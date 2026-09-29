@@ -1,0 +1,273 @@
+# robots.txt for https://help.sap.com
+#
+# Last updated 2025-10-17
+
+User-agent: *
+Disallow: /
+
+# Search Engines
+ 
+User-agent: obot
+Disallow: /
+ 
+User-agent: Googlebot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Googlebot-News
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Googlebot-Video
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+  
+User-agent: GoogleOther
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Storebot-Google
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Bingbot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: 360Spider
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Baiduspider
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: coccocbot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Daum
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Ecosia_bot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: MojeekBot
+Allow: /
+
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Yeti
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: SeznamBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Sogou web spider
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Yahoo! Slurp
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: YandexAccessibilityBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: YandexMobileBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Yandex
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+# AI and Chat Agents
+ 
+User-agent: Amazonbot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: ClaudeBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: CCBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: Google-Extended
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: FacebookBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: MistralAI-User
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: GPTBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Google-NotebookLM
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+ 
+# Fetcher and other
+ 
+User-agent: AdsBot-Google
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Google-Safety
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Mediapartners-Google
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: facebookexternalhit
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Google-Read-Aloud
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Hatena
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: linkedinbot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Pinterestbot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: SchemaBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Telegram
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Twitterbot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: SiteAuditBot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Chrome-Lighthouse
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: Google-InspectionTool
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: BingPreview
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: archive.org_bot
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+User-agent: amazon-QBusiness
+Allow: /
+Disallow: /*/frameset.htm
+Disallow: /doc/*.htm$
+
+Sitemap: https://help.sap.com/http.svc/sitemapxml/sitemaps/sitemap_index.xml

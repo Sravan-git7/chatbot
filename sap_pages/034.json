@@ -1,0 +1,14 @@
+{
+  "title": "Automatic Business Partner Merging",
+  "parent": "Merging Business Partners (IS-U)",
+  "file_path": "1071ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/1071ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983460,
+    "t": "Automatic Business Partner Merging",
+    "u": "1071ce53118d4308e10000000a174cb4.html",
+    "loio": "1071ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Automatic Business Partner Merging\nAutomatic Business Partner Merging\nUse\nYou can use BAPIs or BOR methods to automate individual steps of business partner merging. For further information on this, see the SAP note 624341 (Merging Business Partners).\nFeatures\nYou can use the following BAPIs for automatic business partner merging:\nBAPI\nDescription\nBAPI_ISUACCOUNT_GETDETAIL\nDisplay contract account\nBAPI_ISUACCOUNT_CHANGE\nChange contract account\nBAPI_ISUPARTNER_GETDETAIL\nDisplay contract account\nBAPI_ISUPARTNER_CHANGE\nChange contract account\nBAPI_ISUPROP_GETDETAIL\nDetailed information on owner allocation\nBAPI_ISUPROP_CREATEFROMDATA\nCreate owner allocation\nBAPI_ISUPROP_CHANGE\nChange owner allocation\nBAPI_CTRACDOCUMENT_TRANSFER\nTransfer open FI-CA items\nBAPI_CTRACCONTRACTACCOUNT_GD1\nRead detailed FI-CA contract account data\nBAPI_CTRACCONTRACTACCOUNT_CH1\nChange FI-CA contract account\nNote\nUse mostly IS-U BAPIs to change master data in SAP utilities since these function modules contain additional fields for interfaces.\nCaution\nSAP does not recommend that you use the batch input procedure to automate steps. For further information on this, see the SAP note 432178 (IS-U Transactions and Batch Input).\nRequirements for automating the business partner merging have been included. If you require any support, contact SAP."
+}

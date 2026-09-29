@@ -1,0 +1,14 @@
+{
+  "title": "Handling the Exact Move-In and Move-Out Time",
+  "parent": "Utilities Contract",
+  "file_path": "75b8f8e8301e4d279b0eefaaf244b403.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/75b8f8e8301e4d279b0eefaaf244b403.html",
+  "current_page": {
+    "id": 2554980284,
+    "t": "Handling the Exact Move-In and Move-Out Time",
+    "u": "75b8f8e8301e4d279b0eefaaf244b403.html",
+    "loio": "75b8f8e8301e4d279b0eefaaf244b403",
+    "deltaMtTranslate": false
+  },
+  "text": "Handling the Exact Move-In and Move-Out Time\nHandling the Exact Move-In and Move-Out Time\nThe utilities contract has a duration that starts on the move-in date and ends on the move-out date. Some business requirements may require the\nexact move-in and move-out time to be observed.\nExample\nExample of a move-in:\nThe utilities contract has the move-in date: 2022-07-22.\nThe customer enters the premise at 10:15 on 2022-07-22, meaning that the service starts at 10:15, but not at 00:00.\nExample of a move-out:\nThe utilities contract has the move-out date: 2023-02-25.\nThe customer leaves the premise at 16:00 on 2023-02-25; meaning that the service ends at 16:00, but not at 23:59.\nExample of a customer change on the same date:\nUtilities contract 1 has the move-out date: 2023-02-25; the customer leaves the premise at 16:00 on 2023-02-25.\nThe next customer enters the premise on the same day: 2023-02-25 at 16:30; the corresponding utilities contract 2 has the\nmove-in date: 2023-02-26.\nRestrictions\nThe following restrictions exist:\nThe exact move-in time must either be found on the move-in date or on the day before the move-in.\nThe move-out time must be found on the move-out date.\nDifferent restrictions to those described above apply to the Japanese market. In this case, the logic is dependent on the billing period\napplied. For more details, please see\nHandling the Exact Move-In and Move-Out Time for the Japanese Billing Period\n.\nThe move-in and move-out time can be displayed and changed in the transactions\nDisplay Contract\n(ES22)\nand\nChange Contract\n(ES21)\non the tab “Page 3” in the section “Alternative\nActivation” in the fields\nstart date / start time\nand\nend\ndate / end time\n. You always maintain the date and time; the system automatically observes the time zone of the\ninstallation. The checks applied in the transactions are very basic. For example, an inconsistency that is caused by a possible\noverlap of two subsequent utilities contracts (example: end date 1 = start date 2; end time 1 > start time 2), is not checked.\nIf the consumption at the utilities installation is measured as a time series using a smart meter, the move-in and move-out time can be\nconsidered in TOU and RTP billing to calculate the consumption accurately from the start and to the end of the service. For more\ntechnical details, please see SAP Note\n3394464\n."
+}

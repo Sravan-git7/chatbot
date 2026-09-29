@@ -1,0 +1,14 @@
+{
+  "title": "Create Deregulation Point of Delivery",
+  "parent": "Point of Delivery (PoD)",
+  "file_path": "d169ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/d169ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554984511,
+    "t": "Create Deregulation Point of Delivery",
+    "u": "d169ce53118d4308e10000000a174cb4.html",
+    "loio": "d169ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Create Deregulation Point of Delivery\nCreate Deregulation Point of Delivery\nUse\nWhen you create an installation, the system automatically creates a deregulation point of\ndelivery. Deregulation points of delivery are required for communication in the deregulated energy\nmarket.\nTo allocate a point of delivery ID to a deregulation point of delivery, proceed as described\nbelow.\nProcedure\nFrom the SAP Easy Access menu, choose\nTechnical Master Data\nInstallation\nCreate\n.\nMake the entries required in order to create an installation.\nThe\nPoint of Delivery\ngroup box is in the lower half of the screen is.\nMake the entries required for the point of delivery ID and enter the ID of a grid in the\nGrid\nfield. Note that you must have defined the\ngrids\nin the\nIntercompany Data Exchange\nmenu.\nWhen you make this entry, the system allocates a grid to the point delivery. The grid is used\nduring the move-in to determine the default values for services, for example.\nSave your entries.\nNote\nYou can create an additional installation for the point of delivery by entering the same point of\ndelivery ID in the second installation. To do this, you must observe the following:\nThe installations must be allocated to the same premise\nThe installations must have different service categories\nRelated Information\nDeregulation and Market Communication"
+}

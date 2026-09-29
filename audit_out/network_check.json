@@ -1,0 +1,51 @@
+{
+  "user_agent": "sap-m2c-rag-audit/0.1 (student research prototype)",
+  "robots": {
+    "fetched": true,
+    "saved_to": "robots.txt"
+  },
+  "urls": [
+    {
+      "no": 1,
+      "title": "Utilities Master Data",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+      "robots_allows": false,
+      "status": 200,
+      "final_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+      "content_type": "text/html; charset=UTF-8",
+      "html_bytes": 1160,
+      "visible_text_chars": 33,
+      "likely_js_shell": true,
+      "body_sha256": "f1fc6e13c197e64fe940b47bdb08839a50a10534d962c41bca86c5b15d536e12"
+    },
+    {
+      "no": 2,
+      "title": "Move-In/Out Overview",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+      "robots_allows": false,
+      "status": 200,
+      "final_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+      "content_type": "text/html; charset=UTF-8",
+      "html_bytes": 1160,
+      "visible_text_chars": 33,
+      "likely_js_shell": true,
+      "body_sha256": "f1fc6e13c197e64fe940b47bdb08839a50a10534d962c41bca86c5b15d536e12"
+    },
+    {
+      "no": 3,
+      "title": "Move-In Process",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+      "robots_allows": false,
+      "status": 200,
+      "final_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+      "content_type": "text/html; charset=UTF-8",
+      "html_bytes": 1160,
+      "visible_text_chars": 33,
+      "likely_js_shell": true,
+      "body_sha256": "f1fc6e13c197e64fe940b47bdb08839a50a10534d962c41bca86c5b15d536e12"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Example 2",
+  "parent": "Point of Delivery (PoD)",
+  "file_path": "dd69ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/dd69ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554982977,
+    "t": "Example 2",
+    "u": "dd69ce53118d4308e10000000a174cb4.html",
+    "loio": "dd69ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Example 2\nExample 2\nDevice 4712, containing the registers listed below, is allocated to installation 0816:\nDevice 4712\nRegister Code\nInterval Length\nReg 1\nWatt-hour energy\n15 mins\nReg 2\nReactive consumption\n15 mins\nReg 3\nWatt-hour energy\n15 mins\nIn the installation, register Reg. 3 performs the same meter reading tasks as register Reg. 1. For this reason, the same register code is used for identification purposes.\nRegisters allocated to a point of delivery must have a unique meter reading task as described by the register code. In the following graphic, this allocation is not unique.\nIf you want to import profile values of the profile allocated to the register with the\nWatt-hours\nregister code and the\nConsumption\nrole then 2 profiles are possible (colored light gray in the graphic).\nThe load shapes for registers Reg.1 and Reg.3 cannot therefore be imported via the same point of delivery, necessitating the use of technical points of delivery for the profile import.\nPoint of Delivery (PoD)\nDereg POD\nTech POD\nInstallation\nReg 1\nReg 2\nReg 3\nPOD 1\nX\nX\nX\nX\nPOD 2\nX\nX\nPoint of delivery POD 1 us used to import load shapes for registers Reg. 1 and Reg. 2. Point of delivery POD 2 is used for register Reg. 2.\nPoint of delivery POD 1 is still used for communication in the deregulated energy market. You must therefore define POD 1 as both a technical\nand\nderegulation point of delivery.\nThe technical point of delivery role has a higher priority has a higher priority than the deregulation point of delivery role . As soon a technical point of delivery is created, the system uses it for selection purposes.\nNote\nNote that in this case, you also must allocate data at register level for POD 1 (already allocated at installation level).\nAlternatively, you can use technical points of delivery to model the complete profile value import, as illustrated in example 1. This would result in the following allocation:\nPoint of Delivery (PoD)\nDereg POD\nTech POD\nInstallation\nReg 1\nReg 2\nReg 3\nPOD 1\nX\nX\nPOD 2\nX\nX\nPOD 3\nX\nX\nX"
+}

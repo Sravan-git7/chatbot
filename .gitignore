@@ -1,0 +1,8 @@
+@"
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+chroma_db/
+"@ | Out-File -Encoding utf8 .gitignore

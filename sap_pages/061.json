@@ -1,0 +1,14 @@
+{
+  "title": "Assigning Contracts to Contract Accounts (IS-U)",
+  "parent": "Contract Account and Contract Special Features for IS-U",
+  "file_path": "fe70ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fe70ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554984509,
+    "t": "Assigning Contracts to Contract Accounts (IS-U)",
+    "u": "fe70ce53118d4308e10000000a174cb4.html",
+    "loio": "fe70ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Assigning Contracts to Contract Accounts (IS-U)\nAssigning Contracts to Contract Accounts (IS-U)\nProcedure\nContracts are created in utilities when a move-in is entered (transaction EC50E). Contracts are automatically allocated to a contract account. You can either select an existing contract account or create a new one.\nYou can find more information in the section on\nmove-in\n.\nResult\nOnce you have saved the move-in, the number of the allocated contract account is stored in the contract."
+}

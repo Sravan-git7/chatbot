@@ -1,0 +1,14 @@
+{
+  "title": "Services",
+  "parent": "",
+  "file_path": "8b5fce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/8b5fce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554982942,
+    "t": "Services",
+    "u": "8b5fce53118d4308e10000000a174cb4.html",
+    "loio": "8b5fce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Services\nServices\nDefinition\nUsed to describe a service supplied to a\npoint of delivery\n.\nServices can be\nbillable\nor\nnon-billable\n. All the own or external services that are billed and/or invoiced are modeled as contracts in SAP IS-U. These contracts are also described as billable services. All other services are\nnon-billable services\n.\nThe most important attributes of services are as follows:\nService type to describe the type of service\nService types can be freely defined. In Customizing you must allocate them to a predefined SAP service category.\nAll the service types that do not correspond to one of the predefined service categories can be allocated to the\nOther\nservice category. If you want to continue using a service type based on the\nOther\nservice category internally, you must modify the templates individually.\nService provider as a service agent\nFor more information on service providers, see\nservice providers\n.\nValidity period of service\nIn the case of a billable service (contract), the validity period is based on the move-in and move-out dates. The service type is contained in the corresponding installation.\nIntegration\nThe non-billable are modeled as an own entity in the point of delivery. This is why they are referred to as point of delivery services."
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Contract Account Category",
+  "parent": "Contract Accounts",
+  "file_path": "20fcc5536a51204be10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/20fcc5536a51204be10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983813,
+    "t": "Contract Account Category",
+    "u": "20fcc5536a51204be10000000a174cb4.html",
+    "loio": "20fcc5536a51204be10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Contract Account Category\nContract Account Category\nDefinition\nA contract account category defines certain attributes for a contract account.\nUse\nYou have to assign a contract account category to each contract account when you create it. The fields that appear when you create a contract account are among the things controlled by the contract account category.\nStructure\nThe contract account category determines the following contract account attributes:\nWhether you are allowed to assign only one business partner or more than one to a contract account\nWhether you are allowed to assign only one contract or more than one\nWhether you are allowed to maintain a contract account online\nThe number range that is allowed for external or internal number assignment\nWhether it is a collective bill account (industry component\nUtilities\n)\nWhether it is a one-time account\nWhether it is a deposit account and the account contains deposit contracts (industry component\nInsurance\n)\nThe editing screens or data fields that you can use to edit the contract account"
+}

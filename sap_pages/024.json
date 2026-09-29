@@ -1,0 +1,14 @@
+{
+  "title": "Dealing with Personal Data Outside the Business Partner",
+  "parent": "Blocking and Deleting Personal Data",
+  "file_path": "47ee9e53d8f83e27e10000000a44538d.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/47ee9e53d8f83e27e10000000a44538d.html",
+  "current_page": {
+    "id": 2554985192,
+    "t": "Dealing with Personal Data Outside the Business Partner",
+    "u": "47ee9e53d8f83e27e10000000a44538d.html",
+    "loio": "47ee9e53d8f83e27e10000000a44538d",
+    "deltaMtTranslate": false
+  },
+  "text": "Dealing with Personal Data Outside the Business Partner\nDealing with Personal Data Outside the Business Partner\nNot all personal data is assigned directly to a business partner. In these cases, you have to ensure that all data is archived or deleted in time.\nExample\nData from payment lot items (or items from other incoming lots) is personal data, but it is not directly assigned to a business partner. The payer is also not always the person, whose items are being cleared by the payment. In order to prevent data from payment lot items from being displayed while a business partner is blocked, you have to delete the payment lot data at the right time.\nIf you block business partners after 2 years, then you also have to archive and delete payment lot data at the latest after 2 years.\nExample\nTo improve performance, the payment list does not check whether the affected business partners are blocked. Therefore, you have to delete or archive the payment run early.\nFor data that you do not have to retain and that you do not archive, separate deletion programs are available in the SAP menu under\nPeriodic Processing\nDelete Data\n.\nYou can then create the notification letter. In the SAP menu, choose\nPeriodic Processing\nDelete Data\nOther Objects\n(transaction\nFPDEL_TAB\n) to delete data from tables that you do not archive (see\nDeletion of Other Objects\n).\nExample\nYou use the transaction\nDelete Other Objects\nto delete data of repayment requests. Repayment requests are also included in the data that is not directly assigned to a business partner.\nIf you block business partners after 2 years, then you also have to archive and delete repayment requests at the latest after 2 years."
+}

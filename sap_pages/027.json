@@ -1,0 +1,14 @@
+{
+  "title": "GP Role Installer (IS-U)",
+  "parent": "IS-U Business Partner: Special Features",
+  "file_path": "5271ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/5271ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554980264,
+    "t": "GP Role Installer (IS-U)",
+    "u": "5271ce53118d4308e10000000a174cb4.html",
+    "loio": "5271ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "GP Role Installer (IS-U)\nGP Role Installer (IS-U)\nDefinition\nAn\ninstaller\nis a person licensed by a utilities company to carry out installation work.\nStructure\nYou need the role ISUI and the role category ISUI for the BP role\nInstaller (IS-U)\n.\nIn addition to the address data, you can also enter status management and general data using this role. In the general data you can define data such as license for certain divisions, operating purpose of the company and the identification number of the license. In the status management you can define data such as the type of license and the date of the initial license."
+}

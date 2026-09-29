@@ -1,0 +1,14 @@
+{
+  "title": "Deleting Business Partners",
+  "parent": "Blocking and Deleting Personal Data",
+  "file_path": "a5b89f5326fb3543e10000000a44538d.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/a5b89f5326fb3543e10000000a44538d.html",
+  "current_page": {
+    "id": 2554980269,
+    "t": "Deleting Business Partners",
+    "u": "a5b89f5326fb3543e10000000a44538d.html",
+    "loio": "a5b89f5326fb3543e10000000a44538d",
+    "deltaMtTranslate": false
+  },
+  "text": "Deleting Business Partners\nDeleting Business Partners\nPrerequisites\nDeleting business partners is only possible if the respective student information has no references to other applications. Please use the reset programs in the following areas:\nSales and Distribution (Customer Master Data)\nPurchasing (Vendor Master Data)\nCost Accounting (G/L Account Master Data)\nStudent Lifecycle Management (Student Master Data)\nActivities\nIf all applications that use business partners have reported that a business partner has no purpose and the residence period is expired, then the system blocks the business partner, preventing access by dialog users and business processes. The write program of business partner archiving writes these business partners to an archive file and deletes them from the database.\nIf extracts containing the business partner were replicated for valuations in\nSAP BW∕4HANA\n, the\nS/4HANA (ERP)\nSystem can send data protection notifications to the\nBW∕4HANA\nSystem so that you can also delete the personal data there (see SAP Notes\n2824456\nand\n2779751\n).\nData destruction destroys personal data for a business partner only if the retention period configured in ILM Retention Management has expired.\nYou can use SAP ILM to delete business partner data from the system after the expiration of a certain, possibly legally specified timeframe."
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Link: Contract Account - Business Partner",
+  "parent": "Contract Accounts",
+  "file_path": "35fcc5536a51204be10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+  "current_page": {
+    "id": 2554980221,
+    "t": "Link: Contract Account - Business Partner",
+    "u": "35fcc5536a51204be10000000a174cb4.html",
+    "loio": "35fcc5536a51204be10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Link: Contract Account - Business Partner\nLink: Contract Account - Business Partner\nUse\nAt least one business partner is assigned to each contract account. Depending on the industry sector, assignment of several business partners to a contract account is also allowed.\nPrerequisites\nAdditional business partners can only be assigned to a contract account if the corresponding contract account category allows this.\nFeatures\nThe master data for a contract account is divided into a part that is the same for all business partners of the contract account (that is, independent of the business partner) and a part that is business-partner-specific. The business partner-specific data can be controlled differently for different business partners.\nActivities\nIn Customizing for Contract Accounts Receivable and Payable under\nBasic Functions\nContract Accounts\nContract Account Relationships\nDefine Contract Account/Business Partner Relationships\n, you define contract account relationships.\nThe account relationship defines the role that a business partner plays for a contract account. You can use the account relationship to differentiate between multiple business partners of a contract account.\nExample\nFor automatic payment clearing, you specify that a payment on account is always assigned to the account holder."
+}

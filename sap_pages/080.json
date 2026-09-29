@@ -1,0 +1,14 @@
+{
+  "title": "Device location",
+  "parent": "",
+  "file_path": "fe69ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fe69ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554980237,
+    "t": "Device location",
+    "u": "fe69ce53118d4308e10000000a174cb4.html",
+    "loio": "fe69ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Device location\nDevice location\nDefinition\nThese are locations within the connection objects where devices can be installed.\nThe devices can belong to different divisions.\nThe address of the connection object is allocated to the device location. In addition, a particular premise can also be allocated, and a description of the device location can be entered. This means that the exact location of an installed device is determined using the device location.\nUse\nThe device location is a\nfunctional location\nfrom the\nPlant Maintenance\n(PM) application component. Therefore, maintenance is managed using the functions of the\nService Management\n(PM-SMA) component, for example, if you wish to organize the repair and maintenance of devices at the device location level. Maintenance and repairs are then billed using the\nSales and Distribution\n(SD) application component."
+}

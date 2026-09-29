@@ -1,0 +1,14 @@
+{
+  "title": "Premise",
+  "parent": "",
+  "file_path": "fb69ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fb69ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983850,
+    "t": "Premise",
+    "u": "fb69ce53118d4308e10000000a174cb4.html",
+    "loio": "fb69ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Premise\nPremise\nDefinition\nThe premise is a unit to be supplied that is spatially closed (e.g. apartment, factory hall).\nUse\nSeveral utility installations can belong to a premise. Since the premise is division-independent, you can do the following: Allocate electricity and water supply installations to the same premise.\nThe premise is allocated to a connection object and its address.\nYou can maintain the following information fields for each premise:\nStreet supplements allow you to manage additional information about the street name of the connection object. You can also define different street names.\nSituation data helps field sales representative to identify the corresponding premise more quickly.\nFor a premise, you can enter an owner who must pay open bills if the premise is empty (see also\nOwner Allocation\n)."
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Objects and Enhancements in SAP CRM",
+  "parent": "Merging Business Partners (IS-U)",
+  "file_path": "4071ce53118d4308e10000000a174cb4-39.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4071ce53118d4308e10000000a174cb4-39.html",
+  "current_page": {
+    "id": 2554979665,
+    "t": "Objects and Enhancements in SAP CRM",
+    "u": "4071ce53118d4308e10000000a174cb4-39.html",
+    "loio": "4071ce53118d4308e10000000a174cb4-39",
+    "deltaMtTranslate": false
+  },
+  "text": "Objects and Enhancements in SAP CRM\nObjects and Enhancements in SAP CRM\nDefinition\nIf you integrate SAP S/4HANA Utilities with SAP CRM, you can use the data cleansing tool in SAP CRM to manage the business partner merge cases and, to some extent, process them in SAP CRM.\nUse\nFor the objects replicated between SAP CRM and SAP S/4HANA Utilities, the change is made to the target business partner in SAP CRM. An exception to this is the contract in SAP CRM. Here, the change to the target business partner is triggered by the\ncustomer change\nin SAP S/4HANA Utilities.\nFor more information about transfer functions for other objects in SAP Utilities, see\nObjects and Enhancements in SAP Utilities for Business Partner Merging\n."
+}

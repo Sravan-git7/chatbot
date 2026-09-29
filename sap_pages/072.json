@@ -1,0 +1,14 @@
+{
+  "title": "Technical Installation",
+  "parent": "Premise",
+  "file_path": "c869ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/c869ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983457,
+    "t": "Technical Installation",
+    "u": "c869ce53118d4308e10000000a174cb4.html",
+    "loio": "c869ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Technical Installation\nTechnical Installation\nDefinition\nTechnical Installation\nUse\nYou can allocate one technical installation to a premise for each division.\nA piece of equipment that has already been created can also be allocated to the premise as a technical installation. However, to do this make sure that the\nISU\nfield (IS-U data) in the Equipment category has not been selected. You find this field in IS-U Customizing under\nDevice Management\nTechnology\nDevice\nDefine IS-U Equipment Categories.\nAt present, you\ncannot\nchange or delete a technical installation.\nIntegration\nThe technical installation is created as a piece of\nEquipment\n."
+}

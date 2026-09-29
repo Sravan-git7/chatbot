@@ -1,0 +1,14 @@
+{
+  "title": "SAP Business Partner",
+  "parent": "",
+  "file_path": "78d96b5740800322e10000000a44147b.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+  "current_page": {
+    "id": 2554984550,
+    "t": "SAP Business Partner",
+    "u": "78d96b5740800322e10000000a44147b.html",
+    "loio": "78d96b5740800322e10000000a44147b",
+    "deltaMtTranslate": false
+  },
+  "text": "SAP Business Partner\nSAP Business Partner\nThe SAP Business Partner represents an organization (company, branch), person, or group of persons or organizations in which your company has a business interest.\nBusiness partners used in Contract Accounts Receivable and Payable must exist in the Contract Partner role\nMKK\n.\nYou can enter and manage your business partners centrally with regard to different business transactions.\nThis is particularly useful if a business partner plays different roles in an enterprise, such as a payer as well as a service recipient.\nA business partner can be created in various business partner roles and can assume additional business partner roles during the course of the business relationship. You do not have to enter the general data for a business partner each time, which avoids redundant data entry and retention.\nStructure\nThe following basic elements are available in the business partner data:\nConcept\nComment\nBusiness partner category\nThe data available for your business transactions depends on the\nbusiness partner category\n.\nBusiness partner role\nA business partner can take on different\nbusiness partner roles\n, which enable different views of the business partner data depending on the business function.\nBusiness partner relationship\nA\nrelationship\nconnects two business partners and is identified by the\nbusiness partner relationship category\n.\nBusiness partner group hierarchy\nYou can use the\nbusiness partner group hierarchy\nto represent the structure of an organization.\nRelated Information\nSAP Business Partner"
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Contracts (IS-U)",
+  "parent": "Contract Account and Contract Special Features for IS-U",
+  "file_path": "5a6dce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/5a6dce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554984535,
+    "t": "Contracts (IS-U)",
+    "u": "5a6dce53118d4308e10000000a174cb4.html",
+    "loio": "5a6dce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Contracts (IS-U)\nContracts (IS-U)\nDefinition\nContracts in IS-U.\nUse\nContracts represent the entities that are billed. You can bill one or more contracts together using a contract account.\nStructure\nYou can divide the data from contracts into three categories:\nGeneral data\nData relevant to billing (business)\nData regarding move-in and move-out.\nIntegration\nContracts are linked to installations in IS-U; these installations contain technical data with regard to billing. In the case of a move-out, the installation remains and the contract is ended. In the case of the next move-in, a new contract is created and linked to the installation. Only one contract can ever be assigned to an installation at any one time."
+}

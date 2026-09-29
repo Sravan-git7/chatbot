@@ -1,0 +1,14 @@
+{
+  "title": "Creating a Technical Installation",
+  "parent": "Premise",
+  "file_path": "cb69ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/cb69ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983842,
+    "t": "Creating a Technical Installation",
+    "u": "cb69ce53118d4308e10000000a174cb4.html",
+    "loio": "cb69ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Creating a Technical Installation\nCreating a Technical Installation\nUse\nYou can create a technical installation when you create a new premise or change an already existing premise.\nProcedure\nChoose\nUtilities industry\nTechnical master data\nPremise\nCreate\nor\nChange\n.\nIf you are in change mode, enter a premise.\nChoose\nPremise\nTechn. inst.\n(technical installation\n)\nCreate\n.\nEnter the division and, if necessary, a description.\nA temporary equipment number is displayed in the\nEquipment\nfield.\nSave the premise.\nThe technical installation is created in\nPlant Maintenance and Service Management\n(PM). as a piece of equipment with its own number.\nTo maintain the technical installation as a piece of equipment, proceed as follows:\nDisplay the technical installation.\nDouble click the equipment to call it.\nThe\nDisplay Equipment: General Data\nscreen appears.\nChoose\nEquipment\nCreate.\nResult\nYou have created a technical installation and allocated it to a premise."
+}

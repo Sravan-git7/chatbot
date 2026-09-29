@@ -1,0 +1,14 @@
+{
+  "title": "Utilities Contract",
+  "parent": "",
+  "file_path": "ef69ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/ef69ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983880,
+    "t": "Utilities Contract",
+    "u": "ef69ce53118d4308e10000000a174cb4.html",
+    "loio": "ef69ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Utilities Contract\nUtilities Contract\nDefinition\nUtilities contracts are service agreements between a utilities company and its business partners. The following contract categories exist:\nDelivery contracts, for example for residential contracts, nonresidential contracts, cable television, telecommunications\nPurchase contracts for small power producers, solar installations, and other forms of energy feeding.\nPlant consumption contracts for generation and distribution installations of the utilities company.\nCompany consumption contracts, for example for the electricity consumption of offices at the utilities company\nNote\nService contracts (for example, for maintenance and repair) are not managed in this component; the\nCustomer Service\n(CS) component is used instead. Service contracts are billed in the\nSales and Distribution\n(SD) component.\nUse\nA contract is related to a division. It links one single contract account to one installation (see graphic for the\nmaster data\n(ISU-BF) component). However, it is possible for several contracts to be grouped together in one contract account.\nA contract contains control data for Aontract Billing and Contract Accounts Receivable and Payable. These are:\nGeneral data (for example, contract account)\nMove-in and move-out data\nSchedule data (for example, start date and cancellation date)\nBilling-relevant data\nAccount assignment data (for example, account determination ID)\nSales and distribution data\nDeregulation data\n(for example service providers)\nData relevant to budget billing\nContract model: Where Does Data Originate\nWith the exception of move-in and move-out data, you can change, display and check all data in\nmultiple\ncontracts for a contract account simultaneously, if none of these contracts have been terminated.\nYou can change the screen layout by configuring the tabstrips. For more information, see the\nmove-in screen layout\n.\nIntegration of Other Contract Objects\nIn addition to the utilities contract, other contracts can be integrated into functions and processes in SAP S/4HANA Utilities. A relevant contract object is the MOS contract. Other contract objects can also be integrated.\nIntegration requires the implementation of Business Add-Ins (BAdIs) intended for this purpose. For more information, see SAP Note\n3342499\n."
+}

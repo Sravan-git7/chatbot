@@ -1,0 +1,14 @@
+{
+  "title": "Selecting Addresses for Business Partners",
+  "parent": "Creating, Changing, and Displaying Contract Accounts",
+  "file_path": "05fcc5536a51204be10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/05fcc5536a51204be10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983791,
+    "t": "Selecting Addresses for Business Partners",
+    "u": "05fcc5536a51204be10000000a174cb4.html",
+    "loio": "05fcc5536a51204be10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Selecting Addresses for Business Partners\nSelecting Addresses for Business Partners\nPrerequisites\nYou have defined multiple addresses for a business partner want to use each of these addresses for a specific purpose (for example, for dunning notices).\nProcedure\nIn the\nCreate Contract Account\n/\nChange Contract Account\n(\nCAA1\n/\nCAA2\n) transactions, on the\nGeneral Data\n,\nPayments\n/\nTaxes\n, or\nDunning\n/\nCorrespondence\ntab pages, call the input help for the\nAddress Description\nfield.\nA selection window appears with the business partner addresses maintained in the master record.\nChoose the required address, for example, that you want to send a dunning notice to, by double-clicking it.\nResult\nThe selected address is transferred. In the contract account master record, the\nFixed\nindicator next to the address field is now selected. It indicates that a specific address was selected and not the standard address of the business partner.\nNote\nYou can use this function to select the address for each business partner in the contract account, regardless of whether this is the owner of the contract account to be created or changed, or an alternative business partner (such as the dunning recipient).\nIf you do not select an address, the default address of the contract account holder is used automatically for all business transactions."
+}

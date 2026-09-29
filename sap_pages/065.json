@@ -1,0 +1,14 @@
+{
+  "title": "Multiple Contract Change",
+  "parent": "Utilities Contract",
+  "file_path": "da69ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/da69ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554982959,
+    "t": "Multiple Contract Change",
+    "u": "da69ce53118d4308e10000000a174cb4.html",
+    "loio": "da69ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Multiple Contract Change\nMultiple Contract Change\nUse\nYou use this function to display or process multiple contracts of a contract account at once.\nThe function is useful because it enables lets you cross-check all of the required contracts of a contract account, so you can easily enter and change the data that is the same in one step.\nPrerequisites\nFor the contract, you need\nA contract account that exists\nThat a move-in has been completed\nNote\nYou can find the move-in under\nUtilities Industry\nCustomer Service\nProcess Execution\nMove-In\n.\nFeatures\nTo access multiple-contract maintenance, enter the contract account. You can determine the contract account key by using the data finder (\nEnvironment\nFind Conract Account\n) or with the F4 search help.\nOn the detail screen, by positioning the cursor on a specific contract, you can branch to the full screen of that contract.\nIn addition to the standard functions, you have the option of switching from the detail screen to display mode or to change mode, requesting another contract account for processing, or executing the overall check.\nYou can branch to other IS-U objects (such as the installation or the contract account) by double-clicking the relevant field.\nYou can only change entries that can also be changed in the normal contract maintenance screen (\nUtilities Industry\nMaster Data\nBusiness Contract\nChange\n). You ca change the remaining contract fields using the functions\nMove-In, Move-Out, and Move-In/Out\n(\nUtilities Industry\nCustomer Service\nProcess Execution\n)."
+}

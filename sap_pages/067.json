@@ -1,0 +1,14 @@
+{
+  "title": "Connection Object",
+  "parent": "",
+  "file_path": "f569ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/f569ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983421,
+    "t": "Connection Object",
+    "u": "f569ce53118d4308e10000000a174cb4.html",
+    "loio": "f569ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Connection Object\nConnection Object\nDefinition\nA connection object is usually a building but can also be a piece of property or a\nfacility, such as a fountain or construction site.\nSince an address is allocated to a connection object, the connection object links premises,\ndevice locations and connections to the postal regional structure.\nIntegration\nThe connection object is a\nfunctional location\nfrom the\nPlant Maintenance\n(PM) application component. Therefore,\nmaintenance is managed using the functions of the\nService Management\n(PM-SMA) component, for example, if you wish to organize the repair and maintenance of\ndevices at the connection object level. Maintenance and repairs are billed using the\nSales and Distribution\n(SD) application component.\nOther Information\nFor each connection object you can define any number of static notes. These can be printed\non meter reading orders, for example, to give field service employees extra information.\nExample include \"Ring Mr Y’s doorbell,\" \"Beware of the dog,\" and so on. You can also use the\ndynamic notes predefined in the system (for example \"Installation blocked for meter\nreading,\" \"Meter reading already entered.\")"
+}

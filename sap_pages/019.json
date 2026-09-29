@@ -1,0 +1,14 @@
+{
+  "title": "Dealing with Blocked Business Partners",
+  "parent": "Blocking and Deleting Personal Data",
+  "file_path": "1eee9e537dcccd46e10000000a44538d.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/1eee9e537dcccd46e10000000a44538d.html",
+  "current_page": {
+    "id": 2554983807,
+    "t": "Dealing with Blocked Business Partners",
+    "u": "1eee9e537dcccd46e10000000a44538d.html",
+    "loio": "1eee9e537dcccd46e10000000a44538d",
+    "deltaMtTranslate": false
+  },
+  "text": "Dealing with Blocked Business Partners\nDealing with Blocked Business Partners\nTo protect personal data, you block business partners for which no more business has taken place, following a certain residence time in the system. After that, displaying the personal data of a blocked business partner is only possible for users with special authorization (role\nSAP_CA_BP_DP_ADMIN\n). The system prevents the entry of new business for blocked business partners.\nYou can use transaction\nUnblocking Request (Master Data)\n(\nBUP_REQ_UNBLK\n) to request unblocking, and you can use transaction\nBlocking of Business Partner Data\n(transaction\nBUPA_PRE_EOP\n) to approve the unblocking of business partners."
+}

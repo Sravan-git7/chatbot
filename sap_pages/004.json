@@ -1,0 +1,14 @@
+{
+  "title": "Change of Payment Data",
+  "parent": "SAP Business Partner",
+  "file_path": "4f0ca46a06b0537de10000000a421937.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4f0ca46a06b0537de10000000a421937.html",
+  "current_page": {
+    "id": 2554979667,
+    "t": "Change of Payment Data",
+    "u": "4f0ca46a06b0537de10000000a421937.html",
+    "loio": "4f0ca46a06b0537de10000000a421937",
+    "deltaMtTranslate": false
+  },
+  "text": "Change of Payment Data\nChange of Payment Data\nUse\nYou can change the bank data and payment card details in the master record of a business partner.\nIntegration\nYou can change payment data not only in the master data of the business partner, you can change it at the same time in dependent objects. For example, you can change the bank details of a customer, who went from being a cash payer to a direct debit payer, in his or her contract account, or you can change the payment data for incoming payments of a business partner in his or her\nprepaid account\n.\nNote\nNote for the industry component Insurance\nYou can also change the payment data in the insurance object-partner relationships.\nNote for the industry component Public Sector Contract Accounts Receivable and Payable\nYou can also change the payment data in the contract object-partner relationships.\nThe system does not support editing of customer contacts.\nFeatures\nUsing the\nChange Payment Data\ntransaction, you can centrally perform the following actions for a business partner:\nCreate new bank details/payment cards\nChange existing bank details/payment card data\nDelete bank details/payment cards on the contract account, and as a follow-up action delete them in the business partner master record\nCreate customer contacts\nPrint confirmation letters\nIn the industry component\nInsurance\n, you can also control follow-up activities, such as the reversal of dunning notices or ending dunning runs, using a flexible set of rules. This includes:\nDeleting the bank details/payment card from the master record of the business partner\nDeleting locks from contract accounts, items, and industry objects\nReversing dunning notices (or ending dunning runs in the industry component\nInsurance\n)\nResetting returns activities\nProcessing can take place in one of three modes:\nMode\nFunction\nAccess by Pushbutton\nCreate\nCreate new bank details/payment card\nChange\nChange existing bank details/payment card\nDelete\nDelete existing bank details/payment card"
+}

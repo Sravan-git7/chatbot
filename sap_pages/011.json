@@ -1,0 +1,14 @@
+{
+  "title": "Making Settings for Business Partners",
+  "parent": "Replication and Synchronization of Business Partners from SAP CRM to SAP S/4HANA",
+  "file_path": "266769732cd3488e8a0249a63d9dd7a2.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/266769732cd3488e8a0249a63d9dd7a2.html",
+  "current_page": {
+    "id": 2554984537,
+    "t": "Making Settings for Business Partners",
+    "u": "266769732cd3488e8a0249a63d9dd7a2.html",
+    "loio": "266769732cd3488e8a0249a63d9dd7a2",
+    "deltaMtTranslate": false
+  },
+  "text": "Making Settings for Business Partners\nMaking Settings for Business Partners\nPrerequisites\nYou created a site for the\nS/4HANA\nsystem in your CRM system as described in the topic\nMaking Settings for CRM Middleware\nunder step 3.\nProcedure\nIn your\nCRM system\nin the administration console, create a subscription for all business partners and enter them in the\nS/4HANA\nsite defined in your CRM system. To do so, in the menu, choose\nArchitecture and Technology\nMiddleware\nAdministration\nAdministration Console\n. For more details on this procedure, see\nMaking Settings for CRM Middleware\n.\nDefine number ranges for your business partners in your\nS/4HANA\nsystem and CRM system\n. For more details on this procedure, see\nMaking Settings for CRM Middleware\nand\nMaking Settings for Customer/Vendor Integration\n."
+}

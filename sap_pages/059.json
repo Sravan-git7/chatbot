@@ -1,0 +1,14 @@
+{
+  "title": "Link Between Contract Accounts and Contracts (IS-U)",
+  "parent": "Contract Account and Contract Special Features for IS-U",
+  "file_path": "456dce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/456dce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983887,
+    "t": "Link Between Contract Accounts and Contracts (IS-U)",
+    "u": "456dce53118d4308e10000000a174cb4.html",
+    "loio": "456dce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Link Between Contract Accounts and Contracts (IS-U)\nLink Between Contract Accounts and Contracts (IS-U)\nUse\nSeveral contracts are grouped together in a contract account. A selection of these contracts can be invoiced together. You can make sure that several of them are invoiced together using indicators in the contracts. Otherwise this remains optional, that is, contracts are only invoiced together if invoicing happens to take place at the same time.\nPrerequisites\nA contract must always be assigned to a contract account."
+}

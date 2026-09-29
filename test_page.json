@@ -1,0 +1,604 @@
+{
+    "status": "OK",
+    "data":     {
+        "fallback": false,
+        "deliverable":         {
+            "title": "Master Data",
+            "shortdesc": "",
+            "landingPage": "e369ce53118d4308e10000000a174cb4.html",
+            "loio": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+            "buildableMapLoio": "0a6ace53118d4308e10000000a174cb4",
+            "version": "2025.001",
+            "languageCode": "en-US",
+            "state": "PRODUCTION",
+            "fullToc":             [
+                                {
+                    "c": [],
+                    "t": "Master Data",
+                    "u": "e369ce53118d4308e10000000a174cb4.html",
+                    "id": 2.452341221E9
+                },
+                                {
+                    "c":                     [
+                                                {
+                            "c": [],
+                            "t": "Business Partner in the Contract Partner Role (MKK)",
+                            "u": "98e7c5536a51204be10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452341226E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Making System Settings",
+                                    "u": "85e7c5536a51204be10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.45234123E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Changing Payment Data",
+                                    "u": "4f0cd87713a2606fe10000000a42189e.html",
+                                    "h": "",
+                                    "id": 2.452341231E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Special Features of Changes with Effect in the Future",
+                                    "u": "7fe7c5536a51204be10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452341232E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Triggering Follow-Up Actions",
+                                    "u": "82e7c5536a51204be10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452341233E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Special Cases",
+                                    "u": "4f0d8189081a537be10000000a421937.html",
+                                    "h": "",
+                                    "id": 2.452341235E9
+                                }
+                            ],
+                            "t": "Change of Payment Data",
+                            "u": "4f0ca46a06b0537de10000000a421937.html",
+                            "h": "",
+                            "id": 2.452341229E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Making Settings for Business Partners",
+                                    "u": "266769732cd3488e8a0249a63d9dd7a2.html",
+                                    "h": "",
+                                    "id": 2.452341238E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Making Settings for CRM Middleware",
+                                    "u": "a583f2f77b914d5d8843b299473d380e.html",
+                                    "h": "",
+                                    "id": 2.45234124E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Making Settings for Customer/Vendor Integration",
+                                    "u": "5c8189abfed6435b854f6e73cd53f2f4.html",
+                                    "h": "",
+                                    "id": 2.452341241E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Making Settings for the Postprocessing Office",
+                                    "u": "8a53674ab91f4f929d265d9b1de6f469.html",
+                                    "h": "",
+                                    "id": 2.452341242E9
+                                }
+                            ],
+                            "t": "Replication and Synchronization of Business Partners from SAP CRM to SAP S/4HANA",
+                            "u": "58dac53393d24e73a4044781c5d33a75.html",
+                            "h": "",
+                            "id": 2.452341236E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Business Partner End Of Purpose (EoP) Check",
+                                    "u": "17b4fb689c354f94b36c0f56411d4ec5.html",
+                                    "h": "",
+                                    "id": 2.452341245E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Blocking and Unblocking of Business Partners",
+                                    "u": "1cd49e537dcccd46e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452342546E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Check for End of Purpose in Contract Accounts Receivable and Payable",
+                                    "u": "26f09b532a203e27e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.45234255E9
+                                },
+                                                                {
+                                    "c":                                     [
+                                                                                {
+                                            "c": [],
+                                            "t": "Displaying Personal Data",
+                                            "u": "41f09e537dcccd46e10000000a44538d.html",
+                                            "h": "",
+                                            "id": 2.452342564E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Preventing New Business",
+                                            "u": "03529f5326fb3543e10000000a44538d.html",
+                                            "h": "",
+                                            "id": 2.452342566E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Special Cases When Dealing with Blocked Business Partners",
+                                            "u": "bc7c9e537dcccd46e10000000a44538d.html",
+                                            "h": "",
+                                            "id": 2.452342571E9
+                                        }
+                                    ],
+                                    "t": "Dealing with Blocked Business Partners",
+                                    "u": "1eee9e537dcccd46e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452342558E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Deleting Business Partners",
+                                    "u": "a5b89f5326fb3543e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452342576E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Dealing with Personal Data Outside the Business Partner",
+                                    "u": "47ee9e53d8f83e27e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452342582E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "System Configuration",
+                                    "u": "017ba153f81fb27ae10000000a423f68.html",
+                                    "h": "",
+                                    "id": 2.452342587E9
+                                }
+                            ],
+                            "t": "Blocking and Deleting Personal Data",
+                            "u": "70d599539de1cd46e10000000a44538d.html",
+                            "h": "",
+                            "id": 2.452341244E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "GP Role Installer (IS-U)",
+                                    "u": "5271ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342597E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "BAPIs for Central Business Partner (IS-U)",
+                                    "u": "3771ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.4523426E9
+                                },
+                                                                {
+                                    "c":                                     [
+                                                                                {
+                                            "c": [],
+                                            "t": "Objects in Contract Accounts Receivable and Payable",
+                                            "u": "1971ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.45234261E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Objects and Enhancements in SAP Utilities",
+                                            "u": "2b71ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452342613E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Customer Change",
+                                            "u": "f780ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452342616E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Objects and Enhancements in SAP CRM",
+                                            "u": "4071ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452342619E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Automatic Business Partner Merging",
+                                            "u": "1071ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452342627E9
+                                        }
+                                    ],
+                                    "t": "Merging Business Partners (IS-U)",
+                                    "u": "4371ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342603E9
+                                }
+                            ],
+                            "t": "IS-U Business Partner: Special Features",
+                            "u": "22fbe156e374be43e10000000a441470.html",
+                            "h": "",
+                            "id": 2.452342593E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Objects in Contract Accounts Receivable and Payable",
+                                    "u": "1971ce53118d4308e10000000a174cb4-36.html",
+                                    "h": "",
+                                    "id": 2.452342637E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Objects and Enhancements in SAP Utilities",
+                                    "u": "2b71ce53118d4308e10000000a174cb4-37.html",
+                                    "h": "",
+                                    "id": 2.452342641E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Customer Change",
+                                    "u": "f780ce53118d4308e10000000a174cb4-38.html",
+                                    "h": "",
+                                    "id": 2.452342644E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Objects and Enhancements in SAP CRM",
+                                    "u": "4071ce53118d4308e10000000a174cb4-39.html",
+                                    "h": "",
+                                    "id": 2.452342847E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Automatic Business Partner Merging",
+                                    "u": "1071ce53118d4308e10000000a174cb4-40.html",
+                                    "h": "",
+                                    "id": 2.452342852E9
+                                }
+                            ],
+                            "t": "Merging Business Partners (IS-U)",
+                            "u": "4371ce53118d4308e10000000a174cb4-35.html",
+                            "h": "",
+                            "id": 2.452342629E9
+                        }
+                    ],
+                    "t": "SAP Business Partner",
+                    "u": "78d96b5740800322e10000000a44147b.html",
+                    "id": 2.452341222E9
+                },
+                                {
+                    "c":                     [
+                                                {
+                            "c": [],
+                            "t": "Contract Account Category",
+                            "u": "20fcc5536a51204be10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452342859E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Contract Account",
+                            "u": "23fcc5536a51204be10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452342864E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Controlling Specifications in Contract Accounts",
+                            "u": "ac6b9953caddca11e10000000a44176d.html",
+                            "h": "",
+                            "id": 2.452342866E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Link: Contract Account - Business Partner",
+                            "u": "35fcc5536a51204be10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.45234287E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Logging of Changes to Contract Account",
+                            "u": "57fcc5536a51204be10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.45234288E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Automatic Master Data Transfer",
+                            "u": "2cfcc5536a51204be10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452342886E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Creating Contract Accounts",
+                                    "u": "fffbc5536a51204be10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342892E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Assigning Additional Business Partners",
+                                    "u": "44fcc5536a51204be10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342895E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Displaying or Editing Other Business Partners",
+                                    "u": "17fcc5536a51204be10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342902E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Selecting Addresses for Business Partners",
+                                    "u": "05fcc5536a51204be10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342906E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Creating, Changing and Displaying Locks",
+                                    "u": "f0fbc5536a51204be10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342912E9
+                                }
+                            ],
+                            "t": "Creating, Changing, and Displaying Contract Accounts",
+                            "u": "3efcc5536a51204be10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.45234289E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Manage Contract Accounts",
+                            "u": "6f1202271870470996b7b38ba9d19cab.html",
+                            "h": "",
+                            "id": 2.452342916E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Correspondence for Master Data Changes",
+                            "u": "c4e7c5536a51204be10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452342922E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Contracts (IS-U)",
+                                    "u": "5a6dce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342928E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Controlling Specifications in Contract Accounts (IS-U)",
+                                    "u": "f870ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342932E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Link Between Contract Accounts and Contracts (IS-U)",
+                                    "u": "456dce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342935E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Transferring Master Data Automatically (IS-U)",
+                                    "u": "fb70ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342936E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Assigning Contracts to Contract Accounts (IS-U)",
+                                    "u": "fe70ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342939E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Loans (IS-U)",
+                                    "u": "c970ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452342942E9
+                                }
+                            ],
+                            "t": "Contract Account and Contract Special Features for IS-U",
+                            "u": "e31ce056045c122fe10000000a441470.html",
+                            "h": "",
+                            "id": 2.452342925E9
+                        }
+                    ],
+                    "t": "Contract Accounts",
+                    "u": "0bfcc5536a51204be10000000a174cb4.html",
+                    "id": 2.452342856E9
+                },
+                                {
+                    "c":                     [
+                                                {
+                            "c": [],
+                            "t": "Relevant Fields in the Contract",
+                            "u": "a060ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452343089E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Multiple Contract Change",
+                            "u": "da69ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452343113E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Handling the Exact Move-In and Move-Out Time",
+                            "u": "75b8f8e8301e4d279b0eefaaf244b403.html",
+                            "h": "",
+                            "id": 2.452343131E9
+                        }
+                    ],
+                    "t": "Utilities Contract",
+                    "u": "ef69ce53118d4308e10000000a174cb4.html",
+                    "id": 2.452342945E9
+                },
+                                {
+                    "c": [],
+                    "t": "Connection Object",
+                    "u": "f569ce53118d4308e10000000a174cb4.html",
+                    "id": 2.452343461E9
+                },
+                                {
+                    "c": [],
+                    "t": "Connection",
+                    "u": "f869ce53118d4308e10000000a174cb4.html",
+                    "id": 2.45234347E9
+                },
+                                {
+                    "c":                     [
+                                                {
+                            "c": [],
+                            "t": "Change Connection Object in Premise",
+                            "u": "046ace53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452343491E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Reallocate Point of Delivery/Installation to New Premise",
+                            "u": "866d52c4fcb94291bec7c9d30867e664.html",
+                            "h": "",
+                            "id": 2.452343499E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Technical Installation",
+                            "u": "c869ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.45234351E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Creating a Technical Installation",
+                            "u": "cb69ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452343522E9
+                        }
+                    ],
+                    "t": "Premise",
+                    "u": "fb69ce53118d4308e10000000a174cb4.html",
+                    "id": 2.452343482E9
+                },
+                                {
+                    "c": [],
+                    "t": "Utility Installation",
+                    "u": "016ace53118d4308e10000000a174cb4.html",
+                    "id": 2.452343532E9
+                },
+                                {
+                    "c":                     [
+                                                {
+                            "c": [],
+                            "t": "Example 1",
+                            "u": "c569ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452343556E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Example 2",
+                            "u": "dd69ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452343566E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Create Deregulation Point of Delivery",
+                            "u": "d169ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452343575E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Create Technical Point of Delivery",
+                            "u": "ce69ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452343589E9
+                        }
+                    ],
+                    "t": "Point of Delivery (PoD)",
+                    "u": "076ace53118d4308e10000000a174cb4.html",
+                    "id": 2.452343542E9
+                },
+                                {
+                    "c": [],
+                    "t": "Device location",
+                    "u": "fe69ce53118d4308e10000000a174cb4.html",
+                    "id": 2.452343594E9
+                },
+                                {
+                    "c": [],
+                    "t": "Services",
+                    "u": "8b5fce53118d4308e10000000a174cb4.html",
+                    "id": 2.452343597E9
+                }
+            ],
+            "deleted": 0,
+            "transtype": "html5.uacp",
+            "filteringTokens": null,
+            "clientFilters": null,
+            "projectPhio": "bsy1757338222937",
+            "projectName": "S4H::OP 2025 001 sec"
+        },
+        "currentPage":         {
+            "id": 2554979677,
+            "t": "Master Data",
+            "u": "e369ce53118d4308e10000000a174cb4.html",
+            "loio": "e369ce53118d4308e10000000a174cb4",
+            "deltaMtTranslate": false
+        },
+        "body": "<!DOCTYPE html\n  SYSTEM \"about:legacy-compat\">\n<html lang=\"en-us\" dir=\"ltr\"><head><title>Master Data<\/title><meta charset=\"utf-8\"><link rel=\"stylesheet\" type=\"text/css\" media=\"screen,projection\" href=\"/resource/css/style-v2.css\"><script type=\"text/javascript\" src=\"js/sap-strings.js\"><\/script><\/head><body class=\"en-us sap-light centered navigation-default enumeration-disabled\"><div id=\"d4h5-main-container\" class=\"container_12\" role=\"application\"><div id=\"d4h5-section-container\" class=\"grid_12\"><div id=\"d4h5-main-content\" class=\"grid_8 alpha omega\"><section><div class=\"page topic  - topic-topic \" id=\"loioe369ce53118d4308e10000000a174cb4\"><h1 class=\"title topictitle1\">Master Data<\/h1><div class=\"body\"><p class=\"p\"><span class=\"ph emphasis emphasis\">Purpose<\/span><\/p> <p class=\"p\">This component contains data for the <span class=\"ph uicontrol\">Utilities Industry<\/span> (IS-U) component that remains unchanged over a long period of time.<\/p> <p class=\"p\">There are two different types of master data:<\/p> <div class=\"fig fignone\" id=\"id-32126-loioe369ce53118d4308e10000000a174cb4--fig-56-32-0\"><div class=\"figbody\"><img class=\"inline\" id=\"loioe369ce53118d4308e10000000a174cb4__image_qr3_ywh_xkb\" src=\"loio21577691703a4745a8bcfa5dace7f885_LowRes.png\"><\/div><\/div> <p class=\"p\">Business master data includes:<\/p> <ul class=\"ul\"><li class=\"li\"><p class=\"p\">Business partner<\/p><\/li><li class=\"li\"><p class=\"p\">Contract account<\/p><\/li><li class=\"li\"><p class=\"p\">Contract (billable service)<\/p><\/li><li class=\"li\"><p class=\"p\">Service provider<\/p><\/li><li class=\"li\"><p class=\"p\">Non-billable service<\/p><\/li><\/ul> <p class=\"p\">Technical master data includes:<\/p> <ul class=\"ul\"><li class=\"li\"><p class=\"p\">Grid<\/p><\/li><li class=\"li\"><p class=\"p\">Point of delivery<\/p><\/li><li class=\"li\"><p class=\"p\">Connection<\/p><\/li><li class=\"li\"><p class=\"p\">Connection object<\/p><\/li><li class=\"li\"><p class=\"p\">Technical installation<\/p><\/li><li class=\"li\"><p class=\"p\">Premise<\/p><\/li><li class=\"li\"><p class=\"p\">Device location<\/p><\/li><li class=\"li\"><p class=\"p\">Installation<\/p><\/li><li class=\"li\"><p class=\"p\">Device<\/p><\/li><\/ul><\/div><\/div><\/section><div class=\"clear\"><\/div>\n<\/div><\/div><\/div><\/body><\/html>",
+        "isMachineTranslated": 0,
+        "githubLink": ""
+    }
+}

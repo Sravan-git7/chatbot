@@ -1,0 +1,14 @@
+{
+  "title": "Creating, Changing, and Displaying Contract Accounts",
+  "parent": "Contract Accounts",
+  "file_path": "3efcc5536a51204be10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3efcc5536a51204be10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983858,
+    "t": "Creating, Changing, and Displaying Contract Accounts",
+    "u": "3efcc5536a51204be10000000a174cb4.html",
+    "loio": "3efcc5536a51204be10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Creating, Changing, and Displaying Contract Accounts\nCreating, Changing, and Displaying Contract Accounts\nUse\nYou can create or change contract accounts both online and from the operational system (see\nTransferring Master Data Automatically\n).\nOnly one business partner’s data is ever displayed. For information on editing or displaying another business partner’s data see\nDisplaying or Editing Other Business Partners\n.\nFeatures\nIf you want to change or display a contract account, you can enter the contract account number or the business partner.\nThe business partner is determined automatically if only one business partner has been assigned to the contract account.\nIf more than one business partner has been assigned to the contract account, then a dialog box in which you can choose a partner to be edited appears.\nIf several contract accounts were assigned to a business partner, a dialog box appears showing all the contract accounts assigned to that business partner. You can select a contract account from the dialog box and display it for processing.\nUsing authorization object F_KK_FCODE, you can issue authorizations for master data dialogs. You can determine, for example, which user is no longer authorized to assign partners to a contract account. See the authorization documentation for further information.\nYou can make changes to a contract account and have them take effect from a time in the future. The changes are not saved directly to the database, they are entered in change documents. To activate the data, you have to run report BUSPCDACT for the aplication object FICA(see SAP menu\nMaster Data\nContract Account\n). For more information, see the report documentation."
+}

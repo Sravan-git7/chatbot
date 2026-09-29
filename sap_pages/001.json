@@ -1,0 +1,14 @@
+{
+  "title": "Master Data",
+  "parent": "",
+  "file_path": "e369ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e369ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554979677,
+    "t": "Master Data",
+    "u": "e369ce53118d4308e10000000a174cb4.html",
+    "loio": "e369ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Master Data\nMaster Data\nPurpose\nThis component contains data for the\nUtilities Industry\n(IS-U) component that remains unchanged over a long period of time.\nThere are two different types of master data:\nBusiness master data includes:\nBusiness partner\nContract account\nContract (billable service)\nService provider\nNon-billable service\nTechnical master data includes:\nGrid\nPoint of delivery\nConnection\nConnection object\nTechnical installation\nPremise\nDevice location\nInstallation\nDevice"
+}

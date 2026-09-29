@@ -1,0 +1,14 @@
+{
+  "title": "Preventing New Business",
+  "parent": "Dealing with Blocked Business Partners",
+  "file_path": "03529f5326fb3543e10000000a44538d.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/03529f5326fb3543e10000000a44538d.html",
+  "current_page": {
+    "id": 2554982931,
+    "t": "Preventing New Business",
+    "u": "03529f5326fb3543e10000000a44538d.html",
+    "loio": "03529f5326fb3543e10000000a44538d",
+    "deltaMtTranslate": false
+  },
+  "text": "Preventing New Business\nPreventing New Business\nThe system prevents new business from arising for blocked business partners as follows:\nFor a blocked business partner, it is not possible to create new master data, such as contract accounts, prepaid accounts, or industry-specific contracts.\nYou cannot use blocked business partners as alternative payers in other contract accounts or contracts.\nYou cannot post new documents for blocked business partners.\nYou cannot post any documents, in which a blocked business partner is entered in another role, such as an alternative payer.\nYou cannot reverse any posting documents for a blocked business partner, and resetting clearing is also not possible.\nYou cannot generate event-controlled or periodic correspondence for a blocked business partner."
+}

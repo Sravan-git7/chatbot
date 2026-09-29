@@ -1,0 +1,14 @@
+{
+  "title": "Connection",
+  "parent": "",
+  "file_path": "f869ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/f869ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983445,
+    "t": "Connection",
+    "u": "f869ce53118d4308e10000000a174cb4.html",
+    "loio": "f869ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Connection\nConnection\nDefinition\nThe connection provides the technical link between the utility grid and the installations.\nThe connection processing function is optional. You will require it if you wish to manage the technical data for the connections (for example, length of the line).\nUse\nThe connection is modeled as a piece of equipment with the equipment category\nA: Connection\nfrom the\nPlant Maintenance\n(PM) application component.\nCaution\nYou can change the equipment category\nA\nin Customizing for\nPlant Maintenance and\nService Management\nby choosing\nMaster Data in Plant Maintenance and Service Management\nTechnical Objects\nEquipment\n.\nMaintenance and service (such as initial creation of a connection, or malfunction repair) are managed using the functions of the\nCustomer Service\n(CS-SO) component. In the\nSales and Distribution\n(SD) application component, quotations are created and services are billed.\nThe connection is allocated to the connection object when the device is installed, or when the location of the equipment is changed in the functional location.\nFor more information, see:\nPlant Maintenance\nEquipment\nService Connection (Workflow)\nService Connection with Customer Quotation (Workflow)\nService Connection Order Processing (Workflow)"
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Assigning Additional Business Partners",
+  "parent": "Creating, Changing, and Displaying Contract Accounts",
+  "file_path": "44fcc5536a51204be10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/44fcc5536a51204be10000000a174cb4.html",
+  "current_page": {
+    "id": 2554985039,
+    "t": "Assigning Additional Business Partners",
+    "u": "44fcc5536a51204be10000000a174cb4.html",
+    "loio": "44fcc5536a51204be10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Assigning Additional Business Partners\nAssigning Additional Business Partners\nPrerequisites\nThe contract account category allows you to assign multiple business partners to a contract account. You have already assigned a business partner to the contract account.\nProcedure\nOn the SAP Easy Access screen, choose\nMaster Data\nContract Account\nChange\n(\nCAA2\n) and enter the required contract account.\nThe first screen for data entry appears.\nChoose\nGoto\nNew Partner\nto jump to a dialog box in which you can assign an additional business partner to the account.\nAfter you execute the function, all fields that contain business partner-specific data appear initial (or with their default values) and the general data remains unchanged."
+}

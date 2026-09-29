@@ -1,0 +1,14 @@
+{
+  "title": "Example 1",
+  "parent": "Point of Delivery (PoD)",
+  "file_path": "c569ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/c569ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554982984,
+    "t": "Example 1",
+    "u": "c569ce53118d4308e10000000a174cb4.html",
+    "loio": "c569ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Example 1\nExample 1\nDevice 4711, containing the registers listed below, is allocated to installation 0815:\nDevice 4711\nRegister Code\nInterval Length\nReg 1\nWatt-hour energy\n15 mins\nReg 2\nReactive consumption\n15 mins\nWhen you created installation 0815, deregulation point of delivery POD 1 was created automatically. Allocate the point of delivery a POD ID, so that you have the allocation shown below:\nPoint of Delivery (PoD)\nDereg POD\nTech POD\nInstallation\nReg 1\nReg 2\nPOD 1\nX\nX\nYou can now use the point of delivery ID of POD 1 and the corresponding register code to import the profile values of the profiles allocated to the registers.\nYou therefore do not have to use a technical point of delivery in order to import profile values.\nThe\nConsumption\nrole category is allocated as a default setting. If you do not specify a role category, as is the case in the following graphic, the profile values are imported for the profile that is allocated to the register with the\nWatt-hours\nregister code and the\nConsumption\nrole (colored light gray in the graphic).\nHowever, if you do want to import the profile values of the profile that is allocated to the register with the\nWatt-hours\nregister code and the\nForecast\nrole (schedule profile colored light gray in the following graphic), you must specify the\nForecast\nrole category.\nIn order to use a deregulation point of delivery in a profile value import, the system from which you import the data must work with the same market-standard point of delivery ID as IS-U-EDM.\nIf this is not the case (if for example the automated meter reading system from which you import the values has its own numbers), you must use a technical point of delivery for the import.\nPoint of Delivery (PoD)\nDereg POD\nTech POD\nInstallation\nReg 1\nReg 2\nPOD 1\nX\nX\nPOD 2\nX\nX\nX\nYou still require the deregulation point of delivery to export the data and send it to other market players.\nCommunication in the deregulated energy market is still based on the deregulation point of delivery."
+}

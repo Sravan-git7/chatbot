@@ -1,0 +1,14 @@
+{
+  "title": "Creating, Changing and Displaying Locks",
+  "parent": "Creating, Changing, and Displaying Contract Accounts",
+  "file_path": "f0fbc5536a51204be10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/f0fbc5536a51204be10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983867,
+    "t": "Creating, Changing and Displaying Locks",
+    "u": "f0fbc5536a51204be10000000a174cb4.html",
+    "loio": "f0fbc5536a51204be10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Creating, Changing and Displaying Locks\nCreating, Changing and Displaying Locks\nIn the contract account master record, there is one process lock field for dunning, posting, invoicing, correspondence dunning, interest calculation, incoming payments, and outgoing payments respectively. You enter a lock reason in this field if you want to lock an account. You can set the lock for a limited period or set multiple locks for each business transaction.\nPrerequisites\nYou have maintained the lock reasons for dunning and payment in Customizing for Contract Accounts Receivable and Payable.\nProcedure\nCall up the contract account you want to change or display.\nEnter a lock reason in the\nLock On\nfield on the\nChange Contract Account: Dunning/Correspondence Data\nscreen for dunning control, incoming or outgoing payments.\nIf you want to set a lock for a limited period or if you want to set or display multiple locks, press the arrow key next to the\nLock\nfield.\nA dialog box appears where you can display or enter the lock interval or the lock itself. You can also display the lock history from this dialog box. Changes related to the locks are written in the lock history and are not logged with change documents.\nYou can change and delete locks in this dialog box.\nNote the following:\nIf you only specify one lock reason, the lock will be for an unlimited period of time.\nIf you only enter one lock reason, you can change or delete this. If multiple or limited-time locks have been set, press the arrow key to make changes. You can then make changes in the dialog box that appears.\nIf you have set multiple or limited-time locks, the\nLock\nfield contains a ~ . In this case, choose the arrow key to display the locks.\nResult\nThe contract account is locked for the business transaction selected either for a limited or unlimited amount of time, depending on the lock reason."
+}

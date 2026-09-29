@@ -1,0 +1,14 @@
+{
+  "title": "BAPIs for Central Business Partner (IS-U)",
+  "parent": "IS-U Business Partner: Special Features",
+  "file_path": "3771ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3771ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554983853,
+    "t": "BAPIs for Central Business Partner (IS-U)",
+    "u": "3771ce53118d4308e10000000a174cb4.html",
+    "loio": "3771ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "BAPIs for Central Business Partner (IS-U)\nBAPIs for Central Business Partner (IS-U)\nUse\nThe Business Object Repository (BOR) contains the following Business Application Programming Interface (BAPIs) for the business partner:\nUtilBusinessPartner.CreateFromData (Creating a Business Partner)\nUtilBusinessPartner.Change (Changing a business partner)\nUtilBusinessPartner.GetDetail (Displaying a business partner)\nUtilBusinessPartner.GetList (Displaying a business partner)\nFor more information about BAPIs see the following documentation:\nSee the BAPI user manual and the BAPI Programming Guide\nFor more detailed information, see the documentation of the individual BAPIs in BOR."
+}

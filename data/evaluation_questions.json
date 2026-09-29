@@ -1,0 +1,189 @@
+[
+  {
+    "id": "q01",
+    "question": "What are the two types of master data?",
+    "expected_titles": ["Master Data"],
+    "category": "direct"
+  },
+  {
+    "id": "q02",
+    "question": "What is a business partner?",
+    "expected_titles": ["SAP Business Partner"],
+    "category": "direct"
+  },
+  {
+    "id": "q03",
+    "question": "What is a contract account?",
+    "expected_titles": ["Contract Account", "Contract Accounts"],
+    "category": "direct"
+  },
+  {
+    "id": "q04",
+    "question": "What is the purpose of the Manage Contract Accounts app?",
+    "expected_titles": ["Manage Contract Accounts"],
+    "category": "direct"
+  },
+  {
+    "id": "q05",
+    "question": "What does a contract account category determine?",
+    "expected_titles": ["Contract Account Category"],
+    "category": "direct"
+  },
+  {
+    "id": "q06",
+    "question": "What business master data is included in SAP IS-U?",
+    "expected_titles": ["Master Data"],
+    "category": "direct"
+  },
+  {
+    "id": "q07",
+    "question": "What technical master data is included in SAP IS-U?",
+    "expected_titles": ["Master Data"],
+    "category": "direct"
+  },
+  {
+    "id": "q08",
+    "question": "What roles can a business partner have?",
+    "expected_titles": ["SAP Business Partner"],
+    "category": "direct"
+  },
+  {
+    "id": "q09",
+    "question": "What is a business partner relationship?",
+    "expected_titles": ["SAP Business Partner"],
+    "category": "direct"
+  },
+  {
+    "id": "q10",
+    "question": "How can a business partner be represented in an organization?",
+    "expected_titles": ["SAP Business Partner"],
+    "category": "direct"
+  },
+  {
+    "id": "q11",
+    "question": "Can one business partner have multiple contract accounts?",
+    "expected_titles": ["Contract Accounts"],
+    "category": "relationship"
+  },
+  {
+    "id": "q12",
+    "question": "Can one contract account have multiple business partners?",
+    "expected_titles": ["Contract Accounts"],
+    "category": "relationship"
+  },
+  {
+    "id": "q13",
+    "question": "What is the relationship between a business partner and a contract account?",
+    "expected_titles": [
+      "Contract Accounts",
+      "Link: Contract Account - Business Partner"
+    ],
+    "category": "relationship"
+  },
+  {
+    "id": "q14",
+    "question": "What procedures can be defined for a business partner in a contract account?",
+    "expected_titles": ["Contract Accounts"],
+    "category": "detail"
+  },
+  {
+    "id": "q15",
+    "question": "What attributes are controlled by the contract account category?",
+    "expected_titles": ["Contract Account Category"],
+    "category": "detail"
+  },
+  {
+    "id": "q16",
+    "question": "What can you do with the Manage Contract Accounts app?",
+    "expected_titles": ["Manage Contract Accounts"],
+    "category": "detail"
+  },
+  {
+    "id": "q17",
+    "question": "How are business partner roles useful in SAP?",
+    "expected_titles": ["SAP Business Partner"],
+    "category": "detail"
+  },
+  {
+    "id": "q18",
+    "question": "What is the purpose of master data in the Utilities Industry?",
+    "expected_titles": ["Master Data"],
+    "category": "detail"
+  },
+  {
+    "id": "q19",
+    "question": "How is master data classified in SAP IS-U?",
+    "expected_titles": ["Master Data"],
+    "category": "paraphrased"
+  },
+  {
+    "id": "q20",
+    "question": "Explain what a contract account is in SAP.",
+    "expected_titles": ["Contract Account", "Contract Accounts"],
+    "category": "paraphrased"
+  },
+  {
+    "id": "q21",
+    "question": "Describe the SAP Business Partner concept.",
+    "expected_titles": ["SAP Business Partner"],
+    "category": "paraphrased"
+  },
+  {
+    "id": "q22",
+    "question": "How does SAP define a contract account?",
+    "expected_titles": ["Contract Account"],
+    "category": "paraphrased"
+  },
+  {
+    "id": "q23",
+    "question": "What is the difference between business master data and technical master data?",
+    "expected_titles": ["Master Data"],
+    "category": "comparison"
+  },
+  {
+    "id": "q24",
+    "question": "What is the difference between a business partner and a contract account?",
+    "expected_titles": [
+      "SAP Business Partner",
+      "Contract Account",
+      "Contract Accounts"
+    ],
+    "category": "comparison"
+  },
+  {
+    "id": "q25",
+    "question": "What information is associated with a business partner?",
+    "expected_titles": ["SAP Business Partner"],
+    "category": "detail"
+  },
+  {
+    "id": "q26",
+    "question": "What is SAP HANA licensing cost?",
+    "expected_titles": [],
+    "category": "out_of_domain"
+  },
+  {
+    "id": "q27",
+    "question": "Who is the CEO of SAP?",
+    "expected_titles": [],
+    "category": "out_of_domain"
+  },
+  {
+    "id": "q28",
+    "question": "What is Python?",
+    "expected_titles": [],
+    "category": "out_of_domain"
+  },
+  {
+    "id": "q29",
+    "question": "How do I install Windows 11?",
+    "expected_titles": [],
+    "category": "out_of_domain"
+  },
+  {
+    "id": "q30",
+    "question": "What is the weather today?",
+    "expected_titles": [],
+    "category": "out_of_domain"
+  }
+]

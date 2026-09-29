@@ -1,0 +1,14 @@
+{
+  "title": "Blocking and Deleting Personal Data",
+  "parent": "SAP Business Partner",
+  "file_path": "70d599539de1cd46e10000000a44538d.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/70d599539de1cd46e10000000a44538d.html",
+  "current_page": {
+    "id": 2554985082,
+    "t": "Blocking and Deleting Personal Data",
+    "u": "70d599539de1cd46e10000000a44538d.html",
+    "loio": "70d599539de1cd46e10000000a44538d",
+    "deltaMtTranslate": false
+  },
+  "text": "Blocking and Deleting Personal Data\nBlocking and Deleting Personal Data\nThe processes and functions of Contract Accounts Receivable and Payable use personal data of the SAP business partner. If, from the point of view of these processes and functions, there is no longer any reason to store the data (for example, for a possible tax audit), you can block this data from the perspective of Contract Accounts Receivable and Payable and ultimately destroy it.\nFor destroying personal data, use the functions of Information Lifecycle Management (ILM). Using the ILM functions, you first block the personal data of business partners for whom there is no further business. Then you delete this data as soon as it is no longer needed.\nAll archiving objects in Contract Accounts Receivable and Payable support data protection notifications (see\nDeletion of Personal Data in SAP BW/4HANA and SAP BW\n).\nRelated Information\nData Protection"
+}

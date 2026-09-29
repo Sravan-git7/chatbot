@@ -1,0 +1,14 @@
+{
+  "title": "Merging Business Partners (IS-U)",
+  "parent": "IS-U Business Partner: Special Features",
+  "file_path": "4371ce53118d4308e10000000a174cb4.html",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4371ce53118d4308e10000000a174cb4.html",
+  "current_page": {
+    "id": 2554984522,
+    "t": "Merging Business Partners (IS-U)",
+    "u": "4371ce53118d4308e10000000a174cb4.html",
+    "loio": "4371ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  },
+  "text": "Merging Business Partners (IS-U)\nMerging Business Partners (IS-U)\nPurpose\nNote\nNote that you can only use the functions described in this documentation section (Merging Business Partners (IS-U)), if you are using the industry solution\nSAP S/4HANA Utilities\n.\nYou can use the business partner merging function in connection with the central business partner (SAP application component CA-BP\nContract Accounting – Business Partner\n) and Contract Accounts Receivable and Payable (FI-CA\nFinancial Accounting – Contract Accounting\n).\nImplementation Considerations\nThe following SAP notes contain more information about business partner merging:\nTitle of SAP Note\nSAP Note\nFAQs for Transferring Open Items (FP40)\n616098\nIS-U Transactions and Batch Input\n432178\nMerging Business Partners\n624341\nMove-In: No Meter Reading Results Proposed\n503243\nIntegration\nPart of the central business partner concept is that every natural or legal person as well as every group is only created once in a system. There are different reasons why a business partner is created several times in one system. Business partners that have been created more than once are referred to as duplicates. Duplicates can occur due to the following reasons:\nMigration from legacy systems without merging business\nMigration from different legacy systems without a duplicate check\nNew creation of business partners in SAP systems without duplicate checks\nData Cleansing\nYou can use the data cleansing tool\nCleansing Tool\n(transaction\nCLEAR_INT\n) to process duplicates.\nNote\nThese data cleansing functions are not released for systems with industry add-ons.\nFeatures\nThe following information about business partner objects and other functions and tools is available for business partner merging:\nObjects in Contract Accounts Receivable and Payable\nObjects and Enhancements in SAP Utilities\nCustomer Change\nObjects and Enhancements in SAP CRM\nAutomatic Business Partner Merging\nIn the following, the business partner to be removed from the system is referred to as the\nsource business partner\n. The business partner that replaces the source business partner is referred to as the\ntarget business partner\n."
+}
