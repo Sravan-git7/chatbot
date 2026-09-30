@@ -1,0 +1,1690 @@
+{
+    "status": "OK",
+    "data":     {
+        "fallback": false,
+        "deliverable":         {
+            "title": "Customer Service",
+            "shortdesc": "",
+            "landingPage": "7182ce53118d4308e10000000a174cb4.html",
+            "loio": "f4a255a5de524e3992155767996fb1fd",
+            "buildableMapLoio": "0a83ce53118d4308e10000000a174cb4",
+            "version": "2025.001",
+            "languageCode": "en-US",
+            "state": "PRODUCTION",
+            "fullToc":             [
+                                {
+                    "c": [],
+                    "t": "Customer Service",
+                    "u": "7182ce53118d4308e10000000a174cb4.html",
+                    "id": 2.452361784E9
+                },
+                                {
+                    "c":                     [
+                                                {
+                            "c": [],
+                            "t": "Initial Data Creation",
+                            "u": "7d82ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361786E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Owner Allocation",
+                            "u": "5382ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361787E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c":                                     [
+                                                                                {
+                                            "c": [],
+                                            "t": "Insert Contract",
+                                            "u": "c882ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.45236179E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Enhancements to Move-In/Out",
+                                            "u": "b181ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361791E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Contract Change without Invoicing",
+                                            "u": "8280ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361792E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Customer Change",
+                                            "u": "f780ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361793E9
+                                        }
+                                    ],
+                                    "t": "Move-In/Out Processing",
+                                    "u": "0681ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361789E9
+                                },
+                                                                {
+                                    "c":                                     [
+                                                                                {
+                                            "c": [],
+                                            "t": "Master Data (Move-In)",
+                                            "u": "b481ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361795E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Meter Reading Data (Move-In)",
+                                            "u": "b781ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361796E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Budget Billing Plan",
+                                            "u": "ba81ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361797E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Security Deposits",
+                                            "u": "bd81ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361798E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Welcome Letter",
+                                            "u": "c081ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361799E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Screen Layout",
+                                            "u": "c381ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.4523618E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Service Notifications and Orders",
+                                            "u": "c681ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361801E9
+                                        }
+                                    ],
+                                    "t": "Move-in",
+                                    "u": "0981ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361794E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Move-In Reversal",
+                                    "u": "0c81ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361802E9
+                                },
+                                                                {
+                                    "c":                                     [
+                                                                                {
+                                            "c": [],
+                                            "t": "Master Data (Move-Out)",
+                                            "u": "c981ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361804E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Move-out Confirmation Letter",
+                                            "u": "cc81ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361805E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Meter Reading Data (Move-Out)",
+                                            "u": "cf81ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452361806E9
+                                        }
+                                    ],
+                                    "t": "Move-Out",
+                                    "u": "0f81ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361803E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Move-Out Reversal",
+                                    "u": "1281ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361807E9
+                                }
+                            ],
+                            "t": "Move-In/Out",
+                            "u": "8082ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361788E9
+                        },
+                                                {
+                            "c": [                            {
+                                "c":                                 [
+                                                                        {
+                                        "c": [],
+                                        "t": "Disconnection Document Release",
+                                        "u": "5982ce53118d4308e10000000a174cb4.html",
+                                        "h": "",
+                                        "id": 2.45236181E9
+                                    },
+                                                                        {
+                                        "c": [],
+                                        "t": "Disconnection Order Generation",
+                                        "u": "5c82ce53118d4308e10000000a174cb4.html",
+                                        "h": "",
+                                        "id": 2.452361811E9
+                                    },
+                                                                        {
+                                        "c": [],
+                                        "t": "Disconnection Entry",
+                                        "u": "d980ce53118d4308e10000000a174cb4.html",
+                                        "h": "",
+                                        "id": 2.452361812E9
+                                    },
+                                                                        {
+                                        "c": [],
+                                        "t": "Disconnection Document",
+                                        "u": "ad82ce53118d4308e10000000a174cb4.html",
+                                        "h": "",
+                                        "id": 2.452361813E9
+                                    },
+                                                                        {
+                                        "c": [],
+                                        "t": "Reconnection Order Generation",
+                                        "u": "dc80ce53118d4308e10000000a174cb4.html",
+                                        "h": "",
+                                        "id": 2.452361814E9
+                                    },
+                                                                        {
+                                        "c": [],
+                                        "t": "Reconnection Entry",
+                                        "u": "df80ce53118d4308e10000000a174cb4.html",
+                                        "h": "",
+                                        "id": 2.452361815E9
+                                    },
+                                                                        {
+                                        "c": [],
+                                        "t": "Monitoring Disconnection and Reconnection Activities",
+                                        "u": "8781ce53118d4308e10000000a174cb4.html",
+                                        "h": "",
+                                        "id": 2.452361816E9
+                                    },
+                                                                        {
+                                        "c": [],
+                                        "t": "Rescheduling of Disconnection and Reconnection Orders",
+                                        "u": "dd82ce53118d4308e10000000a174cb4.html",
+                                        "h": "",
+                                        "id": 2.452361817E9
+                                    }
+                                ],
+                                "t": "Disconnection/Reconnection of a Utilities Installation",
+                                "u": "5682ce53118d4308e10000000a174cb4.html",
+                                "h": "",
+                                "id": 2.452361809E9
+                            }],
+                            "t": "Disconnection/Reconnection of a Utility Installation",
+                            "u": "8682ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361808E9
+                        },
+                                                {
+                            "c": [                            {
+                                "c": [],
+                                "t": "Rate Maintenance",
+                                "u": "e280ce53118d4308e10000000a174cb4.html",
+                                "h": "",
+                                "id": 2.452361819E9
+                            }],
+                            "t": "Rate Maintenance",
+                            "u": "8982ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361818E9
+                        }
+                    ],
+                    "t": "Process Execution",
+                    "u": "7a82ce53118d4308e10000000a174cb4.html",
+                    "id": 2.452361785E9
+                },
+                                {
+                    "c": [                    {
+                        "c": [],
+                        "t": "Creation of Customer Contacts",
+                        "u": "c409c5536a51204be10000000a174cb4.html",
+                        "h": "",
+                        "id": 2.452361821E9
+                    }],
+                    "t": "Customer Contact",
+                    "u": "c709c5536a51204be10000000a174cb4.html",
+                    "id": 2.45236182E9
+                },
+                                {
+                    "c":                     [
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Template Category Hierarchy",
+                                    "u": "3582ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361824E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Cardinality of MDT Category Sub-Nodes",
+                                    "u": "6c81ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361825E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Autonomous Master Data Template Categories",
+                                    "u": "6e82ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361826E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Creating or Changing Master Data Template Categories",
+                                    "u": "8f82ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361827E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Virtual Attributes",
+                                    "u": "5781ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361828E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Customer-Specific Fields",
+                                    "u": "1782ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361829E9
+                                }
+                            ],
+                            "t": "Master Data Template Categories",
+                            "u": "b580ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361823E9
+                        },
+                                                {
+                            "c": [                            {
+                                "c": [],
+                                "t": "ISU_ENVIRONMENT_PREMISE",
+                                "u": "e781ce53118d4308e10000000a174cb4.html",
+                                "h": "",
+                                "id": 2.452361831E9
+                            }],
+                            "t": "Environment Determination",
+                            "u": "bc82ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.45236183E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Creating and Testing Master Data Templates",
+                                    "u": "e481ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361833E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Parameters",
+                                    "u": "f180ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361834E9
+                                }
+                            ],
+                            "t": "Master Data Templates",
+                            "u": "c780ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361832E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Create Customer Contact",
+                                    "u": "e181ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361836E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Key for Generated or Changed Master Data",
+                                    "u": "b280ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361837E9
+                                }
+                            ],
+                            "t": "Master Data Generator",
+                            "u": "de81ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361835E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Error Handling in the Master Data Generator",
+                            "u": "fe82ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361838E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Category NEWCUSTPOD",
+                                    "u": "0282ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.45236184E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Category NEWCUST",
+                                    "u": "ed81ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361841E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Category RATECHANGE",
+                                    "u": "e082ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361842E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Categories BPARTNER and CONTRACT_ACCOUNT",
+                                    "u": "ea81ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361843E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Categories DEVICE_INFO and REGISTER_INFO",
+                                    "u": "9981ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361844E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Categories QPRICE and QPRICE_HIST",
+                                    "u": "af80ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452361845E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Categories LPRICE and TPRICE",
+                                    "u": "6981ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362846E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Category CONNOBJ",
+                                    "u": "eb80ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362847E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Category DEVICE_LOCATION",
+                                    "u": "3882ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362848E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Category POD_STAND_ALONE",
+                                    "u": "d581ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362849E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Category PREMISE",
+                                    "u": "fa80ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.45236285E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Category INSTALLATION",
+                                    "u": "8977ef545d254b46996d104f6aebe9e6.html",
+                                    "h": "",
+                                    "id": 2.452362851E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Master Data Template Category BCONTACT",
+                                    "u": "0582ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362852E9
+                                }
+                            ],
+                            "t": "Description of Master Data Template Categories",
+                            "u": "b382ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452361839E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Frequently Asked Questions",
+                            "u": "2682ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452362853E9
+                        }
+                    ],
+                    "t": "Master Data Templates in SAP IS-U",
+                    "u": "fc81ce53118d4308e10000000a174cb4.html",
+                    "id": 2.452361822E9
+                },
+                                {
+                    "c":                     [
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "IS-U / CRM Integration – Data Model",
+                                    "u": "3c81ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362856E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Accelerated Move-In, Move-Out, Move-In/Out Entry: Data Model",
+                                    "u": "4482ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362857E9
+                                }
+                            ],
+                            "t": "Scenario Overview",
+                            "u": "6b82ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452362855E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "List Display for Replications Containing Errors",
+                                    "u": "8b80ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362859E9
+                                },
+                                                                {
+                                    "c":                                     [
+                                                                                {
+                                            "c": [],
+                                            "t": "Menu and Application Toolbar for Detailed Display",
+                                            "u": "7881ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452362861E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Detail Display: Contract Replication from SAP CRM",
+                                            "u": "5082ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452362862E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Detail Display: Connection Object Replication from SAP CRM",
+                                            "u": "e682ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452362863E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Detail Display: Point of Delivery Replication from SAP CRM",
+                                            "u": "a380ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452362864E9
+                                        },
+                                                                                {
+                                            "c": [],
+                                            "t": "Detailed Display for Parked Document",
+                                            "u": "c582ce53118d4308e10000000a174cb4.html",
+                                            "h": "",
+                                            "id": 2.452362865E9
+                                        }
+                                    ],
+                                    "t": "Detailed Display for Replication Containing Errors",
+                                    "u": "8181ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.45236286E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Restart for Replication Containing Errors",
+                                    "u": "ab81ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362866E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Automatic Restart of Dependent Entries",
+                                    "u": "fb82ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362867E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Workflow ECRMINFAILED",
+                                    "u": "ec82ce53118d4308e10000000a174cb4.html",
+                                    "h": "",
+                                    "id": 2.452362868E9
+                                }
+                            ],
+                            "t": "The IS-U Error Monitor",
+                            "u": "8a81ce53118d4308e10000000a174cb4.html",
+                            "h": "",
+                            "id": 2.452362858E9
+                        }
+                    ],
+                    "t": "Error Processing: IS-U/CRM Replication and Parked Documents",
+                    "u": "6081ce53118d4308e10000000a174cb4.html",
+                    "id": 2.452362854E9
+                },
+                                {
+                    "c":                     [
+                                                {
+                            "c": [                            {
+                                "c":                                 [
+                                                                        {
+                                        "c": [],
+                                        "t": "Installation of Multichannel Foundation for Utilities and Public Sector",
+                                        "u": "142daa5766700322e10000000a44147b.html",
+                                        "h": "",
+                                        "id": 2.452362872E9
+                                    },
+                                                                        {
+                                        "c":                                         [
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "ABAP Platform System Settings",
+                                                        "u": "b682aa574af7a30be10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362875E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Gateway Activation",
+                                                        "u": "7683aa574af7a30be10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362876E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain System Alias for the SAP IS-U for S/4 HANA System",
+                                                        "u": "5b3eb457ed725f5de10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362877E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Register Services",
+                                                        "u": "523fb457ed725f5de10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362878E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Roles for Service User for Gateway Hub System",
+                                                        "u": "2e91b95707b83d76e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362879E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Roles for Reference User for Gateway Hub System",
+                                                        "u": "3e92b95707b83d76e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.45236288E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Service User in Gateway Hub System",
+                                                        "u": "e004ad5789cfca02e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362881E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Reference User in Gateway Hub System",
+                                                        "u": "5e24ad573dc35b3be10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362882E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Set Service User in SICF Node for Public OData Services",
+                                                        "u": "015bbd57f1030f2be10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452362883E9
+                                                    }
+                                                ],
+                                                "t": "Configuring the Gateway Hub System",
+                                                "u": "2a81aa574af7a30be10000000a44147b.html",
+                                                "h": "",
+                                                "id": 2.452362874E9
+                                            },
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Role for Service User in the SAP IS-U for S/4 HANA System",
+                                                        "u": "4474bd57f1030f2be10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452362885E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Role for Reference User in the SAP IS-U for S/4 HANA System",
+                                                        "u": "3075bd57f1030f2be10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452362886E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Service User in SAP IS-U for S/4 HANA System",
+                                                        "u": "6623b2573ddcb576e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362887E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Reference User in SAP IS-U for S/4 HANA System",
+                                                        "u": "9cabb357e1c2ca02e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362888E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Activate BC-Sets in SAP IS-U System",
+                                                        "u": "a77da057d1bbad6be10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362889E9
+                                                    }
+                                                ],
+                                                "t": "Configuring the SAP IS-U for S/4 HANA System",
+                                                "u": "9273bd57f1030f2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452362884E9
+                                            },
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain URL for User Account Activation (Mandatory)",
+                                                        "u": "388eb457fa7aca02e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362891E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain Number Range Interval for User Self Service (Mandatory)",
+                                                        "u": "1290b457fa7aca02e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362892E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain RFC Destinations for User Replication (Mandatory)",
+                                                        "u": "2ae9b55734ae5d5de10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362893E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain User Category (Mandatory)",
+                                                        "u": "ac4dbf57f6428809e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362894E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Verify User Request (Optional)",
+                                                        "u": "8717b6575dde5d5de10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362895E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Define Notification Process for User Request Management (Optional)",
+                                                        "u": "8b21b6575dde5d5de10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362896E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Implement User Management (Optional)",
+                                                        "u": "cf4fbf57f6428809e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362897E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Define Handler for User Management Notification (Optional)",
+                                                        "u": "7124b6575dde5d5de10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362898E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "User Request Cleanup (Optional)",
+                                                        "u": "8922b7571a0a5e5de10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362899E9
+                                                    }
+                                                ],
+                                                "t": "Set Up B2C User Management",
+                                                "u": "8881a057d1bbad6be10000000a4450e5.html",
+                                                "h": "",
+                                                "id": 2.45236289E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Quick Testing of OData Service ERP_ISU_UMC",
+                                                "u": "8a66c057c61bba38e10000000a44147b.html",
+                                                "h": "",
+                                                "id": 2.4523629E9
+                                            }
+                                        ],
+                                        "t": "Configuring SAP IS-U for S/4 HANA System as Standalone Scenario",
+                                        "u": "bf32aa5766700322e10000000a44147b.html",
+                                        "h": "",
+                                        "id": 2.452362873E9
+                                    },
+                                                                        {
+                                        "c":                                         [
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "ABAP Platform System Settings",
+                                                        "u": "68a2ac57925c0322e10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362903E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Gateway Activation in SAP CRM",
+                                                        "u": "f6a5ac57925c0322e10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362904E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain System Aliases for SAP IS-U for S/4 HANA and SAP CRM",
+                                                        "u": "e4c3ac57925c0322e10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362905E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Register Services",
+                                                        "u": "58d9ac571c44a30be10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362906E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Role for Service User in Gateway Hub System",
+                                                        "u": "19c6ac57925c0322e10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362907E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Role for Reference User in Gateway Hub System",
+                                                        "u": "5b22ad573dc35b3be10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362908E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Service User in Gateway Hub System",
+                                                        "u": "e004ad5789cfca02e10000000a4450e5-126.html",
+                                                        "h": "",
+                                                        "id": 2.452362909E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Reference User in Gateway Hub System",
+                                                        "u": "5e24ad573dc35b3be10000000a4450e5-127.html",
+                                                        "h": "",
+                                                        "id": 2.45236291E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Set Service User in SICF Node for Public OData Services",
+                                                        "u": "b206ad5789cfca02e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362911E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Activate the SICF Nodes for Private and Public SAPUI5 Template Applications",
+                                                        "u": "da07ad5789cfca02e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362912E9
+                                                    }
+                                                ],
+                                                "t": "Configuring the Gateway Hub System",
+                                                "u": "2a81aa574af7a30be10000000a44147b-119.html",
+                                                "h": "",
+                                                "id": 2.452362902E9
+                                            },
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Role for Service User in SAP CRM System",
+                                                        "u": "892cad5789cfca02e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362914E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Role for Reference User in SAP CRM System",
+                                                        "u": "c0ffad5789cfca02e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362915E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Activate BC-Sets in SAP CRM System",
+                                                        "u": "30b2e25791911070e10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362916E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Service User in SAP CRM System",
+                                                        "u": "4934ab57114eb576e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362917E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Reference User in SAP CRM System",
+                                                        "u": "2735ab57114eb576e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362918E9
+                                                    }
+                                                ],
+                                                "t": "Configuring the SAP CRM System",
+                                                "u": "6d29ad573dc35b3be10000000a4450e5.html",
+                                                "h": "",
+                                                "id": 2.452362913E9
+                                            },
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Role for Service User in SAP IS-U for S/4 HANA System",
+                                                        "u": "5422b2573ddcb576e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.45236292E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create PFCG Role for Reference User in the SAP IS-U for S/4 HANA System",
+                                                        "u": "346cb257d798ca02e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452362921E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Service User in SAP IS-U for S/4 HANA System",
+                                                        "u": "6623b2573ddcb576e10000000a4450e5-139.html",
+                                                        "h": "",
+                                                        "id": 2.452362922E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Create Reference User in SAP IS-U for S/4 HANA System",
+                                                        "u": "9cabb357e1c2ca02e10000000a4450e5-140.html",
+                                                        "h": "",
+                                                        "id": 2.452362923E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Activate BC-Sets in SAP IS-U System",
+                                                        "u": "a77da057d1bbad6be10000000a4450e5-141.html",
+                                                        "h": "",
+                                                        "id": 2.452362924E9
+                                                    }
+                                                ],
+                                                "t": "Configuring the SAP IS-U for S/4 HANA System",
+                                                "u": "a020b2573ddcb576e10000000a4450e5.html",
+                                                "h": "",
+                                                "id": 2.452362919E9
+                                            },
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain URL for User Account Activation (Mandatory)",
+                                                        "u": "388eb457fa7aca02e10000000a4450e5-143.html",
+                                                        "h": "",
+                                                        "id": 2.452362926E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain Number Range Interval for User Self Service (Mandatory)",
+                                                        "u": "1290b457fa7aca02e10000000a4450e5-144.html",
+                                                        "h": "",
+                                                        "id": 2.452362927E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain RFC Destinations for User Replication (Mandatory)",
+                                                        "u": "2ae9b55734ae5d5de10000000a44147b-145.html",
+                                                        "h": "",
+                                                        "id": 2.452362928E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Maintain User Category (Mandatory)",
+                                                        "u": "3e0db7571a0a5e5de10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362929E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Verify User Request (Optional)",
+                                                        "u": "8717b6575dde5d5de10000000a44147b-147.html",
+                                                        "h": "",
+                                                        "id": 2.45236293E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Define Notification Process for User Request Management (Optional)",
+                                                        "u": "8b21b6575dde5d5de10000000a44147b-148.html",
+                                                        "h": "",
+                                                        "id": 2.452362931E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Implement User Management (Optional)",
+                                                        "u": "5423b6575dde5d5de10000000a44147b.html",
+                                                        "h": "",
+                                                        "id": 2.452362932E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Define Handler for User Management Notification (Optional)",
+                                                        "u": "7124b6575dde5d5de10000000a44147b-150.html",
+                                                        "h": "",
+                                                        "id": 2.452362933E9
+                                                    }
+                                                ],
+                                                "t": "Set Up B2C User Management",
+                                                "u": "8881a057d1bbad6be10000000a4450e5-142.html",
+                                                "h": "",
+                                                "id": 2.452362925E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Quick Testing of OData Services CRM_UTILITIES_UMC and ERP_ISU_UMC",
+                                                "u": "3328b7571a0a5e5de10000000a44147b.html",
+                                                "h": "",
+                                                "id": 2.452362934E9
+                                            }
+                                        ],
+                                        "t": "Configuring SAP CRM as Leading System Scenario (Optional)",
+                                        "u": "80aeac571c44a30be10000000a44147b.html",
+                                        "h": "",
+                                        "id": 2.452362901E9
+                                    },
+                                                                        {
+                                        "c":                                         [
+                                                                                        {
+                                                "c": [],
+                                                "t": "Gateway Service Model Development in SAP CRM",
+                                                "u": "0c6dc057bf460d2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452362936E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Gateway Service Model Development in SAP IS-U",
+                                                "u": "256ec057bf460d2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452362937E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Gateway Service Model Extensibility in SAP CRM",
+                                                "u": "e96fc057bf460d2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452362938E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Gateway Service Model Extensibility in SAP IS-U for SAP S/4HANA",
+                                                "u": "447ac057bf460d2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452362939E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Batch Operations for OData Services",
+                                                "u": "de60c05760050e2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.45236294E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Consuming OData Batch Request from SAP UI",
+                                                "u": "f861c05760050e2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452362941E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Error Message Handling",
+                                                "u": "5363c05760050e2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452362942E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Multichannel Foundation for Utilities and Public Sector Solution Monitoring",
+                                                "u": "6e64c05760050e2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452362943E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Multichannel Foundation for Utilities and Public Sector Management",
+                                                "u": "a065c05760050e2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452362944E9
+                                            },
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "UMCUI5 Application",
+                                                        "u": "fadfc357f6ec8909e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452363946E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "UMCUI5 Public Application",
+                                                        "u": "7ce4c357f6ec8909e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452363947E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Log Out Configuration",
+                                                        "u": "96ecc357f6ec8909e10000000a4450e5.html",
+                                                        "h": "",
+                                                        "id": 2.452363948E9
+                                                    }
+                                                ],
+                                                "t": "Sample SAP UI5 Application Configuration",
+                                                "u": "60dcc357f6ec8909e10000000a4450e5.html",
+                                                "h": "",
+                                                "id": 2.452362945E9
+                                            },
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Gateway Service Configuration",
+                                                        "u": "96b7c957ed4a0d2be10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.45236395E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "UMCUI5_MOBILE Public Application",
+                                                        "u": "d1b9c957ed4a0d2be10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452363951E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "UMCUI5_MOBILE Foundation Application",
+                                                        "u": "22bbc957ed4a0d2be10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452363952E9
+                                                    }
+                                                ],
+                                                "t": "Sample SAP UI5 Mobile Application Configuration",
+                                                "u": "1ab6c957ed4a0d2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363949E9
+                                            },
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Specifying the Path to a Custom UI Theme",
+                                                        "u": "78c1c957ed4a0d2be10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452363954E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Creating a Custom Theme",
+                                                        "u": "bec2c957ed4a0d2be10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452363955E9
+                                                    }
+                                                ],
+                                                "t": "Applying Custom Themes to Mobile Applications",
+                                                "u": "65bcc957ed4a0d2be10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363953E9
+                                            },
+                                                                                        {
+                                                "c":                                                 [
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Configuring Visual Business for OData Entity Outage",
+                                                        "u": "aad6cd571d468a3de10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452363957E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Consuming Visual Business Services from the User Interface",
+                                                        "u": "68d7cd571d468a3de10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452363958E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Creating an Outage Region",
+                                                        "u": "6ed8cd571d468a3de10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.452363959E9
+                                                    },
+                                                                                                        {
+                                                        "c": [],
+                                                        "t": "Configuring Outage Messages",
+                                                        "u": "d7d9cd571d468a3de10000000a441470.html",
+                                                        "h": "",
+                                                        "id": 2.45236396E9
+                                                    }
+                                                ],
+                                                "t": "Configuring Outage in Multichannel Foundation for Utilities and Public Sector",
+                                                "u": "fbd5cd571d468a3de10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363956E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Retrieving Channel Information in SAP Multichannel Foundation for Utilities and Public Sector",
+                                                "u": "96dacd571d468a3de10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363961E9
+                                            }
+                                        ],
+                                        "t": "Application Operations",
+                                        "u": "ea77aa574af7a30be10000000a44147b.html",
+                                        "h": "",
+                                        "id": 2.452362935E9
+                                    },
+                                                                        {
+                                        "c":                                         [
+                                                                                        {
+                                                "c": [],
+                                                "t": "Technical System Landscape",
+                                                "u": "be6dd9574a6a4b25e10000000a44147b.html",
+                                                "h": "",
+                                                "id": 2.452363963E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Security Aspects of Data, Data Flow, and Processes",
+                                                "u": "fd08d757c4b4b40ce10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363964E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "User Administration and Authentication",
+                                                "u": "090ad757c4b4b40ce10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363965E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "User Management",
+                                                "u": "4509c857c646be38e10000000a44147b.html",
+                                                "h": "",
+                                                "id": 2.452363966E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "User Integration into SAP GUI Environments",
+                                                "u": "31b8d957b645c525e10000000a4450e5.html",
+                                                "h": "",
+                                                "id": 2.452363967E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Session Security Protection",
+                                                "u": "a84ad657f8a28a3de10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363968E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Network and Communication Security",
+                                                "u": "624bd657f8a28a3de10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363969E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Communication Channel Security",
+                                                "u": "134cd657f8a28a3de10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.45236397E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Network Security",
+                                                "u": "074dd657f8a28a3de10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363971E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "OData Services Security",
+                                                "u": "b84dd657f8a28a3de10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363972E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Other Security-Related Information",
+                                                "u": "6e4ed657f8a28a3de10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363973E9
+                                            },
+                                                                                        {
+                                                "c": [],
+                                                "t": "Security-Relevant Logging and Tracing",
+                                                "u": "f34fd657f8a28a3de10000000a441470.html",
+                                                "h": "",
+                                                "id": 2.452363974E9
+                                            }
+                                        ],
+                                        "t": "Security",
+                                        "u": "3507d757c4b4b40ce10000000a441470.html",
+                                        "h": "",
+                                        "id": 2.452363962E9
+                                    },
+                                                                        {
+                                        "c": [],
+                                        "t": "Implementation Related Information",
+                                        "u": "102ae357cfbbbd12e10000000a4450e5.html",
+                                        "h": "",
+                                        "id": 2.452363975E9
+                                    }
+                                ],
+                                "t": "Technical System Landscape",
+                                "u": "eb24aa5766700322e10000000a44147b.html",
+                                "h": "",
+                                "id": 2.452362871E9
+                            }],
+                            "t": "Implementation of Multichannel Foundation for Utilities and Public Sector",
+                            "u": "c63cb6575dde5d5de10000000a44147b.html",
+                            "h": "",
+                            "id": 2.45236287E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Maintaining Activity Categories for Transaction Types",
+                                    "u": "bc831652a567ba64e10000000a423f68.html",
+                                    "h": "",
+                                    "id": 2.452363977E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Defining Reason Codes for Interaction Records",
+                                    "u": "da841752e81a7a38e10000000a445394.html",
+                                    "h": "",
+                                    "id": 2.452363978E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Mapping Multilevel Categories to Activity Reason Codes",
+                                    "u": "c7122952effbe341e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363979E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Maintaining Types of Note Texts",
+                                    "u": "d3801752e81a7a38e10000000a445394.html",
+                                    "h": "",
+                                    "id": 2.45236398E9
+                                }
+                            ],
+                            "t": "Customizing for Interaction Records",
+                            "u": "f37e1752e81a7a38e10000000a445394.html",
+                            "h": "",
+                            "id": 2.452363976E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Get Communication Channel Used by Customer",
+                                    "u": "71c1e454c2656574e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363982E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Configure Co-Browsing",
+                                    "u": "e21be454ee576374e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363983E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Manage Communication Preferences",
+                                    "u": "d025e454ee576374e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363984E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Record a Customer Interaction",
+                                    "u": "4a1ee454ee576374e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363985E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Get Real-Time Consumption from EDM Profile Values",
+                                    "u": "40c2e454c2656574e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363986E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Start a New Service (Move-In)",
+                                    "u": "a728e454ee576374e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363987E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: End a Service (Move-Out)",
+                                    "u": "2f2ae454ee576374e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363988E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Transfer a Service (Move-In & Move-Out)",
+                                    "u": "932be454ee576374e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363989E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Report an Outage",
+                                    "u": "8ddee454e0b46474e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.45236399E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Create a Payment Plan",
+                                    "u": "30e0e454e0b46474e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363991E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Create a Service Request (Service Notification)",
+                                    "u": "72dde454e0b46474e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452363992E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Correspondence",
+                                    "u": "d04ed755951eb106e10000000a44147b.html",
+                                    "h": "",
+                                    "id": 2.452363993E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Business Process: Use Address-Independent E-mail",
+                                    "u": "42fba856b8848c6ce10000000a4450e5.html",
+                                    "h": "",
+                                    "id": 2.452363994E9
+                                }
+                            ],
+                            "t": "Customizing for Business Process Settings in SAP S/4HANA",
+                            "u": "17d5e454e0b46474e10000000a44538d.html",
+                            "h": "",
+                            "id": 2.452363981E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Configuring Invoices, Invoice PDFs, and Contract Account Balances for OData Consumption",
+                            "u": "d1de2752160f6a72e10000000a44176d.html",
+                            "h": "",
+                            "id": 2.452363995E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Configuring Payments",
+                            "u": "1eb83e53a97fe547e10000000a441470.html",
+                            "h": "",
+                            "id": 2.452363996E9
+                        },
+                                                {
+                            "c": [                            {
+                                "c": [],
+                                "t": "Customizing for Communication Preferences",
+                                "u": "caeb125477a98c24e10000000a4450e5.html",
+                                "h": "",
+                                "id": 2.452363998E9
+                            }],
+                            "t": "Configuring Communication Preferences",
+                            "u": "2f7611547fc88b24e10000000a4450e5.html",
+                            "h": "",
+                            "id": 2.452363997E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Configuring Correspondence",
+                            "u": "074ed755951eb106e10000000a44147b.html",
+                            "h": "",
+                            "id": 2.452363999E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Move-In, Move-Out and Move-In/Out",
+                            "u": "cff8125477a98c24e10000000a4450e5.html",
+                            "h": "",
+                            "id": 2.452364E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Billed Consumption and Period Type",
+                            "u": "862d4e53d540cc5de10000000a4450e5.html",
+                            "h": "",
+                            "id": 2.452364001E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Paying Bills Without Logging In",
+                            "u": "48bbaa54acafc164e10000000a44176d.html",
+                            "h": "",
+                            "id": 2.452364002E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Submitting Meter Reading Results Without Logging In",
+                            "u": "745dc85522751d22e10000000a44147b.html",
+                            "h": "",
+                            "id": 2.452364003E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "APIs for Multichannel Foundation for Utilities and Public Sector",
+                            "u": "e9513ce008ef47a4963eb556e20a2b2e.html",
+                            "h": "",
+                            "m": "e9513ce008ef47a4963eb556e20a2b2e"
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Customizing for Workflow (SAP IS-U for S/4 HANA)",
+                                    "u": "50756a53e7087425e10000000a44176d.html",
+                                    "h": "",
+                                    "id": 2.452364006E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Using Business Object BCONT_UMC",
+                                    "u": "5efd4253bcf1d873e10000000a4450e5.html",
+                                    "h": "",
+                                    "id": 2.452364007E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Example Workflow for Changing Business Partner Name",
+                                    "u": "25424253b6af0150e10000000a44176d.html",
+                                    "h": "",
+                                    "id": 2.452364008E9
+                                }
+                            ],
+                            "t": "Workflow for Internet Service Request (SAP S/4HANA)",
+                            "u": "fff54253bcf1d873e10000000a4450e5.html",
+                            "h": "",
+                            "id": 2.452364005E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Customizing for Follow-up Workflow After Creation of Interaction Record",
+                                    "u": "2ce9d3540656c60ae10000000a441470.html",
+                                    "h": "",
+                                    "id": 2.45236401E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Example Workflow for Follow-Up After Creation of Interaction Record",
+                                    "u": "2353da5452986374e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452364011E9
+                                }
+                            ],
+                            "t": "Workflow for Follow-Up After Creation of Interaction Record",
+                            "u": "3ce6d8547d8ecc38e10000000a441470.html",
+                            "h": "",
+                            "id": 2.452364009E9
+                        },
+                                                {
+                            "c":                             [
+                                                                {
+                                    "c": [],
+                                    "t": "Customizing for Follow-up Workflow After Creation of Business Partner Contact or Outage Message",
+                                    "u": "44e6dc545675c30ae10000000a441470.html",
+                                    "h": "",
+                                    "id": 2.452364013E9
+                                },
+                                                                {
+                                    "c": [],
+                                    "t": "Example Workflow for Follow-Up After Creation of New Business Partner Contact or Outage Message",
+                                    "u": "844ddb54ea516474e10000000a44538d.html",
+                                    "h": "",
+                                    "id": 2.452364014E9
+                                }
+                            ],
+                            "t": "Workflow for Follow-Up After Creation of Business Partner Contact and Outage Message",
+                            "u": "fab7db54ea516474e10000000a44538d.html",
+                            "h": "",
+                            "id": 2.452364012E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Getting Interval Energy Consumption from SAP EDM Profile Values",
+                            "u": "b883c2545720cc38e10000000a441470.html",
+                            "h": "",
+                            "id": 2.452364015E9
+                        },
+                                                {
+                            "c": [],
+                            "t": "Co-Browsing in the Responsive Web Application",
+                            "u": "0315e554daeec50ae10000000a441470.html",
+                            "h": "",
+                            "id": 2.452364016E9
+                        }
+                    ],
+                    "t": "Multichannel Foundation for Utilities and Public Sector (Utilities)",
+                    "u": "9cfa14525ae67a38e10000000a445394.html",
+                    "id": 2.452362869E9
+                }
+            ],
+            "deleted": 0,
+            "transtype": "html5.uacp",
+            "filteringTokens": null,
+            "clientFilters": null,
+            "projectPhio": "bsy1757338222937",
+            "projectName": "S4H::OP 2025 001 sec"
+        },
+        "currentPage":         {
+            "id": 2554990677,
+            "t": "Move-In/Out",
+            "u": "8082ce53118d4308e10000000a174cb4.html",
+            "loio": "8082ce53118d4308e10000000a174cb4",
+            "deltaMtTranslate": false
+        },
+        "body": "<!DOCTYPE html\n  SYSTEM \"about:legacy-compat\">\n<html lang=\"en-us\" dir=\"ltr\"><head><title>Move-In/Out<\/title><meta charset=\"utf-8\"><link rel=\"stylesheet\" type=\"text/css\" media=\"screen,projection\" href=\"/resource/css/style-v2.css\"><script type=\"text/javascript\" src=\"js/sap-strings.js\"><\/script><\/head><body class=\"en-us sap-light centered navigation-default enumeration-disabled\"><div id=\"d4h5-main-container\" class=\"container_12\" role=\"application\"><div id=\"d4h5-section-container\" class=\"grid_12\"><div id=\"d4h5-main-content\" class=\"grid_8 alpha omega\"><section><div class=\"page topic  - topic-topic \" id=\"loio8082ce53118d4308e10000000a174cb4\"><h1 class=\"title topictitle1\"> Move-In/Out <\/h1><div class=\"body\">\n<div class=\"section\"><section class=\"section\" type=\"Purpose\"><h2 class=\"section_title\">Purpose<\/h2>\n<p class=\"p\">This component enables you to process a customer move-in or move-out. In the case of a move-in, you can create a business partner and contract account for the customer, or select existing ones. The contracts are then created and allocated to a utility installation.\n<\/p>\n<p class=\"p\">In a move-out, you terminate the customer's contract. If a new customer moves into the installation, the installation is allocated to this customer's contract.\n<\/p>\n<p class=\"p\">For more information, see <a class=\"xref\" href=\"0981ce53118d4308e10000000a174cb4.html\">Move-In<\/a> and <a class=\"xref\" href=\"0f81ce53118d4308e10000000a174cb4.html\">Move-Out<\/a>.\n<\/p>\n<\/section><\/div>\n<div class=\"section\"><section class=\"section\" type=\"Integration\"><h2 class=\"section_title\">Integration<\/h2>\n<p class=\"p\">Letters to the customer, such as welcome letters and move-out confirmations are created using the <a class=\"xref\" href=\"071a8d5377a0ec23e10000000a174cb4.html\" title=\"\">Print Workbench<\/a> component. The <span class=\"ph uicontrol\">SAP Business Workflow<\/span> component (BC-BMT-WFM) enables you to monitor and configure the workflow processes.\n<\/p>\n<\/section><\/div>\n<div class=\"section\"><section class=\"section\" type=\"Features\"><h2 class=\"section_title\">Features<\/h2>\n<p class=\"p\">You can have the system trigger a number of activities automatically. You can:\n<\/p>\n<ul class=\"ul\"><li class=\"li\"><p class=\"p\"> process the entire transaction immediately and in full.\n<\/p><\/li><li class=\"li\"><p class=\"p\"> create a final bill for the move-out customer.\n<\/p><\/li><li class=\"li\"><p class=\"p\"> create a welcome letter for the move-in customer.\n<\/p><\/li><\/ul>\n<p class=\"p\">You can also configure the screen layout to suit your requirements.\n<\/p>\n<\/section><\/div>\n<\/div><div class=\"related-links\"> <\/div><\/div><\/section><div class=\"clear\"><\/div>\n<\/div><\/div><\/div><\/body><\/html>",
+        "isMachineTranslated": 0,
+        "githubLink": ""
+    }
+}
