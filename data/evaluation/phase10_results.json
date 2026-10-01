@@ -1,0 +1,4121 @@
+{
+ "configs": {
+  "R_exploratory": {
+   "detail_cue_check": false,
+   "lam": 2.0,
+   "theta": 0.34
+  },
+  "R_exploratory+G": {
+   "detail_cue_check": true,
+   "lam": 2.0,
+   "theta": 0.34
+  },
+  "baseline": {
+   "detail_cue_check": false,
+   "lam": 0.0,
+   "theta": 0.34
+  },
+  "selected": {
+   "detail_cue_check": true,
+   "lam": 0.0,
+   "theta": 0.34
+  }
+ },
+ "determinism": {
+  "identical": true,
+  "queries": 30
+ },
+ "dev_sha256": "b7b1e51fbaa3e26b90576863ec74696ef7040143f5175f65409604e318af9d43",
+ "n_test_queries": 73,
+ "regression_references": {
+  "phase8_queries": {
+   "R_exploratory+G": {
+    "config": {
+     "detail_cue_check": true,
+     "lam": 2.0,
+     "theta": 0.34
+    },
+    "n_answerable": 59,
+    "oracle_absent_detail_abstained": {
+     "k": 8,
+     "n": 11,
+     "rate": 0.7273,
+     "wilson95": [
+      0.434,
+      0.903
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 48,
+     "n": 59,
+     "rate": 0.8136,
+     "wilson95": [
+      0.696,
+      0.893
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 80,
+     "recall@1": {
+      "k": 70,
+      "n": 80,
+      "rate": 0.875,
+      "wilson95": [
+       0.785,
+       0.931
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.9689,
+     "recall@1": {
+      "k": 56,
+      "n": 59,
+      "rate": 0.9492,
+      "wilson95": [
+       0.861,
+       0.983
+      ]
+     },
+     "recall@3": {
+      "k": 59,
+      "n": 59,
+      "rate": 1.0,
+      "wilson95": [
+       0.939,
+       1.0
+      ]
+     },
+     "recall@5": {
+      "k": 59,
+      "n": 59,
+      "rate": 1.0,
+      "wilson95": [
+       0.939,
+       1.0
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 45,
+     "n": 59,
+     "rate": 0.7627,
+     "wilson95": [
+      0.64,
+      0.853
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 7,
+      "n": 11,
+      "rate": 0.6364,
+      "wilson95": [
+       0.354,
+       0.848
+      ]
+     },
+     "answerable": {
+      "k": 50,
+      "n": 59,
+      "rate": 0.8475,
+      "wilson95": [
+       0.735,
+       0.918
+      ]
+     },
+     "not_ingested": {
+      "k": 5,
+      "n": 6,
+      "rate": 0.8333,
+      "wilson95": [
+       0.436,
+       0.97
+      ]
+     },
+     "out_of_domain": {
+      "k": 7,
+      "n": 8,
+      "rate": 0.875,
+      "wilson95": [
+       0.529,
+       0.978
+      ]
+     },
+     "unresolved_identity": {
+      "k": 2,
+      "n": 4,
+      "rate": 0.5,
+      "wilson95": [
+       0.15,
+       0.85
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 3,
+     "n": 6,
+     "rate": 0.5,
+     "wilson95": [
+      0.188,
+      0.812
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 2,
+     "n": 4,
+     "rate": 0.5,
+     "wilson95": [
+      0.15,
+      0.85
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 6,
+     "ids": [
+      "P8-060",
+      "P8-064",
+      "P8-065",
+      "P8-069",
+      "P8-077",
+      "P8-084"
+     ]
+    }
+   },
+   "baseline": {
+    "config": {
+     "detail_cue_check": false,
+     "lam": 0.0,
+     "theta": 0.34
+    },
+    "n_answerable": 59,
+    "oracle_absent_detail_abstained": {
+     "k": 6,
+     "n": 11,
+     "rate": 0.5455,
+     "wilson95": [
+      0.28,
+      0.787
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 51,
+     "n": 59,
+     "rate": 0.8644,
+     "wilson95": [
+      0.755,
+      0.93
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 80,
+     "recall@1": {
+      "k": 37,
+      "n": 80,
+      "rate": 0.4625,
+      "wilson95": [
+       0.357,
+       0.571
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.5813,
+     "recall@1": {
+      "k": 23,
+      "n": 59,
+      "rate": 0.3898,
+      "wilson95": [
+       0.276,
+       0.517
+      ]
+     },
+     "recall@3": {
+      "k": 42,
+      "n": 59,
+      "rate": 0.7119,
+      "wilson95": [
+       0.586,
+       0.812
+      ]
+     },
+     "recall@5": {
+      "k": 49,
+      "n": 59,
+      "rate": 0.8305,
+      "wilson95": [
+       0.715,
+       0.905
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 19,
+     "n": 59,
+     "rate": 0.322,
+     "wilson95": [
+      0.217,
+      0.449
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 5,
+      "n": 11,
+      "rate": 0.4545,
+      "wilson95": [
+       0.213,
+       0.72
+      ]
+     },
+     "answerable": {
+      "k": 22,
+      "n": 59,
+      "rate": 0.3729,
+      "wilson95": [
+       0.261,
+       0.5
+      ]
+     },
+     "not_ingested": {
+      "k": 6,
+      "n": 6,
+      "rate": 1.0,
+      "wilson95": [
+       0.61,
+       1.0
+      ]
+     },
+     "out_of_domain": {
+      "k": 7,
+      "n": 8,
+      "rate": 0.875,
+      "wilson95": [
+       0.529,
+       0.978
+      ]
+     },
+     "unresolved_identity": {
+      "k": 4,
+      "n": 4,
+      "rate": 1.0,
+      "wilson95": [
+       0.51,
+       1.0
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 4,
+     "n": 6,
+     "rate": 0.6667,
+     "wilson95": [
+      0.3,
+      0.903
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 4,
+     "n": 4,
+     "rate": 1.0,
+     "wilson95": [
+      0.51,
+      1.0
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 2,
+     "ids": [
+      "P8-064",
+      "P8-084"
+     ]
+    }
+   },
+   "file_sha256": "a7677ff694702b4ca5f05509c9187e9d2e26e55953060f54a5f4c0cad2d22f0a",
+   "lam0_routing_identical_to_baseline": true,
+   "n_queries": 88,
+   "selected": {
+    "config": {
+     "detail_cue_check": true,
+     "lam": 0.0,
+     "theta": 0.34
+    },
+    "n_answerable": 59,
+    "oracle_absent_detail_abstained": {
+     "k": 8,
+     "n": 11,
+     "rate": 0.7273,
+     "wilson95": [
+      0.434,
+      0.903
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 48,
+     "n": 59,
+     "rate": 0.8136,
+     "wilson95": [
+      0.696,
+      0.893
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 80,
+     "recall@1": {
+      "k": 37,
+      "n": 80,
+      "rate": 0.4625,
+      "wilson95": [
+       0.357,
+       0.571
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.5813,
+     "recall@1": {
+      "k": 23,
+      "n": 59,
+      "rate": 0.3898,
+      "wilson95": [
+       0.276,
+       0.517
+      ]
+     },
+     "recall@3": {
+      "k": 42,
+      "n": 59,
+      "rate": 0.7119,
+      "wilson95": [
+       0.586,
+       0.812
+      ]
+     },
+     "recall@5": {
+      "k": 49,
+      "n": 59,
+      "rate": 0.8305,
+      "wilson95": [
+       0.715,
+       0.905
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 18,
+     "n": 59,
+     "rate": 0.3051,
+     "wilson95": [
+      0.203,
+      0.431
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 5,
+      "n": 11,
+      "rate": 0.4545,
+      "wilson95": [
+       0.213,
+       0.72
+      ]
+     },
+     "answerable": {
+      "k": 21,
+      "n": 59,
+      "rate": 0.3559,
+      "wilson95": [
+       0.246,
+       0.483
+      ]
+     },
+     "not_ingested": {
+      "k": 6,
+      "n": 6,
+      "rate": 1.0,
+      "wilson95": [
+       0.61,
+       1.0
+      ]
+     },
+     "out_of_domain": {
+      "k": 7,
+      "n": 8,
+      "rate": 0.875,
+      "wilson95": [
+       0.529,
+       0.978
+      ]
+     },
+     "unresolved_identity": {
+      "k": 4,
+      "n": 4,
+      "rate": 1.0,
+      "wilson95": [
+       0.51,
+       1.0
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 4,
+     "n": 6,
+     "rate": 0.6667,
+     "wilson95": [
+      0.3,
+      0.903
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 4,
+     "n": 4,
+     "rate": 1.0,
+     "wilson95": [
+      0.51,
+      1.0
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 2,
+     "ids": [
+      "P8-064",
+      "P8-084"
+     ]
+    }
+   }
+  },
+  "phase9_queries": {
+   "R_exploratory+G": {
+    "config": {
+     "detail_cue_check": true,
+     "lam": 2.0,
+     "theta": 0.34
+    },
+    "n_answerable": 69,
+    "oracle_absent_detail_abstained": {
+     "k": 14,
+     "n": 14,
+     "rate": 1.0,
+     "wilson95": [
+      0.785,
+      1.0
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 57,
+     "n": 69,
+     "rate": 0.8261,
+     "wilson95": [
+      0.72,
+      0.898
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 111,
+     "recall@1": {
+      "k": 76,
+      "n": 111,
+      "rate": 0.6847,
+      "wilson95": [
+       0.593,
+       0.764
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.8301,
+     "recall@1": {
+      "k": 51,
+      "n": 69,
+      "rate": 0.7391,
+      "wilson95": [
+       0.625,
+       0.828
+      ]
+     },
+     "recall@3": {
+      "k": 62,
+      "n": 69,
+      "rate": 0.8986,
+      "wilson95": [
+       0.805,
+       0.95
+      ]
+     },
+     "recall@5": {
+      "k": 65,
+      "n": 69,
+      "rate": 0.942,
+      "wilson95": [
+       0.86,
+       0.977
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 44,
+     "n": 69,
+     "rate": 0.6377,
+     "wilson95": [
+      0.52,
+      0.741
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 13,
+      "n": 14,
+      "rate": 0.9286,
+      "wilson95": [
+       0.685,
+       0.987
+      ]
+     },
+     "answerable": {
+      "k": 47,
+      "n": 69,
+      "rate": 0.6812,
+      "wilson95": [
+       0.564,
+       0.779
+      ]
+     },
+     "not_ingested": {
+      "k": 7,
+      "n": 20,
+      "rate": 0.35,
+      "wilson95": [
+       0.181,
+       0.567
+      ]
+     },
+     "out_of_domain": {
+      "k": 12,
+      "n": 16,
+      "rate": 0.75,
+      "wilson95": [
+       0.505,
+       0.898
+      ]
+     },
+     "unresolved_identity": {
+      "k": 6,
+      "n": 8,
+      "rate": 0.75,
+      "wilson95": [
+       0.409,
+       0.929
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 13,
+     "n": 20,
+     "rate": 0.65,
+     "wilson95": [
+      0.433,
+      0.819
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 6,
+     "n": 8,
+     "rate": 0.75,
+     "wilson95": [
+      0.409,
+      0.929
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 6,
+     "ids": [
+      "P9-085",
+      "P9-086",
+      "P9-089",
+      "P9-096",
+      "P9-102",
+      "P9-110"
+     ]
+    }
+   },
+   "baseline": {
+    "config": {
+     "detail_cue_check": false,
+     "lam": 0.0,
+     "theta": 0.34
+    },
+    "n_answerable": 69,
+    "oracle_absent_detail_abstained": {
+     "k": 7,
+     "n": 14,
+     "rate": 0.5,
+     "wilson95": [
+      0.268,
+      0.732
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 58,
+     "n": 69,
+     "rate": 0.8406,
+     "wilson95": [
+      0.737,
+      0.909
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 111,
+     "recall@1": {
+      "k": 51,
+      "n": 111,
+      "rate": 0.4595,
+      "wilson95": [
+       0.37,
+       0.552
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.5051,
+     "recall@1": {
+      "k": 23,
+      "n": 69,
+      "rate": 0.3333,
+      "wilson95": [
+       0.234,
+       0.451
+      ]
+     },
+     "recall@3": {
+      "k": 41,
+      "n": 69,
+      "rate": 0.5942,
+      "wilson95": [
+       0.476,
+       0.702
+      ]
+     },
+     "recall@5": {
+      "k": 48,
+      "n": 69,
+      "rate": 0.6957,
+      "wilson95": [
+       0.579,
+       0.792
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 19,
+     "n": 69,
+     "rate": 0.2754,
+     "wilson95": [
+      0.184,
+      0.39
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 2,
+      "n": 14,
+      "rate": 0.1429,
+      "wilson95": [
+       0.04,
+       0.399
+      ]
+     },
+     "answerable": {
+      "k": 20,
+      "n": 69,
+      "rate": 0.2899,
+      "wilson95": [
+       0.196,
+       0.406
+      ]
+     },
+     "not_ingested": {
+      "k": 13,
+      "n": 20,
+      "rate": 0.65,
+      "wilson95": [
+       0.433,
+       0.819
+      ]
+     },
+     "out_of_domain": {
+      "k": 14,
+      "n": 16,
+      "rate": 0.875,
+      "wilson95": [
+       0.64,
+       0.965
+      ]
+     },
+     "unresolved_identity": {
+      "k": 8,
+      "n": 8,
+      "rate": 1.0,
+      "wilson95": [
+       0.676,
+       1.0
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 19,
+     "n": 20,
+     "rate": 0.95,
+     "wilson95": [
+      0.764,
+      0.991
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 8,
+     "n": 8,
+     "rate": 1.0,
+     "wilson95": [
+      0.676,
+      1.0
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 3,
+     "ids": [
+      "P9-074",
+      "P9-076",
+      "P9-096"
+     ]
+    }
+   },
+   "file_sha256": "28f03e5701095b9917522ce1518bcef308bceb8834da2aafed0d749908875309",
+   "lam0_routing_identical_to_baseline": true,
+   "n_queries": 127,
+   "selected": {
+    "config": {
+     "detail_cue_check": true,
+     "lam": 0.0,
+     "theta": 0.34
+    },
+    "n_answerable": 69,
+    "oracle_absent_detail_abstained": {
+     "k": 14,
+     "n": 14,
+     "rate": 1.0,
+     "wilson95": [
+      0.785,
+      1.0
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 57,
+     "n": 69,
+     "rate": 0.8261,
+     "wilson95": [
+      0.72,
+      0.898
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 111,
+     "recall@1": {
+      "k": 51,
+      "n": 111,
+      "rate": 0.4595,
+      "wilson95": [
+       0.37,
+       0.552
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.5051,
+     "recall@1": {
+      "k": 23,
+      "n": 69,
+      "rate": 0.3333,
+      "wilson95": [
+       0.234,
+       0.451
+      ]
+     },
+     "recall@3": {
+      "k": 41,
+      "n": 69,
+      "rate": 0.5942,
+      "wilson95": [
+       0.476,
+       0.702
+      ]
+     },
+     "recall@5": {
+      "k": 48,
+      "n": 69,
+      "rate": 0.6957,
+      "wilson95": [
+       0.579,
+       0.792
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 19,
+     "n": 69,
+     "rate": 0.2754,
+     "wilson95": [
+      0.184,
+      0.39
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 4,
+      "n": 14,
+      "rate": 0.2857,
+      "wilson95": [
+       0.117,
+       0.546
+      ]
+     },
+     "answerable": {
+      "k": 20,
+      "n": 69,
+      "rate": 0.2899,
+      "wilson95": [
+       0.196,
+       0.406
+      ]
+     },
+     "not_ingested": {
+      "k": 13,
+      "n": 20,
+      "rate": 0.65,
+      "wilson95": [
+       0.433,
+       0.819
+      ]
+     },
+     "out_of_domain": {
+      "k": 14,
+      "n": 16,
+      "rate": 0.875,
+      "wilson95": [
+       0.64,
+       0.965
+      ]
+     },
+     "unresolved_identity": {
+      "k": 8,
+      "n": 8,
+      "rate": 1.0,
+      "wilson95": [
+       0.676,
+       1.0
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 19,
+     "n": 20,
+     "rate": 0.95,
+     "wilson95": [
+      0.764,
+      0.991
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 8,
+     "n": 8,
+     "rate": 1.0,
+     "wilson95": [
+      0.676,
+      1.0
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 1,
+     "ids": [
+      "P9-096"
+     ]
+    }
+   }
+  }
+ },
+ "schema_version": 1,
+ "selection_sha256": "e1975d00da3474eaa7982db12a145e2acd3e7852652b8eec4c4af20afb07192d",
+ "test": {
+  "R_exploratory": {
+   "metrics": {
+    "config": {
+     "detail_cue_check": false,
+     "lam": 2.0,
+     "theta": 0.34
+    },
+    "n_answerable": 41,
+    "oracle_absent_detail_abstained": {
+     "k": 6,
+     "n": 12,
+     "rate": 0.5,
+     "wilson95": [
+      0.254,
+      0.746
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 32,
+     "n": 41,
+     "rate": 0.7805,
+     "wilson95": [
+      0.633,
+      0.88
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 65,
+     "recall@1": {
+      "k": 43,
+      "n": 65,
+      "rate": 0.6615,
+      "wilson95": [
+       0.54,
+       0.765
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.8006,
+     "recall@1": {
+      "k": 28,
+      "n": 41,
+      "rate": 0.6829,
+      "wilson95": [
+       0.53,
+       0.804
+      ]
+     },
+     "recall@3": {
+      "k": 37,
+      "n": 41,
+      "rate": 0.9024,
+      "wilson95": [
+       0.775,
+       0.961
+      ]
+     },
+     "recall@5": {
+      "k": 40,
+      "n": 41,
+      "rate": 0.9756,
+      "wilson95": [
+       0.874,
+       0.996
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 21,
+     "n": 41,
+     "rate": 0.5122,
+     "wilson95": [
+      0.365,
+      0.657
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 3,
+      "n": 12,
+      "rate": 0.25,
+      "wilson95": [
+       0.089,
+       0.532
+      ]
+     },
+     "answerable": {
+      "k": 27,
+      "n": 41,
+      "rate": 0.6585,
+      "wilson95": [
+       0.505,
+       0.784
+      ]
+     },
+     "not_ingested": {
+      "k": 6,
+      "n": 8,
+      "rate": 0.75,
+      "wilson95": [
+       0.409,
+       0.929
+      ]
+     },
+     "out_of_domain": {
+      "k": 6,
+      "n": 8,
+      "rate": 0.75,
+      "wilson95": [
+       0.409,
+       0.929
+      ]
+     },
+     "unresolved_identity": {
+      "k": 2,
+      "n": 4,
+      "rate": 0.5,
+      "wilson95": [
+       0.15,
+       0.85
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 8,
+     "n": 8,
+     "rate": 1.0,
+     "wilson95": [
+      0.676,
+      1.0
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 2,
+     "n": 4,
+     "rate": 0.5,
+     "wilson95": [
+      0.15,
+      0.85
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 7,
+     "ids": [
+      "P10T-043",
+      "P10T-044",
+      "P10T-045",
+      "P10T-047",
+      "P10T-048",
+      "P10T-049",
+      "P10T-062"
+     ]
+    }
+   },
+   "per_query": {
+    "P10T-001": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-07",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-002": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 3,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-003": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 3,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-004": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 3,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-005": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-006": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-007": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-008": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-009": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-010": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-011": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-012": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-013": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-014": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-015": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-016": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 8,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-017": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-018": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-019": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-020": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-021": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-022": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-023": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-024": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-025": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-026": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-027": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-028": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-029": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-030": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-20",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-031": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-032": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-11",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-033": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-11",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-034": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-035": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-02",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-036": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-037": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-038": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 5,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-039": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-040": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-041": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-042": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 6,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "absent_detail"
+    },
+    "P10T-043": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-07",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-044": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-07",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-045": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-046": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-06",
+     "status": "page_not_ingested",
+     "type": "absent_detail"
+    },
+    "P10T-047": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-048": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-049": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-050": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-051": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "absent_detail"
+    },
+    "P10T-052": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "out_of_domain",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-053": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-054": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-26",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-055": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-27",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-056": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-29",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-057": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-24",
+     "status": "out_of_domain",
+     "type": "not_ingested"
+    },
+    "P10T-058": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-20",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-059": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-22",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-060": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-08",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-061": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "not_ingested"
+    },
+    "P10T-062": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "unresolved_identity"
+    },
+    "P10T-063": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-11",
+     "status": "out_of_domain",
+     "type": "unresolved_identity"
+    },
+    "P10T-064": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-16",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-065": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-01",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-066": {
+     "correct_answer_router": false,
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-067": {
+     "correct_answer_router": false,
+     "selected": "M2C-24",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-068": {
+     "correct_answer_router": false,
+     "selected": "M2C-24",
+     "status": "insufficient_context",
+     "type": "out_of_domain"
+    },
+    "P10T-069": {
+     "correct_answer_router": false,
+     "selected": "M2C-27",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-070": {
+     "correct_answer_router": false,
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "out_of_domain"
+    },
+    "P10T-071": {
+     "correct_answer_router": false,
+     "selected": "M2C-14",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-072": {
+     "correct_answer_router": false,
+     "selected": "M2C-07",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-073": {
+     "correct_answer_router": false,
+     "selected": "M2C-02",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    }
+   }
+  },
+  "R_exploratory+G": {
+   "metrics": {
+    "config": {
+     "detail_cue_check": true,
+     "lam": 2.0,
+     "theta": 0.34
+    },
+    "n_answerable": 41,
+    "oracle_absent_detail_abstained": {
+     "k": 9,
+     "n": 12,
+     "rate": 0.75,
+     "wilson95": [
+      0.468,
+      0.911
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 32,
+     "n": 41,
+     "rate": 0.7805,
+     "wilson95": [
+      0.633,
+      0.88
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 65,
+     "recall@1": {
+      "k": 43,
+      "n": 65,
+      "rate": 0.6615,
+      "wilson95": [
+       0.54,
+       0.765
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.8006,
+     "recall@1": {
+      "k": 28,
+      "n": 41,
+      "rate": 0.6829,
+      "wilson95": [
+       0.53,
+       0.804
+      ]
+     },
+     "recall@3": {
+      "k": 37,
+      "n": 41,
+      "rate": 0.9024,
+      "wilson95": [
+       0.775,
+       0.961
+      ]
+     },
+     "recall@5": {
+      "k": 40,
+      "n": 41,
+      "rate": 0.9756,
+      "wilson95": [
+       0.874,
+       0.996
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 21,
+     "n": 41,
+     "rate": 0.5122,
+     "wilson95": [
+      0.365,
+      0.657
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 6,
+      "n": 12,
+      "rate": 0.5,
+      "wilson95": [
+       0.254,
+       0.746
+      ]
+     },
+     "answerable": {
+      "k": 27,
+      "n": 41,
+      "rate": 0.6585,
+      "wilson95": [
+       0.505,
+       0.784
+      ]
+     },
+     "not_ingested": {
+      "k": 6,
+      "n": 8,
+      "rate": 0.75,
+      "wilson95": [
+       0.409,
+       0.929
+      ]
+     },
+     "out_of_domain": {
+      "k": 6,
+      "n": 8,
+      "rate": 0.75,
+      "wilson95": [
+       0.409,
+       0.929
+      ]
+     },
+     "unresolved_identity": {
+      "k": 2,
+      "n": 4,
+      "rate": 0.5,
+      "wilson95": [
+       0.15,
+       0.85
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 8,
+     "n": 8,
+     "rate": 1.0,
+     "wilson95": [
+      0.676,
+      1.0
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 2,
+     "n": 4,
+     "rate": 0.5,
+     "wilson95": [
+      0.15,
+      0.85
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 4,
+     "ids": [
+      "P10T-044",
+      "P10T-047",
+      "P10T-048",
+      "P10T-062"
+     ]
+    }
+   },
+   "per_query": {
+    "P10T-001": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-07",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-002": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 3,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-003": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 3,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-004": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 3,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-005": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-006": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-007": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-008": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-009": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-010": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-011": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-012": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-013": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-014": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-015": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-016": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 8,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-017": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-018": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-019": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-020": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-021": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-022": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-023": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-024": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-025": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-026": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-027": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-028": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-029": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-030": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-20",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-031": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-032": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-11",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-033": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-11",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-034": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-035": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-02",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-036": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-037": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-038": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 5,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-039": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-040": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-041": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-042": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 6,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "absent_detail"
+    },
+    "P10T-043": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-07",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-044": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-07",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-045": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-046": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-06",
+     "status": "page_not_ingested",
+     "type": "absent_detail"
+    },
+    "P10T-047": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-048": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-049": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-050": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-051": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "absent_detail"
+    },
+    "P10T-052": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "out_of_domain",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-053": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-054": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-26",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-055": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-27",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-056": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-29",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-057": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-24",
+     "status": "out_of_domain",
+     "type": "not_ingested"
+    },
+    "P10T-058": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-20",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-059": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-22",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-060": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-08",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-061": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "not_ingested"
+    },
+    "P10T-062": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-17",
+     "status": "answered",
+     "type": "unresolved_identity"
+    },
+    "P10T-063": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-11",
+     "status": "out_of_domain",
+     "type": "unresolved_identity"
+    },
+    "P10T-064": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-16",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-065": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-01",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-066": {
+     "correct_answer_router": false,
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-067": {
+     "correct_answer_router": false,
+     "selected": "M2C-24",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-068": {
+     "correct_answer_router": false,
+     "selected": "M2C-24",
+     "status": "insufficient_context",
+     "type": "out_of_domain"
+    },
+    "P10T-069": {
+     "correct_answer_router": false,
+     "selected": "M2C-27",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-070": {
+     "correct_answer_router": false,
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "out_of_domain"
+    },
+    "P10T-071": {
+     "correct_answer_router": false,
+     "selected": "M2C-14",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-072": {
+     "correct_answer_router": false,
+     "selected": "M2C-07",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-073": {
+     "correct_answer_router": false,
+     "selected": "M2C-02",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    }
+   }
+  },
+  "baseline": {
+   "metrics": {
+    "config": {
+     "detail_cue_check": false,
+     "lam": 0.0,
+     "theta": 0.34
+    },
+    "n_answerable": 41,
+    "oracle_absent_detail_abstained": {
+     "k": 6,
+     "n": 12,
+     "rate": 0.5,
+     "wilson95": [
+      0.254,
+      0.746
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 32,
+     "n": 41,
+     "rate": 0.7805,
+     "wilson95": [
+      0.633,
+      0.88
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 65,
+     "recall@1": {
+      "k": 31,
+      "n": 65,
+      "rate": 0.4769,
+      "wilson95": [
+       0.36,
+       0.596
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.5441,
+     "recall@1": {
+      "k": 15,
+      "n": 41,
+      "rate": 0.3659,
+      "wilson95": [
+       0.236,
+       0.519
+      ]
+     },
+     "recall@3": {
+      "k": 26,
+      "n": 41,
+      "rate": 0.6341,
+      "wilson95": [
+       0.481,
+       0.764
+      ]
+     },
+     "recall@5": {
+      "k": 31,
+      "n": 41,
+      "rate": 0.7561,
+      "wilson95": [
+       0.607,
+       0.862
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 10,
+     "n": 41,
+     "rate": 0.2439,
+     "wilson95": [
+      0.138,
+      0.393
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 2,
+      "n": 12,
+      "rate": 0.1667,
+      "wilson95": [
+       0.047,
+       0.448
+      ]
+     },
+     "answerable": {
+      "k": 11,
+      "n": 41,
+      "rate": 0.2683,
+      "wilson95": [
+       0.157,
+       0.419
+      ]
+     },
+     "not_ingested": {
+      "k": 6,
+      "n": 8,
+      "rate": 0.75,
+      "wilson95": [
+       0.409,
+       0.929
+      ]
+     },
+     "out_of_domain": {
+      "k": 7,
+      "n": 8,
+      "rate": 0.875,
+      "wilson95": [
+       0.529,
+       0.978
+      ]
+     },
+     "unresolved_identity": {
+      "k": 4,
+      "n": 4,
+      "rate": 1.0,
+      "wilson95": [
+       0.51,
+       1.0
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 8,
+     "n": 8,
+     "rate": 1.0,
+     "wilson95": [
+      0.676,
+      1.0
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 4,
+     "n": 4,
+     "rate": 1.0,
+     "wilson95": [
+      0.51,
+      1.0
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 3,
+     "ids": [
+      "P10T-044",
+      "P10T-045",
+      "P10T-047"
+     ]
+    }
+   },
+   "per_query": {
+    "P10T-001": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-08",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-002": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 23,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-003": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 27,
+     "oracle_status": "answered",
+     "selected": "M2C-01",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-004": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 18,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-005": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-006": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 18,
+     "oracle_status": "answered",
+     "selected": "M2C-23",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-007": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-008": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-009": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-010": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-011": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-06",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-012": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-013": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-014": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-23",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-015": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-016": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 26,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-017": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 16,
+     "oracle_status": "answered",
+     "selected": "M2C-27",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-018": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-13",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-019": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 14,
+     "oracle_status": "answered",
+     "selected": "M2C-13",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-020": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-021": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-24",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-022": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-15",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-023": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-024": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-025": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-026": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-027": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-01",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-028": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-029": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-030": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 8,
+     "oracle_status": "answered",
+     "selected": "M2C-20",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-031": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-032": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-01",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-033": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-11",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-034": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-11",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-035": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 3,
+     "oracle_status": "answered",
+     "selected": "M2C-04",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-036": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-03",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-037": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 7,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-038": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 11,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-039": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-11",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-040": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-041": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-042": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 14,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "absent_detail"
+    },
+    "P10T-043": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-06",
+     "status": "page_not_ingested",
+     "type": "absent_detail"
+    },
+    "P10T-044": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-07",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-045": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-046": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-07",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-047": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-048": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-23",
+     "status": "page_not_ingested",
+     "type": "absent_detail"
+    },
+    "P10T-049": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-27",
+     "status": "out_of_domain",
+     "type": "absent_detail"
+    },
+    "P10T-050": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-051": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "absent_detail"
+    },
+    "P10T-052": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "out_of_domain",
+     "selected": "M2C-11",
+     "status": "out_of_domain",
+     "type": "absent_detail"
+    },
+    "P10T-053": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 8,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-04",
+     "status": "page_not_ingested",
+     "type": "absent_detail"
+    },
+    "P10T-054": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-26",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-055": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-27",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-056": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-29",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-057": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-25",
+     "status": "out_of_domain",
+     "type": "not_ingested"
+    },
+    "P10T-058": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-20",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-059": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-22",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-060": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-08",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-061": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-03",
+     "status": "out_of_domain",
+     "type": "not_ingested"
+    },
+    "P10T-062": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-063": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-13",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-064": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-16",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-065": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-01",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-066": {
+     "correct_answer_router": false,
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-067": {
+     "correct_answer_router": false,
+     "selected": "M2C-01",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-068": {
+     "correct_answer_router": false,
+     "selected": "M2C-25",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-069": {
+     "correct_answer_router": false,
+     "selected": "M2C-27",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-070": {
+     "correct_answer_router": false,
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "out_of_domain"
+    },
+    "P10T-071": {
+     "correct_answer_router": false,
+     "selected": "M2C-17",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-072": {
+     "correct_answer_router": false,
+     "selected": "M2C-01",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-073": {
+     "correct_answer_router": false,
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    }
+   }
+  },
+  "selected": {
+   "metrics": {
+    "config": {
+     "detail_cue_check": true,
+     "lam": 0.0,
+     "theta": 0.34
+    },
+    "n_answerable": 41,
+    "oracle_absent_detail_abstained": {
+     "k": 9,
+     "n": 12,
+     "rate": 0.75,
+     "wilson95": [
+      0.468,
+      0.911
+     ]
+    },
+    "oracle_correct_answers": {
+     "k": 32,
+     "n": 41,
+     "rate": 0.7805,
+     "wilson95": [
+      0.633,
+      0.88
+     ]
+    },
+    "oracle_grounding_failures": 0,
+    "oracle_phantom_citations": 0,
+    "router_all_gold_card_queries": {
+     "n": 65,
+     "recall@1": {
+      "k": 31,
+      "n": 65,
+      "rate": 0.4769,
+      "wilson95": [
+       0.36,
+       0.596
+      ]
+     }
+    },
+    "router_answerable": {
+     "mrr": 0.5441,
+     "recall@1": {
+      "k": 15,
+      "n": 41,
+      "rate": 0.3659,
+      "wilson95": [
+       0.236,
+       0.519
+      ]
+     },
+     "recall@3": {
+      "k": 26,
+      "n": 41,
+      "rate": 0.6341,
+      "wilson95": [
+       0.481,
+       0.764
+      ]
+     },
+     "recall@5": {
+      "k": 31,
+      "n": 41,
+      "rate": 0.7561,
+      "wilson95": [
+       0.607,
+       0.862
+      ]
+     }
+    },
+    "router_mode_correct_answers": {
+     "k": 10,
+     "n": 41,
+     "rate": 0.2439,
+     "wilson95": [
+      0.138,
+      0.393
+     ]
+    },
+    "router_mode_grounding_failures": 0,
+    "router_mode_phantom_citations": 0,
+    "router_mode_status_match_by_type": {
+     "absent_detail": {
+      "k": 3,
+      "n": 12,
+      "rate": 0.25,
+      "wilson95": [
+       0.089,
+       0.532
+      ]
+     },
+     "answerable": {
+      "k": 11,
+      "n": 41,
+      "rate": 0.2683,
+      "wilson95": [
+       0.157,
+       0.419
+      ]
+     },
+     "not_ingested": {
+      "k": 6,
+      "n": 8,
+      "rate": 0.75,
+      "wilson95": [
+       0.409,
+       0.929
+      ]
+     },
+     "out_of_domain": {
+      "k": 7,
+      "n": 8,
+      "rate": 0.875,
+      "wilson95": [
+       0.529,
+       0.978
+      ]
+     },
+     "unresolved_identity": {
+      "k": 4,
+      "n": 4,
+      "rate": 1.0,
+      "wilson95": [
+       0.51,
+       1.0
+      ]
+     }
+    },
+    "router_top1_not_ingested": {
+     "k": 8,
+     "n": 8,
+     "rate": 1.0,
+     "wilson95": [
+      0.676,
+      1.0
+     ]
+    },
+    "router_top1_unresolved_identity": {
+     "k": 4,
+     "n": 4,
+     "rate": 1.0,
+     "wilson95": [
+      0.51,
+      1.0
+     ]
+    },
+    "wrong_topic_answered": {
+     "count": 2,
+     "ids": [
+      "P10T-044",
+      "P10T-047"
+     ]
+    }
+   },
+   "per_query": {
+    "P10T-001": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-08",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-002": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 23,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-003": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 27,
+     "oracle_status": "answered",
+     "selected": "M2C-01",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-004": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 18,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-005": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-006": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 18,
+     "oracle_status": "answered",
+     "selected": "M2C-23",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-007": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-008": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-009": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-010": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-011": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-06",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-012": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-05",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-013": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-014": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-23",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-015": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-016": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 26,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-017": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 16,
+     "oracle_status": "answered",
+     "selected": "M2C-27",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-018": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-13",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-019": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 14,
+     "oracle_status": "answered",
+     "selected": "M2C-13",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-020": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-021": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-24",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-022": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-15",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-023": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-024": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-025": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-026": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-027": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-01",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-028": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-029": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-030": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 8,
+     "oracle_status": "answered",
+     "selected": "M2C-20",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-031": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-032": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "answered",
+     "selected": "M2C-01",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-033": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-11",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-034": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-11",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-035": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 3,
+     "oracle_status": "answered",
+     "selected": "M2C-04",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-036": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-03",
+     "status": "page_not_ingested",
+     "type": "answerable"
+    },
+    "P10T-037": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 7,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-038": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 11,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-039": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-11",
+     "status": "insufficient_context",
+     "type": "answerable"
+    },
+    "P10T-040": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-14",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-041": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "answerable"
+    },
+    "P10T-042": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 14,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "absent_detail"
+    },
+    "P10T-043": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-06",
+     "status": "page_not_ingested",
+     "type": "absent_detail"
+    },
+    "P10T-044": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-07",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-045": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-05",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-046": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-07",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-047": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "absent_detail"
+    },
+    "P10T-048": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "answered",
+     "selected": "M2C-23",
+     "status": "page_not_ingested",
+     "type": "absent_detail"
+    },
+    "P10T-049": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 4,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-27",
+     "status": "out_of_domain",
+     "type": "absent_detail"
+    },
+    "P10T-050": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
+     "type": "absent_detail"
+    },
+    "P10T-051": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "absent_detail"
+    },
+    "P10T-052": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "oracle_status": "out_of_domain",
+     "selected": "M2C-11",
+     "status": "out_of_domain",
+     "type": "absent_detail"
+    },
+    "P10T-053": {
+     "correct_answer_oracle": false,
+     "correct_answer_router": false,
+     "gold_rank": 8,
+     "oracle_status": "insufficient_context",
+     "selected": "M2C-04",
+     "status": "page_not_ingested",
+     "type": "absent_detail"
+    },
+    "P10T-054": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-26",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-055": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-27",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-056": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-29",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-057": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-25",
+     "status": "out_of_domain",
+     "type": "not_ingested"
+    },
+    "P10T-058": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-20",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-059": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-22",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-060": {
+     "correct_answer_router": false,
+     "gold_rank": 2,
+     "selected": "M2C-08",
+     "status": "page_not_ingested",
+     "type": "not_ingested"
+    },
+    "P10T-061": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-03",
+     "status": "out_of_domain",
+     "type": "not_ingested"
+    },
+    "P10T-062": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-18",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-063": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-13",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-064": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-16",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-065": {
+     "correct_answer_router": false,
+     "gold_rank": 1,
+     "selected": "M2C-01",
+     "status": "unresolved_identity",
+     "type": "unresolved_identity"
+    },
+    "P10T-066": {
+     "correct_answer_router": false,
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-067": {
+     "correct_answer_router": false,
+     "selected": "M2C-01",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-068": {
+     "correct_answer_router": false,
+     "selected": "M2C-25",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-069": {
+     "correct_answer_router": false,
+     "selected": "M2C-27",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-070": {
+     "correct_answer_router": false,
+     "selected": "M2C-02",
+     "status": "insufficient_context",
+     "type": "out_of_domain"
+    },
+    "P10T-071": {
+     "correct_answer_router": false,
+     "selected": "M2C-17",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-072": {
+     "correct_answer_router": false,
+     "selected": "M2C-01",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    },
+    "P10T-073": {
+     "correct_answer_router": false,
+     "selected": "M2C-09",
+     "status": "out_of_domain",
+     "type": "out_of_domain"
+    }
+   }
+  }
+ },
+ "test_sha256": "ffa46afa2628a8e82a4120e645e4355d6caa9304529cc477afb502357e2c6ad9",
+ "verdicts": {
+  "G": {
+   "answerable_correct_lost": 0,
+   "grounding_failures": 0,
+   "net_correct_abstentions": 3,
+   "paired_abstention": {
+    "only_baseline": 0,
+    "only_candidate": 3,
+    "sign_test_p_two_sided": 0.25
+   },
+   "paired_answerable_correct": {
+    "only_baseline": 0,
+    "only_candidate": 0,
+    "sign_test_p_two_sided": null
+   },
+   "phantom_citations": 0,
+   "rule": {
+    "grounding_all_pass": true,
+    "max_answerable_correct_lost": 2,
+    "min_net_correct_abstentions": 4,
+    "phantom_citations": 0
+   },
+   "supported": false
+  },
+  "R_exploratory": {
+   "adopted": false,
+   "lam": 2.0,
+   "paired_r1": {
+    "only_baseline": 2,
+    "only_candidate": 15,
+    "sign_test_p_two_sided": 0.0023
+   },
+   "r1_gain_absolute": 0.3171,
+   "reason_not_adopted": "fusion failed the pre-declared DEV guard (wrong-topic answers increased), so it was not selected; TEST figures are informational",
+   "routing_top1_not_worse_on_not_ingested_and_unresolved": false,
+   "would_pass_all_declared_R_criteria": false,
+   "wrong_topic_answered": 7,
+   "wrong_topic_answered_ids": [
+    "P10T-043",
+    "P10T-044",
+    "P10T-045",
+    "P10T-047",
+    "P10T-048",
+    "P10T-049",
+    "P10T-062"
+   ],
+   "wrong_topic_answered_reference": 3
+  },
+  "R_exploratory+G": {
+   "adopted": false,
+   "lam": 2.0,
+   "paired_r1": {
+    "only_baseline": 2,
+    "only_candidate": 15,
+    "sign_test_p_two_sided": 0.0023
+   },
+   "r1_gain_absolute": 0.3171,
+   "reason_not_adopted": "fusion failed the pre-declared DEV guard (wrong-topic answers increased), so it was not selected; TEST figures are informational",
+   "routing_top1_not_worse_on_not_ingested_and_unresolved": false,
+   "would_pass_all_declared_R_criteria": false,
+   "wrong_topic_answered": 4,
+   "wrong_topic_answered_ids": [
+    "P10T-044",
+    "P10T-047",
+    "P10T-048",
+    "P10T-062"
+   ],
+   "wrong_topic_answered_reference": 2
+  },
+  "R_rule": {
+   "min_r1_gain": 0.05,
+   "sign_test_p_below": 0.05,
+   "unresolved_and_not_ingested_routing_must_not_worsen": true,
+   "wrong_topic_answered_must_not_increase": true
+  }
+ }
+}

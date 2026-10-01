@@ -1,0 +1,21 @@
+{
+ "configs": {
+  "R_exploratory": {
+   "median_ms": 52.3,
+   "p95_ms": 62.7
+  },
+  "R_exploratory+G": {
+   "median_ms": 55.7,
+   "p95_ms": 66.8
+  },
+  "baseline": {
+   "median_ms": 15.9,
+   "p95_ms": 36.9
+  },
+  "selected": {
+   "median_ms": 17.1,
+   "p95_ms": 42.9
+  }
+ },
+ "note": "median/p95 wall time per answer() call on the 73 DEV queries, extractive generator, one process, warm; not a benchmark of Ollama"
+}
