@@ -104,10 +104,17 @@ class OllamaCheck(unittest.TestCase):
             raise RuntimeError("down")
         self.assertIn("GENERATION_ROUND_TRIP_FAILED", OC.check(which=lambda _: "/x/ollama", http_get=self.ok_http, import_ollama=lambda: object(), generate=raises, model="llama3.2:3b")["blockers"])
 
-    def test_recorded_environment_is_not_ready_here(self):
+    def test_recorded_environment_is_self_consistent(self):
+        """The record is a snapshot of whichever machine ran ``phase12_ollama_check.py`` last (the sandbox: not ready; the Windows host: ready), so only its consistency is pinned."""
         rec = json.loads((ROOT / "data" / "phase12" / "ollama_environment.json").read_text(encoding="utf-8"))
-        self.assertFalse(rec["ready"])
-        self.assertIn("NO_OLLAMA_EXECUTABLE", rec["blockers"])
+        self.assertEqual(rec["ready"], not rec["blockers"])
+        self.assertEqual(rec["ready"], all(c.get("ok") for c in rec["checks"].values()))
+        self.assertEqual(rec["configured_model"], "llama3.2:3b")
+        if rec["ready"]:
+            self.assertTrue(rec["checks"]["generation"]["ok"])
+            self.assertIn("REAL Ollama is available", rec["statement"])
+        else:
+            self.assertIn("NOT available", rec["statement"])
 
 
 class CorpusStatus(unittest.TestCase):

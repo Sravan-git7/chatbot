@@ -6,21 +6,12 @@ repository pretends otherwise. Commands are for Windows PowerShell, run from the
 
 ## A. Real Ollama run (the real-LLM validation)
 
-```powershell
-winget install Ollama.Ollama            # then restart the terminal so `ollama` is on PATH
-ollama pull llama3.2:3b                 # the model configured in scripts/rag_core.py (LLM_MODEL_NAME); ~2 GB download
-pip install ollama
-python scripts/phase12_ollama_check.py  # must print {"ready": true, ...}; exit code 0. It also does one real generation round-trip.
-python scripts/evaluate_phase12.py --configs baseline,evidence,ollama_raw,ollama --out data/evaluation/phase12_results_ollama.json
-python scripts/rag_api.py --generator ollama --host 127.0.0.1 --port 8000      # chat UI + API with the real LLM (build the UI first: cd web; npm install; npx vite build)
-```
+Superseded by the complete, checked runbook **`data/phase12/WINDOWS_OLLAMA_RUN.md`** (PowerShell, `D:\chatbot`: environment, hash check, stores, `phase12_ollama_check.py`,
+`evaluate_phase12.py ... --require-ollama --out data/evaluation/phase12_results_ollama.json`, `phase12_compare_results.py`). Notes that still apply:
 
-* `ollama_raw` = real LLM without the evidence guard; `ollama` = real LLM + `EvidenceGuard` (Phase 11.1). A configuration is **never** replaced by the extractive generator;
-  if the check fails the evaluator records `BLOCKED` with the blockers.
-* The existing results file `data/evaluation/phase12_results.json` is sealed and is not overwritten - hence `--out`.
-* Then re-run the real-browser E2E with that server: `node web/e2e/phase12_browser_e2e.cjs` (see the header of that file for the environment variables). With a working Ollama the
-  "generator failure" scenario will no longer fail - that scenario only makes sense without Ollama; skip it or point `E2E_PORT_FAIL` at a server whose Ollama is stopped.
-* Please report the numbers as they are. The Phase 11.1 `EvidenceGuard` for LLM answers has only been tested with a stub so far; if `ollama` is worse than `evidence` that is a finding.
+* `ollama_raw` = real LLM without the evidence guard; `ollama` = real LLM + `EvidenceGuard` (Phase 11.1). A configuration is **never** replaced by the extractive generator.
+* The sealed `data/evaluation/phase12_results.json` is never overwritten - hence `--out`.
+* The "generator failure" scenario of `web/e2e/phase12_browser_e2e.cjs` only makes sense without Ollama.
 
 ## B. The other 22 documentation pages (corpus 7/29 -> up to 25/29)
 

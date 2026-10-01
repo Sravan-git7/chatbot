@@ -166,5 +166,147 @@ class EvaluatorWithStores(unittest.TestCase):
             self.assertEqual(out["status"], r[qid]["real"]["status"])
 
 
+class CompareResults(unittest.TestCase):
+    """Uses the sealed results (and a COPY of its evidence configuration relabelled as an LLM one) purely to test the comparison tool's logic - not a result."""
+
+    def test_blocked_configurations_stay_blocked(self):
+        import phase12_compare_results as CR
+        r = json.loads(RES.read_text(encoding="utf-8"))
+        c = CR.build(r, r)
+        self.assertTrue(c["provenance"]["equals_frozen_hash"])
+        self.assertEqual((c["configs"]["ollama"]["status"], c["configs"]["ollama_raw"]["status"]), ("BLOCKED", "BLOCKED"))
+        self.assertEqual(c["review"], {})
+        self.assertEqual(c["parity_with_sealed_extractive_run"]["baseline"]["differences"], 0)
+        self.assertIn("BLOCKED", CR.markdown(c))
+
+    def test_parity_reports_a_difference_and_review_flags_unsupported_answers(self):
+        import copy
+        import phase12_compare_results as CR
+        sealed = json.loads(RES.read_text(encoding="utf-8"))
+        r = copy.deepcopy(sealed)
+        qid = next(k for k, v in r["configs"]["baseline"]["per_query"].items() if v["real"]["status"] != "answered")
+        r["configs"]["baseline"]["per_query"][qid]["real"]["status"] = "answered"
+        self.assertEqual(CR.parity(r, sealed)["baseline"]["differences"], 1)
+        r["configs"]["ollama"] = copy.deepcopy(r["configs"]["baseline"])
+        rv = CR.build(r, sealed)["review"]["ollama"]
+        self.assertTrue(any("unsupported_question_answered" in f["flags"] for f in rv["flagged"]))
+        self.assertTrue(all(a["status"] == "answered" for a in rv["all_answered"]))
+
+
+STORES = (ROOT / "data" / "vector_store" / "page_collection").exists()
+
+
+class CountingClient:
+    """Stand-in for an LLM client in PLUMBING tests only (never used for any recorded result)."""
+
+    def __init__(self, text="The answer is 42. [S1]", exc=None):
+        self.calls, self.text, self.exc = 0, text, exc
+
+    def generate(self, prompt):
+        self.calls += 1
+        if self.exc:
+            raise self.exc
+        return self.text
+
+
+class RequireOllama(unittest.TestCase):
+    def test_require_ollama_stops_before_any_work_when_not_ready(self):
+        import tempfile
+        import phase12_ollama_check as OC
+        if OC.check()["ready"]:
+            self.skipTest("a real Ollama is available on this machine")
+        with tempfile.TemporaryDirectory() as t:
+            out = Path(t) / "r.json"
+            self.assertEqual(EV.main(["--configs", "ollama_raw,ollama", "--require-ollama", "--out", str(out)]), 3)
+            self.assertFalse(out.exists())
+            self.assertFalse(Path(t, "r_performance.json").exists())
+
+    def test_default_perf_path_never_targets_the_sealed_file_for_a_custom_out(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as t:
+            Path(t, "x_performance.json").write_text("{}", encoding="utf-8")
+            with self.assertRaises(SystemExit) as c:
+                EV.main(["--configs", "baseline", "--out", str(Path(t) / "x.json")])
+            self.assertIn("x_performance.json", str(c.exception))
+
+    def test_checkpoint_header_mismatch_is_refused(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as t:
+            p = Path(t) / "c.jsonl"
+            EV.Checkpoint(p, {"queries_sha256": "a", "model": "m", "configs": ["ollama"]}).put("ollama", "Q", "real", {"x": 1})
+            self.assertEqual(EV.Checkpoint(p, {"queries_sha256": "a", "model": "m", "configs": ["ollama"]}).get("ollama", "Q", "real"), {"x": 1})
+            with self.assertRaises(SystemExit):
+                EV.Checkpoint(p, {"queries_sha256": "b", "model": "m", "configs": ["ollama"]})
+
+    def test_error_record_is_neither_correct_nor_a_correct_abstention(self):
+        q = {"type": "absent_detail", "category": "absent_detail", "id": "x"}
+        r = EV.error_record(q, "oracle", "M2C-07", RuntimeError("boom"))
+        self.assertEqual((r["status"], r["correct"], r["outcome"]), ("generator_error", False, "absent_detail_generator_error"))
+        per = {"x": {"oracle": r}}
+        m = EV.answer_metrics([dict(q, type="absent_detail")], per, "oracle")
+        self.assertEqual((m["unsupported"]["correctly_abstained"], m["unsupported"]["incorrectly_answered"], m["unsupported"]["generator_errors"], m["absent_detail"]["abstained"]), (0, 0, 1, 0))
+
+
+@unittest.skipUnless(STORES, "stores not built in this checkout (see Phase 11 recreate order)")
+class LlmPlumbing(unittest.TestCase):
+    """The evaluator's LLM path with a FAKE client: error handling, resume, no fallback. These are plumbing tests, not LLM results."""
+
+    @classmethod
+    def setUpClass(cls):
+        import rag_pipeline as RP
+        cls.RP = RP
+        qs = EV.load_queries()
+        cls.q = [x for x in qs if x["type"] == "answerable"][:3] + [x for x in qs if x["type"] == "absent_detail"][:2]
+        units = json.loads((ROOT / "data" / "retrieval_units.json").read_text(encoding="utf-8"))
+        cls.card_url = {u["source_id"]: u["source_url"] for u in (units["units"] if isinstance(units, dict) else units)}
+
+    def run_cfg(self, client, **kw):
+        pipe = self.RP.build_pipeline(generator="ollama", llm_client=client)
+        return pipe, EV.evaluate_config(pipe, self.q, {}, self.card_url, name="ollama_raw", llm=True, **kw)["per_query"]
+
+    def test_fabricated_llm_answer_is_not_counted_correct(self):
+        client = CountingClient("The answer is 42. [S1]")
+        _, per = self.run_cfg(client)
+        self.assertGreater(client.calls, 0)
+        for r in per.values():
+            for rec in (r.get("real"), r.get("oracle")):
+                if rec:
+                    self.assertFalse(rec["correct"])
+                    self.assertEqual(rec["phantom"], 0)
+
+    def test_raising_client_is_recorded_per_question_not_substituted(self):
+        client = CountingClient(exc=ConnectionError("ollama stopped"))
+        with self.assertRaises(SystemExit) as c:
+            self.run_cfg(client)
+        self.assertIn("consecutive generator errors", str(c.exception))
+        self.assertEqual(client.calls, EV.MAX_CONSECUTIVE_ERRORS)
+
+    def test_questions_that_never_reach_the_generator_do_not_reset_the_error_counter(self):
+        pipe = self.RP.build_pipeline(generator="ollama", llm_client=CountingClient(exc=ConnectionError("down")))
+        qs = EV.load_queries()
+        mixed = []
+        for a in [x for x in qs if x["type"] == "answerable"][:8]:
+            mixed += [a, next(x for x in qs if x["type"] == "out_of_domain")]
+        with self.assertRaises(SystemExit):
+            EV.evaluate_config(pipe, mixed, {}, self.card_url, name="ollama", llm=True)
+
+    def test_extractive_exceptions_are_not_swallowed(self):
+        pipe = self.RP.build_pipeline(generator="extractive")
+        pipe.answer = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("bug"))
+        with self.assertRaises(RuntimeError):
+            EV.evaluate_config(pipe, self.q[:1], {}, self.card_url, name="baseline", llm=False)
+
+    def test_resume_makes_no_new_llm_calls(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as t:
+            hdr = {"queries_sha256": "s", "model": "fake", "configs": ["ollama_raw"]}
+            c1 = CountingClient("The answer is 42. [S1]")
+            _, first = self.run_cfg(c1, ckpt=EV.Checkpoint(Path(t) / "p.jsonl", hdr))
+            c2 = CountingClient(exc=AssertionError("must not be called"))
+            _, second = self.run_cfg(c2, ckpt=EV.Checkpoint(Path(t) / "p.jsonl", hdr))
+            self.assertEqual(c2.calls, 0)
+            self.assertEqual({k: v.get("real", {}).get("outcome") for k, v in first.items()}, {k: v.get("real", {}).get("outcome") for k, v in second.items()})
+
+
 if __name__ == "__main__":
     unittest.main()
