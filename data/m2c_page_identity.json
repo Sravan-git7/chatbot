@@ -1,0 +1,2403 @@
+{
+  "card_count": 29,
+  "cards": [
+    {
+      "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "card_needs_review": false,
+      "card_page_id": "0a6ace53118d4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Utilities Master Data",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": null,
+      "effective_page_id": null,
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 1,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": null,
+          "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": null,
+          "reasons": [
+            "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
+          ],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": null,
+          "toc_loio_equals_guide_id": null,
+          "toc_node_count": 0,
+          "verification_basis": null,
+          "verified": false
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": false,
+          "role": "card_guide",
+          "toc_available": false,
+          "toc_file": null,
+          "toc_node_count": 0
+        },
+        {
+          "authority": "non_authoritative_hint",
+          "guide_ids": [
+            "e52c8ee6197147ec97dfc2eb8c46a3ad"
+          ],
+          "kind": "page_is_map_root_of_saved_toc",
+          "meaning": "map root of that guide's saved TOC; card guide segment differs; NOT confirmed"
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+      "resolution_status": "card_identity_only",
+      "source_id": "M2C-01"
+    },
+    {
+      "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "card_needs_review": false,
+      "card_page_id": "8082ce53118d4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Move-In/Out Overview",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "effective_page_id": "8082ce53118d4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 2,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "8082ce53118d4308e10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374682",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 233,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_node_count": 233
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-02"
+    },
+    {
+      "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "card_needs_review": false,
+      "card_page_id": "0981ce53118d4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Move-In Process",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "effective_page_id": "0981ce53118d4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 3,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "8082ce53118d4308e10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374682",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 233,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_node_count": 233
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-03"
+    },
+    {
+      "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "card_needs_review": false,
+      "card_page_id": "0f81ce53118d4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Move-Out Process",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "effective_page_id": "0f81ce53118d4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 4,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "8082ce53118d4308e10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374682",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 233,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_node_count": 233
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-04"
+    },
+    {
+      "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "card_needs_review": false,
+      "card_page_id": "8990d0533f8e4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Device Management Overview",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "effective_page_id": "8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 5,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": null,
+          "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": null,
+          "reasons": [
+            "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
+          ],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": null,
+          "toc_loio_equals_guide_id": null,
+          "toc_node_count": 0,
+          "verification_basis": null,
+          "verified": false
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": false,
+          "role": "card_guide",
+          "toc_available": false,
+          "toc_file": null,
+          "toc_node_count": 0
+        },
+        {
+          "authority": "topic_correction",
+          "current_page_id": "8990d0533f8e4308e10000000a174cb4",
+          "current_page_title": "Device Management",
+          "file": "captured_responses/1_40374657_8990d0533f8e4308e10000000a174cb4.json",
+          "kind": "captured_response",
+          "meaning": "page exists inside that deliverable; it does not prove SAP serves the original card URL from it; referenced by the topic correction",
+          "numeric_deliverable_id": "40374657",
+          "response_deliverable_title": "Device Management",
+          "response_loio": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "response_loio_is_card_guide": false,
+          "response_loio_registered_verified": true,
+          "response_toc_nodes": 134,
+          "used_as_effective_guide": false
+        },
+        {
+          "authority": "non_authoritative_hint",
+          "guide_ids": [
+            "2ac7fe29a0c94cdd88fb80c2cb9f7758"
+          ],
+          "kind": "page_also_in_other_saved_toc",
+          "meaning": "a page id in another guide's TOC is not evidence about the card's guide"
+        },
+        {
+          "authority": "topic_correction",
+          "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "card_page_id": "8990d0533f8e4308e10000000a174cb4",
+          "card_record_modified": false,
+          "correction_matches_card_ids": true,
+          "evidence_items": [
+            {
+              "current_page_id": "8990d0533f8e4308e10000000a174cb4",
+              "file": "captured_responses/1_40374657_8990d0533f8e4308e10000000a174cb4.json",
+              "kind": "saved_response",
+              "machine_checked": true,
+              "note": "request deliverable_id=40374657&buildNo=1779&file_path=8990d0533f8e4308e10000000a174cb4.html; response deliverable.loio=2ac7fe29a0c94cdd88fb80c2cb9f7758, currentPage.loio=8990d0533f8e4308e10000000a174cb4 (checked by code each build). The request was constructed, not copied from a browser (alone it would only be a probe).",
+              "numeric_deliverable_id": "40374657",
+              "passed": true,
+              "response_loio": "2ac7fe29a0c94cdd88fb80c2cb9f7758"
+            },
+            {
+              "date": "2026-09-30",
+              "kind": "user_reported_browser",
+              "machine_checked": false,
+              "machine_verified_declared": false,
+              "observation": "Opening the original card URL .../021b182b0c47416c8fafed67ebfd78a9/8990d053....html in the browser redirects/resolves to .../2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d053....html; the page's own pagecontent?deliverableInfo=1 request uses deliverable_id=40374657 and its response has deliverable.loio=2ac7fe29a0c94cdd88fb80c2cb9f7758. (HAR/screenshot not in the worktree.)",
+              "passed": null
+            }
+          ],
+          "kind": "correction",
+          "machine_checked_saved_response_passed": true,
+          "reason": "SAP resolves the ORIGINAL card #5 URL (under 021b182b...) to guide 2ac7fe29... ('Device Management'); page 8990d053... is that guide's landing page / first TOC root. Guide A (021b182b) is NOT registered from this and nothing is inferred for topics 1, 13, 16.",
+          "registers_a_guide": false,
+          "resolved_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "topic_id": 5
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "4d76765c1e012b8ae10000000a42189b"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374657",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "corrected_guide",
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 134,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "toc_membership",
+          "page_is_landing_page": true,
+          "page_is_toc_node": true,
+          "role": "corrected_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_node_count": 134
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CORRECTION_APPLIED_PAGE_IN_CORRECTED_GUIDE_TOC",
+      "resolution_status": "corrected_identity",
+      "source_id": "M2C-05"
+    },
+    {
+      "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "card_needs_review": false,
+      "card_page_id": "bc90d0533f8e4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Reading Meters",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "effective_page_id": "bc90d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 6,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "4d76765c1e012b8ae10000000a42189b"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374657",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 134,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_node_count": 134
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-06"
+    },
+    {
+      "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "card_needs_review": false,
+      "card_page_id": "4d76765c1e012b8ae10000000a42189b",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Monitoring Meter Reading Results",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
+      "disagreements": [],
+      "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 7,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "4d76765c1e012b8ae10000000a42189b"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374657",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 134,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_node_count": 134
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-07"
+    },
+    {
+      "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "card_needs_review": false,
+      "card_page_id": "d090d0533f8e4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Meter Reading Estimation",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "effective_page_id": "d090d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 8,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "4d76765c1e012b8ae10000000a42189b"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374657",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 134,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_node_count": 134
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-08"
+    },
+    {
+      "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "card_needs_review": false,
+      "card_page_id": "bf74c1d28fd54f77b228772b98b72fba",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Estimation Procedure Details",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html",
+      "disagreements": [],
+      "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "effective_page_id": "bf74c1d28fd54f77b228772b98b72fba",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 9,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "4d76765c1e012b8ae10000000a42189b"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374657",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 134,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+          "toc_node_count": 134
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-09"
+    },
+    {
+      "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "card_needs_review": false,
+      "card_page_id": "b781ce53118d4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Meter Reading Data During Move-In",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "effective_page_id": "b781ce53118d4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 10,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "8082ce53118d4308e10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374682",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 233,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_node_count": 233
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-10"
+    },
+    {
+      "card_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+      "card_needs_review": false,
+      "card_page_id": "147bce53118d4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "SAP Utilities Billing Procedure",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+      "effective_page_id": "147bce53118d4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 11,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "147bce53118d4308e10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40404052",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1006,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json",
+          "toc_node_count": 1006
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-11"
+    },
+    {
+      "card_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+      "card_needs_review": false,
+      "card_page_id": "297bce53118d4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Automatic Billing",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+      "effective_page_id": "297bce53118d4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 12,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "147bce53118d4308e10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40404052",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1006,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json",
+          "toc_node_count": 1006
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-12"
+    },
+    {
+      "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "card_needs_review": false,
+      "card_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Budget Billing Plan",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
+      "disagreements": [],
+      "effective_guide_id": null,
+      "effective_page_id": null,
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 13,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": null,
+          "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": null,
+          "reasons": [
+            "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
+          ],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": null,
+          "toc_loio_equals_guide_id": null,
+          "toc_node_count": 0,
+          "verification_basis": null,
+          "verified": false
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": false,
+          "role": "card_guide",
+          "toc_available": false,
+          "toc_file": null,
+          "toc_node_count": 0
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+      "resolution_status": "card_identity_only",
+      "source_id": "M2C-13"
+    },
+    {
+      "card_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+      "card_needs_review": true,
+      "card_page_id": "cc7bce53118d4308e10000000a174cb4",
+      "card_source_status": "needs_review",
+      "card_source_url_status": "needs_review",
+      "card_title": "SAP Utilities Invoicing Procedure",
+      "card_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+      "effective_page_id": "cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 14,
+          "source_status": "needs_review",
+          "source_url_status": "needs_review",
+          "source_url_status_reasons": [
+            "product segment 'sap_s4hana_on-premise' differs from 'SAP_S4HANA_ON-PREMISE' used by the other cards"
+          ],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": [
+            "product spelling 'sap_s4hana_on-premise' normalised to 'SAP_S4HANA_ON-PREMISE'"
+          ]
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "cc7bce53118d4308e10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374633",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 134,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json",
+          "toc_node_count": 134
+        },
+        {
+          "authority": "non_authoritative_hint",
+          "guide_ids": [
+            "ed84b70c199d4470ae2e5ccb93b2e45b"
+          ],
+          "kind": "page_also_in_other_saved_toc",
+          "meaning": "a page id in another guide's TOC is not evidence about the card's guide"
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-14"
+    },
+    {
+      "card_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+      "card_needs_review": false,
+      "card_page_id": "147cce53118d4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Processing Budget Billing Plans",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+      "effective_page_id": "147cce53118d4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 15,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "cc7bce53118d4308e10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374633",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 134,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json",
+          "toc_node_count": 134
+        },
+        {
+          "authority": "non_authoritative_hint",
+          "guide_ids": [
+            "ed84b70c199d4470ae2e5ccb93b2e45b"
+          ],
+          "kind": "page_also_in_other_saved_toc",
+          "meaning": "a page id in another guide's TOC is not evidence about the card's guide"
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-15"
+    },
+    {
+      "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "card_needs_review": false,
+      "card_page_id": "549661e6541f403ea56196782e040bcc",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Periodic Billing and Invoicing Analysis",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
+      "disagreements": [],
+      "effective_guide_id": null,
+      "effective_page_id": null,
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 16,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": null,
+          "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": null,
+          "reasons": [
+            "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
+          ],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": null,
+          "toc_loio_equals_guide_id": null,
+          "toc_node_count": 0,
+          "verification_basis": null,
+          "verified": false
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": false,
+          "role": "card_guide",
+          "toc_available": false,
+          "toc_file": null,
+          "toc_node_count": 0
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+      "resolution_status": "card_identity_only",
+      "source_id": "M2C-16"
+    },
+    {
+      "card_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "card_needs_review": false,
+      "card_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Contract Accounts Overview",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 17,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": null,
+          "declared_verification": null,
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374631",
+          "reasons": [
+            "verified through data/guide_registry.json local-evidence entry (master_data.json); not in guide_registrations.json"
+          ],
+          "registry_json_status": "verified",
+          "role": "card_guide",
+          "toc_file": "master_data.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 81,
+          "verification_basis": "registry_local_evidence_only",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "master_data.json",
+          "toc_node_count": 81
+        },
+        {
+          "authority": "local_page_record",
+          "counted": true,
+          "kind": "local_page_record",
+          "path": "data/sap_help/pages/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.json",
+          "record_topic_ids": [
+            17
+          ],
+          "status": "OK",
+          "text_chars": 2683
+        }
+      ],
+      "local_page_available": true,
+      "local_page_path": "data/sap_help/pages/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.json",
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_AND_LOCAL_RECORD_PRESENT",
+      "resolution_status": "resolved_local_page",
+      "source_id": "M2C-17"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": true,
+      "card_page_id": "b1a202c9bb3011da2b24000f20dac9ef",
+      "card_source_status": "needs_review",
+      "card_source_url_status": "needs_review",
+      "card_title": "Contract Account Business Object",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+      "disagreements": [],
+      "effective_guide_id": null,
+      "effective_page_id": null,
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": "version=2025.001",
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 18,
+          "source_status": "needs_review",
+          "source_url_status": "needs_review",
+          "source_url_status_reasons": [
+            "query string '?version=2025.001' present (not on most cards; version pin to be confirmed)"
+          ],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": [
+            "URL carries ?version=2025.001 (kept as url_version; not part of identity)"
+          ]
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": false,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        },
+        {
+          "authority": "probe_evidence_only",
+          "current_page_id": "b1a202c9bb3011da2b24000f20dac9ef",
+          "current_page_title": "Contract Account",
+          "file": "captured_responses/1_40374490_b1a202c9bb3011da2b24000f20dac9ef.json",
+          "kind": "captured_response",
+          "meaning": "page exists inside that deliverable; it does not prove SAP serves the original card URL from it",
+          "numeric_deliverable_id": "40374490",
+          "response_deliverable_title": "Enterprise Services in Financials",
+          "response_loio": "e4375c1cad104b2eb7d027369bd76638",
+          "response_loio_is_card_guide": false,
+          "response_loio_registered_verified": false,
+          "response_toc_nodes": 669,
+          "used_as_effective_guide": false
+        },
+        {
+          "authority": "resolver",
+          "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "conflict",
+          "meaning": "the card's guide TOC does not contain the page; other evidence exists but is not authoritative; no effective identity is chosen",
+          "other_loios_seen": [
+            "e4375c1cad104b2eb7d027369bd76638"
+          ],
+          "reasons": [
+            "PAGE_NOT_A_NODE_OF_CARD_GUIDE_TOC",
+            "PAGE_SEEN_IN_OTHER_DELIVERABLE"
+          ]
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "PAGE_NOT_IN_CARD_GUIDE_TOC_PAGE_SEEN_ELSEWHERE",
+      "resolution_status": "conflicting_identity",
+      "source_id": "M2C-18"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": false,
+      "card_page_id": "063bf3eb68e347efa5c0fc1d389f70f7",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Analyze Incoming Payments",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "063bf3eb68e347efa5c0fc1d389f70f7",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 19,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-19"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": false,
+      "card_page_id": "edcd0c5823854d3296f2591e9f5d118c",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Clearing Control in Incoming Payments",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 20,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-20"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": false,
+      "card_page_id": "e63529e1a3fd42e3a0e2c009ac783e0d",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Clearing Types",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "e63529e1a3fd42e3a0e2c009ac783e0d",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 21,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-21"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": false,
+      "card_page_id": "3d0ac5536a51204be10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Processing Incoming Payments from External Cash Desks",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 22,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-22"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": true,
+      "card_page_id": "730dc5536a51204be10000000a174cb4",
+      "card_source_status": "needs_review",
+      "card_source_url_status": "needs_review",
+      "card_title": "Installment Plan Overview",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "730dc5536a51204be10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": "version=2025.001",
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 23,
+          "source_status": "needs_review",
+          "source_url_status": "needs_review",
+          "source_url_status_reasons": [
+            "query string '?version=2025.001' present (not on most cards; version pin to be confirmed)"
+          ],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": [
+            "URL carries ?version=2025.001 (kept as url_version; not part of identity)"
+          ]
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-23"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": false,
+      "card_page_id": "790dc5536a51204be10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Creating Installment Plans",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 24,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-24"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": false,
+      "card_page_id": "630dc5536a51204be10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Displaying and Changing Installment Plans",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "630dc5536a51204be10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 25,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-25"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": false,
+      "card_page_id": "b1ffc5536a51204be10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "FI-CA Dunning",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "b1ffc5536a51204be10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 26,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-26"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": false,
+      "card_page_id": "10e7c5536a51204be10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Submission of Receivables to Collection Agency",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "10e7c5536a51204be10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 27,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-27"
+    },
+    {
+      "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "card_needs_review": false,
+      "card_page_id": "9c9c2344851f412f823d5f8a9dc7c694",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Collection Agency APIs and Enterprise Services",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html",
+      "disagreements": [],
+      "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "effective_page_id": "9c9c2344851f412f823d5f8a9dc7c694",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 28,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "790dc5536a51204be10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374790",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 1481,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+          "toc_node_count": 1481
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-28"
+    },
+    {
+      "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "card_needs_review": false,
+      "card_page_id": "8682ce53118d4308e10000000a174cb4",
+      "card_source_status": "verified",
+      "card_source_url_status": "ok",
+      "card_title": "Disconnection/Reconnection of a Utility Installation",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
+      "disagreements": [],
+      "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "effective_page_id": "8682ce53118d4308e10000000a174cb4",
+      "evidence": [
+        {
+          "authority": "card_record",
+          "card_url_query": null,
+          "kind": "card",
+          "source_manifest_present": true,
+          "source_number": 29,
+          "source_status": "verified",
+          "source_url_status": "ok",
+          "source_url_status_reasons": [],
+          "topic_manifest_present": true,
+          "topic_manifest_warnings": []
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "8082ce53118d4308e10000000a174cb4"
+            ],
+            "matching_saved_responses": [
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374682",
+          "reasons": [],
+          "registry_json_status": "unresolved",
+          "role": "card_guide",
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 233,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "kind": "toc_membership",
+          "page_is_landing_page": false,
+          "page_is_toc_node": true,
+          "role": "card_guide",
+          "toc_available": true,
+          "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+          "toc_node_count": 233
+        }
+      ],
+      "local_page_available": false,
+      "local_page_path": null,
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
+      "source_id": "M2C-29"
+    }
+  ],
+  "cards_with_local_page": [
+    "M2C-17"
+  ],
+  "guide_verification_summary": {
+    "guides_known": 7,
+    "guides_verified": 6,
+    "saved_tocs_in_data_toc": 5,
+    "saved_tocs_readable": 6,
+    "verified_by_registration": 5,
+    "verified_by_registry_local_evidence_only": 1
+  },
+  "guides": [
+    {
+      "capture_check": null,
+      "card_topic_ids": [
+        1,
+        5,
+        13,
+        16
+      ],
+      "corrected_topic_ids_resolving_here": [],
+      "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+      "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "numeric_deliverable_id_declared": null,
+      "reasons": [
+        "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
+      ],
+      "registry_json_status": "unresolved",
+      "toc": null,
+      "toc_file": null,
+      "toc_loio_equals_guide_id": null,
+      "toc_node_count": 0,
+      "verification_basis": null,
+      "verified": false
+    },
+    {
+      "capture_check": {
+        "captured_page_ids_declared": [
+          "4d76765c1e012b8ae10000000a42189b"
+        ],
+        "matching_saved_responses": [
+          "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+        ],
+        "passed": true
+      },
+      "card_topic_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "corrected_topic_ids_resolving_here": [
+        5
+      ],
+      "declared_verification": "response_loio_verified",
+      "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "numeric_deliverable_id_declared": "40374657",
+      "reasons": [],
+      "registry_json_status": "unresolved",
+      "toc": {
+        "file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+        "landing_page": "8990d0533f8e4308e10000000a174cb4",
+        "map_root_page_id": "5791d0533f8e4308e10000000a174cb4",
+        "node_count": 134,
+        "title": "Device Management",
+        "toc_loio": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "toc_loio_equals_guide_id": true,
+        "unique_page_ids": 133
+      },
+      "toc_file": "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json",
+      "toc_loio_equals_guide_id": true,
+      "toc_node_count": 134,
+      "verification_basis": "registration_response_loio_verified_and_machine_checked",
+      "verified": true
+    },
+    {
+      "capture_check": {
+        "captured_page_ids_declared": [
+          "790dc5536a51204be10000000a174cb4"
+        ],
+        "matching_saved_responses": [
+          "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+        ],
+        "passed": true
+      },
+      "card_topic_ids": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "corrected_topic_ids_resolving_here": [],
+      "declared_verification": "response_loio_verified",
+      "guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "numeric_deliverable_id_declared": "40374790",
+      "reasons": [],
+      "registry_json_status": "unresolved",
+      "toc": {
+        "file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+        "landing_page": "59e8c5536a51204be10000000a174cb4",
+        "map_root_page_id": "83e8c5536a51204be10000000a174cb4",
+        "node_count": 1481,
+        "title": "Contract Accounting",
+        "toc_loio": "9442486404b54071b4ebeab6a16628e7",
+        "toc_loio_equals_guide_id": true,
+        "unique_page_ids": 1481
+      },
+      "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+      "toc_loio_equals_guide_id": true,
+      "toc_node_count": 1481,
+      "verification_basis": "registration_response_loio_verified_and_machine_checked",
+      "verified": true
+    },
+    {
+      "capture_check": {
+        "captured_page_ids_declared": [
+          "cc7bce53118d4308e10000000a174cb4"
+        ],
+        "matching_saved_responses": [
+          "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json"
+        ],
+        "passed": true
+      },
+      "card_topic_ids": [
+        14,
+        15
+      ],
+      "corrected_topic_ids_resolving_here": [],
+      "declared_verification": "response_loio_verified",
+      "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+      "numeric_deliverable_id_declared": "40374633",
+      "reasons": [],
+      "registry_json_status": "unresolved",
+      "toc": {
+        "file": "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json",
+        "landing_page": "5b7dce53118d4308e10000000a174cb4",
+        "map_root_page_id": "af7dce53118d4308e10000000a174cb4",
+        "node_count": 134,
+        "title": "Invoicing",
+        "toc_loio": "a003b275c98148ee8a4c3fafe9588fe3",
+        "toc_loio_equals_guide_id": true,
+        "unique_page_ids": 134
+      },
+      "toc_file": "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json",
+      "toc_loio_equals_guide_id": true,
+      "toc_node_count": 134,
+      "verification_basis": "registration_response_loio_verified_and_machine_checked",
+      "verified": true
+    },
+    {
+      "capture_check": null,
+      "card_topic_ids": [
+        17
+      ],
+      "corrected_topic_ids_resolving_here": [],
+      "declared_verification": null,
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "numeric_deliverable_id_declared": "40374631",
+      "reasons": [
+        "verified through data/guide_registry.json local-evidence entry (master_data.json); not in guide_registrations.json"
+      ],
+      "registry_json_status": "verified",
+      "toc": {
+        "file": "master_data.json",
+        "landing_page": "e369ce53118d4308e10000000a174cb4",
+        "map_root_page_id": "0a6ace53118d4308e10000000a174cb4",
+        "node_count": 81,
+        "title": "Master Data",
+        "toc_loio": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+        "toc_loio_equals_guide_id": true,
+        "unique_page_ids": 75
+      },
+      "toc_file": "master_data.json",
+      "toc_loio_equals_guide_id": true,
+      "toc_node_count": 81,
+      "verification_basis": "registry_local_evidence_only",
+      "verified": true
+    },
+    {
+      "capture_check": {
+        "captured_page_ids_declared": [
+          "147bce53118d4308e10000000a174cb4"
+        ],
+        "matching_saved_responses": [
+          "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json"
+        ],
+        "passed": true
+      },
+      "card_topic_ids": [
+        11,
+        12
+      ],
+      "corrected_topic_ids_resolving_here": [],
+      "declared_verification": "response_loio_verified",
+      "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+      "numeric_deliverable_id_declared": "40404052",
+      "reasons": [],
+      "registry_json_status": "unresolved",
+      "toc": {
+        "file": "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json",
+        "landing_page": "080cb156aad9cf4fe10000000a44147b",
+        "map_root_page_id": "0aa436eb131543bdb5126f3e21ff2925",
+        "node_count": 1006,
+        "title": "Invoicing",
+        "toc_loio": "ed84b70c199d4470ae2e5ccb93b2e45b",
+        "toc_loio_equals_guide_id": true,
+        "unique_page_ids": 988
+      },
+      "toc_file": "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json",
+      "toc_loio_equals_guide_id": true,
+      "toc_node_count": 1006,
+      "verification_basis": "registration_response_loio_verified_and_machine_checked",
+      "verified": true
+    },
+    {
+      "capture_check": {
+        "captured_page_ids_declared": [
+          "8082ce53118d4308e10000000a174cb4"
+        ],
+        "matching_saved_responses": [
+          "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+        ],
+        "passed": true
+      },
+      "card_topic_ids": [
+        2,
+        3,
+        4,
+        10,
+        29
+      ],
+      "corrected_topic_ids_resolving_here": [],
+      "declared_verification": "response_loio_verified",
+      "guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "numeric_deliverable_id_declared": "40374682",
+      "reasons": [],
+      "registry_json_status": "unresolved",
+      "toc": {
+        "file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+        "landing_page": "7182ce53118d4308e10000000a174cb4",
+        "map_root_page_id": "0a83ce53118d4308e10000000a174cb4",
+        "node_count": 233,
+        "title": "Customer Service",
+        "toc_loio": "f4a255a5de524e3992155767996fb1fd",
+        "toc_loio_equals_guide_id": true,
+        "unique_page_ids": 220
+      },
+      "toc_file": "data/toc/f4a255a5de524e3992155767996fb1fd.json",
+      "toc_loio_equals_guide_id": true,
+      "toc_node_count": 233,
+      "verification_basis": "registration_response_loio_verified_and_machine_checked",
+      "verified": true
+    }
+  ],
+  "inputs_sha256": {
+    "captured_responses/1_40374490_b1a202c9bb3011da2b24000f20dac9ef.json": "02347ba7114d855d038aceac7d509071aa48f438729584fb3ef43c65b70fa8ce",
+    "captured_responses/1_40374657_8990d0533f8e4308e10000000a174cb4.json": "c5d70f3a66f517f066c91fde745eb7efd09c3ef71dd98682079a3d520579b9c0",
+    "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json": "b579297432b2092b904570e3290922277b27d80fdb29dafb5626d27c30aa38f8",
+    "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json": "943c100f3dc33ed2d282dd92f5a3df78c19398724ec8764fa57e5fd41313daf0",
+    "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json": "587bcb7a409247515c193d1dfd409bf49de23c5071fb9efcfe40044fc91bd25f",
+    "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json": "ac3164f8c1b6cb8cbf0c67453ce5f100af67d0c05fcdd291a3b0b01b147a78a8",
+    "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json": "769ae06af51e73a9fa7858ddf0d9c59a8164a4c38ae7c8f06ced0381733137aa",
+    "data/final_corpus_manifest.json": "77ad52cce25deb7aa5b4e44169d2efd087bb864fd1ffa9185bfd92138e979dbc",
+    "data/guide_registrations.json": "fe83f7d69ab6f5ee3511d5aa4b933293e1b9ece6c92d75f45aa71c1782b92a53",
+    "data/guide_registry.json": "3ce74f9747c73f0a2cb24b0cb6c1073d71c4d2b22ff8fee00203ffd99151d01b",
+    "data/retrieval_units.json": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
+    "data/source_manifest.json": "08ad208c0187e935377c828faef36ec9fe077704cd580bb38004356f51b740b1",
+    "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json": "ff0f6c77cf09496a51cb566776633aa1c5f9aa17baf06edfbde6aaec1b6d755d",
+    "data/toc/9442486404b54071b4ebeab6a16628e7.json": "6c3da0345b96cd246ac779d7b1d6f1cbb70698d829bc63496b8d2c5453ad4112",
+    "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json": "77d48416c1bae5ff7fe804e0805e8e42bbccba2cbd27e7b8daa2dfd78f681294",
+    "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json": "dadb19b61b47a11b0188ed1283622404a07dd74eda9b6d223ed9ed74c8564bf6",
+    "data/toc/f4a255a5de524e3992155767996fb1fd.json": "70e661ebce5fdfd26c5efc2513417cd510be68bb3e53f731490116e7f69f6941",
+    "data/topic_corrections.json": "68adee37c1bf8dcaf044a070458e27b5548d72e43520406c8042e4bda5950b06",
+    "data/topic_manifest.json": "936500096311853a69c9100aca155f5fed4c352f3b2a74ec4d2fe54f78ee08f6",
+    "master_data.json": "e700a061480050b9bdcd7ea9a3a7b85a610a282400f47a5898bdd2c0a9d7e032"
+  },
+  "local_page_records_in_index": 1,
+  "local_page_validation": [
+    {
+      "checks": {
+        "identity_says_local": true,
+        "json_valid": true,
+        "path_exists": true,
+        "path_matches_ids": true,
+        "record_guide_id_equals_card_guide": true,
+        "record_guide_id_equals_effective": true,
+        "record_page_id_equals_card_page": true,
+        "record_page_id_equals_effective": true,
+        "record_topic_ids_include_card": true,
+        "status_ok": true,
+        "text_non_empty": true
+      },
+      "ok": true,
+      "record": {
+        "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+        "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+        "fetched_via": "legacy_local:sap_pages/041.json",
+        "file_sha256": "648fe4b1e28249841dc0be8442a78cd31632934c59d547306cff8a926ace9e59",
+        "page_title": "Contract Accounts",
+        "source_type": "legacy_local_copy",
+        "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+        "status": "OK",
+        "text_chars": 2683,
+        "text_sha256": "a89d267ca2bc8d9dbff49e6b02f74b7b70564665ce61146ead955a38a87c233e",
+        "topic_ids": [
+          17
+        ]
+      },
+      "source_id": "M2C-17"
+    }
+  ],
+  "local_usable_page_records_in_index": 1,
+  "rules": "data/m2c_page_identity_rules.md",
+  "schema_version": 1,
+  "stale_sources": {
+    "data/final_corpus_manifest.json": {
+      "completeness": "INCOMPLETE: 6 guide(s) unresolved (no saved TOC): 021b182b, f4a255a5, 2ac7fe29, ed84b70c, a003b275, 94424864",
+      "topic_status_counts": {
+        "RESOLVED": 1,
+        "UNRESOLVED_GUIDE": 28
+      }
+    },
+    "data/guide_registry.json": {
+      "021b182b": "unresolved",
+      "2ac7fe29": "unresolved",
+      "94424864": "unresolved",
+      "a003b275": "unresolved",
+      "e52c8ee6": "verified",
+      "ed84b70c": "unresolved",
+      "f4a255a5": "unresolved"
+    },
+    "note": "recorded as written; superseded by the registrations + saved TOCs; not silently preferred or ignored"
+  },
+  "status_counts": {
+    "card_identity_only": 3,
+    "conflicting_identity": 1,
+    "corrected_identity": 1,
+    "identified_not_local": 23,
+    "resolved_local_page": 1,
+    "unresolved": 0
+  }
+}

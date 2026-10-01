@@ -1,0 +1,6 @@
+{
+  "default_scope": "page_only",
+  "topic_scopes": {},
+  "max_depth": null,
+  "out_dir": "data/sap_help"
+}

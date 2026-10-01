@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "page_id": "fb70ce53118d4308e10000000a174cb4",
+  "file_path": "fb70ce53118d4308e10000000a174cb4.html",
+  "page_title": "Transferring Master Data Automatically (IS-U)",
+  "text_raw": "Transferring Master Data Automatically (IS-U)\nTransferring Master Data Automatically (IS-U)\nUse\nYou use this function to transfer contract account data from a legacy system to IS-U for the first time. It is available within the IS-U migration workbench.\nIntegration\nYou need the IS-U migration workbench to prepare and carry out the data transfer. To do this, go to the Customizing menu for SAP Utilities and select\nTools\nMigration\nEstablish settings for IS-U migration\n.\nPrerequisites\nYou must have transferred business partners in the IS-U migration workbench before transferring the contract accounts.\nMigration Customizing for the contract accounts must have been maintained completely.\nFeatures\nYou create the contract accounts from the legacy system’s data using direct input.",
+  "page_hash": "e525c35785f05b83c4b979a96f387f631b6222c580961c79fedcbc42b4620ba8",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/060.json",
+  "current_page": {
+    "id": 2554985200,
+    "t": "Transferring Master Data Automatically (IS-U)",
+    "u": "fb70ce53118d4308e10000000a174cb4.html",
+    "loio": "fb70ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  }
+}

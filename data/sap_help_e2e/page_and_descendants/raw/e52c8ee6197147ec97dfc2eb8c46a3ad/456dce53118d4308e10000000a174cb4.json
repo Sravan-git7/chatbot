@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "page_id": "456dce53118d4308e10000000a174cb4",
+  "file_path": "456dce53118d4308e10000000a174cb4.html",
+  "page_title": "Link Between Contract Accounts and Contracts (IS-U)",
+  "text_raw": "Link Between Contract Accounts and Contracts (IS-U)\nLink Between Contract Accounts and Contracts (IS-U)\nUse\nSeveral contracts are grouped together in a contract account. A selection of these contracts can be invoiced together. You can make sure that several of them are invoiced together using indicators in the contracts. Otherwise this remains optional, that is, contracts are only invoiced together if invoicing happens to take place at the same time.\nPrerequisites\nA contract must always be assigned to a contract account.",
+  "page_hash": "6598b925484bf7d2b823c79e73edad4a5bdc238e84db23c9723557e2a6098ac5",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/059.json",
+  "current_page": {
+    "id": 2554983887,
+    "t": "Link Between Contract Accounts and Contracts (IS-U)",
+    "u": "456dce53118d4308e10000000a174cb4.html",
+    "loio": "456dce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  }
+}

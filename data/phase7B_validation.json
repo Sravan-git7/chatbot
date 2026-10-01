@@ -1,0 +1,3398 @@
+{
+  "network_attempts": 0,
+  "ok": true,
+  "schema_version": 1,
+  "stages": {
+    "collection": {
+      "checks": [
+        {
+          "check": "store holds exactly one collection, named sap_m2c_card_v1",
+          "detail": [
+            "sap_m2c_card_v1"
+          ],
+          "ok": true
+        },
+        {
+          "check": "legacy collection sap_docs is not in this store",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "legacy chroma_db/ directory does not exist",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "collection.count() == 29",
+          "detail": 29,
+          "ok": true
+        },
+        {
+          "check": "collection distance space is cosine (hnsw:space)",
+          "detail": "cosine",
+          "ok": true
+        },
+        {
+          "check": "collection metadata: model, dimensions, units/corpus hashes match recorded artefacts",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "collection config_json == manifest.configuration",
+          "detail": {},
+          "ok": true
+        },
+        {
+          "check": "every source id appears exactly once and the id set equals the retrieval units",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "vector matrix shape is (29, 384)",
+          "detail": [
+            29,
+            384
+          ],
+          "ok": true
+        },
+        {
+          "check": "stored vectors are unit-normalised (|norm-1| < 1e-5)",
+          "detail": 1.1920928955078125e-07,
+          "ok": true
+        },
+        {
+          "check": "metadata of every vector == builder metadata_for(unit) (complete, unmodified)",
+          "detail": [],
+          "ok": true
+        },
+        {
+          "check": "every metadata record has source_url and NO legacy 'url' key",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "every stored document == the unit's embedding_text",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "model identity: origin and file hashes == recorded manifest",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "stored vectors == freshly recomputed vectors (max abs diff < 1e-06)",
+          "detail": 7.450580596923828e-09,
+          "ok": true
+        },
+        {
+          "check": "rebuilt manifest == recorded manifest (ignoring created_utc, model directory path, float32 hash)",
+          "detail": {},
+          "ok": true
+        }
+      ],
+      "note": "the float32 hash is environment dependent (Phase 4 manifest note); the tolerance check above is the reproducibility criterion",
+      "ok": true,
+      "rebuilt_manifest_float32_sha256_equals_recorded_informational": true,
+      "recomputed_embeddings_float32_sha256": "0d80d10bb4e22f9311e346fd9c01b2216a2a720b08ebbb6411909c6577aecc0a",
+      "recomputed_hash_equals_recorded_informational": true,
+      "recorded_manifest_embeddings_float32_sha256": "0d80d10bb4e22f9311e346fd9c01b2216a2a720b08ebbb6411909c6577aecc0a",
+      "stage": "collection",
+      "stored_embeddings_float32_sha256": "cc4c68efe22ce5dc2eb65b156808bd68a086745a8f6314d049ffb5ff805447c4",
+      "stored_hash_equals_recorded_informational": false,
+      "stored_vs_recomputed_max_abs_diff": 7.450580596923828e-09
+    },
+    "preflight": {
+      "checks": [
+        {
+          "check": "units file sha256 == manifest.retrieval_units_file_sha256",
+          "detail": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
+          "ok": true
+        },
+        {
+          "check": "units file sha256 == token-stats.units_file_sha256",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "units file sha256 == Phase 4 results.retrieval_units_file_sha256",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "token stats sha256 == manifest.token_stats_file_sha256",
+          "detail": "e5213166b4178f8c3d3dc8e52e7e9438abf881e0ae7564045079955e4d3b051c",
+          "ok": true
+        },
+        {
+          "check": "source corpus sha256 == manifest.source_corpus_file_sha256",
+          "detail": "0ee5cb8bda192250a14acdde95617e15b71f6fd803847fe25bae9999ea7e9e76",
+          "ok": true
+        },
+        {
+          "check": "source corpus sha256 == units payload source_corpus.file_sha256",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "source corpus content fingerprint == manifest",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "manifest sha256 == Phase 4 results.collection_manifest_sha256",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "Phase 4 questions sha256 == Phase 4 results.questions_file_sha256",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "29 retrieval units with unique ids",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "source_id == retrieval_unit_id for every unit",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "token statistics: PASS (no embedding_text over the model limit)",
+          "detail": 256,
+          "ok": true
+        },
+        {
+          "check": "token stats max_seq_length == manifest max_seq_length",
+          "detail": 256,
+          "ok": true
+        },
+        {
+          "check": "manifest: vector_count 29, dimensions 384",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "manifest configuration: cosine, normalised, embedding_text, whole_document, batch 16",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "builder constants == manifest (collection, space, model, batch)",
+          "detail": [
+            "sap_m2c_card_v1",
+            "cosine",
+            "all-MiniLM-L6-v2",
+            16
+          ],
+          "ok": true
+        },
+        {
+          "check": "builder metadata schema keys == keys in stored-metadata contract (17)",
+          "detail": [
+            "category",
+            "citation",
+            "corpus_document",
+            "embedding_text_sha256",
+            "filename",
+            "full_text_sha256",
+            "has_source_correction",
+            "page_end",
+            "page_start",
+            "retrieval_unit_id",
+            "sha256",
+            "source_id",
+            "source_number",
+            "source_status",
+            "source_url",
+            "source_url_status",
+            "title"
+          ],
+          "ok": true
+        },
+        {
+          "check": "local model origin == manifest provenance origin",
+          "detail": "pip package gt-all-minilm-l6-v2 (third-party re-packaging of sentence-transformers/all-MiniLM-L6-v2)",
+          "ok": true
+        },
+        {
+          "check": "local model files sha256 == manifest provenance files_sha256",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "chromadb version == manifest.configuration.chromadb",
+          "detail": "1.5.9",
+          "ok": true
+        },
+        {
+          "check": "model max_seq_length == manifest max_seq_length",
+          "detail": 256,
+          "ok": true
+        },
+        {
+          "check": "model dimension == 384",
+          "detail": 384,
+          "ok": true
+        },
+        {
+          "check": "legacy chroma_db/ directory does not exist (and is not created by this stage)",
+          "detail": null,
+          "ok": true
+        }
+      ],
+      "ok": true,
+      "stage": "preflight"
+    },
+    "router": {
+      "checks": [
+        {
+          "check": "phase4: query text of recorded rows matches the query files",
+          "detail": 50,
+          "ok": true
+        },
+        {
+          "check": "phase5: query text of recorded rows matches the query files",
+          "detail": 54,
+          "ok": true
+        },
+        {
+          "check": "phase4: router top-1 == recorded top-1 for all 50 queries",
+          "detail": "50/50",
+          "ok": true
+        },
+        {
+          "check": "phase4: router top-5 ordering == recorded top-5 for all 50 queries",
+          "detail": "50/50",
+          "ok": true
+        },
+        {
+          "check": "phase4: router first-expected-rank == recorded for all 50 queries",
+          "detail": "50/50",
+          "ok": true
+        },
+        {
+          "check": "phase4: router similarities (1 - distance, 4 dp) == recorded similarities",
+          "detail": 0,
+          "ok": true
+        },
+        {
+          "check": "phase5: router top-1 == recorded top-1 for all 54 queries",
+          "detail": "54/54",
+          "ok": true
+        },
+        {
+          "check": "phase5: router top-5 ordering == recorded top-5 for all 54 queries",
+          "detail": "54/54",
+          "ok": true
+        },
+        {
+          "check": "phase5: router first-expected-rank == recorded for all 54 queries",
+          "detail": "54/54",
+          "ok": true
+        },
+        {
+          "check": "phase5: router similarities (1 - distance, 4 dp) == recorded similarities",
+          "detail": 0,
+          "ok": true
+        },
+        {
+          "check": "Phase 4 recorded metrics reproduced from router output",
+          "detail": {
+            "mrr": 0.95,
+            "questions": 50,
+            "recall@1": 0.92,
+            "recall@3": 0.96,
+            "recall@5": 1.0
+          },
+          "ok": true
+        },
+        {
+          "check": "Phase 5 dense recorded metrics reproduced from router output",
+          "detail": {
+            "recorded": {
+              "mrr": 0.7873,
+              "recall@1": 0.7222,
+              "recall@3": 0.7963,
+              "recall@5": 0.8704
+            },
+            "router": {
+              "mrr": 0.7873,
+              "questions": 54,
+              "recall@1": 0.7222,
+              "recall@3": 0.7963,
+              "recall@5": 0.8704
+            }
+          },
+          "ok": true
+        },
+        {
+          "check": "distances are ascending for every query (rank 1 = lowest distance)",
+          "detail": 0,
+          "ok": true
+        },
+        {
+          "check": "router distance == independent cosine distance 1 - q.d (stored vectors, batch-encoded queries), max abs diff < 1e-6",
+          "detail": 5.960464477539062e-07,
+          "ok": true
+        },
+        {
+          "check": "router ranking (all 29) == independent ranking for every query",
+          "detail": 0,
+          "ok": true
+        },
+        {
+          "check": "no gate: all 29 cards returned for every query, including cards beyond the legacy-equivalent cosine 0.5",
+          "detail": {
+            "candidates_beyond_cos_0.5": 2921,
+            "min_returned": 29
+          },
+          "ok": true
+        },
+        {
+          "check": "distances lie in the cosine-distance range [0, 2]",
+          "detail": [
+            0.2751319408416748,
+            1.1404635906219482
+          ],
+          "ok": true
+        },
+        {
+          "check": "all 29 cards: router preserves source_id, title, category, source_url, source_status, source_url_status, has_source_correction, citation (+ provenance), rank, distance",
+          "detail": [],
+          "ok": true
+        },
+        {
+          "check": "known source issues M2C-05/14/18/23 remain visible through the router (status/correction equal to the units, none 'clean')",
+          "detail": {
+            "M2C-05": {
+              "has_source_correction": true,
+              "has_source_correction_in_unit": true,
+              "source_status": "verified",
+              "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+              "source_url_status": "ok",
+              "unit_review_reasons": []
+            },
+            "M2C-14": {
+              "has_source_correction": false,
+              "has_source_correction_in_unit": false,
+              "source_status": "needs_review",
+              "source_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+              "source_url_status": "needs_review",
+              "unit_review_reasons": [
+                "URL: product segment 'sap_s4hana_on-premise' differs from 'SAP_S4HANA_ON-PREMISE' used by the other cards"
+              ]
+            },
+            "M2C-18": {
+              "has_source_correction": false,
+              "has_source_correction_in_unit": false,
+              "source_status": "needs_review",
+              "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+              "source_url_status": "needs_review",
+              "unit_review_reasons": [
+                "URL: query string '?version=2025.001' present (not on most cards; version pin to be confirmed)"
+              ]
+            },
+            "M2C-23": {
+              "has_source_correction": false,
+              "has_source_correction_in_unit": false,
+              "source_status": "needs_review",
+              "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+              "source_url_status": "needs_review",
+              "unit_review_reasons": [
+                "URL: query string '?version=2025.001' present (not on most cards; version pin to be confirmed)"
+              ]
+            }
+          },
+          "ok": true
+        },
+        {
+          "check": "join: every card classified as the independently derived expectation (page record with status OK + text, else url_only)",
+          "detail": {
+            "resolved_page": 1,
+            "url_only": 28
+          },
+          "ok": true
+        },
+        {
+          "check": "join: URL-only cards have local_page_content == False",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "join: no card is unresolved (all 29 have a parseable SAP Help URL)",
+          "detail": {
+            "resolved_page": 1,
+            "url_only": 28
+          },
+          "ok": true
+        },
+        {
+          "check": "orchestrator scenarios: 1, 2, 3 (x4), 4 (x3), 5 (x2) all available on the real collection",
+          "detail": [],
+          "ok": true
+        },
+        {
+          "check": "orchestrator: scenario 1 is resolved_page; scenario 2 is url_only with page_content_available False",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "orchestrator: empty query and selector-rejected -> no_card_candidate with explicit fallback reasons",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "orchestrator: 'unresolved' cannot be produced by the real cards (all 29 have a parseable URL); covered by Phase 7A unit tests",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "store content (ids, metadata, documents, vectors) identical before and after the router stage",
+          "detail": null,
+          "ok": true
+        },
+        {
+          "check": "no LLM client, legacy retriever module, HTTP client or resolver was imported",
+          "detail": [],
+          "ok": true
+        },
+        {
+          "check": "no network connection was attempted during the stage",
+          "detail": [],
+          "ok": true
+        },
+        {
+          "check": "legacy chroma_db/ directory does not exist",
+          "detail": null,
+          "ok": true
+        }
+      ],
+      "datasets": {
+        "phase4": {
+          "differing_queries": [],
+          "first_expected_rank_identical_to_recorded": 50,
+          "max_abs_diff_similarity_vs_recorded": 4.999e-05,
+          "metrics_from_router": {
+            "mrr": 0.95,
+            "questions": 50,
+            "recall@1": 0.92,
+            "recall@3": 0.96,
+            "recall@5": 1.0
+          },
+          "per_query": [
+            {
+              "first_expected_rank": 1,
+              "id": "Q01",
+              "top1": "M2C-03",
+              "top1_distance": 0.522093,
+              "top5": [
+                "M2C-03",
+                "M2C-04",
+                "M2C-10",
+                "M2C-02",
+                "M2C-15"
+              ],
+              "top5_distances": [
+                0.522093,
+                0.600295,
+                0.706924,
+                0.775839,
+                0.852108
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q02",
+              "top1": "M2C-04",
+              "top1_distance": 0.508565,
+              "top5": [
+                "M2C-04",
+                "M2C-03",
+                "M2C-02",
+                "M2C-10",
+                "M2C-29"
+              ],
+              "top5_distances": [
+                0.508565,
+                0.585171,
+                0.706125,
+                0.742746,
+                0.748377
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q03",
+              "top1": "M2C-12",
+              "top1_distance": 0.490851,
+              "top5": [
+                "M2C-12",
+                "M2C-13",
+                "M2C-11",
+                "M2C-16",
+                "M2C-15"
+              ],
+              "top5_distances": [
+                0.490851,
+                0.621239,
+                0.632819,
+                0.64733,
+                0.651865
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q04",
+              "top1": "M2C-13",
+              "top1_distance": 0.432503,
+              "top5": [
+                "M2C-13",
+                "M2C-15",
+                "M2C-11",
+                "M2C-23",
+                "M2C-25"
+              ],
+              "top5_distances": [
+                0.432503,
+                0.499398,
+                0.568313,
+                0.611142,
+                0.631491
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q05",
+              "top1": "M2C-21",
+              "top1_distance": 0.501225,
+              "top5": [
+                "M2C-21",
+                "M2C-20",
+                "M2C-19",
+                "M2C-27",
+                "M2C-26"
+              ],
+              "top5_distances": [
+                0.501225,
+                0.651798,
+                0.758522,
+                0.811638,
+                0.813693
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q06",
+              "top1": "M2C-26",
+              "top1_distance": 0.625122,
+              "top5": [
+                "M2C-26",
+                "M2C-18",
+                "M2C-28",
+                "M2C-22",
+                "M2C-17"
+              ],
+              "top5_distances": [
+                0.625122,
+                0.736909,
+                0.742828,
+                0.793914,
+                0.798895
+              ]
+            },
+            {
+              "first_expected_rank": 2,
+              "id": "Q07",
+              "top1": "M2C-24",
+              "top1_distance": 0.367708,
+              "top5": [
+                "M2C-24",
+                "M2C-23",
+                "M2C-25",
+                "M2C-13",
+                "M2C-15"
+              ],
+              "top5_distances": [
+                0.367708,
+                0.370072,
+                0.435278,
+                0.622934,
+                0.629739
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q08",
+              "top1": "M2C-28",
+              "top1_distance": 0.389711,
+              "top5": [
+                "M2C-28",
+                "M2C-27",
+                "M2C-17",
+                "M2C-26",
+                "M2C-16"
+              ],
+              "top5_distances": [
+                0.389711,
+                0.479885,
+                0.618293,
+                0.624349,
+                0.624537
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q09",
+              "top1": "M2C-06",
+              "top1_distance": 0.509166,
+              "top5": [
+                "M2C-06",
+                "M2C-08",
+                "M2C-07",
+                "M2C-10",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.509166,
+                0.549558,
+                0.572809,
+                0.622839,
+                0.664171
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q10",
+              "top1": "M2C-17",
+              "top1_distance": 0.403663,
+              "top5": [
+                "M2C-17",
+                "M2C-18",
+                "M2C-24",
+                "M2C-23",
+                "M2C-11"
+              ],
+              "top5_distances": [
+                0.403663,
+                0.417553,
+                0.621332,
+                0.638782,
+                0.640849
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q11",
+              "top1": "M2C-29",
+              "top1_distance": 0.375402,
+              "top5": [
+                "M2C-29",
+                "M2C-03",
+                "M2C-02",
+                "M2C-04",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.375402,
+                0.745995,
+                0.775226,
+                0.77671,
+                0.820659
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q12",
+              "top1": "M2C-14",
+              "top1_distance": 0.278301,
+              "top5": [
+                "M2C-14",
+                "M2C-11",
+                "M2C-15",
+                "M2C-17",
+                "M2C-16"
+              ],
+              "top5_distances": [
+                0.278301,
+                0.469391,
+                0.471081,
+                0.492924,
+                0.494125
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q13",
+              "top1": "M2C-08",
+              "top1_distance": 0.311228,
+              "top5": [
+                "M2C-08",
+                "M2C-07",
+                "M2C-06",
+                "M2C-10",
+                "M2C-09"
+              ],
+              "top5_distances": [
+                0.311228,
+                0.552956,
+                0.556445,
+                0.584345,
+                0.594678
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q14",
+              "top1": "M2C-20",
+              "top1_distance": 0.425496,
+              "top5": [
+                "M2C-20",
+                "M2C-19",
+                "M2C-11",
+                "M2C-22",
+                "M2C-15"
+              ],
+              "top5_distances": [
+                0.425496,
+                0.621384,
+                0.639372,
+                0.643203,
+                0.660303
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q15",
+              "top1": "M2C-27",
+              "top1_distance": 0.312226,
+              "top5": [
+                "M2C-27",
+                "M2C-26",
+                "M2C-28",
+                "M2C-19",
+                "M2C-23"
+              ],
+              "top5_distances": [
+                0.312226,
+                0.549963,
+                0.556473,
+                0.618167,
+                0.630384
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q16",
+              "top1": "M2C-23",
+              "top1_distance": 0.45644,
+              "top5": [
+                "M2C-23",
+                "M2C-27",
+                "M2C-24",
+                "M2C-25",
+                "M2C-22"
+              ],
+              "top5_distances": [
+                0.45644,
+                0.473776,
+                0.631883,
+                0.63709,
+                0.66056
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q17",
+              "top1": "M2C-29",
+              "top1_distance": 0.512475,
+              "top5": [
+                "M2C-29",
+                "M2C-27",
+                "M2C-02",
+                "M2C-04",
+                "M2C-16"
+              ],
+              "top5_distances": [
+                0.512475,
+                0.686149,
+                0.708286,
+                0.712991,
+                0.73212
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q18",
+              "top1": "M2C-22",
+              "top1_distance": 0.275132,
+              "top5": [
+                "M2C-22",
+                "M2C-20",
+                "M2C-28",
+                "M2C-19",
+                "M2C-14"
+              ],
+              "top5_distances": [
+                0.275132,
+                0.524099,
+                0.572761,
+                0.596364,
+                0.596908
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q19",
+              "top1": "M2C-01",
+              "top1_distance": 0.488306,
+              "top5": [
+                "M2C-01",
+                "M2C-17",
+                "M2C-18",
+                "M2C-05",
+                "M2C-28"
+              ],
+              "top5_distances": [
+                0.488306,
+                0.541117,
+                0.54824,
+                0.588763,
+                0.594941
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q20",
+              "top1": "M2C-03",
+              "top1_distance": 0.471318,
+              "top5": [
+                "M2C-03",
+                "M2C-02",
+                "M2C-29",
+                "M2C-01",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.471318,
+                0.585751,
+                0.593377,
+                0.659644,
+                0.665042
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q21",
+              "top1": "M2C-04",
+              "top1_distance": 0.421083,
+              "top5": [
+                "M2C-04",
+                "M2C-03",
+                "M2C-02",
+                "M2C-29",
+                "M2C-15"
+              ],
+              "top5_distances": [
+                0.421083,
+                0.551795,
+                0.573027,
+                0.593106,
+                0.67053
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q22",
+              "top1": "M2C-08",
+              "top1_distance": 0.497286,
+              "top5": [
+                "M2C-08",
+                "M2C-13",
+                "M2C-15",
+                "M2C-09",
+                "M2C-26"
+              ],
+              "top5_distances": [
+                0.497286,
+                0.517002,
+                0.55311,
+                0.554401,
+                0.577384
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q23",
+              "top1": "M2C-14",
+              "top1_distance": 0.321666,
+              "top5": [
+                "M2C-14",
+                "M2C-15",
+                "M2C-16",
+                "M2C-11",
+                "M2C-17"
+              ],
+              "top5_distances": [
+                0.321666,
+                0.503195,
+                0.511759,
+                0.511768,
+                0.514971
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q24",
+              "top1": "M2C-20",
+              "top1_distance": 0.355115,
+              "top5": [
+                "M2C-20",
+                "M2C-19",
+                "M2C-21",
+                "M2C-27",
+                "M2C-22"
+              ],
+              "top5_distances": [
+                0.355115,
+                0.513509,
+                0.531679,
+                0.557147,
+                0.599794
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q25",
+              "top1": "M2C-26",
+              "top1_distance": 0.379422,
+              "top5": [
+                "M2C-26",
+                "M2C-27",
+                "M2C-28",
+                "M2C-13",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.379422,
+                0.388074,
+                0.433074,
+                0.466817,
+                0.485502
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q26",
+              "top1": "M2C-13",
+              "top1_distance": 0.439216,
+              "top5": [
+                "M2C-13",
+                "M2C-15",
+                "M2C-16",
+                "M2C-11",
+                "M2C-25"
+              ],
+              "top5_distances": [
+                0.439216,
+                0.562329,
+                0.605917,
+                0.636693,
+                0.656276
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q27",
+              "top1": "M2C-29",
+              "top1_distance": 0.607052,
+              "top5": [
+                "M2C-29",
+                "M2C-04",
+                "M2C-24",
+                "M2C-21",
+                "M2C-23"
+              ],
+              "top5_distances": [
+                0.607052,
+                0.787331,
+                0.807731,
+                0.824616,
+                0.833547
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q28",
+              "top1": "M2C-28",
+              "top1_distance": 0.457726,
+              "top5": [
+                "M2C-28",
+                "M2C-02",
+                "M2C-01",
+                "M2C-16",
+                "M2C-03"
+              ],
+              "top5_distances": [
+                0.457726,
+                0.62042,
+                0.636575,
+                0.637112,
+                0.64113
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q29",
+              "top1": "M2C-21",
+              "top1_distance": 0.410169,
+              "top5": [
+                "M2C-21",
+                "M2C-19",
+                "M2C-13",
+                "M2C-20",
+                "M2C-17"
+              ],
+              "top5_distances": [
+                0.410169,
+                0.481318,
+                0.498154,
+                0.5041,
+                0.52705
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q30",
+              "top1": "M2C-16",
+              "top1_distance": 0.323748,
+              "top5": [
+                "M2C-16",
+                "M2C-07",
+                "M2C-15",
+                "M2C-14",
+                "M2C-02"
+              ],
+              "top5_distances": [
+                0.323748,
+                0.500184,
+                0.504211,
+                0.539198,
+                0.562641
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q31",
+              "top1": "M2C-07",
+              "top1_distance": 0.321545,
+              "top5": [
+                "M2C-07",
+                "M2C-06",
+                "M2C-08",
+                "M2C-05",
+                "M2C-09"
+              ],
+              "top5_distances": [
+                0.321545,
+                0.393336,
+                0.457481,
+                0.519878,
+                0.542944
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q32",
+              "top1": "M2C-29",
+              "top1_distance": 0.495188,
+              "top5": [
+                "M2C-29",
+                "M2C-04",
+                "M2C-02",
+                "M2C-22",
+                "M2C-25"
+              ],
+              "top5_distances": [
+                0.495188,
+                0.716979,
+                0.744405,
+                0.749912,
+                0.75557
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q33",
+              "top1": "M2C-26",
+              "top1_distance": 0.565766,
+              "top5": [
+                "M2C-26",
+                "M2C-27",
+                "M2C-28",
+                "M2C-13",
+                "M2C-17"
+              ],
+              "top5_distances": [
+                0.565766,
+                0.646004,
+                0.669943,
+                0.770525,
+                0.776537
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q34",
+              "top1": "M2C-23",
+              "top1_distance": 0.522028,
+              "top5": [
+                "M2C-23",
+                "M2C-24",
+                "M2C-25",
+                "M2C-13",
+                "M2C-12"
+              ],
+              "top5_distances": [
+                0.522028,
+                0.526003,
+                0.596765,
+                0.678252,
+                0.701503
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q35",
+              "top1": "M2C-21",
+              "top1_distance": 0.507525,
+              "top5": [
+                "M2C-21",
+                "M2C-20",
+                "M2C-19",
+                "M2C-24",
+                "M2C-22"
+              ],
+              "top5_distances": [
+                0.507525,
+                0.507671,
+                0.563699,
+                0.617498,
+                0.65345
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q36",
+              "top1": "M2C-09",
+              "top1_distance": 0.755706,
+              "top5": [
+                "M2C-09",
+                "M2C-08",
+                "M2C-10",
+                "M2C-15",
+                "M2C-11"
+              ],
+              "top5_distances": [
+                0.755706,
+                0.874577,
+                0.906021,
+                0.937176,
+                0.943118
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q37",
+              "top1": "M2C-12",
+              "top1_distance": 0.63556,
+              "top5": [
+                "M2C-12",
+                "M2C-24",
+                "M2C-11",
+                "M2C-01",
+                "M2C-03"
+              ],
+              "top5_distances": [
+                0.63556,
+                0.656998,
+                0.670875,
+                0.709322,
+                0.714723
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q38",
+              "top1": "M2C-26",
+              "top1_distance": 0.46833,
+              "top5": [
+                "M2C-26",
+                "M2C-27",
+                "M2C-08",
+                "M2C-20",
+                "M2C-07"
+              ],
+              "top5_distances": [
+                0.46833,
+                0.590893,
+                0.708686,
+                0.73666,
+                0.741504
+              ]
+            },
+            {
+              "first_expected_rank": 4,
+              "id": "Q39",
+              "top1": "M2C-20",
+              "top1_distance": 0.616127,
+              "top5": [
+                "M2C-20",
+                "M2C-23",
+                "M2C-24",
+                "M2C-19",
+                "M2C-13"
+              ],
+              "top5_distances": [
+                0.616127,
+                0.617305,
+                0.628715,
+                0.653636,
+                0.676803
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q40",
+              "top1": "M2C-07",
+              "top1_distance": 0.339765,
+              "top5": [
+                "M2C-07",
+                "M2C-06",
+                "M2C-10",
+                "M2C-08",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.339765,
+                0.423841,
+                0.448046,
+                0.486442,
+                0.501941
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q41",
+              "top1": "M2C-05",
+              "top1_distance": 0.727757,
+              "top5": [
+                "M2C-05",
+                "M2C-01",
+                "M2C-03",
+                "M2C-24",
+                "M2C-02"
+              ],
+              "top5_distances": [
+                0.727757,
+                0.755764,
+                0.794522,
+                0.846936,
+                0.847314
+              ]
+            },
+            {
+              "first_expected_rank": 4,
+              "id": "Q42",
+              "top1": "M2C-15",
+              "top1_distance": 0.751598,
+              "top5": [
+                "M2C-15",
+                "M2C-03",
+                "M2C-04",
+                "M2C-17",
+                "M2C-27"
+              ],
+              "top5_distances": [
+                0.751598,
+                0.758579,
+                0.762772,
+                0.772174,
+                0.772428
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q43",
+              "top1": "M2C-18",
+              "top1_distance": 0.452973,
+              "top5": [
+                "M2C-18",
+                "M2C-17",
+                "M2C-20",
+                "M2C-24",
+                "M2C-27"
+              ],
+              "top5_distances": [
+                0.452973,
+                0.516784,
+                0.62022,
+                0.652636,
+                0.665631
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q44",
+              "top1": "M2C-10",
+              "top1_distance": 0.324938,
+              "top5": [
+                "M2C-10",
+                "M2C-06",
+                "M2C-03",
+                "M2C-08",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.324938,
+                0.515111,
+                0.531553,
+                0.536453,
+                0.543967
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q45",
+              "top1": "M2C-15",
+              "top1_distance": 0.336941,
+              "top5": [
+                "M2C-15",
+                "M2C-14",
+                "M2C-13",
+                "M2C-16",
+                "M2C-11"
+              ],
+              "top5_distances": [
+                0.336941,
+                0.488164,
+                0.499142,
+                0.549024,
+                0.561196
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q46",
+              "top1": "M2C-08",
+              "top1_distance": 0.42839,
+              "top5": [
+                "M2C-08",
+                "M2C-09",
+                "M2C-06",
+                "M2C-10",
+                "M2C-07"
+              ],
+              "top5_distances": [
+                0.42839,
+                0.472534,
+                0.568509,
+                0.588344,
+                0.596433
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q47",
+              "top1": "M2C-02",
+              "top1_distance": 0.438853,
+              "top5": [
+                "M2C-02",
+                "M2C-03",
+                "M2C-04",
+                "M2C-29",
+                "M2C-16"
+              ],
+              "top5_distances": [
+                0.438853,
+                0.528182,
+                0.557734,
+                0.572684,
+                0.640163
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q48",
+              "top1": "M2C-24",
+              "top1_distance": 0.392241,
+              "top5": [
+                "M2C-24",
+                "M2C-23",
+                "M2C-25",
+                "M2C-15",
+                "M2C-13"
+              ],
+              "top5_distances": [
+                0.392241,
+                0.411317,
+                0.490765,
+                0.646299,
+                0.691585
+              ]
+            },
+            {
+              "first_expected_rank": 2,
+              "id": "Q49",
+              "top1": "M2C-02",
+              "top1_distance": 0.558474,
+              "top5": [
+                "M2C-02",
+                "M2C-04",
+                "M2C-03",
+                "M2C-29",
+                "M2C-13"
+              ],
+              "top5_distances": [
+                0.558474,
+                0.566459,
+                0.620607,
+                0.65001,
+                0.669736
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "Q50",
+              "top1": "M2C-27",
+              "top1_distance": 0.42433,
+              "top5": [
+                "M2C-27",
+                "M2C-23",
+                "M2C-28",
+                "M2C-29",
+                "M2C-17"
+              ],
+              "top5_distances": [
+                0.42433,
+                0.671648,
+                0.67484,
+                0.700425,
+                0.719906
+              ]
+            }
+          ],
+          "queries": 50,
+          "recorded_similarity_mismatches_after_4dp_rounding": 0,
+          "top1_identical_to_recorded": 50,
+          "top5_ordering_identical_to_recorded": 50
+        },
+        "phase5": {
+          "differing_queries": [],
+          "first_expected_rank_identical_to_recorded": 54,
+          "max_abs_diff_similarity_vs_recorded": 4.932e-05,
+          "metrics_from_router": {
+            "mrr": 0.7873,
+            "questions": 54,
+            "recall@1": 0.7222,
+            "recall@3": 0.7963,
+            "recall@5": 0.8704
+          },
+          "per_query": [
+            {
+              "first_expected_rank": 9,
+              "id": "P5-01",
+              "top1": "M2C-05",
+              "top1_distance": 0.556925,
+              "top5": [
+                "M2C-05",
+                "M2C-06",
+                "M2C-02",
+                "M2C-10",
+                "M2C-07"
+              ],
+              "top5_distances": [
+                0.556925,
+                0.562572,
+                0.567325,
+                0.576461,
+                0.593503
+              ]
+            },
+            {
+              "first_expected_rank": 2,
+              "id": "P5-02",
+              "top1": "M2C-29",
+              "top1_distance": 0.643821,
+              "top5": [
+                "M2C-29",
+                "M2C-03",
+                "M2C-02",
+                "M2C-04",
+                "M2C-25"
+              ],
+              "top5_distances": [
+                0.643821,
+                0.72112,
+                0.757335,
+                0.780279,
+                0.824937
+              ]
+            },
+            {
+              "first_expected_rank": 8,
+              "id": "P5-03",
+              "top1": "M2C-08",
+              "top1_distance": 0.496928,
+              "top5": [
+                "M2C-08",
+                "M2C-10",
+                "M2C-06",
+                "M2C-02",
+                "M2C-29"
+              ],
+              "top5_distances": [
+                0.496928,
+                0.521598,
+                0.556008,
+                0.574066,
+                0.587115
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-04",
+              "top1": "M2C-08",
+              "top1_distance": 0.457081,
+              "top5": [
+                "M2C-08",
+                "M2C-09",
+                "M2C-13",
+                "M2C-11",
+                "M2C-06"
+              ],
+              "top5_distances": [
+                0.457081,
+                0.614658,
+                0.63718,
+                0.643456,
+                0.668118
+              ]
+            },
+            {
+              "first_expected_rank": 13,
+              "id": "P5-05",
+              "top1": "M2C-16",
+              "top1_distance": 0.783033,
+              "top5": [
+                "M2C-16",
+                "M2C-22",
+                "M2C-13",
+                "M2C-08",
+                "M2C-27"
+              ],
+              "top5_distances": [
+                0.783033,
+                0.801284,
+                0.803057,
+                0.804974,
+                0.825441
+              ]
+            },
+            {
+              "first_expected_rank": 2,
+              "id": "P5-06",
+              "top1": "M2C-20",
+              "top1_distance": 0.758332,
+              "top5": [
+                "M2C-20",
+                "M2C-23",
+                "M2C-13",
+                "M2C-25",
+                "M2C-22"
+              ],
+              "top5_distances": [
+                0.758332,
+                0.759598,
+                0.780079,
+                0.785501,
+                0.798977
+              ]
+            },
+            {
+              "first_expected_rank": 7,
+              "id": "P5-07",
+              "top1": "M2C-22",
+              "top1_distance": 0.688775,
+              "top5": [
+                "M2C-22",
+                "M2C-27",
+                "M2C-14",
+                "M2C-11",
+                "M2C-23"
+              ],
+              "top5_distances": [
+                0.688775,
+                0.691979,
+                0.697896,
+                0.702794,
+                0.706638
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-08",
+              "top1": "M2C-29",
+              "top1_distance": 0.64606,
+              "top5": [
+                "M2C-29",
+                "M2C-02",
+                "M2C-03",
+                "M2C-13",
+                "M2C-22"
+              ],
+              "top5_distances": [
+                0.64606,
+                0.73473,
+                0.738235,
+                0.753298,
+                0.755402
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-09",
+              "top1": "M2C-14",
+              "top1_distance": 0.454451,
+              "top5": [
+                "M2C-14",
+                "M2C-15",
+                "M2C-16",
+                "M2C-11",
+                "M2C-13"
+              ],
+              "top5_distances": [
+                0.454451,
+                0.490449,
+                0.518091,
+                0.590817,
+                0.614467
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-10",
+              "top1": "M2C-07",
+              "top1_distance": 0.53222,
+              "top5": [
+                "M2C-07",
+                "M2C-06",
+                "M2C-08",
+                "M2C-10",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.53222,
+                0.542243,
+                0.555227,
+                0.62229,
+                0.68637
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-11",
+              "top1": "M2C-27",
+              "top1_distance": 0.696792,
+              "top5": [
+                "M2C-27",
+                "M2C-28",
+                "M2C-22",
+                "M2C-17",
+                "M2C-18"
+              ],
+              "top5_distances": [
+                0.696792,
+                0.728795,
+                0.733524,
+                0.753576,
+                0.754908
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-12",
+              "top1": "M2C-28",
+              "top1_distance": 0.546776,
+              "top5": [
+                "M2C-28",
+                "M2C-27",
+                "M2C-03",
+                "M2C-22",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.546776,
+                0.586396,
+                0.643973,
+                0.675334,
+                0.688329
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-13",
+              "top1": "M2C-18",
+              "top1_distance": 0.482479,
+              "top5": [
+                "M2C-18",
+                "M2C-17",
+                "M2C-11",
+                "M2C-12",
+                "M2C-13"
+              ],
+              "top5_distances": [
+                0.482479,
+                0.521522,
+                0.527214,
+                0.546187,
+                0.560808
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-14",
+              "top1": "M2C-13",
+              "top1_distance": 0.575791,
+              "top5": [
+                "M2C-13",
+                "M2C-15",
+                "M2C-12",
+                "M2C-24",
+                "M2C-16"
+              ],
+              "top5_distances": [
+                0.575791,
+                0.637626,
+                0.675898,
+                0.682537,
+                0.684989
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-15",
+              "top1": "M2C-13",
+              "top1_distance": 0.42596,
+              "top5": [
+                "M2C-13",
+                "M2C-15",
+                "M2C-11",
+                "M2C-12",
+                "M2C-16"
+              ],
+              "top5_distances": [
+                0.42596,
+                0.495783,
+                0.557914,
+                0.596211,
+                0.654165
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-16",
+              "top1": "M2C-09",
+              "top1_distance": 0.762129,
+              "top5": [
+                "M2C-09",
+                "M2C-08",
+                "M2C-10",
+                "M2C-11",
+                "M2C-13"
+              ],
+              "top5_distances": [
+                0.762129,
+                0.862309,
+                0.923269,
+                0.929867,
+                0.960277
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-17",
+              "top1": "M2C-20",
+              "top1_distance": 0.784108,
+              "top5": [
+                "M2C-20",
+                "M2C-27",
+                "M2C-03",
+                "M2C-10",
+                "M2C-26"
+              ],
+              "top5_distances": [
+                0.784108,
+                0.93481,
+                0.961787,
+                0.961881,
+                0.966682
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-18",
+              "top1": "M2C-22",
+              "top1_distance": 0.649564,
+              "top5": [
+                "M2C-22",
+                "M2C-13",
+                "M2C-21",
+                "M2C-26",
+                "M2C-27"
+              ],
+              "top5_distances": [
+                0.649564,
+                0.780889,
+                0.78192,
+                0.782408,
+                0.794217
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-19",
+              "top1": "M2C-26",
+              "top1_distance": 0.770422,
+              "top5": [
+                "M2C-26",
+                "M2C-08",
+                "M2C-27",
+                "M2C-28",
+                "M2C-29"
+              ],
+              "top5_distances": [
+                0.770422,
+                0.918647,
+                0.923705,
+                0.924941,
+                0.939034
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-20",
+              "top1": "M2C-08",
+              "top1_distance": 0.467196,
+              "top5": [
+                "M2C-08",
+                "M2C-09",
+                "M2C-06",
+                "M2C-07",
+                "M2C-10"
+              ],
+              "top5_distances": [
+                0.467196,
+                0.537158,
+                0.605209,
+                0.617297,
+                0.656525
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-21",
+              "top1": "M2C-11",
+              "top1_distance": 0.45332,
+              "top5": [
+                "M2C-11",
+                "M2C-12",
+                "M2C-14",
+                "M2C-13",
+                "M2C-16"
+              ],
+              "top5_distances": [
+                0.45332,
+                0.482837,
+                0.537544,
+                0.541606,
+                0.57329
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-22",
+              "top1": "M2C-25",
+              "top1_distance": 0.399271,
+              "top5": [
+                "M2C-25",
+                "M2C-23",
+                "M2C-24",
+                "M2C-13",
+                "M2C-15"
+              ],
+              "top5_distances": [
+                0.399271,
+                0.452942,
+                0.47139,
+                0.630721,
+                0.679901
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-23",
+              "top1": "M2C-29",
+              "top1_distance": 0.786715,
+              "top5": [
+                "M2C-29",
+                "M2C-04",
+                "M2C-03",
+                "M2C-21",
+                "M2C-27"
+              ],
+              "top5_distances": [
+                0.786715,
+                0.845724,
+                0.905549,
+                0.917058,
+                0.924187
+              ]
+            },
+            {
+              "first_expected_rank": 5,
+              "id": "P5-24",
+              "top1": "M2C-29",
+              "top1_distance": 0.86948,
+              "top5": [
+                "M2C-29",
+                "M2C-04",
+                "M2C-25",
+                "M2C-03",
+                "M2C-22"
+              ],
+              "top5_distances": [
+                0.86948,
+                0.874677,
+                0.916117,
+                0.916318,
+                0.91723
+              ]
+            },
+            {
+              "first_expected_rank": 2,
+              "id": "P5-25",
+              "top1": "M2C-08",
+              "top1_distance": 0.793205,
+              "top5": [
+                "M2C-08",
+                "M2C-16",
+                "M2C-10",
+                "M2C-06",
+                "M2C-07"
+              ],
+              "top5_distances": [
+                0.793205,
+                0.805958,
+                0.811865,
+                0.815248,
+                0.817959
+              ]
+            },
+            {
+              "first_expected_rank": 5,
+              "id": "P5-26",
+              "top1": "M2C-18",
+              "top1_distance": 0.547934,
+              "top5": [
+                "M2C-18",
+                "M2C-28",
+                "M2C-17",
+                "M2C-26",
+                "M2C-14"
+              ],
+              "top5_distances": [
+                0.547934,
+                0.584995,
+                0.614163,
+                0.622842,
+                0.632247
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-27",
+              "top1": "M2C-03",
+              "top1_distance": 0.583896,
+              "top5": [
+                "M2C-03",
+                "M2C-02",
+                "M2C-05",
+                "M2C-10",
+                "M2C-01"
+              ],
+              "top5_distances": [
+                0.583896,
+                0.623147,
+                0.675802,
+                0.710184,
+                0.721701
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-28",
+              "top1": "M2C-04",
+              "top1_distance": 0.659334,
+              "top5": [
+                "M2C-04",
+                "M2C-29",
+                "M2C-02",
+                "M2C-03",
+                "M2C-16"
+              ],
+              "top5_distances": [
+                0.659334,
+                0.69557,
+                0.718205,
+                0.7687,
+                0.812791
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-29",
+              "top1": "M2C-11",
+              "top1_distance": 0.61709,
+              "top5": [
+                "M2C-11",
+                "M2C-13",
+                "M2C-12",
+                "M2C-16",
+                "M2C-15"
+              ],
+              "top5_distances": [
+                0.61709,
+                0.663179,
+                0.719071,
+                0.729358,
+                0.732762
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-30",
+              "top1": "M2C-08",
+              "top1_distance": 0.544848,
+              "top5": [
+                "M2C-08",
+                "M2C-06",
+                "M2C-07",
+                "M2C-10",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.544848,
+                0.603433,
+                0.632806,
+                0.674183,
+                0.712365
+              ]
+            },
+            {
+              "first_expected_rank": 6,
+              "id": "P5-31",
+              "top1": "M2C-10",
+              "top1_distance": 0.612125,
+              "top5": [
+                "M2C-10",
+                "M2C-08",
+                "M2C-07",
+                "M2C-06",
+                "M2C-26"
+              ],
+              "top5_distances": [
+                0.612125,
+                0.616521,
+                0.675933,
+                0.676085,
+                0.689563
+              ]
+            },
+            {
+              "first_expected_rank": 15,
+              "id": "P5-32",
+              "top1": "M2C-11",
+              "top1_distance": 0.630818,
+              "top5": [
+                "M2C-11",
+                "M2C-16",
+                "M2C-27",
+                "M2C-13",
+                "M2C-15"
+              ],
+              "top5_distances": [
+                0.630818,
+                0.672317,
+                0.676608,
+                0.684082,
+                0.686455
+              ]
+            },
+            {
+              "first_expected_rank": 5,
+              "id": "P5-33",
+              "top1": "M2C-27",
+              "top1_distance": 0.741415,
+              "top5": [
+                "M2C-27",
+                "M2C-22",
+                "M2C-16",
+                "M2C-13",
+                "M2C-19"
+              ],
+              "top5_distances": [
+                0.741415,
+                0.747857,
+                0.761126,
+                0.770729,
+                0.775158
+              ]
+            },
+            {
+              "first_expected_rank": 4,
+              "id": "P5-34",
+              "top1": "M2C-20",
+              "top1_distance": 0.580035,
+              "top5": [
+                "M2C-20",
+                "M2C-19",
+                "M2C-22",
+                "M2C-21",
+                "M2C-27"
+              ],
+              "top5_distances": [
+                0.580035,
+                0.677842,
+                0.724663,
+                0.733172,
+                0.734295
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-35",
+              "top1": "M2C-22",
+              "top1_distance": 0.620874,
+              "top5": [
+                "M2C-22",
+                "M2C-20",
+                "M2C-27",
+                "M2C-19",
+                "M2C-23"
+              ],
+              "top5_distances": [
+                0.620874,
+                0.689121,
+                0.729192,
+                0.747882,
+                0.77717
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-36",
+              "top1": "M2C-25",
+              "top1_distance": 0.689316,
+              "top5": [
+                "M2C-25",
+                "M2C-23",
+                "M2C-20",
+                "M2C-24",
+                "M2C-19"
+              ],
+              "top5_distances": [
+                0.689316,
+                0.756859,
+                0.764036,
+                0.776936,
+                0.780678
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-37",
+              "top1": "M2C-24",
+              "top1_distance": 0.706897,
+              "top5": [
+                "M2C-24",
+                "M2C-25",
+                "M2C-19",
+                "M2C-20",
+                "M2C-23"
+              ],
+              "top5_distances": [
+                0.706897,
+                0.721377,
+                0.728,
+                0.735432,
+                0.739254
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-38",
+              "top1": "M2C-16",
+              "top1_distance": 0.584042,
+              "top5": [
+                "M2C-16",
+                "M2C-15",
+                "M2C-02",
+                "M2C-13",
+                "M2C-11"
+              ],
+              "top5_distances": [
+                0.584042,
+                0.616206,
+                0.635151,
+                0.637309,
+                0.666016
+              ]
+            },
+            {
+              "first_expected_rank": 7,
+              "id": "P5-39",
+              "top1": "M2C-29",
+              "top1_distance": 0.667448,
+              "top5": [
+                "M2C-29",
+                "M2C-03",
+                "M2C-10",
+                "M2C-22",
+                "M2C-04"
+              ],
+              "top5_distances": [
+                0.667448,
+                0.719312,
+                0.732232,
+                0.735934,
+                0.738148
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-40",
+              "top1": "M2C-12",
+              "top1_distance": 0.706331,
+              "top5": [
+                "M2C-12",
+                "M2C-11",
+                "M2C-21",
+                "M2C-09",
+                "M2C-19"
+              ],
+              "top5_distances": [
+                0.706331,
+                0.788762,
+                0.803969,
+                0.805166,
+                0.829052
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-41",
+              "top1": "M2C-14",
+              "top1_distance": 0.79322,
+              "top5": [
+                "M2C-14",
+                "M2C-27",
+                "M2C-06",
+                "M2C-16",
+                "M2C-11"
+              ],
+              "top5_distances": [
+                0.79322,
+                0.899921,
+                0.923264,
+                0.926211,
+                0.929934
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-42",
+              "top1": "M2C-05",
+              "top1_distance": 0.705086,
+              "top5": [
+                "M2C-05",
+                "M2C-03",
+                "M2C-01",
+                "M2C-09",
+                "M2C-29"
+              ],
+              "top5_distances": [
+                0.705086,
+                0.78629,
+                0.795995,
+                0.807993,
+                0.824469
+              ]
+            },
+            {
+              "first_expected_rank": 3,
+              "id": "P5-43",
+              "top1": "M2C-16",
+              "top1_distance": 0.74953,
+              "top5": [
+                "M2C-16",
+                "M2C-15",
+                "M2C-08",
+                "M2C-13",
+                "M2C-26"
+              ],
+              "top5_distances": [
+                0.74953,
+                0.76256,
+                0.777058,
+                0.784318,
+                0.786803
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-44",
+              "top1": "M2C-28",
+              "top1_distance": 0.338099,
+              "top5": [
+                "M2C-28",
+                "M2C-27",
+                "M2C-17",
+                "M2C-26",
+                "M2C-02"
+              ],
+              "top5_distances": [
+                0.338099,
+                0.442818,
+                0.490626,
+                0.494186,
+                0.494595
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-45",
+              "top1": "M2C-27",
+              "top1_distance": 0.438191,
+              "top5": [
+                "M2C-27",
+                "M2C-26",
+                "M2C-23",
+                "M2C-20",
+                "M2C-28"
+              ],
+              "top5_distances": [
+                0.438191,
+                0.693645,
+                0.738965,
+                0.759881,
+                0.768653
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-46",
+              "top1": "M2C-23",
+              "top1_distance": 0.629138,
+              "top5": [
+                "M2C-23",
+                "M2C-24",
+                "M2C-25",
+                "M2C-15",
+                "M2C-27"
+              ],
+              "top5_distances": [
+                0.629138,
+                0.661699,
+                0.701476,
+                0.726003,
+                0.742841
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-47",
+              "top1": "M2C-05",
+              "top1_distance": 0.557326,
+              "top5": [
+                "M2C-05",
+                "M2C-06",
+                "M2C-07",
+                "M2C-08",
+                "M2C-10"
+              ],
+              "top5_distances": [
+                0.557326,
+                0.574428,
+                0.596781,
+                0.629774,
+                0.646248
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-48",
+              "top1": "M2C-03",
+              "top1_distance": 0.672466,
+              "top5": [
+                "M2C-03",
+                "M2C-02",
+                "M2C-04",
+                "M2C-10",
+                "M2C-01"
+              ],
+              "top5_distances": [
+                0.672466,
+                0.793266,
+                0.820161,
+                0.856181,
+                0.917094
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-49",
+              "top1": "M2C-15",
+              "top1_distance": 0.356437,
+              "top5": [
+                "M2C-15",
+                "M2C-14",
+                "M2C-13",
+                "M2C-16",
+                "M2C-11"
+              ],
+              "top5_distances": [
+                0.356437,
+                0.451088,
+                0.473905,
+                0.511923,
+                0.539795
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-50",
+              "top1": "M2C-23",
+              "top1_distance": 0.406096,
+              "top5": [
+                "M2C-23",
+                "M2C-24",
+                "M2C-25",
+                "M2C-15",
+                "M2C-13"
+              ],
+              "top5_distances": [
+                0.406096,
+                0.410434,
+                0.483115,
+                0.657451,
+                0.663937
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-51",
+              "top1": "M2C-06",
+              "top1_distance": 0.428856,
+              "top5": [
+                "M2C-06",
+                "M2C-10",
+                "M2C-07",
+                "M2C-08",
+                "M2C-05"
+              ],
+              "top5_distances": [
+                0.428856,
+                0.459155,
+                0.469544,
+                0.481633,
+                0.516211
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-52",
+              "top1": "M2C-20",
+              "top1_distance": 0.650052,
+              "top5": [
+                "M2C-20",
+                "M2C-22",
+                "M2C-19",
+                "M2C-23",
+                "M2C-24"
+              ],
+              "top5_distances": [
+                0.650052,
+                0.651635,
+                0.658459,
+                0.679209,
+                0.68572
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-53",
+              "top1": "M2C-18",
+              "top1_distance": 0.475183,
+              "top5": [
+                "M2C-18",
+                "M2C-17",
+                "M2C-24",
+                "M2C-12",
+                "M2C-23"
+              ],
+              "top5_distances": [
+                0.475183,
+                0.521657,
+                0.728979,
+                0.732099,
+                0.738837
+              ]
+            },
+            {
+              "first_expected_rank": 1,
+              "id": "P5-54",
+              "top1": "M2C-11",
+              "top1_distance": 0.433119,
+              "top5": [
+                "M2C-11",
+                "M2C-15",
+                "M2C-14",
+                "M2C-16",
+                "M2C-12"
+              ],
+              "top5_distances": [
+                0.433119,
+                0.446964,
+                0.472192,
+                0.480964,
+                0.522603
+              ]
+            }
+          ],
+          "queries": 54,
+          "recorded_similarity_mismatches_after_4dp_rounding": 0,
+          "top1_identical_to_recorded": 54,
+          "top5_ordering_identical_to_recorded": 54
+        }
+      },
+      "distance_semantics": {
+        "ascending_violations": 0,
+        "candidates_with_distance_above_legacy_equivalent_cosine_0.5": 2921,
+        "max_abs_diff_distance_vs_independent": 5.960464477539062e-07,
+        "max_distance_seen": 1.1404635906219482,
+        "min_candidates_returned": 29,
+        "min_distance_seen": 0.2751319408416748,
+        "queries": 104,
+        "rank1_not_minimum": 0,
+        "ranking_id_mismatches_vs_independent": 0
+      },
+      "metadata_issue_cards": {
+        "M2C-05": {
+          "has_source_correction": true,
+          "has_source_correction_in_unit": true,
+          "source_status": "verified",
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+          "source_url_status": "ok",
+          "unit_review_reasons": []
+        },
+        "M2C-14": {
+          "has_source_correction": false,
+          "has_source_correction_in_unit": false,
+          "source_status": "needs_review",
+          "source_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+          "source_url_status": "needs_review",
+          "unit_review_reasons": [
+            "URL: product segment 'sap_s4hana_on-premise' differs from 'SAP_S4HANA_ON-PREMISE' used by the other cards"
+          ]
+        },
+        "M2C-18": {
+          "has_source_correction": false,
+          "has_source_correction_in_unit": false,
+          "source_status": "needs_review",
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+          "source_url_status": "needs_review",
+          "unit_review_reasons": [
+            "URL: query string '?version=2025.001' present (not on most cards; version pin to be confirmed)"
+          ]
+        },
+        "M2C-23": {
+          "has_source_correction": false,
+          "has_source_correction_in_unit": false,
+          "source_status": "needs_review",
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+          "source_url_status": "needs_review",
+          "unit_review_reasons": [
+            "URL: query string '?version=2025.001' present (not on most cards; version pin to be confirmed)"
+          ]
+        }
+      },
+      "ok": true,
+      "orchestrator_scenarios": [
+        {
+          "available": true,
+          "fallback_reason": null,
+          "page_content_available": true,
+          "query": "Contract Accounts Overview",
+          "query_id": "Q10",
+          "resolution": {
+            "card_exists": true,
+            "content_path": "data/sap_help/pages/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.json",
+            "local_page_content": true,
+            "state": "resolved_page",
+            "url_exists": true
+          },
+          "scenario": "1 resolved local page content (first query whose rank-1 card has a local page)",
+          "selected": {
+            "citation": "[17] Contract Accounts Overview (17_Contract_Accounts_Overview.pdf, sha256:0b07f58bc21c)",
+            "distance": 0.403663,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-17",
+            "source_status": "verified",
+            "source_url_status": "ok",
+            "title": "Contract Accounts Overview"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+          "state": "resolved_page",
+          "top3": [
+            {
+              "distance": 0.403663,
+              "rank": 1,
+              "source_id": "M2C-17"
+            },
+            {
+              "distance": 0.417553,
+              "rank": 2,
+              "source_id": "M2C-18"
+            },
+            {
+              "distance": 0.621332,
+              "rank": 3,
+              "source_id": "M2C-24"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "Move-In Process",
+          "query_id": "Q01",
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "2 URL-only card (first query whose rank-1 card has no local page and no source issue)",
+          "selected": {
+            "citation": "[03] Move-In Process (03_Move_In_Process.pdf, sha256:a360a36d72d1)",
+            "distance": 0.522093,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-03",
+            "source_status": "verified",
+            "source_url_status": "ok",
+            "title": "Move-In Process"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.522093,
+              "rank": 1,
+              "source_id": "M2C-03"
+            },
+            {
+              "distance": 0.600295,
+              "rank": 2,
+              "source_id": "M2C-04"
+            },
+            {
+              "distance": 0.706924,
+              "rank": 3,
+              "source_id": "M2C-10"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "parent topic for devices and technical installations",
+          "query_id": "Q41",
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "3 source-status issue: first query whose rank-1 card is M2C-05",
+          "selected": {
+            "citation": "[05] Device Management Overview (05_Device_Management_Overview.pdf, sha256:34c7b911e61c)",
+            "distance": 0.727757,
+            "has_source_correction": true,
+            "rank": 1,
+            "source_id": "M2C-05",
+            "source_status": "verified",
+            "source_url_status": "ok",
+            "title": "Device Management Overview"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.727757,
+              "rank": 1,
+              "source_id": "M2C-05"
+            },
+            {
+              "distance": 0.755764,
+              "rank": 2,
+              "source_id": "M2C-01"
+            },
+            {
+              "distance": 0.794522,
+              "rank": 3,
+              "source_id": "M2C-03"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "Which reference explains how billing results become invoices, print documents and postings in FI-CA?",
+          "query_id": "Q12",
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "3 source-status issue: first query whose rank-1 card is M2C-14",
+          "selected": {
+            "citation": "[14] SAP Utilities Invoicing Procedure (14_SAP_Utilities_Invoicing_Procedure.pdf, sha256:ff53f87e163f)",
+            "distance": 0.278301,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-14",
+            "source_status": "needs_review",
+            "source_url_status": "needs_review",
+            "title": "SAP Utilities Invoicing Procedure"
+          },
+          "source_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.278301,
+              "rank": 1,
+              "source_id": "M2C-14"
+            },
+            {
+              "distance": 0.469391,
+              "rank": 2,
+              "source_id": "M2C-11"
+            },
+            {
+              "distance": 0.471081,
+              "rank": 3,
+              "source_id": "M2C-15"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "control role of the contract account for postings, payments and dunning",
+          "query_id": "Q43",
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "3 source-status issue: first query whose rank-1 card is M2C-18",
+          "selected": {
+            "citation": "[18] Contract Account Business Object (18_Contract_Account_Business_Object.pdf, sha256:36b4c4ac10ac)",
+            "distance": 0.452973,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-18",
+            "source_status": "needs_review",
+            "source_url_status": "needs_review",
+            "title": "Contract Account Business Object"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.452973,
+              "rank": 1,
+              "source_id": "M2C-18"
+            },
+            {
+              "distance": 0.516784,
+              "rank": 2,
+              "source_id": "M2C-17"
+            },
+            {
+              "distance": 0.62022,
+              "rank": 3,
+              "source_id": "M2C-20"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "How are source receivables redistributed into scheduled installment receivables?",
+          "query_id": "Q16",
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "3 source-status issue: first query whose rank-1 card is M2C-23",
+          "selected": {
+            "citation": "[23] Installment Plan Overview (23_Installment_Plan_Overview.pdf, sha256:5fc82f433e51)",
+            "distance": 0.45644,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-23",
+            "source_status": "needs_review",
+            "source_url_status": "needs_review",
+            "title": "Installment Plan Overview"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.45644,
+              "rank": 1,
+              "source_id": "M2C-23"
+            },
+            {
+              "distance": 0.473776,
+              "rank": 2,
+              "source_id": "M2C-27"
+            },
+            {
+              "distance": 0.631883,
+              "rank": 3,
+              "source_id": "M2C-24"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "Installment Plan Overview",
+          "query_id": "Q07",
+          "rank1_rank2_distance_gap": 0.002364,
+          "rank1_rank2_same_category": true,
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "4 sibling near-tie: recorded Phase 4 near-tie Q07 (M2C-24 vs M2C-23)",
+          "selected": {
+            "citation": "[24] Creating Installment Plans (24_Creating_Installment_Plans.pdf, sha256:bf7eb138905e)",
+            "distance": 0.367708,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-24",
+            "source_status": "verified",
+            "source_url_status": "ok",
+            "title": "Creating Installment Plans"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.367708,
+              "rank": 1,
+              "source_id": "M2C-24"
+            },
+            {
+              "distance": 0.370072,
+              "rank": 2,
+              "source_id": "M2C-23"
+            },
+            {
+              "distance": 0.435278,
+              "rank": 3,
+              "source_id": "M2C-25"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "What is needed for final billing when a customer moves out?",
+          "query_id": "Q49",
+          "rank1_rank2_distance_gap": 0.007985,
+          "rank1_rank2_same_category": true,
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "4 sibling near-tie: recorded Phase 4 near-tie Q49 (M2C-02 vs M2C-04)",
+          "selected": {
+            "citation": "[02] Move-In/Out Overview (02_Move_In_Out_Overview.pdf, sha256:80c862abcf09)",
+            "distance": 0.558474,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-02",
+            "source_status": "verified",
+            "source_url_status": "ok",
+            "title": "Move-In/Out Overview"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.558474,
+              "rank": 1,
+              "source_id": "M2C-02"
+            },
+            {
+              "distance": 0.566459,
+              "rank": 2,
+              "source_id": "M2C-04"
+            },
+            {
+              "distance": 0.620607,
+              "rank": 3,
+              "source_id": "M2C-03"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "Which cards are in the Payments & Clearing category?",
+          "query_id": "Q35",
+          "rank1_rank2_distance_gap": 0.000147,
+          "rank1_rank2_same_category": true,
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "4 sibling near-tie: smallest rank1-rank2 distance gap over all 104 queries (Q35)",
+          "selected": {
+            "citation": "[21] Clearing Types (21_Clearing_Types.pdf, sha256:66173bede3f7)",
+            "distance": 0.507525,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-21",
+            "source_status": "verified",
+            "source_url_status": "ok",
+            "title": "Clearing Types"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.507525,
+              "rank": 1,
+              "source_id": "M2C-21"
+            },
+            {
+              "distance": 0.507671,
+              "rank": 2,
+              "source_id": "M2C-20"
+            },
+            {
+              "distance": 0.563699,
+              "rank": 3,
+              "source_id": "M2C-19"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "extrapolation",
+          "query_id": "P5-16",
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "5 short / rare term: P5-16 'extrapolation'",
+          "selected": {
+            "citation": "[09] Estimation Procedure Details (09_Estimation_Procedure_Details.pdf, sha256:e10bdb4dd6e2)",
+            "distance": 0.762129,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-09",
+            "source_status": "verified",
+            "source_url_status": "ok",
+            "title": "Estimation Procedure Details"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.762129,
+              "rank": 1,
+              "source_id": "M2C-09"
+            },
+            {
+              "distance": 0.862309,
+              "rank": 2,
+              "source_id": "M2C-08"
+            },
+            {
+              "distance": 0.923269,
+              "rank": 3,
+              "source_id": "M2C-10"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "NO_LOCAL_PAGE_RECORD",
+          "page_content_available": false,
+          "query": "subledger processing",
+          "query_id": "Q42",
+          "resolution": {
+            "card_exists": true,
+            "content_path": null,
+            "local_page_content": false,
+            "state": "url_only",
+            "url_exists": true
+          },
+          "scenario": "5 short / rare term: Q42 'subledger processing'",
+          "selected": {
+            "citation": "[15] Processing Budget Billing Plans (15_Processing_Budget_Billing_Plans.pdf, sha256:ac9f2c91a906)",
+            "distance": 0.751598,
+            "has_source_correction": false,
+            "rank": 1,
+            "source_id": "M2C-15",
+            "source_status": "verified",
+            "source_url_status": "ok",
+            "title": "Processing Budget Billing Plans"
+          },
+          "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html",
+          "state": "url_only",
+          "top3": [
+            {
+              "distance": 0.751598,
+              "rank": 1,
+              "source_id": "M2C-15"
+            },
+            {
+              "distance": 0.758579,
+              "rank": 2,
+              "source_id": "M2C-03"
+            },
+            {
+              "distance": 0.762772,
+              "rank": 3,
+              "source_id": "M2C-04"
+            }
+          ]
+        },
+        {
+          "available": true,
+          "fallback_reason": "EMPTY_QUERY",
+          "page_content_available": false,
+          "query": "   ",
+          "resolution": null,
+          "scenario": "6 no-card scenario: empty query",
+          "selected": null,
+          "source_url": null,
+          "state": "no_card_candidate",
+          "top3": []
+        },
+        {
+          "available": true,
+          "fallback_reason": "SELECTOR_REJECTED_ALL_CANDIDATES",
+          "page_content_available": false,
+          "query": "What is a contract account?",
+          "resolution": null,
+          "scenario": "6 no-card scenario: caller-side selector rejects every candidate (illustration of the hook, NOT a recommended policy)",
+          "selected": null,
+          "source_url": null,
+          "state": "no_card_candidate",
+          "top3": [
+            {
+              "distance": 0.416238,
+              "rank": 1,
+              "source_id": "M2C-18"
+            },
+            {
+              "distance": 0.484258,
+              "rank": 2,
+              "source_id": "M2C-17"
+            },
+            {
+              "distance": 0.67573,
+              "rank": 3,
+              "source_id": "M2C-24"
+            }
+          ]
+        }
+      ],
+      "page_join": {
+        "counts": {
+          "resolved_page": 1,
+          "url_only": 28
+        },
+        "index_pages": 1,
+        "not_counted_as_page_content": {
+          "captured_responses_files": 8,
+          "saved_toc_files": 5
+        },
+        "per_card": {
+          "M2C-01": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-02": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-03": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-04": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-05": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-06": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-07": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-08": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-09": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-10": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-11": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-12": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-13": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-14": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-15": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-16": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-17": {
+            "content_chars": 2683,
+            "content_path": "data/sap_help/pages/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.json",
+            "reason": null,
+            "state": "resolved_page",
+            "warnings": []
+          },
+          "M2C-18": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-19": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-20": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-21": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-22": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-23": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-24": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-25": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-26": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-27": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-28": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          },
+          "M2C-29": {
+            "content_chars": null,
+            "content_path": null,
+            "reason": "NO_LOCAL_PAGE_RECORD",
+            "state": "url_only",
+            "warnings": []
+          }
+        },
+        "resolved_cards": [
+          "M2C-17"
+        ]
+      },
+      "score_note": "similarity = 1 - distance is shown only to compare with recorded Phase 4/5 similarities; the stored/returned quantity is the cosine DISTANCE",
+      "stage": "router"
+    }
+  }
+}

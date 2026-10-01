@@ -1,0 +1,162 @@
+{
+  "acquisition": {
+    "body_sha256": "34e37d74e298f014bf236bf31a1251ab8b58d0c1560a6d002dc624f82b21347b",
+    "build_no": "1779",
+    "deliverable_title": "Device Management",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "captured_responses/1_40374657_8990d0533f8e4308e10000000a174cb4.json",
+    "file_sha256": "c5d70f3a66f517f066c91fde745eb7efd09c3ef71dd98682079a3d520579b9c0",
+    "html_chars": 7611,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374657",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Device Management",
+        "Purpose"
+      ],
+      "kind": "paragraph",
+      "text": "This component manages technical data, installations, meter readings, and the inspection of devices."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Device Management",
+        "Purpose"
+      ],
+      "kind": "paragraph",
+      "text": "If you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1) and you are in an advanced metering infrastructure, you can find more information under Advanced Metering Infrastructure ."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Device Management",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "The following table lists the standard application components that must be integrated into device management before you can manage devices. The device, device category, and device number in the Utilities Industry (IS-U) component correspond to equipment, material, and the serial number in the standard system:"
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Device Management",
+        "Integration"
+      ],
+      "kind": "table",
+      "text": "Name in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment\nName in IS-U: Device Category; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Material\nName in IS-U: Device Number; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Serial Number"
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Device Management",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "The device number is created in MM with the Goods Receipt function and transferred to the device. It can also be generated when you create a device in IS-U. The device is identified by a unique material and serial number combination to distinguish it from other pieces of material that may have the same serial number. The equipment number is the same throughout the system."
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Device Management",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "MM is also used for the following functions in device flow:"
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Device Management",
+        "Integration"
+      ],
+      "kind": "table",
+      "text": "Function: Procurement; Component: Purchase Requisition and Purchase Order from Purchasing (MM-PUR)\nFunction: Delivery; Component: Goods Receipt from Inventory Management (MM-IM)\nFunction: Outward Movement (such as scrapping or sales); Component: Goods Issue and Return Delivery from MM-IM\nFunction: Stock Transfer; Component: Goods Issue and Return Delivery from MM-IM"
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Device Management",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "Equipment records are created automatically during goods receipt . Therefore, functions from the PM application component are used, including standard ordering functions and creation of maintenance plans or task lists. Billing is then carried out with the Sales and Distribution (SD) component."
+    },
+    {
+      "block_index": 8,
+      "heading_path": [
+        "Device Management",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "See Also"
+    },
+    {
+      "block_index": 9,
+      "heading_path": [
+        "Device Management",
+        "Integration"
+      ],
+      "kind": "list",
+      "text": "- PM: Equipment\n- LO-MD: Material Master\n- MM-PUR: Purchase Requisitions , Purchase Orders\n- MM-IM: Planning Goods Receipts , Goods Receipts for Purchase Orders , Goods Receipts for Orders , Other Goods Receipts , Goods Issues ."
+    }
+  ],
+  "breadcrumb": [
+    "Device Management"
+  ],
+  "card": {
+    "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+    "card_page_id": "8990d0533f8e4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Device Management Overview",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+  "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+  "headings": [
+    "Device Management",
+    "Purpose",
+    "Integration"
+  ],
+  "html_title": "Device Management",
+  "identity": {
+    "basis": "CORRECTION_APPLIED_PAGE_IN_CORRECTED_GUIDE_TOC",
+    "effective_guide_id_differs_from_card": true,
+    "status": "corrected_identity"
+  },
+  "page_id": "8990d0533f8e4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-05"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 10,
+    "chrome_elements_removed": 0,
+    "headings": 3,
+    "kinds": {
+      "list": 1,
+      "paragraph": 7,
+      "table": 2
+    }
+  },
+  "text": "Device Management\nPurpose\nThis component manages technical data, installations, meter readings, and the inspection of devices.\nIf you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1) and you are in an advanced metering infrastructure, you can find more information under Advanced Metering Infrastructure .\nIntegration\nThe following table lists the standard application components that must be integrated into device management before you can manage devices. The device, device category, and device number in the Utilities Industry (IS-U) component correspond to equipment, material, and the serial number in the standard system:\nName in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment\nName in IS-U: Device Category; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Material\nName in IS-U: Device Number; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Serial Number\nThe device number is created in MM with the Goods Receipt function and transferred to the device. It can also be generated when you create a device in IS-U. The device is identified by a unique material and serial number combination to distinguish it from other pieces of material that may have the same serial number. The equipment number is the same throughout the system.\nMM is also used for the following functions in device flow:\nFunction: Procurement; Component: Purchase Requisition and Purchase Order from Purchasing (MM-PUR)\nFunction: Delivery; Component: Goods Receipt from Inventory Management (MM-IM)\nFunction: Outward Movement (such as scrapping or sales); Component: Goods Issue and Return Delivery from MM-IM\nFunction: Stock Transfer; Component: Goods Issue and Return Delivery from MM-IM\nEquipment records are created automatically during goods receipt . Therefore, functions from the PM application component are used, including standard ordering functions and creation of maintenance plans or task lists. Billing is then carried out with the Sales and Distribution (SD) component.\nSee Also\n- PM: Equipment\n- LO-MD: Material Master\n- MM-PUR: Purchase Requisitions , Purchase Orders\n- MM-IM: Planning Goods Receipts , Goods Receipts for Purchase Orders , Goods Receipts for Orders , Other Goods Receipts , Goods Issues .",
+  "text_sha256": "690ca7ec4e35ef9eed0c53dd6cba78d4330c0463cede00d65b67717a8da3a5f8",
+  "title": "Device Management",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 2320
+  }
+}

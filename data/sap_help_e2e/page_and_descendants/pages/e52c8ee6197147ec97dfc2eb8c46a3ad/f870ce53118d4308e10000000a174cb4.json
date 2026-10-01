@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/f870ce53118d4308e10000000a174cb4",
+  "topic_id": 17,
+  "topic_title": "Contract Accounts Overview",
+  "topic_ids": [
+    17
+  ],
+  "topic_refs": [
+    {
+      "topic_id": 17,
+      "topic_title": "Contract Accounts Overview",
+      "role": "descendant",
+      "via_doc_id": null,
+      "pdf_file": "17_Contract_Accounts_Overview.pdf"
+    }
+  ],
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "numeric_deliverable_id": "40374631",
+  "build_no": "1779",
+  "page_id": "f870ce53118d4308e10000000a174cb4",
+  "file_path": "f870ce53118d4308e10000000a174cb4.html",
+  "alias_file_paths": [],
+  "parent_page_id": "e31ce056045c122fe10000000a441470",
+  "toc_path": [
+    "Contract Accounts",
+    "Contract Account and Contract Special Features for IS-U",
+    "Controlling Specifications in Contract Accounts (IS-U)"
+  ],
+  "depth": 2,
+  "page_title": "Controlling Specifications in Contract Accounts (IS-U)",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/f870ce53118d4308e10000000a174cb4.html",
+  "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/f870ce53118d4308e10000000a174cb4.html",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/058.json",
+  "page_hash": "f2cf35266e40ddffb6412f29fd15bcb03a8ed71581f2d75f4ddbb0209ce16558",
+  "content_hash": "0d97d2acc6d2b79d6ea74d083da5538bc927ca395881b6d5676a80493b13ce97",
+  "duplicate_of": null,
+  "duplicate_docs": [],
+  "text_raw": "Controlling Specifications in Contract Accounts (IS-U)\nControlling Specifications in Contract Accounts (IS-U)\nUse\nThere are a number of attributes in the contract account that are specific to IS-U. These can be divided into various areas:\nGeneral data, such as:\nIndicator for additional bill\nTransaction currency\nTerms of payment\nAccount class\nSettlement category\nAccount determination ID\nApplication form\nLanguage\nDunning control:\nIndicator for additional dunning notice\nPayment control, such as:\nAutomatic debit procedure\nNumber of automatic debits performed\nNumber of returned automatic debits\nIndicator for recurring entry request\nNo payment form indicator\nFeatures\nSeveral business partners can be assigned to the contract account. There is always just one account holder. You cannot post to the other business partners.\nThe Business Object Repository (BOR) contains the following Business Application Programming Interface (BAPIs) for contract accounts:\nBAPI_ISUACCOUNT_CREATERFROMDATA\n(creating a contract account)\nBAPI_ISUACCOUNT_GETDETAIL\n(displaying a contract account)\nBAPI_ISUACCOUNT_GETLIST\n(displaying a list of contract accounts)\nFor more information about BAPIs, see the following:\nBAPIs in general: BAPI user guide and programming guidelines.\nBAPIs in detail: Associated documentation in the BOR",
+  "text": "Controlling Specifications in Contract Accounts (IS-U)\nUse\nThere are a number of attributes in the contract account that are specific to IS-U. These can be divided into various areas:\nGeneral data, such as:\nIndicator for additional bill\nTransaction currency\nTerms of payment\nAccount class\nSettlement category\nAccount determination ID\nApplication form\nLanguage\nDunning control:\nIndicator for additional dunning notice\nPayment control, such as:\nAutomatic debit procedure\nNumber of automatic debits performed\nNumber of returned automatic debits\nIndicator for recurring entry request\nNo payment form indicator\nFeatures\nSeveral business partners can be assigned to the contract account. There is always just one account holder. You cannot post to the other business partners.\nThe Business Object Repository (BOR) contains the following Business Application Programming Interface (BAPIs) for contract accounts:\nBAPI_ISUACCOUNT_CREATERFROMDATA\n(creating a contract account)\nBAPI_ISUACCOUNT_GETDETAIL\n(displaying a contract account)\nBAPI_ISUACCOUNT_GETLIST\n(displaying a list of contract accounts)\nFor more information about BAPIs, see the following:\nBAPIs in general: BAPI user guide and programming guidelines.\nBAPIs in detail: Associated documentation in the BOR",
+  "clean_stats": {
+    "title_duplicates_removed": 1,
+    "lines_in": 33,
+    "lines_out": 32
+  },
+  "status": "OK"
+}

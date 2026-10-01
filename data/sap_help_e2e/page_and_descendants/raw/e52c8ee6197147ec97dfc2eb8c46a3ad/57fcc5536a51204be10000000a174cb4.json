@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "page_id": "57fcc5536a51204be10000000a174cb4",
+  "file_path": "57fcc5536a51204be10000000a174cb4.html",
+  "page_title": "Logging of Changes to Contract Account",
+  "text_raw": "Logging of Changes to Contract Account\nLogging of Changes to Contract Account\nUse\nChanges to fields of the contract account are logged. The changes can be displayed in the dialog maintenance of the contract account. It also contains information about who created a contract account when, and who made the last change.\nKey Features\nIn the menu, choose the transaction\nExtras\nand then choose the desired menu entry in the following table.\nMenu Entry\nThe system displays the following:\nCreation Data\nWho created a contract account when and last changed it\nThere is a difference here between general and business-partner-specific data.\nAccount Changes\nAll the changes to an account.\nDuring execution, the system offers a selection list of all fields that have previously been changed on the account. In addition, the system displays cross-business-partner and business-partner-specific details regarding the creation data of the account, and additional data on business partners.\nBy selecting individual fields, you can select the change data. After confirming the entries, a list of all the changes appears, specifying the person who made them and the date of the change.\nField Changes\nChanges to the field on which the cursor is positioned.\nAfter choosing this function, a list with the changes made to this field appears, specifying the person who made them and the date of the change.\nNo change documents are written for process locks. You can display the history for the display locks from the dialog for the locks",
+  "page_hash": "a8e20c9aa73fdfee6c6a0d494b5323b1316c5bcb38eab36bf5f64f45ee5a3791",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/046.json",
+  "current_page": {
+    "id": 2554982938,
+    "t": "Logging of Changes to Contract Account",
+    "u": "57fcc5536a51204be10000000a174cb4.html",
+    "loio": "57fcc5536a51204be10000000a174cb4",
+    "deltaMtTranslate": false
+  }
+}

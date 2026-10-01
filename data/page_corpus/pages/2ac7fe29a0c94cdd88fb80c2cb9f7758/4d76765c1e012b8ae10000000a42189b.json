@@ -1,0 +1,344 @@
+{
+  "acquisition": {
+    "body_sha256": "81d853c5344b28f8869cce901346909ceb30a8a51109539705966509a6adeefb",
+    "build_no": "1779",
+    "deliverable_title": "Device Management",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json",
+    "file_sha256": "943c100f3dc33ed2d282dd92f5a3df78c19398724ec8764fa57e5fd41313daf0",
+    "html_chars": 13724,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374657",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "To monitor meter reading results, you can use the following transactions in the Utilities Industry menu under Device Management > Meter Reading > Monitoring ."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Monitoring of Meter Reading Results"
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Transaction EL31"
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can use this transaction to monitor meter reading results based on different selection criteria. You have different monitoring options depending on the selection criteria you choose. The following table provides an overview of these options. The selection criteria are listed in the first column. The objects that you can monitor using these selection criteria are marked with x in each row."
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "table",
+      "text": "Selection Criterion: | Schedule Record | Meter Reading Order | Meter Reading Result | Billing Order\nPortion | x | x (*) | x (*) | x (*)\nMeter Reading Unit | x | x (*) | x (*) | x (*)\nBusiness Partner | - | x | x | x\nContract | - | x | x | x\nInstallation | - | x | x | x\nDevice | - | x | x | -\nPremise | - | x | x | x"
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "(*) At first the system displays a summarized list grouped by date (meter reading date, billing date); from here you can navigate to more detailed lists."
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Portion or Meter Reading Unit"
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "If you start by entering portions or meter reading units, you can display schedule records, billing orders, and meter reading orders."
+    },
+    {
+      "block_index": 8,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "If the business function Utilities, Quantity Determination ( ISU_QD_1 ) is active, you can also display meter reading results."
+    },
+    {
+      "block_index": 9,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Contract, Installation, Business Partner, or Premise"
+    },
+    {
+      "block_index": 10,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "If you start by entering contracts, installations, or business partners, you can display billing orders, meter reading orders, or meter reading results."
+    },
+    {
+      "block_index": 11,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Device"
+    },
+    {
+      "block_index": 12,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "If you start by entering devices, you can display meter reading orders or meter reading results."
+    },
+    {
+      "block_index": 13,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "In almost all of the lists for the monitoring function, you can navigate to the detailed display of an object by choosing Edit > Select or by double clicking on the field in question."
+    },
+    {
+      "block_index": 14,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Meter Reading Orders"
+    },
+    {
+      "block_index": 15,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "If there are meter reading orders for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more orders."
+    },
+    {
+      "block_index": 16,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Meter Reading Results"
+    },
+    {
+      "block_index": 17,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "The following functions are available in the lists of meter reading results:"
+    },
+    {
+      "block_index": 18,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "list",
+      "text": "- On-demand meter reading For the right kind of devices, you can use the pushbutton to request on-demand meter readings. Note A prerequisite is that you have activated the business function Advanced Metering Infrastructure ( ISU_AMI_1 ).\n- AMI monitoring If there are meter readings for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more meter readings. Note A prerequisite is that you have activated the business function Advanced Metering Infrastructure 2 ( ISU_AMI_2 ).\n- Quantity determination For meter readings with a quantity determination trigger, you can use the pushbutton to carry out quantity determination. Note A prerequisite is that you have activated the business function Utilities, Quantity Determination ( ISU_QD_1 )."
+    },
+    {
+      "block_index": 19,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Automatic Monitoring of Meter Reading Data"
+    },
+    {
+      "block_index": 20,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Transaction EL32"
+    },
+    {
+      "block_index": 21,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can use this transaction to monitor meter reading data and trigger automatic follow-on processing for selected meter reading orders. For the follow-on processing actions, this transaction interprets the settings in Customizing for the automatic monitoring of meter reading data:"
+    },
+    {
+      "block_index": 22,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Customizing for SAP Utilities > Device Management > Meter Reading > Basic Settings > Automatic Monitoring of Meter Reading Data ."
+    },
+    {
+      "block_index": 23,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "For more information about the automatic follow-on processing of meter reading orders, see the documentation for the Customizing activity."
+    },
+    {
+      "block_index": 24,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Postprocessing of IDocs for Uploading Meter Reading Results"
+    },
+    {
+      "block_index": 25,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Transaction ELDM"
+    },
+    {
+      "block_index": 26,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can use this transaction to display the successfully and unsuccessfully posted meter reading documents after uploading discrete meter reading data (IDocs from category ISU_MR_UPLOAD)."
+    },
+    {
+      "block_index": 27,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Device Overview"
+    },
+    {
+      "block_index": 28,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Transaction EL43"
+    },
+    {
+      "block_index": 29,
+      "heading_path": [
+        "Monitoring of Meter Reading Results",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can use this transaction to get an overview of the devices of a meter reading unit."
+    }
+  ],
+  "breadcrumb": [
+    "Reading Meters",
+    "Monitoring",
+    "Monitoring of Meter Reading Results"
+  ],
+  "card": {
+    "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+    "card_page_id": "4d76765c1e012b8ae10000000a42189b",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Monitoring Meter Reading Results",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
+    "review_flag": false
+  },
+  "doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+  "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+  "headings": [
+    "Monitoring of Meter Reading Results",
+    "Use",
+    "Features"
+  ],
+  "html_title": "Monitoring of Meter Reading Results",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "4d76765c1e012b8ae10000000a42189b",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-07"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
+  "structure": {
+    "blocks": 30,
+    "chrome_elements_removed": 0,
+    "headings": 3,
+    "kinds": {
+      "list": 1,
+      "paragraph": 28,
+      "table": 1
+    }
+  },
+  "text": "Monitoring of Meter Reading Results\nUse\nTo monitor meter reading results, you can use the following transactions in the Utilities Industry menu under Device Management > Meter Reading > Monitoring .\nFeatures\nMonitoring of Meter Reading Results\nTransaction EL31\nYou can use this transaction to monitor meter reading results based on different selection criteria. You have different monitoring options depending on the selection criteria you choose. The following table provides an overview of these options. The selection criteria are listed in the first column. The objects that you can monitor using these selection criteria are marked with x in each row.\nSelection Criterion: | Schedule Record | Meter Reading Order | Meter Reading Result | Billing Order\nPortion | x | x (*) | x (*) | x (*)\nMeter Reading Unit | x | x (*) | x (*) | x (*)\nBusiness Partner | - | x | x | x\nContract | - | x | x | x\nInstallation | - | x | x | x\nDevice | - | x | x | -\nPremise | - | x | x | x\n(*) At first the system displays a summarized list grouped by date (meter reading date, billing date); from here you can navigate to more detailed lists.\nPortion or Meter Reading Unit\nIf you start by entering portions or meter reading units, you can display schedule records, billing orders, and meter reading orders.\nIf the business function Utilities, Quantity Determination ( ISU_QD_1 ) is active, you can also display meter reading results.\nContract, Installation, Business Partner, or Premise\nIf you start by entering contracts, installations, or business partners, you can display billing orders, meter reading orders, or meter reading results.\nDevice\nIf you start by entering devices, you can display meter reading orders or meter reading results.\nIn almost all of the lists for the monitoring function, you can navigate to the detailed display of an object by choosing Edit > Select or by double clicking on the field in question.\nMeter Reading Orders\nIf there are meter reading orders for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more orders.\nMeter Reading Results\nThe following functions are available in the lists of meter reading results:\n- On-demand meter reading For the right kind of devices, you can use the pushbutton to request on-demand meter readings. Note A prerequisite is that you have activated the business function Advanced Metering Infrastructure ( ISU_AMI_1 ).\n- AMI monitoring If there are meter readings for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more meter readings. Note A prerequisite is that you have activated the business function Advanced Metering Infrastructure 2 ( ISU_AMI_2 ).\n- Quantity determination For meter readings with a quantity determination trigger, you can use the pushbutton to carry out quantity determination. Note A prerequisite is that you have activated the business function Utilities, Quantity Determination ( ISU_QD_1 ).\nAutomatic Monitoring of Meter Reading Data\nTransaction EL32\nYou can use this transaction to monitor meter reading data and trigger automatic follow-on processing for selected meter reading orders. For the follow-on processing actions, this transaction interprets the settings in Customizing for the automatic monitoring of meter reading data:\nCustomizing for SAP Utilities > Device Management > Meter Reading > Basic Settings > Automatic Monitoring of Meter Reading Data .\nFor more information about the automatic follow-on processing of meter reading orders, see the documentation for the Customizing activity.\nPostprocessing of IDocs for Uploading Meter Reading Results\nTransaction ELDM\nYou can use this transaction to display the successfully and unsuccessfully posted meter reading documents after uploading discrete meter reading data (IDocs from category ISU_MR_UPLOAD).\nDevice Overview\nTransaction EL43\nYou can use this transaction to get an overview of the devices of a meter reading unit.",
+  "text_sha256": "79db03e802b750746a94623adbd619da8e5bf23fd43bc30a6dc1fad2616eb3fc",
+  "title": "Monitoring of Meter Reading Results",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 3936
+  }
+}

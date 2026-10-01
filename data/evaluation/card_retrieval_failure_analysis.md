@@ -1,0 +1,14 @@
+These notes were written after the evaluation ran, from the retrieved results in `data/evaluation/card_retrieval_results.json` and the card texts in `data/retrieval_units.json`. No question, label, threshold or text was changed after seeing the results. Four of the 50 questions missed at rank 1, and two of those also missed at rank 3.
+
+| Question | Expected | What was retrieved (cosine similarity) | Reading of the retrieved text |
+|---|---|---|---|
+| Q07 "Installment Plan Overview" (exact title) | M2C-23 at rank 2 | rank 1 M2C-24 "Creating Installment Plans" 0.6323; rank 2 M2C-23 0.6299 | Near-tie (difference 0.0024) inside one card family. Cards 23, 24 and 25 share the category line "Payment Arrangements / Installment Plans" and the words "installment plans" in their text, so a title query does not single out one card. Card 24 is a related card, not an unrelated one. |
+| Q39 "payment clarification" | M2C-19 at rank 4 | rank 1 M2C-20 "Clearing Control in Incoming Payments" 0.3839; rank 2 M2C-23 0.3827; rank 3 M2C-24 0.3713 | Two-word query with weak signal: every similarity is below 0.39. The tokenizer splits "clarification" into `cl ##ari ##fication`, and the model matched on "payment" in general. Card 19 contains the phrase ("analysis of incoming payments and payment clarification") but the phrase is only a small part of its embedded text. |
+| Q42 "subledger processing" | M2C-17 at rank 4 | rank 1 M2C-15 0.2484; rank 2 M2C-03 0.2414; rank 3 M2C-04 0.2372 | Rare single term with almost no signal: the top similarities are all near 0.25 and the retrieved cards (budget billing, move-in, move-out) are unrelated to the query. The tokenizer splits "subledger" into `sub ##led ##ger`, so the model cannot match the word as a term. This is the clearest failure. In the full-text control, M2C-17 ranks 7th. |
+| Q49 "What is needed for final billing when a customer moves out?" (ambiguous) | M2C-04 at rank 2 | rank 1 M2C-02 "Move-In/Out Overview" 0.4415; rank 2 M2C-04 0.4335 | Near-tie. Card 02's Meter-to-Cash line also mentions "final billing" ("connecting customer/service setup to billing eligibility and final billing"), so the retrieved card is plausibly relevant. The question was labelled ambiguous before the run, with M2C-02 listed as also relevant. The result is reported as a miss at rank 1, not relabelled. |
+
+What these cases suggest, without changing anything:
+- The misses are (a) near-ties between neighbouring cards in one family (Q07, Q49) and (b) very short queries built from a rare or single term, which dense retrieval handles poorly (Q39, Q42).
+- For a 29-card collection Recall@5 is lenient: the top 5 covers 17% of the cards. The more informative numbers are Recall@1 and MRR.
+- Rank-1 differences of a few thousandths decide some results (Q07, Q49), so a change in wording or in the model can flip them.
+- A keyword or hybrid component would address (b). That is a later design decision and was not tried here.

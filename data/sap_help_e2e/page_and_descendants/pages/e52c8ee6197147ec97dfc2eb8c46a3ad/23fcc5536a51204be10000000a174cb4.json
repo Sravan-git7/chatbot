@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/23fcc5536a51204be10000000a174cb4",
+  "topic_id": 17,
+  "topic_title": "Contract Accounts Overview",
+  "topic_ids": [
+    17
+  ],
+  "topic_refs": [
+    {
+      "topic_id": 17,
+      "topic_title": "Contract Accounts Overview",
+      "role": "descendant",
+      "via_doc_id": null,
+      "pdf_file": "17_Contract_Accounts_Overview.pdf"
+    }
+  ],
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "numeric_deliverable_id": "40374631",
+  "build_no": "1779",
+  "page_id": "23fcc5536a51204be10000000a174cb4",
+  "file_path": "23fcc5536a51204be10000000a174cb4.html",
+  "alias_file_paths": [],
+  "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+  "toc_path": [
+    "Contract Accounts",
+    "Contract Account"
+  ],
+  "depth": 1,
+  "page_title": "Contract Account",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/23fcc5536a51204be10000000a174cb4.html",
+  "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/23fcc5536a51204be10000000a174cb4.html",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/043.json",
+  "page_hash": "2d1cdda9eed66930dda52972271d180e50374e33fbc8e9eef5429c15ebb9a44d",
+  "content_hash": "6d042f56967bc719b7699aca64c272bba28fcd567e7744022eb3c67573d987b6",
+  "duplicate_of": null,
+  "duplicate_docs": [],
+  "text_raw": "Contract Account\nContract Account\nDefinition\nStructure used to bill the posting data for contracts or contract items for which the same collection/disbursement agreements apply.\nContract accounts are managed on an open item basis within\nContract Accounts Receivable and Payable\n.\nNote\nIn the industry component\nInsurance\n, you can decide whether accounting is to be managed on an account or open item basis.\nUse\nAlternative correspondence recipient\nYou can define an alternative correspondence recipient in the contract account (see\nRecipient and Sender Determination\n).\nPlanned changes to the contract account\nYou do not have to activate contract account changes to have immediate effect, but rather you can enter a date as from which the changes should become effective. This data is not written to the database but recorded in change documents. The planned changes function only applies to changes to the contract account. You cannot schedule the creation of a contract account.\nTo activate this data, you should run program\nBUSPCDACT\non a daily basis. This writes the scheduling to the database. You can use the application object\nFICA\nto activate planned changes to the contract account.\nWhen you are in display mode for change documents, you can delete inconsistent data, for example, data that arises when planned changes are cancelled.\nCheck digits in the contract account\nWhen you create a contract account, you can add a check digit to the contract account number. The prerequisites are as follows:\nYou add the check digit procedure using event 1051. (Sample function module FKK_SAMPLE_1051_2_CHECKDIGITS for two check digits is supplied by SAP)\nThe contract account is created with internal number assignment.\nOnly procedures with one or two check digits are supported. The number range is configured such that it begins with a leading zero (check digit procedure with one check digit) or with two leading zeros (procedure with two check digits).\nContract account enhancements\nYou can make enhancements using the\nBusiness Data Toolset (\nBDT) in the menu for transaction CAWM.\nStructure\nEvery contract account master record consists of general data that is the same for all business partners assigned to the contract account and business partner-specific data that can be set differently for each business partner in the contract account.\nNote\nIn the industry component\nInsurance\n, you can also define this data for the insurance relationship.\nThe master data is structured according to the processes that depend on the contract account data, such as incoming and outgoing payments, correspondence, dunning.\nIntegration\nAll transactions relating to contract accounts access data from the contract account master record (such as payments and dunning). Several transactions change data in the contract account master record (such as payment locks for returns).",
+  "text": "Contract Account\nDefinition\nStructure used to bill the posting data for contracts or contract items for which the same collection/disbursement agreements apply.\nContract accounts are managed on an open item basis within\nContract Accounts Receivable and Payable.\nNote\nIn the industry component\nInsurance, you can decide whether accounting is to be managed on an account or open item basis.\nUse\nAlternative correspondence recipient\nYou can define an alternative correspondence recipient in the contract account (see Recipient and Sender Determination).\nPlanned changes to the contract account\nYou do not have to activate contract account changes to have immediate effect, but rather you can enter a date as from which the changes should become effective. This data is not written to the database but recorded in change documents. The planned changes function only applies to changes to the contract account. You cannot schedule the creation of a contract account.\nTo activate this data, you should run program\nBUSPCDACT on a daily basis. This writes the scheduling to the database. You can use the application object\nFICA to activate planned changes to the contract account.\nWhen you are in display mode for change documents, you can delete inconsistent data, for example, data that arises when planned changes are cancelled.\nCheck digits in the contract account\nWhen you create a contract account, you can add a check digit to the contract account number. The prerequisites are as follows:\nYou add the check digit procedure using event 1051. (Sample function module FKK_SAMPLE_1051_2_CHECKDIGITS for two check digits is supplied by SAP)\nThe contract account is created with internal number assignment.\nOnly procedures with one or two check digits are supported. The number range is configured such that it begins with a leading zero (check digit procedure with one check digit) or with two leading zeros (procedure with two check digits).\nContract account enhancements\nYou can make enhancements using the Business Data Toolset (BDT) in the menu for transaction CAWM.\nStructure\nEvery contract account master record consists of general data that is the same for all business partners assigned to the contract account and business partner-specific data that can be set differently for each business partner in the contract account.\nNote\nIn the industry component\nInsurance, you can also define this data for the insurance relationship.\nThe master data is structured according to the processes that depend on the contract account data, such as incoming and outgoing payments, correspondence, dunning.\nIntegration\nAll transactions relating to contract accounts access data from the contract account master record (such as payments and dunning). Several transactions change data in the contract account master record (such as payment locks for returns).",
+  "clean_stats": {
+    "title_duplicates_removed": 1,
+    "fragments_joined": 9,
+    "lines_in": 42,
+    "lines_out": 32
+  },
+  "status": "OK"
+}

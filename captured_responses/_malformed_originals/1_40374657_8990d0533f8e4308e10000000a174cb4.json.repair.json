@@ -1,0 +1,21 @@
+{
+  "bare_quotes_escaped": 440,
+  "body_chars": 7611,
+  "body_sha256": "34e37d74e298f014bf236bf31a1251ab8b58d0c1560a6d002dc624f82b21347b",
+  "tail_keys": [
+    "isMachineTranslated",
+    "githubLink"
+  ],
+  "tail_candidates_examined": 1,
+  "head_keys": [
+    "fallback",
+    "deliverable",
+    "currentPage"
+  ],
+  "source_file": "1_40374657_8990d0533f8e4308e10000000a174cb4.json",
+  "original_sha256": "2bb7b68ff6f0a098a5a34a72b45b9932440183b3a2d8f2255923fee28f04e052",
+  "response_loio": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+  "current_page_loio": "8990d0533f8e4308e10000000a174cb4",
+  "toc_roots": 7,
+  "title": "Device Management"
+}

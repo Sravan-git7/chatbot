@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "page_id": "e31ce056045c122fe10000000a441470",
+  "file_path": "e31ce056045c122fe10000000a441470.html",
+  "page_title": "Contract Account and Contract Special Features for IS-U",
+  "text_raw": "Contract Account and Contract Special Features for IS-U\nContract Account and Contract Special Features for IS-U\nThis documentation section contains information about enhancements and variations from the FI-CA contract account and contract, which apply specifically to SAP Utilities (IS-U).",
+  "page_hash": "1c4669a59200988d2d82e32b3423965a1b798ac07a8991db9209889aa42d0e5c",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/056.json",
+  "current_page": {
+    "id": 2554985053,
+    "t": "Contract Account and Contract Special Features for IS-U",
+    "u": "e31ce056045c122fe10000000a441470.html",
+    "loio": "e31ce056045c122fe10000000a441470",
+    "deltaMtTranslate": false
+  }
+}

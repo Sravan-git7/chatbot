@@ -1,0 +1,2768 @@
+{
+ "summary": {
+  "pdfs": 29,
+  "producers": {
+   "ReportLab PDF Library - (opensource)": 29
+  },
+  "authors": {
+   "OpenAI": 29
+  },
+  "creators": {
+   "(unspecified)": 29
+  },
+  "subjects_keywords": {
+   "('(unspecified)', '')": 29
+  },
+  "annotation_counts": {
+   "1": 29
+  },
+  "annotation_action_keys": {
+   "['/S', '/Type', '/URI']": 29
+  },
+  "annotation_extra_keys": {
+   "[]": 29
+  },
+  "catalog_keys": {
+   "['/PageMode', '/Pages', '/Type']": 29
+  },
+  "features_present": {
+   "/Names": 0,
+   "/Dests": 0,
+   "/OpenAction": 0,
+   "/AA": 0,
+   "/JavaScript": 0,
+   "/AcroForm": 0,
+   "/Outlines": 0,
+   "/PageLabels": 0,
+   "/StructTreeRoot": 0,
+   "/Metadata": 0
+  },
+  "embedded_files_total": 0,
+  "xmp_present": 0,
+  "hidden_render_mode_3_total": 0,
+  "white_fill_ops_total": 0,
+  "bytes_after_last_EOF_nonzero": [],
+  "eof_counts": {
+   "1": 29
+  },
+  "distinct_urls_in_files": [
+   "https:/"
+  ],
+  "help_sap_urls_per_pdf": {
+   "1": 29
+  },
+  "hex32_token_classes": {
+   "card_guide_id": 29,
+   "card_page_id": 29,
+   "reportlab_document_digest (trailer /ID)": 29
+  },
+  "OTHER_hex32_equals_trailer_ID_count": 29,
+  "query_params_seen": {
+   "?T=h?Z": 1,
+   "?rSmP=o&a\\4GtbH$=?n=1": 1,
+   "?h=P79": 1,
+   "?version=2025.001": 2,
+   "?OK=E": 1,
+   "?Mg=\\bq:S$[thcRG?": 1
+  },
+  "numeric_tokens_seen": [
+   "10000000",
+   "228772",
+   "2344851",
+   "24000",
+   "3992155767996",
+   "42189",
+   "47416",
+   "51204",
+   "53118",
+   "54071",
+   "549661",
+   "56196782",
+   "5823854",
+   "6197147",
+   "63529",
+   "73440",
+   "76765",
+   "9442486404",
+   "98148"
+  ],
+  "sha256_distinct_pdfs": 29
+ },
+ "per_pdf": [
+  {
+   "file": "01_Utilities_Master_Data.pdf",
+   "bytes": 3178,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155015+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155015+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Utilities Master Data",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "a23d587324300eb794c49f6b1d0e8e5a",
+    "a23d587324300eb794c49f6b1d0e8e5a"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      511.4,
+      196.0,
+      523.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 35,
+   "trailer_ID_hex": "a23d587324300eb794c49f6b1d0e8e5a",
+   "hex32_tokens_anywhere": {
+    "021b182b0c47416c8fafed67ebfd78a9": "card_guide_id",
+    "0a6ace53118d4308e10000000a174cb4": "card_page_id",
+    "a23d587324300eb794c49f6b1d0e8e5a": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "47416",
+    "53118"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "02_Move_In_Out_Overview.pdf",
+   "bytes": 3124,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155015+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155015+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Move-In/Out Overview",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "3de0251e295097450049748e5b0bf0b1",
+    "3de0251e295097450049748e5b0bf0b1"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "3de0251e295097450049748e5b0bf0b1",
+   "hex32_tokens_anywhere": {
+    "3de0251e295097450049748e5b0bf0b1": "reportlab_document_digest (trailer /ID)",
+    "8082ce53118d4308e10000000a174cb4": "card_page_id",
+    "f4a255a5de524e3992155767996fb1fd": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "3992155767996",
+    "53118"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "03_Move_In_Process.pdf",
+   "bytes": 3131,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155015+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155015+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Move-In Process",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "\nÄ|[¦ï',nT−(;«á\u0002",
+    "\nÄ|[¦ï',nT−(;«á\u0002"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "0ac47c5ba6ef272c6e548a283babe102",
+   "hex32_tokens_anywhere": {
+    "0981ce53118d4308e10000000a174cb4": "card_page_id",
+    "0ac47c5ba6ef272c6e548a283babe102": "reportlab_document_digest (trailer /ID)",
+    "f4a255a5de524e3992155767996fb1fd": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "3992155767996",
+    "53118"
+   ],
+   "query_params": [
+    "?T=h?Z",
+    "?rSmP=o&a\\4GtbH$=?n=1"
+   ]
+  },
+  {
+   "file": "04_Move_Out_Process.pdf",
+   "bytes": 3142,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155015+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155015+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Move-Out Process",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "S×b†wäñæ%ï.r†ä‡U",
+    "S×b†wäñæ%ï.r†ä‡U"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "53d7628177e4f1e625ef2e7281e48255",
+   "hex32_tokens_anywhere": {
+    "0f81ce53118d4308e10000000a174cb4": "card_page_id",
+    "53d7628177e4f1e625ef2e7281e48255": "reportlab_document_digest (trailer /ID)",
+    "f4a255a5de524e3992155767996fb1fd": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "3992155767996",
+    "53118"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "05_Device_Management_Overview.pdf",
+   "bytes": 3123,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155015+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155015+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Device Management Overview",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "égÇŸbõb\u0013+hÔ\u0007ûUAY",
+    "égÇŸbõb\u0013+hÔ\u0007ûUAY"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "e967c79862f562132b68d407fb554159",
+   "hex32_tokens_anywhere": {
+    "021b182b0c47416c8fafed67ebfd78a9": "card_guide_id",
+    "8990d0533f8e4308e10000000a174cb4": "card_page_id",
+    "e967c79862f562132b68d407fb554159": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "47416"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "06_Reading_Meters.pdf",
+   "bytes": 3120,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155015+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155015+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Reading Meters",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "f1ff9ebe1604e613740e9616d7e4595c",
+    "f1ff9ebe1604e613740e9616d7e4595c"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "f1ff9ebe1604e613740e9616d7e4595c",
+   "hex32_tokens_anywhere": {
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758": "card_guide_id",
+    "bc90d0533f8e4308e10000000a174cb4": "card_page_id",
+    "f1ff9ebe1604e613740e9616d7e4595c": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000"
+   ],
+   "query_params": [
+    "?h=P79"
+   ]
+  },
+  {
+   "file": "07_Monitoring_Meter_Reading_Results.pdf",
+   "bytes": 3147,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155015+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155015+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Monitoring Meter Reading Results",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "‹Ý(^ŁSóåJ¢i¸¥¼Äv",
+    "‹Ý(^ŁSóåJ¢i¸¥¼Äv"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "88dd285e9553f3e54aa269b8a5bcc476",
+   "hex32_tokens_anywhere": {
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758": "card_guide_id",
+    "4d76765c1e012b8ae10000000a42189b": "card_page_id",
+    "88dd285e9553f3e54aa269b8a5bcc476": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "42189",
+    "76765"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "08_Meter_Reading_Estimation.pdf",
+   "bytes": 3119,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155015+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155015+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Meter Reading Estimation",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "\u00174\u0003.Z\u0015\u0013\u0004÷¾'e´i!\u0015",
+    "\u00174\u0003.Z\u0015\u0013\u0004÷¾'e´i!\u0015"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "1734032e5a151304f7be2765b4692115",
+   "hex32_tokens_anywhere": {
+    "1734032e5a151304f7be2765b4692115": "reportlab_document_digest (trailer /ID)",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758": "card_guide_id",
+    "d090d0533f8e4308e10000000a174cb4": "card_page_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "09_Estimation_Procedure_Details.pdf",
+   "bytes": 3139,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Estimation Procedure Details",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "Èª‰\beÃ¬ÝÄ>¥¯;ˆŽÒ",
+    "Èª‰\beÃ¬ÝÄ>¥¯;ˆŽÒ"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "c8aa8b0865c3acddc43ea5af3b1a99d2",
+   "hex32_tokens_anywhere": {
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758": "card_guide_id",
+    "bf74c1d28fd54f77b228772b98b72fba": "card_page_id",
+    "c8aa8b0865c3acddc43ea5af3b1a99d2": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "228772"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "10_Meter_Reading_Data_During_Move_In.pdf",
+   "bytes": 3129,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Meter Reading Data During Move-In",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "06d6e73de25ba7f376164f6d8f106cd7",
+    "06d6e73de25ba7f376164f6d8f106cd7"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      539.5,
+      196.0,
+      551.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "06d6e73de25ba7f376164f6d8f106cd7",
+   "hex32_tokens_anywhere": {
+    "06d6e73de25ba7f376164f6d8f106cd7": "reportlab_document_digest (trailer /ID)",
+    "b781ce53118d4308e10000000a174cb4": "card_page_id",
+    "f4a255a5de524e3992155767996fb1fd": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "3992155767996",
+    "53118"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "11_SAP_Utilities_Billing_Procedure.pdf",
+   "bytes": 3097,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "SAP Utilities Billing Procedure",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "I(†ﬁ®*‡−\u0015¿f¡{Ö<%",
+    "I(†ﬁ®*‡−\u0015¿f¡{Ö<%"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "49288193ae2a828a15bf66a17bd63c25",
+   "hex32_tokens_anywhere": {
+    "147bce53118d4308e10000000a174cb4": "card_page_id",
+    "49288193ae2a828a15bf66a17bd63c25": "reportlab_document_digest (trailer /ID)",
+    "ed84b70c199d4470ae2e5ccb93b2e45b": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "53118"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "12_Automatic_Billing.pdf",
+   "bytes": 3109,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Automatic Billing",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "I\u0011Ý«;N\u0012ˆ.ÆFÑþµˇ\u0006",
+    "I\u0011Ý«;N\u0012ˆ.ÆFÑþµˇ\u0006"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "4911ddab3b4e121a2ec646d1feb51906",
+   "hex32_tokens_anywhere": {
+    "297bce53118d4308e10000000a174cb4": "card_page_id",
+    "4911ddab3b4e121a2ec646d1feb51906": "reportlab_document_digest (trailer /ID)",
+    "ed84b70c199d4470ae2e5ccb93b2e45b": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "53118"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "13_Budget_Billing_Plan.pdf",
+   "bytes": 3111,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Budget Billing Plan",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "3f6024c8d559af00234abdb7121c1443",
+    "3f6024c8d559af00234abdb7121c1443"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      539.5,
+      196.0,
+      551.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "3f6024c8d559af00234abdb7121c1443",
+   "hex32_tokens_anywhere": {
+    "021b182b0c47416c8fafed67ebfd78a9": "card_guide_id",
+    "3f6024c8d559af00234abdb7121c1443": "reportlab_document_digest (trailer /ID)",
+    "c1a5e8aee73440ee971a768af5b9ea1b": "card_page_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "47416",
+    "73440"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "14_SAP_Utilities_Invoicing_Procedure.pdf",
+   "bytes": 3103,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "SAP Utilities Invoicing Procedure",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "ÐgíHˆ;\u0015ò²´wæ¸ú©#",
+    "ÐgíHˆ;\u0015ò²´wæ¸ú©#"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "d067ed481a3b15f2b2b477e6b8faa923",
+   "hex32_tokens_anywhere": {
+    "a003b275c98148ee8a4c3fafe9588fe3": "card_guide_id",
+    "cc7bce53118d4308e10000000a174cb4": "card_page_id",
+    "d067ed481a3b15f2b2b477e6b8faa923": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "53118",
+    "98148"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "15_Processing_Budget_Billing_Plans.pdf",
+   "bytes": 3088,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Processing Budget Billing Plans",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "a92122e3d23bcdc480c701b0fb7e16b2",
+    "a92122e3d23bcdc480c701b0fb7e16b2"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      539.5,
+      196.0,
+      551.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 32,
+   "trailer_ID_hex": "a92122e3d23bcdc480c701b0fb7e16b2",
+   "hex32_tokens_anywhere": {
+    "147cce53118d4308e10000000a174cb4": "card_page_id",
+    "a003b275c98148ee8a4c3fafe9588fe3": "card_guide_id",
+    "a92122e3d23bcdc480c701b0fb7e16b2": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "53118",
+    "98148"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "16_Periodic_Billing_and_Invoicing_Analysis.pdf",
+   "bytes": 3121,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Periodic Billing and Invoicing Analysis",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "71f420890e589d16bf28c4fb07fe1d69",
+    "71f420890e589d16bf28c4fb07fe1d69"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      539.5,
+      196.0,
+      551.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "71f420890e589d16bf28c4fb07fe1d69",
+   "hex32_tokens_anywhere": {
+    "021b182b0c47416c8fafed67ebfd78a9": "card_guide_id",
+    "549661e6541f403ea56196782e040bcc": "card_page_id",
+    "71f420890e589d16bf28c4fb07fe1d69": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "47416",
+    "549661",
+    "56196782"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "17_Contract_Accounts_Overview.pdf",
+   "bytes": 3108,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Contract Accounts Overview",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "2BPT¼„òÒTË-˝Jå¯§",
+    "2BPT¼„òÒTË-˝Jå¯§"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "32425054bc8cf2d254cb2d1c4ae5afa7",
+   "hex32_tokens_anywhere": {
+    "0bfcc5536a51204be10000000a174cb4": "card_page_id",
+    "32425054bc8cf2d254cb2d1c4ae5afa7": "reportlab_document_digest (trailer /ID)",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "51204",
+    "6197147"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "18_Contract_Account_Business_Object.pdf",
+   "bytes": 3184,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Contract Account Business Object",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "9fd344dff45a7c4468d969b73d718167",
+    "9fd344dff45a7c4468d969b73d718167"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 36,
+   "trailer_ID_hex": "9fd344dff45a7c4468d969b73d718167",
+   "hex32_tokens_anywhere": {
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id",
+    "9fd344dff45a7c4468d969b73d718167": "reportlab_document_digest (trailer /ID)",
+    "b1a202c9bb3011da2b24000f20dac9ef": "card_page_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "24000",
+    "54071",
+    "9442486404"
+   ],
+   "query_params": [
+    "?version=2025.001"
+   ]
+  },
+  {
+   "file": "19_Analyze_Incoming_Payments.pdf",
+   "bytes": 3107,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Analyze Incoming Payments",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "700eeda2fc9f9bb30e8fe10e1acf6b10",
+    "700eeda2fc9f9bb30e8fe10e1acf6b10"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "700eeda2fc9f9bb30e8fe10e1acf6b10",
+   "hex32_tokens_anywhere": {
+    "063bf3eb68e347efa5c0fc1d389f70f7": "card_page_id",
+    "700eeda2fc9f9bb30e8fe10e1acf6b10": "reportlab_document_digest (trailer /ID)",
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "54071",
+    "9442486404"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "20_Clearing_Control_in_Incoming_Payments.pdf",
+   "bytes": 3166,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Clearing Control in Incoming Payments",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "²’!\u0006%‹  üÁ¨0Bü¦ñ",
+    "²’!\u0006%‹  üÁ¨0Bü¦ñ"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "b290210625882020fcc1a83042fca6f1",
+   "hex32_tokens_anywhere": {
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id",
+    "b290210625882020fcc1a83042fca6f1": "reportlab_document_digest (trailer /ID)",
+    "edcd0c5823854d3296f2591e9f5d118c": "card_page_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "54071",
+    "5823854",
+    "9442486404"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "21_Clearing_Types.pdf",
+   "bytes": 3085,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Clearing Types",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "Ut°âevÛ´ˆ\u0004.Ìœ²£Z",
+    "Ut°âevÛ´ˆ\u0004.Ìœ²£Z"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      539.5,
+      196.0,
+      551.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "5574b0e26576dbb41a042ecc9cb2a35a",
+   "hex32_tokens_anywhere": {
+    "5574b0e26576dbb41a042ecc9cb2a35a": "reportlab_document_digest (trailer /ID)",
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id",
+    "e63529e1a3fd42e3a0e2c009ac783e0d": "card_page_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "54071",
+    "63529",
+    "9442486404"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "22_Processing_Incoming_Payments_from_External_Cash_Desks.pdf",
+   "bytes": 3154,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Processing Incoming Payments from External Cash Desks",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "701ea9fd2bee65a582bb8884ee0f9f74",
+    "701ea9fd2bee65a582bb8884ee0f9f74"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "701ea9fd2bee65a582bb8884ee0f9f74",
+   "hex32_tokens_anywhere": {
+    "3d0ac5536a51204be10000000a174cb4": "card_page_id",
+    "701ea9fd2bee65a582bb8884ee0f9f74": "reportlab_document_digest (trailer /ID)",
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "51204",
+    "54071",
+    "9442486404"
+   ],
+   "query_params": [
+    "?OK=E"
+   ]
+  },
+  {
+   "file": "23_Installment_Plan_Overview.pdf",
+   "bytes": 3156,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Installment Plan Overview",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "ü»½−Y‰%Ø¸Œ«©\\õt\u000e",
+    "ü»½−Y‰%Ø¸Œ«©\\õt\u000e"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 35,
+   "trailer_ID_hex": "fcbbbd8a598b25d8b896aba95cf5740e",
+   "hex32_tokens_anywhere": {
+    "730dc5536a51204be10000000a174cb4": "card_page_id",
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id",
+    "fcbbbd8a598b25d8b896aba95cf5740e": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "51204",
+    "54071",
+    "9442486404"
+   ],
+   "query_params": [
+    "?Mg=\\bq:S$[thcRG?",
+    "?version=2025.001"
+   ]
+  },
+  {
+   "file": "24_Creating_Installment_Plans.pdf",
+   "bytes": 3123,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Creating Installment Plans",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "DÓdËïqn—˙ÐÅmo;@d",
+    "DÓdËïqn—˙ÐÅmo;@d"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      539.5,
+      196.0,
+      551.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 32,
+   "trailer_ID_hex": "44d364cbef716e841bd0c56d6f3b4064",
+   "hex32_tokens_anywhere": {
+    "44d364cbef716e841bd0c56d6f3b4064": "reportlab_document_digest (trailer /ID)",
+    "790dc5536a51204be10000000a174cb4": "card_page_id",
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "51204",
+    "54071",
+    "9442486404"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "25_Displaying_and_Changing_Installment_Plans.pdf",
+   "bytes": 3156,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Displaying and Changing Installment Plans",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "8Ôô¾5°ñ‡{ŸÔ-íôC×",
+    "8Ôô¾5°ñ‡{ŸÔ-íôC×"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "38d4f4be35b0f1827b98d42dedf443d7",
+   "hex32_tokens_anywhere": {
+    "38d4f4be35b0f1827b98d42dedf443d7": "reportlab_document_digest (trailer /ID)",
+    "630dc5536a51204be10000000a174cb4": "card_page_id",
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "51204",
+    "54071",
+    "9442486404"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "26_FI_CA_Dunning.pdf",
+   "bytes": 3074,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "FI-CA Dunning",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "™\u000eêvmøý¸\u0017\b6•ìxy„",
+    "™\u000eêvmøý¸\u0017\b6•ìxy„"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "920eea766df8fdb817083680ec78798c",
+   "hex32_tokens_anywhere": {
+    "920eea766df8fdb817083680ec78798c": "reportlab_document_digest (trailer /ID)",
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id",
+    "b1ffc5536a51204be10000000a174cb4": "card_page_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "51204",
+    "54071",
+    "9442486404"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "27_Submission_of_Receivables_to_Collection_Agency.pdf",
+   "bytes": 3165,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Submission of Receivables to Collection Agency",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "e7a805b615adf6b28f5e21472e3a1cff",
+    "e7a805b615adf6b28f5e21472e3a1cff"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 33,
+   "trailer_ID_hex": "e7a805b615adf6b28f5e21472e3a1cff",
+   "hex32_tokens_anywhere": {
+    "10e7c5536a51204be10000000a174cb4": "card_page_id",
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id",
+    "e7a805b615adf6b28f5e21472e3a1cff": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "51204",
+    "54071",
+    "9442486404"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "28_Collection_Agency_APIs_and_Enterprise_Services.pdf",
+   "bytes": 3157,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Collection Agency APIs and Enterprise Services",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "5cžÛ0êl˜½Y“ð[òBª",
+    "5cžÛ0êl˜½Y“ð[òBª"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "35639edb30ea6c1fbd598df05bf242aa",
+   "hex32_tokens_anywhere": {
+    "35639edb30ea6c1fbd598df05bf242aa": "reportlab_document_digest (trailer /ID)",
+    "9442486404b54071b4ebeab6a16628e7": "card_guide_id",
+    "9c9c2344851f412f823d5f8a9dc7c694": "card_page_id"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "2344851",
+    "54071",
+    "9442486404"
+   ],
+   "query_params": []
+  },
+  {
+   "file": "29_Disconnection_Reconnection_of_a_Utility_Installation.pdf",
+   "bytes": 3213,
+   "pdf_version": "%PDF-1.4",
+   "pages": 1,
+   "trailer_keys": [
+    "/ID",
+    "/Info",
+    "/Root",
+    "/Size"
+   ],
+   "catalog_keys": [
+    "/PageMode",
+    "/Pages",
+    "/Type"
+   ],
+   "info": {
+    "/Author": "OpenAI",
+    "/CreationDate": "D:20260918155016+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20260918155016+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "(unspecified)",
+    "/Title": "Disconnection/Reconnection of a Utility Installation",
+    "/Trapped": "/False"
+   },
+   "xmp_metadata": false,
+   "has_names_dests_openaction_js": {
+    "/Names": false,
+    "/Dests": false,
+    "/OpenAction": false,
+    "/AA": false,
+    "/JavaScript": false,
+    "/AcroForm": false,
+    "/Outlines": false,
+    "/PageLabels": false,
+    "/StructTreeRoot": false,
+    "/Metadata": false
+   },
+   "embedded_files": [],
+   "bytes_after_last_EOF": 0,
+   "eof_count": 1,
+   "xref_sections": 1,
+   "trailer_ID": [
+    "fcac24f955337180aff3b083ad9845b6",
+    "fcac24f955337180aff3b083ad9845b6"
+   ],
+   "object_kinds": {
+    "DictionaryObject": 8,
+    "EncodedStreamObject": 1
+   },
+   "annotations": [
+    {
+     "subtype": "/Link",
+     "rect": [
+      52.8,
+      525.5,
+      196.0,
+      537.5
+     ],
+     "action_keys": [
+      "/S",
+      "/Type",
+      "/URI"
+     ],
+     "uri": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
+     "other_keys": []
+    }
+   ],
+   "hidden_text_indicators": {
+    "render_mode_3": 0,
+    "white_fill": 0
+   },
+   "content_stream_tj_strings": 34,
+   "trailer_ID_hex": "fcac24f955337180aff3b083ad9845b6",
+   "hex32_tokens_anywhere": {
+    "8682ce53118d4308e10000000a174cb4": "card_page_id",
+    "f4a255a5de524e3992155767996fb1fd": "card_guide_id",
+    "fcac24f955337180aff3b083ad9845b6": "reportlab_document_digest (trailer /ID)"
+   },
+   "url_like_tokens_raw_decoded": [
+    "https:/",
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html"
+   ],
+   "numeric_tokens_ge_5_digits_in_text_strings": [
+    "10000000",
+    "3992155767996",
+    "53118"
+   ],
+   "query_params": []
+  }
+ ]
+}

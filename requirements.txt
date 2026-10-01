@@ -1,0 +1,14 @@
+# Runtime dependencies (all local / open source).
+# Tested with: chromadb 1.5.9, sentence-transformers 6.1.0, ollama (client) 0.6.3, Python 3.11.
+# Pin exact versions once you have a known-good environment (`pip freeze`).
+chromadb>=1.0
+sentence-transformers>=3.0
+ollama>=0.4
+
+# Only needed to re-download the SAP pages (fetch_sap_pages.py) and by sap_resolver:
+requests
+beautifulsoup4
+
+# sap_resolver (topic manifest from the 29 reference-card PDFs) and its tests:
+pypdf
+pytest

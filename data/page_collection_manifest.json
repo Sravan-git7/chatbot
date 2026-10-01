@@ -1,0 +1,87 @@
+{
+  "collection_name": "sap_pages_v1",
+  "vector_store_dir": "data/vector_store/page_collection",
+  "created_utc": "2026-10-01T01:47:30+00:00",
+  "vector_count": 32,
+  "embedding_dimensions": 384,
+  "distance_space": "cosine",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "embedding_model_provenance": {
+    "model_name": "all-MiniLM-L6-v2",
+    "origin": "pip package gt-all-minilm-l6-v2 (third-party re-packaging of sentence-transformers/all-MiniLM-L6-v2)",
+    "directory": "/tmp/av/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
+    "files_sha256": {
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+    }
+  },
+  "max_seq_length": 256,
+  "normalize_embeddings": true,
+  "chunk_strategy": "B_heading_200",
+  "chunk_config": {
+    "name": "B_heading_200",
+    "strategy": "heading",
+    "max_chars": 1000,
+    "target_tokens": 200,
+    "max_tokens": 250,
+    "min_tokens": 24,
+    "overlap_sentences": 1,
+    "embed_prefix": true
+  },
+  "token_counter": {
+    "tokenizer": "all-MiniLM-L6-v2 WordPiece (tokenizers)",
+    "model_dir": "/tmp/av/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
+    "exact": true
+  },
+  "corpus_sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d",
+  "pages": 7,
+  "page_doc_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+    "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+    "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4"
+  ],
+  "chunks_fingerprint": "c50e951f7c693ed615e8554c501a6d34fc920ece1372ce63f5dce1f7f12df61b",
+  "chunk_stats": {
+    "chunks": 32,
+    "pages": 7,
+    "chunks_per_page_mean": 4.57,
+    "tokens": {
+      "min": 31,
+      "median": 109.5,
+      "mean": 118.8,
+      "p90": 190.0,
+      "max": 226
+    },
+    "chars": {
+      "min": 116,
+      "median": 521.5,
+      "mean": 566.5,
+      "max": 1092
+    },
+    "over_model_limit": 0,
+    "tiny_chunks_under_24_tokens": 0,
+    "split_chunks": 16,
+    "chunks_with_overlap": 0,
+    "total_chunk_chars": 18128
+  },
+  "embeddings_float32_sha256": "787a64b11bf1411dfef291bbb712d5ecebf3300a4ce5ab4b5ba6ad8a82492c95",
+  "embeddings_sha256_note": "hash of the float32 matrix as computed on this machine; may differ on other hardware/library builds",
+  "card_collection_untouched": {
+    "name": "sap_m2c_card_v1",
+    "dir": "data/vector_store",
+    "opened_by_this_script": false
+  },
+  "legacy_collection_untouched": {
+    "name": "sap_docs"
+  },
+  "chromadb": "1.5.9",
+  "reproduce_with": "python scripts/page_corpus.py && python scripts/build_page_collection.py --rebuild"
+}

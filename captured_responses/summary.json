@@ -1,0 +1,56 @@
+[
+  {
+    "n": 1,
+    "url": "﻿https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=8990d0533f8e4308e10000000a174cb4.html",
+    "deliverable_id": "40374657",
+    "buildNo": "1779",
+    "file_path": "8990d0533f8e4308e10000000a174cb4.html",
+    "http": null,
+    "error": "URLError: <urlopen error unknown url type: ﻿https>"
+  },
+  {
+    "n": 2,
+    "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=8082ce53118d4308e10000000a174cb4.html",
+    "deliverable_id": "40374682",
+    "buildNo": "1779",
+    "file_path": "8082ce53118d4308e10000000a174cb4.html",
+    "http": null,
+    "error": "URLError: <urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  {
+    "n": 3,
+    "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=4d76765c1e012b8ae10000000a42189b.html",
+    "deliverable_id": "40374657",
+    "buildNo": "1779",
+    "file_path": "4d76765c1e012b8ae10000000a42189b.html",
+    "http": null,
+    "error": "URLError: <urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  {
+    "n": 4,
+    "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40404052&buildNo=78&file_path=147bce53118d4308e10000000a174cb4.html",
+    "deliverable_id": "40404052",
+    "buildNo": "78",
+    "file_path": "147bce53118d4308e10000000a174cb4.html",
+    "http": null,
+    "error": "URLError: <urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  {
+    "n": 5,
+    "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374633&buildNo=1779&file_path=cc7bce53118d4308e10000000a174cb4.html",
+    "deliverable_id": "40374633",
+    "buildNo": "1779",
+    "file_path": "cc7bce53118d4308e10000000a174cb4.html",
+    "http": null,
+    "error": "URLError: <urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  {
+    "n": 6,
+    "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=790dc5536a51204be10000000a174cb4.html",
+    "deliverable_id": "40374790",
+    "buildNo": "1779",
+    "file_path": "790dc5536a51204be10000000a174cb4.html",
+    "http": null,
+    "error": "URLError: <urlopen error [Errno 11001] getaddrinfo failed>"
+  }
+]

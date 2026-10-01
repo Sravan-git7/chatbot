@@ -1,0 +1,454 @@
+[
+  {
+    "id": "a01",
+    "type": "direct",
+    "question": "What are the two types of master data?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "Master Data"
+      ]
+    ],
+    "must_include": [
+      [
+        "business master data"
+      ],
+      [
+        "technical master data"
+      ]
+    ]
+  },
+  {
+    "id": "a02",
+    "type": "direct",
+    "question": "What does a contract account category determine?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "Contract Account Category"
+      ]
+    ],
+    "must_include": [
+      [
+        "attribute"
+      ],
+      [
+        "business partner",
+        "number range",
+        "one-time",
+        "editing screen",
+        "contract"
+      ]
+    ]
+  },
+  {
+    "id": "a03",
+    "type": "direct",
+    "question": "What is a business partner?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "SAP Business Partner"
+      ]
+    ],
+    "must_include": [
+      [
+        "organization",
+        "person",
+        "group of persons"
+      ]
+    ]
+  },
+  {
+    "id": "a04",
+    "type": "paraphrased",
+    "question": "How does SAP classify master data in IS-U?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "Master Data"
+      ]
+    ],
+    "must_include": [
+      [
+        "business master data"
+      ],
+      [
+        "technical master data"
+      ]
+    ]
+  },
+  {
+    "id": "a05",
+    "type": "paraphrased",
+    "question": "Describe the SAP Business Partner concept.",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "SAP Business Partner"
+      ]
+    ],
+    "must_include": [
+      [
+        "organization",
+        "person"
+      ],
+      [
+        "role"
+      ]
+    ]
+  },
+  {
+    "id": "a06",
+    "type": "detail",
+    "question": "What technical master data is included in SAP IS-U?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "Master Data"
+      ]
+    ],
+    "must_include": [
+      [
+        "grid"
+      ],
+      [
+        "point of delivery"
+      ],
+      [
+        "connection object"
+      ],
+      [
+        "technical installation"
+      ]
+    ]
+  },
+  {
+    "id": "a07",
+    "type": "detail",
+    "question": "What actions does the system perform when a business partner is blocked in Contract Accounts Receivable and Payable?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "Blocking and Unblocking of Business Partners"
+      ]
+    ],
+    "must_include": [
+      [
+        "posting block"
+      ],
+      [
+        "deletion flag"
+      ]
+    ]
+  },
+  {
+    "id": "a08",
+    "type": "detail",
+    "question": "Which transaction is the central program for blocking business partner data?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "Blocking and Unblocking of Business Partners"
+      ]
+    ],
+    "must_include": [
+      [
+        "BUPA_PRE_EOP"
+      ]
+    ]
+  },
+  {
+    "id": "a09",
+    "type": "relationship",
+    "question": "Can one contract account have multiple business partners?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "Contract Accounts",
+        "Link: Contract Account - Business Partner"
+      ]
+    ],
+    "must_include": [
+      [
+        "more than one",
+        "several",
+        "multiple",
+        "yes"
+      ]
+    ]
+  },
+  {
+    "id": "a10",
+    "type": "relationship",
+    "question": "What is the relationship between a business partner and a contract account?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "Contract Accounts",
+        "Link: Contract Account - Business Partner"
+      ]
+    ],
+    "must_include": [
+      [
+        "assign"
+      ]
+    ]
+  },
+  {
+    "id": "a11",
+    "type": "comparison",
+    "question": "What is the difference between business master data and technical master data?",
+    "expect": "answer",
+    "expected_sources": [
+      [
+        "Master Data"
+      ]
+    ],
+    "must_include": [
+      [
+        "business partner",
+        "contract account",
+        "contract"
+      ],
+      [
+        "grid",
+        "point of delivery",
+        "connection",
+        "premise",
+        "installation"
+      ]
+    ]
+  },
+  {
+    "id": "a12",
+    "type": "comparison",
+    "question": "What is the difference between a business partner and a contract account?",
+    "expect": "answer",
+    "multi_source": true,
+    "expected_sources": [
+      [
+        "SAP Business Partner"
+      ],
+      [
+        "Contract Account",
+        "Contract Accounts"
+      ]
+    ],
+    "must_include": [
+      [
+        "organization",
+        "person",
+        "group of persons"
+      ],
+      [
+        "bill",
+        "posting",
+        "payment",
+        "collection",
+        "procedure"
+      ]
+    ]
+  },
+  {
+    "id": "a13",
+    "type": "multi_source",
+    "question": "How does a contract account relate to contracts and to business partners in IS-U?",
+    "expect": "answer",
+    "multi_source": true,
+    "expected_sources": [
+      [
+        "Link: Contract Account - Business Partner"
+      ],
+      [
+        "Link Between Contract Accounts and Contracts (IS-U)"
+      ]
+    ],
+    "must_include": [
+      [
+        "business partner"
+      ],
+      [
+        "contract"
+      ],
+      [
+        "one contract account",
+        "assigned to a contract account",
+        "must always be assigned",
+        "grouped",
+        "each contract"
+      ]
+    ]
+  },
+  {
+    "id": "a14",
+    "type": "multi_source",
+    "question": "What is a business partner and what is a contract account?",
+    "expect": "answer",
+    "multi_source": true,
+    "expected_sources": [
+      [
+        "SAP Business Partner"
+      ],
+      [
+        "Contract Account",
+        "Contract Accounts"
+      ]
+    ],
+    "must_include": [
+      [
+        "organization",
+        "person",
+        "group of persons"
+      ],
+      [
+        "bill",
+        "posting",
+        "payment",
+        "collection"
+      ]
+    ]
+  },
+  {
+    "id": "g01",
+    "type": "absent",
+    "question": "How do I configure SAP MM purchase orders?",
+    "expect": "refuse",
+    "must_not_include": [
+      "purchase requisition",
+      "goods receipt"
+    ]
+  },
+  {
+    "id": "g02",
+    "type": "absent",
+    "question": "What is the SAP HANA licensing cost?",
+    "expect": "refuse",
+    "must_not_include": [
+      "$",
+      "usd",
+      "eur"
+    ]
+  },
+  {
+    "id": "g03",
+    "type": "absent",
+    "question": "What is the SAP S/4HANA price per user?",
+    "expect": "refuse",
+    "must_not_include": [
+      "$",
+      "usd",
+      "eur",
+      "per month"
+    ]
+  },
+  {
+    "id": "g04",
+    "type": "absent",
+    "question": "How do I create a sales order in SAP SD?",
+    "expect": "refuse",
+    "must_not_include": [
+      "va01"
+    ]
+  },
+  {
+    "id": "g05",
+    "type": "absent",
+    "question": "What is the difference between a contract and a business partner in Salesforce?",
+    "expect": "refuse",
+    "must_not_include": [
+      "salesforce is",
+      "salesforce contract"
+    ]
+  },
+  {
+    "id": "o01",
+    "type": "out_of_domain",
+    "question": "Who is the CEO of SAP?",
+    "expect": "refuse",
+    "must_not_include": [
+      "christian klein"
+    ]
+  },
+  {
+    "id": "o02",
+    "type": "out_of_domain",
+    "question": "What is Python?",
+    "expect": "refuse",
+    "must_not_include": [
+      "programming language"
+    ]
+  },
+  {
+    "id": "o03",
+    "type": "out_of_domain",
+    "question": "What is the capital of France?",
+    "expect": "refuse",
+    "must_not_include": [
+      "paris"
+    ]
+  },
+  {
+    "id": "h01",
+    "type": "hallucination_trap",
+    "question": "What is the maximum number of business partners that can be assigned to a contract account?",
+    "expect": "answer_or_refuse",
+    "expected_sources": [
+      [
+        "Contract Accounts",
+        "Link: Contract Account - Business Partner"
+      ]
+    ],
+    "must_not_match": [
+      "\\b\\d+\\s+(?:business )?partners\\b",
+      "\\bmaximum of\\b"
+    ]
+  },
+  {
+    "id": "h02",
+    "type": "hallucination_trap",
+    "question": "What is the default number range for contract accounts?",
+    "expect": "answer_or_refuse",
+    "expected_sources": [
+      [
+        "Contract Account Category"
+      ]
+    ],
+    "must_not_match": [
+      "\\b\\d{5,}\\b"
+    ]
+  },
+  {
+    "id": "m01",
+    "type": "ambiguous",
+    "question": "What is a partner?",
+    "expect": "answer_or_refuse",
+    "expected_sources": [
+      [
+        "SAP Business Partner"
+      ]
+    ],
+    "manual_review": true
+  },
+  {
+    "id": "m02",
+    "type": "ambiguous",
+    "question": "How do I create one?",
+    "expect": "answer_or_refuse",
+    "manual_review": true
+  },
+  {
+    "id": "m03",
+    "type": "ambiguous",
+    "question": "Tell me about accounts",
+    "expect": "answer_or_refuse",
+    "expected_sources": [
+      [
+        "Contract Accounts",
+        "Contract Account",
+        "Contract Account Category"
+      ]
+    ],
+    "manual_review": true
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "totals": {
+    "topics_resolved": 1,
+    "topics_unresolved": 28,
+    "page_references": 22,
+    "unique_pages_planned": 22,
+    "pages_fetched": 22,
+    "pages_failed": 0,
+    "duplicate_pages_identity": 0,
+    "duplicate_content_pages": 0,
+    "empty_pages": 0,
+    "canonical_documents_chunked": 22,
+    "total_chars_raw": 37049,
+    "total_chars_cleaned": 36175,
+    "total_chunks": 51,
+    "avg_chunk_chars": 713.1,
+    "median_chunk_chars": 815,
+    "min_chunk_chars": 72,
+    "max_chunk_chars": 999,
+    "duplicate_chunks_exact": 0
+  },
+  "chunk_length": {
+    "count": 51,
+    "total": 36368,
+    "mean": 713.1,
+    "median": 815,
+    "min": 72,
+    "max": 999
+  },
+  "chunks_per_topic": {
+    "17": 51
+  },
+  "pages_per_topic": {
+    "17": 22
+  },
+  "chunks_per_page": {
+    "count": 22,
+    "total": 51,
+    "mean": 2.3,
+    "median": 2.0,
+    "min": 1,
+    "max": 8
+  }
+}

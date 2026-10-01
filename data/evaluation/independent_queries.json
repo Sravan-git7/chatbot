@@ -1,0 +1,1294 @@
+{
+  "schema_version": 1,
+  "description": "Independent retrieval queries written like real users; labels from the card text only; written by hand by the AI coding agent (no automated LLM generation pipeline, no human domain expert) before any Phase 5 retrieval.",
+  "independence_rules": {
+    "max_verbatim_overlap_words": 3,
+    "not_equal_to_phase4_questions": true
+  },
+  "difficulty_criteria": {
+    "easy": "term appears in only one or two cards, or intent unmistakable",
+    "medium": "intent clear but vocabulary differs from the card, or a sibling card is plausible",
+    "hard": "vocabulary differs AND a sibling card is plausible, or very short/generic/compound"
+  },
+  "length_buckets": {
+    "very_short": "1-4 words",
+    "short": "5-7",
+    "long": "8-20",
+    "very_long": ">20"
+  },
+  "query_count": 54,
+  "queries": [
+    {
+      "query_id": "P5-01",
+      "query": "Where do I start if I need to understand how customers, premises and meters fit together in the system?",
+      "query_type": "natural",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-01"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-05",
+        "M2C-17"
+      ],
+      "ambiguous": true,
+      "rationale": "Card 01 is the foundation card for the master-data objects (business partner, premise, installation, device) and their relationships.",
+      "evidence": [
+        {
+          "source_id": "M2C-01",
+          "quote": "Foundation source for Business Partner, Contract Account, Contract, Point of Delivery"
+        }
+      ],
+      "word_count": 19,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-02",
+      "query": "What happens in the system when a new tenant gets connected?",
+      "query_type": "natural",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02",
+        "M2C-10"
+      ],
+      "ambiguous": true,
+      "rationale": "Starting service for a new customer is the move-in process (creation of the customer-service relationship).",
+      "evidence": [
+        {
+          "source_id": "M2C-03",
+          "quote": "creation of the customer-service relationship for a utility installation"
+        }
+      ],
+      "word_count": 11,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-03",
+      "query": "A customer is leaving the property. What needs to happen with their last bill and meter reading?",
+      "query_type": "natural",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02"
+      ],
+      "ambiguous": true,
+      "rationale": "Card 04 names service stop, final meter reading and final billing; card 02 also mentions final billing.",
+      "evidence": [
+        {
+          "source_id": "M2C-04",
+          "quote": "service stop, final meter reading, final billing and downstream account effects"
+        }
+      ],
+      "word_count": 17,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-04",
+      "query": "Why did a customer get a bill based on an estimate instead of an actual reading?",
+      "query_type": "natural",
+      "difficulty": "easy",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-09"
+      ],
+      "ambiguous": false,
+      "rationale": "Card 08 covers estimation when readings are missing or unusable and estimated-bill reasoning.",
+      "evidence": [
+        {
+          "source_id": "M2C-08",
+          "quote": "estimation when readings are missing, unavailable or unsuitable for direct use"
+        }
+      ],
+      "word_count": 16,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-05",
+      "query": "How do I follow up on customers who have not paid on time?",
+      "query_type": "natural",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-27",
+        "M2C-29"
+      ],
+      "ambiguous": true,
+      "rationale": "Overdue items and the escalation of collections are the subject of the dunning card; later-stage cards are siblings.",
+      "evidence": [
+        {
+          "source_id": "M2C-26",
+          "quote": "overdue items, dunning notices and dunning activities"
+        }
+      ],
+      "word_count": 13,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-06",
+      "query": "Can I spread a large overdue balance over several payments?",
+      "query_type": "natural",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-24"
+      ],
+      "ambiguous": true,
+      "rationale": "Redistributing receivables into scheduled instalments is defined on the installment plan overview card.",
+      "evidence": [
+        {
+          "source_id": "M2C-23",
+          "quote": "source receivables are redistributed into scheduled installment receivables"
+        }
+      ],
+      "word_count": 10,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-07",
+      "query": "Where can I find out how a payment that just arrived gets matched to what the customer owes?",
+      "query_type": "natural",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-21",
+        "M2C-19"
+      ],
+      "ambiguous": true,
+      "rationale": "Assigning incoming amounts to open items is the clearing-control card.",
+      "evidence": [
+        {
+          "source_id": "M2C-20",
+          "quote": "incoming-payment amounts are assigned to open items using FI-CA clearing control"
+        }
+      ],
+      "word_count": 18,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-08",
+      "query": "How is electricity supply switched off and back on when a customer doesn't pay?",
+      "query_type": "natural",
+      "difficulty": "easy",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-26"
+      ],
+      "ambiguous": false,
+      "rationale": "Interruption and restoration of supply for collection reasons is the disconnection/reconnection card.",
+      "evidence": [
+        {
+          "source_id": "M2C-29",
+          "quote": "temporary interruption and restoration of utility supply for collection or technical reasons"
+        }
+      ],
+      "word_count": 15,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-09",
+      "query": "Which topic explains how an invoice gets created after the bill has been calculated?",
+      "query_type": "natural",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-11"
+      ],
+      "ambiguous": true,
+      "rationale": "Turning billing results into invoices is the invoicing procedure card; card 11 ends at billing results.",
+      "evidence": [
+        {
+          "source_id": "M2C-14",
+          "quote": "how billing results become invoices, print documents and FI-CA postings"
+        }
+      ],
+      "word_count": 14,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-10",
+      "query": "How can I keep an eye on meter reads that came in wrong or are stuck?",
+      "query_type": "natural",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-06"
+      ],
+      "ambiguous": true,
+      "rationale": "Monitoring results and exception/troubleshooting scenarios belong to card 07; card 06 covers validation and correction.",
+      "evidence": [
+        {
+          "source_id": "M2C-07",
+          "quote": "exception monitoring and support/troubleshooting scenarios"
+        }
+      ],
+      "word_count": 16,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-11",
+      "query": "Is there a way to hand unpaid accounts over to an external debt collector?",
+      "query_type": "natural",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-27"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-28"
+      ],
+      "ambiguous": true,
+      "rationale": "Submitting receivables to collection agencies is card 27; card 28 covers the technical integration.",
+      "evidence": [
+        {
+          "source_id": "M2C-27",
+          "quote": "releasing, submitting, processing and recalling receivables handled by collection agencies"
+        }
+      ],
+      "word_count": 14,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-12",
+      "query": "How do system interfaces to outside collection companies work?",
+      "query_type": "natural",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-27"
+      ],
+      "ambiguous": true,
+      "rationale": "Integration mechanisms between FI-CA and external agencies are card 28.",
+      "evidence": [
+        {
+          "source_id": "M2C-28",
+          "quote": "integration mechanisms between FI-CA and external collection agencies"
+        }
+      ],
+      "word_count": 9,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-13",
+      "query": "What does a customer's financial account in the billing system control?",
+      "query_type": "natural",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-18"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-17"
+      ],
+      "ambiguous": true,
+      "rationale": "The contract account's control role is described on card 18; card 17 is the overview.",
+      "evidence": [
+        {
+          "source_id": "M2C-18",
+          "quote": "control role for postings, payments and dunning"
+        }
+      ],
+      "word_count": 12,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-14",
+      "query": "How do customers pay a steady monthly amount instead of variable bills?",
+      "query_type": "natural",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-15"
+      ],
+      "ambiguous": true,
+      "rationale": "Budget billing plans and periodic payment concepts are card 13.",
+      "evidence": [
+        {
+          "source_id": "M2C-13",
+          "quote": "utility budget billing plans and periodic payment concepts"
+        }
+      ],
+      "word_count": 12,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-15",
+      "query": "budget billing",
+      "query_type": "keyword",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-13",
+        "M2C-15"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": true,
+      "rationale": "Both budget-billing cards are equally valid answers to a bare two-word query.",
+      "evidence": [
+        {
+          "source_id": "M2C-13",
+          "quote": "budget billing plans"
+        },
+        {
+          "source_id": "M2C-15",
+          "quote": "budget billing plans"
+        }
+      ],
+      "word_count": 2,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-16",
+      "query": "extrapolation",
+      "query_type": "keyword",
+      "difficulty": "easy",
+      "expected_source_ids": [
+        "M2C-09"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-08"
+      ],
+      "ambiguous": false,
+      "rationale": "Extrapolation is named only on the estimation-procedure details card.",
+      "evidence": [
+        {
+          "source_id": "M2C-09",
+          "quote": "extrapolation/interpolation"
+        }
+      ],
+      "word_count": 1,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-17",
+      "query": "open items",
+      "query_type": "keyword",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-21"
+      ],
+      "ambiguous": false,
+      "rationale": "Assignment of incoming amounts to open items is card 20.",
+      "evidence": [
+        {
+          "source_id": "M2C-20",
+          "quote": "assigned to open items"
+        }
+      ],
+      "word_count": 2,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-18",
+      "query": "cash desk",
+      "query_type": "keyword",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-21"
+      ],
+      "ambiguous": true,
+      "rationale": "External cash desks are the subject of card 22; card 21 mentions cash-desk clearing contexts.",
+      "evidence": [
+        {
+          "source_id": "M2C-22",
+          "quote": "incoming-payment notifications from external cash desks"
+        }
+      ],
+      "word_count": 2,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-19",
+      "query": "dunning",
+      "query_type": "keyword",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-27",
+        "M2C-29",
+        "M2C-17",
+        "M2C-18"
+      ],
+      "ambiguous": true,
+      "rationale": "Card 26 is the primary dunning reference; several cards mention dunning in passing.",
+      "evidence": [
+        {
+          "source_id": "M2C-26",
+          "quote": "Primary reference for FI-CA dunning"
+        }
+      ],
+      "word_count": 1,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-20",
+      "query": "meter estimation",
+      "query_type": "keyword",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-08",
+        "M2C-09"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": true,
+      "rationale": "Two cards cover estimation; either answers the query.",
+      "evidence": [
+        {
+          "source_id": "M2C-08",
+          "quote": "Explains estimation"
+        },
+        {
+          "source_id": "M2C-09",
+          "quote": "Deeper reference for estimation procedures"
+        }
+      ],
+      "word_count": 2,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-21",
+      "query": "billing schema",
+      "query_type": "keyword",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-11",
+        "M2C-12"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": true,
+      "rationale": "Schema is named on the billing procedure card (rate/schema calculation) and on the automatic billing card.",
+      "evidence": [
+        {
+          "source_id": "M2C-11",
+          "quote": "rate/schema calculation"
+        },
+        {
+          "source_id": "M2C-12",
+          "quote": "rate type, schema, operand, price"
+        }
+      ],
+      "word_count": 2,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-22",
+      "query": "installment plan display",
+      "query_type": "keyword",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-25"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-23",
+        "M2C-24"
+      ],
+      "ambiguous": true,
+      "rationale": "Display and change functions are on card 25; cards 23 and 24 are in the same family.",
+      "evidence": [
+        {
+          "source_id": "M2C-25",
+          "quote": "display/change functions"
+        }
+      ],
+      "word_count": 3,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-23",
+      "query": "delinquency",
+      "query_type": "keyword",
+      "difficulty": "easy",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "rationale": "Delinquency is named only on the disconnection card.",
+      "evidence": [
+        {
+          "source_id": "M2C-29",
+          "quote": "distinction between delinquency and disconnect eligibility"
+        }
+      ],
+      "word_count": 1,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-24",
+      "query": "reversal",
+      "query_type": "keyword",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "rationale": "Reversal scenarios are named only on the external cash desk card.",
+      "evidence": [
+        {
+          "source_id": "M2C-22",
+          "quote": "real-time external payment and reversal scenarios"
+        }
+      ],
+      "word_count": 1,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-25",
+      "query": "KPIs",
+      "query_type": "keyword",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-16"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-07"
+      ],
+      "ambiguous": false,
+      "rationale": "KPIs are named only on the periodic billing/invoicing analysis card.",
+      "evidence": [
+        {
+          "source_id": "M2C-16",
+          "quote": "operational monitoring, KPIs and exception-management use cases"
+        }
+      ],
+      "word_count": 1,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-26",
+      "query": "FI-CA document",
+      "query_type": "keyword",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-26"
+      ],
+      "ambiguous": true,
+      "rationale": "Card 14 is the one that distinguishes the FI-CA document from the billing document; FI-CA appears on many cards.",
+      "evidence": [
+        {
+          "source_id": "M2C-14",
+          "quote": "customer bill and FI-CA document"
+        }
+      ],
+      "word_count": 3,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 3
+    },
+    {
+      "query_id": "P5-27",
+      "query": "Explain how a household is registered as using a service point for the first time",
+      "query_type": "paraphrase",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02",
+        "M2C-10"
+      ],
+      "ambiguous": true,
+      "rationale": "First-time use of a utility installation by a customer is the move-in process.",
+      "evidence": [
+        {
+          "source_id": "M2C-03",
+          "quote": "Explains the move-in process"
+        }
+      ],
+      "word_count": 15,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-28",
+      "query": "Stopping service for a customer and finishing up the account",
+      "query_type": "paraphrase",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02"
+      ],
+      "ambiguous": true,
+      "rationale": "Ending the relationship with final processing is the move-out process.",
+      "evidence": [
+        {
+          "source_id": "M2C-04",
+          "quote": "termination of the customer-service relationship and related final processing"
+        }
+      ],
+      "word_count": 10,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-29",
+      "query": "Calculating what to charge from usage figures using price tables",
+      "query_type": "paraphrase",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-11"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-12"
+      ],
+      "ambiguous": true,
+      "rationale": "The billing procedure goes from consumption data through rate calculation to billing results; card 12 covers the configuration elements.",
+      "evidence": [
+        {
+          "source_id": "M2C-11",
+          "quote": "from consumption/profile data through rate/schema calculation to billing results"
+        }
+      ],
+      "word_count": 10,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-30",
+      "query": "What do I do when a meter cannot be read and a figure has to be guessed?",
+      "query_type": "paraphrase",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-09"
+      ],
+      "ambiguous": true,
+      "rationale": "Missing or unavailable readings lead to estimation.",
+      "evidence": [
+        {
+          "source_id": "M2C-08",
+          "quote": "estimation when readings are missing, unavailable or unsuitable for direct use"
+        }
+      ],
+      "word_count": 17,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-31",
+      "query": "Filling gaps in usage data between two known readings",
+      "query_type": "paraphrase",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-09"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-08"
+      ],
+      "ambiguous": true,
+      "rationale": "Interpolation between known values is named on card 09 (estimation procedure details).",
+      "evidence": [
+        {
+          "source_id": "M2C-09",
+          "quote": "extrapolation/interpolation"
+        }
+      ],
+      "word_count": 9,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-32",
+      "query": "Checking the quality of submitted consumption figures and fixing wrong ones before charging",
+      "query_type": "paraphrase",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-06"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-07"
+      ],
+      "ambiguous": true,
+      "rationale": "Validation/correction of results and their transfer toward billing is card 06.",
+      "evidence": [
+        {
+          "source_id": "M2C-06",
+          "quote": "validation/correction and transfer of results toward billing"
+        }
+      ],
+      "word_count": 13,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-33",
+      "query": "Looking into money received from customers that can't be assigned",
+      "query_type": "paraphrase",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-19"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-20"
+      ],
+      "ambiguous": true,
+      "rationale": "Analysis and clarification of incoming payments is card 19; card 20 covers the assignment mechanism.",
+      "evidence": [
+        {
+          "source_id": "M2C-19",
+          "quote": "analysis of incoming payments and payment clarification"
+        }
+      ],
+      "word_count": 11,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-34",
+      "query": "Different situations in which open amounts get settled against payments",
+      "query_type": "paraphrase",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-21"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-20"
+      ],
+      "ambiguous": true,
+      "rationale": "Clearing types across FI-CA processes are card 21.",
+      "evidence": [
+        {
+          "source_id": "M2C-21",
+          "quote": "Reference for clearing types used across FI-CA processes"
+        }
+      ],
+      "word_count": 10,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-35",
+      "query": "Shop-counter payments from outside partners being posted immediately",
+      "query_type": "paraphrase",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-19"
+      ],
+      "ambiguous": true,
+      "rationale": "Real-time external payment notifications are card 22.",
+      "evidence": [
+        {
+          "source_id": "M2C-22",
+          "quote": "real-time external payment and reversal scenarios"
+        }
+      ],
+      "word_count": 9,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-36",
+      "query": "Changing a payment agreement after it has been set up for a customer",
+      "query_type": "paraphrase",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-25"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-24"
+      ],
+      "ambiguous": true,
+      "rationale": "Maintenance of an arrangement after creation, including change functions, is card 25.",
+      "evidence": [
+        {
+          "source_id": "M2C-25",
+          "quote": "maintenance and exception scenarios after an arrangement is created"
+        }
+      ],
+      "word_count": 13,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-37",
+      "query": "Setting up a new payment arrangement and checking whether the customer qualifies",
+      "query_type": "paraphrase",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-24"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-23"
+      ],
+      "ambiguous": true,
+      "rationale": "Creation, eligibility and setup are card 24.",
+      "evidence": [
+        {
+          "source_id": "M2C-24",
+          "quote": "eligibility, setup and downstream clearing/dunning reasoning"
+        }
+      ],
+      "word_count": 12,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-38",
+      "query": "Dashboards for how well the bill runs are doing",
+      "query_type": "paraphrase",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-16"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-07"
+      ],
+      "ambiguous": true,
+      "rationale": "An analytical view of execution and status of periodic billing/invoicing is card 16.",
+      "evidence": [
+        {
+          "source_id": "M2C-16",
+          "quote": "Modern analytical view of periodic billing/invoicing execution and status"
+        }
+      ],
+      "word_count": 9,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-39",
+      "query": "Point of Delivery and Connection Object",
+      "query_type": "entity",
+      "difficulty": "easy",
+      "expected_source_ids": [
+        "M2C-01"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "rationale": "Both objects are listed on the master-data foundation card.",
+      "evidence": [
+        {
+          "source_id": "M2C-01",
+          "quote": "Point of Delivery, Connection Object, Premise"
+        }
+      ],
+      "word_count": 6,
+      "length_bucket": "short",
+      "max_verbatim_overlap_words": 3
+    },
+    {
+      "query_id": "P5-40",
+      "query": "operand and rate type",
+      "query_type": "entity",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-12"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-11"
+      ],
+      "ambiguous": true,
+      "rationale": "Rate type and operand are named on the automatic billing card.",
+      "evidence": [
+        {
+          "source_id": "M2C-12",
+          "quote": "rate type, schema, operand, price"
+        }
+      ],
+      "word_count": 4,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-41",
+      "query": "print documents",
+      "query_type": "entity",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "rationale": "Print documents are named on the invoicing procedure card.",
+      "evidence": [
+        {
+          "source_id": "M2C-14",
+          "quote": "invoices, print documents and FI-CA postings"
+        }
+      ],
+      "word_count": 2,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-42",
+      "query": "technical installations and devices",
+      "query_type": "entity",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-05"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-01"
+      ],
+      "ambiguous": true,
+      "rationale": "Card 05 is the parent topic for devices and technical installations; card 01 lists installation and device among master data.",
+      "evidence": [
+        {
+          "source_id": "M2C-05",
+          "quote": "Parent topic for devices, technical installations"
+        }
+      ],
+      "word_count": 4,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-43",
+      "query": "catch-up bill",
+      "query_type": "entity",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "rationale": "Catch-up-bill reasoning is named on the estimation card.",
+      "evidence": [
+        {
+          "source_id": "M2C-08",
+          "quote": "estimated-bill and catch-up-bill reasoning"
+        }
+      ],
+      "word_count": 3,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 3
+    },
+    {
+      "query_id": "P5-44",
+      "query": "SAP enterprise services for collection agencies",
+      "query_type": "entity",
+      "difficulty": "easy",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-27"
+      ],
+      "ambiguous": true,
+      "rationale": "Enterprise services for agency integration are card 28.",
+      "evidence": [
+        {
+          "source_id": "M2C-28",
+          "quote": "Collection Agency APIs and Enterprise Services"
+        }
+      ],
+      "word_count": 6,
+      "length_bucket": "short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-45",
+      "query": "recall of receivables",
+      "query_type": "entity",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-27"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-28"
+      ],
+      "ambiguous": false,
+      "rationale": "Recalling receivables is part of the collection agency submission process.",
+      "evidence": [
+        {
+          "source_id": "M2C-27",
+          "quote": "releasing, submitting, processing and recalling receivables"
+        }
+      ],
+      "word_count": 3,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-46",
+      "query": "debt arrangement",
+      "query_type": "entity",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-24",
+        "M2C-25"
+      ],
+      "ambiguous": true,
+      "rationale": "Debt-arrangement concepts are named on the installment plan overview card.",
+      "evidence": [
+        {
+          "source_id": "M2C-23",
+          "quote": "Core source for debt-arrangement concepts and future due dates"
+        }
+      ],
+      "word_count": 2,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-47",
+      "query": "meter hardware and technical setup",
+      "query_type": "entity",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-05"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-01"
+      ],
+      "ambiguous": true,
+      "rationale": "Physical metering assets and technical installations are the subject of the device management overview.",
+      "evidence": [
+        {
+          "source_id": "M2C-05",
+          "quote": "how physical metering assets connect to the Meter-to-Cash chain"
+        }
+      ],
+      "word_count": 5,
+      "length_bucket": "short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-48",
+      "query": "What do I need to know about move-in?",
+      "query_type": "ambiguous",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02",
+        "M2C-10"
+      ],
+      "ambiguous": true,
+      "rationale": "Three cards concern move-in; card 03 is the process card.",
+      "evidence": [
+        {
+          "source_id": "M2C-03",
+          "quote": "Explains the move-in process"
+        }
+      ],
+      "word_count": 9,
+      "length_bucket": "long",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-49",
+      "query": "Explain budget billing in the invoicing context",
+      "query_type": "ambiguous",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-15"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-13",
+        "M2C-14"
+      ],
+      "ambiguous": true,
+      "rationale": "Card 15 treats budget billing within invoicing; cards 13 and 14 each match half of the query.",
+      "evidence": [
+        {
+          "source_id": "M2C-15",
+          "quote": "treatment of budget billing plans in the invoicing process"
+        }
+      ],
+      "word_count": 7,
+      "length_bucket": "short",
+      "max_verbatim_overlap_words": 3
+    },
+    {
+      "query_id": "P5-50",
+      "query": "How do installment plans work?",
+      "query_type": "ambiguous",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-24",
+        "M2C-25"
+      ],
+      "ambiguous": true,
+      "rationale": "Card 23 defines installment plans; cards 24 and 25 cover creating and maintaining them.",
+      "evidence": [
+        {
+          "source_id": "M2C-23",
+          "quote": "Defines installment plans"
+        }
+      ],
+      "word_count": 5,
+      "length_bucket": "short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-51",
+      "query": "How is meter reading handled?",
+      "query_type": "ambiguous",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-06"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-05",
+        "M2C-07",
+        "M2C-08",
+        "M2C-10"
+      ],
+      "ambiguous": true,
+      "rationale": "Card 06 is the core meter-read lifecycle card; four sibling cards concern meter reading from other angles.",
+      "evidence": [
+        {
+          "source_id": "M2C-06",
+          "quote": "Core source for teaching meter-read lifecycle"
+        }
+      ],
+      "word_count": 5,
+      "length_bucket": "short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-52",
+      "query": "Payments that come in from customers",
+      "query_type": "ambiguous",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-19",
+        "M2C-20",
+        "M2C-22"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-21"
+      ],
+      "ambiguous": true,
+      "rationale": "Three cards handle incoming payments from different angles; any is acceptable.",
+      "evidence": [
+        {
+          "source_id": "M2C-19",
+          "quote": "analysis of incoming payments"
+        },
+        {
+          "source_id": "M2C-20",
+          "quote": "incoming-payment amounts are assigned"
+        },
+        {
+          "source_id": "M2C-22",
+          "quote": "incoming-payment notifications"
+        }
+      ],
+      "word_count": 6,
+      "length_bucket": "short",
+      "max_verbatim_overlap_words": 1
+    },
+    {
+      "query_id": "P5-53",
+      "query": "Contract account",
+      "query_type": "ambiguous",
+      "difficulty": "hard",
+      "expected_source_ids": [
+        "M2C-17",
+        "M2C-18"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": true,
+      "rationale": "Two cards are about the contract account (overview and business object); either is acceptable.",
+      "evidence": [
+        {
+          "source_id": "M2C-17",
+          "quote": "Foundation reference for contract accounts"
+        },
+        {
+          "source_id": "M2C-18",
+          "quote": "definition of the contract account"
+        }
+      ],
+      "word_count": 2,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 2
+    },
+    {
+      "query_id": "P5-54",
+      "query": "Billing process overview",
+      "query_type": "ambiguous",
+      "difficulty": "medium",
+      "expected_source_ids": [
+        "M2C-11"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-12",
+        "M2C-14",
+        "M2C-16"
+      ],
+      "ambiguous": true,
+      "rationale": "Card 11 is described as the primary business-process source for billing.",
+      "evidence": [
+        {
+          "source_id": "M2C-11",
+          "quote": "Primary business-process source for SAP Utilities billing"
+        }
+      ],
+      "word_count": 3,
+      "length_bucket": "very_short",
+      "max_verbatim_overlap_words": 1
+    }
+  ]
+}

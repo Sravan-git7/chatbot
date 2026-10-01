@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "page_id": "f870ce53118d4308e10000000a174cb4",
+  "file_path": "f870ce53118d4308e10000000a174cb4.html",
+  "page_title": "Controlling Specifications in Contract Accounts (IS-U)",
+  "text_raw": "Controlling Specifications in Contract Accounts (IS-U)\nControlling Specifications in Contract Accounts (IS-U)\nUse\nThere are a number of attributes in the contract account that are specific to IS-U. These can be divided into various areas:\nGeneral data, such as:\nIndicator for additional bill\nTransaction currency\nTerms of payment\nAccount class\nSettlement category\nAccount determination ID\nApplication form\nLanguage\nDunning control:\nIndicator for additional dunning notice\nPayment control, such as:\nAutomatic debit procedure\nNumber of automatic debits performed\nNumber of returned automatic debits\nIndicator for recurring entry request\nNo payment form indicator\nFeatures\nSeveral business partners can be assigned to the contract account. There is always just one account holder. You cannot post to the other business partners.\nThe Business Object Repository (BOR) contains the following Business Application Programming Interface (BAPIs) for contract accounts:\nBAPI_ISUACCOUNT_CREATERFROMDATA\n(creating a contract account)\nBAPI_ISUACCOUNT_GETDETAIL\n(displaying a contract account)\nBAPI_ISUACCOUNT_GETLIST\n(displaying a list of contract accounts)\nFor more information about BAPIs, see the following:\nBAPIs in general: BAPI user guide and programming guidelines.\nBAPIs in detail: Associated documentation in the BOR",
+  "page_hash": "f2cf35266e40ddffb6412f29fd15bcb03a8ed71581f2d75f4ddbb0209ce16558",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/058.json",
+  "current_page": {
+    "id": 2554981605,
+    "t": "Controlling Specifications in Contract Accounts (IS-U)",
+    "u": "f870ce53118d4308e10000000a174cb4.html",
+    "loio": "f870ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  }
+}

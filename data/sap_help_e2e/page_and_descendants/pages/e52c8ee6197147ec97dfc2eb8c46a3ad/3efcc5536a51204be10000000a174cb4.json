@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/3efcc5536a51204be10000000a174cb4",
+  "topic_id": 17,
+  "topic_title": "Contract Accounts Overview",
+  "topic_ids": [
+    17
+  ],
+  "topic_refs": [
+    {
+      "topic_id": 17,
+      "topic_title": "Contract Accounts Overview",
+      "role": "descendant",
+      "via_doc_id": null,
+      "pdf_file": "17_Contract_Accounts_Overview.pdf"
+    }
+  ],
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "numeric_deliverable_id": "40374631",
+  "build_no": "1779",
+  "page_id": "3efcc5536a51204be10000000a174cb4",
+  "file_path": "3efcc5536a51204be10000000a174cb4.html",
+  "alias_file_paths": [],
+  "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+  "toc_path": [
+    "Contract Accounts",
+    "Creating, Changing, and Displaying Contract Accounts"
+  ],
+  "depth": 1,
+  "page_title": "Creating, Changing, and Displaying Contract Accounts",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/3efcc5536a51204be10000000a174cb4.html",
+  "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/3efcc5536a51204be10000000a174cb4.html",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/048.json",
+  "page_hash": "10a7cd2d98f45605bc58dca2b39daf5e998a0c1971db7460d50a8443b0bc6056",
+  "content_hash": "ff29bc37ad5f55e282cebf4885aab64add02878c86eeaeacda43cc6630e347d0",
+  "duplicate_of": null,
+  "duplicate_docs": [],
+  "text_raw": "Creating, Changing, and Displaying Contract Accounts\nCreating, Changing, and Displaying Contract Accounts\nUse\nYou can create or change contract accounts both online and from the operational system (see\nTransferring Master Data Automatically\n).\nOnly one business partner’s data is ever displayed. For information on editing or displaying another business partner’s data see\nDisplaying or Editing Other Business Partners\n.\nFeatures\nIf you want to change or display a contract account, you can enter the contract account number or the business partner.\nThe business partner is determined automatically if only one business partner has been assigned to the contract account.\nIf more than one business partner has been assigned to the contract account, then a dialog box in which you can choose a partner to be edited appears.\nIf several contract accounts were assigned to a business partner, a dialog box appears showing all the contract accounts assigned to that business partner. You can select a contract account from the dialog box and display it for processing.\nUsing authorization object F_KK_FCODE, you can issue authorizations for master data dialogs. You can determine, for example, which user is no longer authorized to assign partners to a contract account. See the authorization documentation for further information.\nYou can make changes to a contract account and have them take effect from a time in the future. The changes are not saved directly to the database, they are entered in change documents. To activate the data, you have to run report BUSPCDACT for the aplication object FICA(see SAP menu\nMaster Data\nContract Account\n). For more information, see the report documentation.",
+  "text": "Creating, Changing, and Displaying Contract Accounts\nUse\nYou can create or change contract accounts both online and from the operational system (see Transferring Master Data Automatically).\nOnly one business partner’s data is ever displayed. For information on editing or displaying another business partner’s data see Displaying or Editing Other Business Partners.\nFeatures\nIf you want to change or display a contract account, you can enter the contract account number or the business partner.\nThe business partner is determined automatically if only one business partner has been assigned to the contract account.\nIf more than one business partner has been assigned to the contract account, then a dialog box in which you can choose a partner to be edited appears.\nIf several contract accounts were assigned to a business partner, a dialog box appears showing all the contract accounts assigned to that business partner. You can select a contract account from the dialog box and display it for processing.\nUsing authorization object F_KK_FCODE, you can issue authorizations for master data dialogs. You can determine, for example, which user is no longer authorized to assign partners to a contract account. See the authorization documentation for further information.\nYou can make changes to a contract account and have them take effect from a time in the future. The changes are not saved directly to the database, they are entered in change documents. To activate the data, you have to run report BUSPCDACT for the aplication object FICA(see SAP menu Master Data Contract Account). For more information, see the report documentation.",
+  "clean_stats": {
+    "title_duplicates_removed": 1,
+    "fragments_joined": 7,
+    "lines_in": 19,
+    "lines_out": 11
+  },
+  "status": "OK"
+}

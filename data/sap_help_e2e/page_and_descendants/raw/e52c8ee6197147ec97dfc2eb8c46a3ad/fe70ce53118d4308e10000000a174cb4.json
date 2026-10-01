@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "page_id": "fe70ce53118d4308e10000000a174cb4",
+  "file_path": "fe70ce53118d4308e10000000a174cb4.html",
+  "page_title": "Assigning Contracts to Contract Accounts (IS-U)",
+  "text_raw": "Assigning Contracts to Contract Accounts (IS-U)\nAssigning Contracts to Contract Accounts (IS-U)\nProcedure\nContracts are created in utilities when a move-in is entered (transaction EC50E). Contracts are automatically allocated to a contract account. You can either select an existing contract account or create a new one.\nYou can find more information in the section on\nmove-in\n.\nResult\nOnce you have saved the move-in, the number of the allocated contract account is stored in the contract.",
+  "page_hash": "61468fe060f01453555b6b44d3b719771d04a96aff9be8fc05ca8a8e11b6e0f7",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/061.json",
+  "current_page": {
+    "id": 2554984509,
+    "t": "Assigning Contracts to Contract Accounts (IS-U)",
+    "u": "fe70ce53118d4308e10000000a174cb4.html",
+    "loio": "fe70ce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  }
+}
