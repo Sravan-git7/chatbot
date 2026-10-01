@@ -1,0 +1,13 @@
+{
+ "file": "phase11_1_holdout_questions.json",
+ "sha256": "52b0a0a8658362d7f288cc49bb63d875e2c16d9104431c9d45916ce82de57ea5",
+ "total": 72,
+ "counts": {
+  "answerable": 40,
+  "absent_detail": 15,
+  "not_ingested": 7,
+  "unresolved_identity": 3,
+  "out_of_domain": 7
+ },
+ "frozen_before": "any Phase 11.1 candidate code or evaluation"
+}

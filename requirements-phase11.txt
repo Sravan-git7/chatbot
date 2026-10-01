@@ -1,0 +1,8 @@
+# Phase 11 - RAG chat API (scripts/rag_api.py). Install on top of requirements.txt and the Phase 8 retrieval stack.
+# Versions are the ones the Phase 11 tests and E2E run were executed with.
+fastapi==0.142.2
+uvicorn==0.54.0
+pydantic==2.13.5
+starlette==1.7.0
+# only needed for scripts/phase11_e2e.py and the API tests
+httpx==0.28.1

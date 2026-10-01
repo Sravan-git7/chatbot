@@ -1,0 +1,156 @@
+{
+ "schema_version": 1,
+ "base_url": "http://127.0.0.1:8000",
+ "passed": 28,
+ "total": 28,
+ "checks": [
+  {
+   "name": "welcome heading renders",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "coverage line comes from /api/health",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "example prompt reaches the backend and the answer text is displayed",
+   "passed": true,
+   "detail": "In the SAP Easy Access screen, choose Account > Installment "
+  },
+  {
+   "name": "displayed citation URL is byte-equal to the URL returned by the API",
+   "passed": true,
+   "detail": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+  },
+  {
+   "name": "citation link opens in a new tab safely",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "citation chips are present in the answer",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "Shift+Enter inserts a newline and does not send",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "Enter sends the multi-line message",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "missing page is reported honestly with a reference link and no sources",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "no raw card ids visible in the conversation",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "reference link equals the stored URL from the API",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "out-of-scope question is labelled and not answered",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "absent detail shows the exact abstention message",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "abstention is not framed as an answer and shows no citation chips or sources",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "unresolved identity is stated plainly",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "HTML typed by the user is displayed as text and never executed",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "New chat returns to the welcome state",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "a second conversation appears in the history",
+   "passed": true,
+   "detail": "1 -> 2"
+  },
+  {
+   "name": "conversations survive a reload (local storage)",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "selecting an old conversation shows its stored messages",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "developer panel is off by default",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "about panel reports the live service state",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "developer panel shows routing, grounding and latency from the backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "mobile: sidebar is closed on load",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "mobile: sidebar opens as a drawer",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "mobile: no horizontal overflow with an answer on screen",
+   "passed": true,
+   "detail": "overflow 0px"
+  },
+  {
+   "name": "network failure shows an actionable message",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "no console errors or uncaught exceptions",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "initial_load": {
+  "wall_ms_networkidle": 971,
+  "domContentLoaded": 75,
+  "load": 76,
+  "fcp": 292,
+  "transferBytes": 1019,
+  "requests": 3
+ }
+}

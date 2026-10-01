@@ -1,0 +1,13 @@
+{
+ "file": "phase11_1_holdout2_questions.json",
+ "sha256": "3a9049400ffe9dd07f32f05ba4624b505443a8568a037a94cb7c7a7794f04ee4",
+ "total": 48,
+ "counts": {
+  "answerable": 28,
+  "absent_detail": 10,
+  "not_ingested": 4,
+  "unresolved_identity": 2,
+  "out_of_domain": 4
+ },
+ "frozen_before": "the iteration-2 candidate code (C3) and any evaluation of it"
+}

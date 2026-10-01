@@ -1,0 +1,870 @@
+{
+ "schema_version": 1,
+ "description": "Phase 11.1 second fresh holdout (frozen before the iteration-2 candidate existed)",
+ "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+ "counts": {
+  "answerable": 28,
+  "absent_detail": 10,
+  "not_ingested": 4,
+  "unresolved_identity": 2,
+  "out_of_domain": 4
+ },
+ "total": 48,
+ "corpus_sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d",
+ "queries": [
+  {
+   "id": "P111H2-001",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which business function is a prerequisite for AMI monitoring of meter readings?",
+   "type": "answerable",
+   "facet": "detail",
+   "gold_source_id": "M2C-07",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "you have activated the business function Advanced Metering Infrastructure 2 ( ISU_AMI_2 )"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-002",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "If I enter a portion, which objects can I display?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-07",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "you can display schedule records, billing orders, and meter reading orders"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-003",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What can be shown when the starting point is a device?",
+   "type": "answerable",
+   "facet": "paraphrase",
+   "gold_source_id": "M2C-07",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "you can display meter reading orders or meter reading results"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-004",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Under which menu path are the monitoring transactions found?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-07",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "in the Utilities Industry menu under Device Management > Meter Reading > Monitoring"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-005",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which component corresponds to the serial number in the standard system for a device number?",
+   "type": "answerable",
+   "facet": "detail",
+   "gold_source_id": "M2C-05",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "Name in IS-U: Device Number; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Serial Number"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-006",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which component handles goods issue and return delivery when devices are scrapped or sold?",
+   "type": "answerable",
+   "facet": "detail",
+   "gold_source_id": "M2C-05",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "Function: Outward Movement (such as scrapping or sales); Component: Goods Issue and Return Delivery from MM-IM"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-007",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which component is used to bill devices?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-05",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "Billing is then carried out with the Sales and Distribution (SD) component"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-008",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What does Device Management take care of?",
+   "type": "answerable",
+   "facet": "paraphrase",
+   "gold_source_id": "M2C-05",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "This component manages technical data, installations, meter readings, and the inspection of devices"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-009",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Where do I specify the percentage for the first installment?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-24",
+   "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "under: Business Transactions > Deferral and Installment Plan > Define Categories for Installment Plan , specify a percentage"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-010",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What do I have to activate so that interest and surcharges are part of an installment plan?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-24",
+   "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "activate the enhancement under Business Transactions > Deferral and Installment Plan > Activate Installment Plan Enhancement for Surcharges/Interest"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-011",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which entries are mandatory when I enter the installment plan parameters manually?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-24",
+   "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "You must enter the installment interval and the interval type, as well as the installment plan category"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-012",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "How does the system check a rounding amount that I enter?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-24",
+   "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "the system automatically checks whether this amount complies with the rounding rules defined in Customizing"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-013",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What is the prerequisite for creating an inflation surcharge in the installment plan proposal?",
+   "type": "answerable",
+   "facet": "detail",
+   "gold_source_id": "M2C-24",
+   "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "The prerequisite in this case is that you activated the enhancement in Customizing under Business Transactions > Deferral and Installment Plans > Activate Installment Plan Enhancement for Charges/Interest"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-014",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which function module is documented as the sample for event 3000?",
+   "type": "answerable",
+   "facet": "detail",
+   "gold_source_id": "M2C-24",
+   "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "see the documentation of the sample function module FKK_SAMPLE_3000"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-015",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What can I do with the Print Document Display function?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-14",
+   "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "you can use to simulate the bill using the Print Document Display function"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-016",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "With which component is invoicing reversal integrated?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-14",
+   "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "Invoicing reversal, therefore, is integrated with the Contract Billing (IS-U-BI) component"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-017",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which function reverses billing documents that have already been invoiced?",
+   "type": "answerable",
+   "facet": "detail",
+   "gold_source_id": "M2C-14",
+   "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "To reverse billing documents that have been invoiced, you can use the Full Reversal function"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-018",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What must exist before billing can take place?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-14",
+   "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "must exist if billing is to take place"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-019",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which functions inform the customer about the number of budget billings and their due dates?",
+   "type": "answerable",
+   "facet": "detail",
+   "gold_source_id": "M2C-14",
+   "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "you use either the Partial Bill Creation function or the Budget Billing Request function"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-020",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Can one contract in Utilities belong to several contract accounts?",
+   "type": "answerable",
+   "facet": "yes_no",
+   "gold_source_id": "M2C-17",
+   "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "each individual contract is assigned to one contract account only"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-021",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What is defined in the contract account master record for each business partner?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-17",
+   "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-022",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What can cause a processing lock to be set automatically?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-17",
+   "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "a return can result in a processing lock being set"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-023",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "On what basis are contract accounts usually managed?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-17",
+   "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "Contract accounts tend to be managed on an open item basis"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-024",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What does the billing module ensure about changes during a billing period?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-11",
+   "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "The billing module ensures that all billing-relevant changes that occur during a billing period are taken into consideration"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-025",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What happens to the total consumption when a price changes?",
+   "type": "answerable",
+   "facet": "paraphrase",
+   "gold_source_id": "M2C-11",
+   "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "The system also divides the total consumption, which produces the corresponding partial amount"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-026",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What can I do for the business partner in a move-in?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-02",
+   "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "you can create a business partner and contract account for the customer, or select existing ones"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-027",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Can the screen layout for move-in and move-out be configured?",
+   "type": "answerable",
+   "facet": "yes_no",
+   "gold_source_id": "M2C-02",
+   "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "You can also configure the screen layout to suit your requirements"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-028",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Can a move-in or move-out be processed completely in one step?",
+   "type": "answerable",
+   "facet": "natural",
+   "gold_source_id": "M2C-02",
+   "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [
+    "process the entire transaction immediately and in full"
+   ],
+   "expected_status": "answered",
+   "notes": "",
+   "answerability": "answerable_from_local_page"
+  },
+  {
+   "id": "P111H2-029",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "How many bills can be reversed at once?",
+   "type": "absent_detail",
+   "facet": "numeric",
+   "gold_source_id": "M2C-14",
+   "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "at once"
+   ]
+  },
+  {
+   "id": "P111H2-030",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What is the maximum number of reprints allowed per bill?",
+   "type": "absent_detail",
+   "facet": "numeric",
+   "gold_source_id": "M2C-14",
+   "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "maximum"
+   ]
+  },
+  {
+   "id": "P111H2-031",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What is the minimum interval between two installments?",
+   "type": "absent_detail",
+   "facet": "numeric",
+   "gold_source_id": "M2C-24",
+   "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "minimum"
+   ]
+  },
+  {
+   "id": "P111H2-032",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which authorization object controls who may create installment plans?",
+   "type": "absent_detail",
+   "facet": "detail",
+   "gold_source_id": "M2C-24",
+   "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "authorization"
+   ]
+  },
+  {
+   "id": "P111H2-033",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What is the default selection criterion in the monitoring transaction?",
+   "type": "absent_detail",
+   "facet": "detail",
+   "gold_source_id": "M2C-07",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "default"
+   ]
+  },
+  {
+   "id": "P111H2-034",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "How many characters can a device number have?",
+   "type": "absent_detail",
+   "facet": "numeric",
+   "gold_source_id": "M2C-05",
+   "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "characters"
+   ]
+  },
+  {
+   "id": "P111H2-035",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "How long is a billing period in days?",
+   "type": "absent_detail",
+   "facet": "numeric",
+   "gold_source_id": "M2C-11",
+   "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "days"
+   ]
+  },
+  {
+   "id": "P111H2-036",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which transaction code displays a contract account?",
+   "type": "absent_detail",
+   "facet": "detail",
+   "gold_source_id": "M2C-17",
+   "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "transaction code"
+   ]
+  },
+  {
+   "id": "P111H2-037",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What is the notice period for terminating a customer's contract in a move-out?",
+   "type": "absent_detail",
+   "facet": "detail",
+   "gold_source_id": "M2C-02",
+   "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "notice period"
+   ]
+  },
+  {
+   "id": "P111H2-038",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which fee applies to the final bill of a move-out?",
+   "type": "absent_detail",
+   "facet": "detail",
+   "gold_source_id": "M2C-02",
+   "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "insufficient_context",
+   "notes": "topic is on the page, the asked detail is not",
+   "answerability": "not_answerable_detail_absent_from_page",
+   "absent_terms": [
+    "fee"
+   ]
+  },
+  {
+   "id": "P111H2-039",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "How does the move-in process work?",
+   "type": "not_ingested",
+   "facet": "natural",
+   "gold_source_id": "M2C-03",
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "page_not_ingested",
+   "notes": "",
+   "answerability": "not_answerable_page_not_in_local_corpus"
+  },
+  {
+   "id": "P111H2-040",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "How do I analyse incoming payments?",
+   "type": "not_ingested",
+   "facet": "natural",
+   "gold_source_id": "M2C-19",
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "page_not_ingested",
+   "notes": "",
+   "answerability": "not_answerable_page_not_in_local_corpus"
+  },
+  {
+   "id": "P111H2-041",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Which APIs exist for collection agencies?",
+   "type": "not_ingested",
+   "facet": "natural",
+   "gold_source_id": "M2C-28",
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "page_not_ingested",
+   "notes": "",
+   "answerability": "not_answerable_page_not_in_local_corpus"
+  },
+  {
+   "id": "P111H2-042",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "How is meter reading data handled during a move-in?",
+   "type": "not_ingested",
+   "facet": "natural",
+   "gold_source_id": "M2C-10",
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "page_not_ingested",
+   "notes": "",
+   "answerability": "not_answerable_page_not_in_local_corpus"
+  },
+  {
+   "id": "P111H2-043",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What master data does Utilities Master Data cover?",
+   "type": "unresolved_identity",
+   "facet": "natural",
+   "gold_source_id": "M2C-01",
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "unresolved_identity",
+   "notes": "",
+   "answerability": "not_answerable_identity_unresolved"
+  },
+  {
+   "id": "P111H2-044",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What does periodic billing analysis show?",
+   "type": "unresolved_identity",
+   "facet": "natural",
+   "gold_source_id": "M2C-16",
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "unresolved_identity",
+   "notes": "",
+   "answerability": "not_answerable_identity_unresolved"
+  },
+  {
+   "id": "P111H2-045",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "How tall is Mount Everest?",
+   "type": "out_of_domain",
+   "facet": "natural",
+   "gold_source_id": null,
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "out_of_domain",
+   "notes": "",
+   "answerability": "out_of_domain"
+  },
+  {
+   "id": "P111H2-046",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "Translate good morning into French.",
+   "type": "out_of_domain",
+   "facet": "natural",
+   "gold_source_id": null,
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "out_of_domain",
+   "notes": "",
+   "answerability": "out_of_domain"
+  },
+  {
+   "id": "P111H2-047",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "What is a good recipe for chicken curry?",
+   "type": "out_of_domain",
+   "facet": "natural",
+   "gold_source_id": null,
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "out_of_domain",
+   "notes": "",
+   "answerability": "out_of_domain"
+  },
+  {
+   "id": "P111H2-048",
+   "authorship": "AI coding assistant (not blind; not a domain expert; had read the 7-page corpus text and the Phase 11 E2E failure analysis; written 2026-10-01 AFTER the first holdout was evaluated and BEFORE the iteration-2 candidate (C3) existed; NOT human-labelled)",
+   "authored_phase": "11.1",
+   "authored_on": "2026-10-01",
+   "query": "How do I install Python on Windows?",
+   "type": "out_of_domain",
+   "facet": "natural",
+   "gold_source_id": null,
+   "gold_doc_id": null,
+   "acceptable_source_ids": [],
+   "evidence": [],
+   "expected_status": "out_of_domain",
+   "notes": "",
+   "answerability": "out_of_domain"
+  }
+ ]
+}
