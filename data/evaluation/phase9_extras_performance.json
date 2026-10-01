@@ -1,0 +1,8 @@
+{
+  "chunk_and_embed_seconds_by_strategy": {
+    "A_legacy_1000c": 1.239,
+    "B_heading_200": 1.425,
+    "C_heading_128": 1.49
+  },
+  "cli_three_subprocess_runs_seconds": 23.23
+}

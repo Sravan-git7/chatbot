@@ -1,0 +1,38 @@
+{
+  "embedder_load_s": 5.083,
+  "router_ms_per_query_mean": 23.77,
+  "per_query_ms_router_mode_extractive": {
+    "context_ms": {
+      "median": 2.91,
+      "p95": 6.51,
+      "max": 8.47,
+      "n": 30
+    },
+    "generate_ms": {
+      "median": 0.37,
+      "p95": 0.85,
+      "max": 0.96,
+      "n": 25
+    },
+    "retrieve_ms": {
+      "median": 20.94,
+      "p95": 28.94,
+      "max": 44.64,
+      "n": 30
+    },
+    "route_ms": {
+      "median": 21.4,
+      "p95": 29.89,
+      "max": 37.89,
+      "n": 127
+    },
+    "total_ms": {
+      "median": 22.54,
+      "p95": 61.13,
+      "max": 78.1,
+      "n": 127
+    }
+  },
+  "peak_rss_mb": 958.9,
+  "ollama_latency": "NOT MEASURED: local model unavailable"
+}

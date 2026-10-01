@@ -1,0 +1,7 @@
+{
+  "file": "data/evaluation/phase9_queries.json",
+  "sha256": "28f03e5701095b9917522ce1518bcef308bceb8834da2aafed0d749908875309",
+  "queries": 127,
+  "frozen_on": "2026-10-01",
+  "statement": "frozen before any retrieval result was computed; evaluate_phase9.py refuses a different hash"
+}
