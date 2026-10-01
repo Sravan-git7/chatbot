@@ -1,0 +1,27 @@
+{
+ "file": "phase12_queries.json",
+ "sha256": "3c5a9ddd2d62e9cb1919a4fbb7c81cd5239994ff230abbbe6440fb6fa5c132ac",
+ "total": 113,
+ "counts": {
+  "answerable": 65,
+  "absent_detail": 16,
+  "not_ingested": 10,
+  "unresolved_identity": 6,
+  "ambiguous": 8,
+  "out_of_domain": 8
+ },
+ "categories": {
+  "direct_factual": 16,
+  "paraphrased": 11,
+  "terminology": 9,
+  "code_transaction": 9,
+  "numeric_detail": 6,
+  "sibling_topic": 13,
+  "corrected_identity": 7,
+  "review_conflict": 10,
+  "absent_detail": 16,
+  "ambiguous": 8,
+  "out_of_domain": 8
+ },
+ "frozen_before": "any Phase 12 retrieval, router, generator or UI evaluation"
+}

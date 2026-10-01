@@ -1,0 +1,48 @@
+{
+ "schema_version": 1,
+ "checked_at": "2026-10-01T15:29:06+00:00",
+ "configured_model": "llama3.2:3b",
+ "options": {
+  "temperature": 0,
+  "seed": 42
+ },
+ "host": {
+  "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+  "cpu_count": 2,
+  "ram_gb": 3.8,
+  "free_disk_gb": 10.2
+ },
+ "checks": {
+  "executable": {
+   "ok": false,
+   "path": null
+  },
+  "python_package": {
+   "ok": false,
+   "error": "ModuleNotFoundError: No module named 'ollama'"
+  },
+  "server": {
+   "ok": false,
+   "host": "127.0.0.1:11434",
+   "http_status": null,
+   "error": "ConnectionRefusedError: [Errno 111] Connection refused",
+   "version": null
+  },
+  "model": {
+   "ok": false,
+   "skipped": "server not responding",
+   "configured": "llama3.2:3b"
+  },
+  "generation": {
+   "ok": false,
+   "skipped": "an earlier check failed"
+  }
+ },
+ "blockers": [
+  "NO_OLLAMA_EXECUTABLE",
+  "NO_PYTHON_OLLAMA_PACKAGE",
+  "OLLAMA_SERVER_NOT_RESPONDING"
+ ],
+ "ready": false,
+ "statement": "REAL Ollama is NOT available in this environment: no LLM result exists; the ollama configurations are BLOCKED, never replaced by the extractive generator."
+}

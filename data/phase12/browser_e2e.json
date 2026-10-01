@@ -1,0 +1,154 @@
+{
+ "schema_version": 1,
+ "base_url": "http://127.0.0.1:8000",
+ "passed": 24,
+ "total": 24,
+ "backend_checks": 21,
+ "synthetic_checks": 2,
+ "checks": [
+  {
+   "name": "normal answer: displayed text equals the API answer (citation markers aside)",
+   "group": "backend",
+   "passed": true,
+   "detail": "Transaction EL31 You can use this transaction to monitor meter reading results b"
+  },
+  {
+   "name": "normal answer: every displayed citation URL is byte-equal to an API source URL",
+   "group": "backend",
+   "passed": true,
+   "detail": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+  },
+  {
+   "name": "normal answer: citation links open safely in a new tab",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "citation: the answer shows citation chips",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "citation: clicking a chip highlights exactly one source item",
+   "group": "backend",
+   "passed": true,
+   "detail": "active=1"
+  },
+  {
+   "name": "abstention: exact abstention message",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "abstention: no \"here's what I found\", no sources, no citation chips",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "out of domain: labelled and not answered",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "page not ingested: \"documentation unavailable\" wording, a reference-only link, no sources",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "unresolved identity: stated plainly, no card ids",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "no raw card ids anywhere in the conversation",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "list rendering: a bulleted API answer renders as list items",
+   "group": "backend",
+   "passed": true,
+   "detail": "this answer has no bullets (not exercised)"
+  },
+  {
+   "name": "continuity: the conversation is kept in the history list after a reload",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "continuity: reopening it restores all stored messages",
+   "group": "backend",
+   "passed": true,
+   "detail": "6 -> 6"
+  },
+  {
+   "name": "continuity: a further question is appended to the same conversation (still one history entry)",
+   "group": "backend",
+   "passed": true,
+   "detail": null
+  },
+  {
+   "name": "mobile: no horizontal overflow with an answer and an abstention on screen",
+   "group": "backend",
+   "passed": true,
+   "detail": "overflow 0px"
+  },
+  {
+   "name": "generator-failure server started",
+   "group": "backend",
+   "passed": true,
+   "detail": "http://127.0.0.1:8011"
+  },
+  {
+   "name": "generator failure: the user sees an actionable error and NO answer text (no silent fallback to another generator)",
+   "group": "backend",
+   "passed": true,
+   "detail": "The request failed\nThe answer generator failed, so no answer was produced. If the backend is configu"
+  },
+  {
+   "name": "generator failure server: a question that never reaches generation (out of domain) is still answered honestly",
+   "group": "backend",
+   "passed": true,
+   "detail": "OUT OF SCOPE\n\nThis question doesn't appear to match the SAP Utilities documentat"
+  },
+  {
+   "name": "disposable server started",
+   "group": "backend",
+   "passed": true,
+   "detail": "http://127.0.0.1:8012"
+  },
+  {
+   "name": "backend killed mid-session: the user sees an actionable \"unable to reach\" message; the earlier answer stays visible",
+   "group": "backend",
+   "passed": true,
+   "detail": "Service unreachable\nUnable to reach the RAG service. Make sure the backend is running (python script"
+  },
+  {
+   "name": "renderer (synthetic): inline code, bold, ordered list and code block render as elements",
+   "group": "renderer-synthetic",
+   "passed": true,
+   "detail": "{\"code\":2,\"strong\":1,\"ol\":2,\"pre\":1}"
+  },
+  {
+   "name": "renderer (synthetic): a long answer and a long code line cause no horizontal page overflow on mobile",
+   "group": "renderer-synthetic",
+   "passed": true,
+   "detail": "overflow 0px"
+  },
+  {
+   "name": "no console errors or uncaught exceptions",
+   "group": "all",
+   "passed": true,
+   "detail": ""
+  }
+ ]
+}
