@@ -201,14 +201,43 @@ class RagService:
         return to_chat_result(raw, self.generator_name, cid, (time.perf_counter() - t0) * 1000, debug=debug, evidence=evidence)
 
 
+# Phase 18 - the VERIFIED production pipeline configuration (data/phase16/phase16_comparison.json,
+# configuration "phase16_combined_ABC", the adopted Phase 16 baseline):
+#   top_k_cards=10, rerank_router=True, code_aware_router=True (Phase 15),
+#   in_page_grounding=True, citation_normalization=True, relaxed_context_gate=True (Phase 16 A/B/C),
+#   evidence_frame_normalization=False (Phase 17A Feature E: experimental, MUST stay OFF).
+# The service must serve exactly this configuration - the numbers the project claims are the numbers
+# measured for it. NOTE: the dataclass defaults in rag_pipeline.PipelineConfig are intentionally left at
+# their historical values so that pre-Phase-18 evaluators keep reproducing their sealed results; only the
+# production service path is pinned here (lazy import, matching this module's import style).
+
+
+def production_pipeline_config():
+    import rag_pipeline as RP
+    return RP.PipelineConfig(
+        top_k_cards=10,
+        rerank_router=True,
+        code_aware_router=True,
+        in_page_grounding=True,
+        citation_normalization=True,
+        relaxed_context_gate=True,
+        evidence_frame_normalization=False,
+        # Phase 18 experimental flags stay OFF until the Phase 18 adoption rules pass:
+        phrase_reranker=False,
+        full_page_coverage=False,
+        citation_repair=False,
+    )
+
+
 def build_service(generator: str = "extractive") -> RagService:
     """Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback."""
     if generator not in ("extractive", "ollama"):
         raise ValueError("generator must be 'extractive' or 'ollama'")
     import rag_evidence as EV
     import rag_pipeline as RP
-    # Phase 11.1: the shipped configuration is "C1" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening
-    return RagService(EV.build_evidence_pipeline(RP.build_pipeline(generator=generator), tau=EV.SHIPPED_TAU, widen=False, generator=generator), generator)
+    # Phase 11.1: the shipped configuration is "C1" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.
+    # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).
+    return RagService(EV.build_evidence_pipeline(RP.build_pipeline(generator=generator, config=production_pipeline_config()), tau=EV.SHIPPED_TAU, widen=False, generator=generator), generator)
 
 
 def answer_question(question: str, service: Optional[RagService] = None, generator: str = "extractive", conversation_id: Optional[str] = None,

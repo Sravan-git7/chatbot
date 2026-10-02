@@ -58,6 +58,11 @@ class PipelineConfig:
     relaxed_context_gate: bool = False
     evidence_frame_normalization: bool = False
     phase16_context_experiment: bool = False
+    # Phase 18 (experimental, OFF by default; adopted only if the Phase 18 adoption rules pass):
+    phrase_reranker: bool = False          # E1a: unique-phrase channel in the Phase 13 reranker (0.10 weight)
+    phrase_min_corroboration: int = 1      # E1a-v2: unique phrases a page must own before it earns the channel (1 = run-1 behaviour)
+    full_page_coverage: bool = False       # E1b: reranker coverage over the candidate's full page text
+    citation_repair: bool = False          # E2: deterministic in-page marker repair after grounding
 
     def to_dict(self) -> Dict[str, Any]:
         return dict(self.__dict__)
@@ -213,6 +218,9 @@ class RagPipeline:
                     top_k_evaluate=self.cfg.top_k_cards,
                     query_embedding=q_emb,
                     code_aware=getattr(self.cfg, "code_aware_router", False),
+                    phrase_reranker=getattr(self.cfg, "phrase_reranker", False),
+                    phrase_min_corroboration=getattr(self.cfg, "phrase_min_corroboration", 1),
+                    full_page_coverage=getattr(self.cfg, "full_page_coverage", False),
                 )
                 mode_str = f"router_reranked_top{self.cfg.top_k_cards}"
                 if getattr(self.cfg, "code_aware_router", False):
@@ -308,7 +316,24 @@ class RagPipeline:
             dbg["answer_withheld"] = gen.text
             return self._finish(out, INSUFFICIENT, "GROUNDING_VERIFICATION_FAILED", MESSAGES[INSUFFICIENT] + " (a generated answer was withheld because it failed the grounding check)",
                                 dbg, debug, timings, t0)
-        out["answer"] = gen.text
+
+        # ---- 7b. Phase 18 (E2): deterministic in-page citation repair (flag OFF => no-op) --------------------
+        # Only markers change, never content. The repaired text must pass the SAME verifier; otherwise the
+        # original (already verified) answer is kept. Worst case is the status quo.
+        repaired_text = gen.text
+        if getattr(self.cfg, "citation_repair", False):
+            import rag_citation_repair as CRC
+            repaired_text, repair_log = CRC.repair_citations(gen.text, context, citation_normalization=bool(cit_norm))
+            if repair_log.get("changed"):
+                repaired_report = verify_grounding(repaired_text, context, in_page_grounding=in_page, citation_normalization=cit_norm)
+                if repaired_report.ok and not repaired_report.refusal:
+                    report = repaired_report
+                else:
+                    repair_log["revert"] = "REPAIR_FAILED_VERIFICATION"
+                    repaired_text = gen.text
+            dbg["citation_repair"] = repair_log
+
+        out["answer"] = repaired_text
         out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, report, entry)
         return self._finish(out, ANSWERED, None, None, dbg, debug, timings, t0)
 
