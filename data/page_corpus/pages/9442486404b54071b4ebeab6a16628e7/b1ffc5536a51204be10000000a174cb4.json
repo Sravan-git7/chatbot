@@ -1,0 +1,103 @@
+{
+  "acquisition": {
+    "body_sha256": "f9ed5384eeab7e1828543677e3ef0c8daefdccd4284d64a724e9df74c7d56da7",
+    "build_no": null,
+    "deliverable_title": "Contract Accounting",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/15_40374790_b1ffc5536a51204be10000000a174cb4.json",
+    "file_sha256": "143877f50717f466824ac4d0e38b4a73cb15121eed6344af97296f12ebc80324",
+    "html_chars": 4363,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374790",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Dunning"
+      ],
+      "kind": "paragraph",
+      "text": "You can create payment reminders or dunning letters and send them to your business partners, to alert them of overdue payables and to request payment."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Dunning"
+      ],
+      "kind": "paragraph",
+      "text": "You can print correspondence either using the Correspondence component or directly by using the application forms that you have defined in the Print Workbench ."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Dunning"
+      ],
+      "kind": "paragraph",
+      "text": "In addition to the features of the standard delivery, you can realize industry-specific dunning activities."
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Dunning"
+      ],
+      "kind": "note",
+      "text": "Note: Industry Component Utilities (IS-U) You can dun budget billing requests as well as open items. The dunning run can create lock documents automatically (see Disconnection/Reconnection of a Utility Installation ). You can postprocess the dunning-relevant data manually in the dunning proposal. Industry Component Telecommunications (IS-T) You can postprocess the dunning-relevant data manually in the dunning proposal. If receivables have reached a specific collection step, you can lock the contract account or the service for a business partner automatically in the dunning activities run (see Lock Services Using SAP RM-CA and SAP CRM ). Industry Component Insurance (FS-CD) The following dunning procedure types are supported: Individual Dunning Notices In an individual dunning notice, all items in a contract are considered independently of one another. This means that you can have several dunning procedures for one contract. Collective Dunning In a collective dunning notice, all items in a contract are dunned with one dunning procedure. Multi-Collective dunning Multiple collective dunning can, in contrast to collective dunning, contain several collective dunning notices for one business partner/insurance object relationship in parallel. Contract Dunning In a contract dunning notice, only one current dunning procedure exists at any one point in time. This refers to the oldest item. Account Dunning All items due for dunning for a contract account are dunned on a cross-contract basis for account dunning. The dunning procedures to be used are determined in the dunning proposal run and saved in the item."
+    }
+  ],
+  "breadcrumb": [
+    "Contract Accounting",
+    "Credit and Collections Management",
+    "Dunning"
+  ],
+  "card": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_page_id": "b1ffc5536a51204be10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "FI-CA Dunning",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4",
+  "guide_id": "9442486404b54071b4ebeab6a16628e7",
+  "headings": [
+    "Dunning"
+  ],
+  "html_title": "Dunning",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "b1ffc5536a51204be10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-26"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html",
+  "structure": {
+    "blocks": 4,
+    "chrome_elements_removed": 0,
+    "headings": 1,
+    "kinds": {
+      "note": 1,
+      "paragraph": 3
+    }
+  },
+  "text": "Dunning\nYou can create payment reminders or dunning letters and send them to your business partners, to alert them of overdue payables and to request payment.\nYou can print correspondence either using the Correspondence component or directly by using the application forms that you have defined in the Print Workbench .\nIn addition to the features of the standard delivery, you can realize industry-specific dunning activities.\nNote: Industry Component Utilities (IS-U) You can dun budget billing requests as well as open items. The dunning run can create lock documents automatically (see Disconnection/Reconnection of a Utility Installation ). You can postprocess the dunning-relevant data manually in the dunning proposal. Industry Component Telecommunications (IS-T) You can postprocess the dunning-relevant data manually in the dunning proposal. If receivables have reached a specific collection step, you can lock the contract account or the service for a business partner automatically in the dunning activities run (see Lock Services Using SAP RM-CA and SAP CRM ). Industry Component Insurance (FS-CD) The following dunning procedure types are supported: Individual Dunning Notices In an individual dunning notice, all items in a contract are considered independently of one another. This means that you can have several dunning procedures for one contract. Collective Dunning In a collective dunning notice, all items in a contract are dunned with one dunning procedure. Multi-Collective dunning Multiple collective dunning can, in contrast to collective dunning, contain several collective dunning notices for one business partner/insurance object relationship in parallel. Contract Dunning In a contract dunning notice, only one current dunning procedure exists at any one point in time. This refers to the oldest item. Account Dunning All items due for dunning for a contract account are dunned on a cross-contract basis for account dunning. The dunning procedures to be used are determined in the dunning proposal run and saved in the item.",
+  "text_sha256": "b1108bf30ff75b1f819ee893b2c55e8dd55205e063a74129526af5da9aba6bb9",
+  "title": "Dunning",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 2053
+  }
+}

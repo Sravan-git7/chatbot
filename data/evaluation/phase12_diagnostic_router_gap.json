@@ -1,0 +1,1367 @@
+{
+  "all_gold_n": 105,
+  "all_r1_correct": 53,
+  "all_r1_failures": 52,
+  "all_in_top3_not_top1": 26,
+  "all_in_top5_not_top3": 11,
+  "all_outside_top5": 15,
+  "answerable_n": 65,
+  "answerable_r1_correct": 30,
+  "answerable_r1_failures": 35,
+  "answerable_in_top3_not_top1": 17,
+  "answerable_in_top5_not_top3": 6,
+  "answerable_outside_top5": 12,
+  "classification_counts": {
+    "query/card vocabulary mismatch (zero content-term overlap between query and card)": 6,
+    "card description weakness / subtopic omission (card lacks specific detail/transaction mentioned in query)": 5,
+    "gold card absent from top-k (ranked beyond #5)": 8,
+    "near-tie dense embedding limitation (margin <= 0.03)": 2,
+    "near-duplicate/semantically competing card (M2C-17 vs M2C-18 Contract Accounts conflict hub)": 3,
+    "near-duplicate/semantically competing card (functional sibling in same category/domain)": 11
+  },
+  "b_casualties_count": 29,
+  "e_casualties_count": 31,
+  "oll_casualties_count": 22,
+  "failed_details": [
+    {
+      "id": "P12-001",
+      "query": "What is the purpose of transaction EL43?",
+      "category": "direct_factual",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-22",
+      "top1_title": "Processing Incoming Payments from External Cash Desks",
+      "rank": 27,
+      "top1_sim": 0.4261,
+      "gold_sim": 0.2675,
+      "margin": 0.1586,
+      "primary_diag": "query/card vocabulary mismatch (zero content-term overlap between query and card)",
+      "top3": [
+        "M2C-22",
+        "M2C-03",
+        "M2C-19"
+      ],
+      "top5": [
+        "M2C-22",
+        "M2C-03",
+        "M2C-19",
+        "M2C-04",
+        "M2C-24"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": []
+    },
+    {
+      "id": "P12-002",
+      "query": "What does transaction ELDM display?",
+      "category": "direct_factual",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-25",
+      "top1_title": "Displaying and Changing Installment Plans",
+      "rank": 21,
+      "top1_sim": 0.3955,
+      "gold_sim": 0.2882,
+      "margin": 0.1073,
+      "primary_diag": "query/card vocabulary mismatch (zero content-term overlap between query and card)",
+      "top3": [
+        "M2C-25",
+        "M2C-19",
+        "M2C-22"
+      ],
+      "top5": [
+        "M2C-25",
+        "M2C-19",
+        "M2C-22",
+        "M2C-10",
+        "M2C-20"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_answered_wrong_page",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": []
+    },
+    {
+      "id": "P12-006",
+      "query": "When are equipment records created?",
+      "category": "direct_factual",
+      "gold": "M2C-05",
+      "gold_title": "Device Management Overview",
+      "top1": "M2C-27",
+      "top1_title": "Submission of Receivables to Collection Agency",
+      "rank": 3,
+      "top1_sim": 0.3453,
+      "gold_sim": 0.2615,
+      "margin": 0.0838,
+      "primary_diag": "card description weakness / subtopic omission (card lacks specific detail/transaction mentioned in query)",
+      "top3": [
+        "M2C-27",
+        "M2C-14",
+        "M2C-05"
+      ],
+      "top5": [
+        "M2C-27",
+        "M2C-14",
+        "M2C-05",
+        "M2C-09",
+        "M2C-10"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_answered_wrong_page",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_citation_evidence_failure",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "record"
+      ]
+    },
+    {
+      "id": "P12-007",
+      "query": "Which indicator sets the clearing priority of original items?",
+      "category": "direct_factual",
+      "gold": "M2C-24",
+      "gold_title": "Creating Installment Plans",
+      "top1": "M2C-20",
+      "top1_title": "Clearing Control in Incoming Payments",
+      "rank": 25,
+      "top1_sim": 0.3868,
+      "gold_sim": 0.1558,
+      "margin": 0.231,
+      "primary_diag": "gold card absent from top-k (ranked beyond #5)",
+      "top3": [
+        "M2C-20",
+        "M2C-21",
+        "M2C-27"
+      ],
+      "top5": [
+        "M2C-20",
+        "M2C-21",
+        "M2C-27",
+        "M2C-26",
+        "M2C-29"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "original",
+        "clear"
+      ]
+    },
+    {
+      "id": "P12-008",
+      "query": "What happens to interest and charges when the Distribute indicator is set?",
+      "category": "direct_factual",
+      "gold": "M2C-24",
+      "gold_title": "Creating Installment Plans",
+      "top1": "M2C-20",
+      "top1_title": "Clearing Control in Incoming Payments",
+      "rank": 4,
+      "top1_sim": 0.3253,
+      "gold_sim": 0.2999,
+      "margin": 0.0254,
+      "primary_diag": "query/card vocabulary mismatch (zero content-term overlap between query and card)",
+      "top3": [
+        "M2C-20",
+        "M2C-25",
+        "M2C-27"
+      ],
+      "top5": [
+        "M2C-20",
+        "M2C-25",
+        "M2C-27",
+        "M2C-24",
+        "M2C-13"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": []
+    },
+    {
+      "id": "P12-010",
+      "query": "What happens to a bill after it has been created?",
+      "category": "direct_factual",
+      "gold": "M2C-14",
+      "gold_title": "SAP Utilities Invoicing Procedure",
+      "top1": "M2C-29",
+      "top1_title": "Disconnection/Reconnection of a Utility Installation",
+      "rank": 2,
+      "top1_sim": 0.2705,
+      "gold_sim": 0.2658,
+      "margin": 0.0047,
+      "primary_diag": "near-tie dense embedding limitation (margin <= 0.03)",
+      "top3": [
+        "M2C-29",
+        "M2C-14",
+        "M2C-15"
+      ],
+      "top5": [
+        "M2C-29",
+        "M2C-14",
+        "M2C-15",
+        "M2C-03",
+        "M2C-25"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "bill"
+      ]
+    },
+    {
+      "id": "P12-011",
+      "query": "What does the Contract Accounts component let me create?",
+      "category": "direct_factual",
+      "gold": "M2C-17",
+      "gold_title": "Contract Accounts Overview",
+      "top1": "M2C-18",
+      "top1_title": "Contract Account Business Object",
+      "rank": 2,
+      "top1_sim": 0.5501,
+      "gold_sim": 0.5123,
+      "margin": 0.0378,
+      "primary_diag": "near-duplicate/semantically competing card (M2C-17 vs M2C-18 Contract Accounts conflict hub)",
+      "top3": [
+        "M2C-18",
+        "M2C-17",
+        "M2C-24"
+      ],
+      "top5": [
+        "M2C-18",
+        "M2C-17",
+        "M2C-24",
+        "M2C-12",
+        "M2C-01"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "account",
+        "contract"
+      ]
+    },
+    {
+      "id": "P12-013",
+      "query": "Through which component are letters such as move-out confirmations generated?",
+      "category": "direct_factual",
+      "gold": "M2C-02",
+      "gold_title": "Move-In/Out Overview",
+      "top1": "M2C-04",
+      "top1_title": "Move-Out Process",
+      "rank": 12,
+      "top1_sim": 0.2338,
+      "gold_sim": 0.1658,
+      "margin": 0.068,
+      "primary_diag": "gold card absent from top-k (ranked beyond #5)",
+      "top3": [
+        "M2C-04",
+        "M2C-22",
+        "M2C-14"
+      ],
+      "top5": [
+        "M2C-04",
+        "M2C-22",
+        "M2C-14",
+        "M2C-27",
+        "M2C-26"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "move"
+      ]
+    },
+    {
+      "id": "P12-014",
+      "query": "What can the system trigger automatically for a move-out customer?",
+      "category": "direct_factual",
+      "gold": "M2C-02",
+      "gold_title": "Move-In/Out Overview",
+      "top1": "M2C-03",
+      "top1_title": "Move-In Process",
+      "rank": 3,
+      "top1_sim": 0.4225,
+      "gold_sim": 0.3793,
+      "margin": 0.0432,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-03",
+        "M2C-04",
+        "M2C-02"
+      ],
+      "top5": [
+        "M2C-03",
+        "M2C-04",
+        "M2C-02",
+        "M2C-29",
+        "M2C-10"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_citation_evidence_failure",
+      "e_real_outcome": "answerable_answered_wrong_page",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_answered_wrong_page",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": false,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "move",
+        "customer"
+      ]
+    },
+    {
+      "id": "P12-015",
+      "query": "How can I see which meters belong to a reading unit?",
+      "category": "paraphrased",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-06",
+      "top1_title": "Reading Meters",
+      "rank": 2,
+      "top1_sim": 0.4588,
+      "gold_sim": 0.4086,
+      "margin": 0.0502,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-06",
+        "M2C-07",
+        "M2C-08"
+      ],
+      "top5": [
+        "M2C-06",
+        "M2C-07",
+        "M2C-08",
+        "M2C-10",
+        "M2C-05"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_citation_evidence_failure",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_citation_evidence_failure",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": false,
+      "is_oracle_casualty_ev": false,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "meter",
+        "read"
+      ]
+    },
+    {
+      "id": "P12-022",
+      "query": "What kind of change can happen to account master data without a user editing it?",
+      "category": "paraphrased",
+      "gold": "M2C-17",
+      "gold_title": "Contract Accounts Overview",
+      "top1": "M2C-01",
+      "top1_title": "Utilities Master Data",
+      "rank": 9,
+      "top1_sim": 0.3495,
+      "gold_sim": 0.1743,
+      "margin": 0.1752,
+      "primary_diag": "gold card absent from top-k (ranked beyond #5)",
+      "top3": [
+        "M2C-01",
+        "M2C-03",
+        "M2C-04"
+      ],
+      "top5": [
+        "M2C-01",
+        "M2C-03",
+        "M2C-04",
+        "M2C-02",
+        "M2C-10"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_abstained",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_abstained",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": false,
+      "is_oracle_casualty_ev": false,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "account"
+      ]
+    },
+    {
+      "id": "P12-023",
+      "query": "Why is the billing period cut into pieces when a rate changes?",
+      "category": "paraphrased",
+      "gold": "M2C-11",
+      "gold_title": "SAP Utilities Billing Procedure",
+      "top1": "M2C-13",
+      "top1_title": "Budget Billing Plan",
+      "rank": 3,
+      "top1_sim": 0.3914,
+      "gold_sim": 0.3638,
+      "margin": 0.0276,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-13",
+        "M2C-12",
+        "M2C-11"
+      ],
+      "top5": [
+        "M2C-13",
+        "M2C-12",
+        "M2C-11",
+        "M2C-15",
+        "M2C-16"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "bill",
+        "rate"
+      ]
+    },
+    {
+      "id": "P12-024",
+      "query": "What takes place when a customer leaves and a new one arrives?",
+      "category": "paraphrased",
+      "gold": "M2C-02",
+      "gold_title": "Move-In/Out Overview",
+      "top1": "M2C-03",
+      "top1_title": "Move-In Process",
+      "rank": 4,
+      "top1_sim": 0.4044,
+      "gold_sim": 0.3388,
+      "margin": 0.0656,
+      "primary_diag": "card description weakness / subtopic omission (card lacks specific detail/transaction mentioned in query)",
+      "top3": [
+        "M2C-03",
+        "M2C-04",
+        "M2C-29"
+      ],
+      "top5": [
+        "M2C-03",
+        "M2C-04",
+        "M2C-29",
+        "M2C-02",
+        "M2C-10"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_abstained",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_abstained",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": false,
+      "is_oracle_casualty_ev": false,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "customer"
+      ]
+    },
+    {
+      "id": "P12-026",
+      "query": "What is ISU_QD_1 used for in the meter reading monitoring lists?",
+      "category": "terminology",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-06",
+      "top1_title": "Reading Meters",
+      "rank": 3,
+      "top1_sim": 0.4653,
+      "gold_sim": 0.4314,
+      "margin": 0.0339,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-06",
+        "M2C-05",
+        "M2C-07"
+      ],
+      "top5": [
+        "M2C-06",
+        "M2C-05",
+        "M2C-07",
+        "M2C-10",
+        "M2C-08"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_citation_evidence_failure",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_citation_evidence_failure",
+      "is_oracle_casualty_base": false,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "read",
+        "meter",
+        "monitor"
+      ]
+    },
+    {
+      "id": "P12-027",
+      "query": "What is the business function ISU_AMI_1 required for?",
+      "category": "terminology",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-03",
+      "top1_title": "Move-In Process",
+      "rank": 25,
+      "top1_sim": 0.3621,
+      "gold_sim": 0.2692,
+      "margin": 0.0929,
+      "primary_diag": "gold card absent from top-k (ranked beyond #5)",
+      "top3": [
+        "M2C-03",
+        "M2C-17",
+        "M2C-18"
+      ],
+      "top5": [
+        "M2C-03",
+        "M2C-17",
+        "M2C-18",
+        "M2C-05",
+        "M2C-02"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "busines"
+      ]
+    },
+    {
+      "id": "P12-030",
+      "query": "What is event 3000 used for?",
+      "category": "terminology",
+      "gold": "M2C-24",
+      "gold_title": "Creating Installment Plans",
+      "top1": "M2C-27",
+      "top1_title": "Submission of Receivables to Collection Agency",
+      "rank": 26,
+      "top1_sim": 0.2589,
+      "gold_sim": 0.1739,
+      "margin": 0.085,
+      "primary_diag": "query/card vocabulary mismatch (zero content-term overlap between query and card)",
+      "top3": [
+        "M2C-27",
+        "M2C-05",
+        "M2C-26"
+      ],
+      "top5": [
+        "M2C-27",
+        "M2C-05",
+        "M2C-26",
+        "M2C-19",
+        "M2C-29"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": []
+    },
+    {
+      "id": "P12-031",
+      "query": "What does outsorting mean for a consumption bill?",
+      "category": "terminology",
+      "gold": "M2C-14",
+      "gold_title": "SAP Utilities Invoicing Procedure",
+      "top1": "M2C-13",
+      "top1_title": "Budget Billing Plan",
+      "rank": 10,
+      "top1_sim": 0.3965,
+      "gold_sim": 0.3105,
+      "margin": 0.086,
+      "primary_diag": "gold card absent from top-k (ranked beyond #5)",
+      "top3": [
+        "M2C-13",
+        "M2C-15",
+        "M2C-08"
+      ],
+      "top5": [
+        "M2C-13",
+        "M2C-15",
+        "M2C-08",
+        "M2C-24",
+        "M2C-23"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "bill"
+      ]
+    },
+    {
+      "id": "P12-032",
+      "query": "Which industry component limits a contract account to one business partner?",
+      "category": "terminology",
+      "gold": "M2C-17",
+      "gold_title": "Contract Accounts Overview",
+      "top1": "M2C-18",
+      "top1_title": "Contract Account Business Object",
+      "rank": 2,
+      "top1_sim": 0.4756,
+      "gold_sim": 0.4107,
+      "margin": 0.0649,
+      "primary_diag": "near-duplicate/semantically competing card (M2C-17 vs M2C-18 Contract Accounts conflict hub)",
+      "top3": [
+        "M2C-18",
+        "M2C-17",
+        "M2C-01"
+      ],
+      "top5": [
+        "M2C-18",
+        "M2C-17",
+        "M2C-01",
+        "M2C-24",
+        "M2C-28"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "account",
+        "contract"
+      ]
+    },
+    {
+      "id": "P12-033",
+      "query": "What is a subperiod in billing?",
+      "category": "terminology",
+      "gold": "M2C-11",
+      "gold_title": "SAP Utilities Billing Procedure",
+      "top1": "M2C-12",
+      "top1_title": "Automatic Billing",
+      "rank": 2,
+      "top1_sim": 0.4417,
+      "gold_sim": 0.4385,
+      "margin": 0.0032,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-12",
+        "M2C-11",
+        "M2C-14"
+      ],
+      "top5": [
+        "M2C-12",
+        "M2C-11",
+        "M2C-14",
+        "M2C-15",
+        "M2C-13"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "bill"
+      ]
+    },
+    {
+      "id": "P12-034",
+      "query": "Which component monitors the workflow processes of move-in and move-out?",
+      "category": "terminology",
+      "gold": "M2C-02",
+      "gold_title": "Move-In/Out Overview",
+      "top1": "M2C-04",
+      "top1_title": "Move-Out Process",
+      "rank": 4,
+      "top1_sim": 0.4551,
+      "gold_sim": 0.3369,
+      "margin": 0.1182,
+      "primary_diag": "card description weakness / subtopic omission (card lacks specific detail/transaction mentioned in query)",
+      "top3": [
+        "M2C-04",
+        "M2C-03",
+        "M2C-10"
+      ],
+      "top5": [
+        "M2C-04",
+        "M2C-03",
+        "M2C-10",
+        "M2C-02",
+        "M2C-22"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "move"
+      ]
+    },
+    {
+      "id": "P12-035",
+      "query": "Which transaction code shows all devices belonging to one meter reading unit?",
+      "category": "code_transaction",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-06",
+      "top1_title": "Reading Meters",
+      "rank": 3,
+      "top1_sim": 0.6043,
+      "gold_sim": 0.5599,
+      "margin": 0.0444,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-06",
+        "M2C-05",
+        "M2C-07"
+      ],
+      "top5": [
+        "M2C-06",
+        "M2C-05",
+        "M2C-07",
+        "M2C-10",
+        "M2C-08"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "meter",
+        "read"
+      ]
+    },
+    {
+      "id": "P12-036",
+      "query": "Which transaction handles the automatic monitoring of meter reading data?",
+      "category": "code_transaction",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-10",
+      "top1_title": "Meter Reading Data During Move-In",
+      "rank": 2,
+      "top1_sim": 0.6495,
+      "gold_sim": 0.619,
+      "margin": 0.0305,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-10",
+        "M2C-07",
+        "M2C-06"
+      ],
+      "top5": [
+        "M2C-10",
+        "M2C-07",
+        "M2C-06",
+        "M2C-05",
+        "M2C-08"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "read",
+        "meter",
+        "monitor"
+      ]
+    },
+    {
+      "id": "P12-037",
+      "query": "Which business function enables on-demand meter reading?",
+      "category": "code_transaction",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-10",
+      "top1_title": "Meter Reading Data During Move-In",
+      "rank": 4,
+      "top1_sim": 0.5788,
+      "gold_sim": 0.5391,
+      "margin": 0.0397,
+      "primary_diag": "card description weakness / subtopic omission (card lacks specific detail/transaction mentioned in query)",
+      "top3": [
+        "M2C-10",
+        "M2C-06",
+        "M2C-08"
+      ],
+      "top5": [
+        "M2C-10",
+        "M2C-06",
+        "M2C-08",
+        "M2C-07",
+        "M2C-05"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "busines",
+        "meter",
+        "read"
+      ]
+    },
+    {
+      "id": "P12-038",
+      "query": "Which business function is required to carry out quantity determination from the results list?",
+      "category": "code_transaction",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-27",
+      "top1_title": "Submission of Receivables to Collection Agency",
+      "rank": 6,
+      "top1_sim": 0.3557,
+      "gold_sim": 0.3212,
+      "margin": 0.0345,
+      "primary_diag": "gold card absent from top-k (ranked beyond #5)",
+      "top3": [
+        "M2C-27",
+        "M2C-11",
+        "M2C-09"
+      ],
+      "top5": [
+        "M2C-27",
+        "M2C-11",
+        "M2C-09",
+        "M2C-14",
+        "M2C-08"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "busines",
+        "result"
+      ]
+    },
+    {
+      "id": "P12-039",
+      "query": "What is the IDoc category used when uploading discrete meter reading data?",
+      "category": "code_transaction",
+      "gold": "M2C-07",
+      "gold_title": "Monitoring Meter Reading Results",
+      "top1": "M2C-10",
+      "top1_title": "Meter Reading Data During Move-In",
+      "rank": 5,
+      "top1_sim": 0.5301,
+      "gold_sim": 0.443,
+      "margin": 0.0871,
+      "primary_diag": "card description weakness / subtopic omission (card lacks specific detail/transaction mentioned in query)",
+      "top3": [
+        "M2C-10",
+        "M2C-06",
+        "M2C-08"
+      ],
+      "top5": [
+        "M2C-10",
+        "M2C-06",
+        "M2C-08",
+        "M2C-05",
+        "M2C-07"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "category",
+        "meter",
+        "read"
+      ]
+    },
+    {
+      "id": "P12-041",
+      "query": "Where in Customizing is the clearing priority indicator made available?",
+      "category": "code_transaction",
+      "gold": "M2C-24",
+      "gold_title": "Creating Installment Plans",
+      "top1": "M2C-20",
+      "top1_title": "Clearing Control in Incoming Payments",
+      "rank": 26,
+      "top1_sim": 0.3752,
+      "gold_sim": 0.163,
+      "margin": 0.2122,
+      "primary_diag": "gold card absent from top-k (ranked beyond #5)",
+      "top3": [
+        "M2C-20",
+        "M2C-21",
+        "M2C-26"
+      ],
+      "top5": [
+        "M2C-20",
+        "M2C-21",
+        "M2C-26",
+        "M2C-29",
+        "M2C-22"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "clear"
+      ]
+    },
+    {
+      "id": "P12-042",
+      "query": "Which component abbreviation covers purchase requisitions and purchase orders?",
+      "category": "code_transaction",
+      "gold": "M2C-05",
+      "gold_title": "Device Management Overview",
+      "top1": "M2C-23",
+      "top1_title": "Installment Plan Overview",
+      "rank": 14,
+      "top1_sim": 0.4409,
+      "gold_sim": 0.3617,
+      "margin": 0.0792,
+      "primary_diag": "gold card absent from top-k (ranked beyond #5)",
+      "top3": [
+        "M2C-23",
+        "M2C-17",
+        "M2C-24"
+      ],
+      "top5": [
+        "M2C-23",
+        "M2C-17",
+        "M2C-24",
+        "M2C-27",
+        "M2C-28"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "cover"
+      ]
+    },
+    {
+      "id": "P12-043",
+      "query": "What is the component abbreviation of SAP Business Workflow in move-in and move-out?",
+      "category": "code_transaction",
+      "gold": "M2C-02",
+      "gold_title": "Move-In/Out Overview",
+      "top1": "M2C-03",
+      "top1_title": "Move-In Process",
+      "rank": 3,
+      "top1_sim": 0.6371,
+      "gold_sim": 0.5816,
+      "margin": 0.0555,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-03",
+        "M2C-04",
+        "M2C-02"
+      ],
+      "top5": [
+        "M2C-03",
+        "M2C-04",
+        "M2C-02",
+        "M2C-10",
+        "M2C-25"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "move"
+      ]
+    },
+    {
+      "id": "P12-047",
+      "query": "In which step does a list of selected items appear?",
+      "category": "numeric_detail",
+      "gold": "M2C-24",
+      "gold_title": "Creating Installment Plans",
+      "top1": "M2C-27",
+      "top1_title": "Submission of Receivables to Collection Agency",
+      "rank": 7,
+      "top1_sim": 0.2289,
+      "gold_sim": 0.1512,
+      "margin": 0.0777,
+      "primary_diag": "query/card vocabulary mismatch (zero content-term overlap between query and card)",
+      "top3": [
+        "M2C-27",
+        "M2C-20",
+        "M2C-14"
+      ],
+      "top5": [
+        "M2C-27",
+        "M2C-20",
+        "M2C-14",
+        "M2C-03",
+        "M2C-25"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_abstained",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": false,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": []
+    },
+    {
+      "id": "P12-050",
+      "query": "How do I copy default values into the first screen when entering installment plan parameters?",
+      "category": "sibling_topic",
+      "gold": "M2C-24",
+      "gold_title": "Creating Installment Plans",
+      "top1": "M2C-25",
+      "top1_title": "Displaying and Changing Installment Plans",
+      "rank": 3,
+      "top1_sim": 0.3817,
+      "gold_sim": 0.3333,
+      "margin": 0.0484,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-25",
+        "M2C-23",
+        "M2C-24"
+      ],
+      "top5": [
+        "M2C-25",
+        "M2C-23",
+        "M2C-24",
+        "M2C-13",
+        "M2C-11"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "installment",
+        "plan"
+      ]
+    },
+    {
+      "id": "P12-051",
+      "query": "What can be changed in an installment plan proposal before it is saved?",
+      "category": "sibling_topic",
+      "gold": "M2C-24",
+      "gold_title": "Creating Installment Plans",
+      "top1": "M2C-25",
+      "top1_title": "Displaying and Changing Installment Plans",
+      "rank": 2,
+      "top1_sim": 0.5676,
+      "gold_sim": 0.5429,
+      "margin": 0.0247,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-25",
+        "M2C-24",
+        "M2C-23"
+      ],
+      "top5": [
+        "M2C-25",
+        "M2C-24",
+        "M2C-23",
+        "M2C-13",
+        "M2C-15"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_answered_wrong_page",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_answered_wrong_page",
+      "oll_oracle_outcome": "answerable_abstained",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": false,
+      "overlap_terms": [
+        "installment",
+        "plan"
+      ]
+    },
+    {
+      "id": "P12-052",
+      "query": "What does the move-in/out component do for a customer who leaves?",
+      "category": "sibling_topic",
+      "gold": "M2C-02",
+      "gold_title": "Move-In/Out Overview",
+      "top1": "M2C-04",
+      "top1_title": "Move-Out Process",
+      "rank": 3,
+      "top1_sim": 0.491,
+      "gold_sim": 0.436,
+      "margin": 0.055,
+      "primary_diag": "near-duplicate/semantically competing card (functional sibling in same category/domain)",
+      "top3": [
+        "M2C-04",
+        "M2C-03",
+        "M2C-02"
+      ],
+      "top5": [
+        "M2C-04",
+        "M2C-03",
+        "M2C-02",
+        "M2C-29",
+        "M2C-10"
+      ],
+      "b_real_outcome": "answerable_answered_wrong_page",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_answered_wrong_page",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_answered_wrong_page",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "move",
+        "customer"
+      ]
+    },
+    {
+      "id": "P12-054",
+      "query": "How does the billing procedure cope with changes to master data during a period?",
+      "category": "sibling_topic",
+      "gold": "M2C-11",
+      "gold_title": "SAP Utilities Billing Procedure",
+      "top1": "M2C-12",
+      "top1_title": "Automatic Billing",
+      "rank": 4,
+      "top1_sim": 0.4145,
+      "gold_sim": 0.4092,
+      "margin": 0.0053,
+      "primary_diag": "near-tie dense embedding limitation (margin <= 0.03)",
+      "top3": [
+        "M2C-12",
+        "M2C-03",
+        "M2C-02"
+      ],
+      "top5": [
+        "M2C-12",
+        "M2C-03",
+        "M2C-02",
+        "M2C-11",
+        "M2C-01"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "bill",
+        "procedure",
+        "data"
+      ]
+    },
+    {
+      "id": "P12-056",
+      "query": "Is each contract tied to a single contract account in the insurance component?",
+      "category": "sibling_topic",
+      "gold": "M2C-17",
+      "gold_title": "Contract Accounts Overview",
+      "top1": "M2C-18",
+      "top1_title": "Contract Account Business Object",
+      "rank": 2,
+      "top1_sim": 0.3719,
+      "gold_sim": 0.3397,
+      "margin": 0.0322,
+      "primary_diag": "near-duplicate/semantically competing card (M2C-17 vs M2C-18 Contract Accounts conflict hub)",
+      "top3": [
+        "M2C-18",
+        "M2C-17",
+        "M2C-23"
+      ],
+      "top5": [
+        "M2C-18",
+        "M2C-17",
+        "M2C-23",
+        "M2C-24",
+        "M2C-25"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_citation_evidence_failure",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": false,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": [
+        "account",
+        "contract"
+      ]
+    },
+    {
+      "id": "P12-064",
+      "query": "What does the Full Reversal function do?",
+      "category": "review_conflict",
+      "gold": "M2C-14",
+      "gold_title": "SAP Utilities Invoicing Procedure",
+      "top1": "M2C-04",
+      "top1_title": "Move-Out Process",
+      "rank": 2,
+      "top1_sim": 0.1962,
+      "gold_sim": 0.1556,
+      "margin": 0.0406,
+      "primary_diag": "query/card vocabulary mismatch (zero content-term overlap between query and card)",
+      "top3": [
+        "M2C-04",
+        "M2C-14",
+        "M2C-22"
+      ],
+      "top5": [
+        "M2C-04",
+        "M2C-14",
+        "M2C-22",
+        "M2C-03",
+        "M2C-25"
+      ],
+      "b_real_outcome": "answerable_abstained",
+      "b_oracle_outcome": "answerable_answered_correct",
+      "e_real_outcome": "answerable_abstained",
+      "e_oracle_outcome": "answerable_answered_correct",
+      "oll_real_outcome": "answerable_abstained",
+      "oll_oracle_outcome": "answerable_answered_correct",
+      "is_oracle_casualty_base": true,
+      "is_oracle_casualty_ev": true,
+      "is_oracle_casualty_oll": true,
+      "overlap_terms": []
+    }
+  ]
+}

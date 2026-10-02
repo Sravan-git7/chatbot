@@ -19,7 +19,10 @@ import json
 import math
 import os
 import re
-import resource
+try:
+    import resource
+except ImportError:          # Windows has no `resource`
+    resource = None
 import statistics
 import sys
 import time
@@ -395,7 +398,10 @@ def main() -> int:
         return round(xs[min(len(xs) - 1, int(round((len(xs) - 1) * p)))], 2)
     perf["per_query_ms_router_mode"] = {k: {"median": round(statistics.median(v), 2), "p95": pct(v, 0.95), "max": round(max(v), 2), "n": len(v)} for k, v in sorted(stages.items())}
     perf.update(PERF_NOTES)
-    perf["peak_rss_mb"] = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)
+    perf["peak_rss_mb"] = (
+    round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)
+    if resource is not None else None
+)
     perf["note"] = "CPU, no GPU, extractive generator; LLM generation latency is NOT measured (no LLM available)"
     PERF.write_text(json.dumps(perf, indent=2) + "\n", encoding="utf-8")
 

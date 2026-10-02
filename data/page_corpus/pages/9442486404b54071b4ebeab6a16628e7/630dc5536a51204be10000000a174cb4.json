@@ -1,0 +1,113 @@
+{
+  "acquisition": {
+    "body_sha256": "22661a420e026f7b0ad1feb84ebf666881cabf37cbd70d1079c9c2e4c87ae3a9",
+    "build_no": null,
+    "deliverable_title": "Contract Accounting",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/14_40374790_630dc5536a51204be10000000a174cb4.json",
+    "file_sha256": "b8b6fc2cdc82dc0b7e7385c27e9279405b5b4ac16e0042d0c012387fdad95cef",
+    "html_chars": 13718,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374790",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Displaying and Changing Installment Plans"
+      ],
+      "kind": "paragraph",
+      "text": "To view or change existing installment agreements for a business partner, proceed as follows:"
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Displaying and Changing Installment Plans"
+      ],
+      "kind": "list",
+      "text": "1. In the SAP Easy Access screen, choose Account > Installment Plan > Display (transaction FPR3 ).\n2. Choose Change or Display .\n3. Specify the desired installment plan and choose Continue . Note If you use the input help for the Installment Plan Number field, for selection using the installment plan history, the system displays only active installment plans as standard. If you also want to display deactivated installment plans, you have to specify a deactivation reason on the tab page Installment Plan History ."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Displaying and Changing Installment Plans"
+      ],
+      "kind": "paragraph",
+      "text": "The following table lists the functions you can use when changing or displaying an installment plan:"
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Displaying and Changing Installment Plans"
+      ],
+      "kind": "table",
+      "text": "Functions with Display and Change: Print letter; Calling the function: Installment Plan > Save + Create Letter; Procedure / Notes: The letter is written into the correspondence container. For more information on output, see Functions for Scheduling Program Runs , Printing Correspondence , and Printing Correspondence with the Print Workbench .\nFunctions with Display and Change: Display source receivables in the account balance display; Calling the function: Environment > Source Receivable (Account Display); Procedure / Notes: The system calls up the account balance display. You see the documents that were transferred to installment plan.\nFunctions with Display and Change: Display installment plan changes; Calling the function: Goto > Changes\nFunctions with Display and Change: Display interest supplement; Calling the function: Environment > Interest Supplement; Procedure / Notes: The precondition is that interest was charged on the installment plan.\nFunctions with Display and Change: Display / change processing locks; Calling the function: The system will display locks, such as payment, dunning, interest, and clearing locks, together for each installment plan item. When you place the cursor on the icon , the type of locks that exist are displayed in a quick info. For detailed information, such as the lock reason, double-click on the icon and select the required lock in the following dialog box. The overview also shows a column for each processing lock with the relevant lock reason. If there are several locks of the same type with different lock reasons, a tilde appears (~). By double-clicking on the table field with the lock required, you can display and change the details for this lock directly.; Procedure / Notes: To set or change a lock, navigate using the icon or by double-clicking on the corresponding table field in the overview to the dialog box for setting/changing the required lock and enter the data required. Alternatively, delete the lock reason or enter it in the required column in the overview. The field is only ready for input if only one unlimited lock exists or if there are none. In this way, you can only set time-based unlimited locks."
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Displaying and Changing Installment Plans"
+      ],
+      "kind": "table",
+      "text": "Functions only with Change: Deactivate installment plan; Calling the function: Installment Plan > Deactivate Installment Plan; Procedure / Notes: If the installment plan has not yet been paid or has been partially paid, an automatic reversal of the interest and the charge document for this installment plan is possible.\nFunctions only with Change: Add installment; Calling the function: Edit > Add Installment; Procedure / Notes: If you add or delete installments, you must then ensure that the total of the installment plan corresponds to the amount of the source receivable.\nFunctions only with Change: Delete installment; Calling the function: Select the appropriate installment(s) and choose Edit > Delete Installment .; Procedure / Notes: If you add or delete installments, you must then ensure that the total of the installment plan corresponds to the amount of the source receivable.\nFunctions only with Change: Display source receivables in the installment plan history; Calling the function: Goto > Display Source Receivables for Installment Plan; Procedure / Notes: This brings you to the installment plan history. It will tell you which receivables are included in the installment plan. This function is also possible after the reactivation of the installment plan."
+    }
+  ],
+  "breadcrumb": [
+    "Contract Accounting",
+    "Credit and Collections Management",
+    "Deferrals and Installment Plans",
+    "Displaying and Changing Installment Plans"
+  ],
+  "card": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_page_id": "630dc5536a51204be10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Displaying and Changing Installment Plans",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4",
+  "guide_id": "9442486404b54071b4ebeab6a16628e7",
+  "headings": [
+    "Displaying and Changing Installment Plans"
+  ],
+  "html_title": "Displaying and Changing Installment Plans",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "630dc5536a51204be10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-25"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
+  "structure": {
+    "blocks": 5,
+    "chrome_elements_removed": 0,
+    "headings": 1,
+    "kinds": {
+      "list": 1,
+      "paragraph": 2,
+      "table": 2
+    }
+  },
+  "text": "Displaying and Changing Installment Plans\nTo view or change existing installment agreements for a business partner, proceed as follows:\n1. In the SAP Easy Access screen, choose Account > Installment Plan > Display (transaction FPR3 ).\n2. Choose Change or Display .\n3. Specify the desired installment plan and choose Continue . Note If you use the input help for the Installment Plan Number field, for selection using the installment plan history, the system displays only active installment plans as standard. If you also want to display deactivated installment plans, you have to specify a deactivation reason on the tab page Installment Plan History .\nThe following table lists the functions you can use when changing or displaying an installment plan:\nFunctions with Display and Change: Print letter; Calling the function: Installment Plan > Save + Create Letter; Procedure / Notes: The letter is written into the correspondence container. For more information on output, see Functions for Scheduling Program Runs , Printing Correspondence , and Printing Correspondence with the Print Workbench .\nFunctions with Display and Change: Display source receivables in the account balance display; Calling the function: Environment > Source Receivable (Account Display); Procedure / Notes: The system calls up the account balance display. You see the documents that were transferred to installment plan.\nFunctions with Display and Change: Display installment plan changes; Calling the function: Goto > Changes\nFunctions with Display and Change: Display interest supplement; Calling the function: Environment > Interest Supplement; Procedure / Notes: The precondition is that interest was charged on the installment plan.\nFunctions with Display and Change: Display / change processing locks; Calling the function: The system will display locks, such as payment, dunning, interest, and clearing locks, together for each installment plan item. When you place the cursor on the icon , the type of locks that exist are displayed in a quick info. For detailed information, such as the lock reason, double-click on the icon and select the required lock in the following dialog box. The overview also shows a column for each processing lock with the relevant lock reason. If there are several locks of the same type with different lock reasons, a tilde appears (~). By double-clicking on the table field with the lock required, you can display and change the details for this lock directly.; Procedure / Notes: To set or change a lock, navigate using the icon or by double-clicking on the corresponding table field in the overview to the dialog box for setting/changing the required lock and enter the data required. Alternatively, delete the lock reason or enter it in the required column in the overview. The field is only ready for input if only one unlimited lock exists or if there are none. In this way, you can only set time-based unlimited locks.\nFunctions only with Change: Deactivate installment plan; Calling the function: Installment Plan > Deactivate Installment Plan; Procedure / Notes: If the installment plan has not yet been paid or has been partially paid, an automatic reversal of the interest and the charge document for this installment plan is possible.\nFunctions only with Change: Add installment; Calling the function: Edit > Add Installment; Procedure / Notes: If you add or delete installments, you must then ensure that the total of the installment plan corresponds to the amount of the source receivable.\nFunctions only with Change: Delete installment; Calling the function: Select the appropriate installment(s) and choose Edit > Delete Installment .; Procedure / Notes: If you add or delete installments, you must then ensure that the total of the installment plan corresponds to the amount of the source receivable.\nFunctions only with Change: Display source receivables in the installment plan history; Calling the function: Goto > Display Source Receivables for Installment Plan; Procedure / Notes: This brings you to the installment plan history. It will tell you which receivables are included in the installment plan. This function is also possible after the reactivation of the installment plan.",
+  "text_sha256": "82683da49e3f78a6a65c6c0b70861ae1806a137cec8e9391349e1fb170853f11",
+  "title": "Displaying and Changing Installment Plans",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 4220
+  }
+}

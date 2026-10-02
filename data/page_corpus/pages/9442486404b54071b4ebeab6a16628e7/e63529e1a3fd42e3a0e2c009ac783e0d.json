@@ -1,0 +1,156 @@
+{
+  "acquisition": {
+    "body_sha256": "0ab6f8226f586c51e78fa7290ea62199f8defa4e3c8df0e6285af766467023c0",
+    "build_no": null,
+    "deliverable_title": "Contract Accounting",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/11_40374790_e63529e1a3fd42e3a0e2c009ac783e0d.json",
+    "file_sha256": "c62663d315b217e670151c5de3eaca55f57e4b0d4ca746b9b9997d7a16653c04",
+    "html_chars": 8971,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374790",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "paragraph",
+      "text": "In Customizing for Contract Accounts Receivable and Payable, under Open Item Management > Clearing Control > Define Clearing Types , define the clearing rules, depending on the clearing type."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "paragraph",
+      "text": "The clearing type represents the business transaction, such as payment lot (05), cash desk (19), or manual account maintenance (03). For the standard processes of incoming payments and account maintenance, the clearing type supplied by SAP corresponds to the origin (origin key of document HERKF_KK ) of the clearing process."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "paragraph",
+      "text": "The standard processes of Contract Accounts Receivable and Payable use the following clearing types:"
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "table",
+      "text": "Clearing Type: 01; Description: Manual posting; Use: Incoming payment\nClearing Type: 03; Description: Manual account maintenance; Use: Account maintenance\nClearing Type: 04; Description: Automatic account maintenance; Use: Account maintenance\nClearing Type: 05; Description: Payment lot; Use: Incoming payment\nClearing Type: 06*; Description: Payment run (Assignment of an available amount, for example, for incoming payment); Use: Payment run\nClearing Type: 19; Description: Payment in the cash desk; Use: Incoming payment\nClearing Type: 25; Description: Check lot; Use: Incoming payment\nClearing Type: 55; Description: Credit card lot; Use: Incoming payment"
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "paragraph",
+      "text": "* Clearing type 06 is used in the configuration of the extended grouping in event 0600."
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "paragraph",
+      "text": "The system uses the following clearing types to distribute the clearing amount to the dependent items:"
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "table",
+      "text": "Clearing Type: 20R; Description: Distribute a payment to the original items of an installment plan; Use: Distribute the clearing amount to the dependent items\nClearing Type: 20S; Description: Distribute a payment to the original items of a collective bill; Use: Distribute the clearing amount to the dependent items\nClearing Type: 30G; Description: Distribute a payment to the line items of a summarization group; Use: Distribute the clearing amount to the dependent items"
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "note",
+      "text": "Note: A clearing type is also flagged if it controls the assignment of an available amount (such as a payment) to the open items. Otherwise, it only controls the assignment between the open items that have already been posted (account maintenance)."
+    },
+    {
+      "block_index": 8,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "paragraph",
+      "text": "Depending on the area of use, the rules to be defined for a clearing type vary. These rules are processed in the clearing process in the following sequence:"
+    },
+    {
+      "block_index": 9,
+      "heading_path": [
+        "Clearing Type"
+      ],
+      "kind": "list",
+      "text": "1. Filter the selected open items according to the specifications for restricting the selection\n2. Creation of a clearing proposal based on the rules of the clearing variant\n3. Handling of unassigned payments (on account or clarification)\n4. Clearing statistical items without follow-on posting (indicator XCLON )"
+    }
+  ],
+  "breadcrumb": [
+    "Contract Accounting",
+    "Basic Functions",
+    "Open Item Management",
+    "Clearing Control",
+    "Definition of Clearing Rules",
+    "Clearing Type"
+  ],
+  "card": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_page_id": "e63529e1a3fd42e3a0e2c009ac783e0d",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Clearing Types",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
+    "review_flag": false
+  },
+  "doc_id": "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d",
+  "guide_id": "9442486404b54071b4ebeab6a16628e7",
+  "headings": [
+    "Clearing Type"
+  ],
+  "html_title": "Clearing Type",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "e63529e1a3fd42e3a0e2c009ac783e0d",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-21"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
+  "structure": {
+    "blocks": 10,
+    "chrome_elements_removed": 0,
+    "headings": 1,
+    "kinds": {
+      "list": 1,
+      "note": 1,
+      "paragraph": 6,
+      "table": 2
+    }
+  },
+  "text": "Clearing Type\nIn Customizing for Contract Accounts Receivable and Payable, under Open Item Management > Clearing Control > Define Clearing Types , define the clearing rules, depending on the clearing type.\nThe clearing type represents the business transaction, such as payment lot (05), cash desk (19), or manual account maintenance (03). For the standard processes of incoming payments and account maintenance, the clearing type supplied by SAP corresponds to the origin (origin key of document HERKF_KK ) of the clearing process.\nThe standard processes of Contract Accounts Receivable and Payable use the following clearing types:\nClearing Type: 01; Description: Manual posting; Use: Incoming payment\nClearing Type: 03; Description: Manual account maintenance; Use: Account maintenance\nClearing Type: 04; Description: Automatic account maintenance; Use: Account maintenance\nClearing Type: 05; Description: Payment lot; Use: Incoming payment\nClearing Type: 06*; Description: Payment run (Assignment of an available amount, for example, for incoming payment); Use: Payment run\nClearing Type: 19; Description: Payment in the cash desk; Use: Incoming payment\nClearing Type: 25; Description: Check lot; Use: Incoming payment\nClearing Type: 55; Description: Credit card lot; Use: Incoming payment\n* Clearing type 06 is used in the configuration of the extended grouping in event 0600.\nThe system uses the following clearing types to distribute the clearing amount to the dependent items:\nClearing Type: 20R; Description: Distribute a payment to the original items of an installment plan; Use: Distribute the clearing amount to the dependent items\nClearing Type: 20S; Description: Distribute a payment to the original items of a collective bill; Use: Distribute the clearing amount to the dependent items\nClearing Type: 30G; Description: Distribute a payment to the line items of a summarization group; Use: Distribute the clearing amount to the dependent items\nNote: A clearing type is also flagged if it controls the assignment of an available amount (such as a payment) to the open items. Otherwise, it only controls the assignment between the open items that have already been posted (account maintenance).\nDepending on the area of use, the rules to be defined for a clearing type vary. These rules are processed in the clearing process in the following sequence:\n1. Filter the selected open items according to the specifications for restricting the selection\n2. Creation of a clearing proposal based on the rules of the clearing variant\n3. Handling of unassigned payments (on account or clarification)\n4. Clearing statistical items without follow-on posting (indicator XCLON )",
+  "text_sha256": "c33590821830f7e1e9e886ec84c9150bd1972ab8c10dd4ac38e6c9d4a85b2124",
+  "title": "Clearing Type",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 2676
+  }
+}

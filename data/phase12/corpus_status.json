@@ -1,11 +1,11 @@
 {
  "schema_version": 1,
- "generated_at": "2026-10-01T15:21:02+00:00",
+ "generated_at": "2026-10-01T17:32:36+00:00",
  "totals": {
   "cards": 29,
-  "local_pages": 7,
-  "answerable_content": 7,
-  "identified_not_local_without_page": 18,
+  "local_pages": 25,
+  "answerable_content": 25,
+  "identified_not_local_without_page": 0,
   "not_fetchable": 4,
   "identity_status_counts": {
    "card_identity_only": 3,
@@ -107,13 +107,13 @@
    "review_flag": false,
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
    "effective_page_id": "0981ce53118d4308e10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 8,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-04",
@@ -126,13 +126,13 @@
    "review_flag": false,
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
    "effective_page_id": "0f81ce53118d4308e10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 6,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-05",
@@ -164,13 +164,13 @@
    "review_flag": false,
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
    "effective_page_id": "bc90d0533f8e4308e10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 3,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-07",
@@ -202,13 +202,13 @@
    "review_flag": false,
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
    "effective_page_id": "d090d0533f8e4308e10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 1,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-09",
@@ -221,13 +221,13 @@
    "review_flag": false,
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
    "effective_page_id": "bf74c1d28fd54f77b228772b98b72fba",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 4,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-10",
@@ -240,13 +240,13 @@
    "review_flag": false,
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
    "effective_page_id": "b781ce53118d4308e10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 2,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-11",
@@ -278,13 +278,13 @@
    "review_flag": false,
    "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
    "effective_page_id": "297bce53118d4308e10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 4,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-13",
@@ -335,13 +335,13 @@
    "review_flag": false,
    "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
    "effective_page_id": "147cce53118d4308e10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 5,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-16",
@@ -411,13 +411,13 @@
    "review_flag": false,
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "063bf3eb68e347efa5c0fc1d389f70f7",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 6,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-20",
@@ -430,13 +430,13 @@
    "review_flag": false,
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 1,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-21",
@@ -449,13 +449,13 @@
    "review_flag": false,
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "e63529e1a3fd42e3a0e2c009ac783e0d",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 4,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-22",
@@ -468,13 +468,13 @@
    "review_flag": false,
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 5,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-23",
@@ -487,13 +487,13 @@
    "review_flag": true,
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "730dc5536a51204be10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 3,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-24",
@@ -525,13 +525,13 @@
    "review_flag": false,
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "630dc5536a51204be10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 5,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-26",
@@ -544,13 +544,13 @@
    "review_flag": false,
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "b1ffc5536a51204be10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 3,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-27",
@@ -563,13 +563,13 @@
    "review_flag": false,
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "10e7c5536a51204be10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 2,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-28",
@@ -582,13 +582,13 @@
    "review_flag": false,
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "9c9c2344851f412f823d5f8a9dc7c694",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 5,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   },
   {
    "source_id": "M2C-29",
@@ -601,97 +601,13 @@
    "review_flag": false,
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
    "effective_page_id": "8682ce53118d4308e10000000a174cb4",
-   "corpus_status": "not_ingested_no_local_content",
-   "local_page": false,
-   "page_chunks": null,
-   "answerable_content": false,
-   "acquisition": null,
-   "needed_to_complete": "official pagecontent response (recorded ids; see import_manifest.json)",
-   "fetchable_with_recorded_ids": true
-  }
- ],
- "network_probe": [
-  {
-   "host": "help.sap.com",
-   "dns": [
-    "23.216.147.195",
-    "23.216.147.196",
-    "2600:1409:9800:1c::17d8:9147"
-   ],
-   "tcp_443": true,
-   "tls": {
-    "ok": false
-   },
-   "failed_stage": "tls_handshake",
-   "error": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
-  },
-  {
-   "host": "ollama.com",
-   "dns": [
-    "34.36.133.15"
-   ],
-   "tcp_443": true,
-   "tls": {
-    "ok": false
-   },
-   "failed_stage": "tls_handshake",
-   "error": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
-  },
-  {
-   "host": "registry.ollama.ai",
-   "dns": [
-    "104.18.16.170",
-    "104.18.17.170",
-    "2606:4700::6812:10aa"
-   ],
-   "tcp_443": true,
-   "tls": {
-    "ok": false
-   },
-   "failed_stage": "tls_handshake",
-   "error": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
-  },
-  {
-   "host": "huggingface.co",
-   "dns": [
-    "2600:9000:212d:0:17:b174:6d00:93a1",
-    "2600:9000:212d:1400:17:b174:6d00:93a1",
-    "2600:9000:212d:3200:17:b174:6d00:93a1"
-   ],
-   "tcp_443": true,
-   "tls": {
-    "ok": false
-   },
-   "failed_stage": "tls_handshake",
-   "error": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
-  },
-  {
-   "host": "github.com",
-   "dns": [
-    "20.29.134.23"
-   ],
-   "tcp_443": true,
-   "tls": {
-    "ok": true,
-    "version": "TLSv1.3"
-   },
-   "failed_stage": null,
-   "error": null
-  },
-  {
-   "host": "pypi.org",
-   "dns": [
-    "151.101.0.223",
-    "151.101.128.223",
-    "151.101.192.223"
-   ],
-   "tcp_443": true,
-   "tls": {
-    "ok": true,
-    "version": "TLSv1.3"
-   },
-   "failed_stage": null,
-   "error": null
+   "corpus_status": "ingested",
+   "local_page": true,
+   "page_chunks": 7,
+   "answerable_content": true,
+   "acquisition": "saved_sap_help_pagecontent_response",
+   "needed_to_complete": "none (page present)",
+   "fetchable_with_recorded_ids": false
   }
  ]
 }

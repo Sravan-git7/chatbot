@@ -1,0 +1,418 @@
+{
+  "acquisition": {
+    "body_sha256": "706c6c1b149d5568178867b3ccfff70c48ce60434a43868de4390fe3eb85237a",
+    "build_no": null,
+    "deliverable_title": "Customer Service",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/1_40374682_0981ce53118d4308e10000000a174cb4.json",
+    "file_sha256": "32ab23844d005d76dee8b1680da384b788dda10b4b866c6f32528fd685a15cb5",
+    "html_chars": 10751,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374682",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Move-in",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "You use the move-in function to carry out most of the activities required to begin providing a business partner with a utility service. You create new, or change existing business master data. Most importantly, you allocate a contract to an installation."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Move-in",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "In move-in processing, you establish whether a contract can be billed. From the move-in, you can also trigger the charges levied at the commencement of a utility service, as well as a welcome letter to the customer."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Move-in",
+        "Prerequisites"
+      ],
+      "kind": "paragraph",
+      "text": "To create a move-in, you require one or more installations that are vacant on the desired move-in date."
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Move-in",
+        "Prerequisites"
+      ],
+      "kind": "list",
+      "text": "- In the case of an initial move-in, ensure that you have completed initial data creation, including creation of the installation(s).\n- Devices can (but do not have to) be installed and allocated before move-in.\n- If one of the installations is already allocated to a contract, this allocation must be reversed. To do this, process a move-out. An installation can only be allocated to one contract at any given time."
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Customer Contact"
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "When a move-in is created, a corresponding customer contact is created automatically. This is automatically linked to the move-in document. You can find additional information in the section on Customer contact ."
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Overall Check"
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "When a contract is assigned the move-in status 05 (meter reading entered completely), you can verify that the contract can be billed."
+    },
+    {
+      "block_index": 8,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Move-In Status"
+    },
+    {
+      "block_index": 9,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "If you process or display a move-in document, the system also displays the move-in status of each contract. The move-in status informs the agent which stage of move-in processing has been reached."
+    },
+    {
+      "block_index": 10,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "The minimum is formed from the move-in status of the contracts and also displayed. In this way you can obtain information on the status of the entire move-in processing."
+    },
+    {
+      "block_index": 11,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Move-In Documents"
+    },
+    {
+      "block_index": 12,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "When you display the move-in documents for a business partner or a premise, the documents from the last three months appear. If no documents exist for this period then the system displays the documents from the last six months."
+    },
+    {
+      "block_index": 13,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Once you have entered the move-in, move-out, or move-in/out, you can use the SAP Business Workflows to trigger and monitor additional business processes."
+    },
+    {
+      "block_index": 14,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can re-process incomplete move-ins and monitor the status of processing. This may be necessary if, for example:"
+    },
+    {
+      "block_index": 15,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "list",
+      "text": "- The meter readings are unavailable"
+    },
+    {
+      "block_index": 16,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "list",
+      "text": "- The budget billing plan cannot be created, or"
+    },
+    {
+      "block_index": 17,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "list",
+      "text": "- The data required to print the welcome letter is incomplete"
+    },
+    {
+      "block_index": 18,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Move-In Charges"
+    },
+    {
+      "block_index": 19,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "When you save the move-in document, the system posts the move-in charges automatically, provided you have configured the system accordingly in Customizing under Move-In/Out > Define System Parameters for Move-In and Move-Out. ."
+    },
+    {
+      "block_index": 20,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can configure the system to post the charges to a contract or contract account. You configure how the system calculates the charges using the parameters Charge category and Charge schema . In this way, you can, for example, levy a move-in charge staggered to correspond with the number of contracts."
+    },
+    {
+      "block_index": 21,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Reduced Layouts"
+    },
+    {
+      "block_index": 22,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "In Customizing, you can define reduced layouts for the configurable tab on page on the move-in screen to hide some of the data on the individual tab pages. The layouts can now be stored in the special processing variants for the move-in/out. This enables agents to process move-ins and move-in/outs more quickly."
+    },
+    {
+      "block_index": 23,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Budget Billing"
+    },
+    {
+      "block_index": 24,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "A budget billing amount agreed with the customer is also taken in account if the move-in is entered by the master data generator. If a budget billing plan cannot be created for a contact in move-in processing then the BudgetBillingPlansFailed event of the MOVEINDOC BOR object type is triggered."
+    },
+    {
+      "block_index": 25,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Activity Log"
+    },
+    {
+      "block_index": 26,
+      "heading_path": [
+        "Move-in",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "In Customizing you can configure the system to save the activity log for the move-in. You can then display it on the move-in screen. To do this choose Extras > Display Activity Log."
+    },
+    {
+      "block_index": 27,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Initial Screen"
+    },
+    {
+      "block_index": 28,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Based on the data you specified on the initial screen, the system automatically determines which of the following cases applies:"
+    },
+    {
+      "block_index": 29,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "table",
+      "text": "Exists before move-in: Business partner, contract account, installation; Is created during move-in: Contract\nExists before move-in: Business partner, installation; Is created during move-in: Contract account, contract\nExists before move-in: Installation; Is created during move-in: Business partner, contract account, contract"
+    },
+    {
+      "block_index": 30,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Move-in date"
+    },
+    {
+      "block_index": 31,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "You can change the date of a move-in after it has been created without affecting the move-out that precedes it. To do this, choose Edit > Change Move-In Date ."
+    },
+    {
+      "block_index": 32,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Actual Move-In Date"
+    },
+    {
+      "block_index": 33,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "In addition to the move-in date, the actual move-in date can be entered as the date from which the premise is occupied."
+    },
+    {
+      "block_index": 34,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Save"
+    },
+    {
+      "block_index": 35,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "When you save the move-in, the initial move-in or move-in/out screen reappears. In Customizing under Define Control Parameters at Document Level , you can configure the system so that when you save the data, a log is displayed containing information on the changes made to the data."
+    },
+    {
+      "block_index": 36,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Certain move-in activities, for example, maintaining a budget billing plan, are based on the database changes made by the move-in. In these instances, you can, in Customizing under Move-In/Out -> Move-In -> Define Control Parameters at Document Level configure the system to either output a confirmation prompt or save the data automatically before the action is carried out."
+    },
+    {
+      "block_index": 37,
+      "heading_path": [
+        "Move-in",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "You can also save your changes in the move-in without leaving the move-in screen. To do this, choose Save and Hold ."
+    }
+  ],
+  "breadcrumb": [
+    "Process Execution",
+    "Move-In/Out",
+    "Move-in"
+  ],
+  "card": {
+    "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+    "card_page_id": "0981ce53118d4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Move-In Process",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4",
+  "guide_id": "f4a255a5de524e3992155767996fb1fd",
+  "headings": [
+    "Move-in",
+    "Use",
+    "Prerequisites",
+    "Features",
+    "Activities"
+  ],
+  "html_title": "Move-in",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "0981ce53118d4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-03"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 38,
+    "chrome_elements_removed": 0,
+    "headings": 5,
+    "kinds": {
+      "list": 4,
+      "paragraph": 33,
+      "table": 1
+    }
+  },
+  "text": "Move-in\nUse\nYou use the move-in function to carry out most of the activities required to begin providing a business partner with a utility service. You create new, or change existing business master data. Most importantly, you allocate a contract to an installation.\nIn move-in processing, you establish whether a contract can be billed. From the move-in, you can also trigger the charges levied at the commencement of a utility service, as well as a welcome letter to the customer.\nPrerequisites\nTo create a move-in, you require one or more installations that are vacant on the desired move-in date.\n- In the case of an initial move-in, ensure that you have completed initial data creation, including creation of the installation(s).\n- Devices can (but do not have to) be installed and allocated before move-in.\n- If one of the installations is already allocated to a contract, this allocation must be reversed. To do this, process a move-out. An installation can only be allocated to one contract at any given time.\nFeatures\nCustomer Contact\nWhen a move-in is created, a corresponding customer contact is created automatically. This is automatically linked to the move-in document. You can find additional information in the section on Customer contact .\nOverall Check\nWhen a contract is assigned the move-in status 05 (meter reading entered completely), you can verify that the contract can be billed.\nMove-In Status\nIf you process or display a move-in document, the system also displays the move-in status of each contract. The move-in status informs the agent which stage of move-in processing has been reached.\nThe minimum is formed from the move-in status of the contracts and also displayed. In this way you can obtain information on the status of the entire move-in processing.\nMove-In Documents\nWhen you display the move-in documents for a business partner or a premise, the documents from the last three months appear. If no documents exist for this period then the system displays the documents from the last six months.\nOnce you have entered the move-in, move-out, or move-in/out, you can use the SAP Business Workflows to trigger and monitor additional business processes.\nYou can re-process incomplete move-ins and monitor the status of processing. This may be necessary if, for example:\n- The meter readings are unavailable\n- The budget billing plan cannot be created, or\n- The data required to print the welcome letter is incomplete\nMove-In Charges\nWhen you save the move-in document, the system posts the move-in charges automatically, provided you have configured the system accordingly in Customizing under Move-In/Out > Define System Parameters for Move-In and Move-Out. .\nYou can configure the system to post the charges to a contract or contract account. You configure how the system calculates the charges using the parameters Charge category and Charge schema . In this way, you can, for example, levy a move-in charge staggered to correspond with the number of contracts.\nReduced Layouts\nIn Customizing, you can define reduced layouts for the configurable tab on page on the move-in screen to hide some of the data on the individual tab pages. The layouts can now be stored in the special processing variants for the move-in/out. This enables agents to process move-ins and move-in/outs more quickly.\nBudget Billing\nA budget billing amount agreed with the customer is also taken in account if the move-in is entered by the master data generator. If a budget billing plan cannot be created for a contact in move-in processing then the BudgetBillingPlansFailed event of the MOVEINDOC BOR object type is triggered.\nActivity Log\nIn Customizing you can configure the system to save the activity log for the move-in. You can then display it on the move-in screen. To do this choose Extras > Display Activity Log.\nActivities\nInitial Screen\nBased on the data you specified on the initial screen, the system automatically determines which of the following cases applies:\nExists before move-in: Business partner, contract account, installation; Is created during move-in: Contract\nExists before move-in: Business partner, installation; Is created during move-in: Contract account, contract\nExists before move-in: Installation; Is created during move-in: Business partner, contract account, contract\nMove-in date\nYou can change the date of a move-in after it has been created without affecting the move-out that precedes it. To do this, choose Edit > Change Move-In Date .\nActual Move-In Date\nIn addition to the move-in date, the actual move-in date can be entered as the date from which the premise is occupied.\nSave\nWhen you save the move-in, the initial move-in or move-in/out screen reappears. In Customizing under Define Control Parameters at Document Level , you can configure the system so that when you save the data, a log is displayed containing information on the changes made to the data.\nCertain move-in activities, for example, maintaining a budget billing plan, are based on the database changes made by the move-in. In these instances, you can, in Customizing under Move-In/Out -> Move-In -> Define Control Parameters at Document Level configure the system to either output a confirmation prompt or save the data automatically before the action is carried out.\nYou can also save your changes in the move-in without leaving the move-in screen. To do this, choose Save and Hold .",
+  "text_sha256": "31f91e104dba6818aa3b822d2f89ba40307aa4459f882f0bed3136eb7222874f",
+  "title": "Move-in",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 5408
+  }
+}

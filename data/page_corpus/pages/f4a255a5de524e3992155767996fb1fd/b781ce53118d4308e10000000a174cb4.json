@@ -1,0 +1,136 @@
+{
+  "acquisition": {
+    "body_sha256": "eb5cb28e81424d3a7c526ebfe466073e0ed9109e041deda55b76128757e8d52a",
+    "build_no": null,
+    "deliverable_title": "Customer Service",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/6_40374682_b781ce53118d4308e10000000a174cb4.json",
+    "file_sha256": "0f490d22f2379be8eaf474ba6ad1889c2a6b7d93537e36b5e69216e5d06b470e",
+    "html_chars": 5132,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374682",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Meter Reading Data (Move-In)"
+      ],
+      "kind": "paragraph",
+      "text": "Use"
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Meter Reading Data (Move-In)"
+      ],
+      "kind": "paragraph",
+      "text": "When you create a move-in, the system proposes an existing meter reading result for all the billing-relevant registers allocated to the devices for billing purposes. Ensure you have configured the system accordingly in Customizing under SAP Utilities > Device Management > Meter Reading > Basic Settings > Define Control Parameters for Meter Reading Data Processing ."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Meter Reading Data (Move-In)"
+      ],
+      "kind": "list",
+      "text": "- If the system proposes a meter reading result then choose one of the following two options:"
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Meter Reading Data (Move-In)"
+      ],
+      "kind": "list",
+      "text": "- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result.\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in ."
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Meter Reading Data (Move-In)"
+      ],
+      "kind": "list",
+      "text": "- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. In both cases, the system creates a new meter reading result from the adopted/changed result and gives it the meter reading reason Move-In ."
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Meter Reading Data (Move-In)"
+      ],
+      "kind": "list",
+      "text": "- If the system does not propose a meter reading result, and you do not enter one manually, a service notification or service order is created for the current register. For more information see service notifications and orders ."
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Meter Reading Data (Move-In)"
+      ],
+      "kind": "paragraph",
+      "text": "You can also suppress the meter reading proposal or define an interval as required. If you do this, the system only makes a proposal if the meter reading result on which the proposal is based was takes during the interval. Ensure you have configured the system accordingly in Customizing under SAP Utilities > Device Management > Meter Reading > Basic Settings > Define Control Parameters for Meter Reading Data Processing . Ensure that you make an appropriate entry in the Move-in prop. inter. (Interval for determining default value) and the Display default move-in value checkbox alongside it."
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Meter Reading Data (Move-In)"
+      ],
+      "kind": "paragraph",
+      "text": "You can find additional information on meter reading data processing in the section on the meter reading component."
+    }
+  ],
+  "breadcrumb": [
+    "Process Execution",
+    "Move-In/Out",
+    "Move-in",
+    "Meter Reading Data (Move-In)"
+  ],
+  "card": {
+    "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+    "card_page_id": "b781ce53118d4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Meter Reading Data During Move-In",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4",
+  "guide_id": "f4a255a5de524e3992155767996fb1fd",
+  "headings": [
+    "Meter Reading Data (Move-In)"
+  ],
+  "html_title": "Meter Reading Data (Move-In)",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "b781ce53118d4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-10"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 8,
+    "chrome_elements_removed": 0,
+    "headings": 1,
+    "kinds": {
+      "list": 4,
+      "paragraph": 4
+    }
+  },
+  "text": "Meter Reading Data (Move-In)\nUse\nWhen you create a move-in, the system proposes an existing meter reading result for all the billing-relevant registers allocated to the devices for billing purposes. Ensure you have configured the system accordingly in Customizing under SAP Utilities > Device Management > Meter Reading > Basic Settings > Define Control Parameters for Meter Reading Data Processing .\n- If the system proposes a meter reading result then choose one of the following two options:\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result.\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in .\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. In both cases, the system creates a new meter reading result from the adopted/changed result and gives it the meter reading reason Move-In .\n- If the system does not propose a meter reading result, and you do not enter one manually, a service notification or service order is created for the current register. For more information see service notifications and orders .\nYou can also suppress the meter reading proposal or define an interval as required. If you do this, the system only makes a proposal if the meter reading result on which the proposal is based was takes during the interval. Ensure you have configured the system accordingly in Customizing under SAP Utilities > Device Management > Meter Reading > Basic Settings > Define Control Parameters for Meter Reading Data Processing . Ensure that you make an appropriate entry in the Move-in prop. inter. (Interval for determining default value) and the Display default move-in value checkbox alongside it.\nYou can find additional information on meter reading data processing in the section on the meter reading component.",
+  "text_sha256": "3be66ed68fb1777995505e187ffa55274ae7ad6cc75991815cbfef069854caf7",
+  "title": "Meter Reading Data (Move-In)",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 1902
+  }
+}

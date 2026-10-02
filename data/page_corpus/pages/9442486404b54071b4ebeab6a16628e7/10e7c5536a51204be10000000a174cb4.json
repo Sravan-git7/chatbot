@@ -1,0 +1,101 @@
+{
+  "acquisition": {
+    "body_sha256": "40ed0451a3b8fa82025e238f43807ad91029cb3f7d4aadb421d6ecd389af0cff",
+    "build_no": null,
+    "deliverable_title": "Contract Accounting",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/16_40374790_10e7c5536a51204be10000000a174cb4.json",
+    "file_sha256": "0bf71aadc3e47e4e34203235f0b333f98923748047c9369ebe4948fd41ef25d5",
+    "html_chars": 3252,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374790",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Submission of Receivables to Collection Agency",
+        "Purpose"
+      ],
+      "kind": "paragraph",
+      "text": "You can use the following functions to submit receivables, make required postings, and process the exchange of information with collection agencies:"
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Submission of Receivables to Collection Agency",
+        "Purpose"
+      ],
+      "kind": "list",
+      "text": "- Releasing Receivables for Collection\n- Submission of Receivables to Collection Agency\n- Processing and Managing Collection Items\n- Recalling Submitted Receivables\n- Forwarding Information to Collection Agencies\n- Processing of Incoming Information from Collection Agencies"
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Submission of Receivables to Collection Agency",
+        "Process Flow"
+      ],
+      "kind": "paragraph",
+      "text": "In the system receivables are submitted in two steps. First you have to release the items for collection. Then you can submit the released items. The collection items created are recorded in the system. You can carry out the release and submission of the items manually, automatically as a mass run, or automatically in other business transactions. The system can determine the collection agency to which the receivables are to be submitted automatically during release or you can specify a collection agency when you submit. For the submission, the system checks whether the items entered manually or selected by the release run have a status that permits submission. For each collection agency, it creates a list and/or a submission file with all information relevant for collecting the receivables and calls the corresponding API for the submission. You can generally submit all items with Receivable Released for Submission (01) or Receivable Called Back (09) status."
+    }
+  ],
+  "breadcrumb": [
+    "Contract Accounting",
+    "Credit and Collections Management",
+    "Submission of Receivables to Collection Agency",
+    "Submission of Receivables to Collection Agency"
+  ],
+  "card": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_page_id": "10e7c5536a51204be10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Submission of Receivables to Collection Agency",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4",
+  "guide_id": "9442486404b54071b4ebeab6a16628e7",
+  "headings": [
+    "Submission of Receivables to Collection Agency",
+    "Purpose",
+    "Process Flow"
+  ],
+  "html_title": "Submission of Receivables to Collection Agency",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "10e7c5536a51204be10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-27"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+  "structure": {
+    "blocks": 3,
+    "chrome_elements_removed": 0,
+    "headings": 3,
+    "kinds": {
+      "list": 1,
+      "paragraph": 2
+    }
+  },
+  "text": "Submission of Receivables to Collection Agency\nPurpose\nYou can use the following functions to submit receivables, make required postings, and process the exchange of information with collection agencies:\n- Releasing Receivables for Collection\n- Submission of Receivables to Collection Agency\n- Processing and Managing Collection Items\n- Recalling Submitted Receivables\n- Forwarding Information to Collection Agencies\n- Processing of Incoming Information from Collection Agencies\nProcess Flow\nIn the system receivables are submitted in two steps. First you have to release the items for collection. Then you can submit the released items. The collection items created are recorded in the system. You can carry out the release and submission of the items manually, automatically as a mass run, or automatically in other business transactions. The system can determine the collection agency to which the receivables are to be submitted automatically during release or you can specify a collection agency when you submit. For the submission, the system checks whether the items entered manually or selected by the release run have a status that permits submission. For each collection agency, it creates a list and/or a submission file with all information relevant for collecting the receivables and calls the corresponding API for the submission. You can generally submit all items with Receivable Released for Submission (01) or Receivable Called Back (09) status.",
+  "text_sha256": "b69e386ff0707812c73782aeda70e3df440482a650e8de3cc4922dfa89b7bb5c",
+  "title": "Submission of Receivables to Collection Agency",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 1463
+  }
+}

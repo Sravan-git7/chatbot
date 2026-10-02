@@ -47,5 +47,233 @@
     "saved": [],
     "stopped_reason": "CIRCUIT_BREAKER_3_CONSECUTIVE_FAILURES",
     "finished_at": "2026-10-01T01:30:35+00:00"
+  },
+  {
+    "network_enabled": true,
+    "started_at": "2026-10-01T17:18:05+00:00",
+    "robots": {
+      "http_status": 200,
+      "error": null,
+      "disallow_all_for_generic_agents": true
+    },
+    "attempts": [],
+    "skipped": [],
+    "saved": [],
+    "stopped_reason": "ROBOTS_DISALLOW_ALL: refusing to fetch without --acknowledge-robots-disallow (an explicit human decision)"
+  },
+  {
+    "network_enabled": true,
+    "started_at": "2026-10-01T17:19:15+00:00",
+    "robots": {
+      "http_status": 200,
+      "error": null,
+      "disallow_all_for_generic_agents": true,
+      "operator_acknowledged": true
+    },
+    "attempts": [
+      {
+        "source_id": "M2C-03",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=0981ce53118d4308e10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:15+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\1_40374682_0981ce53118d4308e10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-04",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=0f81ce53118d4308e10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:17+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\2_40374682_0f81ce53118d4308e10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-06",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=bc90d0533f8e4308e10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:18+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\3_40374657_bc90d0533f8e4308e10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-08",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=d090d0533f8e4308e10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:20+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\4_40374657_d090d0533f8e4308e10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-09",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=bf74c1d28fd54f77b228772b98b72fba.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:21+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\5_40374657_bf74c1d28fd54f77b228772b98b72fba.json"
+      },
+      {
+        "source_id": "M2C-10",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=b781ce53118d4308e10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:23+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\6_40374682_b781ce53118d4308e10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-12",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40404052&buildNo=78&file_path=297bce53118d4308e10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:24+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\7_40404052_297bce53118d4308e10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-15",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374633&buildNo=1779&file_path=147cce53118d4308e10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:26+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\8_40374633_147cce53118d4308e10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-19",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=063bf3eb68e347efa5c0fc1d389f70f7.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:28+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\9_40374790_063bf3eb68e347efa5c0fc1d389f70f7.json"
+      },
+      {
+        "source_id": "M2C-20",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=edcd0c5823854d3296f2591e9f5d118c.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:30+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\10_40374790_edcd0c5823854d3296f2591e9f5d118c.json"
+      },
+      {
+        "source_id": "M2C-21",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=e63529e1a3fd42e3a0e2c009ac783e0d.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:32+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\11_40374790_e63529e1a3fd42e3a0e2c009ac783e0d.json"
+      },
+      {
+        "source_id": "M2C-22",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=3d0ac5536a51204be10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:33+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\12_40374790_3d0ac5536a51204be10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-23",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=730dc5536a51204be10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:35+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\13_40374790_730dc5536a51204be10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-25",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=630dc5536a51204be10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:37+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\14_40374790_630dc5536a51204be10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-26",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=b1ffc5536a51204be10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:39+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\15_40374790_b1ffc5536a51204be10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-27",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=10e7c5536a51204be10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:41+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\16_40374790_10e7c5536a51204be10000000a174cb4.json"
+      },
+      {
+        "source_id": "M2C-28",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=9c9c2344851f412f823d5f8a9dc7c694.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:43+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\17_40374790_9c9c2344851f412f823d5f8a9dc7c694.json"
+      },
+      {
+        "source_id": "M2C-29",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=8682ce53118d4308e10000000a174cb4.html",
+        "http_status": 200,
+        "error": null,
+        "ok": true,
+        "reasons": [],
+        "at": "2026-10-01T17:19:45+00:00",
+        "saved_to": "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\18_40374682_8682ce53118d4308e10000000a174cb4.json"
+      }
+    ],
+    "skipped": [],
+    "saved": [
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\1_40374682_0981ce53118d4308e10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\2_40374682_0f81ce53118d4308e10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\3_40374657_bc90d0533f8e4308e10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\4_40374657_d090d0533f8e4308e10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\5_40374657_bf74c1d28fd54f77b228772b98b72fba.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\6_40374682_b781ce53118d4308e10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\7_40404052_297bce53118d4308e10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\8_40374633_147cce53118d4308e10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\9_40374790_063bf3eb68e347efa5c0fc1d389f70f7.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\10_40374790_edcd0c5823854d3296f2591e9f5d118c.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\11_40374790_e63529e1a3fd42e3a0e2c009ac783e0d.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\12_40374790_3d0ac5536a51204be10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\13_40374790_730dc5536a51204be10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\14_40374790_630dc5536a51204be10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\15_40374790_b1ffc5536a51204be10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\16_40374790_10e7c5536a51204be10000000a174cb4.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\17_40374790_9c9c2344851f412f823d5f8a9dc7c694.json",
+      "D:\\chatbot-phase12\\data\\page_corpus\\fetched\\18_40374682_8682ce53118d4308e10000000a174cb4.json"
+    ],
+    "stopped_reason": null,
+    "finished_at": "2026-10-01T17:19:45+00:00"
   }
 ]

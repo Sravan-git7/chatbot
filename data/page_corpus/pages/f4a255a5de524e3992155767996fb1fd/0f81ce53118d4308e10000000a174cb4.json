@@ -1,0 +1,308 @@
+{
+  "acquisition": {
+    "body_sha256": "dddcb43be99a973cf93401a880c300161137b9687534ce2087ee41c220f3f576",
+    "build_no": null,
+    "deliverable_title": "Customer Service",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/2_40374682_0f81ce53118d4308e10000000a174cb4.json",
+    "file_sha256": "fd47255b40196fac1f2ded7db3875c6ed314288284ea3b9d5774baf0f52028a3",
+    "html_chars": 8145,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374682",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Move-Out",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "During the move-out transaction, you execute most of the activities required to cancel the customer's supply of utilities services. You make changes to the business partner master data that result from a move-out. You specifically end the allocation of a contract to an installation on the move-out date."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Move-Out",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "Move-out processing stops the active payment plans. A move-out confirmation letter and an immediate bill can also be triggered from the move-out."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Move-Out",
+        "Prerequisites"
+      ],
+      "kind": "paragraph",
+      "text": "You require one or more existing contracts with installations for the requested move-out date to create a move-out."
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Budget Billing Plan"
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "In Customizing under Move-In/Out > Move-Out > Define Move-Out Control Parameters at Contract Level , you can specify that budget billing plans for contracts involved in the move-out are stopped on the move-out date. This means that all open budget billing amounts whose print date is later than the move-out date are no longer requested. Budget billing amounts that have already been paid are cleared when the final billing is invoiced."
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Open Items in Dunning"
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Once you have created the move-out. you have the option of applying an alternative dunning procedure to the contracts in the move-out. You can also deactivate the dunning procedure that is currently active by specifying a dunning block reason due to the move-out. This data can also be defined as default data by making the neessary Customizing settings."
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Move-Out Status"
+    },
+    {
+      "block_index": 8,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "If you edit or display a move-out document, the system displays the move-out status for every contract. This shows how far you have completed move-out processing for this contract."
+    },
+    {
+      "block_index": 9,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "The system calculates the minimum status from the move-out status and also displays this. This means that you have quick access to the status of overall move-out processing."
+    },
+    {
+      "block_index": 10,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Move-Out Documents"
+    },
+    {
+      "block_index": 11,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "If you display move-out documents for a business partner or premise, the system displays documents for the last three months. If no documents exist for this period, the system displays the documents from the last six months."
+    },
+    {
+      "block_index": 12,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Final Billing"
+    },
+    {
+      "block_index": 13,
+      "heading_path": [
+        "Move-Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You have the option of triggering an immediate bill for contracts in the move-out from move-out processing, once move-out status 05 (meter readings entered completely) has been reached for the entire move-out. During this process, billing, invoicing and then the bill print are accessed."
+    },
+    {
+      "block_index": 14,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Screen Layout"
+    },
+    {
+      "block_index": 15,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "In Customizing under Move-In/Out > Move-Out - Configure Tabs for Move-Out Screen , you can configure various views of the data available on the move-out screen. This consists of various tab pages that you can use to divide the data into various logical units according to your requirements."
+    },
+    {
+      "block_index": 16,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "For more information, see Screen Layout ."
+    },
+    {
+      "block_index": 17,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Move-Out Date"
+    },
+    {
+      "block_index": 18,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "You can subsequently change the move-out date for a move-out that has already been created without affecting the date of the subsequent move-in. You cannot change the date for contracts that have already been billed or for a contract and customer change."
+    },
+    {
+      "block_index": 19,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Actual Move-Out Date"
+    },
+    {
+      "block_index": 20,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "In addition to the move-out date, you can also enter an alternative actual move-in date."
+    },
+    {
+      "block_index": 21,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Save"
+    },
+    {
+      "block_index": 22,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Certain actions in the move-out (such as triggering a move-out confirmation letter) assume that the changes triggered by the move-out have been updated in the database. In Customizing under Move-In/Out > Move-Out Define Control Parameters at Document Level , you can specify whether in this situation, the system is to output a confirmation prompt or save the data automatically before the action is carried out."
+    },
+    {
+      "block_index": 23,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "You can also save your changes in the move-out without leaving the move-out screen. To do this, choose Save and Hold ."
+    },
+    {
+      "block_index": 24,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "Final Billing"
+    },
+    {
+      "block_index": 25,
+      "heading_path": [
+        "Move-Out",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "In Customizing under Move-In/Out > Move-Out Define Move-Out Control Parameters at Contract Level , you can specify that an immediate bill is created automatically when the move-out id saved."
+    }
+  ],
+  "breadcrumb": [
+    "Process Execution",
+    "Move-In/Out",
+    "Move-Out"
+  ],
+  "card": {
+    "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+    "card_page_id": "0f81ce53118d4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Move-Out Process",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4",
+  "guide_id": "f4a255a5de524e3992155767996fb1fd",
+  "headings": [
+    "Move-Out",
+    "Use",
+    "Prerequisites",
+    "Features",
+    "Activities"
+  ],
+  "html_title": "Move-Out",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "0f81ce53118d4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-04"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 26,
+    "chrome_elements_removed": 0,
+    "headings": 5,
+    "kinds": {
+      "paragraph": 26
+    }
+  },
+  "text": "Move-Out\nUse\nDuring the move-out transaction, you execute most of the activities required to cancel the customer's supply of utilities services. You make changes to the business partner master data that result from a move-out. You specifically end the allocation of a contract to an installation on the move-out date.\nMove-out processing stops the active payment plans. A move-out confirmation letter and an immediate bill can also be triggered from the move-out.\nPrerequisites\nYou require one or more existing contracts with installations for the requested move-out date to create a move-out.\nFeatures\nBudget Billing Plan\nIn Customizing under Move-In/Out > Move-Out > Define Move-Out Control Parameters at Contract Level , you can specify that budget billing plans for contracts involved in the move-out are stopped on the move-out date. This means that all open budget billing amounts whose print date is later than the move-out date are no longer requested. Budget billing amounts that have already been paid are cleared when the final billing is invoiced.\nOpen Items in Dunning\nOnce you have created the move-out. you have the option of applying an alternative dunning procedure to the contracts in the move-out. You can also deactivate the dunning procedure that is currently active by specifying a dunning block reason due to the move-out. This data can also be defined as default data by making the neessary Customizing settings.\nMove-Out Status\nIf you edit or display a move-out document, the system displays the move-out status for every contract. This shows how far you have completed move-out processing for this contract.\nThe system calculates the minimum status from the move-out status and also displays this. This means that you have quick access to the status of overall move-out processing.\nMove-Out Documents\nIf you display move-out documents for a business partner or premise, the system displays documents for the last three months. If no documents exist for this period, the system displays the documents from the last six months.\nFinal Billing\nYou have the option of triggering an immediate bill for contracts in the move-out from move-out processing, once move-out status 05 (meter readings entered completely) has been reached for the entire move-out. During this process, billing, invoicing and then the bill print are accessed.\nActivities\nScreen Layout\nIn Customizing under Move-In/Out > Move-Out - Configure Tabs for Move-Out Screen , you can configure various views of the data available on the move-out screen. This consists of various tab pages that you can use to divide the data into various logical units according to your requirements.\nFor more information, see Screen Layout .\nMove-Out Date\nYou can subsequently change the move-out date for a move-out that has already been created without affecting the date of the subsequent move-in. You cannot change the date for contracts that have already been billed or for a contract and customer change.\nActual Move-Out Date\nIn addition to the move-out date, you can also enter an alternative actual move-in date.\nSave\nCertain actions in the move-out (such as triggering a move-out confirmation letter) assume that the changes triggered by the move-out have been updated in the database. In Customizing under Move-In/Out > Move-Out Define Control Parameters at Document Level , you can specify whether in this situation, the system is to output a confirmation prompt or save the data automatically before the action is carried out.\nYou can also save your changes in the move-out without leaving the move-out screen. To do this, choose Save and Hold .\nFinal Billing\nIn Customizing under Move-In/Out > Move-Out Define Move-Out Control Parameters at Contract Level , you can specify that an immediate bill is created automatically when the move-out id saved.",
+  "text_sha256": "235e3400a19cf8af0e8d682119ab9a0eb58ea78996c56e71f077813228ead982",
+  "title": "Move-Out",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 3832
+  }
+}
