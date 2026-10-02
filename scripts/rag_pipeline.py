@@ -52,6 +52,7 @@ class PipelineConfig:
     ood_min_coverage: float = OOD_MIN_COVERAGE
     context_min_coverage: float = CONTEXT_MIN_COVERAGE
     rerank_router: bool = True
+    code_aware_router: bool = False
 
     def to_dict(self) -> Dict[str, Any]:
         return dict(self.__dict__)
@@ -67,17 +68,35 @@ MESSAGES = {
 class PageCorpusIndex:
     """Which cards have admitted page text (from ``data/page_corpus/manifest.json``); a card absent here is never answerable."""
 
-    def __init__(self, manifest: Mapping[str, Any]) -> None:
+    def __init__(self, manifest: Mapping[str, Any], corpus_dir: Optional[Path] = None) -> None:
         self.entries = {c["source_id"]: dict(c) for c in manifest["cards"]}
         self.corpus_sha256 = manifest["corpus_sha256"]
+        self.corpus_dir = Path(corpus_dir or PC.CORPUS_DIR)
+        self._page_texts: Dict[str, str] = {}
 
     @classmethod
     def from_dir(cls, out_dir: Path = PC.CORPUS_DIR) -> "PageCorpusIndex":
         import json
-        return cls(json.loads((out_dir / "manifest.json").read_text(encoding="utf-8")))
+        return cls(json.loads((out_dir / "manifest.json").read_text(encoding="utf-8")), corpus_dir=out_dir)
 
     def entry(self, source_id: str) -> Optional[Dict[str, Any]]:
         return self.entries.get(source_id)
+
+    def page_text(self, source_id: str) -> str:
+        if source_id in self._page_texts:
+            return self._page_texts[source_id]
+        entry = self.entries.get(source_id) or {}
+        rec = entry.get("record")
+        if rec and (self.corpus_dir / rec).is_file():
+            import json
+            try:
+                txt = json.loads((self.corpus_dir / rec).read_text(encoding="utf-8")).get("text", "")
+                self._page_texts[source_id] = txt
+                return txt
+            except Exception:
+                pass
+        self._page_texts[source_id] = ""
+        return ""
 
 
 class RagPipeline:
@@ -88,6 +107,68 @@ class RagPipeline:
         self.count_tokens = count_tokens
         self.cfg = config or PipelineConfig()
         self.cards = {c["source_id"]: dict(c) for c in (cards if cards is not None else pid.load_cards(ctx.root if hasattr(ctx, "root") else PC.ROOT))}
+
+    def _inject_code_aware_candidates(self, query: str, dense_candidates: Sequence[Any]) -> List[Any]:
+        """Phase 15: If query contains technical codes or discriminative phrases matching page text,
+        inject matching cards into the candidate pool (replacing lowest-ranked dense candidates to keep pool <= top_k_cards).
+        """
+        import re
+        import m2c_router as rt
+
+        GENERIC_WORDS = frozenset({"transaction", "business", "function", "process", "billing", "customer", "system", "utilities", "order", "detail", "display", "standard"})
+        EXCLUDED_CODES = frozenset({"SAP", "IS", "SYSTEM", "THE", "AND", "FOR", "NOT"})
+
+        raw_codes = {c.upper() for c in T.code_tokens(query) if c.upper() not in EXCLUDED_CODES}
+
+        # Multi-word technical phrases
+        words = [w.lower() for w in re.findall(r'[a-z0-9_-]+', query) if w.lower() not in T.STOPWORDS and len(w) > 2]
+        candidate_phrases = []
+        for n in (3, 2):
+            for i in range(len(words) - n + 1):
+                ngram = words[i:i+n]
+                if all(w in GENERIC_WORDS for w in ngram):
+                    continue
+                candidate_phrases.append(" ".join(ngram))
+
+        page_texts = {sid: self.corpus.page_text(sid).lower() for sid in self.corpus.entries if self.corpus.page_text(sid)}
+
+        matched_sids: List[str] = []
+
+        # 1. Code matches (highest precision)
+        for sid in sorted(page_texts.keys()):
+            ptxt = page_texts[sid]
+            if any(re.search(r'\b' + re.escape(c.lower()) + r'\b', ptxt) for c in raw_codes):
+                if sid not in matched_sids:
+                    matched_sids.append(sid)
+
+        # 2. Discriminative phrase matches (phrase occurs in 1 or 2 pages)
+        for phrase in candidate_phrases:
+            matching = [sid for sid in sorted(page_texts.keys()) if phrase in page_texts[sid]]
+            if 1 <= len(matching) <= 2:
+                for s in matching:
+                    if s not in matched_sids:
+                        matched_sids.append(s)
+
+        current_pool_sids = {c.source_id for c in dense_candidates}
+        to_inject = [sid for sid in matched_sids if sid not in current_pool_sids]
+        if not to_inject:
+            return list(dense_candidates)
+
+        # Query all cards to obtain properly normalized CardCandidate objects with true Chroma distances
+        all_raw = self.backend.query(query.strip(), len(self.cards))
+        all_candidates_by_id = {}
+        for i, (cid, meta, dist) in enumerate(zip(all_raw["ids"][0], all_raw["metadatas"][0], all_raw["distances"][0]), start=1):
+            all_candidates_by_id[meta["source_id"]] = rt.normalize_candidate(i, cid, meta, dist)
+
+        pool = list(dense_candidates)
+        for sid in to_inject:
+            if sid in all_candidates_by_id:
+                cand = all_candidates_by_id[sid]
+                if len(pool) >= self.cfg.top_k_cards:
+                    pool.pop()  # Replace lowest-ranked dense candidate
+                pool.append(cand)
+
+        return pool
 
     # ------------------------------------------------------------------------------------------------------------
     def answer(self, query: str, debug: bool = False, oracle_source_id: Optional[str] = None) -> Dict[str, Any]:
@@ -109,26 +190,34 @@ class RagPipeline:
                 raise KeyError(f"unknown card {oracle_source_id}")
         else:
             outcome = route_to_page(query, self.backend, self.ctx.page_index, top_k=self.cfg.top_k_cards, selector=select_top_ranked)
-            if getattr(self.cfg, "rerank_router", False) and outcome.candidates:
+            candidates = list(outcome.candidates)
+            if getattr(self.cfg, "code_aware_router", False):
+                candidates = self._inject_code_aware_candidates(query, candidates)
+
+            if getattr(self.cfg, "rerank_router", False) and candidates:
                 import phase13_reranker as PR13
                 if hasattr(self.retriever, "embed"):
                     q_emb = self.retriever.embed([query])
                 card, scored = PR13.rerank_candidates(
                     query,
-                    outcome.candidates,
+                    candidates,
                     self.cards,
                     self.retriever,
                     self.ctx,
                     self.corpus,
                     top_k_evaluate=self.cfg.top_k_cards,
                     query_embedding=q_emb,
+                    code_aware=getattr(self.cfg, "code_aware_router", False),
                 )
-                out["routing"]["mode"] = f"router_reranked_top{self.cfg.top_k_cards}"
+                mode_str = f"router_reranked_top{self.cfg.top_k_cards}"
+                if getattr(self.cfg, "code_aware_router", False):
+                    mode_str += "_code_aware"
+                out["routing"]["mode"] = mode_str
                 out["routing"]["candidates"] = [s.to_dict() for s in scored]
             else:
                 out["routing"]["candidates"] = [{"rank": c.rank, "source_id": c.source_id, "title": c.title, "similarity": round(1.0 - c.distance, 4),
-                                                 "distance": round(c.distance, 6)} for c in outcome.candidates]
-                card = outcome.selected_card
+                                                 "distance": round(c.distance, 6)} for c in candidates]
+                card = candidates[0] if candidates else None
             dbg["routing_outcome_state_7a"] = outcome.state
         timings["route_ms"] = (time.perf_counter() - t) * 1000
         if card is None:

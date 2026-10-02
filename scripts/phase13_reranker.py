@@ -45,6 +45,7 @@ class ScoredCandidate:
     final_score: float
     rerank: int
     note: str
+    code_match: float = 0.0
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -57,6 +58,7 @@ class ScoredCandidate:
             "similarity": round(self.card_similarity, 4),
             "page_similarity": round(self.page_similarity, 4),
             "coverage": round(self.coverage, 4),
+            "code_match": round(self.code_match, 4),
             "ingested": self.ingested,
             "identity_status": self.identity_status,
             "final_score": round(self.final_score, 4),
@@ -74,6 +76,8 @@ def score_candidate(
     qterms: Optional[Sequence[str]] = None,
     query_embedding: Optional[Any] = None,
     hits_cache: Optional[Dict[Tuple[str, str], Any]] = None,
+    query_code_tokens: Optional[Set[str]] = None,
+    code_aware: bool = False,
 ) -> ScoredCandidate:
     qterms = qterms if qterms is not None else T.terms(query)
     card_sim = round(1.0 - cand.distance, 4)
@@ -87,7 +91,9 @@ def score_candidate(
 
     page_sim = 0.0
     coverage = 0.0
+    code_match = 0.0
     note = "initial"
+    hits = None
 
     if ingested:
         try:
@@ -118,13 +124,31 @@ def score_candidate(
     else:
         note = "not_ingested_no_local_content"
 
-    # Deterministic scoring formula
-    if ingested:
-        score = W_CARD * card_sim + W_PAGE * page_sim + W_COVERAGE * coverage
-    elif status_7c in (pid.CONFLICTING_IDENTITY, pid.CARD_IDENTITY_ONLY, pid.UNRESOLVED):
-        score = W_CARD * card_sim - UNRESOLVED_PENALTY
+    # Check code match in page text when code_aware mode is active
+    if code_aware and query_code_tokens and ingested:
+        page_txt = ""
+        if hasattr(corpus, "page_text"):
+            page_txt = corpus.page_text(cand.source_id)
+        if not page_txt and hits:
+            page_txt = " ".join(f"{h.title} {h.text}" for h in hits)
+        import re
+        if any(re.search(r'\b' + re.escape(ct.lower()) + r'\b', page_txt.lower()) for ct in query_code_tokens):
+            code_match = 1.0
+
+    # Deterministic scoring formula:
+    # Phase 15: 0.40 card + 0.40 page + 0.10 cov + 0.10 code when code_aware AND query has code tokens
+    # Phase 13 baseline: 0.50 card + 0.40 page + 0.10 cov when no code tokens or not code_aware
+    if code_aware and query_code_tokens:
+        w_card, w_page, w_cov, w_code = 0.40, 0.40, 0.10, 0.10
     else:
-        score = W_CARD * card_sim - NOT_INGESTED_PENALTY
+        w_card, w_page, w_cov, w_code = W_CARD, W_PAGE, W_COVERAGE, 0.0
+
+    if ingested:
+        score = w_card * card_sim + w_page * page_sim + w_cov * coverage + w_code * code_match
+    elif status_7c in (pid.CONFLICTING_IDENTITY, pid.CARD_IDENTITY_ONLY, pid.UNRESOLVED):
+        score = w_card * card_sim - UNRESOLVED_PENALTY
+    else:
+        score = w_card * card_sim - NOT_INGESTED_PENALTY
 
     return ScoredCandidate(
         candidate=cand,
@@ -136,6 +160,7 @@ def score_candidate(
         final_score=round(score, 4),
         rerank=0,  # filled after sorting
         note=note,
+        code_match=code_match,
     )
 
 
@@ -148,6 +173,7 @@ def rerank_candidates(
     corpus: Any,
     top_k_evaluate: int = 5,
     query_embedding: Optional[Any] = None,
+    code_aware: bool = False,
 ) -> Tuple[CardCandidate, List[ScoredCandidate]]:
     """Rerank the top_k_evaluate candidates using page evidence and return (selected_card, scored_candidates)."""
     if not candidates:
@@ -155,6 +181,11 @@ def rerank_candidates(
 
     to_eval = candidates[:top_k_evaluate]
     qterms = T.terms(query)
+
+    query_code_tokens: Set[str] = set()
+    if code_aware:
+        EXCLUDED_CODES = frozenset({"SAP", "IS", "SYSTEM", "THE", "AND", "FOR", "NOT"})
+        query_code_tokens = {c.upper() for c in T.code_tokens(query) if c.upper() not in EXCLUDED_CODES}
 
     # Precompute query embedding once per reranking operation if not supplied
     if query_embedding is None and hasattr(retriever, "embed"):
@@ -175,6 +206,8 @@ def rerank_candidates(
             qterms=qterms,
             query_embedding=query_embedding,
             hits_cache=hits_cache,
+            query_code_tokens=query_code_tokens,
+            code_aware=code_aware,
         )
         scored.append(sc)
 
@@ -193,6 +226,7 @@ def rerank_candidates(
             final_score=sc.final_score,
             rerank=idx,
             note=sc.note,
+            code_match=sc.code_match,
         )
         for idx, sc in enumerate(scored, 1)
     ]
