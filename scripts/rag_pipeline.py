@@ -45,7 +45,7 @@ CONTEXT_MIN_COVERAGE = 0.5            # pre-declared: share of question content 
 
 @dataclass(frozen=True)
 class PipelineConfig:
-    top_k_cards: int = 5
+    top_k_cards: int = 10
     k_chunks: int = 5
     context_budget_tokens: int = DEFAULT_BUDGET_TOKENS
     max_context_chunks: int = DEFAULT_MAX_CHUNKS
