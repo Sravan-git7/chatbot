@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "note": "Per-topic card->guide corrections. The card records (PDF links, data/topic_manifest.json) are NOT edited. A correction never registers a guide and never confirms a page by itself: the topic resolves only if the card's page id is a node of the verified TOC of resolved_guide_id.",
+  "corrections": [
+    {
+      "topic_id": 5,
+      "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "card_page_id": "8990d0533f8e4308e10000000a174cb4",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+      "resolved_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "reason": "SAP resolves the ORIGINAL card #5 URL (under 021b182b...) to guide 2ac7fe29... ('Device Management'); page 8990d053... is that guide's landing page / first TOC root. Guide A (021b182b) is NOT registered from this and nothing is inferred for topics 1, 13, 16.",
+      "evidence": [
+        {
+          "kind": "saved_response",
+          "file": "captured_responses/1_40374657_8990d0533f8e4308e10000000a174cb4.json",
+          "sha256_repaired_json": "c5d70f3a66f517f066c91fde745eb7efd09c3ef71dd98682079a3d520579b9c0",
+          "sha256_original_malformed_copy": "2bb7b68ff6f0a098a5a34a72b45b9932440183b3a2d8f2255923fee28f04e052",
+          "note": "request deliverable_id=40374657&buildNo=1779&file_path=8990d0533f8e4308e10000000a174cb4.html; response deliverable.loio=2ac7fe29a0c94cdd88fb80c2cb9f7758, currentPage.loio=8990d0533f8e4308e10000000a174cb4 (checked by code each build). The request was constructed, not copied from a browser (alone it would only be a probe)."
+        },
+        {
+          "kind": "user_reported_browser",
+          "date": "2026-09-30",
+          "machine_verified": false,
+          "observation": "Opening the original card URL .../021b182b0c47416c8fafed67ebfd78a9/8990d053....html in the browser redirects/resolves to .../2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d053....html; the page's own pagecontent?deliverableInfo=1 request uses deliverable_id=40374657 and its response has deliverable.loio=2ac7fe29a0c94cdd88fb80c2cb9f7758. (HAR/screenshot not in the worktree.)"
+        }
+      ]
+    }
+  ]
+}

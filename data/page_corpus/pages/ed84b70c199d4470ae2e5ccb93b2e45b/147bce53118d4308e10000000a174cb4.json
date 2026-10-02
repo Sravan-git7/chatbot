@@ -1,0 +1,94 @@
+{
+  "acquisition": {
+    "body_sha256": "da114fdf5e27d46cdb4de31153711ac1a42b676166ea0cccf6ececd197f6aad1",
+    "build_no": "78",
+    "deliverable_title": "Invoicing",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json",
+    "file_sha256": "587bcb7a409247515c193d1dfd409bf49de23c5071fb9efcfe40044fc91bd25f",
+    "html_chars": 1708,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40404052",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Billing Procedure"
+      ],
+      "kind": "paragraph",
+      "text": "Purpose"
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Billing Procedure"
+      ],
+      "kind": "paragraph",
+      "text": "Billing uses meter reading results or load profiles to determine the evaluation basis for schema execution. All calculations required for rate creation are made during schema execution. Different billing periods are included in the various billing procedures. All master and billing master data can change during a billing period. The billing module ensures that all billing-relevant changes that occur during a billing period are taken into consideration. For example, a price change causes the system to divide the total period into subperiods, each with the price valid for that subperiod. The system also divides the total consumption, which produces the corresponding partial amount."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Billing Procedure"
+      ],
+      "kind": "paragraph",
+      "text": "You can process all known period categories using different billing procedures."
+    }
+  ],
+  "breadcrumb": [
+    "IS-U Invoicing",
+    "Contract Billing",
+    "Billing Procedure"
+  ],
+  "card": {
+    "card_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+    "card_page_id": "147bce53118d4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "SAP Utilities Billing Procedure",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+  "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+  "headings": [
+    "Billing Procedure"
+  ],
+  "html_title": "Billing Procedure",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "147bce53118d4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-11"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 3,
+    "chrome_elements_removed": 0,
+    "headings": 1,
+    "kinds": {
+      "paragraph": 3
+    }
+  },
+  "text": "Billing Procedure\nPurpose\nBilling uses meter reading results or load profiles to determine the evaluation basis for schema execution. All calculations required for rate creation are made during schema execution. Different billing periods are included in the various billing procedures. All master and billing master data can change during a billing period. The billing module ensures that all billing-relevant changes that occur during a billing period are taken into consideration. For example, a price change causes the system to divide the total period into subperiods, each with the price valid for that subperiod. The system also divides the total consumption, which produces the corresponding partial amount.\nYou can process all known period categories using different billing procedures.",
+  "text_sha256": "910be3b7b8ecab664465a8f615b5202f84b8f9f22b1c434a0d327aab05275169",
+  "title": "Billing Procedure",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 794
+  }
+}

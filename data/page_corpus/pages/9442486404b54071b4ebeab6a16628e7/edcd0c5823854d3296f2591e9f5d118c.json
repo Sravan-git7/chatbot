@@ -1,0 +1,97 @@
+{
+  "acquisition": {
+    "body_sha256": "6307d307c95c8b7dd1de079bf06a1e7f79e6b27aa059745fc7a3700d1b6c20cf",
+    "build_no": null,
+    "deliverable_title": "Contract Accounting",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/10_40374790_edcd0c5823854d3296f2591e9f5d118c.json",
+    "file_sha256": "73289aa90049c40c3a2ce3c81228a8124e3f190bfa7c8530cb55c272085e26b9",
+    "html_chars": 1908,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374790",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Clearing Control in Incoming Payments"
+      ],
+      "kind": "paragraph",
+      "text": "During the processing of externally initiated payments, the system attempts in event 0110 to assign the payment amount to the open items. By default, the system posts unassigned amounts and partial amounts of a payment on account."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Clearing Control in Incoming Payments"
+      ],
+      "kind": "paragraph",
+      "text": "Clearing control takes account of entries in the same fields, as in account maintenance . Additional postings, such as payments on account and expense and revenue postings, can also be set up."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Clearing Control in Incoming Payments"
+      ],
+      "kind": "note",
+      "text": "Example: A payment of 50- is received. Clearing Control in Incoming Payments"
+    }
+  ],
+  "breadcrumb": [
+    "Contract Accounting",
+    "Basic Functions",
+    "Open Item Management",
+    "Clearing Control",
+    "Clearing Control in Incoming Payments"
+  ],
+  "card": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_page_id": "edcd0c5823854d3296f2591e9f5d118c",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Clearing Control in Incoming Payments",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
+    "review_flag": false
+  },
+  "doc_id": "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c",
+  "guide_id": "9442486404b54071b4ebeab6a16628e7",
+  "headings": [
+    "Clearing Control in Incoming Payments"
+  ],
+  "html_title": "Clearing Control in Incoming Payments",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "edcd0c5823854d3296f2591e9f5d118c",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-20"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
+  "structure": {
+    "blocks": 3,
+    "chrome_elements_removed": 0,
+    "headings": 1,
+    "kinds": {
+      "note": 1,
+      "paragraph": 2
+    }
+  },
+  "text": "Clearing Control in Incoming Payments\nDuring the processing of externally initiated payments, the system attempts in event 0110 to assign the payment amount to the open items. By default, the system posts unassigned amounts and partial amounts of a payment on account.\nClearing control takes account of entries in the same fields, as in account maintenance . Additional postings, such as payments on account and expense and revenue postings, can also be set up.\nExample: A payment of 50- is received. Clearing Control in Incoming Payments",
+  "text_sha256": "84362eaa81505648ce31488c77b78d26acf5574c5b7c1b347d39f26e3d6d783a",
+  "title": "Clearing Control in Incoming Payments",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 538
+  }
+}

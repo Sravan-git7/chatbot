@@ -1,0 +1,1008 @@
+{
+  "status": "OK",
+  "data": {
+    "fallback": false,
+    "deliverable": {
+      "title": "Device Management",
+      "shortdesc": "",
+      "landingPage": "8990d0533f8e4308e10000000a174cb4.html",
+      "loio": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "buildableMapLoio": "5791d0533f8e4308e10000000a174cb4",
+      "version": "2025.001",
+      "languageCode": "en-US",
+      "state": "PRODUCTION",
+      "fullToc": [
+        {
+          "c": [],
+          "t": "Device Management",
+          "u": "8990d0533f8e4308e10000000a174cb4.html",
+          "id": 2452314572.0
+        },
+        {
+          "c": [
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Sample Register Relationship",
+                  "u": "0890d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452314586.0
+                }
+              ],
+              "t": "Register Group",
+              "u": "8f90d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452314582.0
+            },
+            {
+              "c": [],
+              "t": "Input/Output Group",
+              "u": "9290d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452314589.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Creating Command Groups",
+                  "u": "f08fd0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452314604.0
+                }
+              ],
+              "t": "Command Group",
+              "u": "9590d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452314597.0
+            },
+            {
+              "c": [],
+              "t": "Winding Group",
+              "u": "9b90d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452314609.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Device Category Creation",
+                  "u": "f68fd0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452314625.0
+                },
+                {
+                  "c": [],
+                  "t": "Creating Device Categories in IS-U",
+                  "u": "f98fd0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452314628.0
+                }
+              ],
+              "t": "Device Category",
+              "u": "9e90d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452314616.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Inspection Relevance",
+                      "u": "0b90d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452314639.0
+                    }
+                  ],
+                  "t": "Device Creation",
+                  "u": "fc8fd0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452314633.0
+                },
+                {
+                  "c": [],
+                  "t": "Creating Devices in Plant Maintenance",
+                  "u": "ff8fd0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452314642.0
+                },
+                {
+                  "c": [],
+                  "t": "Creating Devices in Inventory Management",
+                  "u": "0290d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318247.0
+                }
+              ],
+              "t": "Equipment",
+              "u": "a190d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452314630.0
+            }
+          ],
+          "t": "Technical Device and Connection Data",
+          "u": "8c90d0533f8e4308e10000000a174cb4.html",
+          "id": 2452314578.0
+        },
+        {
+          "c": [
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Deletion of Unused Device Information Records",
+                  "u": "ef205443152747d093a78a2d2e2d2acf.html",
+                  "h": "",
+                  "id": 2518784728.0
+                }
+              ],
+              "t": "Device Information Record",
+              "u": "5990d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452318254.0
+            },
+            {
+              "c": [],
+              "t": "Device Grouping",
+              "u": "aa90d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452318257.0
+            },
+            {
+              "c": [],
+              "t": "Installing, Removing or Replacing Devices",
+              "u": "5f90d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452318260.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Device Installation",
+                  "u": "6290d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318273.0
+                }
+              ],
+              "t": "Device Installation",
+              "u": "ad90d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452318266.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Device Removal",
+                  "u": "6590d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318282.0
+                }
+              ],
+              "t": "Device Removal",
+              "u": "b090d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452318279.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Device Replacement",
+                  "u": "6890d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318287.0
+                },
+                {
+                  "c": [],
+                  "t": "Replacement of Device Group with Device Group",
+                  "u": "2090d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318293.0
+                },
+                {
+                  "c": [],
+                  "t": "Replacement of Device Group with Smaller Device Group",
+                  "u": "2990d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318296.0
+                },
+                {
+                  "c": [],
+                  "t": "Replacement of Device Group with Larger Device Group",
+                  "u": "2c90d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318299.0
+                },
+                {
+                  "c": [],
+                  "t": "Repl. of Dev. Group with Dev. Grp with Special Tech. Inst.",
+                  "u": "2f90d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318300.0
+                },
+                {
+                  "c": [],
+                  "t": "Replacement of Devices in a Device Group",
+                  "u": "3290d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318301.0
+                },
+                {
+                  "c": [],
+                  "t": "Replacement of Device Group with Complex Device",
+                  "u": "3590d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318304.0
+                },
+                {
+                  "c": [],
+                  "t": "Replacement of Complex Device with Device Group",
+                  "u": "3890d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318307.0
+                }
+              ],
+              "t": "Device Replacement",
+              "u": "b390d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452318283.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Reversing Device Installations",
+                  "u": "4d90d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318313.0
+                },
+                {
+                  "c": [],
+                  "t": "Reversing Device Removals",
+                  "u": "5090d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318316.0
+                },
+                {
+                  "c": [],
+                  "t": "Reversing Device Replacements",
+                  "u": "5390d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318320.0
+                }
+              ],
+              "t": "Reversal of Technical Installations, Removals and Replacements",
+              "u": "8390d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452318310.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Entry of Meter Reading Results During Modification",
+                      "u": "4490d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452318328.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Allocation of Different Device Category via MM-IM",
+                      "u": "3e90d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452318332.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Allocation of Different Device Category via PM",
+                      "u": "4190d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452318336.0
+                    }
+                  ],
+                  "t": "Device Modification",
+                  "u": "6b90d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318324.0
+                }
+              ],
+              "t": "Device Modification",
+              "u": "b690d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452318321.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Creating Device Allocations",
+                      "u": "7190d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319146.0
+                    }
+                  ],
+                  "t": "Device Allocation",
+                  "u": "6e90d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452318343.0
+                },
+                {
+                  "c": [],
+                  "t": "Rate data",
+                  "u": "7490d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319151.0
+                },
+                {
+                  "c": [],
+                  "t": "Register Relationship",
+                  "u": "7790d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319154.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Period Consumption and Usage Factor Concepts",
+                      "u": "742b2d5190f0470be10000000a423f68.html",
+                      "h": "",
+                      "id": 2452319158.0
+                    }
+                  ],
+                  "t": "Period Consumption",
+                  "u": "2991d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319156.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Changing Logical Register Numbers",
+                      "u": "7d90d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319164.0
+                    }
+                  ],
+                  "t": "Logical Register Number",
+                  "u": "7a90d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319160.0
+                }
+              ],
+              "t": "Installation Structure",
+              "u": "b990d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452318339.0
+            }
+          ],
+          "t": "Device Installation",
+          "u": "a790d0533f8e4308e10000000a174cb4.html",
+          "id": 2452318250.0
+        },
+        {
+          "c": [
+            {
+              "c": [],
+              "t": "Base Period",
+              "u": "82fdab43632041dca054093d94cdfe7c.html",
+              "h": "",
+              "id": 2452319170.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Examples for Mixed Weighting",
+                  "u": "ce43e3d0703245c18f96bfa37aa3a0cd.html",
+                  "h": "",
+                  "id": 2452319174.0
+                }
+              ],
+              "t": "Weighting Procedure",
+              "u": "4dc355620d113761e10000000a42189e.html",
+              "h": "",
+              "id": 2452319172.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Extrapolation for Consumption Registers",
+                  "u": "4a91d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319179.0
+                },
+                {
+                  "c": [],
+                  "t": "Extrapolation for Demand Registers",
+                  "u": "4d91d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319182.0
+                },
+                {
+                  "c": [],
+                  "t": "Extrapolation for Resetting Registers",
+                  "u": "5091d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319185.0
+                },
+                {
+                  "c": [],
+                  "t": "Extrapolation with Billing Factor",
+                  "u": "8090d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319187.0
+                },
+                {
+                  "c": [],
+                  "t": "Proration of Meter Readings",
+                  "u": "2390d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319190.0
+                },
+                {
+                  "c": [],
+                  "t": "Extrapolation of Demand from Billing",
+                  "u": "1d90d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319192.0
+                }
+              ],
+              "t": "Extrapolation",
+              "u": "1d91d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452319176.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Maintain Street Route for Meter Reading Unit",
+                      "u": "2691d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319198.0
+                    }
+                  ],
+                  "t": "Street Route",
+                  "u": "c290d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319196.0
+                },
+                {
+                  "c": [],
+                  "t": "Planning Meter Readers",
+                  "u": "e990d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319201.0
+                },
+                {
+                  "c": [],
+                  "t": "Mass Changes to Meter Reading Units",
+                  "u": "1a91d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319203.0
+                }
+              ],
+              "t": "Meter Reading Organization",
+              "u": "bf90d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452319194.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Single Order Creation",
+                      "u": "2c91d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319209.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Mass Order Creation",
+                      "u": "2f91d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319211.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Meter Reading Control",
+                      "u": "3b90d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319214.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Reversal",
+                      "u": "4e3092449ec61555e10000000a42189e.html",
+                      "h": "",
+                      "id": 2452319216.0
+                    }
+                  ],
+                  "t": "Meter Reading Order Creation",
+                  "u": "c890d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319207.0
+                },
+                {
+                  "c": [],
+                  "t": "Order Output",
+                  "u": "cb90d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319218.0
+                }
+              ],
+              "t": "Meter Reading Order",
+              "u": "c590d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452319205.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Upload",
+                      "u": "3791d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319225.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Fast Entry With/Without Correction",
+                      "u": "3d91d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319226.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Single Entry",
+                      "u": "4091d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319227.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Assessing",
+                      "u": "ec90d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319229.0
+                    }
+                  ],
+                  "t": "Entry of Meter Reading Results",
+                  "u": "4d46961d6c2b3c97e10000000a42189c.html",
+                  "h": "",
+                  "id": 2452319223.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Upload",
+                      "u": "1a90d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319234.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Correction of Plausible Meter Reading Results",
+                      "u": "4391d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319236.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Correction of Implausible Meter Reading Results",
+                      "u": "4691d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319238.0
+                    }
+                  ],
+                  "t": "Correction of Meter Reading Results",
+                  "u": "5c90d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319232.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Independent Validation",
+                      "u": "4e844b08097d4453e10000000a421937.html",
+                      "h": "",
+                      "id": 2452319241.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Dependent Validation",
+                      "u": "4a90d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452319242.0
+                    }
+                  ],
+                  "t": "Validations",
+                  "u": "8690d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319240.0
+                },
+                {
+                  "c": [],
+                  "t": "Estimation",
+                  "u": "d090d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452319244.0
+                },
+                {
+                  "c": [],
+                  "t": "Process Implausible Meter Reading Results Using Machine Learning",
+                  "u": "0fdbf93ccc784715b45bb00f308ff1aa.html",
+                  "h": "",
+                  "id": 2452320046.0
+                }
+              ],
+              "t": "Meter Reading Result",
+              "u": "4d5b5b4e7fdc51b0e10000000a42189c.html",
+              "h": "",
+              "id": 2452319220.0
+            },
+            {
+              "c": [],
+              "t": "Reversal",
+              "u": "4e3092449ec61555e10000000a42189e-91.html",
+              "h": "",
+              "id": 2518784731.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Monitoring of Meter Reading Results",
+                  "u": "4d76765c1e012b8ae10000000a42189b.html",
+                  "h": "",
+                  "id": 2452320052.0
+                },
+                {
+                  "c": [],
+                  "t": "Device Overview",
+                  "u": "e690d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452320053.0
+                }
+              ],
+              "t": "Monitoring",
+              "u": "d390d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452320051.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Important Notes",
+                      "u": "d59150e9b3f34af1a2966c1a2896c144.html",
+                      "h": "",
+                      "id": 2452320060.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Notes About the Time of the Changeover",
+                      "u": "5b24ecd6e01a41e2929677025be3a534.html",
+                      "h": "",
+                      "id": 2452320063.0
+                    },
+                    {
+                      "c": [
+                        {
+                          "c": [],
+                          "t": "Change Meter Reading Results",
+                          "u": "475c7c9e73e541d9a0315ff204286944.html",
+                          "h": "",
+                          "id": 2452320067.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Quantity Determination Trigger Concept",
+                          "u": "503d8c30112b4a019fda0b80ae5a504d.html",
+                          "h": "",
+                          "id": 2452320068.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Check for Final Determined Consumption in Technical Transactions",
+                          "u": "3dd5556cf2e746369228058ed75af7e6.html",
+                          "h": "",
+                          "id": 2452320069.0
+                        },
+                        {
+                          "c": [
+                            {
+                              "c": [],
+                              "t": "Extrapolation",
+                              "u": "b425a6a270d94ab891476687a75382ba.html",
+                              "h": "",
+                              "id": 2452320073.0
+                            },
+                            {
+                              "c": [],
+                              "t": "Interpolation",
+                              "u": "74be2a6289754b66aed0cdb7281679bd.html",
+                              "h": "",
+                              "id": 2452320074.0
+                            },
+                            {
+                              "c": [],
+                              "t": "Interaction - Estimation and Actual Meter Reading",
+                              "u": "3e83592e48ed4776bca854100458bad4.html",
+                              "h": "",
+                              "id": 2452320075.0
+                            }
+                          ],
+                          "t": "Estimation Procedure",
+                          "u": "bf74c1d28fd54f77b228772b98b72fba.html",
+                          "h": "",
+                          "id": 2452320071.0
+                        }
+                      ],
+                      "t": "Concepts",
+                      "u": "8170608830cf428e958730e899f725b8.html",
+                      "h": "",
+                      "id": 2452320065.0
+                    }
+                  ],
+                  "t": "Quantity Determination During Meter Reading",
+                  "u": "e63b864b30e14cf38f0aa33fc2775c23.html",
+                  "h": "",
+                  "id": 2452320058.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Check Company-Specific Starting Point",
+                      "u": "e292cb8073574998a11e08202f16b1a1.html",
+                      "h": "",
+                      "id": 2452320077.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Defining the Quantity Determination Procedure",
+                      "u": "b9dc3f66d1734715a3dda3fd7e387aea.html",
+                      "h": "",
+                      "id": 2452320078.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Defining the QD Procedure for Existing Installations",
+                      "u": "90ecabccba6847b386d91d5575c0748b.html",
+                      "h": "",
+                      "id": 2452320079.0
+                    }
+                  ],
+                  "t": "One-Off Activities for Changeover",
+                  "u": "f75a70f4d6fd482da43dec18a607f737.html",
+                  "h": "",
+                  "id": 2452320076.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Process Quantity Determination Trigger",
+                      "u": "f236444d06fa46a4a6d036d9a38f8016.html",
+                      "h": "",
+                      "id": 2452320081.0
+                    }
+                  ],
+                  "t": "Activities in Production Operation",
+                  "u": "2daedc93268a4075bf9e69365badbfec.html",
+                  "h": "",
+                  "id": 2452320080.0
+                }
+              ],
+              "t": "Quantity Determination",
+              "u": "b7d9651b24bc4c639bc44c2e71a06b22.html",
+              "h": "",
+              "id": 2452320056.0
+            }
+          ],
+          "t": "Reading Meters",
+          "u": "bc90d0533f8e4308e10000000a174cb4.html",
+          "id": 2452319166.0
+        },
+        {
+          "c": [
+            {
+              "c": [],
+              "t": "Device Inspection",
+              "u": "ef90d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452320083.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Official/Internal Lots",
+                      "u": "f590d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452320086.0
+                    },
+                    {
+                      "c": [
+                        {
+                          "c": [],
+                          "t": "Compiling Lots",
+                          "u": "fb90d0533f8e4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452320088.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Deleting Devices or Device Categories from Lots",
+                          "u": "0791d0533f8e4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452320089.0
+                        }
+                      ],
+                      "t": "Lot Compilation",
+                      "u": "f890d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452320087.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Determination of Lot Devices",
+                      "u": "fe90d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452320090.0
+                    },
+                    {
+                      "c": [
+                        {
+                          "c": [],
+                          "t": "Drawing Sample Devices",
+                          "u": "0491d0533f8e4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452320092.0
+                        }
+                      ],
+                      "t": "Drawing Sample Devices",
+                      "u": "0191d0533f8e4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452320091.0
+                    }
+                  ],
+                  "t": "Sampling Procedure",
+                  "u": "f290d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452320085.0
+                },
+                {
+                  "c": [],
+                  "t": "Sampling Procedure for Canada",
+                  "u": "617ae9e6b0e5447d8f268e8baf2c2222.html",
+                  "h": "",
+                  "id": 2452320093.0
+                }
+              ],
+              "t": "Sampling Procedure",
+              "u": "4e16feb5bdf91a28e10000000a42189e.html",
+              "h": "",
+              "id": 2452320084.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Creation of Periodic Replacement Lists",
+                  "u": "0a91d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452320095.0
+                },
+                {
+                  "c": [],
+                  "t": "Work Order or Notification Creation",
+                  "u": "1190d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452320096.0
+                },
+                {
+                  "c": [],
+                  "t": "Work Order Printout",
+                  "u": "1790d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452320097.0
+                }
+              ],
+              "t": "Periodic Replacement",
+              "u": "dd90d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452320094.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Certification",
+                  "u": "1391d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452320099.0
+                },
+                {
+                  "c": [],
+                  "t": "Seal Extension",
+                  "u": "1691d0533f8e4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452320100.0
+                }
+              ],
+              "t": "Certification",
+              "u": "e390d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452320098.0
+            },
+            {
+              "c": [],
+              "t": "Recording Device Inspection Data in Quality Management",
+              "u": "4790d0533f8e4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452320101.0
+            }
+          ],
+          "t": "Device Inspection",
+          "u": "d690d0533f8e4308e10000000a174cb4.html",
+          "id": 2452320082.0
+        },
+        {
+          "c": [],
+          "t": "Add Customer-Specific Fields to the Device Master Data",
+          "u": "8e11007aed76429c9ad5b4e9e7531d07.html",
+          "id": 2452320102.0
+        },
+        {
+          "c": [],
+          "t": "Country/Region-Specific Functions",
+          "u": "4baf0596e4bd442d8f208e1f110eb0d3.html",
+          "id": 2452320103.0
+        }
+      ],
+      "deleted": 0,
+      "transtype": "html5.uacp",
+      "filteringTokens": null,
+      "clientFilters": null,
+      "projectPhio": "bsy1757338222937",
+      "projectName": "S4H::OP 2025 001 sec"
+    },
+    "currentPage": {
+      "id": 2554998395,
+      "t": "Estimation Procedure",
+      "u": "bf74c1d28fd54f77b228772b98b72fba.html",
+      "loio": "bf74c1d28fd54f77b228772b98b72fba",
+      "deltaMtTranslate": false
+    },
+    "body": "<!DOCTYPE html\n  SYSTEM \"about:legacy-compat\">\n<html lang=\"en-us\" dir=\"ltr\"><head><title>Estimation Procedure</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" type=\"text/css\" media=\"screen,projection\" href=\"/resource/css/style-v2.css\"><script type=\"text/javascript\" src=\"js/sap-strings.js\"></script></head><body class=\"en-us sap-light centered navigation-default enumeration-disabled\"><div id=\"d4h5-main-container\" class=\"container_12\" role=\"application\"><div id=\"d4h5-section-container\" class=\"grid_12\"><div id=\"d4h5-main-content\" class=\"grid_8 alpha omega\"><section><div class=\"page topic  - topic-topic \" id=\"loiobf74c1d28fd54f77b228772b98b72fba\"><h1 class=\"title topictitle1\">Estimation Procedure</h1><div class=\"body\">\n<div class=\"section\"><section class=\"section\" type=\"Use\"><h2 class=\"section_title\">Use</h2><p class=\"p\">If measurement data is incomplete or implausible, it may be necessary to replace or add to this data with estimated values. Data simulations and forecasts are also based on estimations. In SAP Utilities, estimation procedures are used in the following processes:\n</p>\n<ul class=\"ul\"><li class=\"li\"><p class=\"p\">Estimate meter reading results\n</p></li><li class=\"li\"><p class=\"p\">Validate meter reading results\n</p></li><li class=\"li\"><p class=\"p\">Billing simulation\n</p></li><li class=\"li\"><p class=\"p\">Budget billing plan creation\n</p></li><li class=\"li\"><p class=\"p\">Unbilled revenue reporting\n</p></li></ul>\n<p class=\"p\">The estimation procedures used are <span class=\"ph emphasis emphasis\">extrapolation</span> and <span class=\"ph emphasis emphasis\">interpolation</span>. When using the quantity determination procedure <span class=\"ph uicontrol\">Quantity Determination During Meter Reading</span>, both of these procedures use the quantities saved in the system for the respective base period as a basis for estimation. The system uses these quantities to calculate the quantity for the estimation period and then calculates the estimated value for the meter reading.\n</p>\n<p class=\"p\">During extrapolation, a value is determined beyond the base period. During interpolation, a value is estimated between other existing values. The base period is the period that contains all meter readings used as the basis for estimation.\n</p>\n<p class=\"p\">One feature of the quantity determination procedure <span class=\"ph uicontrol\">Quantity Determination During Meter Reading</span> for the gas division is that the quantity is calculated once an actual meter reading is available following one or more estimations (usually extrapolations). In this case, the gas factors are determined for the most recent actual previous meter reading result. This part of the concept is described in section <span class=\"ph emphasis emphasis\">Interaction - Estimation and Meter Reading</span>.\n</p>\n<p class=\"p\">With these differences in mind, you can read the information about the classical estimation procedures for discrete values:\n</p>\n<p class=\"p\"><a class=\"xref\" href=\"1d91d0533f8e4308e10000000a174cb4.html\">Classical Estimation Procedure</a>\n</p>\n<p class=\"p\">The aspects specifically relevant for quantity determination during meter reading are described in the following sections.\n</p>\n<p class=\"p\">During estimation, assumptions are made regarding the time-related distribution of the quantity on which the estimation is based. This distribution is described with a weighting function <span class=\"ph sap-technical-name sap-technical-name\">y(t)</span>. The examples in the further sections are based on a linear distribution of weightings in which the weighting function increases by one unit per day. In practice, you can also set up and use other weighting methods in the system. For more information about weighting procedures and the necessary Customizing settings, see <a class=\"xref\" href=\"4dc355620d113761e10000000a42189e.html\">Weighting Procedures</a>.\n</p>\n</section></div>\n<div class=\"section\"><section class=\"section\" type=\"Features\"><h2 class=\"section_title\">Features</h2><p class=\"p\">The following sections describe extrapolation and interpolation as estimation procedures for discrete data during the use of the quantity determination procedure <span class=\"ph uicontrol\">Quantity Determination During Meter Reading</span>.\n</p>\n<p class=\"p\"><a class=\"xref\" href=\"b425a6a270d94ab891476687a75382ba.html\">Extrapolation</a>\n</p>\n<p class=\"p\"><a class=\"xref\" href=\"74be2a6289754b66aed0cdb7281679bd.html\">Interpolation</a>\n</p>\n<p class=\"p\">The concept for calculating the quantity once an actual meter reading result is available following one or more estimations (usually extrapolations) is described in the following section:\n</p>\n<p class=\"p\"><a class=\"xref\" href=\"3e83592e48ed4776bca854100458bad4.html\">Interaction - Estimation and Actual Meter Reading</a>\n</p>\n</section></div>\n</div><div class=\"related-links\"> </div></div></section><div class=\"clear\"></div>\n</div></div></div></body></html>",
+    "isMachineTranslated": 0,
+    "githubLink": ""
+  }
+}

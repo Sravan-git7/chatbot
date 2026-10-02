@@ -1,0 +1,147 @@
+{
+  "acquisition": {
+    "body_sha256": "f5de5f6083e6c92804ebfcc27fa2d67a97832659b31fd56e47be7f2f5df1be17",
+    "build_no": "1779",
+    "deliverable_title": "Invoicing",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json",
+    "file_sha256": "ac3164f8c1b6cb8cbf0c67453ce5f100af67d0c05fcdd291a3b0b01b147a78a8",
+    "html_chars": 4900,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374633",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Invoicing Procedure",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "Invoicing creates the link to contract accounting and provides the basis for bill creation. The contracts of a contract account are grouped together in invoicing for the joint bill. Posting documents are posted in subledger accounting. Budget billing plans are processed."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Invoicing Procedure",
+        "Prerequisites"
+      ],
+      "kind": "paragraph",
+      "text": "Billing documents from the Contract Billing (IS-U-BI) component, or budget billing plans, which are managed in the Budget Billing Plan component must exist if billing is to take place."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Invoicing Procedure",
+        "Process Flow"
+      ],
+      "kind": "list",
+      "text": "1. Once the contract is billed, you start bill creation. You must release the documents previously outsorted during billing checks.\n2. Invoicing with Bill Creation results in a print document and a contract accounting document.\n3. To print the bill, you require the print document. When you execute the function, you specify the output type as a print parameter. It is possible to reprint bills.\n4. If your utility company charges budget billing amounts instead of the expected bill amount, you manage these in the Budget Billing Plan component. To inform the customer about the number of budget billings and their amounts and due dates, you use either the Partial Bill Creation function or the Budget Billing Request function. Print documents are generated, which you can process using the above-mentioned functions."
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Invoicing Procedure",
+        "Process Flow"
+      ],
+      "kind": "paragraph",
+      "text": "In addition to these general activities, the following individual processing steps are useful:"
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Invoicing Procedure",
+        "Process Flow"
+      ],
+      "kind": "list",
+      "text": "- When you create a consumption bill, you can run various bill checks, which may result in outsorting of the bill. A print document is generated, which you can use to simulate the bill using the Print Document Display function. However, no postings occur in contract accounts receivable and payable. Postings do not take place until the bill is released using the Outsorting function.\n- If bills are found to be incorrect, and their documents have been updated in the Contract Accounts Receivable and Payable (FI-CA) component, you must process them using the Bill Reversal function. In this way you create a reverse document in FI-CA. This document clears the bill items in FI-CA, carries out offsetting entries, and creates a reverse print document. To reverse billing documents that have been invoiced, you can use the Full Reversal function. Invoicing reversal, therefore, is integrated with the Contract Billing (IS-U-BI) component."
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Invoicing Procedure",
+        "Process Flow"
+      ],
+      "kind": "paragraph",
+      "text": "The following diagram illustrates the process flow from billing through invoicing and invoice printout."
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Invoicing Procedure",
+        "Process Flow"
+      ],
+      "kind": "caption",
+      "text": "Process Flow"
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Invoicing Procedure",
+        "Result"
+      ],
+      "kind": "paragraph",
+      "text": "After the bill has been created, it is sent to the bill recipient. The bill requests can be followed up in contract accounts receivable and payable. This means that the bill amounts are paid, regulated by the utility company, or dunned."
+    }
+  ],
+  "breadcrumb": [
+    "Invoicing Processing",
+    "Invoicing Procedure"
+  ],
+  "card": {
+    "card_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+    "card_page_id": "cc7bce53118d4308e10000000a174cb4",
+    "card_source_status": "needs_review",
+    "card_source_url_status": "needs_review",
+    "card_title": "SAP Utilities Invoicing Procedure",
+    "card_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+    "review_flag": true
+  },
+  "doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+  "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+  "headings": [
+    "Invoicing Procedure",
+    "Use",
+    "Prerequisites",
+    "Process Flow",
+    "Result"
+  ],
+  "html_title": "Invoicing Procedure",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "cc7bce53118d4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-14"
+  ],
+  "source_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 8,
+    "chrome_elements_removed": 0,
+    "headings": 5,
+    "kinds": {
+      "caption": 1,
+      "list": 2,
+      "paragraph": 5
+    }
+  },
+  "text": "Invoicing Procedure\nUse\nInvoicing creates the link to contract accounting and provides the basis for bill creation. The contracts of a contract account are grouped together in invoicing for the joint bill. Posting documents are posted in subledger accounting. Budget billing plans are processed.\nPrerequisites\nBilling documents from the Contract Billing (IS-U-BI) component, or budget billing plans, which are managed in the Budget Billing Plan component must exist if billing is to take place.\nProcess Flow\n1. Once the contract is billed, you start bill creation. You must release the documents previously outsorted during billing checks.\n2. Invoicing with Bill Creation results in a print document and a contract accounting document.\n3. To print the bill, you require the print document. When you execute the function, you specify the output type as a print parameter. It is possible to reprint bills.\n4. If your utility company charges budget billing amounts instead of the expected bill amount, you manage these in the Budget Billing Plan component. To inform the customer about the number of budget billings and their amounts and due dates, you use either the Partial Bill Creation function or the Budget Billing Request function. Print documents are generated, which you can process using the above-mentioned functions.\nIn addition to these general activities, the following individual processing steps are useful:\n- When you create a consumption bill, you can run various bill checks, which may result in outsorting of the bill. A print document is generated, which you can use to simulate the bill using the Print Document Display function. However, no postings occur in contract accounts receivable and payable. Postings do not take place until the bill is released using the Outsorting function.\n- If bills are found to be incorrect, and their documents have been updated in the Contract Accounts Receivable and Payable (FI-CA) component, you must process them using the Bill Reversal function. In this way you create a reverse document in FI-CA. This document clears the bill items in FI-CA, carries out offsetting entries, and creates a reverse print document. To reverse billing documents that have been invoiced, you can use the Full Reversal function. Invoicing reversal, therefore, is integrated with the Contract Billing (IS-U-BI) component.\nThe following diagram illustrates the process flow from billing through invoicing and invoice printout.\nProcess Flow\nResult\nAfter the bill has been created, it is sent to the bill recipient. The bill requests can be followed up in contract accounts receivable and payable. This means that the bill amounts are paid, regulated by the utility company, or dunned.",
+  "text_sha256": "e36506efd8ab1db307d041df4c31995e80a3a78b03fb9d7c1ec81b7139112200",
+  "title": "Invoicing Procedure",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 2719
+  }
+}

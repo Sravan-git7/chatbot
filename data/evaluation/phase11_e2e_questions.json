@@ -1,0 +1,134 @@
+{
+ "schema_version": 1,
+ "authored": "2026-10-01, Phase 11, AI-authored before the first end-to-end run; not used for tuning; evidence strings were verified to occur in data/page_corpus text",
+ "questions": [
+  {
+   "id": "E01",
+   "question": "Which transaction is used to monitor meter reading results?",
+   "type": "answerable",
+   "expected_card": "M2C-07",
+   "expected_status": "answered",
+   "evidence": "Transaction EL31"
+  },
+  {
+   "id": "E02",
+   "question": "What does the Device Management component manage?",
+   "type": "answerable",
+   "expected_card": "M2C-05",
+   "expected_status": "answered",
+   "evidence": "manages technical data, installations, meter readings, and the inspection of devices"
+  },
+  {
+   "id": "E03",
+   "question": "When do I create an installment plan?",
+   "type": "answerable",
+   "expected_card": "M2C-24",
+   "expected_status": "answered",
+   "evidence": "You create an installment plan when both of the following apply"
+  },
+  {
+   "id": "E04",
+   "question": "Which transaction creates an installment plan?",
+   "type": "answerable",
+   "expected_card": "M2C-24",
+   "expected_status": "answered",
+   "evidence": "transaction FPR1"
+  },
+  {
+   "id": "E05",
+   "question": "What does invoicing do in SAP Utilities?",
+   "type": "answerable",
+   "expected_card": "M2C-14",
+   "expected_status": "answered",
+   "evidence": "Invoicing creates the link to contract accounting"
+  },
+  {
+   "id": "E06",
+   "question": "What happens to the contract in a move-out?",
+   "type": "answerable",
+   "expected_card": "M2C-02",
+   "expected_status": "answered",
+   "evidence": "In a move-out, you terminate the customer's contract."
+  },
+  {
+   "id": "E07",
+   "question": "What does billing use to determine the evaluation basis for schema execution?",
+   "type": "answerable",
+   "expected_card": "M2C-11",
+   "expected_status": "answered",
+   "evidence": "meter reading results or load profiles"
+  },
+  {
+   "id": "E08",
+   "question": "How is the first installment of an installment plan calculated?",
+   "type": "answerable",
+   "expected_card": "M2C-24",
+   "expected_status": "answered",
+   "evidence": "calculate the first installment as a percentage"
+  },
+  {
+   "id": "E09",
+   "question": "What does the Contract Accounts component enable me to do?",
+   "type": "answerable",
+   "expected_card": "M2C-17",
+   "expected_status": "answered",
+   "evidence": "create and manage contract account master data"
+  },
+  {
+   "id": "E10",
+   "question": "Which components must be integrated into device management?",
+   "type": "answerable",
+   "expected_card": "M2C-05",
+   "expected_status": "answered",
+   "evidence": "standard application components that must be integrated into device management"
+  },
+  {
+   "id": "E11",
+   "question": "How are dunning notices created?",
+   "type": "page_not_ingested",
+   "expected_card": "M2C-26",
+   "expected_status": "documentation_unavailable",
+   "evidence": null
+  },
+  {
+   "id": "E12",
+   "question": "How do I submit receivables to a collection agency?",
+   "type": "page_not_ingested",
+   "expected_card": "M2C-27",
+   "expected_status": "documentation_unavailable",
+   "evidence": null
+  },
+  {
+   "id": "E13",
+   "question": "What is the weather in Hyderabad?",
+   "type": "out_of_domain",
+   "expected_card": null,
+   "expected_status": "out_of_scope",
+   "evidence": null
+  },
+  {
+   "id": "E14",
+   "question": "Which authorization object is needed for transaction EL31?",
+   "type": "absent_detail",
+   "expected_card": "M2C-07",
+   "expected_status": "unable_to_verify",
+   "evidence": null
+  },
+  {
+   "id": "E15",
+   "question": "What is a business partner?",
+   "type": "unresolved_identity",
+   "expected_card": null,
+   "expected_status": "unable_to_verify",
+   "evidence": null
+  },
+  {
+   "id": "E16",
+   "question": "What is the minimum installment amount?",
+   "type": "absent_detail",
+   "expected_card": "M2C-24",
+   "expected_status": "unable_to_verify",
+   "evidence": null
+  }
+ ]
+}

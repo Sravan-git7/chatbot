@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "page_id": "fffbc5536a51204be10000000a174cb4",
+  "file_path": "fffbc5536a51204be10000000a174cb4.html",
+  "page_title": "Creating Contract Accounts",
+  "text_raw": "Creating Contract Accounts\nCreating Contract Accounts\nPrerequisites\nTo create a contract account, you must have created a business partner to whom you assign this contract account. You can assign additional business partners to the contract account depending on the industry and contract account category.\nIn addition, in the system, a contract account category must have been maintained that you assigned to the contract account when you created it.\nProcedure\nSelect one of the following paths:\nRoles\nEdit contract account master data\n(SAP_FI_CA_CONTRACT_ACCOUNT)\nCreate contract account\nSAP Menu\nMaster data\nContract account\nCreate\nThe initial screen appears.\nEnter the following data:\nA business partner who is assigned to the account. At least one partner must be assigned to each account.\nA contract account category (see\nContract Account Category\n),\nYou can either assign a contract account number yourself or have the system assign the number.\nChoose\nContinue\n.\nThe first data entry screen appears.\nEnter the required data. Using the navigation buttons, you can navigate between the various data screens.\nSave the contract account.\nResult\nYou have created the contract account and made all business partner assignments.",
+  "page_hash": "6aa9d8141490f383d5f7b98c8080c513cf8b3da3068716d243c866192aa700d1",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/049.json",
+  "current_page": {
+    "id": 2554982962,
+    "t": "Creating Contract Accounts",
+    "u": "fffbc5536a51204be10000000a174cb4.html",
+    "loio": "fffbc5536a51204be10000000a174cb4",
+    "deltaMtTranslate": false
+  }
+}

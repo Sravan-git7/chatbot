@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/35fcc5536a51204be10000000a174cb4",
+  "topic_id": 17,
+  "topic_title": "Contract Accounts Overview",
+  "topic_ids": [
+    17
+  ],
+  "topic_refs": [
+    {
+      "topic_id": 17,
+      "topic_title": "Contract Accounts Overview",
+      "role": "descendant",
+      "via_doc_id": null,
+      "pdf_file": "17_Contract_Accounts_Overview.pdf"
+    }
+  ],
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "numeric_deliverable_id": "40374631",
+  "build_no": "1779",
+  "page_id": "35fcc5536a51204be10000000a174cb4",
+  "file_path": "35fcc5536a51204be10000000a174cb4.html",
+  "alias_file_paths": [],
+  "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+  "toc_path": [
+    "Contract Accounts",
+    "Link: Contract Account - Business Partner"
+  ],
+  "depth": 1,
+  "page_title": "Link: Contract Account - Business Partner",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/35fcc5536a51204be10000000a174cb4.html",
+  "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/35fcc5536a51204be10000000a174cb4.html",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/045.json",
+  "page_hash": "600a156b054d35e207ca5a20de06cc5a87be813c196ed101a122b2c8a4ccb6ea",
+  "content_hash": "4ad352a6965ffe0b0054b7645f1f0142c97e54a2625b3fc66e6c2c02348776b9",
+  "duplicate_of": null,
+  "duplicate_docs": [],
+  "text_raw": "Link: Contract Account - Business Partner\nLink: Contract Account - Business Partner\nUse\nAt least one business partner is assigned to each contract account. Depending on the industry sector, assignment of several business partners to a contract account is also allowed.\nPrerequisites\nAdditional business partners can only be assigned to a contract account if the corresponding contract account category allows this.\nFeatures\nThe master data for a contract account is divided into a part that is the same for all business partners of the contract account (that is, independent of the business partner) and a part that is business-partner-specific. The business partner-specific data can be controlled differently for different business partners.\nActivities\nIn Customizing for Contract Accounts Receivable and Payable under\nBasic Functions\nContract Accounts\nContract Account Relationships\nDefine Contract Account/Business Partner Relationships\n, you define contract account relationships.\nThe account relationship defines the role that a business partner plays for a contract account. You can use the account relationship to differentiate between multiple business partners of a contract account.\nExample\nFor automatic payment clearing, you specify that a payment on account is always assigned to the account holder.",
+  "text": "Link: Contract Account - Business Partner\nUse\nAt least one business partner is assigned to each contract account. Depending on the industry sector, assignment of several business partners to a contract account is also allowed.\nPrerequisites\nAdditional business partners can only be assigned to a contract account if the corresponding contract account category allows this.\nFeatures\nThe master data for a contract account is divided into a part that is the same for all business partners of the contract account (that is, independent of the business partner) and a part that is business-partner-specific. The business partner-specific data can be controlled differently for different business partners.\nActivities\nIn Customizing for Contract Accounts Receivable and Payable under Basic Functions\nContract Accounts\nContract Account Relationships\nDefine Contract Account/Business Partner Relationships, you define contract account relationships.\nThe account relationship defines the role that a business partner plays for a contract account. You can use the account relationship to differentiate between multiple business partners of a contract account.\nExample\nFor automatic payment clearing, you specify that a payment on account is always assigned to the account holder.",
+  "clean_stats": {
+    "title_duplicates_removed": 1,
+    "fragments_joined": 2,
+    "lines_in": 18,
+    "lines_out": 15
+  },
+  "status": "OK"
+}

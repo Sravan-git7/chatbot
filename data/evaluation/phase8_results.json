@@ -1,0 +1,1610 @@
+{
+  "authorship": {
+    "authored_by": "AI coding assistant, after reading the ingested pages; not a human domain expert; no LLM generation at runtime",
+    "caveat": "answerable queries are paraphrases of page facts written with the page text in view; they are not blind. The set is small (per-page n of 6-10) and every metric derived from it is a point estimate with wide uncertainty.",
+    "labels_changed_after_retrieval": false,
+    "out_of_domain_origin": "every 7th out_of_domain query (sorted by id) of data/evaluation/phase7F_ood_queries.json, first 8",
+    "written_before_evaluation": true
+  },
+  "chunking_comparison": {
+    "paired_recall@1_in_gold_page": {
+      "B_vs_A_legacy_1000c": {
+        "only_B_right": 3,
+        "only_other_right": 5,
+        "sign_test_p_two_sided": 0.7266
+      },
+      "B_vs_C_heading_128": {
+        "only_B_right": 0,
+        "only_other_right": 1,
+        "sign_test_p_two_sided": 1.0
+      }
+    },
+    "strategies": {
+      "A_legacy_1000c": {
+        "chunk_stats": {
+          "chars": {
+            "max": 998,
+            "mean": 805.5,
+            "median": 929.0,
+            "min": 67
+          },
+          "chunks": 23,
+          "chunks_per_page_mean": 3.29,
+          "chunks_with_overlap": 0,
+          "over_model_limit": 0,
+          "pages": 7,
+          "split_chunks": 0,
+          "tiny_chunks_under_24_tokens": 1,
+          "tokens": {
+            "max": 231,
+            "mean": 158.9,
+            "median": 185.0,
+            "min": 17,
+            "p90": 196.4
+          },
+          "total_chunk_chars": 18526
+        },
+        "config": {
+          "embed_prefix": false,
+          "max_chars": 1000,
+          "max_tokens": 250,
+          "min_tokens": 24,
+          "name": "A_legacy_1000c",
+          "overlap_sentences": 0,
+          "strategy": "legacy",
+          "target_tokens": 200
+        },
+        "retrieval": {
+          "context": {
+            "context_precision_mean": 0.3884,
+            "context_tokens_max": 610,
+            "context_tokens_mean": 457.9,
+            "evidence_in_context": {
+              "k": 56,
+              "n": 59,
+              "rate": 0.9492,
+              "wilson95": [
+                0.861,
+                0.983
+              ]
+            },
+            "redundancy_mean": 0.537
+          },
+          "corpus_wide_no_card_stage": {
+            "mrr": 0.8771,
+            "page_hit@1": {
+              "k": 56,
+              "n": 59,
+              "rate": 0.9492,
+              "wilson95": [
+                0.861,
+                0.983
+              ]
+            },
+            "recall@1": {
+              "k": 48,
+              "n": 59,
+              "rate": 0.8136,
+              "wilson95": [
+                0.696,
+                0.893
+              ]
+            },
+            "recall@3": {
+              "k": 56,
+              "n": 59,
+              "rate": 0.9492,
+              "wilson95": [
+                0.861,
+                0.983
+              ]
+            },
+            "recall@5": {
+              "k": 57,
+              "n": 59,
+              "rate": 0.9661,
+              "wilson95": [
+                0.885,
+                0.991
+              ]
+            }
+          },
+          "in_gold_page": {
+            "mrr": 0.9096,
+            "recall@1": {
+              "k": 51,
+              "n": 59,
+              "rate": 0.8644,
+              "wilson95": [
+                0.755,
+                0.93
+              ]
+            },
+            "recall@3": {
+              "k": 56,
+              "n": 59,
+              "rate": 0.9492,
+              "wilson95": [
+                0.861,
+                0.983
+              ]
+            },
+            "recall@5": {
+              "k": 58,
+              "n": 59,
+              "rate": 0.9831,
+              "wilson95": [
+                0.91,
+                0.997
+              ]
+            }
+          },
+          "queries": 59,
+          "queries_with_gold_chunk": 59
+        }
+      },
+      "B_heading_200": {
+        "chunk_stats": {
+          "chars": {
+            "max": 1092,
+            "mean": 566.5,
+            "median": 521.5,
+            "min": 116
+          },
+          "chunks": 32,
+          "chunks_per_page_mean": 4.57,
+          "chunks_with_overlap": 0,
+          "over_model_limit": 0,
+          "pages": 7,
+          "split_chunks": 16,
+          "tiny_chunks_under_24_tokens": 0,
+          "tokens": {
+            "max": 226,
+            "mean": 118.8,
+            "median": 109.5,
+            "min": 31,
+            "p90": 190.0
+          },
+          "total_chunk_chars": 18128
+        },
+        "config": {
+          "embed_prefix": true,
+          "max_chars": 1000,
+          "max_tokens": 250,
+          "min_tokens": 24,
+          "name": "B_heading_200",
+          "overlap_sentences": 1,
+          "strategy": "heading",
+          "target_tokens": 200
+        },
+        "retrieval": {
+          "context": {
+            "context_precision_mean": 0.3376,
+            "context_tokens_max": 626,
+            "context_tokens_mean": 416.1,
+            "evidence_in_context": {
+              "k": 59,
+              "n": 59,
+              "rate": 1.0,
+              "wilson95": [
+                0.939,
+                1.0
+              ]
+            },
+            "redundancy_mean": 0.5285
+          },
+          "corpus_wide_no_card_stage": {
+            "mrr": 0.8466,
+            "page_hit@1": {
+              "k": 54,
+              "n": 59,
+              "rate": 0.9153,
+              "wilson95": [
+                0.816,
+                0.963
+              ]
+            },
+            "recall@1": {
+              "k": 44,
+              "n": 59,
+              "rate": 0.7458,
+              "wilson95": [
+                0.622,
+                0.839
+              ]
+            },
+            "recall@3": {
+              "k": 55,
+              "n": 59,
+              "rate": 0.9322,
+              "wilson95": [
+                0.838,
+                0.973
+              ]
+            },
+            "recall@5": {
+              "k": 59,
+              "n": 59,
+              "rate": 1.0,
+              "wilson95": [
+                0.939,
+                1.0
+              ]
+            }
+          },
+          "in_gold_page": {
+            "mrr": 0.8969,
+            "recall@1": {
+              "k": 49,
+              "n": 59,
+              "rate": 0.8305,
+              "wilson95": [
+                0.715,
+                0.905
+              ]
+            },
+            "recall@3": {
+              "k": 56,
+              "n": 59,
+              "rate": 0.9492,
+              "wilson95": [
+                0.861,
+                0.983
+              ]
+            },
+            "recall@5": {
+              "k": 59,
+              "n": 59,
+              "rate": 1.0,
+              "wilson95": [
+                0.939,
+                1.0
+              ]
+            }
+          },
+          "queries": 59,
+          "queries_with_gold_chunk": 59
+        }
+      },
+      "C_heading_128": {
+        "chunk_stats": {
+          "chars": {
+            "max": 1063,
+            "mean": 476.9,
+            "median": 456.5,
+            "min": 116
+          },
+          "chunks": 38,
+          "chunks_per_page_mean": 5.43,
+          "chunks_with_overlap": 0,
+          "over_model_limit": 0,
+          "pages": 7,
+          "split_chunks": 24,
+          "tiny_chunks_under_24_tokens": 0,
+          "tokens": {
+            "max": 226,
+            "mean": 101.4,
+            "median": 97.5,
+            "min": 31,
+            "p90": 170.6
+          },
+          "total_chunk_chars": 18122
+        },
+        "config": {
+          "embed_prefix": true,
+          "max_chars": 1000,
+          "max_tokens": 250,
+          "min_tokens": 24,
+          "name": "C_heading_128",
+          "overlap_sentences": 1,
+          "strategy": "heading",
+          "target_tokens": 128
+        },
+        "retrieval": {
+          "context": {
+            "context_precision_mean": 0.3333,
+            "context_tokens_max": 493,
+            "context_tokens_mean": 365.5,
+            "evidence_in_context": {
+              "k": 58,
+              "n": 59,
+              "rate": 0.9831,
+              "wilson95": [
+                0.91,
+                0.997
+              ]
+            },
+            "redundancy_mean": 0.5137
+          },
+          "corpus_wide_no_card_stage": {
+            "mrr": 0.8658,
+            "page_hit@1": {
+              "k": 56,
+              "n": 59,
+              "rate": 0.9492,
+              "wilson95": [
+                0.861,
+                0.983
+              ]
+            },
+            "recall@1": {
+              "k": 47,
+              "n": 59,
+              "rate": 0.7966,
+              "wilson95": [
+                0.677,
+                0.88
+              ]
+            },
+            "recall@3": {
+              "k": 55,
+              "n": 59,
+              "rate": 0.9322,
+              "wilson95": [
+                0.838,
+                0.973
+              ]
+            },
+            "recall@5": {
+              "k": 58,
+              "n": 59,
+              "rate": 0.9831,
+              "wilson95": [
+                0.91,
+                0.997
+              ]
+            }
+          },
+          "in_gold_page": {
+            "mrr": 0.8955,
+            "recall@1": {
+              "k": 50,
+              "n": 59,
+              "rate": 0.8475,
+              "wilson95": [
+                0.735,
+                0.918
+              ]
+            },
+            "recall@3": {
+              "k": 56,
+              "n": 59,
+              "rate": 0.9492,
+              "wilson95": [
+                0.861,
+                0.983
+              ]
+            },
+            "recall@5": {
+              "k": 58,
+              "n": 59,
+              "rate": 0.9831,
+              "wilson95": [
+                0.91,
+                0.997
+              ]
+            }
+          },
+          "queries": 59,
+          "queries_with_gold_chunk": 59
+        }
+      }
+    }
+  },
+  "corpus": {
+    "cards": 29,
+    "pages": 7,
+    "sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d",
+    "status_counts": {
+      "excluded_card_identity_only": 3,
+      "excluded_conflicting_identity": 1,
+      "ingested": 7,
+      "not_ingested_no_local_content": 18
+    }
+  },
+  "end_to_end_by_chunk_strategy_oracle_routing": {
+    "A_legacy_1000c": {
+      "abstention_on_absent_detail": {
+        "k": 8,
+        "n": 11,
+        "rate": 0.7273,
+        "wilson95": [
+          0.434,
+          0.903
+        ]
+      },
+      "answered_and_cites_evidence_chunk_on_gold_page": {
+        "k": 46,
+        "n": 59,
+        "rate": 0.7797,
+        "wilson95": [
+          0.659,
+          0.866
+        ]
+      },
+      "answered_given_answerable": {
+        "k": 50,
+        "n": 59,
+        "rate": 0.8475,
+        "wilson95": [
+          0.735,
+          0.918
+        ]
+      }
+    },
+    "B_heading_200": {
+      "abstention_on_absent_detail": {
+        "k": 6,
+        "n": 11,
+        "rate": 0.5455,
+        "wilson95": [
+          0.28,
+          0.787
+        ]
+      },
+      "answered_and_cites_evidence_chunk_on_gold_page": {
+        "k": 51,
+        "n": 59,
+        "rate": 0.8644,
+        "wilson95": [
+          0.755,
+          0.93
+        ]
+      },
+      "answered_given_answerable": {
+        "k": 55,
+        "n": 59,
+        "rate": 0.9322,
+        "wilson95": [
+          0.838,
+          0.973
+        ]
+      }
+    },
+    "C_heading_128": {
+      "abstention_on_absent_detail": {
+        "k": 6,
+        "n": 11,
+        "rate": 0.5455,
+        "wilson95": [
+          0.28,
+          0.787
+        ]
+      },
+      "answered_and_cites_evidence_chunk_on_gold_page": {
+        "k": 51,
+        "n": 59,
+        "rate": 0.8644,
+        "wilson95": [
+          0.755,
+          0.93
+        ]
+      },
+      "answered_given_answerable": {
+        "k": 55,
+        "n": 59,
+        "rate": 0.9322,
+        "wilson95": [
+          0.838,
+          0.973
+        ]
+      }
+    },
+    "paired_B_vs_A_legacy_1000c": {
+      "only_B_correct": 6,
+      "only_other_correct": 1,
+      "sign_test_p_two_sided": 0.125
+    },
+    "paired_B_vs_C_heading_128": {
+      "only_B_correct": 1,
+      "only_other_correct": 1,
+      "sign_test_p_two_sided": 1.0
+    }
+  },
+  "end_to_end_oracle_routing": {
+    "abstention_on_absent_detail": {
+      "answered_anyway": {
+        "k": 5,
+        "n": 11,
+        "rate": 0.4545,
+        "wilson95": [
+          0.213,
+          0.72
+        ]
+      },
+      "insufficient_context": {
+        "k": 6,
+        "n": 11,
+        "rate": 0.5455,
+        "wilson95": [
+          0.28,
+          0.787
+        ]
+      }
+    },
+    "citation": {
+      "answer_source_url_differs_from_card_url": 0,
+      "answer_sources_containing_gold_evidence_among_answerable": {
+        "k": 51,
+        "n": 83,
+        "rate": 0.6145,
+        "wilson95": [
+          0.507,
+          0.712
+        ]
+      },
+      "answer_sources_total": 96,
+      "answered_total": 60,
+      "phantom_citations": 0,
+      "topic_pointer_counted_as_evidence": 0
+    },
+    "failures": [
+      {
+        "actual": "insufficient_context",
+        "expected": "answered",
+        "gold": "M2C-05",
+        "id": "P8-017",
+        "query": "Which component takes care of billing in the device flow?",
+        "reason": "GENERATOR_REFUSED",
+        "routed": "M2C-05"
+      },
+      {
+        "actual": "insufficient_context",
+        "expected": "answered",
+        "gold": "M2C-14",
+        "id": "P8-030",
+        "query": "What has to exist before invoicing can run?",
+        "reason": "GENERATOR_REFUSED",
+        "routed": "M2C-14"
+      },
+      {
+        "actual": "insufficient_context",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-055",
+        "query": "Which activities can the system start by itself during a move-in or move-out?",
+        "reason": "GENERATOR_REFUSED",
+        "routed": "M2C-02"
+      },
+      {
+        "actual": "insufficient_context",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-059",
+        "query": "Can I adapt how the screen looks for move-in and move-out?",
+        "reason": "GENERATOR_REFUSED",
+        "routed": "M2C-02"
+      },
+      {
+        "actual": "answered",
+        "expected": "insufficient_context",
+        "gold": "M2C-07",
+        "id": "P8-060",
+        "query": "Which authorization object controls access to the meter reading monitoring transaction?",
+        "reason": null,
+        "routed": "M2C-07"
+      },
+      {
+        "actual": "answered",
+        "expected": "insufficient_context",
+        "gold": "M2C-07",
+        "id": "P8-061",
+        "query": "How long are meter reading results retained before they are archived?",
+        "reason": null,
+        "routed": "M2C-07"
+      },
+      {
+        "actual": "answered",
+        "expected": "insufficient_context",
+        "gold": "M2C-24",
+        "id": "P8-064",
+        "query": "What interest rate applies to an installment plan?",
+        "reason": null,
+        "routed": "M2C-24"
+      },
+      {
+        "actual": "answered",
+        "expected": "insufficient_context",
+        "gold": "M2C-24",
+        "id": "P8-065",
+        "query": "How do I cancel an installment plan after it was saved?",
+        "reason": null,
+        "routed": "M2C-24"
+      },
+      {
+        "actual": "answered",
+        "expected": "insufficient_context",
+        "gold": "M2C-17",
+        "id": "P8-068",
+        "query": "Which transaction creates a new contract account?",
+        "reason": null,
+        "routed": "M2C-17"
+      }
+    ],
+    "generation": {
+      "answered_and_cites_evidence_chunk_on_gold_page": {
+        "k": 51,
+        "n": 59,
+        "rate": 0.8644,
+        "wilson95": [
+          0.755,
+          0.93
+        ]
+      },
+      "answered_given_answerable": {
+        "k": 55,
+        "n": 59,
+        "rate": 0.9322,
+        "wilson95": [
+          0.838,
+          0.973
+        ]
+      },
+      "generator": "extractive (non-LLM baseline); LLM path not validated here",
+      "grounding_verifier_passed_among_answered": {
+        "k": 55,
+        "n": 55,
+        "rate": 1.0,
+        "wilson95": [
+          0.935,
+          1.0
+        ]
+      },
+      "refused_by_generator": 4,
+      "refused_low_context_coverage": 0,
+      "withheld_by_grounding_check": 0
+    },
+    "ood_gate": {
+      "in_domain_wrongly_flagged_out_of_domain": {
+        "k": 0,
+        "n": 80,
+        "rate": 0.0,
+        "wilson95": [
+          0.0,
+          0.046
+        ]
+      },
+      "note": "lexical heuristic; not calibrated; small n; not a reliable OOD detector",
+      "ood_answered": 0,
+      "ood_flagged_out_of_domain": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "wilson95": [
+          null,
+          null
+        ]
+      }
+    },
+    "pages_matching_gold": {
+      "k": 59,
+      "n": 59,
+      "rate": 1.0,
+      "wilson95": [
+        0.939,
+        1.0
+      ]
+    },
+    "per_page_answerable": {
+      "M2C-02": {
+        "answered": 6,
+        "answered_correct": 6,
+        "n": 8
+      },
+      "M2C-05": {
+        "answered": 8,
+        "answered_correct": 7,
+        "n": 9
+      },
+      "M2C-07": {
+        "answered": 9,
+        "answered_correct": 8,
+        "n": 9
+      },
+      "M2C-11": {
+        "answered": 6,
+        "answered_correct": 6,
+        "n": 6
+      },
+      "M2C-14": {
+        "answered": 8,
+        "answered_correct": 8,
+        "n": 9
+      },
+      "M2C-17": {
+        "answered": 8,
+        "answered_correct": 7,
+        "n": 8
+      },
+      "M2C-24": {
+        "answered": 10,
+        "answered_correct": 9,
+        "n": 10
+      }
+    },
+    "queries": 80,
+    "retrieval": {
+      "evidence_in_assembled_context_given_gold_page": {
+        "k": 59,
+        "n": 59,
+        "rate": 1.0,
+        "wilson95": [
+          0.939,
+          1.0
+        ]
+      }
+    },
+    "status_confusion_expected_to_actual": {
+      "answered": {
+        "answered": 55,
+        "insufficient_context": 4
+      },
+      "insufficient_context": {
+        "answered": 5,
+        "insufficient_context": 6
+      },
+      "page_not_ingested": {
+        "page_not_ingested": 6
+      },
+      "unresolved_identity": {
+        "unresolved_identity": 4
+      }
+    },
+    "status_match_by_type": {
+      "absent_detail": {
+        "k": 6,
+        "n": 11,
+        "rate": 0.5455,
+        "wilson95": [
+          0.28,
+          0.787
+        ]
+      },
+      "answerable": {
+        "k": 55,
+        "n": 59,
+        "rate": 0.9322,
+        "wilson95": [
+          0.838,
+          0.973
+        ]
+      },
+      "not_ingested": {
+        "k": 6,
+        "n": 6,
+        "rate": 1.0,
+        "wilson95": [
+          0.61,
+          1.0
+        ]
+      },
+      "unresolved_identity": {
+        "k": 4,
+        "n": 4,
+        "rate": 1.0,
+        "wilson95": [
+          0.51,
+          1.0
+        ]
+      }
+    }
+  },
+  "end_to_end_router_rank1": {
+    "abstention_on_absent_detail": {
+      "answered_anyway": {
+        "k": 1,
+        "n": 11,
+        "rate": 0.0909,
+        "wilson95": [
+          0.016,
+          0.377
+        ]
+      },
+      "insufficient_context": {
+        "k": 5,
+        "n": 11,
+        "rate": 0.4545,
+        "wilson95": [
+          0.213,
+          0.72
+        ]
+      }
+    },
+    "citation": {
+      "answer_source_url_differs_from_card_url": 0,
+      "answer_sources_containing_gold_evidence_among_answerable": {
+        "k": 19,
+        "n": 40,
+        "rate": 0.475,
+        "wilson95": [
+          0.329,
+          0.625
+        ]
+      },
+      "answer_sources_total": 45,
+      "answered_total": 24,
+      "phantom_citations": 0,
+      "topic_pointer_counted_as_evidence": 0
+    },
+    "failures": [
+      {
+        "actual": "insufficient_context",
+        "expected": "answered",
+        "gold": "M2C-07",
+        "id": "P8-002",
+        "query": "If I start from a device, what can I display?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-05"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-07",
+        "id": "P8-003",
+        "query": "Which business function lets me display meter reading results when I begin with portions or reading units?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-06"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-07",
+        "id": "P8-004",
+        "query": "Which transaction triggers automatic follow-on processing for meter reading orders?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-10"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-07",
+        "id": "P8-005",
+        "query": "How can I see which meter reading documents were posted successfully after an IDoc upload?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-06"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-07",
+        "id": "P8-006",
+        "query": "How do I get an overview of the devices in a reading unit?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-06"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-07",
+        "id": "P8-007",
+        "query": "What must be activated before I can run quantity determination from the result lists?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-27"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-07",
+        "id": "P8-008",
+        "query": "How do I jump to the detailed view of an object in the monitoring lists?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-10"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-05",
+        "id": "P8-015",
+        "query": "At what point are equipment records generated?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-27"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-05",
+        "id": "P8-017",
+        "query": "Which component takes care of billing in the device flow?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-11"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-05",
+        "id": "P8-018",
+        "query": "Where can I read more about the advanced metering infrastructure?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-06"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-24",
+        "id": "P8-021",
+        "query": "Which indicator do I set to prioritize clearing of the original items when payments arrive?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-20"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-24",
+        "id": "P8-022",
+        "query": "Which fields does the system take over from the original item into the plan?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-03"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-24",
+        "id": "P8-023",
+        "query": "How can I avoid copying the company code and contract into the plan?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-23"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-24",
+        "id": "P8-024",
+        "query": "Is it possible to have the first installment computed as a share of the plan total?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-23"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-24",
+        "id": "P8-025",
+        "query": "What effect does the Distribute indicator have?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-25"
+      },
+      {
+        "actual": "insufficient_context",
+        "expected": "answered",
+        "gold": "M2C-14",
+        "id": "P8-030",
+        "query": "What has to exist before invoicing can run?",
+        "reason": "GENERATOR_REFUSED",
+        "routed": "M2C-14"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-14",
+        "id": "P8-033",
+        "query": "How do I tell customers about the number and due dates of their budget billings?",
+        "reason": "CARD_IDENTITY_ONLY",
+        "routed": "M2C-13"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-14",
+        "id": "P8-036",
+        "query": "When are postings made for a consumption bill that was outsorted?",
+        "reason": "CARD_IDENTITY_ONLY",
+        "routed": "M2C-13"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-17",
+        "id": "P8-038",
+        "query": "What does the contract account component enable?",
+        "reason": "CONFLICTING_IDENTITY",
+        "routed": "M2C-18"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-17",
+        "id": "P8-039",
+        "query": "May one business partner own several contract accounts?",
+        "reason": "CONFLICTING_IDENTITY",
+        "routed": "M2C-18"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-17",
+        "id": "P8-041",
+        "query": "Can an individual utility contract sit in more than one contract account?",
+        "reason": "CONFLICTING_IDENTITY",
+        "routed": "M2C-18"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-17",
+        "id": "P8-042",
+        "query": "How many business partners can a telecommunications contract account have?",
+        "reason": "CONFLICTING_IDENTITY",
+        "routed": "M2C-18"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-17",
+        "id": "P8-043",
+        "query": "Can a business transaction automatically block a contract account?",
+        "reason": "CONFLICTING_IDENTITY",
+        "routed": "M2C-18"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-17",
+        "id": "P8-044",
+        "query": "Are modifications to contract account master data recorded?",
+        "reason": "CARD_IDENTITY_ONLY",
+        "routed": "M2C-01"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-17",
+        "id": "P8-045",
+        "query": "How are contract accounts used for taxes in the public sector?",
+        "reason": "CONFLICTING_IDENTITY",
+        "routed": "M2C-18"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-11",
+        "id": "P8-047",
+        "query": "What does the system do if a price changes in the middle of a billing period?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-13"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-11",
+        "id": "P8-049",
+        "query": "Is it allowed for master data to change while a billing period is running?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-12"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-11",
+        "id": "P8-050",
+        "query": "How is consumption handled when a billing period is split?",
+        "reason": "CARD_IDENTITY_ONLY",
+        "routed": "M2C-13"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-11",
+        "id": "P8-051",
+        "query": "Which period categories can be handled by the billing procedures?",
+        "reason": "CARD_IDENTITY_ONLY",
+        "routed": "M2C-13"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-052",
+        "query": "What does the move-in and move-out component let me do?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-03"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-053",
+        "query": "What happens to the customer's contract on a move-out?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-04"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-054",
+        "query": "Which component produces welcome letters and move-out confirmations?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-20"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-055",
+        "query": "Which activities can the system start by itself during a move-in or move-out?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-03"
+      },
+      {
+        "actual": "out_of_domain",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-056",
+        "query": "Which component allows me to monitor and configure the workflow processes?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "routed": "M2C-04"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-057",
+        "query": "What can I do about the business partner and contract account when a customer moves in?",
+        "reason": "CONFLICTING_IDENTITY",
+        "routed": "M2C-18"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-058",
+        "query": "What happens to an installation when a new customer moves in after a move-out?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-03"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "answered",
+        "gold": "M2C-02",
+        "id": "P8-059",
+        "query": "Can I adapt how the screen looks for move-in and move-out?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-03"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "insufficient_context",
+        "gold": "M2C-07",
+        "id": "P8-060",
+        "query": "Which authorization object controls access to the meter reading monitoring transaction?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-06"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "insufficient_context",
+        "gold": "M2C-07",
+        "id": "P8-061",
+        "query": "How long are meter reading results retained before they are archived?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-06"
+      },
+      {
+        "actual": "answered",
+        "expected": "insufficient_context",
+        "gold": "M2C-24",
+        "id": "P8-064",
+        "query": "What interest rate applies to an installment plan?",
+        "reason": null,
+        "routed": "M2C-24"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "insufficient_context",
+        "gold": "M2C-24",
+        "id": "P8-065",
+        "query": "How do I cancel an installment plan after it was saved?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-23"
+      },
+      {
+        "actual": "unresolved_identity",
+        "expected": "insufficient_context",
+        "gold": "M2C-17",
+        "id": "P8-068",
+        "query": "Which transaction creates a new contract account?",
+        "reason": "CONFLICTING_IDENTITY",
+        "routed": "M2C-18"
+      },
+      {
+        "actual": "page_not_ingested",
+        "expected": "insufficient_context",
+        "gold": "M2C-02",
+        "id": "P8-070",
+        "query": "How long does a move-out take to post in the system?",
+        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "routed": "M2C-04"
+      },
+      {
+        "actual": "answered",
+        "expected": "out_of_domain",
+        "gold": null,
+        "id": "P8-084",
+        "query": "How do I post a vendor invoice in accounts payable?",
+        "reason": null,
+        "routed": "M2C-14"
+      }
+    ],
+    "generation": {
+      "answered_and_cites_evidence_chunk_on_gold_page": {
+        "k": 19,
+        "n": 59,
+        "rate": 0.322,
+        "wilson95": [
+          0.217,
+          0.449
+        ]
+      },
+      "answered_given_answerable": {
+        "k": 22,
+        "n": 59,
+        "rate": 0.3729,
+        "wilson95": [
+          0.261,
+          0.5
+        ]
+      },
+      "generator": "extractive (non-LLM baseline); LLM path not validated here",
+      "grounding_verifier_passed_among_answered": {
+        "k": 22,
+        "n": 22,
+        "rate": 1.0,
+        "wilson95": [
+          0.851,
+          1.0
+        ]
+      },
+      "refused_by_generator": 1,
+      "refused_low_context_coverage": 1,
+      "withheld_by_grounding_check": 0
+    },
+    "identity": {
+      "effective_page_equals_gold_doc_when_routed": {
+        "k": 23,
+        "n": 23,
+        "rate": 1.0,
+        "wilson95": [
+          0.857,
+          1.0
+        ]
+      },
+      "gold_ingested_pages_routed_top1": {
+        "k": 23,
+        "n": 59,
+        "rate": 0.3898,
+        "wilson95": [
+          0.276,
+          0.517
+        ]
+      },
+      "m2c05_correction_preserved": {
+        "k": 9,
+        "n": 9,
+        "rate": 1.0,
+        "wilson95": [
+          0.701,
+          1.0
+        ]
+      },
+      "m2c18_never_answered": true,
+      "unresolved_card_routed_but_never_answered": {
+        "of_those_answered": 0,
+        "routed_to_conflict_or_identity_only": 19
+      }
+    },
+    "ood_gate": {
+      "in_domain_wrongly_flagged_out_of_domain": {
+        "k": 11,
+        "n": 80,
+        "rate": 0.1375,
+        "wilson95": [
+          0.079,
+          0.23
+        ]
+      },
+      "note": "lexical heuristic; not calibrated; small n; not a reliable OOD detector",
+      "ood_answered": 1,
+      "ood_flagged_out_of_domain": {
+        "k": 7,
+        "n": 8,
+        "rate": 0.875,
+        "wilson95": [
+          0.529,
+          0.978
+        ]
+      }
+    },
+    "pages_matching_gold": {
+      "k": 23,
+      "n": 59,
+      "rate": 0.3898,
+      "wilson95": [
+        0.276,
+        0.517
+      ]
+    },
+    "per_page_answerable": {
+      "M2C-02": {
+        "answered": 0,
+        "answered_correct": 0,
+        "n": 8
+      },
+      "M2C-05": {
+        "answered": 6,
+        "answered_correct": 5,
+        "n": 9
+      },
+      "M2C-07": {
+        "answered": 2,
+        "answered_correct": 1,
+        "n": 9
+      },
+      "M2C-11": {
+        "answered": 2,
+        "answered_correct": 2,
+        "n": 6
+      },
+      "M2C-14": {
+        "answered": 6,
+        "answered_correct": 6,
+        "n": 9
+      },
+      "M2C-17": {
+        "answered": 1,
+        "answered_correct": 1,
+        "n": 8
+      },
+      "M2C-24": {
+        "answered": 5,
+        "answered_correct": 4,
+        "n": 10
+      }
+    },
+    "queries": 88,
+    "retrieval": {
+      "evidence_in_assembled_context_given_gold_page": {
+        "k": 23,
+        "n": 23,
+        "rate": 1.0,
+        "wilson95": [
+          0.857,
+          1.0
+        ]
+      }
+    },
+    "routing": {
+      "mrr": 0.6231,
+      "queries_with_gold_card": 80,
+      "top1": {
+        "k": 37,
+        "n": 80,
+        "rate": 0.4625,
+        "wilson95": [
+          0.357,
+          0.571
+        ]
+      },
+      "top1_by_type": {
+        "absent_detail": {
+          "k": 6,
+          "n": 11,
+          "rate": 0.5455,
+          "wilson95": [
+            0.28,
+            0.787
+          ]
+        },
+        "answerable": {
+          "k": 23,
+          "n": 59,
+          "rate": 0.3898,
+          "wilson95": [
+            0.276,
+            0.517
+          ]
+        },
+        "not_ingested": {
+          "k": 4,
+          "n": 6,
+          "rate": 0.6667,
+          "wilson95": [
+            0.3,
+            0.903
+          ]
+        },
+        "unresolved_identity": {
+          "k": 4,
+          "n": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.51,
+            1.0
+          ]
+        }
+      },
+      "top3": {
+        "k": 62,
+        "n": 80,
+        "rate": 0.775,
+        "wilson95": [
+          0.672,
+          0.853
+        ]
+      },
+      "top5": {
+        "k": 70,
+        "n": 80,
+        "rate": 0.875,
+        "wilson95": [
+          0.785,
+          0.931
+        ]
+      }
+    },
+    "status_confusion_expected_to_actual": {
+      "answered": {
+        "answered": 22,
+        "insufficient_context": 2,
+        "out_of_domain": 11,
+        "page_not_ingested": 12,
+        "unresolved_identity": 12
+      },
+      "insufficient_context": {
+        "answered": 1,
+        "insufficient_context": 5,
+        "page_not_ingested": 4,
+        "unresolved_identity": 1
+      },
+      "out_of_domain": {
+        "answered": 1,
+        "out_of_domain": 7
+      },
+      "page_not_ingested": {
+        "page_not_ingested": 6
+      },
+      "unresolved_identity": {
+        "unresolved_identity": 4
+      }
+    },
+    "status_match_by_type": {
+      "absent_detail": {
+        "k": 5,
+        "n": 11,
+        "rate": 0.4545,
+        "wilson95": [
+          0.213,
+          0.72
+        ]
+      },
+      "answerable": {
+        "k": 22,
+        "n": 59,
+        "rate": 0.3729,
+        "wilson95": [
+          0.261,
+          0.5
+        ]
+      },
+      "not_ingested": {
+        "k": 6,
+        "n": 6,
+        "rate": 1.0,
+        "wilson95": [
+          0.61,
+          1.0
+        ]
+      },
+      "out_of_domain": {
+        "k": 7,
+        "n": 8,
+        "rate": 0.875,
+        "wilson95": [
+          0.529,
+          0.978
+        ]
+      },
+      "unresolved_identity": {
+        "k": 4,
+        "n": 4,
+        "rate": 1.0,
+        "wilson95": [
+          0.51,
+          1.0
+        ]
+      }
+    }
+  },
+  "hallucination_guard": {
+    "cases": {
+      "faithful_control": {
+        "fabricated_answer_shown": 59,
+        "other_refusal": 0,
+        "queries": 59,
+        "withheld_by_verifier": 0
+      },
+      "invented_number": {
+        "fabricated_answer_shown": 0,
+        "other_refusal": 0,
+        "queries": 59,
+        "withheld_by_verifier": 59
+      },
+      "invented_transaction_code": {
+        "fabricated_answer_shown": 0,
+        "other_refusal": 0,
+        "queries": 59,
+        "withheld_by_verifier": 59
+      },
+      "invented_url": {
+        "fabricated_answer_shown": 0,
+        "other_refusal": 0,
+        "queries": 59,
+        "withheld_by_verifier": 59
+      },
+      "off_context_claim": {
+        "fabricated_answer_shown": 0,
+        "other_refusal": 0,
+        "queries": 59,
+        "withheld_by_verifier": 59
+      },
+      "phantom_citation": {
+        "fabricated_answer_shown": 0,
+        "other_refusal": 0,
+        "queries": 59,
+        "withheld_by_verifier": 59
+      },
+      "uncited_claim": {
+        "fabricated_answer_shown": 0,
+        "other_refusal": 0,
+        "queries": 59,
+        "withheld_by_verifier": 59
+      }
+    },
+    "note": "scripted stub LLMs that fabricate in one specific way; measures whether the verifier withholds each type. It does not measure llama3.2:3b behaviour."
+  },
+  "limitations": [
+    "7 of 29 cards have page text; 22 can only be answered with page_not_ingested / unresolved_identity",
+    "queries are AI-authored with the page text in view; n per page is 6-10; every rate has a wide Wilson interval",
+    "the extractive generator is not an LLM; answer fluency and paraphrase quality are not measured",
+    "lexical gates are uncalibrated heuristics"
+  ],
+  "llm_generation": {
+    "reason": "no Ollama server and no model weights are reachable from this environment (network blocked); OllamaClient is implemented and unit-tested with stubs only",
+    "validated": false
+  },
+  "preregistered": {
+    "answer_correct_definition": "status == answered AND at least one cited chunk contains an evidence quote AND the cited page is the gold page",
+    "context_budget_tokens": 700,
+    "context_min_coverage": 0.5,
+    "declared_before_evaluation": true,
+    "default_chunk_strategy": "B_heading_200",
+    "extractive_min_score": 0.34,
+    "hit_definition": "a retrieved chunk whose text contains (whitespace-normalised) any evidence quote of the query",
+    "k_chunks": 5,
+    "max_context_chunks": 4,
+    "metrics_not_combined": [
+      "routing",
+      "identity",
+      "retrieval",
+      "generation",
+      "citation"
+    ],
+    "min_sentence_support": 0.6,
+    "no_tuning_on_this_set": true,
+    "ood_min_coverage": 0.25,
+    "router": "rank-1 of the card router, no similarity threshold (Phase 7F: min_cosine stays None)"
+  },
+  "queries_file": "data/evaluation/phase8_queries.json",
+  "queries_file_sha256": "a7677ff694702b4ca5f05509c9187e9d2e26e55953060f54a5f4c0cad2d22f0a",
+  "query_counts": {
+    "absent_detail": 11,
+    "answerable": 59,
+    "not_ingested": 6,
+    "out_of_domain": 8,
+    "unresolved_identity": 4
+  },
+  "schema_version": 1,
+  "token_counter": {
+    "exact": true,
+    "model_dir": "/tmp/av/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
+    "tokenizer": "all-MiniLM-L6-v2 WordPiece (tokenizers)"
+  }
+}

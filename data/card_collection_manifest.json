@@ -1,0 +1,45 @@
+{
+  "collection_name": "sap_m2c_card_v1",
+  "vector_store_dir": "data\\vector_store",
+  "created_utc": "2026-10-01T16:48:30+00:00",
+  "vector_count": 29,
+  "embedding_dimensions": 384,
+  "embedding_model": "all-MiniLM-L6-v2",
+  "embedding_model_provenance": {
+    "model_name": "all-MiniLM-L6-v2",
+    "origin": "pip package gt-all-minilm-l6-v2 (third-party re-packaging of sentence-transformers/all-MiniLM-L6-v2)",
+    "directory": "C:\\Users\\srava\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\gt_all_minilm_l6_v2\\model",
+    "files_sha256": {
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+    }
+  },
+  "configuration": {
+    "collection": "sap_m2c_card_v1",
+    "distance_space": "cosine",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "normalize_embeddings": true,
+    "batch_size": 16,
+    "max_seq_length": 256,
+    "truncation": "none needed (validated)",
+    "document_embedded": "embedding_text",
+    "strategy": "whole_document (one vector per card)",
+    "device": "cpu",
+    "chromadb": "1.5.9"
+  },
+  "source_corpus_file_sha256": "0ee5cb8bda192250a14acdde95617e15b71f6fd803847fe25bae9999ea7e9e76",
+  "source_corpus_content_fingerprint": "8eed668f4ac4cf951bd41df5ff94688abb7331bd05e283da1045abd1eb017cda",
+  "retrieval_units_file_sha256": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
+  "token_stats_file_sha256": "e5213166b4178f8c3d3dc8e52e7e9438abf881e0ae7564045079955e4d3b051c",
+  "embeddings_float32_sha256": "8cefa974641791b8494f8cf8fddde69d8356bef566fbb1524ef03357a35dae7d",
+  "embeddings_sha256_note": "hash of the float32 matrix as computed on this machine; may differ on other hardware/library builds",
+  "legacy_collection_untouched": {
+    "name": "sap_docs",
+    "present_in_this_store": false
+  },
+  "reproduce_with": "python scripts/build_retrieval_units.py && python scripts/validate_token_lengths.py && python scripts/build_card_collection.py --rebuild"
+}

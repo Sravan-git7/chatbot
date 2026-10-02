@@ -1,0 +1,167 @@
+{
+  "acquisition": {
+    "body_sha256": "768ded4cacf4b1e36bf58e15475bf9c0053cc3b1271ea39c698cc4467704ea50",
+    "build_no": null,
+    "deliverable_title": "Invoicing",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/7_40404052_297bce53118d4308e10000000a174cb4.json",
+    "file_sha256": "07c91b740dd26a73a23bfd963edd4735a261c5e7f4c10bc49d388363597871ed",
+    "html_chars": 4340,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40404052",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Automatic Billing",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "Automatic billing enables you to bill a single contract or any selection of contracts. Contracts not allocated to an installation are not selected. Billing is executed based on intervals defined in scheduling. All master data that form the basis of the contract – such as the installation, device or register – are automatically taken into account."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Automatic Billing",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "Automatic billing provides a link between general master data and invoicing. In addition to general master data, the following billing master data are included in automatic billing:"
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Automatic Billing",
+        "Integration"
+      ],
+      "kind": "list",
+      "text": "- Rate Type\n- Operand\n- Price\n- Price Adjustment Clause\n- Rate\n- Schema\n- Rate Category\n- Rate Determination\n- Variants\n- Discounts\n- Franchise Fees"
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Automatic Billing",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "Scheduling determines how often billing runs occur. All billed contracts of a contract account can be invoiced, which is followed by printing of the bill."
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Automatic Billing",
+        "Prerequisites"
+      ],
+      "kind": "paragraph",
+      "text": "All master data and billing master data must be consistent before billing can be executed."
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Automatic Billing",
+        "Prerequisites"
+      ],
+      "kind": "paragraph",
+      "text": "This means the following:"
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Automatic Billing",
+        "Prerequisites"
+      ],
+      "kind": "list",
+      "text": "- A business partner and a contract must be allocated to the installation in move-in processing.\n- Devices containing registers must be allocated to this installation in device installation.\n- Meter reading orders must be generated and meter reading results must be entered in meter reading.\n- The schedule records must be created in scheduling.\n- In billing, a rate determination must be defined for the rate category of the installation and for the rate type of the device/register."
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Automatic Billing",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "Automatic billing determines the amount to be paid, based on the meter reading taken for the register. Calculation rules defined in variants in the rate are used to calculate this amount. Nonmeasured consumption and demand values specified in the facts for the rate, the rate category or the installation are also taken into account."
+    },
+    {
+      "block_index": 8,
+      "heading_path": [
+        "Automatic Billing",
+        "Activities"
+      ],
+      "kind": "paragraph",
+      "text": "For more information, see:"
+    },
+    {
+      "block_index": 9,
+      "heading_path": [
+        "Automatic Billing",
+        "Activities"
+      ],
+      "kind": "list",
+      "text": "- Billing Execution\n- Simulation/Billing Simulation\n- Simulation Execution\n- Billing Simulation"
+    }
+  ],
+  "breadcrumb": [
+    "IS-U Invoicing",
+    "Contract Billing",
+    "Additional Functions",
+    "Automatic Billing"
+  ],
+  "card": {
+    "card_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+    "card_page_id": "297bce53118d4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Automatic Billing",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4",
+  "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+  "headings": [
+    "Automatic Billing",
+    "Use",
+    "Integration",
+    "Prerequisites",
+    "Features",
+    "Activities"
+  ],
+  "html_title": "Automatic Billing",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "297bce53118d4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-12"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 10,
+    "chrome_elements_removed": 0,
+    "headings": 6,
+    "kinds": {
+      "list": 3,
+      "paragraph": 7
+    }
+  },
+  "text": "Automatic Billing\nUse\nAutomatic billing enables you to bill a single contract or any selection of contracts. Contracts not allocated to an installation are not selected. Billing is executed based on intervals defined in scheduling. All master data that form the basis of the contract – such as the installation, device or register – are automatically taken into account.\nIntegration\nAutomatic billing provides a link between general master data and invoicing. In addition to general master data, the following billing master data are included in automatic billing:\n- Rate Type\n- Operand\n- Price\n- Price Adjustment Clause\n- Rate\n- Schema\n- Rate Category\n- Rate Determination\n- Variants\n- Discounts\n- Franchise Fees\nScheduling determines how often billing runs occur. All billed contracts of a contract account can be invoiced, which is followed by printing of the bill.\nPrerequisites\nAll master data and billing master data must be consistent before billing can be executed.\nThis means the following:\n- A business partner and a contract must be allocated to the installation in move-in processing.\n- Devices containing registers must be allocated to this installation in device installation.\n- Meter reading orders must be generated and meter reading results must be entered in meter reading.\n- The schedule records must be created in scheduling.\n- In billing, a rate determination must be defined for the rate category of the installation and for the rate type of the device/register.\nFeatures\nAutomatic billing determines the amount to be paid, based on the meter reading taken for the register. Calculation rules defined in variants in the rate are used to calculate this amount. Nonmeasured consumption and demand values specified in the facts for the rate, the rate category or the installation are also taken into account.\nActivities\nFor more information, see:\n- Billing Execution\n- Simulation/Billing Simulation\n- Simulation Execution\n- Billing Simulation",
+  "text_sha256": "e29567c339632f1f612d3f253bcd2815ca6637a513b65da24aba3bf560f7675a",
+  "title": "Automatic Billing",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 1961
+  }
+}

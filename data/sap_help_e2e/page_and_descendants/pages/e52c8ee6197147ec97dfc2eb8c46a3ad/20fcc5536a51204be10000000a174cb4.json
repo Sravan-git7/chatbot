@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/20fcc5536a51204be10000000a174cb4",
+  "topic_id": 17,
+  "topic_title": "Contract Accounts Overview",
+  "topic_ids": [
+    17
+  ],
+  "topic_refs": [
+    {
+      "topic_id": 17,
+      "topic_title": "Contract Accounts Overview",
+      "role": "descendant",
+      "via_doc_id": null,
+      "pdf_file": "17_Contract_Accounts_Overview.pdf"
+    }
+  ],
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "numeric_deliverable_id": "40374631",
+  "build_no": "1779",
+  "page_id": "20fcc5536a51204be10000000a174cb4",
+  "file_path": "20fcc5536a51204be10000000a174cb4.html",
+  "alias_file_paths": [],
+  "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+  "toc_path": [
+    "Contract Accounts",
+    "Contract Account Category"
+  ],
+  "depth": 1,
+  "page_title": "Contract Account Category",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/20fcc5536a51204be10000000a174cb4.html",
+  "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/20fcc5536a51204be10000000a174cb4.html",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/042.json",
+  "page_hash": "2a65e9c363607fc68314891fc2076b1cb0a8ff5149951d97254494518ce631ad",
+  "content_hash": "e1537382ee55147f16484a699796b0f283b9b238a66b1824be2f2dcd78b60a07",
+  "duplicate_of": null,
+  "duplicate_docs": [],
+  "text_raw": "Contract Account Category\nContract Account Category\nDefinition\nA contract account category defines certain attributes for a contract account.\nUse\nYou have to assign a contract account category to each contract account when you create it. The fields that appear when you create a contract account are among the things controlled by the contract account category.\nStructure\nThe contract account category determines the following contract account attributes:\nWhether you are allowed to assign only one business partner or more than one to a contract account\nWhether you are allowed to assign only one contract or more than one\nWhether you are allowed to maintain a contract account online\nThe number range that is allowed for external or internal number assignment\nWhether it is a collective bill account (industry component\nUtilities\n)\nWhether it is a one-time account\nWhether it is a deposit account and the account contains deposit contracts (industry component\nInsurance\n)\nThe editing screens or data fields that you can use to edit the contract account",
+  "text": "Contract Account Category\nDefinition\nA contract account category defines certain attributes for a contract account.\nUse\nYou have to assign a contract account category to each contract account when you create it. The fields that appear when you create a contract account are among the things controlled by the contract account category.\nStructure\nThe contract account category determines the following contract account attributes:\nWhether you are allowed to assign only one business partner or more than one to a contract account\nWhether you are allowed to assign only one contract or more than one\nWhether you are allowed to maintain a contract account online\nThe number range that is allowed for external or internal number assignment\nWhether it is a collective bill account (industry component Utilities)\nWhether it is a one-time account\nWhether it is a deposit account and the account contains deposit contracts (industry component Insurance)\nThe editing screens or data fields that you can use to edit the contract account",
+  "clean_stats": {
+    "title_duplicates_removed": 1,
+    "fragments_joined": 4,
+    "lines_in": 20,
+    "lines_out": 15
+  },
+  "status": "OK"
+}

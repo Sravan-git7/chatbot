@@ -1,0 +1,136 @@
+{
+  "acquisition": {
+    "body_sha256": "e328bd966bcaba3d71bc0b8090dba9227712300442db1638894a7cf4d106116e",
+    "build_no": "1779",
+    "deliverable_title": "Customer Service",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json",
+    "file_sha256": "b579297432b2092b904570e3290922277b27d80fdb29dafb5626d27c30aa38f8",
+    "html_chars": 2676,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374682",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Move-In/Out",
+        "Purpose"
+      ],
+      "kind": "paragraph",
+      "text": "This component enables you to process a customer move-in or move-out. In the case of a move-in, you can create a business partner and contract account for the customer, or select existing ones. The contracts are then created and allocated to a utility installation."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Move-In/Out",
+        "Purpose"
+      ],
+      "kind": "paragraph",
+      "text": "In a move-out, you terminate the customer's contract. If a new customer moves into the installation, the installation is allocated to this customer's contract."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Move-In/Out",
+        "Purpose"
+      ],
+      "kind": "paragraph",
+      "text": "For more information, see Move-In and Move-Out ."
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Move-In/Out",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "Letters to the customer, such as welcome letters and move-out confirmations are created using the Print Workbench component. The SAP Business Workflow component (BC-BMT-WFM) enables you to monitor and configure the workflow processes."
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Move-In/Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can have the system trigger a number of activities automatically. You can:"
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Move-In/Out",
+        "Features"
+      ],
+      "kind": "list",
+      "text": "- process the entire transaction immediately and in full.\n- create a final bill for the move-out customer.\n- create a welcome letter for the move-in customer."
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Move-In/Out",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can also configure the screen layout to suit your requirements."
+    }
+  ],
+  "breadcrumb": [
+    "Process Execution",
+    "Move-In/Out"
+  ],
+  "card": {
+    "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+    "card_page_id": "8082ce53118d4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Move-In/Out Overview",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+  "guide_id": "f4a255a5de524e3992155767996fb1fd",
+  "headings": [
+    "Move-In/Out",
+    "Purpose",
+    "Integration",
+    "Features"
+  ],
+  "html_title": "Move-In/Out",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "8082ce53118d4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-02"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 7,
+    "chrome_elements_removed": 0,
+    "headings": 4,
+    "kinds": {
+      "list": 1,
+      "paragraph": 6
+    }
+  },
+  "text": "Move-In/Out\nPurpose\nThis component enables you to process a customer move-in or move-out. In the case of a move-in, you can create a business partner and contract account for the customer, or select existing ones. The contracts are then created and allocated to a utility installation.\nIn a move-out, you terminate the customer's contract. If a new customer moves into the installation, the installation is allocated to this customer's contract.\nFor more information, see Move-In and Move-Out .\nIntegration\nLetters to the customer, such as welcome letters and move-out confirmations are created using the Print Workbench component. The SAP Business Workflow component (BC-BMT-WFM) enables you to monitor and configure the workflow processes.\nFeatures\nYou can have the system trigger a number of activities automatically. You can:\n- process the entire transaction immediately and in full.\n- create a final bill for the move-out customer.\n- create a welcome letter for the move-in customer.\nYou can also configure the screen layout to suit your requirements.",
+  "text_sha256": "699a8645b3c38cba320039264c20f387584802e5a0c1f9dd8f4fa2dbcf68fe20",
+  "title": "Move-In/Out",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 1056
+  }
+}

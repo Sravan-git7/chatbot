@@ -1,0 +1,194 @@
+{
+ "schema_version": 1,
+ "note": "latency in ms of the process/host that ran the evaluation (see results.run / ollama_environment.host)",
+ "configs": {
+  "baseline": {
+   "status": "RUN",
+   "latency_ms_real_routing": {
+    "route_ms": {
+     "median": 12.4,
+     "p95": 14.8,
+     "n": 113
+    },
+    "retrieve_ms": {
+     "median": 12.0,
+     "p95": 13.9,
+     "n": 79
+    },
+    "generate_ms": {
+     "median": 0.4,
+     "p95": 0.5,
+     "n": 60
+    },
+    "total_ms": {
+     "median": 29.2,
+     "p95": 34.5,
+     "n": 113
+    }
+   },
+   "latency_ms_oracle_routing": {
+    "route_ms": {
+     "median": 0.0,
+     "p95": 0.0,
+     "n": 81
+    },
+    "retrieve_ms": {
+     "median": 12.3,
+     "p95": 15.6,
+     "n": 80
+    },
+    "generate_ms": {
+     "median": 0.4,
+     "p95": 0.6,
+     "n": 71
+    },
+    "total_ms": {
+     "median": 18.1,
+     "p95": 21.0,
+     "n": 81
+    }
+   }
+  },
+  "evidence": {
+   "status": "RUN",
+   "latency_ms_real_routing": {
+    "route_ms": {
+     "median": 13.2,
+     "p95": 18.1,
+     "n": 113
+    },
+    "retrieve_ms": {
+     "median": 12.5,
+     "p95": 16.9,
+     "n": 79
+    },
+    "generate_ms": {
+     "median": 0.9,
+     "p95": 1.3,
+     "n": 60
+    },
+    "total_ms": {
+     "median": 30.5,
+     "p95": 40.2,
+     "n": 113
+    }
+   },
+   "latency_ms_oracle_routing": {
+    "route_ms": {
+     "median": 0.0,
+     "p95": 0.0,
+     "n": 81
+    },
+    "retrieve_ms": {
+     "median": 12.8,
+     "p95": 16.0,
+     "n": 80
+    },
+    "generate_ms": {
+     "median": 0.9,
+     "p95": 1.5,
+     "n": 71
+    },
+    "total_ms": {
+     "median": 19.8,
+     "p95": 23.8,
+     "n": 81
+    }
+   }
+  },
+  "ollama_raw": {
+   "status": "RUN",
+   "latency_ms_real_routing": {
+    "route_ms": {
+     "median": 24.1,
+     "p95": 42.9,
+     "n": 113
+    },
+    "retrieve_ms": {
+     "median": 20.5,
+     "p95": 37.0,
+     "n": 79
+    },
+    "generate_ms": {
+     "median": 435.0,
+     "p95": 1365.3,
+     "n": 60
+    },
+    "total_ms": {
+     "median": 329.1,
+     "p95": 873.1,
+     "n": 113
+    }
+   },
+   "latency_ms_oracle_routing": {
+    "route_ms": {
+     "median": 0.0,
+     "p95": 0.0,
+     "n": 81
+    },
+    "retrieve_ms": {
+     "median": 25.2,
+     "p95": 45.6,
+     "n": 80
+    },
+    "generate_ms": {
+     "median": 399.0,
+     "p95": 822.8,
+     "n": 71
+    },
+    "total_ms": {
+     "median": 416.2,
+     "p95": 765.4,
+     "n": 81
+    }
+   }
+  },
+  "ollama": {
+   "status": "RUN",
+   "latency_ms_real_routing": {
+    "route_ms": {
+     "median": 20.1,
+     "p95": 35.9,
+     "n": 113
+    },
+    "retrieve_ms": {
+     "median": 17.3,
+     "p95": 37.1,
+     "n": 79
+    },
+    "generate_ms": {
+     "median": 375.1,
+     "p95": 1360.9,
+     "n": 60
+    },
+    "total_ms": {
+     "median": 53.5,
+     "p95": 854.4,
+     "n": 113
+    }
+   },
+   "latency_ms_oracle_routing": {
+    "route_ms": {
+     "median": 0.0,
+     "p95": 0.0,
+     "n": 81
+    },
+    "retrieve_ms": {
+     "median": 18.1,
+     "p95": 34.3,
+     "n": 80
+    },
+    "generate_ms": {
+     "median": 361.1,
+     "p95": 671.3,
+     "n": 71
+    },
+    "total_ms": {
+     "median": 371.3,
+     "p95": 684.0,
+     "n": 81
+    }
+   }
+  }
+ }
+}

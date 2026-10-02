@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/f0fbc5536a51204be10000000a174cb4",
+  "topic_id": 17,
+  "topic_title": "Contract Accounts Overview",
+  "topic_ids": [
+    17
+  ],
+  "topic_refs": [
+    {
+      "topic_id": 17,
+      "topic_title": "Contract Accounts Overview",
+      "role": "descendant",
+      "via_doc_id": null,
+      "pdf_file": "17_Contract_Accounts_Overview.pdf"
+    }
+  ],
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "numeric_deliverable_id": "40374631",
+  "build_no": "1779",
+  "page_id": "f0fbc5536a51204be10000000a174cb4",
+  "file_path": "f0fbc5536a51204be10000000a174cb4.html",
+  "alias_file_paths": [],
+  "parent_page_id": "3efcc5536a51204be10000000a174cb4",
+  "toc_path": [
+    "Contract Accounts",
+    "Creating, Changing, and Displaying Contract Accounts",
+    "Creating, Changing and Displaying Locks"
+  ],
+  "depth": 2,
+  "page_title": "Creating, Changing and Displaying Locks",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/f0fbc5536a51204be10000000a174cb4.html",
+  "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/f0fbc5536a51204be10000000a174cb4.html",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/053.json",
+  "page_hash": "167402f03ef674276eb4c2c1384526a6e614484acda0d401b479dd23dbf5f981",
+  "content_hash": "6b3420adde973c7b56f461b7ab9ee0ef100433a457546a7c4489dba52b89c966",
+  "duplicate_of": null,
+  "duplicate_docs": [],
+  "text_raw": "Creating, Changing and Displaying Locks\nCreating, Changing and Displaying Locks\nIn the contract account master record, there is one process lock field for dunning, posting, invoicing, correspondence dunning, interest calculation, incoming payments, and outgoing payments respectively. You enter a lock reason in this field if you want to lock an account. You can set the lock for a limited period or set multiple locks for each business transaction.\nPrerequisites\nYou have maintained the lock reasons for dunning and payment in Customizing for Contract Accounts Receivable and Payable.\nProcedure\nCall up the contract account you want to change or display.\nEnter a lock reason in the\nLock On\nfield on the\nChange Contract Account: Dunning/Correspondence Data\nscreen for dunning control, incoming or outgoing payments.\nIf you want to set a lock for a limited period or if you want to set or display multiple locks, press the arrow key next to the\nLock\nfield.\nA dialog box appears where you can display or enter the lock interval or the lock itself. You can also display the lock history from this dialog box. Changes related to the locks are written in the lock history and are not logged with change documents.\nYou can change and delete locks in this dialog box.\nNote the following:\nIf you only specify one lock reason, the lock will be for an unlimited period of time.\nIf you only enter one lock reason, you can change or delete this. If multiple or limited-time locks have been set, press the arrow key to make changes. You can then make changes in the dialog box that appears.\nIf you have set multiple or limited-time locks, the\nLock\nfield contains a ~ . In this case, choose the arrow key to display the locks.\nResult\nThe contract account is locked for the business transaction selected either for a limited or unlimited amount of time, depending on the lock reason.",
+  "text": "Creating, Changing and Displaying Locks\nIn the contract account master record, there is one process lock field for dunning, posting, invoicing, correspondence dunning, interest calculation, incoming payments, and outgoing payments respectively. You enter a lock reason in this field if you want to lock an account. You can set the lock for a limited period or set multiple locks for each business transaction.\nPrerequisites\nYou have maintained the lock reasons for dunning and payment in Customizing for Contract Accounts Receivable and Payable.\nProcedure\nCall up the contract account you want to change or display.\nEnter a lock reason in the Lock On field on the Change Contract Account: Dunning/Correspondence Data screen for dunning control, incoming or outgoing payments.\nIf you want to set a lock for a limited period or if you want to set or display multiple locks, press the arrow key next to the Lock field.\nA dialog box appears where you can display or enter the lock interval or the lock itself. You can also display the lock history from this dialog box. Changes related to the locks are written in the lock history and are not logged with change documents.\nYou can change and delete locks in this dialog box.\nNote the following:\nIf you only specify one lock reason, the lock will be for an unlimited period of time.\nIf you only enter one lock reason, you can change or delete this. If multiple or limited-time locks have been set, press the arrow key to make changes. You can then make changes in the dialog box that appears.\nIf you have set multiple or limited-time locks, the Lock field contains a ~ . In this case, choose the arrow key to display the locks.\nResult\nThe contract account is locked for the business transaction selected either for a limited or unlimited amount of time, depending on the lock reason.",
+  "clean_stats": {
+    "title_duplicates_removed": 1,
+    "fragments_joined": 8,
+    "lines_in": 25,
+    "lines_out": 16
+  },
+  "status": "OK"
+}

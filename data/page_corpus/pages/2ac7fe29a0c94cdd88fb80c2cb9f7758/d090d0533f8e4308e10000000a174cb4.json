@@ -1,0 +1,90 @@
+{
+  "acquisition": {
+    "body_sha256": "a30adb38fe2cb14d4127fb07da10dd1a29a9bed89fb7c7796c8103fcca921bbe",
+    "build_no": null,
+    "deliverable_title": "Device Management",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/4_40374657_d090d0533f8e4308e10000000a174cb4.json",
+    "file_sha256": "03cff44915398e08cfeac918897d1e282de5f53e21ebed29df10fffbb1dde934",
+    "html_chars": 1271,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374657",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Estimation",
+        "Purpose"
+      ],
+      "kind": "paragraph",
+      "text": "This component allows you to estimate meter reading results automatically in the case of missing meter readings or implausible consumption."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Estimation",
+        "Implementation considerations"
+      ],
+      "kind": "paragraph",
+      "text": "This component is optional."
+    }
+  ],
+  "breadcrumb": [
+    "Reading Meters",
+    "Meter Reading Result",
+    "Estimation"
+  ],
+  "card": {
+    "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+    "card_page_id": "d090d0533f8e4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Meter Reading Estimation",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4",
+  "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+  "headings": [
+    "Estimation",
+    "Purpose",
+    "Implementation considerations"
+  ],
+  "html_title": "Estimation",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "d090d0533f8e4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-08"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 2,
+    "chrome_elements_removed": 0,
+    "headings": 3,
+    "kinds": {
+      "paragraph": 2
+    }
+  },
+  "text": "Estimation\nPurpose\nThis component allows you to estimate meter reading results automatically in the case of missing meter readings or implausible consumption.\nImplementation considerations\nThis component is optional.",
+  "text_sha256": "8de4e47d28ced7dc3f5ac9bced05eec0a7f27412c01bdb88b58635035fc46807",
+  "title": "Estimation",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 216
+  }
+}

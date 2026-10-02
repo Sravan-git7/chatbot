@@ -1,0 +1,29 @@
+{
+  "statement": "both files were written before any Phase 10 experiment; the TEST file is sealed and is evaluated once with the configuration selected on DEV",
+  "files": {
+    "dev": {
+      "file": "data/evaluation/phase10_dev_queries.json",
+      "sha256": "b7b1e51fbaa3e26b90576863ec74696ef7040143f5175f65409604e318af9d43",
+      "queries": 73,
+      "counts": {
+        "answerable": 41,
+        "absent_detail": 12,
+        "not_ingested": 8,
+        "unresolved_identity": 4,
+        "out_of_domain": 8
+      }
+    },
+    "test": {
+      "file": "data/evaluation/phase10_test_queries.json",
+      "sha256": "ffa46afa2628a8e82a4120e645e4355d6caa9304529cc477afb502357e2c6ad9",
+      "queries": 73,
+      "counts": {
+        "answerable": 41,
+        "absent_detail": 12,
+        "not_ingested": 8,
+        "unresolved_identity": 4,
+        "out_of_domain": 8
+      }
+    }
+  }
+}

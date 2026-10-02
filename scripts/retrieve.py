@@ -1,126 +1,24 @@
-import re
-import chromadb
-from sentence_transformers import SentenceTransformer
+"""Interactive retrieval check: show what the chatbot would retrieve.
 
-DB_DIR = "chroma_db"
-COLLECTION_NAME = "sap_docs"
+Usage (from the repository root):
+    python scripts/retrieve.py                      # 'improved' strategy
+    python scripts/retrieve.py --strategy baseline  # raw dense top-k
+"""
 
-# Retrieval configuration
-CANDIDATE_K = 10
+import argparse
+
+from rag_core import DEFAULT_STRATEGY, STRATEGIES, search
+
 TOP_K = 5
 
-# Maximum allowed cosine distance
-MAX_DISTANCE = 1.0
 
-print("Loading embedding model...")
-model = SentenceTransformer("all-MiniLM-L6-v2")
-
-client = chromadb.PersistentClient(path=DB_DIR)
-collection = client.get_collection(COLLECTION_NAME)
-
-print(f"Loaded {collection.count()} chunks.")
-
-
-def search(query, top_k=TOP_K):
-
-    query = query.strip()
-
-    if not query:
-        return []
-
-    # --------------------------------------------------
-    # 1. Create normalized query embedding
-    # --------------------------------------------------
-
-    query_embedding = model.encode(
-        [query],
-        normalize_embeddings=True
-    ).tolist()
-
-    # --------------------------------------------------
-    # 2. Retrieve candidate documents
-    # --------------------------------------------------
-
-    results = collection.query(
-        query_embeddings=query_embedding,
-        n_results=CANDIDATE_K,
-        include=[
-            "documents",
-            "metadatas",
-            "distances"
-        ]
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument(
+        "--strategy", choices=sorted(STRATEGIES), default=DEFAULT_STRATEGY
     )
-
-    candidates = []
-
-    # --------------------------------------------------
-    # 3. Convert distance → similarity score
-    # --------------------------------------------------
-
-    for doc, metadata, distance in zip(
-        results["documents"][0],
-        results["metadatas"][0],
-        results["distances"][0]
-    ):
-
-        if distance > MAX_DISTANCE:
-            continue
-
-        similarity = 1 - distance
-
-        title = metadata.get("title", "")
-        url = metadata.get("url", "")
-
-        candidates.append({
-            "document": doc,
-            "metadata": metadata,
-            "distance": distance,
-            "score": similarity
-        })
-
-    # --------------------------------------------------
-    # 4. Remove duplicate documents
-    # --------------------------------------------------
-
-    seen = set()
-    unique = []
-
-    for item in candidates:
-
-        metadata = item["metadata"]
-
-        title = metadata.get("title", "").strip().lower()
-        url = metadata.get("url", "").strip()
-
-        # Prefer URL as the document identity
-        if url:
-            key = url
-        else:
-            key = title
-
-        if key in seen:
-            continue
-
-        seen.add(key)
-        unique.append(item)
-
-    # --------------------------------------------------
-    # 5. Sort by similarity
-    # --------------------------------------------------
-
-    unique.sort(
-        key=lambda x: x["score"],
-        reverse=True
-    )
-
-    # --------------------------------------------------
-    # 6. Return strongest results
-    # --------------------------------------------------
-
-    return unique[:top_k]
-
-
-if __name__ == "__main__":
+    parser.add_argument("--top-k", type=int, default=TOP_K)
+    args = parser.parse_args()
 
     query = input("Ask: ").strip()
 
@@ -128,36 +26,24 @@ if __name__ == "__main__":
         print("Please enter a question.")
         raise SystemExit
 
-    results = search(query)
+    results = search(query, top_k=args.top_k, strategy=args.strategy)
 
-    print(f"\nFound {len(results)} relevant results.")
+    print(f"\nFound {len(results)} relevant results (strategy={args.strategy}).")
 
     for i, result in enumerate(results, start=1):
-
         metadata = result["metadata"]
 
         print(f"\n--- Result {i} ---")
-
-        print(
-            "Title:",
-            metadata.get("title", "Unknown")
-        )
-
-        print(
-            "Distance:",
-            round(result["distance"], 4)
-        )
-
-        print(
-            "Score:",
-            round(result["score"], 4)
-        )
-
-        print(
-            "URL:",
-            metadata.get("url", "")
-        )
-
+        print("Title:", metadata.get("title", "Unknown"))
+        # ChromaDB distance is squared L2 (lower = closer), NOT cosine distance.
+        print("Distance (squared L2):", round(result["distance"], 4))
+        print("Cosine similarity:", round(result["cosine"], 4))
+        if "final_score" in result:
+            print("Final score:", round(result["final_score"], 4))
+        print("URL:", metadata.get("url", ""))
         print()
-
         print(result["document"])
+
+
+if __name__ == "__main__":
+    main()

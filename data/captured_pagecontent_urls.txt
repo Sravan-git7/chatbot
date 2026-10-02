@@ -1,0 +1,9 @@
+# Browser-captured SAP Help pagecontent requests (as supplied; '&amp;' un-escaped). One URL per line.
+# Order = order supplied. Identity of each is decided by scripts/guide_intake.py capture, never by position.
+https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=8990d0533f8e4308e10000000a174cb4.html
+https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=8082ce53118d4308e10000000a174cb4.html
+https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=4d76765c1e012b8ae10000000a42189b.html
+https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40404052&buildNo=78&file_path=147bce53118d4308e10000000a174cb4.html
+https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374633&buildNo=1779&file_path=cc7bce53118d4308e10000000a174cb4.html
+https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=790dc5536a51204be10000000a174cb4.html
+https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374490&buildNo=1779&file_path=b1a202c9bb3011da2b24000f20dac9ef.html

@@ -1,0 +1,174 @@
+{
+  "evidence_mode": "response_loio (saved responses: captured_responses)",
+  "urls_file": "captured_pagecontent_urls.txt",
+  "rows": [
+    {
+      "n": 1,
+      "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=8990d0533f8e4308e10000000a174cb4.html",
+      "numeric_id": "40374657",
+      "build_no": "1779",
+      "file_path": "8990d0533f8e4308e10000000a174cb4.html",
+      "page_id": "8990d0533f8e4308e10000000a174cb4",
+      "card_matches": [
+        {
+          "topic_id": 5,
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "title": "Device Management Overview"
+        }
+      ],
+      "response_loio": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "response_page_loio": "8990d0533f8e4308e10000000a174cb4",
+      "toc_nodes": 7,
+      "guide_id": null,
+      "evidence": null,
+      "decision": "CARD_MISMATCH",
+      "reason": "response loio 2ac7fe29 but the card(s) carrying this page id [5] name guide(s) ['021b182b']; identity not confirmed, nothing registered for this URL",
+      "page_in_toc": true,
+      "response_source": "saved_response"
+    },
+    {
+      "n": 2,
+      "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=8082ce53118d4308e10000000a174cb4.html",
+      "numeric_id": "40374682",
+      "build_no": "1779",
+      "file_path": "8082ce53118d4308e10000000a174cb4.html",
+      "page_id": "8082ce53118d4308e10000000a174cb4",
+      "card_matches": [
+        {
+          "topic_id": 2,
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "title": "Move-In/Out Overview"
+        }
+      ],
+      "response_loio": "f4a255a5de524e3992155767996fb1fd",
+      "response_page_loio": "8082ce53118d4308e10000000a174cb4",
+      "toc_nodes": 6,
+      "guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "evidence": "response_loio",
+      "decision": "MAPPED",
+      "reason": "response deliverable.loio == f4a255a5de524e3992155767996fb1fd, currentPage == requested page, card(s) [2] agree",
+      "page_in_toc": true,
+      "response_source": "saved_response"
+    },
+    {
+      "n": 3,
+      "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=4d76765c1e012b8ae10000000a42189b.html",
+      "numeric_id": "40374657",
+      "build_no": "1779",
+      "file_path": "4d76765c1e012b8ae10000000a42189b.html",
+      "page_id": "4d76765c1e012b8ae10000000a42189b",
+      "card_matches": [
+        {
+          "topic_id": 7,
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "title": "Monitoring Meter Reading Results"
+        }
+      ],
+      "response_loio": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "response_page_loio": "4d76765c1e012b8ae10000000a42189b",
+      "toc_nodes": 7,
+      "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "evidence": "response_loio",
+      "decision": "MAPPED",
+      "reason": "response deliverable.loio == 2ac7fe29a0c94cdd88fb80c2cb9f7758, currentPage == requested page, card(s) [7] agree",
+      "page_in_toc": true,
+      "response_source": "saved_response"
+    },
+    {
+      "n": 4,
+      "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40404052&buildNo=78&file_path=147bce53118d4308e10000000a174cb4.html",
+      "numeric_id": "40404052",
+      "build_no": "78",
+      "file_path": "147bce53118d4308e10000000a174cb4.html",
+      "page_id": "147bce53118d4308e10000000a174cb4",
+      "card_matches": [
+        {
+          "topic_id": 11,
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "title": "SAP Utilities Billing Procedure"
+        }
+      ],
+      "response_loio": "ed84b70c199d4470ae2e5ccb93b2e45b",
+      "response_page_loio": "147bce53118d4308e10000000a174cb4",
+      "toc_nodes": 7,
+      "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+      "evidence": "response_loio",
+      "decision": "MAPPED",
+      "reason": "response deliverable.loio == ed84b70c199d4470ae2e5ccb93b2e45b, currentPage == requested page, card(s) [11] agree",
+      "page_in_toc": true,
+      "response_source": "saved_response"
+    },
+    {
+      "n": 5,
+      "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374633&buildNo=1779&file_path=cc7bce53118d4308e10000000a174cb4.html",
+      "numeric_id": "40374633",
+      "build_no": "1779",
+      "file_path": "cc7bce53118d4308e10000000a174cb4.html",
+      "page_id": "cc7bce53118d4308e10000000a174cb4",
+      "card_matches": [
+        {
+          "topic_id": 14,
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "title": "SAP Utilities Invoicing Procedure"
+        }
+      ],
+      "response_loio": "a003b275c98148ee8a4c3fafe9588fe3",
+      "response_page_loio": "cc7bce53118d4308e10000000a174cb4",
+      "toc_nodes": 3,
+      "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+      "evidence": "response_loio",
+      "decision": "MAPPED",
+      "reason": "response deliverable.loio == a003b275c98148ee8a4c3fafe9588fe3, currentPage == requested page, card(s) [14] agree",
+      "page_in_toc": true,
+      "response_source": "saved_response"
+    },
+    {
+      "n": 6,
+      "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=790dc5536a51204be10000000a174cb4.html",
+      "numeric_id": "40374790",
+      "build_no": "1779",
+      "file_path": "790dc5536a51204be10000000a174cb4.html",
+      "page_id": "790dc5536a51204be10000000a174cb4",
+      "card_matches": [
+        {
+          "topic_id": 24,
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "title": "Creating Installment Plans"
+        }
+      ],
+      "response_loio": "9442486404b54071b4ebeab6a16628e7",
+      "response_page_loio": "790dc5536a51204be10000000a174cb4",
+      "toc_nodes": 1,
+      "guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "evidence": "response_loio",
+      "decision": "MAPPED",
+      "reason": "response deliverable.loio == 9442486404b54071b4ebeab6a16628e7, currentPage == requested page, card(s) [24] agree",
+      "page_in_toc": true,
+      "response_source": "saved_response"
+    },
+    {
+      "n": 7,
+      "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374490&buildNo=1779&file_path=b1a202c9bb3011da2b24000f20dac9ef.html",
+      "numeric_id": "40374490",
+      "build_no": "1779",
+      "file_path": "b1a202c9bb3011da2b24000f20dac9ef.html",
+      "page_id": "b1a202c9bb3011da2b24000f20dac9ef",
+      "card_matches": [
+        {
+          "topic_id": 18,
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "title": "Contract Account Business Object"
+        }
+      ],
+      "response_loio": "e4375c1cad104b2eb7d027369bd76638",
+      "response_page_loio": "b1a202c9bb3011da2b24000f20dac9ef",
+      "toc_nodes": 22,
+      "guide_id": null,
+      "evidence": null,
+      "decision": "NOT_A_CARD_GUIDE",
+      "reason": "response loio e4375c1cad104b2eb7d027369bd76638 is not referenced by any of the 29 cards; not registered",
+      "page_in_toc": true,
+      "response_source": "saved_response"
+    }
+  ]
+}

@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "phase": "14",
+  "experiment": "Retrieval Recall Candidate Depth Evaluation",
+  "queries_sha256": "3c5a9ddd2d62e9cb1919a4fbb7c81cd5239994ff230abbbe6440fb6fa5c132ac",
+  "model": "llama3.2:3b",
+  "depths": [
+    5,
+    10,
+    15
+  ],
+  "results_by_depth": {
+    "5": {
+      "router_metrics": {
+        "all_gold_r1": 0.7333,
+        "all_gold_r3": 0.8,
+        "all_gold_r5": 0.8571,
+        "all_gold_in_pool_rate": 0.8571,
+        "all_gold_in_pool_count": 90,
+        "answerable_r1": 0.7692,
+        "answerable_r1_count": 50,
+        "answerable_in_pool_rate": 0.8154,
+        "answerable_in_pool_count": 53
+      },
+      "guarded_ollama": {
+        "answerable_correct": 30,
+        "oracle_correct": 38,
+        "real_vs_oracle_gap": 8,
+        "wrong_page_answers": 1,
+        "unsupported_answered": 6,
+        "absent_detail_answered": 0,
+        "citation_evidence_failures": 2,
+        "grounding_failures": 0,
+        "phantom_citations": 0,
+        "generator_errors": 0
+      },
+      "extractive": {
+        "answerable_correct": 41
+      },
+      "latency": {
+        "route_median_ms": 53.48,
+        "route_mean_ms": 60.12,
+        "rerank_median_ms": 20.49,
+        "rerank_mean_ms": 22.91,
+        "total_pipeline_median_ms": 414.2
+      }
+    },
+    "10": {
+      "router_metrics": {
+        "all_gold_r1": 0.7619,
+        "all_gold_r3": 0.8476,
+        "all_gold_r5": 0.8476,
+        "all_gold_in_pool_rate": 0.9048,
+        "all_gold_in_pool_count": 95,
+        "answerable_r1": 0.8154,
+        "answerable_r1_count": 53,
+        "answerable_in_pool_rate": 0.8769,
+        "answerable_in_pool_count": 57
+      },
+      "guarded_ollama": {
+        "answerable_correct": 31,
+        "oracle_correct": 38,
+        "real_vs_oracle_gap": 7,
+        "wrong_page_answers": 1,
+        "unsupported_answered": 6,
+        "absent_detail_answered": 0,
+        "citation_evidence_failures": 2,
+        "grounding_failures": 0,
+        "phantom_citations": 0,
+        "generator_errors": 0
+      },
+      "extractive": {
+        "answerable_correct": 43
+      },
+      "latency": {
+        "route_median_ms": 256.73,
+        "route_mean_ms": 195.84,
+        "rerank_median_ms": 110.32,
+        "rerank_mean_ms": 87.88,
+        "total_pipeline_median_ms": 442.5
+      }
+    },
+    "15": {
+      "router_metrics": {
+        "all_gold_r1": 0.7714,
+        "all_gold_r3": 0.8667,
+        "all_gold_r5": 0.8667,
+        "all_gold_in_pool_rate": 0.9238,
+        "all_gold_in_pool_count": 97,
+        "answerable_r1": 0.8462,
+        "answerable_r1_count": 55,
+        "answerable_in_pool_rate": 0.9077,
+        "answerable_in_pool_count": 59
+      },
+      "guarded_ollama": {
+        "answerable_correct": 33,
+        "oracle_correct": 38,
+        "real_vs_oracle_gap": 5,
+        "wrong_page_answers": 2,
+        "unsupported_answered": 6,
+        "absent_detail_answered": 0,
+        "citation_evidence_failures": 2,
+        "grounding_failures": 0,
+        "phantom_citations": 0,
+        "generator_errors": 0
+      },
+      "extractive": {
+        "answerable_correct": 45
+      },
+      "latency": {
+        "route_median_ms": 63.22,
+        "route_mean_ms": 63.51,
+        "rerank_median_ms": 33.12,
+        "rerank_mean_ms": 33.47,
+        "total_pipeline_median_ms": 463.6
+      }
+    }
+  },
+  "gap_8_analysis": [
+    {
+      "id": "P12-002",
+      "query": "What does transaction ELDM display?",
+      "gold_card": "M2C-07",
+      "initial_dense_rank": 21,
+      "by_depth": {
+        "5": {
+          "in_pool": false,
+          "selected_card": "M2C-25",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "10": {
+          "in_pool": false,
+          "selected_card": "M2C-25",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "15": {
+          "in_pool": false,
+          "selected_card": "M2C-25",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        }
+      }
+    },
+    {
+      "id": "P12-007",
+      "query": "Which indicator sets the clearing priority of original items?",
+      "gold_card": "M2C-24",
+      "initial_dense_rank": 25,
+      "by_depth": {
+        "5": {
+          "in_pool": false,
+          "selected_card": "M2C-20",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "10": {
+          "in_pool": false,
+          "selected_card": "M2C-20",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "15": {
+          "in_pool": false,
+          "selected_card": "M2C-20",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        }
+      }
+    },
+    {
+      "id": "P12-013",
+      "query": "Through which component are letters such as move-out confirmations generated?",
+      "gold_card": "M2C-02",
+      "initial_dense_rank": 12,
+      "by_depth": {
+        "5": {
+          "in_pool": false,
+          "selected_card": "M2C-04",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "10": {
+          "in_pool": false,
+          "selected_card": "M2C-04",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "15": {
+          "in_pool": true,
+          "selected_card": "M2C-02",
+          "status": "answered",
+          "correct": true,
+          "answer": "Letters such as move-out confirmations are generated using the Print Workbench component, [S2]."
+        }
+      }
+    },
+    {
+      "id": "P12-027",
+      "query": "What is the business function ISU_AMI_1 required for?",
+      "gold_card": "M2C-07",
+      "initial_dense_rank": 25,
+      "by_depth": {
+        "5": {
+          "in_pool": false,
+          "selected_card": "M2C-05",
+          "status": "answered",
+          "correct": false,
+          "answer": "The business function ISU_AMI_1 is required for advanced metering infrastructure. [S1]"
+        },
+        "10": {
+          "in_pool": false,
+          "selected_card": "M2C-05",
+          "status": "answered",
+          "correct": false,
+          "answer": "The business function ISU_AMI_1 is required for advanced metering infrastructure. [S1]"
+        },
+        "15": {
+          "in_pool": false,
+          "selected_card": "M2C-05",
+          "status": "answered",
+          "correct": false,
+          "answer": "The business function ISU_AMI_1 is required for advanced metering infrastructure. [S1]"
+        }
+      }
+    },
+    {
+      "id": "P12-034",
+      "query": "Which component monitors the workflow processes of move-in and move-out?",
+      "gold_card": "M2C-02",
+      "initial_dense_rank": 4,
+      "by_depth": {
+        "5": {
+          "in_pool": true,
+          "selected_card": "M2C-03",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "10": {
+          "in_pool": true,
+          "selected_card": "M2C-03",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "15": {
+          "in_pool": true,
+          "selected_card": "M2C-03",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        }
+      }
+    },
+    {
+      "id": "P12-038",
+      "query": "Which business function is required to carry out quantity determination from the results list?",
+      "gold_card": "M2C-07",
+      "initial_dense_rank": 6,
+      "by_depth": {
+        "5": {
+          "in_pool": false,
+          "selected_card": "M2C-09",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "10": {
+          "in_pool": true,
+          "selected_card": "M2C-07",
+          "status": "answered",
+          "correct": true,
+          "answer": "The business function Utilities, Quantity Determination ( ISU_QD_1 ) is required to carry out quantity determination from the results list. [S4]"
+        },
+        "15": {
+          "in_pool": true,
+          "selected_card": "M2C-07",
+          "status": "answered",
+          "correct": true,
+          "answer": "The business function Utilities, Quantity Determination ( ISU_QD_1 ) is required to carry out quantity determination from the results list. [S4]"
+        }
+      }
+    },
+    {
+      "id": "P12-041",
+      "query": "Where in Customizing is the clearing priority indicator made available?",
+      "gold_card": "M2C-24",
+      "initial_dense_rank": 26,
+      "by_depth": {
+        "5": {
+          "in_pool": false,
+          "selected_card": "M2C-21",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "10": {
+          "in_pool": false,
+          "selected_card": "M2C-21",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "15": {
+          "in_pool": false,
+          "selected_card": "M2C-21",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        }
+      }
+    },
+    {
+      "id": "P12-042",
+      "query": "Which component abbreviation covers purchase requisitions and purchase orders?",
+      "gold_card": "M2C-05",
+      "initial_dense_rank": 14,
+      "by_depth": {
+        "5": {
+          "in_pool": false,
+          "selected_card": "M2C-17",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "10": {
+          "in_pool": false,
+          "selected_card": "M2C-17",
+          "status": "insufficient_context",
+          "correct": false,
+          "answer": null
+        },
+        "15": {
+          "in_pool": true,
+          "selected_card": "M2C-05",
+          "status": "answered",
+          "correct": true,
+          "answer": "The component abbreviation that covers purchase requisitions and purchase orders is MM-PUR. [S3]"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+ "schema_version": 1,
+ "purpose": "pages that must be copied from an environment that can reach help.sap.com; saved by a human decision (robots.txt of help.sap.com was last saved as Disallow: / for generic agents)",
+ "count": 0,
+ "validator": "python scripts/phase12_import_pages.py --from-dir <folder>",
+ "items": []
+}

@@ -1,0 +1,1410 @@
+{
+  "schema_version": 1,
+  "description": "Phase 10 TEST queries - sealed; one evaluation with the DEV-selected configuration",
+  "authorship": {
+    "authored_by": "AI coding assistant, after reading the 7 ingested pages; not a human domain expert; no LLM generation at runtime",
+    "caveat": "not blind; design-aware of Phase 9 failures; n is small so every rate has a wide interval",
+    "written_before_experiments": true,
+    "labels_changed_after_retrieval": false,
+    "authored_on": "2026-10-01"
+  },
+  "preregistered": {
+    "declared_in": "data/phase10_contract.md",
+    "declared_before_experiments": true,
+    "no_tuning_on_test": true,
+    "test_evaluated_with_the_configuration_selected_on_dev_only": true,
+    "phase8_and_phase9_sets_are_regression_references_only": true
+  },
+  "counts": {
+    "answerable": 41,
+    "absent_detail": 12,
+    "not_ingested": 8,
+    "unresolved_identity": 4,
+    "out_of_domain": 8
+  },
+  "facet_counts": {
+    "entity": 4,
+    "keyword": 4,
+    "multi_concept": 3,
+    "natural": 41,
+    "paraphrase": 7,
+    "rare_term": 3,
+    "section_specific": 4,
+    "sibling_ambiguous": 3,
+    "terminology_mismatch": 4
+  },
+  "corpus_sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d",
+  "queries": [
+    {
+      "id": "P10T-001",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How do I find out which readings failed to post after an upload?",
+      "type": "answerable",
+      "facet": "terminology_mismatch",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "display the successfully and unsuccessfully posted meter reading documents after uploading discrete meter reading data"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-002",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Does starting from premises show billing orders?",
+      "type": "answerable",
+      "facet": "entity",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Contract, Installation, Business Partner, or Premise"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-003",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "ISU_AMI_1 prerequisite",
+      "type": "answerable",
+      "facet": "rare_term",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Advanced Metering Infrastructure ( ISU_AMI_1 )"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 0
+    },
+    {
+      "id": "P10T-004",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What is the purpose of EL32?",
+      "type": "answerable",
+      "facet": "paraphrase",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "monitor meter reading data and trigger automatic follow-on processing for selected meter reading orders"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-005",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which menu path leads to the reading monitoring transactions?",
+      "type": "answerable",
+      "facet": "section_specific",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Utilities Industry menu under Device Management > Meter Reading > Monitoring"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-006",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "summarized list grouped by date",
+      "type": "answerable",
+      "facet": "keyword",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "At first the system displays a summarized list grouped by date (meter reading date, billing date)"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-007",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What does the device category correspond to in the standard system?",
+      "type": "answerable",
+      "facet": "natural",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Name in IS-U: Device Category; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Material"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-008",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Does the equipment number change between components?",
+      "type": "answerable",
+      "facet": "natural",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "The equipment number is the same throughout the system."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-009",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How can scrapped or sold meters be handled in the flow of devices?",
+      "type": "answerable",
+      "facet": "terminology_mismatch",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Function: Outward Movement (such as scrapping or sales); Component: Goods Issue and Return Delivery from MM-IM"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-010",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What does the See Also list say about equipment?",
+      "type": "answerable",
+      "facet": "section_specific",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "PM: Equipment"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-011",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "advanced metering infrastructure information",
+      "type": "answerable",
+      "facet": "keyword",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "you can find more information under Advanced Metering Infrastructure"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-012",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which technical data does device management cover?",
+      "type": "answerable",
+      "facet": "paraphrase",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "This component manages technical data, installations, meter readings, and the inspection of devices."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-013",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How is the installment amount worked out from the rounding amount and the number of installments?",
+      "type": "answerable",
+      "facet": "multi_concept",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "The installment amount is calculated from the total sum of the original receivables, the rounding amount, and the number of installments."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-014",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What makes the system split interest across all due dates?",
+      "type": "answerable",
+      "facet": "terminology_mismatch",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "If you set the Distribute indicator, the interest and charges are distributed over all of the due dates."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-015",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "In which situation should I create an installment plan?",
+      "type": "answerable",
+      "facet": "natural",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "The business partner is unable to meet his/her payment obligations in accordance with the usual payment rules."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-016",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What default values can I copy into the first screen?",
+      "type": "answerable",
+      "facet": "paraphrase",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "You can either copy default values to the initial screen using the Installment Plan Type or enter the installment plan parameters manually."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-017",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "event 3000",
+      "type": "answerable",
+      "facet": "entity",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "by defining event 3000 accordingly"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 0
+    },
+    {
+      "id": "P10T-018",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which balances are shown at the bottom right of the proposal?",
+      "type": "answerable",
+      "facet": "section_specific",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "a table appears with the most important account balances (such as open amount, due amount, installment plan, credit)"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-019",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "inflation surcharge",
+      "type": "answerable",
+      "facet": "rare_term",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Create or delete an installment plan surcharge and/or an inflation surcharge"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 0
+    },
+    {
+      "id": "P10T-020",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What must exist before billing documents can be invoiced?",
+      "type": "answerable",
+      "facet": "natural",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Billing documents from the Contract Billing (IS-U-BI) component, or budget billing plans, which are managed in the Budget Billing Plan component must exist if billing is to take place."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-021",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How are several contracts put on one bill?",
+      "type": "answerable",
+      "facet": "paraphrase",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "The contracts of a contract account are grouped together in invoicing for the joint bill."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-022",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which function lets me simulate a bill without posting?",
+      "type": "answerable",
+      "facet": "natural",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "simulate the bill using the Print Document Display function"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-023",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What does bill reversal create in FI-CA?",
+      "type": "answerable",
+      "facet": "entity",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "you create a reverse document in FI-CA"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-024",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "output type print parameter",
+      "type": "answerable",
+      "facet": "keyword",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "you specify the output type as a print parameter"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-025",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "invoicing and contract accounting link",
+      "type": "answerable",
+      "facet": "multi_concept",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Invoicing creates the link to contract accounting and provides the basis for bill creation."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-026",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What can be defined for each business partner in the account record?",
+      "type": "answerable",
+      "facet": "natural",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "you can define, for each business partner, the procedures that apply when posting and processing the line items"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-027",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Are changes to contract account master data recorded?",
+      "type": "answerable",
+      "facet": "paraphrase",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "The system logs changes to master data."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-028",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How are insurance contracts allocated to contract accounts?",
+      "type": "answerable",
+      "facet": "section_specific",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Each contract is only assigned to one contract account, however one contract account may have several contracts assigned to it."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-029",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What are one-time accounts an exception to?",
+      "type": "answerable",
+      "facet": "entity",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "This does not apply to one-time accounts."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-030",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "open item basis",
+      "type": "answerable",
+      "facet": "keyword",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Contract accounts tend to be managed on an open item basis."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-031",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which tax types can a public sector contract account cover?",
+      "type": "answerable",
+      "facet": "terminology_mismatch",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "(property tax, income tax, and so on)"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-032",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which master data may change during a billing period?",
+      "type": "answerable",
+      "facet": "natural",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "All master and billing master data can change during a billing period."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-033",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How does billing split the consumption for subperiods?",
+      "type": "answerable",
+      "facet": "paraphrase",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "The system also divides the total consumption, which produces the corresponding partial amount."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-034",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "load profiles",
+      "type": "answerable",
+      "facet": "rare_term",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "Billing uses meter reading results or load profiles"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 0
+    },
+    {
+      "id": "P10T-035",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which activities can the system trigger automatically at move-out?",
+      "type": "answerable",
+      "facet": "natural",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "create a final bill for the move-out customer."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-036",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Can I process a move-in completely in a single step?",
+      "type": "answerable",
+      "facet": "paraphrase",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "process the entire transaction immediately and in full."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-037",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How are workflow processes for moves monitored?",
+      "type": "answerable",
+      "facet": "natural",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "enables you to monitor and configure the workflow processes"
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-038",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "business partner and contract account for a new tenant",
+      "type": "answerable",
+      "facet": "multi_concept",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [
+        "you can create a business partner and contract account for the customer, or select existing ones."
+      ],
+      "expected_status": "answered",
+      "notes": "",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-039",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "billing procedure basics",
+      "type": "answerable",
+      "facet": "sibling_ambiguous",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [
+        "M2C-12"
+      ],
+      "evidence": [
+        "Billing uses meter reading results or load profiles to determine the evaluation basis for schema execution."
+      ],
+      "expected_status": "answered",
+      "notes": "sibling ambiguity by design",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-040",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "invoicing",
+      "type": "answerable",
+      "facet": "sibling_ambiguous",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [
+        "M2C-16",
+        "M2C-11"
+      ],
+      "evidence": [
+        "Invoicing creates the link to contract accounting and provides the basis for bill creation."
+      ],
+      "expected_status": "answered",
+      "notes": "sibling ambiguity by design",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-041",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "contract account overview",
+      "type": "answerable",
+      "facet": "sibling_ambiguous",
+      "answerability": "answerable_from_local_page",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [
+        "M2C-18"
+      ],
+      "evidence": [
+        "This component enables you to create and manage contract account master data."
+      ],
+      "expected_status": "answered",
+      "notes": "sibling ambiguity by design",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-042",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What is the maximum date range for EL31 selections?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "maximum"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-043",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which transaction code lists meter reading orders by status?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "EL28"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 3
+    },
+    {
+      "id": "P10T-044",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Can I export the monitoring list to a spreadsheet?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "spreadsheet"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-045",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How many device categories does the standard system ship with?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "ship"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-046",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Who is responsible for scrapping a defective meter?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "responsible"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-047",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What is the default installment interval?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "default interval"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-048",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Does an installment plan stop dunning?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "dunning"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-049",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How long are print documents kept?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "retention"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-050",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which tax is shown on the bill?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "tax"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-051",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What is the maximum length of a contract account number?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "maximum length"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-052",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which transaction starts a single billing run?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "EA11"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-053",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Can a move-in be reversed after it was saved?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "answerability": "not_answerable_detail_absent_from_page",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "absent_terms": [
+        "revers"
+      ],
+      "expected_status": "insufficient_context",
+      "notes": "topic is on the page, the asked detail is not",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-054",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What is the sequence of dunning notices sent to a late payer?",
+      "type": "not_ingested",
+      "facet": "natural",
+      "answerability": "not_answerable_page_not_in_local_corpus",
+      "gold_source_id": "M2C-26",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "page_not_ingested",
+      "notes": "page exists on SAP Help but is not in the local corpus",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-055",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Which receivables can be submitted to an external collector?",
+      "type": "not_ingested",
+      "facet": "natural",
+      "answerability": "not_answerable_page_not_in_local_corpus",
+      "gold_source_id": "M2C-27",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [
+        "M2C-28"
+      ],
+      "evidence": [],
+      "expected_status": "page_not_ingested",
+      "notes": "page exists on SAP Help but is not in the local corpus",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-056",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What steps restore supply after a disconnection?",
+      "type": "not_ingested",
+      "facet": "natural",
+      "answerability": "not_answerable_page_not_in_local_corpus",
+      "gold_source_id": "M2C-29",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "page_not_ingested",
+      "notes": "page exists on SAP Help but is not in the local corpus",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-057",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How can I shorten or extend an existing instalment arrangement?",
+      "type": "not_ingested",
+      "facet": "natural",
+      "answerability": "not_answerable_page_not_in_local_corpus",
+      "gold_source_id": "M2C-25",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [
+        "M2C-24",
+        "M2C-23"
+      ],
+      "evidence": [],
+      "expected_status": "page_not_ingested",
+      "notes": "page exists on SAP Help but is not in the local corpus",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-058",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How is the clearing control configured for incoming payments?",
+      "type": "not_ingested",
+      "facet": "natural",
+      "answerability": "not_answerable_page_not_in_local_corpus",
+      "gold_source_id": "M2C-20",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [
+        "M2C-21"
+      ],
+      "evidence": [],
+      "expected_status": "page_not_ingested",
+      "notes": "page exists on SAP Help but is not in the local corpus",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-059",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How are lockbox or cash desk payments recorded?",
+      "type": "not_ingested",
+      "facet": "natural",
+      "answerability": "not_answerable_page_not_in_local_corpus",
+      "gold_source_id": "M2C-22",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [
+        "M2C-19"
+      ],
+      "evidence": [],
+      "expected_status": "page_not_ingested",
+      "notes": "page exists on SAP Help but is not in the local corpus",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-060",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What is the difference between the estimation methods for missing readings?",
+      "type": "not_ingested",
+      "facet": "natural",
+      "answerability": "not_answerable_page_not_in_local_corpus",
+      "gold_source_id": "M2C-09",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [
+        "M2C-08"
+      ],
+      "evidence": [],
+      "expected_status": "page_not_ingested",
+      "notes": "page exists on SAP Help but is not in the local corpus",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-061",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What do I need to do to set up a new customer in a house that was vacant?",
+      "type": "not_ingested",
+      "facet": "natural",
+      "answerability": "not_answerable_page_not_in_local_corpus",
+      "gold_source_id": "M2C-03",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [
+        "M2C-02"
+      ],
+      "evidence": [],
+      "expected_status": "page_not_ingested",
+      "notes": "page exists on SAP Help but is not in the local corpus",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-062",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What attributes describe a contract account as an object?",
+      "type": "unresolved_identity",
+      "facet": "natural",
+      "answerability": "not_answerable_identity_unresolved",
+      "gold_source_id": "M2C-18",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "unresolved_identity",
+      "notes": "conflicting or identity-only card (7C)",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-063",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How is the monthly instalment for budget billing determined?",
+      "type": "unresolved_identity",
+      "facet": "natural",
+      "answerability": "not_answerable_identity_unresolved",
+      "gold_source_id": "M2C-13",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "unresolved_identity",
+      "notes": "conflicting or identity-only card (7C)",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-064",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How can I analyse invoicing runs over time?",
+      "type": "unresolved_identity",
+      "facet": "natural",
+      "answerability": "not_answerable_identity_unresolved",
+      "gold_source_id": "M2C-16",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "unresolved_identity",
+      "notes": "conflicting or identity-only card (7C)",
+      "max_card_phrase_run_words": 1
+    },
+    {
+      "id": "P10T-065",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How are connection objects and premises structured?",
+      "type": "unresolved_identity",
+      "facet": "natural",
+      "answerability": "not_answerable_identity_unresolved",
+      "gold_source_id": "M2C-01",
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "unresolved_identity",
+      "notes": "conflicting or identity-only card (7C)",
+      "max_card_phrase_run_words": 2
+    },
+    {
+      "id": "P10T-066",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "What time does the sun set in Paris?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "answerability": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "notes": ""
+    },
+    {
+      "id": "P10T-067",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Give me a recipe for vegetable curry.",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "answerability": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "notes": ""
+    },
+    {
+      "id": "P10T-068",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How do I apply conditional formatting in Excel?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "answerability": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "notes": ""
+    },
+    {
+      "id": "P10T-069",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How does public key cryptography work?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "answerability": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "notes": ""
+    },
+    {
+      "id": "P10T-070",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How do I configure SAP HANA database backups?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "answerability": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "notes": ""
+    },
+    {
+      "id": "P10T-071",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Who painted the Mona Lisa?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "answerability": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "notes": ""
+    },
+    {
+      "id": "P10T-072",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "How should I prepare for a job interview?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "answerability": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "notes": ""
+    },
+    {
+      "id": "P10T-073",
+      "authorship": "AI coding assistant (not blind; not a domain expert; design-aware of Phase 9 failures)",
+      "authored_phase": 10,
+      "authored_on": "2026-10-01",
+      "query": "Translate good morning into Spanish.",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "answerability": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "acceptable_source_ids": [],
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "notes": ""
+    }
+  ]
+}

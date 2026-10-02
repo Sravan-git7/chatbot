@@ -1,0 +1,5292 @@
+{
+  "checks": [
+    {
+      "check": "query file sha256 recorded and counts match the file's own header",
+      "detail": {
+        "7f_ambiguous": 8,
+        "7f_in_domain": 40,
+        "7f_ood": 62,
+        "legacy_ood": 5,
+        "phase4": 50,
+        "phase5": 54
+      },
+      "ok": true
+    },
+    {
+      "check": "every query routed with 29 candidates; rank-1 similarity == 1 - rank-1 distance (to 6 dp)",
+      "detail": null,
+      "ok": true
+    },
+    {
+      "check": "Phase 4 and Phase 5 rankings, expected ranks and metrics equal the Phase 7E results (which equal the recorded ones)",
+      "detail": null,
+      "ok": true
+    },
+    {
+      "check": "default min_cosine is None (and the verdict sets a value only if the rule is satisfied)",
+      "detail": null,
+      "ok": true
+    },
+    {
+      "check": "store: logical content identical before and after",
+      "detail": null,
+      "ok": true
+    },
+    {
+      "check": "no network attempt",
+      "detail": 0,
+      "ok": true
+    },
+    {
+      "check": "no LLM / legacy-pipeline module loaded",
+      "detail": [],
+      "ok": true
+    }
+  ],
+  "counts": {
+    "7f_ambiguous": 8,
+    "7f_in_domain": 40,
+    "7f_ood": 62,
+    "legacy_ood": 5,
+    "phase4": 50,
+    "phase5": 54
+  },
+  "distributions": {
+    "ambiguous_excluded": {
+      "max": 0.514713,
+      "mean": 0.374524,
+      "median": 0.384893,
+      "min": 0.237103,
+      "n": 8,
+      "percentiles": {
+        "p10": 0.249959,
+        "p25": 0.304756,
+        "p5": 0.243531,
+        "p50": 0.384893,
+        "p75": 0.448214,
+        "p90": 0.469744,
+        "p95": 0.492228
+      },
+      "stdev": 0.102607
+    },
+    "auroc_by_in_domain_group": {
+      "7f_in_domain": 0.9181,
+      "phase4": 0.9361,
+      "phase5": 0.7772
+    },
+    "auroc_by_ood_category": {
+      "lexical_overlap_trap": 0.941,
+      "other_software_it": 1.0,
+      "sap_other_modules": 0.661,
+      "unrelated_general": 1.0,
+      "utilities_adjacent_not_covered": 0.8631,
+      "very_short_unrelated": 0.9745
+    },
+    "auroc_correct_vs_wrong_rank1_among_in_domain": 0.7927,
+    "auroc_gap_signal_descriptive_only": 0.8237,
+    "auroc_in_vs_ood_rank1_similarity": 0.8715,
+    "in_domain_all": {
+      "max": 0.724868,
+      "mean": 0.474312,
+      "median": 0.491135,
+      "min": 0.13052,
+      "n": 144,
+      "percentiles": {
+        "p10": 0.293273,
+        "p25": 0.387009,
+        "p5": 0.238441,
+        "p50": 0.491135,
+        "p75": 0.567035,
+        "p90": 0.644488,
+        "p95": 0.676073
+      },
+      "stdev": 0.129546
+    },
+    "in_domain_by_group": {
+      "7f_in_domain": {
+        "max": 0.684622,
+        "mean": 0.496009,
+        "median": 0.493823,
+        "min": 0.371897,
+        "n": 40,
+        "percentiles": {
+          "p10": 0.41575,
+          "p25": 0.43386,
+          "p5": 0.396011,
+          "p50": 0.493823,
+          "p75": 0.541444,
+          "p90": 0.613477,
+          "p95": 0.659306
+        },
+        "stdev": 0.079912
+      },
+      "phase4": {
+        "max": 0.724868,
+        "mean": 0.541331,
+        "median": 0.553905,
+        "min": 0.244294,
+        "n": 50,
+        "percentiles": {
+          "p10": 0.382974,
+          "p25": 0.490984,
+          "p5": 0.313732,
+          "p50": 0.553905,
+          "p75": 0.623593,
+          "p90": 0.678346,
+          "p95": 0.688323
+        },
+        "stdev": 0.116385
+      },
+      "phase5": {
+        "max": 0.661901,
+        "mean": 0.396185,
+        "median": 0.381018,
+        "min": 0.13052,
+        "n": 54,
+        "percentiles": {
+          "p10": 0.22075,
+          "p25": 0.296988,
+          "p5": 0.211013,
+          "p50": 0.381018,
+          "p75": 0.513909,
+          "p90": 0.569865,
+          "p95": 0.596293
+        },
+        "stdev": 0.131326
+      }
+    },
+    "in_domain_by_split": {
+      "dev": {
+        "max": 0.688772,
+        "mean": 0.469333,
+        "median": 0.489179,
+        "min": 0.20678,
+        "n": 72,
+        "percentiles": {
+          "p10": 0.259951,
+          "p25": 0.39168,
+          "p5": 0.216483,
+          "p50": 0.489179,
+          "p75": 0.564143,
+          "p90": 0.642436,
+          "p95": 0.678388
+        },
+        "stdev": 0.133213
+      },
+      "test": {
+        "max": 0.724868,
+        "mean": 0.479291,
+        "median": 0.494305,
+        "min": 0.13052,
+        "n": 72,
+        "percentiles": {
+          "p10": 0.312369,
+          "p25": 0.382026,
+          "p5": 0.246553,
+          "p50": 0.494305,
+          "p75": 0.567035,
+          "p90": 0.641735,
+          "p95": 0.672133
+        },
+        "stdev": 0.12651
+      }
+    },
+    "in_domain_n": 144,
+    "in_domain_rank1_correct": {
+      "max": 0.724868,
+      "mean": 0.496615,
+      "median": 0.507138,
+      "min": 0.20678,
+      "n": 120,
+      "percentiles": {
+        "p10": 0.325849,
+        "p25": 0.42474,
+        "p5": 0.270846,
+        "p50": 0.507138,
+        "p75": 0.574796,
+        "p90": 0.660402,
+        "p95": 0.67834
+      },
+      "stdev": 0.120939
+    },
+    "in_domain_rank1_wrong": {
+      "max": 0.632292,
+      "mean": 0.362793,
+      "median": 0.377885,
+      "min": 0.13052,
+      "n": 24,
+      "percentiles": {
+        "p10": 0.224377,
+        "p25": 0.256556,
+        "p5": 0.208321,
+        "p50": 0.377885,
+        "p75": 0.441913,
+        "p90": 0.486335,
+        "p95": 0.502764
+      },
+      "stdev": 0.11443
+    },
+    "legacy_ood_q26_q30": {
+      "max": 0.41374,
+      "mean": 0.201805,
+      "median": 0.082848,
+      "min": 0.041577,
+      "n": 5,
+      "percentiles": {
+        "p10": 0.052779,
+        "p25": 0.069581,
+        "p5": 0.047178,
+        "p50": 0.082848,
+        "p75": 0.401278,
+        "p90": 0.408755,
+        "p95": 0.411248
+      },
+      "stdev": 0.188423
+    },
+    "ood_above_in_domain_median": 5,
+    "ood_above_in_domain_p5": 30,
+    "ood_n": 62,
+    "out_of_domain_all": {
+      "max": 0.560147,
+      "mean": 0.224464,
+      "median": 0.237198,
+      "min": -0.064474,
+      "n": 62,
+      "percentiles": {
+        "p10": 0.010941,
+        "p25": 0.082538,
+        "p5": -0.025875,
+        "p50": 0.237198,
+        "p75": 0.341902,
+        "p90": 0.464263,
+        "p95": 0.497744
+      },
+      "stdev": 0.1681
+    },
+    "out_of_domain_by_category": {
+      "lexical_overlap_trap": {
+        "max": 0.309447,
+        "mean": 0.220416,
+        "median": 0.225173,
+        "min": 0.101856,
+        "n": 8,
+        "percentiles": {
+          "p10": 0.12294,
+          "p25": 0.161032,
+          "p5": 0.112398,
+          "p50": 0.225173,
+          "p75": 0.297963,
+          "p90": 0.304626,
+          "p95": 0.307037
+        },
+        "stdev": 0.08344
+      },
+      "other_software_it": {
+        "max": 0.113442,
+        "mean": 0.048035,
+        "median": 0.049517,
+        "min": -0.026947,
+        "n": 8,
+        "percentiles": {
+          "p10": 0.00402,
+          "p25": 0.020813,
+          "p5": -0.011463,
+          "p50": 0.049517,
+          "p75": 0.07942,
+          "p90": 0.090293,
+          "p95": 0.101868
+        },
+        "stdev": 0.044505
+      },
+      "sap_other_modules": {
+        "max": 0.560147,
+        "mean": 0.398565,
+        "median": 0.448354,
+        "min": 0.162481,
+        "n": 16,
+        "percentiles": {
+          "p10": 0.220175,
+          "p25": 0.299545,
+          "p5": 0.192175,
+          "p50": 0.448354,
+          "p75": 0.493929,
+          "p90": 0.505735,
+          "p95": 0.520221
+        },
+        "stdev": 0.122739
+      },
+      "unrelated_general": {
+        "max": 0.127455,
+        "mean": 0.036333,
+        "median": 0.025312,
+        "min": -0.064474,
+        "n": 10,
+        "percentiles": {
+          "p10": -0.039096,
+          "p25": -0.00183,
+          "p5": -0.051785,
+          "p50": 0.025312,
+          "p75": 0.086679,
+          "p90": 0.115048,
+          "p95": 0.121252
+        },
+        "stdev": 0.064262
+      },
+      "utilities_adjacent_not_covered": {
+        "max": 0.430191,
+        "mean": 0.30688,
+        "median": 0.309303,
+        "min": 0.153489,
+        "n": 14,
+        "percentiles": {
+          "p10": 0.232401,
+          "p25": 0.268758,
+          "p5": 0.19618,
+          "p50": 0.309303,
+          "p75": 0.349627,
+          "p90": 0.376609,
+          "p95": 0.400259
+        },
+        "stdev": 0.070616
+      },
+      "very_short_unrelated": {
+        "max": 0.272302,
+        "mean": 0.122073,
+        "median": 0.138021,
+        "min": -0.062262,
+        "n": 6,
+        "percentiles": {
+          "p10": -0.026014,
+          "p25": 0.030285,
+          "p5": -0.044138,
+          "p50": 0.138021,
+          "p75": 0.22349,
+          "p90": 0.254211,
+          "p95": 0.263256
+        },
+        "stdev": 0.131984
+      }
+    },
+    "out_of_domain_by_split": {
+      "dev": {
+        "max": 0.506912,
+        "mean": 0.211054,
+        "median": 0.202073,
+        "min": -0.064474,
+        "n": 31,
+        "percentiles": {
+          "p10": 0.010235,
+          "p25": 0.079737,
+          "p5": -0.049269,
+          "p50": 0.202073,
+          "p75": 0.334495,
+          "p90": 0.460381,
+          "p95": 0.48111
+        },
+        "stdev": 0.169631
+      },
+      "test": {
+        "max": 0.560147,
+        "mean": 0.237873,
+        "median": 0.263279,
+        "min": -0.026947,
+        "n": 31,
+        "percentiles": {
+          "p10": 0.017292,
+          "p25": 0.096146,
+          "p5": 0.001843,
+          "p50": 0.263279,
+          "p75": 0.357606,
+          "p90": 0.464694,
+          "p95": 0.501287
+        },
+        "stdev": 0.168259
+      }
+    },
+    "overlap": {
+      "clean_gap_exists": false,
+      "clean_gap_interval": null,
+      "in_domain_n": 144,
+      "in_domain_scores_at_or_below_max_ood": 103,
+      "ood_n": 62,
+      "ood_scores_at_or_above_min_in_domain": 40,
+      "overlap_interval": [
+        0.13052,
+        0.560147
+      ],
+      "zero_in_domain_refusal_range": {
+        "ood_accepted_at_that_t": 40,
+        "t_at_most": 0.13052
+      },
+      "zero_ood_acceptance_range": {
+        "in_domain_refused_at_that_t": 103,
+        "t_greater_than": 0.560147
+      }
+    },
+    "post_hoc_descriptive_mentions_sap": {
+      "auroc_in_vs_ood_both_without_word_SAP": 0.9416,
+      "in_domain": {
+        "with_word_SAP": {
+          "max": 0.661901,
+          "mean": 0.661901,
+          "median": 0.661901,
+          "min": 0.661901,
+          "n": 1,
+          "percentiles": {
+            "p10": 0.661901,
+            "p25": 0.661901,
+            "p5": 0.661901,
+            "p50": 0.661901,
+            "p75": 0.661901,
+            "p90": 0.661901,
+            "p95": 0.661901
+          },
+          "stdev": 0.0
+        },
+        "without_word_SAP": {
+          "max": 0.724868,
+          "mean": 0.473,
+          "median": 0.490834,
+          "min": 0.13052,
+          "n": 143,
+          "percentiles": {
+            "p10": 0.293216,
+            "p25": 0.386142,
+            "p5": 0.238251,
+            "p50": 0.490834,
+            "p75": 0.564345,
+            "p90": 0.641309,
+            "p95": 0.676133
+          },
+          "stdev": 0.129038
+        }
+      },
+      "note": "post hoc; descriptive only; does not enter the decision rule",
+      "out_of_domain": {
+        "with_word_SAP": {
+          "max": 0.560147,
+          "mean": 0.463023,
+          "median": 0.469654,
+          "min": 0.280781,
+          "n": 11,
+          "percentiles": {
+            "p10": 0.419215,
+            "p25": 0.448354,
+            "p5": 0.349998,
+            "p50": 0.469654,
+            "p75": 0.501287,
+            "p90": 0.506912,
+            "p95": 0.533529
+          },
+          "stdev": 0.07147
+        },
+        "without_word_SAP": {
+          "max": 0.430191,
+          "mean": 0.17301,
+          "median": 0.170717,
+          "min": -0.064474,
+          "n": 51,
+          "percentiles": {
+            "p10": 0.009189,
+            "p25": 0.070689,
+            "p5": -0.031612,
+            "p50": 0.170717,
+            "p75": 0.290223,
+            "p90": 0.342518,
+            "p95": 0.367095
+          },
+          "stdev": 0.135026
+        }
+      }
+    },
+    "similarity_definition": "rank-1 cosine similarity = 1 - cosine distance"
+  },
+  "grid_what_if_refused_counts": [
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 0
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 0
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 18
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 3
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 0
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 0
+      },
+      "t": 0.1
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 0
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 0
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 23
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 3
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 0
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 1
+      },
+      "t": 0.15
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 0
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 0
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 28
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 3
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 0
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 1
+      },
+      "t": 0.2
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 1
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 0
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 32
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 3
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 2
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 9
+      },
+      "t": 0.25
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 2
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 0
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 41
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 3
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 3
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 14
+      },
+      "t": 0.3
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 4
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 0
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 47
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 3
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 3
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 21
+      },
+      "t": 0.35
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 4
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 3
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 51
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 3
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 7
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 29
+      },
+      "t": 0.4
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 6
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 14
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 54
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 5
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 9
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 35
+      },
+      "t": 0.45
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 7
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 22
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 59
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 5
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 16
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 39
+      },
+      "t": 0.5
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 8
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 32
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 61
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 5
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 25
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 46
+      },
+      "t": 0.55
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 8
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 35
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 62
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 5
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 34
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 51
+      },
+      "t": 0.6
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 8
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 37
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 62
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 5
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 40
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 53
+      },
+      "t": 0.65
+    },
+    {
+      "7f_ambiguous": {
+        "n": 8,
+        "refused": 8
+      },
+      "7f_in_domain": {
+        "n": 40,
+        "refused": 40
+      },
+      "7f_ood": {
+        "n": 62,
+        "refused": 62
+      },
+      "legacy_ood": {
+        "n": 5,
+        "refused": 5
+      },
+      "phase4": {
+        "n": 50,
+        "refused": 48
+      },
+      "phase5": {
+        "n": 54,
+        "refused": 54
+      },
+      "t": 0.7
+    }
+  ],
+  "inputs": {
+    "collection_manifest_sha256": "5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731",
+    "legacy_questions_sha256": "dc0801cce3ec63e176062ea46914500169b5cfd8c8a1f2991b060edb3108a674",
+    "phase4_results_sha256": "c1b0459779eeb0ac0f4dbf26c6e128302c91ad7be0aa75db6a2d657e45c49206",
+    "phase5_results_sha256": "2ca554287c9c2397f125e086cd121e5bd67983588bf798011e0298b286f0ef6d",
+    "phase7e_evaluation_sha256": "727236b9707eb783e173c6418e84f459ae17aba918f90cd34080f5bd3e22be28",
+    "queries_file_sha256": "631c7a524edecb5f78205334dd86256638fe1473998e86e7926ec619801dbe14"
+  },
+  "isolation": {
+    "banned_modules_loaded": [],
+    "network_attempts": 0
+  },
+  "ok": true,
+  "per_query": [
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.078202,
+      "group": "phase4",
+      "id": "Q01",
+      "label": "in_domain",
+      "query": "Move-In Process",
+      "rank1_cosine_distance": 0.522093,
+      "rank1_cosine_similarity": 0.477907,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.600295,
+      "rank2_cosine_similarity": 0.399705,
+      "rank2_source_id": "M2C-04",
+      "split": "dev"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.076605,
+      "group": "phase4",
+      "id": "Q02",
+      "label": "in_domain",
+      "query": "Move-Out Process",
+      "rank1_cosine_distance": 0.508565,
+      "rank1_cosine_similarity": 0.491435,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-04",
+      "rank2_cosine_distance": 0.585171,
+      "rank2_cosine_similarity": 0.414829,
+      "rank2_source_id": "M2C-03",
+      "split": "test"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-12"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.130387,
+      "group": "phase4",
+      "id": "Q03",
+      "label": "in_domain",
+      "query": "Automatic Billing",
+      "rank1_cosine_distance": 0.490851,
+      "rank1_cosine_similarity": 0.509149,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-12",
+      "rank2_cosine_distance": 0.621239,
+      "rank2_cosine_similarity": 0.378761,
+      "rank2_source_id": "M2C-13",
+      "split": "dev"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.066896,
+      "group": "phase4",
+      "id": "Q04",
+      "label": "in_domain",
+      "query": "Budget Billing Plan",
+      "rank1_cosine_distance": 0.432503,
+      "rank1_cosine_similarity": 0.567497,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-13",
+      "rank2_cosine_distance": 0.499398,
+      "rank2_cosine_similarity": 0.500602,
+      "rank2_source_id": "M2C-15",
+      "split": "test"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-21"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.150573,
+      "group": "phase4",
+      "id": "Q05",
+      "label": "in_domain",
+      "query": "Clearing Types",
+      "rank1_cosine_distance": 0.501225,
+      "rank1_cosine_similarity": 0.498775,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-21",
+      "rank2_cosine_distance": 0.651798,
+      "rank2_cosine_similarity": 0.348202,
+      "rank2_source_id": "M2C-20",
+      "split": "dev"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.111787,
+      "group": "phase4",
+      "id": "Q06",
+      "label": "in_domain",
+      "query": "FI-CA Dunning",
+      "rank1_cosine_distance": 0.625122,
+      "rank1_cosine_similarity": 0.374878,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-26",
+      "rank2_cosine_distance": 0.736909,
+      "rank2_cosine_similarity": 0.263091,
+      "rank2_source_id": "M2C-18",
+      "split": "test"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "first_expected_rank": 2,
+      "gap_cosine_distance_rank1_rank2": 0.002364,
+      "group": "phase4",
+      "id": "Q07",
+      "label": "in_domain",
+      "query": "Installment Plan Overview",
+      "rank1_cosine_distance": 0.367708,
+      "rank1_cosine_similarity": 0.632292,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-24",
+      "rank2_cosine_distance": 0.370072,
+      "rank2_cosine_similarity": 0.629928,
+      "rank2_source_id": "M2C-23",
+      "split": "dev"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.090173,
+      "group": "phase4",
+      "id": "Q08",
+      "label": "in_domain",
+      "query": "Collection Agency APIs and Enterprise Services",
+      "rank1_cosine_distance": 0.389711,
+      "rank1_cosine_similarity": 0.610289,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-28",
+      "rank2_cosine_distance": 0.479885,
+      "rank2_cosine_similarity": 0.520115,
+      "rank2_source_id": "M2C-27",
+      "split": "test"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-06"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.040392,
+      "group": "phase4",
+      "id": "Q09",
+      "label": "in_domain",
+      "query": "Reading Meters",
+      "rank1_cosine_distance": 0.509166,
+      "rank1_cosine_similarity": 0.490834,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-06",
+      "rank2_cosine_distance": 0.549558,
+      "rank2_cosine_similarity": 0.450442,
+      "rank2_source_id": "M2C-08",
+      "split": "dev"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-17"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.01389,
+      "group": "phase4",
+      "id": "Q10",
+      "label": "in_domain",
+      "query": "Contract Accounts Overview",
+      "rank1_cosine_distance": 0.403663,
+      "rank1_cosine_similarity": 0.596337,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-17",
+      "rank2_cosine_distance": 0.417553,
+      "rank2_cosine_similarity": 0.582447,
+      "rank2_source_id": "M2C-18",
+      "split": "test"
+    },
+    {
+      "category": "exact_title",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.370592,
+      "group": "phase4",
+      "id": "Q11",
+      "label": "in_domain",
+      "query": "Disconnection/Reconnection of a Utility Installation",
+      "rank1_cosine_distance": 0.375402,
+      "rank1_cosine_similarity": 0.624598,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.745995,
+      "rank2_cosine_similarity": 0.254005,
+      "rank2_source_id": "M2C-03",
+      "split": "dev"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.19109,
+      "group": "phase4",
+      "id": "Q12",
+      "label": "in_domain",
+      "query": "Which reference explains how billing results become invoices, print documents and postings in FI-CA?",
+      "rank1_cosine_distance": 0.278301,
+      "rank1_cosine_similarity": 0.721699,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-14",
+      "rank2_cosine_distance": 0.469391,
+      "rank2_cosine_similarity": 0.530609,
+      "rank2_source_id": "M2C-11",
+      "split": "test"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.241728,
+      "group": "phase4",
+      "id": "Q13",
+      "label": "in_domain",
+      "query": "What explains estimating a reading when the meter reading is missing or unavailable?",
+      "rank1_cosine_distance": 0.311228,
+      "rank1_cosine_similarity": 0.688772,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.552956,
+      "rank2_cosine_similarity": 0.447044,
+      "rank2_source_id": "M2C-07",
+      "split": "dev"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.195888,
+      "group": "phase4",
+      "id": "Q14",
+      "label": "in_domain",
+      "query": "How are incoming payment amounts assigned to open items?",
+      "rank1_cosine_distance": 0.425496,
+      "rank1_cosine_similarity": 0.574504,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-20",
+      "rank2_cosine_distance": 0.621384,
+      "rank2_cosine_similarity": 0.378616,
+      "rank2_source_id": "M2C-19",
+      "split": "test"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-27"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.237737,
+      "group": "phase4",
+      "id": "Q15",
+      "label": "in_domain",
+      "query": "Which topic covers releasing, submitting, processing and recalling receivables handled by collection agencies?",
+      "rank1_cosine_distance": 0.312226,
+      "rank1_cosine_similarity": 0.687774,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 0.549963,
+      "rank2_cosine_similarity": 0.450037,
+      "rank2_source_id": "M2C-26",
+      "split": "dev"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.017336,
+      "group": "phase4",
+      "id": "Q16",
+      "label": "in_domain",
+      "query": "How are source receivables redistributed into scheduled installment receivables?",
+      "rank1_cosine_distance": 0.45644,
+      "rank1_cosine_similarity": 0.54356,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-23",
+      "rank2_cosine_distance": 0.473776,
+      "rank2_cosine_similarity": 0.526224,
+      "rank2_source_id": "M2C-27",
+      "split": "test"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.173674,
+      "group": "phase4",
+      "id": "Q17",
+      "label": "in_domain",
+      "query": "Temporary interruption and restoration of utility supply for collection or technical reasons",
+      "rank1_cosine_distance": 0.512475,
+      "rank1_cosine_similarity": 0.487525,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.686149,
+      "rank2_cosine_similarity": 0.313851,
+      "rank2_source_id": "M2C-27",
+      "split": "dev"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.248967,
+      "group": "phase4",
+      "id": "Q18",
+      "label": "in_domain",
+      "query": "How are notifications of incoming payments from external cash desks integrated into FI-CA?",
+      "rank1_cosine_distance": 0.275132,
+      "rank1_cosine_similarity": 0.724868,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-22",
+      "rank2_cosine_distance": 0.524099,
+      "rank2_cosine_similarity": 0.475901,
+      "rank2_source_id": "M2C-20",
+      "split": "test"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-01"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.05281,
+      "group": "phase4",
+      "id": "Q19",
+      "label": "in_domain",
+      "query": "Which source lists Business Partner, Contract Account, Contract, Point of Delivery, Connection Object, Premise, Device Location, Installation and Device?",
+      "rank1_cosine_distance": 0.488306,
+      "rank1_cosine_similarity": 0.511694,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-01",
+      "rank2_cosine_distance": 0.541117,
+      "rank2_cosine_similarity": 0.458883,
+      "rank2_source_id": "M2C-17",
+      "split": "dev"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.114433,
+      "group": "phase4",
+      "id": "Q20",
+      "label": "in_domain",
+      "query": "What covers the creation of the customer-service relationship for a utility installation?",
+      "rank1_cosine_distance": 0.471318,
+      "rank1_cosine_similarity": 0.528682,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.585751,
+      "rank2_cosine_similarity": 0.414249,
+      "rank2_source_id": "M2C-02",
+      "split": "test"
+    },
+    {
+      "category": "semantic",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.130712,
+      "group": "phase4",
+      "id": "Q21",
+      "label": "in_domain",
+      "query": "What covers the termination of the customer-service relationship and related final processing?",
+      "rank1_cosine_distance": 0.421083,
+      "rank1_cosine_similarity": 0.578917,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-04",
+      "rank2_cosine_distance": 0.551795,
+      "rank2_cosine_similarity": 0.448205,
+      "rank2_source_id": "M2C-03",
+      "split": "dev"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.019717,
+      "group": "phase4",
+      "id": "Q22",
+      "label": "in_domain",
+      "query": "Which source is important for estimated-bill and catch-up-bill reasoning?",
+      "rank1_cosine_distance": 0.497286,
+      "rank1_cosine_similarity": 0.502714,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.517002,
+      "rank2_cosine_similarity": 0.482998,
+      "rank2_source_id": "M2C-13",
+      "split": "test"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.181529,
+      "group": "phase4",
+      "id": "Q23",
+      "label": "in_domain",
+      "query": "Which reference is critical for distinguishing billing document, invoicing result, customer bill and FI-CA document?",
+      "rank1_cosine_distance": 0.321666,
+      "rank1_cosine_similarity": 0.678334,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-14",
+      "rank2_cosine_distance": 0.503195,
+      "rank2_cosine_similarity": 0.496805,
+      "rank2_source_id": "M2C-15",
+      "split": "dev"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.158394,
+      "group": "phase4",
+      "id": "Q24",
+      "label": "in_domain",
+      "query": "Which source teaches that payment receipt and open-item clearing are distinct steps?",
+      "rank1_cosine_distance": 0.355115,
+      "rank1_cosine_similarity": 0.644885,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-20",
+      "rank2_cosine_distance": 0.513509,
+      "rank2_cosine_similarity": 0.486491,
+      "rank2_source_id": "M2C-19",
+      "split": "test"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.008653,
+      "group": "phase4",
+      "id": "Q25",
+      "label": "in_domain",
+      "query": "Which source is the core reference for collections escalation logic within Meter-to-Cash?",
+      "rank1_cosine_distance": 0.379422,
+      "rank1_cosine_similarity": 0.620578,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-26",
+      "rank2_cosine_distance": 0.388074,
+      "rank2_cosine_similarity": 0.611926,
+      "rank2_source_id": "M2C-27",
+      "split": "dev"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.123112,
+      "group": "phase4",
+      "id": "Q26",
+      "label": "in_domain",
+      "query": "Why can interim or budget amounts affect the customer balance independently of final consumption billing?",
+      "rank1_cosine_distance": 0.439216,
+      "rank1_cosine_similarity": 0.560784,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-13",
+      "rank2_cosine_distance": 0.562329,
+      "rank2_cosine_similarity": 0.437671,
+      "rank2_source_id": "M2C-15",
+      "split": "test"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.180279,
+      "group": "phase4",
+      "id": "Q27",
+      "label": "in_domain",
+      "query": "Which card preserves the distinction between delinquency and disconnect eligibility?",
+      "rank1_cosine_distance": 0.607052,
+      "rank1_cosine_similarity": 0.392948,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.787331,
+      "rank2_cosine_similarity": 0.212669,
+      "rank2_source_id": "M2C-04",
+      "split": "dev"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.162695,
+      "group": "phase4",
+      "id": "Q28",
+      "label": "in_domain",
+      "query": "Which source covers modern API and service integration beyond file-based exchanges?",
+      "rank1_cosine_distance": 0.457726,
+      "rank1_cosine_similarity": 0.542274,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-28",
+      "rank2_cosine_distance": 0.62042,
+      "rank2_cosine_similarity": 0.37958,
+      "rank2_source_id": "M2C-02",
+      "split": "test"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-21"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.071149,
+      "group": "phase4",
+      "id": "Q29",
+      "label": "in_domain",
+      "query": "Which source is useful for differentiating payment-lot, cash-desk, account-maintenance and payment-run clearing contexts?",
+      "rank1_cosine_distance": 0.410169,
+      "rank1_cosine_similarity": 0.589831,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-21",
+      "rank2_cosine_distance": 0.481318,
+      "rank2_cosine_similarity": 0.518682,
+      "rank2_source_id": "M2C-19",
+      "split": "dev"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-16"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.176436,
+      "group": "phase4",
+      "id": "Q30",
+      "label": "in_domain",
+      "query": "Which source is useful for operational monitoring, KPIs and exception-management of periodic billing and invoicing?",
+      "rank1_cosine_distance": 0.323748,
+      "rank1_cosine_similarity": 0.676252,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-16",
+      "rank2_cosine_distance": 0.500184,
+      "rank2_cosine_similarity": 0.499816,
+      "rank2_source_id": "M2C-07",
+      "split": "test"
+    },
+    {
+      "category": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.071791,
+      "group": "phase4",
+      "id": "Q31",
+      "label": "in_domain",
+      "query": "Which source helps with exception monitoring and support or troubleshooting scenarios for meter-reading results?",
+      "rank1_cosine_distance": 0.321545,
+      "rank1_cosine_similarity": 0.678455,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-07",
+      "rank2_cosine_distance": 0.393336,
+      "rank2_cosine_similarity": 0.606664,
+      "rank2_source_id": "M2C-06",
+      "split": "dev"
+    },
+    {
+      "category": "category",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.22179,
+      "group": "phase4",
+      "id": "Q32",
+      "label": "in_domain",
+      "query": "Which card is in the Disconnection & Reconnection category?",
+      "rank1_cosine_distance": 0.495188,
+      "rank1_cosine_similarity": 0.504812,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.716979,
+      "rank2_cosine_similarity": 0.283021,
+      "rank2_source_id": "M2C-04",
+      "split": "test"
+    },
+    {
+      "category": "category",
+      "expected_source_ids": [
+        "M2C-26",
+        "M2C-27",
+        "M2C-28"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.080239,
+      "group": "phase4",
+      "id": "Q33",
+      "label": "in_domain",
+      "query": "Which cards belong to the Dunning & Collections category?",
+      "rank1_cosine_distance": 0.565766,
+      "rank1_cosine_similarity": 0.434234,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-26",
+      "rank2_cosine_distance": 0.646004,
+      "rank2_cosine_similarity": 0.353996,
+      "rank2_source_id": "M2C-27",
+      "split": "dev"
+    },
+    {
+      "category": "category",
+      "expected_source_ids": [
+        "M2C-23",
+        "M2C-24",
+        "M2C-25"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.003975,
+      "group": "phase4",
+      "id": "Q34",
+      "label": "in_domain",
+      "query": "Which cards belong to Payment Arrangements / Installment Plans?",
+      "rank1_cosine_distance": 0.522028,
+      "rank1_cosine_similarity": 0.477972,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-23",
+      "rank2_cosine_distance": 0.526003,
+      "rank2_cosine_similarity": 0.473997,
+      "rank2_source_id": "M2C-24",
+      "split": "test"
+    },
+    {
+      "category": "category",
+      "expected_source_ids": [
+        "M2C-19",
+        "M2C-20",
+        "M2C-21",
+        "M2C-22"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.000147,
+      "group": "phase4",
+      "id": "Q35",
+      "label": "in_domain",
+      "query": "Which cards are in the Payments & Clearing category?",
+      "rank1_cosine_distance": 0.507525,
+      "rank1_cosine_similarity": 0.492475,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-21",
+      "rank2_cosine_distance": 0.507671,
+      "rank2_cosine_similarity": 0.492329,
+      "rank2_source_id": "M2C-20",
+      "split": "dev"
+    },
+    {
+      "category": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-09"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.118871,
+      "group": "phase4",
+      "id": "Q36",
+      "label": "in_domain",
+      "query": "extrapolation and interpolation",
+      "rank1_cosine_distance": 0.755706,
+      "rank1_cosine_similarity": 0.244294,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-09",
+      "rank2_cosine_distance": 0.874577,
+      "rank2_cosine_similarity": 0.125423,
+      "rank2_source_id": "M2C-08",
+      "split": "test"
+    },
+    {
+      "category": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-12"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.021438,
+      "group": "phase4",
+      "id": "Q37",
+      "label": "in_domain",
+      "query": "installation, rate type, schema, operand and price",
+      "rank1_cosine_distance": 0.63556,
+      "rank1_cosine_similarity": 0.36444,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-12",
+      "rank2_cosine_distance": 0.656998,
+      "rank2_cosine_similarity": 0.343002,
+      "rank2_source_id": "M2C-24",
+      "split": "dev"
+    },
+    {
+      "category": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.122563,
+      "group": "phase4",
+      "id": "Q38",
+      "label": "in_domain",
+      "query": "dunning notices and dunning activities for overdue items",
+      "rank1_cosine_distance": 0.46833,
+      "rank1_cosine_similarity": 0.53167,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-26",
+      "rank2_cosine_distance": 0.590893,
+      "rank2_cosine_similarity": 0.409107,
+      "rank2_source_id": "M2C-27",
+      "split": "test"
+    },
+    {
+      "category": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-19"
+      ],
+      "first_expected_rank": 4,
+      "gap_cosine_distance_rank1_rank2": 0.001178,
+      "group": "phase4",
+      "id": "Q39",
+      "label": "in_domain",
+      "query": "payment clarification",
+      "rank1_cosine_distance": 0.616127,
+      "rank1_cosine_similarity": 0.383873,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-20",
+      "rank2_cosine_distance": 0.617305,
+      "rank2_cosine_similarity": 0.382695,
+      "rank2_source_id": "M2C-23",
+      "split": "dev"
+    },
+    {
+      "category": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.084075,
+      "group": "phase4",
+      "id": "Q40",
+      "label": "in_domain",
+      "query": "monitoring meter-reading results across business objects and organizational criteria",
+      "rank1_cosine_distance": 0.339765,
+      "rank1_cosine_similarity": 0.660235,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-07",
+      "rank2_cosine_distance": 0.423841,
+      "rank2_cosine_similarity": 0.576159,
+      "rank2_source_id": "M2C-06",
+      "split": "test"
+    },
+    {
+      "category": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-05"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.028007,
+      "group": "phase4",
+      "id": "Q41",
+      "label": "in_domain",
+      "query": "parent topic for devices and technical installations",
+      "rank1_cosine_distance": 0.727757,
+      "rank1_cosine_similarity": 0.272243,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-05",
+      "rank2_cosine_distance": 0.755764,
+      "rank2_cosine_similarity": 0.244236,
+      "rank2_source_id": "M2C-01",
+      "split": "dev"
+    },
+    {
+      "category": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-17"
+      ],
+      "first_expected_rank": 4,
+      "gap_cosine_distance_rank1_rank2": 0.006982,
+      "group": "phase4",
+      "id": "Q42",
+      "label": "in_domain",
+      "query": "subledger processing",
+      "rank1_cosine_distance": 0.751598,
+      "rank1_cosine_similarity": 0.248402,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-15",
+      "rank2_cosine_distance": 0.758579,
+      "rank2_cosine_similarity": 0.241421,
+      "rank2_source_id": "M2C-03",
+      "split": "test"
+    },
+    {
+      "category": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-18"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.063811,
+      "group": "phase4",
+      "id": "Q43",
+      "label": "in_domain",
+      "query": "control role of the contract account for postings, payments and dunning",
+      "rank1_cosine_distance": 0.452973,
+      "rank1_cosine_similarity": 0.547027,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 0.516784,
+      "rank2_cosine_similarity": 0.483216,
+      "rank2_source_id": "M2C-17",
+      "split": "dev"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-10"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.190173,
+      "group": "phase4",
+      "id": "Q44",
+      "label": "in_domain",
+      "query": "How does meter reading data take part in the move-in process?",
+      "rank1_cosine_distance": 0.324938,
+      "rank1_cosine_similarity": 0.675062,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-10",
+      "rank2_cosine_distance": 0.515111,
+      "rank2_cosine_similarity": 0.484889,
+      "rank2_source_id": "M2C-06",
+      "split": "test"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-15"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.151222,
+      "group": "phase4",
+      "id": "Q45",
+      "label": "in_domain",
+      "query": "How are budget billing plans treated in invoicing?",
+      "rank1_cosine_distance": 0.336941,
+      "rank1_cosine_similarity": 0.663059,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-15",
+      "rank2_cosine_distance": 0.488164,
+      "rank2_cosine_similarity": 0.511836,
+      "rank2_source_id": "M2C-14",
+      "split": "dev"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-08",
+        "M2C-09"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.044144,
+      "group": "phase4",
+      "id": "Q46",
+      "label": "in_domain",
+      "query": "Explain the estimation procedure for meter readings",
+      "rank1_cosine_distance": 0.42839,
+      "rank1_cosine_similarity": 0.57161,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.472534,
+      "rank2_cosine_similarity": 0.527466,
+      "rank2_source_id": "M2C-09",
+      "split": "test"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-02"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.089329,
+      "group": "phase4",
+      "id": "Q47",
+      "label": "in_domain",
+      "query": "Overview of starting and ending utility service",
+      "rank1_cosine_distance": 0.438853,
+      "rank1_cosine_similarity": 0.561147,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-02",
+      "rank2_cosine_distance": 0.528182,
+      "rank2_cosine_similarity": 0.471818,
+      "rank2_source_id": "M2C-03",
+      "split": "dev"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-24"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.019076,
+      "group": "phase4",
+      "id": "Q48",
+      "label": "in_domain",
+      "query": "How are installment plans created?",
+      "rank1_cosine_distance": 0.392241,
+      "rank1_cosine_similarity": 0.607759,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-24",
+      "rank2_cosine_distance": 0.411317,
+      "rank2_cosine_similarity": 0.588683,
+      "rank2_source_id": "M2C-23",
+      "split": "test"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "first_expected_rank": 2,
+      "gap_cosine_distance_rank1_rank2": 0.007985,
+      "group": "phase4",
+      "id": "Q49",
+      "label": "in_domain",
+      "query": "What is needed for final billing when a customer moves out?",
+      "rank1_cosine_distance": 0.558474,
+      "rank1_cosine_similarity": 0.441526,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-02",
+      "rank2_cosine_distance": 0.566459,
+      "rank2_cosine_similarity": 0.433541,
+      "rank2_source_id": "M2C-04",
+      "split": "dev"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-27",
+        "M2C-28"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.247318,
+      "group": "phase4",
+      "id": "Q50",
+      "label": "in_domain",
+      "query": "How does a collection agency get involved when receivables stay unpaid?",
+      "rank1_cosine_distance": 0.42433,
+      "rank1_cosine_similarity": 0.57567,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 0.671648,
+      "rank2_cosine_similarity": 0.328352,
+      "rank2_source_id": "M2C-23",
+      "split": "test"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-01"
+      ],
+      "first_expected_rank": 9,
+      "gap_cosine_distance_rank1_rank2": 0.005647,
+      "group": "phase5",
+      "id": "P5-01",
+      "label": "in_domain",
+      "query": "Where do I start if I need to understand how customers, premises and meters fit together in the system?",
+      "rank1_cosine_distance": 0.556925,
+      "rank1_cosine_similarity": 0.443075,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-05",
+      "rank2_cosine_distance": 0.562572,
+      "rank2_cosine_similarity": 0.437428,
+      "rank2_source_id": "M2C-06",
+      "split": "dev"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "first_expected_rank": 2,
+      "gap_cosine_distance_rank1_rank2": 0.077299,
+      "group": "phase5",
+      "id": "P5-02",
+      "label": "in_domain",
+      "query": "What happens in the system when a new tenant gets connected?",
+      "rank1_cosine_distance": 0.643821,
+      "rank1_cosine_similarity": 0.356179,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.72112,
+      "rank2_cosine_similarity": 0.27888,
+      "rank2_source_id": "M2C-03",
+      "split": "test"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "first_expected_rank": 8,
+      "gap_cosine_distance_rank1_rank2": 0.024669,
+      "group": "phase5",
+      "id": "P5-03",
+      "label": "in_domain",
+      "query": "A customer is leaving the property. What needs to happen with their last bill and meter reading?",
+      "rank1_cosine_distance": 0.496928,
+      "rank1_cosine_similarity": 0.503072,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.521598,
+      "rank2_cosine_similarity": 0.478402,
+      "rank2_source_id": "M2C-10",
+      "split": "dev"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.157578,
+      "group": "phase5",
+      "id": "P5-04",
+      "label": "in_domain",
+      "query": "Why did a customer get a bill based on an estimate instead of an actual reading?",
+      "rank1_cosine_distance": 0.457081,
+      "rank1_cosine_similarity": 0.542919,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.614658,
+      "rank2_cosine_similarity": 0.385342,
+      "rank2_source_id": "M2C-09",
+      "split": "test"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "first_expected_rank": 13,
+      "gap_cosine_distance_rank1_rank2": 0.018251,
+      "group": "phase5",
+      "id": "P5-05",
+      "label": "in_domain",
+      "query": "How do I follow up on customers who have not paid on time?",
+      "rank1_cosine_distance": 0.783033,
+      "rank1_cosine_similarity": 0.216967,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-16",
+      "rank2_cosine_distance": 0.801284,
+      "rank2_cosine_similarity": 0.198716,
+      "rank2_source_id": "M2C-22",
+      "split": "dev"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "first_expected_rank": 2,
+      "gap_cosine_distance_rank1_rank2": 0.001266,
+      "group": "phase5",
+      "id": "P5-06",
+      "label": "in_domain",
+      "query": "Can I spread a large overdue balance over several payments?",
+      "rank1_cosine_distance": 0.758332,
+      "rank1_cosine_similarity": 0.241668,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-20",
+      "rank2_cosine_distance": 0.759598,
+      "rank2_cosine_similarity": 0.240402,
+      "rank2_source_id": "M2C-23",
+      "split": "test"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "first_expected_rank": 7,
+      "gap_cosine_distance_rank1_rank2": 0.003204,
+      "group": "phase5",
+      "id": "P5-07",
+      "label": "in_domain",
+      "query": "Where can I find out how a payment that just arrived gets matched to what the customer owes?",
+      "rank1_cosine_distance": 0.688775,
+      "rank1_cosine_similarity": 0.311225,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-22",
+      "rank2_cosine_distance": 0.691979,
+      "rank2_cosine_similarity": 0.308021,
+      "rank2_source_id": "M2C-27",
+      "split": "dev"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.088671,
+      "group": "phase5",
+      "id": "P5-08",
+      "label": "in_domain",
+      "query": "How is electricity supply switched off and back on when a customer doesn't pay?",
+      "rank1_cosine_distance": 0.64606,
+      "rank1_cosine_similarity": 0.35394,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.73473,
+      "rank2_cosine_similarity": 0.26527,
+      "rank2_source_id": "M2C-02",
+      "split": "test"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.035998,
+      "group": "phase5",
+      "id": "P5-09",
+      "label": "in_domain",
+      "query": "Which topic explains how an invoice gets created after the bill has been calculated?",
+      "rank1_cosine_distance": 0.454451,
+      "rank1_cosine_similarity": 0.545549,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-14",
+      "rank2_cosine_distance": 0.490449,
+      "rank2_cosine_similarity": 0.509551,
+      "rank2_source_id": "M2C-15",
+      "split": "dev"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.010023,
+      "group": "phase5",
+      "id": "P5-10",
+      "label": "in_domain",
+      "query": "How can I keep an eye on meter reads that came in wrong or are stuck?",
+      "rank1_cosine_distance": 0.53222,
+      "rank1_cosine_similarity": 0.46778,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-07",
+      "rank2_cosine_distance": 0.542243,
+      "rank2_cosine_similarity": 0.457757,
+      "rank2_source_id": "M2C-06",
+      "split": "test"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-27"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.032003,
+      "group": "phase5",
+      "id": "P5-11",
+      "label": "in_domain",
+      "query": "Is there a way to hand unpaid accounts over to an external debt collector?",
+      "rank1_cosine_distance": 0.696792,
+      "rank1_cosine_similarity": 0.303208,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 0.728795,
+      "rank2_cosine_similarity": 0.271205,
+      "rank2_source_id": "M2C-28",
+      "split": "dev"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.03962,
+      "group": "phase5",
+      "id": "P5-12",
+      "label": "in_domain",
+      "query": "How do system interfaces to outside collection companies work?",
+      "rank1_cosine_distance": 0.546776,
+      "rank1_cosine_similarity": 0.453224,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-28",
+      "rank2_cosine_distance": 0.586396,
+      "rank2_cosine_similarity": 0.413604,
+      "rank2_source_id": "M2C-27",
+      "split": "test"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-18"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.039043,
+      "group": "phase5",
+      "id": "P5-13",
+      "label": "in_domain",
+      "query": "What does a customer's financial account in the billing system control?",
+      "rank1_cosine_distance": 0.482479,
+      "rank1_cosine_similarity": 0.517521,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 0.521522,
+      "rank2_cosine_similarity": 0.478478,
+      "rank2_source_id": "M2C-17",
+      "split": "dev"
+    },
+    {
+      "category": "natural",
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.061835,
+      "group": "phase5",
+      "id": "P5-14",
+      "label": "in_domain",
+      "query": "How do customers pay a steady monthly amount instead of variable bills?",
+      "rank1_cosine_distance": 0.575791,
+      "rank1_cosine_similarity": 0.424209,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-13",
+      "rank2_cosine_distance": 0.637626,
+      "rank2_cosine_similarity": 0.362374,
+      "rank2_source_id": "M2C-15",
+      "split": "test"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-13",
+        "M2C-15"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.069823,
+      "group": "phase5",
+      "id": "P5-15",
+      "label": "in_domain",
+      "query": "budget billing",
+      "rank1_cosine_distance": 0.42596,
+      "rank1_cosine_similarity": 0.57404,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-13",
+      "rank2_cosine_distance": 0.495783,
+      "rank2_cosine_similarity": 0.504217,
+      "rank2_source_id": "M2C-15",
+      "split": "dev"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-09"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.10018,
+      "group": "phase5",
+      "id": "P5-16",
+      "label": "in_domain",
+      "query": "extrapolation",
+      "rank1_cosine_distance": 0.762129,
+      "rank1_cosine_similarity": 0.237871,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-09",
+      "rank2_cosine_distance": 0.862309,
+      "rank2_cosine_similarity": 0.137691,
+      "rank2_source_id": "M2C-08",
+      "split": "test"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.150702,
+      "group": "phase5",
+      "id": "P5-17",
+      "label": "in_domain",
+      "query": "open items",
+      "rank1_cosine_distance": 0.784108,
+      "rank1_cosine_similarity": 0.215892,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-20",
+      "rank2_cosine_distance": 0.93481,
+      "rank2_cosine_similarity": 0.06519,
+      "rank2_source_id": "M2C-27",
+      "split": "dev"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.131325,
+      "group": "phase5",
+      "id": "P5-18",
+      "label": "in_domain",
+      "query": "cash desk",
+      "rank1_cosine_distance": 0.649564,
+      "rank1_cosine_similarity": 0.350436,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-22",
+      "rank2_cosine_distance": 0.780889,
+      "rank2_cosine_similarity": 0.219111,
+      "rank2_source_id": "M2C-13",
+      "split": "test"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.148225,
+      "group": "phase5",
+      "id": "P5-19",
+      "label": "in_domain",
+      "query": "dunning",
+      "rank1_cosine_distance": 0.770422,
+      "rank1_cosine_similarity": 0.229578,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-26",
+      "rank2_cosine_distance": 0.918647,
+      "rank2_cosine_similarity": 0.081353,
+      "rank2_source_id": "M2C-08",
+      "split": "dev"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-08",
+        "M2C-09"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.069962,
+      "group": "phase5",
+      "id": "P5-20",
+      "label": "in_domain",
+      "query": "meter estimation",
+      "rank1_cosine_distance": 0.467196,
+      "rank1_cosine_similarity": 0.532804,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.537158,
+      "rank2_cosine_similarity": 0.462842,
+      "rank2_source_id": "M2C-09",
+      "split": "test"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-11",
+        "M2C-12"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.029517,
+      "group": "phase5",
+      "id": "P5-21",
+      "label": "in_domain",
+      "query": "billing schema",
+      "rank1_cosine_distance": 0.45332,
+      "rank1_cosine_similarity": 0.54668,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.482837,
+      "rank2_cosine_similarity": 0.517163,
+      "rank2_source_id": "M2C-12",
+      "split": "dev"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-25"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.05367,
+      "group": "phase5",
+      "id": "P5-22",
+      "label": "in_domain",
+      "query": "installment plan display",
+      "rank1_cosine_distance": 0.399271,
+      "rank1_cosine_similarity": 0.600729,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-25",
+      "rank2_cosine_distance": 0.452942,
+      "rank2_cosine_similarity": 0.547058,
+      "rank2_source_id": "M2C-23",
+      "split": "test"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.059009,
+      "group": "phase5",
+      "id": "P5-23",
+      "label": "in_domain",
+      "query": "delinquency",
+      "rank1_cosine_distance": 0.786715,
+      "rank1_cosine_similarity": 0.213285,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.845724,
+      "rank2_cosine_similarity": 0.154276,
+      "rank2_source_id": "M2C-04",
+      "split": "dev"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "first_expected_rank": 5,
+      "gap_cosine_distance_rank1_rank2": 0.005197,
+      "group": "phase5",
+      "id": "P5-24",
+      "label": "in_domain",
+      "query": "reversal",
+      "rank1_cosine_distance": 0.86948,
+      "rank1_cosine_similarity": 0.13052,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.874677,
+      "rank2_cosine_similarity": 0.125323,
+      "rank2_source_id": "M2C-04",
+      "split": "test"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-16"
+      ],
+      "first_expected_rank": 2,
+      "gap_cosine_distance_rank1_rank2": 0.012753,
+      "group": "phase5",
+      "id": "P5-25",
+      "label": "in_domain",
+      "query": "KPIs",
+      "rank1_cosine_distance": 0.793205,
+      "rank1_cosine_similarity": 0.206795,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.805958,
+      "rank2_cosine_similarity": 0.194042,
+      "rank2_source_id": "M2C-16",
+      "split": "dev"
+    },
+    {
+      "category": "keyword",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "first_expected_rank": 5,
+      "gap_cosine_distance_rank1_rank2": 0.037061,
+      "group": "phase5",
+      "id": "P5-26",
+      "label": "in_domain",
+      "query": "FI-CA document",
+      "rank1_cosine_distance": 0.547934,
+      "rank1_cosine_similarity": 0.452066,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 0.584995,
+      "rank2_cosine_similarity": 0.415005,
+      "rank2_source_id": "M2C-28",
+      "split": "test"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.039251,
+      "group": "phase5",
+      "id": "P5-27",
+      "label": "in_domain",
+      "query": "Explain how a household is registered as using a service point for the first time",
+      "rank1_cosine_distance": 0.583896,
+      "rank1_cosine_similarity": 0.416104,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.623147,
+      "rank2_cosine_similarity": 0.376853,
+      "rank2_source_id": "M2C-02",
+      "split": "dev"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.036237,
+      "group": "phase5",
+      "id": "P5-28",
+      "label": "in_domain",
+      "query": "Stopping service for a customer and finishing up the account",
+      "rank1_cosine_distance": 0.659334,
+      "rank1_cosine_similarity": 0.340666,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-04",
+      "rank2_cosine_distance": 0.69557,
+      "rank2_cosine_similarity": 0.30443,
+      "rank2_source_id": "M2C-29",
+      "split": "test"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-11"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.046089,
+      "group": "phase5",
+      "id": "P5-29",
+      "label": "in_domain",
+      "query": "Calculating what to charge from usage figures using price tables",
+      "rank1_cosine_distance": 0.61709,
+      "rank1_cosine_similarity": 0.38291,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.663179,
+      "rank2_cosine_similarity": 0.336821,
+      "rank2_source_id": "M2C-13",
+      "split": "dev"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.058585,
+      "group": "phase5",
+      "id": "P5-30",
+      "label": "in_domain",
+      "query": "What do I do when a meter cannot be read and a figure has to be guessed?",
+      "rank1_cosine_distance": 0.544848,
+      "rank1_cosine_similarity": 0.455152,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.603433,
+      "rank2_cosine_similarity": 0.396567,
+      "rank2_source_id": "M2C-06",
+      "split": "test"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-09"
+      ],
+      "first_expected_rank": 6,
+      "gap_cosine_distance_rank1_rank2": 0.004396,
+      "group": "phase5",
+      "id": "P5-31",
+      "label": "in_domain",
+      "query": "Filling gaps in usage data between two known readings",
+      "rank1_cosine_distance": 0.612125,
+      "rank1_cosine_similarity": 0.387875,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-10",
+      "rank2_cosine_distance": 0.616521,
+      "rank2_cosine_similarity": 0.383479,
+      "rank2_source_id": "M2C-08",
+      "split": "dev"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-06"
+      ],
+      "first_expected_rank": 15,
+      "gap_cosine_distance_rank1_rank2": 0.041499,
+      "group": "phase5",
+      "id": "P5-32",
+      "label": "in_domain",
+      "query": "Checking the quality of submitted consumption figures and fixing wrong ones before charging",
+      "rank1_cosine_distance": 0.630818,
+      "rank1_cosine_similarity": 0.369182,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.672317,
+      "rank2_cosine_similarity": 0.327683,
+      "rank2_source_id": "M2C-16",
+      "split": "test"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-19"
+      ],
+      "first_expected_rank": 5,
+      "gap_cosine_distance_rank1_rank2": 0.006443,
+      "group": "phase5",
+      "id": "P5-33",
+      "label": "in_domain",
+      "query": "Looking into money received from customers that can't be assigned",
+      "rank1_cosine_distance": 0.741415,
+      "rank1_cosine_similarity": 0.258585,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 0.747857,
+      "rank2_cosine_similarity": 0.252143,
+      "rank2_source_id": "M2C-22",
+      "split": "dev"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-21"
+      ],
+      "first_expected_rank": 4,
+      "gap_cosine_distance_rank1_rank2": 0.097807,
+      "group": "phase5",
+      "id": "P5-34",
+      "label": "in_domain",
+      "query": "Different situations in which open amounts get settled against payments",
+      "rank1_cosine_distance": 0.580035,
+      "rank1_cosine_similarity": 0.419965,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-20",
+      "rank2_cosine_distance": 0.677842,
+      "rank2_cosine_similarity": 0.322158,
+      "rank2_source_id": "M2C-19",
+      "split": "test"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.068246,
+      "group": "phase5",
+      "id": "P5-35",
+      "label": "in_domain",
+      "query": "Shop-counter payments from outside partners being posted immediately",
+      "rank1_cosine_distance": 0.620874,
+      "rank1_cosine_similarity": 0.379126,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-22",
+      "rank2_cosine_distance": 0.689121,
+      "rank2_cosine_similarity": 0.310879,
+      "rank2_source_id": "M2C-20",
+      "split": "dev"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-25"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.067543,
+      "group": "phase5",
+      "id": "P5-36",
+      "label": "in_domain",
+      "query": "Changing a payment agreement after it has been set up for a customer",
+      "rank1_cosine_distance": 0.689316,
+      "rank1_cosine_similarity": 0.310684,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-25",
+      "rank2_cosine_distance": 0.756859,
+      "rank2_cosine_similarity": 0.243141,
+      "rank2_source_id": "M2C-23",
+      "split": "test"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-24"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.014481,
+      "group": "phase5",
+      "id": "P5-37",
+      "label": "in_domain",
+      "query": "Setting up a new payment arrangement and checking whether the customer qualifies",
+      "rank1_cosine_distance": 0.706897,
+      "rank1_cosine_similarity": 0.293103,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-24",
+      "rank2_cosine_distance": 0.721377,
+      "rank2_cosine_similarity": 0.278623,
+      "rank2_source_id": "M2C-25",
+      "split": "dev"
+    },
+    {
+      "category": "paraphrase",
+      "expected_source_ids": [
+        "M2C-16"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.032164,
+      "group": "phase5",
+      "id": "P5-38",
+      "label": "in_domain",
+      "query": "Dashboards for how well the bill runs are doing",
+      "rank1_cosine_distance": 0.584042,
+      "rank1_cosine_similarity": 0.415958,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-16",
+      "rank2_cosine_distance": 0.616206,
+      "rank2_cosine_similarity": 0.383794,
+      "rank2_source_id": "M2C-15",
+      "split": "test"
+    },
+    {
+      "category": "entity",
+      "expected_source_ids": [
+        "M2C-01"
+      ],
+      "first_expected_rank": 7,
+      "gap_cosine_distance_rank1_rank2": 0.051863,
+      "group": "phase5",
+      "id": "P5-39",
+      "label": "in_domain",
+      "query": "Point of Delivery and Connection Object",
+      "rank1_cosine_distance": 0.667448,
+      "rank1_cosine_similarity": 0.332552,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.719312,
+      "rank2_cosine_similarity": 0.280688,
+      "rank2_source_id": "M2C-03",
+      "split": "dev"
+    },
+    {
+      "category": "entity",
+      "expected_source_ids": [
+        "M2C-12"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.082431,
+      "group": "phase5",
+      "id": "P5-40",
+      "label": "in_domain",
+      "query": "operand and rate type",
+      "rank1_cosine_distance": 0.706331,
+      "rank1_cosine_similarity": 0.293669,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-12",
+      "rank2_cosine_distance": 0.788762,
+      "rank2_cosine_similarity": 0.211238,
+      "rank2_source_id": "M2C-11",
+      "split": "test"
+    },
+    {
+      "category": "entity",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.1067,
+      "group": "phase5",
+      "id": "P5-41",
+      "label": "in_domain",
+      "query": "print documents",
+      "rank1_cosine_distance": 0.79322,
+      "rank1_cosine_similarity": 0.20678,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-14",
+      "rank2_cosine_distance": 0.899921,
+      "rank2_cosine_similarity": 0.100079,
+      "rank2_source_id": "M2C-27",
+      "split": "dev"
+    },
+    {
+      "category": "entity",
+      "expected_source_ids": [
+        "M2C-05"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.081204,
+      "group": "phase5",
+      "id": "P5-42",
+      "label": "in_domain",
+      "query": "technical installations and devices",
+      "rank1_cosine_distance": 0.705086,
+      "rank1_cosine_similarity": 0.294914,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-05",
+      "rank2_cosine_distance": 0.78629,
+      "rank2_cosine_similarity": 0.21371,
+      "rank2_source_id": "M2C-03",
+      "split": "test"
+    },
+    {
+      "category": "entity",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "first_expected_rank": 3,
+      "gap_cosine_distance_rank1_rank2": 0.01303,
+      "group": "phase5",
+      "id": "P5-43",
+      "label": "in_domain",
+      "query": "catch-up bill",
+      "rank1_cosine_distance": 0.74953,
+      "rank1_cosine_similarity": 0.25047,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-16",
+      "rank2_cosine_distance": 0.76256,
+      "rank2_cosine_similarity": 0.23744,
+      "rank2_source_id": "M2C-15",
+      "split": "dev"
+    },
+    {
+      "category": "entity",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.104719,
+      "group": "phase5",
+      "id": "P5-44",
+      "label": "in_domain",
+      "query": "SAP enterprise services for collection agencies",
+      "rank1_cosine_distance": 0.338099,
+      "rank1_cosine_similarity": 0.661901,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-28",
+      "rank2_cosine_distance": 0.442818,
+      "rank2_cosine_similarity": 0.557182,
+      "rank2_source_id": "M2C-27",
+      "split": "test"
+    },
+    {
+      "category": "entity",
+      "expected_source_ids": [
+        "M2C-27"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.255454,
+      "group": "phase5",
+      "id": "P5-45",
+      "label": "in_domain",
+      "query": "recall of receivables",
+      "rank1_cosine_distance": 0.438191,
+      "rank1_cosine_similarity": 0.561809,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 0.693645,
+      "rank2_cosine_similarity": 0.306355,
+      "rank2_source_id": "M2C-26",
+      "split": "dev"
+    },
+    {
+      "category": "entity",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.032561,
+      "group": "phase5",
+      "id": "P5-46",
+      "label": "in_domain",
+      "query": "debt arrangement",
+      "rank1_cosine_distance": 0.629138,
+      "rank1_cosine_similarity": 0.370862,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-23",
+      "rank2_cosine_distance": 0.661699,
+      "rank2_cosine_similarity": 0.338301,
+      "rank2_source_id": "M2C-24",
+      "split": "test"
+    },
+    {
+      "category": "entity",
+      "expected_source_ids": [
+        "M2C-05"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.017102,
+      "group": "phase5",
+      "id": "P5-47",
+      "label": "in_domain",
+      "query": "meter hardware and technical setup",
+      "rank1_cosine_distance": 0.557326,
+      "rank1_cosine_similarity": 0.442674,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-05",
+      "rank2_cosine_distance": 0.574428,
+      "rank2_cosine_similarity": 0.425572,
+      "rank2_source_id": "M2C-06",
+      "split": "dev"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.1208,
+      "group": "phase5",
+      "id": "P5-48",
+      "label": "in_domain",
+      "query": "What do I need to know about move-in?",
+      "rank1_cosine_distance": 0.672466,
+      "rank1_cosine_similarity": 0.327534,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.793266,
+      "rank2_cosine_similarity": 0.206734,
+      "rank2_source_id": "M2C-02",
+      "split": "test"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-15"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.094651,
+      "group": "phase5",
+      "id": "P5-49",
+      "label": "in_domain",
+      "query": "Explain budget billing in the invoicing context",
+      "rank1_cosine_distance": 0.356437,
+      "rank1_cosine_similarity": 0.643563,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-15",
+      "rank2_cosine_distance": 0.451088,
+      "rank2_cosine_similarity": 0.548912,
+      "rank2_source_id": "M2C-14",
+      "split": "dev"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.004338,
+      "group": "phase5",
+      "id": "P5-50",
+      "label": "in_domain",
+      "query": "How do installment plans work?",
+      "rank1_cosine_distance": 0.406096,
+      "rank1_cosine_similarity": 0.593904,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-23",
+      "rank2_cosine_distance": 0.410434,
+      "rank2_cosine_similarity": 0.589566,
+      "rank2_source_id": "M2C-24",
+      "split": "test"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-06"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.030298,
+      "group": "phase5",
+      "id": "P5-51",
+      "label": "in_domain",
+      "query": "How is meter reading handled?",
+      "rank1_cosine_distance": 0.428856,
+      "rank1_cosine_similarity": 0.571144,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-06",
+      "rank2_cosine_distance": 0.459155,
+      "rank2_cosine_similarity": 0.540845,
+      "rank2_source_id": "M2C-10",
+      "split": "dev"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-19",
+        "M2C-20",
+        "M2C-22"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.001583,
+      "group": "phase5",
+      "id": "P5-52",
+      "label": "in_domain",
+      "query": "Payments that come in from customers",
+      "rank1_cosine_distance": 0.650052,
+      "rank1_cosine_similarity": 0.349948,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-20",
+      "rank2_cosine_distance": 0.651635,
+      "rank2_cosine_similarity": 0.348365,
+      "rank2_source_id": "M2C-22",
+      "split": "test"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-17",
+        "M2C-18"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.046475,
+      "group": "phase5",
+      "id": "P5-53",
+      "label": "in_domain",
+      "query": "Contract account",
+      "rank1_cosine_distance": 0.475183,
+      "rank1_cosine_similarity": 0.524817,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 0.521657,
+      "rank2_cosine_similarity": 0.478343,
+      "rank2_source_id": "M2C-17",
+      "split": "dev"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [
+        "M2C-11"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.013844,
+      "group": "phase5",
+      "id": "P5-54",
+      "label": "in_domain",
+      "query": "Billing process overview",
+      "rank1_cosine_distance": 0.433119,
+      "rank1_cosine_similarity": 0.566881,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.446964,
+      "rank2_cosine_similarity": 0.553036,
+      "rank2_source_id": "M2C-15",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-01"
+      ],
+      "first_expected_rank": 4,
+      "gap_cosine_distance_rank1_rank2": 0.035078,
+      "group": "7f_in_domain",
+      "id": "7F-I01",
+      "label": "in_domain",
+      "query": "How are customers, their addresses and the supply points linked together in the data model?",
+      "rank1_cosine_distance": 0.603378,
+      "rank1_cosine_similarity": 0.396622,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.638456,
+      "rank2_cosine_similarity": 0.361544,
+      "rank2_source_id": "M2C-02",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-02"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.075778,
+      "group": "7f_in_domain",
+      "id": "7F-I02",
+      "label": "in_domain",
+      "query": "What lifecycle stages does a customer go through when they start and then stop using a utility service?",
+      "rank1_cosine_distance": 0.486023,
+      "rank1_cosine_similarity": 0.513977,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-02",
+      "rank2_cosine_distance": 0.561801,
+      "rank2_cosine_similarity": 0.438199,
+      "rank2_source_id": "M2C-03",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.110637,
+      "group": "7f_in_domain",
+      "id": "7F-I03",
+      "label": "in_domain",
+      "query": "How is a new customer's service relationship set up when they begin taking supply at an address?",
+      "rank1_cosine_distance": 0.556185,
+      "rank1_cosine_similarity": 0.443815,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.666822,
+      "rank2_cosine_similarity": 0.333178,
+      "rank2_source_id": "M2C-02",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "first_expected_rank": 2,
+      "gap_cosine_distance_rank1_rank2": 0.006698,
+      "group": "7f_in_domain",
+      "id": "7F-I04",
+      "label": "in_domain",
+      "query": "What gets done to wrap up a customer's account when they stop service?",
+      "rank1_cosine_distance": 0.628103,
+      "rank1_cosine_similarity": 0.371897,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.634801,
+      "rank2_cosine_similarity": 0.365199,
+      "rank2_source_id": "M2C-04",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-05"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.055072,
+      "group": "7f_in_domain",
+      "id": "7F-I05",
+      "label": "in_domain",
+      "query": "I need an entry point into the area covering physical metering assets",
+      "rank1_cosine_distance": 0.480751,
+      "rank1_cosine_similarity": 0.519249,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-05",
+      "rank2_cosine_distance": 0.535823,
+      "rank2_cosine_similarity": 0.464177,
+      "rank2_source_id": "M2C-06",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-06"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.133582,
+      "group": "7f_in_domain",
+      "id": "7F-I06",
+      "label": "in_domain",
+      "query": "Which source covers orders for reading meters and sending the results on to billing?",
+      "rank1_cosine_distance": 0.330264,
+      "rank1_cosine_similarity": 0.669736,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-06",
+      "rank2_cosine_distance": 0.463847,
+      "rank2_cosine_similarity": 0.536153,
+      "rank2_source_id": "M2C-07",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.068176,
+      "group": "7f_in_domain",
+      "id": "7F-I07",
+      "label": "in_domain",
+      "query": "Where do support teams check readings across organisational criteria to spot problems?",
+      "rank1_cosine_distance": 0.548738,
+      "rank1_cosine_similarity": 0.451262,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-07",
+      "rank2_cosine_distance": 0.616914,
+      "rank2_cosine_similarity": 0.383086,
+      "rank2_source_id": "M2C-06",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.064339,
+      "group": "7f_in_domain",
+      "id": "7F-I08",
+      "label": "in_domain",
+      "query": "How does the system come up with a consumption value when no real reading is available?",
+      "rank1_cosine_distance": 0.56553,
+      "rank1_cosine_similarity": 0.43447,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.629869,
+      "rank2_cosine_similarity": 0.370131,
+      "rank2_source_id": "M2C-10",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-09"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.119435,
+      "group": "7f_in_domain",
+      "id": "7F-I09",
+      "label": "in_domain",
+      "query": "Which reference explains interpolation and extrapolation procedures for consumption?",
+      "rank1_cosine_distance": 0.56325,
+      "rank1_cosine_similarity": 0.43675,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-09",
+      "rank2_cosine_distance": 0.682684,
+      "rank2_cosine_similarity": 0.317316,
+      "rank2_source_id": "M2C-08",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-10"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.136917,
+      "group": "7f_in_domain",
+      "id": "7F-I10",
+      "label": "in_domain",
+      "query": "What role does reading data play when someone moves into a property?",
+      "rank1_cosine_distance": 0.52176,
+      "rank1_cosine_similarity": 0.47824,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-10",
+      "rank2_cosine_distance": 0.658677,
+      "rank2_cosine_similarity": 0.341323,
+      "rank2_source_id": "M2C-08",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-11"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.094989,
+      "group": "7f_in_domain",
+      "id": "7F-I11",
+      "label": "in_domain",
+      "query": "How do usage figures turn into billing results through rates and schemas?",
+      "rank1_cosine_distance": 0.341243,
+      "rank1_cosine_similarity": 0.658757,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.436233,
+      "rank2_cosine_similarity": 0.563767,
+      "rank2_source_id": "M2C-12",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-12"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.050937,
+      "group": "7f_in_domain",
+      "id": "7F-I12",
+      "label": "in_domain",
+      "query": "Which elements of master and configuration data take part when billing runs without manual intervention?",
+      "rank1_cosine_distance": 0.454258,
+      "rank1_cosine_similarity": 0.545742,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-12",
+      "rank2_cosine_distance": 0.505195,
+      "rank2_cosine_similarity": 0.494805,
+      "rank2_source_id": "M2C-11",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.028901,
+      "group": "7f_in_domain",
+      "id": "7F-I13",
+      "label": "in_domain",
+      "query": "How do fixed monthly payment plans work for utility customers?",
+      "rank1_cosine_distance": 0.582583,
+      "rank1_cosine_similarity": 0.417417,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-13",
+      "rank2_cosine_distance": 0.611484,
+      "rank2_cosine_similarity": 0.388516,
+      "rank2_source_id": "M2C-15",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.006488,
+      "group": "7f_in_domain",
+      "id": "7F-I14",
+      "label": "in_domain",
+      "query": "How do computed billing results end up as customer bills and postings in the accounting subledger?",
+      "rank1_cosine_distance": 0.468201,
+      "rank1_cosine_similarity": 0.531799,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-14",
+      "rank2_cosine_distance": 0.474688,
+      "rank2_cosine_similarity": 0.525312,
+      "rank2_source_id": "M2C-11",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-15"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.060786,
+      "group": "7f_in_domain",
+      "id": "7F-I15",
+      "label": "in_domain",
+      "query": "How are plans for levelled monthly payments treated when invoices are produced?",
+      "rank1_cosine_distance": 0.494872,
+      "rank1_cosine_similarity": 0.505128,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-15",
+      "rank2_cosine_distance": 0.555658,
+      "rank2_cosine_similarity": 0.444342,
+      "rank2_source_id": "M2C-23",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-16"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.139197,
+      "group": "7f_in_domain",
+      "id": "7F-I16",
+      "label": "in_domain",
+      "query": "Is there an analytical app showing the execution status of periodic billing runs?",
+      "rank1_cosine_distance": 0.439833,
+      "rank1_cosine_similarity": 0.560167,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-16",
+      "rank2_cosine_distance": 0.57903,
+      "rank2_cosine_similarity": 0.42097,
+      "rank2_source_id": "M2C-11",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-17"
+      ],
+      "first_expected_rank": 2,
+      "gap_cosine_distance_rank1_rank2": 0.010652,
+      "group": "7f_in_domain",
+      "id": "7F-I17",
+      "label": "in_domain",
+      "query": "Why does a utility customer need a contract account for managing what they owe?",
+      "rank1_cosine_distance": 0.599256,
+      "rank1_cosine_similarity": 0.400744,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 0.609908,
+      "rank2_cosine_similarity": 0.390092,
+      "rank2_source_id": "M2C-17",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-18"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.067254,
+      "group": "7f_in_domain",
+      "id": "7F-I18",
+      "label": "in_domain",
+      "query": "How is the contract account defined, and what does it control for payments and dunning?",
+      "rank1_cosine_distance": 0.386618,
+      "rank1_cosine_similarity": 0.613382,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 0.453872,
+      "rank2_cosine_similarity": 0.546128,
+      "rank2_source_id": "M2C-17",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-19"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.103985,
+      "group": "7f_in_domain",
+      "id": "7F-I19",
+      "label": "in_domain",
+      "query": "Where can I analyse incoming payments that need clarification?",
+      "rank1_cosine_distance": 0.454193,
+      "rank1_cosine_similarity": 0.545807,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-19",
+      "rank2_cosine_distance": 0.558178,
+      "rank2_cosine_similarity": 0.441822,
+      "rank2_source_id": "M2C-22",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.095445,
+      "group": "7f_in_domain",
+      "id": "7F-I20",
+      "label": "in_domain",
+      "query": "How does the system allocate the money from an incoming payment to the customer's open receivables?",
+      "rank1_cosine_distance": 0.502826,
+      "rank1_cosine_similarity": 0.497174,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-20",
+      "rank2_cosine_distance": 0.598271,
+      "rank2_cosine_similarity": 0.401729,
+      "rank2_source_id": "M2C-27",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-21"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.090406,
+      "group": "7f_in_domain",
+      "id": "7F-I21",
+      "label": "in_domain",
+      "query": "Which clearing types exist for payment lots, cash desks and payment runs?",
+      "rank1_cosine_distance": 0.412705,
+      "rank1_cosine_similarity": 0.587295,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-21",
+      "rank2_cosine_distance": 0.503111,
+      "rank2_cosine_similarity": 0.496889,
+      "rank2_source_id": "M2C-20",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.196518,
+      "group": "7f_in_domain",
+      "id": "7F-I22",
+      "label": "in_domain",
+      "query": "How are payment messages from third-party cash desks integrated, including reversals?",
+      "rank1_cosine_distance": 0.459989,
+      "rank1_cosine_similarity": 0.540011,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-22",
+      "rank2_cosine_distance": 0.656507,
+      "rank2_cosine_similarity": 0.343493,
+      "rank2_source_id": "M2C-19",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "first_expected_rank": 2,
+      "gap_cosine_distance_rank1_rank2": 0.052053,
+      "group": "7f_in_domain",
+      "id": "7F-I23",
+      "label": "in_domain",
+      "query": "How are overdue receivables redistributed into future-dated installments?",
+      "rank1_cosine_distance": 0.498978,
+      "rank1_cosine_similarity": 0.501022,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 0.551031,
+      "rank2_cosine_similarity": 0.448969,
+      "rank2_source_id": "M2C-23",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-24"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.059477,
+      "group": "7f_in_domain",
+      "id": "7F-I24",
+      "label": "in_domain",
+      "query": "How do I create a new payment plan and what must be considered?",
+      "rank1_cosine_distance": 0.554418,
+      "rank1_cosine_similarity": 0.445582,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-24",
+      "rank2_cosine_distance": 0.613895,
+      "rank2_cosine_similarity": 0.386105,
+      "rank2_source_id": "M2C-23",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-25"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.02901,
+      "group": "7f_in_domain",
+      "id": "7F-I25",
+      "label": "in_domain",
+      "query": "How do I view or modify an existing installment arrangement after it was created?",
+      "rank1_cosine_distance": 0.488376,
+      "rank1_cosine_similarity": 0.511624,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-25",
+      "rank2_cosine_distance": 0.517386,
+      "rank2_cosine_similarity": 0.482614,
+      "rank2_source_id": "M2C-23",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "first_expected_rank": 2,
+      "gap_cosine_distance_rank1_rank2": 0.09271,
+      "group": "7f_in_domain",
+      "id": "7F-I26",
+      "label": "in_domain",
+      "query": "What explains the escalation of overdue receivables through reminder letters?",
+      "rank1_cosine_distance": 0.549542,
+      "rank1_cosine_similarity": 0.450458,
+      "rank1_is_correct": false,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 0.642251,
+      "rank2_cosine_similarity": 0.357749,
+      "rank2_source_id": "M2C-26",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-27"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.29964,
+      "group": "7f_in_domain",
+      "id": "7F-I27",
+      "label": "in_domain",
+      "query": "How is the release, submission and recall of receivables to an outside collections company handled?",
+      "rank1_cosine_distance": 0.315378,
+      "rank1_cosine_similarity": 0.684622,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 0.615018,
+      "rank2_cosine_similarity": 0.384982,
+      "rank2_source_id": "M2C-28",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.044587,
+      "group": "7f_in_domain",
+      "id": "7F-I28",
+      "label": "in_domain",
+      "query": "What technical integration options connect the accounting system with outside debt-recovery firms, other than flat files?",
+      "rank1_cosine_distance": 0.509527,
+      "rank1_cosine_similarity": 0.490473,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-28",
+      "rank2_cosine_distance": 0.554115,
+      "rank2_cosine_similarity": 0.445885,
+      "rank2_source_id": "M2C-17",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.099097,
+      "group": "7f_in_domain",
+      "id": "7F-I29",
+      "label": "in_domain",
+      "query": "How is supply interrupted and restored for non-payment or technical reasons?",
+      "rank1_cosine_distance": 0.575224,
+      "rank1_cosine_similarity": 0.424776,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.674321,
+      "rank2_cosine_similarity": 0.325679,
+      "rank2_source_id": "M2C-04",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.047706,
+      "group": "7f_in_domain",
+      "id": "7F-I30",
+      "label": "in_domain",
+      "query": "What is the difference between a customer bill and an FI-CA document?",
+      "rank1_cosine_distance": 0.500317,
+      "rank1_cosine_similarity": 0.499683,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-14",
+      "rank2_cosine_distance": 0.548023,
+      "rank2_cosine_similarity": 0.451977,
+      "rank2_source_id": "M2C-18",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.116652,
+      "group": "7f_in_domain",
+      "id": "7F-I31",
+      "label": "in_domain",
+      "query": "How does a missing meter read affect a bill that still has to be issued?",
+      "rank1_cosine_distance": 0.385667,
+      "rank1_cosine_similarity": 0.614333,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.50232,
+      "rank2_cosine_similarity": 0.49768,
+      "rank2_source_id": "M2C-06",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.1869,
+      "group": "7f_in_domain",
+      "id": "7F-I32",
+      "label": "in_domain",
+      "query": "How does the delinquency state differ from eligibility to disconnect?",
+      "rank1_cosine_distance": 0.567971,
+      "rank1_cosine_similarity": 0.432029,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.754871,
+      "rank2_cosine_similarity": 0.245129,
+      "rank2_source_id": "M2C-04",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.169296,
+      "group": "7f_in_domain",
+      "id": "7F-I33",
+      "label": "in_domain",
+      "query": "Why does receiving a payment not automatically settle the open item?",
+      "rank1_cosine_distance": 0.57205,
+      "rank1_cosine_similarity": 0.42795,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-20",
+      "rank2_cosine_distance": 0.741347,
+      "rank2_cosine_similarity": 0.258653,
+      "rank2_source_id": "M2C-22",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.02868,
+      "group": "7f_in_domain",
+      "id": "7F-I34",
+      "label": "in_domain",
+      "query": "Can interim amounts change what a customer owes regardless of actual consumption?",
+      "rank1_cosine_distance": 0.615591,
+      "rank1_cosine_similarity": 0.384409,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-13",
+      "rank2_cosine_distance": 0.64427,
+      "rank2_cosine_similarity": 0.35573,
+      "rank2_source_id": "M2C-25",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.105269,
+      "group": "7f_in_domain",
+      "id": "7F-I35",
+      "label": "in_domain",
+      "query": "How can I see which readings failed validation across business objects?",
+      "rank1_cosine_distance": 0.575367,
+      "rank1_cosine_similarity": 0.424633,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-07",
+      "rank2_cosine_distance": 0.680636,
+      "rank2_cosine_similarity": 0.319364,
+      "rank2_source_id": "M2C-06",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.086049,
+      "group": "7f_in_domain",
+      "id": "7F-I36",
+      "label": "in_domain",
+      "query": "Which future due dates are created once a debt arrangement has been agreed?",
+      "rank1_cosine_distance": 0.549657,
+      "rank1_cosine_similarity": 0.450343,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-23",
+      "rank2_cosine_distance": 0.635706,
+      "rank2_cosine_similarity": 0.364294,
+      "rank2_source_id": "M2C-24",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-16"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.106761,
+      "group": "7f_in_domain",
+      "id": "7F-I37",
+      "label": "in_domain",
+      "query": "What KPIs can I use to watch billing and invoicing runs?",
+      "rank1_cosine_distance": 0.539829,
+      "rank1_cosine_similarity": 0.460171,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-16",
+      "rank2_cosine_distance": 0.64659,
+      "rank2_cosine_similarity": 0.35341,
+      "rank2_source_id": "M2C-15",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.106128,
+      "group": "7f_in_domain",
+      "id": "7F-I38",
+      "label": "in_domain",
+      "query": "Which automated interface connects collections providers in a modern service-based way?",
+      "rank1_cosine_distance": 0.496559,
+      "rank1_cosine_similarity": 0.503441,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-28",
+      "rank2_cosine_distance": 0.602687,
+      "rank2_cosine_similarity": 0.397313,
+      "rank2_source_id": "M2C-27",
+      "split": "test"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-01"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.087448,
+      "group": "7f_in_domain",
+      "id": "7F-I39",
+      "label": "in_domain",
+      "query": "How do the technical master data objects relate to the business master data before transactions are taught?",
+      "rank1_cosine_distance": 0.406841,
+      "rank1_cosine_similarity": 0.593159,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-01",
+      "rank2_cosine_distance": 0.494289,
+      "rank2_cosine_similarity": 0.505711,
+      "rank2_source_id": "M2C-03",
+      "split": "dev"
+    },
+    {
+      "category": "in_domain_card_text",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "first_expected_rank": 1,
+      "gap_cosine_distance_rank1_rank2": 0.0063,
+      "group": "7f_in_domain",
+      "id": "7F-I40",
+      "label": "in_domain",
+      "query": "How is the final reading used when a customer leaves, before the closing bill?",
+      "rank1_cosine_distance": 0.577803,
+      "rank1_cosine_similarity": 0.422197,
+      "rank1_is_correct": true,
+      "rank1_source_id": "M2C-04",
+      "rank2_cosine_distance": 0.584103,
+      "rank2_cosine_similarity": 0.415897,
+      "rank2_source_id": "M2C-10",
+      "split": "test"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.000249,
+      "group": "7f_ood",
+      "id": "7F-O01",
+      "label": "out_of_domain",
+      "query": "What is a good recipe for vegetable biryani?",
+      "rank1_cosine_distance": 1.036276,
+      "rank1_cosine_similarity": -0.036276,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-09",
+      "rank2_cosine_distance": 1.036526,
+      "rank2_cosine_similarity": -0.036526,
+      "rank2_source_id": "M2C-01",
+      "split": "dev"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.011065,
+      "group": "7f_ood",
+      "id": "7F-O02",
+      "label": "out_of_domain",
+      "query": "How do I renew my passport in India?",
+      "rank1_cosine_distance": 0.872545,
+      "rank1_cosine_similarity": 0.127455,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-09",
+      "rank2_cosine_distance": 0.883609,
+      "rank2_cosine_similarity": 0.116391,
+      "rank2_source_id": "M2C-11",
+      "split": "test"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.002907,
+      "group": "7f_ood",
+      "id": "7F-O03",
+      "label": "out_of_domain",
+      "query": "What is the capital of Australia?",
+      "rank1_cosine_distance": 0.88633,
+      "rank1_cosine_similarity": 0.11367,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-17",
+      "rank2_cosine_distance": 0.889238,
+      "rank2_cosine_similarity": 0.110762,
+      "rank2_source_id": "M2C-18",
+      "split": "dev"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.01165,
+      "group": "7f_ood",
+      "id": "7F-O04",
+      "label": "out_of_domain",
+      "query": "What is the best way to learn guitar as an adult?",
+      "rank1_cosine_distance": 1.005503,
+      "rank1_cosine_similarity": -0.005503,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-06",
+      "rank2_cosine_distance": 1.017153,
+      "rank2_cosine_similarity": -0.017153,
+      "rank2_source_id": "M2C-18",
+      "split": "test"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.048568,
+      "group": "7f_ood",
+      "id": "7F-O05",
+      "label": "out_of_domain",
+      "query": "How long should I boil an egg?",
+      "rank1_cosine_distance": 0.968859,
+      "rank1_cosine_similarity": 0.031141,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-09",
+      "rank2_cosine_distance": 1.017427,
+      "rank2_cosine_similarity": -0.017427,
+      "rank2_source_id": "M2C-23",
+      "split": "dev"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.002739,
+      "group": "7f_ood",
+      "id": "7F-O06",
+      "label": "out_of_domain",
+      "query": "Can you recommend a laptop for video editing?",
+      "rank1_cosine_distance": 0.980518,
+      "rank1_cosine_similarity": 0.019482,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-25",
+      "rank2_cosine_distance": 0.983258,
+      "rank2_cosine_similarity": 0.016742,
+      "rank2_source_id": "M2C-09",
+      "split": "test"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.009972,
+      "group": "7f_ood",
+      "id": "7F-O07",
+      "label": "out_of_domain",
+      "query": "What causes thunderstorms?",
+      "rank1_cosine_distance": 0.910965,
+      "rank1_cosine_similarity": 0.089035,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-01",
+      "rank2_cosine_distance": 0.920937,
+      "rank2_cosine_similarity": 0.079063,
+      "rank2_source_id": "M2C-03",
+      "split": "dev"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.005667,
+      "group": "7f_ood",
+      "id": "7F-O08",
+      "label": "out_of_domain",
+      "query": "How do you say good morning in Spanish?",
+      "rank1_cosine_distance": 0.920388,
+      "rank1_cosine_similarity": 0.079612,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-09",
+      "rank2_cosine_distance": 0.926055,
+      "rank2_cosine_similarity": 0.073945,
+      "rank2_source_id": "M2C-12",
+      "split": "test"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.000139,
+      "group": "7f_ood",
+      "id": "7F-O09",
+      "label": "out_of_domain",
+      "query": "How do I get rid of a cold quickly?",
+      "rank1_cosine_distance": 1.064474,
+      "rank1_cosine_similarity": -0.064474,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 1.064613,
+      "rank2_cosine_similarity": -0.064613,
+      "rank2_source_id": "M2C-27",
+      "split": "dev"
+    },
+    {
+      "category": "unrelated_general",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.019387,
+      "group": "7f_ood",
+      "id": "7F-O10",
+      "label": "out_of_domain",
+      "query": "Who won the football world cup in 2018?",
+      "rank1_cosine_distance": 0.990811,
+      "rank1_cosine_similarity": 0.009189,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 1.010198,
+      "rank2_cosine_similarity": -0.010198,
+      "rank2_source_id": "M2C-28",
+      "split": "test"
+    },
+    {
+      "category": "other_software_it",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.013422,
+      "group": "7f_ood",
+      "id": "7F-O11",
+      "label": "out_of_domain",
+      "query": "How do I reset my router password?",
+      "rank1_cosine_distance": 0.978013,
+      "rank1_cosine_similarity": 0.021987,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.991435,
+      "rank2_cosine_similarity": 0.008565,
+      "rank2_source_id": "M2C-25",
+      "split": "dev"
+    },
+    {
+      "category": "other_software_it",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.00605,
+      "group": "7f_ood",
+      "id": "7F-O12",
+      "label": "out_of_domain",
+      "query": "How do I center a div with CSS?",
+      "rank1_cosine_distance": 1.026947,
+      "rank1_cosine_similarity": -0.026947,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 1.032996,
+      "rank2_cosine_similarity": -0.032996,
+      "rank2_source_id": "M2C-12",
+      "split": "test"
+    },
+    {
+      "category": "other_software_it",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.002118,
+      "group": "7f_ood",
+      "id": "7F-O13",
+      "label": "out_of_domain",
+      "query": "What is the difference between TCP and UDP?",
+      "rank1_cosine_distance": 0.920898,
+      "rank1_cosine_similarity": 0.079102,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-10",
+      "rank2_cosine_distance": 0.923016,
+      "rank2_cosine_similarity": 0.076984,
+      "rank2_source_id": "M2C-03",
+      "split": "dev"
+    },
+    {
+      "category": "other_software_it",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.000573,
+      "group": "7f_ood",
+      "id": "7F-O14",
+      "label": "out_of_domain",
+      "query": "How do I create a pivot table in Excel?",
+      "rank1_cosine_distance": 0.886558,
+      "rank1_cosine_similarity": 0.113442,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-01",
+      "rank2_cosine_distance": 0.887131,
+      "rank2_cosine_similarity": 0.112869,
+      "rank2_source_id": "M2C-24",
+      "split": "test"
+    },
+    {
+      "category": "other_software_it",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.014757,
+      "group": "7f_ood",
+      "id": "7F-O15",
+      "label": "out_of_domain",
+      "query": "How do I set up two-factor authentication on Gmail?",
+      "rank1_cosine_distance": 0.919628,
+      "rank1_cosine_similarity": 0.080372,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-12",
+      "rank2_cosine_distance": 0.934385,
+      "rank2_cosine_similarity": 0.065615,
+      "rank2_source_id": "M2C-17",
+      "split": "dev"
+    },
+    {
+      "category": "other_software_it",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.034257,
+      "group": "7f_ood",
+      "id": "7F-O16",
+      "label": "out_of_domain",
+      "query": "My Docker container will not start, what should I check?",
+      "rank1_cosine_distance": 0.982708,
+      "rank1_cosine_similarity": 0.017292,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-04",
+      "rank2_cosine_distance": 1.016965,
+      "rank2_cosine_similarity": -0.016965,
+      "rank2_source_id": "M2C-02",
+      "split": "test"
+    },
+    {
+      "category": "other_software_it",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.008062,
+      "group": "7f_ood",
+      "id": "7F-O17",
+      "label": "out_of_domain",
+      "query": "How do I write a SQL join between two tables?",
+      "rank1_cosine_distance": 0.937725,
+      "rank1_cosine_similarity": 0.062275,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 0.945788,
+      "rank2_cosine_similarity": 0.054212,
+      "rank2_source_id": "M2C-17",
+      "split": "dev"
+    },
+    {
+      "category": "other_software_it",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.019002,
+      "group": "7f_ood",
+      "id": "7F-O18",
+      "label": "out_of_domain",
+      "query": "How do I configure a VPN on Windows?",
+      "rank1_cosine_distance": 0.963241,
+      "rank1_cosine_similarity": 0.036759,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-09",
+      "rank2_cosine_distance": 0.982243,
+      "rank2_cosine_similarity": 0.017757,
+      "rank2_source_id": "M2C-12",
+      "split": "test"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.002774,
+      "group": "7f_ood",
+      "id": "7F-O19",
+      "label": "out_of_domain",
+      "query": "How do I create a purchase order in SAP MM?",
+      "rank1_cosine_distance": 0.539619,
+      "rank1_cosine_similarity": 0.460381,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-24",
+      "rank2_cosine_distance": 0.542393,
+      "rank2_cosine_similarity": 0.457607,
+      "rank2_source_id": "M2C-20",
+      "split": "dev"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.010649,
+      "group": "7f_ood",
+      "id": "7F-O20",
+      "label": "out_of_domain",
+      "query": "What is the ABAP statement to loop over an internal table?",
+      "rank1_cosine_distance": 0.761722,
+      "rank1_cosine_similarity": 0.238278,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 0.772371,
+      "rank2_cosine_similarity": 0.227629,
+      "rank2_source_id": "M2C-17",
+      "split": "test"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.00362,
+      "group": "7f_ood",
+      "id": "7F-O21",
+      "label": "out_of_domain",
+      "query": "How is a payroll run executed in SAP HCM?",
+      "rank1_cosine_distance": 0.563673,
+      "rank1_cosine_similarity": 0.436327,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.567293,
+      "rank2_cosine_similarity": 0.432707,
+      "rank2_source_id": "M2C-22",
+      "split": "dev"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.045424,
+      "group": "7f_ood",
+      "id": "7F-O22",
+      "label": "out_of_domain",
+      "query": "How do I post a vendor invoice in accounts payable?",
+      "rank1_cosine_distance": 0.624843,
+      "rank1_cosine_similarity": 0.375157,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-14",
+      "rank2_cosine_distance": 0.670267,
+      "rank2_cosine_similarity": 0.329733,
+      "rank2_source_id": "M2C-15",
+      "split": "test"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.002989,
+      "group": "7f_ood",
+      "id": "7F-O23",
+      "label": "out_of_domain",
+      "query": "What is a controlling area in SAP CO?",
+      "rank1_cosine_distance": 0.493088,
+      "rank1_cosine_similarity": 0.506912,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-17",
+      "rank2_cosine_distance": 0.496077,
+      "rank2_cosine_similarity": 0.503923,
+      "rank2_source_id": "M2C-10",
+      "split": "dev"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.003118,
+      "group": "7f_ood",
+      "id": "7F-O24",
+      "label": "out_of_domain",
+      "query": "How do I configure tiles in the SAP Fiori launchpad?",
+      "rank1_cosine_distance": 0.719219,
+      "rank1_cosine_similarity": 0.280781,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-21",
+      "rank2_cosine_distance": 0.722337,
+      "rank2_cosine_similarity": 0.277663,
+      "rank2_source_id": "M2C-28",
+      "split": "test"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.017575,
+      "group": "7f_ood",
+      "id": "7F-O25",
+      "label": "out_of_domain",
+      "query": "How do I extend a material master to a new plant?",
+      "rank1_cosine_distance": 0.837519,
+      "rank1_cosine_similarity": 0.162481,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.855095,
+      "rank2_cosine_similarity": 0.144905,
+      "rank2_source_id": "M2C-04",
+      "split": "dev"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.043191,
+      "group": "7f_ood",
+      "id": "7F-O26",
+      "label": "out_of_domain",
+      "query": "How does SAP Transportation Management plan a freight order?",
+      "rank1_cosine_distance": 0.439853,
+      "rank1_cosine_similarity": 0.560147,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.483044,
+      "rank2_cosine_similarity": 0.516956,
+      "rank2_source_id": "M2C-10",
+      "split": "test"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.028888,
+      "group": "7f_ood",
+      "id": "7F-O27",
+      "label": "out_of_domain",
+      "query": "What is a sales order type in SAP SD?",
+      "rank1_cosine_distance": 0.507433,
+      "rank1_cosine_similarity": 0.492567,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.536321,
+      "rank2_cosine_similarity": 0.463679,
+      "rank2_source_id": "M2C-21",
+      "split": "dev"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.002341,
+      "group": "7f_ood",
+      "id": "7F-O28",
+      "label": "out_of_domain",
+      "query": "How do I set up user roles and authorizations in SAP?",
+      "rank1_cosine_distance": 0.580785,
+      "rank1_cosine_similarity": 0.419215,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-17",
+      "rank2_cosine_distance": 0.583126,
+      "rank2_cosine_similarity": 0.416874,
+      "rank2_source_id": "M2C-18",
+      "split": "test"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.000848,
+      "group": "7f_ood",
+      "id": "7F-O29",
+      "label": "out_of_domain",
+      "query": "How do I schedule a background job in SM36?",
+      "rank1_cosine_distance": 0.797927,
+      "rank1_cosine_similarity": 0.202073,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-16",
+      "rank2_cosine_distance": 0.798775,
+      "rank2_cosine_similarity": 0.201225,
+      "rank2_source_id": "M2C-04",
+      "split": "dev"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.000377,
+      "group": "7f_ood",
+      "id": "7F-O30",
+      "label": "out_of_domain",
+      "query": "How do I convert from SAP ECC to SAP S/4HANA?",
+      "rank1_cosine_distance": 0.495442,
+      "rank1_cosine_similarity": 0.504558,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-28",
+      "rank2_cosine_distance": 0.495819,
+      "rank2_cosine_similarity": 0.504181,
+      "rank2_source_id": "M2C-22",
+      "split": "test"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.03009,
+      "group": "7f_ood",
+      "id": "7F-O31",
+      "label": "out_of_domain",
+      "query": "What is the Cloud Foundry environment in SAP BTP?",
+      "rank1_cosine_distance": 0.530346,
+      "rank1_cosine_similarity": 0.469654,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-01",
+      "rank2_cosine_distance": 0.560435,
+      "rank2_cosine_similarity": 0.439565,
+      "rank2_source_id": "M2C-28",
+      "split": "dev"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.013021,
+      "group": "7f_ood",
+      "id": "7F-O32",
+      "label": "out_of_domain",
+      "query": "How is asset depreciation calculated in SAP FI-AA?",
+      "rank1_cosine_distance": 0.535306,
+      "rank1_cosine_similarity": 0.464694,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 0.548327,
+      "rank2_cosine_similarity": 0.451673,
+      "rank2_source_id": "M2C-09",
+      "split": "test"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.0444,
+      "group": "7f_ood",
+      "id": "7F-O33",
+      "label": "out_of_domain",
+      "query": "How do I configure a pricing procedure for sales?",
+      "rank1_cosine_distance": 0.6942,
+      "rank1_cosine_similarity": 0.3058,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.7386,
+      "rank2_cosine_similarity": 0.2614,
+      "rank2_source_id": "M2C-12",
+      "split": "dev"
+    },
+    {
+      "category": "sap_other_modules",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.025917,
+      "group": "7f_ood",
+      "id": "7F-O34",
+      "label": "out_of_domain",
+      "query": "How does performance management work in SAP SuccessFactors?",
+      "rank1_cosine_distance": 0.501983,
+      "rank1_cosine_similarity": 0.498017,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-04",
+      "rank2_cosine_distance": 0.5279,
+      "rank2_cosine_similarity": 0.4721,
+      "rank2_source_id": "M2C-07",
+      "split": "test"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.033346,
+      "group": "7f_ood",
+      "id": "7F-O35",
+      "label": "out_of_domain",
+      "query": "How is feed-in compensation for rooftop solar panels calculated and paid to the customer?",
+      "rank1_cosine_distance": 0.657482,
+      "rank1_cosine_similarity": 0.342518,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.690828,
+      "rank2_cosine_similarity": 0.309172,
+      "rank2_source_id": "M2C-15",
+      "split": "dev"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.012958,
+      "group": "7f_ood",
+      "id": "7F-O36",
+      "label": "out_of_domain",
+      "query": "How do smart meters transmit consumption data to a head-end system over a mesh network?",
+      "rank1_cosine_distance": 0.615858,
+      "rank1_cosine_similarity": 0.384142,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-10",
+      "rank2_cosine_distance": 0.628817,
+      "rank2_cosine_similarity": 0.371183,
+      "rank2_source_id": "M2C-05",
+      "split": "test"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.009848,
+      "group": "7f_ood",
+      "id": "7F-O37",
+      "label": "out_of_domain",
+      "query": "How are outages detected on the distribution network and repair crews dispatched?",
+      "rank1_cosine_distance": 0.640967,
+      "rank1_cosine_similarity": 0.359033,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.650815,
+      "rank2_cosine_similarity": 0.349185,
+      "rank2_source_id": "M2C-07",
+      "split": "dev"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.053565,
+      "group": "7f_ood",
+      "id": "7F-O38",
+      "label": "out_of_domain",
+      "query": "How are EDI messages exchanged with other market participants when a customer switches supplier?",
+      "rank1_cosine_distance": 0.659945,
+      "rank1_cosine_similarity": 0.340055,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-03",
+      "rank2_cosine_distance": 0.71351,
+      "rank2_cosine_similarity": 0.28649,
+      "rank2_source_id": "M2C-10",
+      "split": "test"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.003849,
+      "group": "7f_ood",
+      "id": "7F-O39",
+      "label": "out_of_domain",
+      "query": "How do I plan inspection and maintenance of gas pipelines?",
+      "rank1_cosine_distance": 0.780832,
+      "rank1_cosine_similarity": 0.219168,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-04",
+      "rank2_cosine_distance": 0.784681,
+      "rank2_cosine_similarity": 0.215319,
+      "rank2_source_id": "M2C-16",
+      "split": "dev"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.014225,
+      "group": "7f_ood",
+      "id": "7F-O40",
+      "label": "out_of_domain",
+      "query": "How is the wholesale price for energy trading determined?",
+      "rank1_cosine_distance": 0.707865,
+      "rank1_cosine_similarity": 0.292135,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-05",
+      "rank2_cosine_distance": 0.722089,
+      "rank2_cosine_similarity": 0.277911,
+      "rank2_source_id": "M2C-10",
+      "split": "test"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.017733,
+      "group": "7f_ood",
+      "id": "7F-O41",
+      "label": "out_of_domain",
+      "query": "How can a household apply for an energy efficiency subsidy?",
+      "rank1_cosine_distance": 0.846511,
+      "rank1_cosine_similarity": 0.153489,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-15",
+      "rank2_cosine_distance": 0.864244,
+      "rank2_cosine_similarity": 0.135756,
+      "rank2_source_id": "M2C-09",
+      "split": "dev"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.03818,
+      "group": "7f_ood",
+      "id": "7F-O42",
+      "label": "out_of_domain",
+      "query": "How are waste collection fees calculated and billed to residents?",
+      "rank1_cosine_distance": 0.569809,
+      "rank1_cosine_similarity": 0.430191,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.607989,
+      "rank2_cosine_similarity": 0.392011,
+      "rank2_source_id": "M2C-13",
+      "split": "test"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.00693,
+      "group": "7f_ood",
+      "id": "7F-O43",
+      "label": "out_of_domain",
+      "query": "How does a demand response programme shed load during peak hours?",
+      "rank1_cosine_distance": 0.673529,
+      "rank1_cosine_similarity": 0.326471,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.680458,
+      "rank2_cosine_similarity": 0.319542,
+      "rank2_source_id": "M2C-13",
+      "split": "dev"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.014095,
+      "group": "7f_ood",
+      "id": "7F-O44",
+      "label": "out_of_domain",
+      "query": "How do I calculate carbon emissions from a customer's electricity usage?",
+      "rank1_cosine_distance": 0.735251,
+      "rank1_cosine_similarity": 0.264749,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.749346,
+      "rank2_cosine_similarity": 0.250654,
+      "rank2_source_id": "M2C-13",
+      "split": "test"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.00787,
+      "group": "7f_ood",
+      "id": "7F-O45",
+      "label": "out_of_domain",
+      "query": "How do I build a customer self-service web portal for a utility?",
+      "rank1_cosine_distance": 0.711688,
+      "rank1_cosine_similarity": 0.288312,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-02",
+      "rank2_cosine_distance": 0.719557,
+      "rank2_cosine_similarity": 0.280443,
+      "rank2_source_id": "M2C-03",
+      "split": "dev"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.014194,
+      "group": "7f_ood",
+      "id": "7F-O46",
+      "label": "out_of_domain",
+      "query": "How is water leak detection implemented using flow sensors?",
+      "rank1_cosine_distance": 0.736721,
+      "rank1_cosine_similarity": 0.263279,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-07",
+      "rank2_cosine_distance": 0.750915,
+      "rank2_cosine_similarity": 0.249085,
+      "rank2_source_id": "M2C-10",
+      "split": "test"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.02848,
+      "group": "7f_ood",
+      "id": "7F-O47",
+      "label": "out_of_domain",
+      "query": "How are renewable energy certificates tracked and retired?",
+      "rank1_cosine_distance": 0.648003,
+      "rank1_cosine_similarity": 0.351997,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-27",
+      "rank2_cosine_distance": 0.676484,
+      "rank2_cosine_similarity": 0.323516,
+      "rank2_source_id": "M2C-28",
+      "split": "dev"
+    },
+    {
+      "category": "utilities_adjacent_not_covered",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.010616,
+      "group": "7f_ood",
+      "id": "7F-O48",
+      "label": "out_of_domain",
+      "query": "How does a utility forecast load for the next day?",
+      "rank1_cosine_distance": 0.719215,
+      "rank1_cosine_similarity": 0.280785,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.729831,
+      "rank2_cosine_similarity": 0.270169,
+      "rank2_source_id": "M2C-02",
+      "split": "test"
+    },
+    {
+      "category": "lexical_overlap_trap",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.001672,
+      "group": "7f_ood",
+      "id": "7F-O49",
+      "label": "out_of_domain",
+      "query": "How do I dispute a charge on my credit card statement?",
+      "rank1_cosine_distance": 0.829283,
+      "rank1_cosine_similarity": 0.170717,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-13",
+      "rank2_cosine_distance": 0.830955,
+      "rank2_cosine_similarity": 0.169045,
+      "rank2_source_id": "M2C-27",
+      "split": "dev"
+    },
+    {
+      "category": "lexical_overlap_trap",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.020957,
+      "group": "7f_ood",
+      "id": "7F-O50",
+      "label": "out_of_domain",
+      "query": "How should I move out of a rented flat and get my deposit back?",
+      "rank1_cosine_distance": 0.898144,
+      "rank1_cosine_similarity": 0.101856,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.919102,
+      "rank2_cosine_similarity": 0.080898,
+      "rank2_source_id": "M2C-25",
+      "split": "test"
+    },
+    {
+      "category": "lexical_overlap_trap",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.052576,
+      "group": "7f_ood",
+      "id": "7F-O51",
+      "label": "out_of_domain",
+      "query": "What is a sensible monthly budget plan for a family of four?",
+      "rank1_cosine_distance": 0.70357,
+      "rank1_cosine_similarity": 0.29643,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-13",
+      "rank2_cosine_distance": 0.756146,
+      "rank2_cosine_similarity": 0.243854,
+      "rank2_source_id": "M2C-15",
+      "split": "dev"
+    },
+    {
+      "category": "lexical_overlap_trap",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.002947,
+      "group": "7f_ood",
+      "id": "7F-O52",
+      "label": "out_of_domain",
+      "query": "How can I pay for a new phone in installments?",
+      "rank1_cosine_distance": 0.690553,
+      "rank1_cosine_similarity": 0.309447,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-24",
+      "rank2_cosine_distance": 0.6935,
+      "rank2_cosine_similarity": 0.3065,
+      "rank2_source_id": "M2C-23",
+      "split": "test"
+    },
+    {
+      "category": "lexical_overlap_trap",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.057272,
+      "group": "7f_ood",
+      "id": "7F-O53",
+      "label": "out_of_domain",
+      "query": "What is the Dunning-Kruger effect?",
+      "rank1_cosine_distance": 0.730725,
+      "rank1_cosine_similarity": 0.269275,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-26",
+      "rank2_cosine_distance": 0.787997,
+      "rank2_cosine_similarity": 0.212003,
+      "rank2_source_id": "M2C-08",
+      "split": "dev"
+    },
+    {
+      "category": "lexical_overlap_trap",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.156802,
+      "group": "7f_ood",
+      "id": "7F-O54",
+      "label": "out_of_domain",
+      "query": "How do I disconnect my laptop from wifi and connect to another network?",
+      "rank1_cosine_distance": 0.818929,
+      "rank1_cosine_similarity": 0.181071,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-29",
+      "rank2_cosine_distance": 0.97573,
+      "rank2_cosine_similarity": 0.02427,
+      "rank2_source_id": "M2C-04",
+      "split": "test"
+    },
+    {
+      "category": "lexical_overlap_trap",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.082611,
+      "group": "7f_ood",
+      "id": "7F-O55",
+      "label": "out_of_domain",
+      "query": "How do I clear my browser cache and cookies?",
+      "rank1_cosine_distance": 0.868024,
+      "rank1_cosine_similarity": 0.131976,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-21",
+      "rank2_cosine_distance": 0.950635,
+      "rank2_cosine_similarity": 0.049365,
+      "rank2_source_id": "M2C-20",
+      "split": "dev"
+    },
+    {
+      "category": "lexical_overlap_trap",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.022864,
+      "group": "7f_ood",
+      "id": "7F-O56",
+      "label": "out_of_domain",
+      "query": "What is the notice period in an employment contract?",
+      "rank1_cosine_distance": 0.69744,
+      "rank1_cosine_similarity": 0.30256,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-23",
+      "rank2_cosine_distance": 0.720304,
+      "rank2_cosine_similarity": 0.279696,
+      "rank2_source_id": "M2C-25",
+      "split": "test"
+    },
+    {
+      "category": "very_short_unrelated",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.011868,
+      "group": "7f_ood",
+      "id": "7F-O57",
+      "label": "out_of_domain",
+      "query": "weather",
+      "rank1_cosine_distance": 0.989765,
+      "rank1_cosine_similarity": 0.010235,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 1.001633,
+      "rank2_cosine_similarity": -0.001633,
+      "rank2_source_id": "M2C-07",
+      "split": "dev"
+    },
+    {
+      "category": "very_short_unrelated",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.005607,
+      "group": "7f_ood",
+      "id": "7F-O58",
+      "label": "out_of_domain",
+      "query": "football scores",
+      "rank1_cosine_distance": 0.909563,
+      "rank1_cosine_similarity": 0.090437,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-07",
+      "rank2_cosine_distance": 0.91517,
+      "rank2_cosine_similarity": 0.08483,
+      "rank2_source_id": "M2C-06",
+      "split": "test"
+    },
+    {
+      "category": "very_short_unrelated",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.00189,
+      "group": "7f_ood",
+      "id": "7F-O59",
+      "label": "out_of_domain",
+      "query": "pizza recipe",
+      "rank1_cosine_distance": 1.062262,
+      "rank1_cosine_similarity": -0.062262,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-18",
+      "rank2_cosine_distance": 1.064152,
+      "rank2_cosine_similarity": -0.064152,
+      "rank2_source_id": "M2C-14",
+      "split": "dev"
+    },
+    {
+      "category": "very_short_unrelated",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.021496,
+      "group": "7f_ood",
+      "id": "7F-O60",
+      "label": "out_of_domain",
+      "query": "ABAP",
+      "rank1_cosine_distance": 0.763881,
+      "rank1_cosine_similarity": 0.236119,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-15",
+      "rank2_cosine_distance": 0.785377,
+      "rank2_cosine_similarity": 0.214623,
+      "rank2_source_id": "M2C-04",
+      "split": "test"
+    },
+    {
+      "category": "very_short_unrelated",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.016957,
+      "group": "7f_ood",
+      "id": "7F-O61",
+      "label": "out_of_domain",
+      "query": "payroll",
+      "rank1_cosine_distance": 0.727698,
+      "rank1_cosine_similarity": 0.272302,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-15",
+      "rank2_cosine_distance": 0.744655,
+      "rank2_cosine_similarity": 0.255345,
+      "rank2_source_id": "M2C-16",
+      "split": "dev"
+    },
+    {
+      "category": "very_short_unrelated",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.046161,
+      "group": "7f_ood",
+      "id": "7F-O62",
+      "label": "out_of_domain",
+      "query": "Excel formulas",
+      "rank1_cosine_distance": 0.814395,
+      "rank1_cosine_similarity": 0.185605,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-09",
+      "rank2_cosine_distance": 0.860556,
+      "rank2_cosine_similarity": 0.139444,
+      "rank2_source_id": "M2C-17",
+      "split": "test"
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.038126,
+      "group": "7f_ambiguous",
+      "id": "7F-A01",
+      "label": "ambiguous_excluded",
+      "query": "How do I read my electricity meter and send the reading to my provider?",
+      "rank1_cosine_distance": 0.556637,
+      "rank1_cosine_similarity": 0.443363,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-06",
+      "rank2_cosine_distance": 0.594764,
+      "rank2_cosine_similarity": 0.405236,
+      "rank2_source_id": "M2C-07",
+      "split": null
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.000833,
+      "group": "7f_ambiguous",
+      "id": "7F-A02",
+      "label": "ambiguous_excluded",
+      "query": "How are late payment fees charged to a customer?",
+      "rank1_cosine_distance": 0.744531,
+      "rank1_cosine_similarity": 0.255469,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.745364,
+      "rank2_cosine_similarity": 0.254636,
+      "rank2_source_id": "M2C-12",
+      "split": null
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.012233,
+      "group": "7f_ambiguous",
+      "id": "7F-A03",
+      "label": "ambiguous_excluded",
+      "query": "What is the difference between a bill and an invoice in utilities?",
+      "rank1_cosine_distance": 0.485287,
+      "rank1_cosine_similarity": 0.514713,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-14",
+      "rank2_cosine_distance": 0.49752,
+      "rank2_cosine_similarity": 0.50248,
+      "rank2_source_id": "M2C-15",
+      "split": null
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.020168,
+      "group": "7f_ambiguous",
+      "id": "7F-A04",
+      "label": "ambiguous_excluded",
+      "query": "How do smart meters work?",
+      "rank1_cosine_distance": 0.549529,
+      "rank1_cosine_similarity": 0.450471,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-06",
+      "rank2_cosine_distance": 0.569697,
+      "rank2_cosine_similarity": 0.430303,
+      "rank2_source_id": "M2C-05",
+      "split": null
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.002423,
+      "group": "7f_ambiguous",
+      "id": "7F-A05",
+      "label": "ambiguous_excluded",
+      "query": "What is SAP IS-U?",
+      "rank1_cosine_distance": 0.552538,
+      "rank1_cosine_similarity": 0.447462,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-28",
+      "rank2_cosine_distance": 0.554961,
+      "rank2_cosine_similarity": 0.445039,
+      "rank2_source_id": "M2C-22",
+      "split": null
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.009709,
+      "group": "7f_ambiguous",
+      "id": "7F-A06",
+      "label": "ambiguous_excluded",
+      "query": "How do I handle a customer who disputes their bill?",
+      "rank1_cosine_distance": 0.762897,
+      "rank1_cosine_similarity": 0.237103,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-15",
+      "rank2_cosine_distance": 0.772605,
+      "rank2_cosine_similarity": 0.227395,
+      "rank2_source_id": "M2C-14",
+      "split": null
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.017348,
+      "group": "7f_ambiguous",
+      "id": "7F-A07",
+      "label": "ambiguous_excluded",
+      "query": "How are payments from customers who pay by direct debit processed?",
+      "rank1_cosine_distance": 0.678815,
+      "rank1_cosine_similarity": 0.321185,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-22",
+      "rank2_cosine_distance": 0.696163,
+      "rank2_cosine_similarity": 0.303837,
+      "rank2_source_id": "M2C-11",
+      "split": null
+    },
+    {
+      "category": "ambiguous",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.045594,
+      "group": "7f_ambiguous",
+      "id": "7F-A08",
+      "label": "ambiguous_excluded",
+      "query": "What is the process when a customer asks for a payment extension?",
+      "rank1_cosine_distance": 0.673576,
+      "rank1_cosine_similarity": 0.326424,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-22",
+      "rank2_cosine_distance": 0.719171,
+      "rank2_cosine_similarity": 0.280829,
+      "rank2_source_id": "M2C-24",
+      "split": null
+    },
+    {
+      "category": "out_of_domain",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.006067,
+      "group": "legacy_ood",
+      "id": "q26",
+      "label": "out_of_domain_legacy",
+      "query": "What is SAP HANA licensing cost?",
+      "rank1_cosine_distance": 0.598722,
+      "rank1_cosine_similarity": 0.401278,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-11",
+      "rank2_cosine_distance": 0.604789,
+      "rank2_cosine_similarity": 0.395211,
+      "rank2_source_id": "M2C-09",
+      "split": null
+    },
+    {
+      "category": "out_of_domain",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.002868,
+      "group": "legacy_ood",
+      "id": "q27",
+      "label": "out_of_domain_legacy",
+      "query": "Who is the CEO of SAP?",
+      "rank1_cosine_distance": 0.58626,
+      "rank1_cosine_similarity": 0.41374,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-01",
+      "rank2_cosine_distance": 0.589127,
+      "rank2_cosine_similarity": 0.410873,
+      "rank2_source_id": "M2C-02",
+      "split": null
+    },
+    {
+      "category": "out_of_domain",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.020968,
+      "group": "legacy_ood",
+      "id": "q28",
+      "label": "out_of_domain_legacy",
+      "query": "What is Python?",
+      "rank1_cosine_distance": 0.917152,
+      "rank1_cosine_similarity": 0.082848,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-14",
+      "rank2_cosine_distance": 0.93812,
+      "rank2_cosine_similarity": 0.06188,
+      "rank2_source_id": "M2C-15",
+      "split": null
+    },
+    {
+      "category": "out_of_domain",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.03423,
+      "group": "legacy_ood",
+      "id": "q29",
+      "label": "out_of_domain_legacy",
+      "query": "How do I install Windows 11?",
+      "rank1_cosine_distance": 0.930419,
+      "rank1_cosine_similarity": 0.069581,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-24",
+      "rank2_cosine_distance": 0.964649,
+      "rank2_cosine_similarity": 0.035351,
+      "rank2_source_id": "M2C-03",
+      "split": null
+    },
+    {
+      "category": "out_of_domain",
+      "expected_source_ids": [],
+      "first_expected_rank": null,
+      "gap_cosine_distance_rank1_rank2": 0.028689,
+      "group": "legacy_ood",
+      "id": "q30",
+      "label": "out_of_domain_legacy",
+      "query": "What is the weather today?",
+      "rank1_cosine_distance": 0.958423,
+      "rank1_cosine_similarity": 0.041577,
+      "rank1_is_correct": null,
+      "rank1_source_id": "M2C-08",
+      "rank2_cosine_distance": 0.987112,
+      "rank2_cosine_similarity": 0.012888,
+      "rank2_source_id": "M2C-09",
+      "split": null
+    }
+  ],
+  "regression": {
+    "default_min_cosine": null,
+    "phase4": {
+      "first_expected_rank_equals_7e": 50,
+      "metrics": {
+        "hits@1": 46,
+        "mean_expected_coverage@1": 0.8583,
+        "mean_expected_coverage@3": 0.955,
+        "mean_expected_coverage@5": 1.0,
+        "mrr": 0.95,
+        "questions": 50,
+        "recall@1": 0.92,
+        "recall@3": 0.96,
+        "recall@5": 1.0
+      },
+      "metrics_equal_7e": true,
+      "queries": 50,
+      "rank1_distance_equals_7e_to_6dp": 50,
+      "rank1_equals_7e": 50,
+      "refused_with_default_selector": 0,
+      "top5_equals_7e": 50
+    },
+    "phase5": {
+      "first_expected_rank_equals_7e": 54,
+      "metrics": {
+        "hits@1": 39,
+        "mean_expected_coverage@1": 0.6728,
+        "mean_expected_coverage@3": 0.7963,
+        "mean_expected_coverage@5": 0.8704,
+        "mrr": 0.7873,
+        "questions": 54,
+        "recall@1": 0.7222,
+        "recall@3": 0.7963,
+        "recall@5": 0.8704
+      },
+      "metrics_equal_7e": true,
+      "queries": 54,
+      "rank1_distance_equals_7e_to_6dp": 54,
+      "rank1_equals_7e": 54,
+      "refused_with_default_selector": 0,
+      "top5_equals_7e": 54
+    }
+  },
+  "rule": {
+    "constants": {
+      "auroc_min": 0.9,
+      "dev_max_fn": 0.05,
+      "min_in_domain": 100,
+      "min_ood": 50,
+      "min_ood_per_split": 25,
+      "pooled_max_fn": 0.05,
+      "pooled_max_fp": 0.2,
+      "test_max_fn": 0.1,
+      "test_max_fp": 0.25
+    },
+    "text": {
+      "C1_sample_adequacy": "n_in_domain >= 100, n_out_of_domain >= 50, and at least 25 out-of-domain queries in each of dev and test",
+      "C2_separation_pooled": "AUROC (probability that a random in-domain rank-1 similarity exceeds a random out-of-domain one, ties 0.5) >= 0.90 AND some threshold t has in-domain refusal rate <= 0.05 AND out-of-domain acceptance rate <= 0.20 on the pooled set",
+      "C3_held_out": "t* = on DEV only: among candidate thresholds (midpoints between adjacent distinct DEV scores) with DEV in-domain refusal rate <= 0.05, the one with the lowest DEV out-of-domain acceptance rate (ties: the lowest t). On TEST, t* must give in-domain refusal rate <= 0.10 and out-of-domain acceptance rate <= 0.25",
+      "acceptance_semantics": "a query is accepted when rank-1 similarity >= t (inclusive); refused when below",
+      "declared_before_evaluation": true,
+      "not_gates": "ambiguous queries, the five legacy out-of-domain questions, the gap rank1-rank2, and per-category figures are descriptive only",
+      "populations": "in-domain = Phase 4 (50) + Phase 5 (54) + 7F in-domain; out-of-domain = 7F out_of_domain (the clear ones only)",
+      "score": "rank-1 cosine SIMILARITY = 1 - cosine distance, as returned by the unchanged dense router (no threshold, k=29, rank 1 only)",
+      "verdict": "a threshold is justified only if C1, C2 and C3 all hold, and even then it is indicative (small sample, agent-authored). Otherwise no threshold is justified and min_cosine stays None"
+    }
+  },
+  "schema_version": 1,
+  "scope": {
+    "answer_generated": false,
+    "default_min_cosine": null,
+    "pages_fetched_or_ingested": false,
+    "retrieval_changed": false,
+    "router_modified": false,
+    "score": "rank-1 cosine similarity (1 - cosine distance); distance is reported separately in every row",
+    "threshold_enabled_in_router": false
+  },
+  "spec": "data/phase6_next_phase_spec.md#7F",
+  "store": {
+    "after": {
+      "collections": [
+        "sap_m2c_card_v1"
+      ],
+      "count": 29,
+      "logical_content_sha256": "643eac2e44082b8633bd762c575d5bc6f4a82e6abecd521db5ecd579c8132efb",
+      "space": "cosine"
+    },
+    "before": {
+      "collections": [
+        "sap_m2c_card_v1"
+      ],
+      "count": 29,
+      "logical_content_sha256": "643eac2e44082b8633bd762c575d5bc6f4a82e6abecd521db5ecd579c8132efb",
+      "space": "cosine"
+    }
+  },
+  "verdict": {
+    "C1_sample_adequacy": {
+      "n_in_domain": 144,
+      "n_ood_dev": 31,
+      "n_ood_test": 31,
+      "n_out_of_domain": 62,
+      "pass": true
+    },
+    "C2_separation_pooled": {
+      "auroc": 0.8715,
+      "auroc_min": 0.9,
+      "pass": false,
+      "pooled_feasible": {
+        "best_at_refusal_limit": {
+          "in_domain_n": 144,
+          "in_domain_refusal_ci95": [
+            0.0237,
+            0.0969
+          ],
+          "in_domain_refusal_rate": 0.0486,
+          "in_domain_refused": 7,
+          "ood_acceptance_ci95": [
+            0.3792,
+            0.6208
+          ],
+          "ood_acceptance_rate": 0.5,
+          "ood_accepted": 31,
+          "ood_n": 62,
+          "t": 0.236995
+        },
+        "exists": false
+      }
+    },
+    "C3_held_out": {
+      "dev": {
+        "in_domain_n": 72,
+        "in_domain_refusal_ci95": [
+          0.0,
+          0.0507
+        ],
+        "in_domain_refusal_rate": 0.0,
+        "in_domain_refused": 0,
+        "ood_acceptance_ci95": [
+          0.3197,
+          0.6516
+        ],
+        "ood_acceptance_rate": 0.4839,
+        "ood_accepted": 15,
+        "ood_n": 31,
+        "t": 0.204427
+      },
+      "limits": {
+        "test_max_in_domain_refusal": 0.1,
+        "test_max_ood_acceptance": 0.25
+      },
+      "pass": false,
+      "t_star": 0.204427,
+      "test": {
+        "in_domain_n": 72,
+        "in_domain_refusal_ci95": [
+          0.0025,
+          0.0746
+        ],
+        "in_domain_refusal_rate": 0.0139,
+        "in_domain_refused": 1,
+        "ood_acceptance_ci95": [
+          0.4077,
+          0.7358
+        ],
+        "ood_acceptance_rate": 0.5806,
+        "ood_accepted": 18,
+        "ood_n": 31,
+        "t": 0.204427
+      }
+    },
+    "min_cosine": null,
+    "proposed_min_cosine": null,
+    "threshold_justified": false
+  }
+}

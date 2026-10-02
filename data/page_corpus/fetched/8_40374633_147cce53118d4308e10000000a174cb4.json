@@ -1,0 +1,992 @@
+{
+  "status": "OK",
+  "data": {
+    "fallback": false,
+    "deliverable": {
+      "title": "Invoicing",
+      "shortdesc": "",
+      "landingPage": "5b7dce53118d4308e10000000a174cb4.html",
+      "loio": "a003b275c98148ee8a4c3fafe9588fe3",
+      "buildableMapLoio": "af7dce53118d4308e10000000a174cb4",
+      "version": "2025.001",
+      "languageCode": "en-US",
+      "state": "PRODUCTION",
+      "fullToc": [
+        {
+          "c": [],
+          "t": "Invoicing",
+          "u": "5b7dce53118d4308e10000000a174cb4.html",
+          "id": 2452377209.0
+        },
+        {
+          "c": [
+            {
+              "c": [],
+              "t": "Invoicing Procedure",
+              "u": "cc7bce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452377213.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Document Number Assignment",
+                  "u": "a77cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452377218.0
+                },
+                {
+                  "c": [],
+                  "t": "Invoicing Transactions",
+                  "u": "aa7cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452377220.0
+                },
+                {
+                  "c": [],
+                  "t": "FI Account Determination / CO Account Assignment",
+                  "u": "b07cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452377222.0
+                }
+              ],
+              "t": "Technical Prerequisites for Invoicing",
+              "u": "a47cce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452377215.0
+            },
+            {
+              "c": [],
+              "t": "Incorporation of External Billing Documents",
+              "u": "647dce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452377225.0
+            },
+            {
+              "c": [],
+              "t": "Processing CI Invoicing Documents in IS-U Invoicing",
+              "u": "ed923653e7306757e10000000a44538d.html",
+              "h": "",
+              "id": 2452377227.0
+            },
+            {
+              "c": [],
+              "t": "Generation of Billable Items in Convergent Invoicing",
+              "u": "4df4246bd8eb44319e42556ec72ef9dd.html",
+              "h": "",
+              "id": 2452377231.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [
+                        {
+                          "c": [],
+                          "t": "Structure of an Invoicing Unit",
+                          "u": "087cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379647.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Settlement Type",
+                          "u": "ad7cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379651.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Posting Document Creation",
+                          "u": "0d7dce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379652.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Print Document Creation",
+                          "u": "0e7cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379655.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Levying of Taxes",
+                          "u": "117cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379657.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Requesting an FI-CA Document in Next Invoicing Run",
+                          "u": "0b7cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379660.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Structure of Print Document Lines",
+                          "u": "027cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379662.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Print Block",
+                          "u": "4f7dce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379665.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Determination of Final Bill Amount",
+                          "u": "467dce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379668.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Determination of the Repayment Method",
+                          "u": "237cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379670.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Determination of Due Date",
+                          "u": "1d7cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379672.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Account Maintenance",
+                          "u": "1a7cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379674.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Dunning",
+                          "u": "177cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379676.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Subitems",
+                          "u": "207cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379678.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Rounding – Currency-Specific",
+                          "u": "497dce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379680.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Rounding the Final Bill Amount",
+                          "u": "947dce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379681.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Interest Calculation",
+                          "u": "437dce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379683.0
+                        },
+                        {
+                          "c": [],
+                          "t": "Processing Budget Billing Plans",
+                          "u": "147cce53118d4308e10000000a174cb4.html",
+                          "h": "",
+                          "id": 2452379684.0
+                        }
+                      ],
+                      "t": "Invoice Creation Features",
+                      "u": "3a7dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452377242.0
+                    }
+                  ],
+                  "t": "Bill Creation",
+                  "u": "d27bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452377238.0
+                },
+                {
+                  "c": [],
+                  "t": "Partial Bill Creation",
+                  "u": "d57bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379687.0
+                },
+                {
+                  "c": [],
+                  "t": "Joint Creation of Bills and Partial Bills",
+                  "u": "d17cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379688.0
+                },
+                {
+                  "c": [],
+                  "t": "Invoicing Reversal",
+                  "u": "de7bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379692.0
+                },
+                {
+                  "c": [],
+                  "t": "Full Reversal",
+                  "u": "e17bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379693.0
+                },
+                {
+                  "c": [],
+                  "t": "Collective Bill",
+                  "u": "857dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379694.0
+                },
+                {
+                  "c": [],
+                  "t": "Budget Billing Request",
+                  "u": "d87bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379697.0
+                },
+                {
+                  "c": [],
+                  "t": "Change Documents for Budget Billing Amounts",
+                  "u": "597cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379699.0
+                },
+                {
+                  "c": [],
+                  "t": "Print Document Printout",
+                  "u": "db7bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379701.0
+                }
+              ],
+              "t": "Invoicing Processes",
+              "u": "b37cce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452377237.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Individual Processing",
+                  "u": "e47bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379704.0
+                },
+                {
+                  "c": [],
+                  "t": "Mass Processing",
+                  "u": "cf7bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379706.0
+                },
+                {
+                  "c": [],
+                  "t": "Parallel Processing",
+                  "u": "0a7dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379708.0
+                }
+              ],
+              "t": "Invoicing Execution",
+              "u": "b67cce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452379702.0
+            },
+            {
+              "c": [],
+              "t": "Print Document Display",
+              "u": "f07bce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452379709.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Processing Outsorting Lists",
+                  "u": "a67bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379714.0
+                }
+              ],
+              "t": "Outsorting",
+              "u": "917bce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452379711.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Concession (Australia)",
+                  "u": "927cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379718.0
+                },
+                {
+                  "c": [],
+                  "t": "Withholding Taxes (Brazil)",
+                  "u": "d77cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379719.0
+                },
+                {
+                  "c": [],
+                  "t": "Bollo (Italy)",
+                  "u": "dd7cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379721.0
+                },
+                {
+                  "c": [],
+                  "t": "Surcharge (Argentina)",
+                  "u": "da7cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379722.0
+                }
+              ],
+              "t": "Country-Specific Additional Functions",
+              "u": "4c7dce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452379715.0
+            }
+          ],
+          "t": "Invoicing Processing",
+          "u": "5e7dce53118d4308e10000000a174cb4.html",
+          "id": 2452377211.0
+        },
+        {
+          "c": [
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Technical Structure of a Budget Billing Plan",
+                  "u": "e67cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379727.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Main/Subtransactions for Statistical Budget Billing Procedure",
+                      "u": "b97cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452379730.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Main/Subtransactions for the Partial Bill Procedure",
+                      "u": "677dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452379731.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Account Determination for Statistical Budget Billing Procedure",
+                      "u": "137dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452379732.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Account Determination for the Partial Bill Procedure",
+                      "u": "2b7dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452379733.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Rate Structure for the Stat. and Partial Bill Procedure",
+                      "u": "167dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452379735.0
+                    }
+                  ],
+                  "t": "Customizing for the Statistical and Partial Bill Procedures",
+                  "u": "897cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379728.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Basics of a Budget Billing Plan",
+                      "u": "9e7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452379737.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Determination of the Budget Billing Due Date",
+                      "u": "9b7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452379738.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Determination of Budget Billing Amount",
+                      "u": "197dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452379740.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Changes to the Preliminary Budget Billing Plan",
+                      "u": "a17cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452379741.0
+                    }
+                  ],
+                  "t": "Creation of a Budget Billing Plan",
+                  "u": "ec7cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379736.0
+                },
+                {
+                  "c": [],
+                  "t": "Manual Changes to a Budget Billing Plan",
+                  "u": "ea7bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379742.0
+                },
+                {
+                  "c": [],
+                  "t": "Print Function when Processing Budget Billing Plans",
+                  "u": "c87cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379744.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Changing Budget Billing Amounts",
+                      "u": "cb7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380846.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Extrapolating the Budget Billing Plan",
+                      "u": "a07dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380848.0
+                    }
+                  ],
+                  "t": "Changing the Budget Billing Amount Express Transaction",
+                  "u": "c67bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452379745.0
+                },
+                {
+                  "c": [],
+                  "t": "Deactivation of a Budget Billing Plan",
+                  "u": "ef7cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380849.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Activation of the Budget Billing Plan as Advance Payment",
+                      "u": "bc7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380852.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Yearly Advance Payment",
+                      "u": "407dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380853.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Automatic Budget Billing Plan Adjustment and Rate Maintenance",
+                      "u": "f37bce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380854.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Deletion of a Budget Billing Plan",
+                      "u": "ed7bce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380856.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Portion Change",
+                      "u": "f57cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380857.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Support of Multi-Level Taxes in the Statistical Budget Billing Plans for Reverse Charge",
+                      "u": "d4acc19f8a214d8dbec6eba611e58c8a.html",
+                      "h": "",
+                      "id": 2452380858.0
+                    }
+                  ],
+                  "t": "Special Functions",
+                  "u": "f27cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380850.0
+                }
+              ],
+              "t": "Statistical Budget Billing Procedure and Partial Bill Procedure",
+              "u": "f87cce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452379726.0
+            },
+            {
+              "c": [
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Creating a Payment Plan Manually",
+                      "u": "627cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380863.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Creating Payment Plans Automatically During Invoicing",
+                      "u": "657cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380864.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Creating a Payment Plan Automatically During Change of Supplier",
+                      "u": "6b7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380866.0
+                    }
+                  ],
+                  "t": "Creating a Payment Plan",
+                  "u": "687cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380862.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Changing a Payment Plan Manually",
+                      "u": "957cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380869.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Joint Maintenance of Payment Plans",
+                      "u": "807cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380870.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Changing a Payment Plan During Invoicing",
+                      "u": "707dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380871.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Changing a Payment Plan Automatically",
+                      "u": "377dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380873.0
+                    }
+                  ],
+                  "t": "Changing a Payment Plan",
+                  "u": "5f7cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380867.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Joint Display of Payment Plans",
+                      "u": "837cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380875.0
+                    }
+                  ],
+                  "t": "Displaying a Payment Plan",
+                  "u": "737dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380874.0
+                },
+                {
+                  "c": [],
+                  "t": "Ending a Payment Scheme",
+                  "u": "8f7cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380877.0
+                },
+                {
+                  "c": [],
+                  "t": "Manual History",
+                  "u": "ff7bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380878.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Releasing the Balance Forward Amount",
+                      "u": "c27cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380881.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Adjusting the Balance Forward Amount Manually",
+                      "u": "317dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380883.0
+                    }
+                  ],
+                  "t": "The Balance Forward Amount",
+                  "u": "a97dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380880.0
+                },
+                {
+                  "c": [],
+                  "t": "Migrating Payment Plans",
+                  "u": "357cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380884.0
+                },
+                {
+                  "c": [],
+                  "t": "Archiving Payment Plans",
+                  "u": "057cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380885.0
+                },
+                {
+                  "c": [],
+                  "t": "Deleting Payment Plans",
+                  "u": "507cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380887.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Defining Payment Plan Types",
+                      "u": "6e7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380889.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Defining Print Parameters",
+                      "u": "747cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380891.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Document Type for Manual Adjustment of Balance Forward Amount",
+                      "u": "777cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380892.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Checking the Sequence of Documents in Invoicing",
+                      "u": "7a7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380893.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Special Settings for Scheduling",
+                      "u": "7d7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380895.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Preparing Payment Plan Procedures in Customizing for Contract Accounting",
+                      "u": "717cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380896.0
+                    }
+                  ],
+                  "t": "Customizing for the Payment Plan",
+                  "u": "257dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380888.0
+                }
+              ],
+              "t": "Payment Plan",
+              "u": "8b7dce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452380860.0
+            },
+            {
+              "c": [
+                {
+                  "c": [],
+                  "t": "Creating a Payment Scheme",
+                  "u": "a37dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380898.0
+                },
+                {
+                  "c": [],
+                  "t": "Changing a Payment Scheme Manually",
+                  "u": "8c7cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380900.0
+                },
+                {
+                  "c": [],
+                  "t": "Displaying a Payment Scheme",
+                  "u": "327cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380901.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Adjustment for Interim Bill with Recovery Rate Completely",
+                      "u": "fe7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380903.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Adjustment for Interim Bill with Recovery Rate “Partially”",
+                      "u": "3b7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380904.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Adjustment for Interim Bill Without Recovery Rate",
+                      "u": "227dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380905.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Adjustment for Interim Bill with Different Recovery Rates",
+                      "u": "1c7dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380907.0
+                    }
+                  ],
+                  "t": "Adjusting a Payment Scheme for a Periodic or Interim Bill",
+                  "u": "347dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380902.0
+                },
+                {
+                  "c": [],
+                  "t": "Adjusting a Payment Scheme During Creation of a Periodic Bill",
+                  "u": "557dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380908.0
+                },
+                {
+                  "c": [],
+                  "t": "Automatic Adjustment of Payment Schemes",
+                  "u": "267cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380909.0
+                },
+                {
+                  "c": [],
+                  "t": "Amount and Percentage Limit Check for Payment Scheme Adjustment",
+                  "u": "fb7cce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380910.0
+                },
+                {
+                  "c": [],
+                  "t": "Creating Statistical Requests",
+                  "u": "f97bce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380912.0
+                },
+                {
+                  "c": [],
+                  "t": "Ending a Payment Scheme",
+                  "u": "ac7dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380913.0
+                },
+                {
+                  "c": [],
+                  "t": "Archiving and Deleting Payment Schemes",
+                  "u": "2e7dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380914.0
+                },
+                {
+                  "c": [],
+                  "t": "Migrating Payment Schemes",
+                  "u": "1f7dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380915.0
+                },
+                {
+                  "c": [
+                    {
+                      "c": [],
+                      "t": "Control Parameters",
+                      "u": "c97bce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380918.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Payment Scheme Category",
+                      "u": "107dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380919.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Deactivation Reason",
+                      "u": "7c7dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380920.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Number Range",
+                      "u": "387cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380922.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Rounding Parameters",
+                      "u": "2c7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380923.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Define Amount/Prcntge Limits for Automatic Payment Scheme Adj.",
+                      "u": "047dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380924.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Amount/Percentage Limits for Manual Payment Scheme Adjustment",
+                      "u": "ce7cce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380925.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Customizing for Invoicing",
+                      "u": "6a7dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380927.0
+                    },
+                    {
+                      "c": [],
+                      "t": "Customizing for Contract Accounts Receivable and Payable",
+                      "u": "287dce53118d4308e10000000a174cb4.html",
+                      "h": "",
+                      "id": 2452380928.0
+                    }
+                  ],
+                  "t": "Customizing for the Payment Scheme",
+                  "u": "9a7dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380917.0
+                },
+                {
+                  "c": [],
+                  "t": "Definition of Events",
+                  "u": "887dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380929.0
+                },
+                {
+                  "c": [],
+                  "t": "BOR Object PayScheme",
+                  "u": "a67dce53118d4308e10000000a174cb4.html",
+                  "h": "",
+                  "id": 2452380930.0
+                }
+              ],
+              "t": "Payment Scheme",
+              "u": "3e7cce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452380897.0
+            },
+            {
+              "c": [],
+              "t": "Payment Scheme for Unmeasured Customers",
+              "u": "2f7cce53118d4308e10000000a174cb4.html",
+              "h": "",
+              "id": 2452380932.0
+            }
+          ],
+          "t": "Budget Billing Plan Procedure",
+          "u": "617dce53118d4308e10000000a174cb4.html",
+          "id": 2452379725.0
+        }
+      ],
+      "deleted": 0,
+      "transtype": "html5.uacp",
+      "filteringTokens": null,
+      "clientFilters": null,
+      "projectPhio": "bsy1757338222937",
+      "projectName": "S4H::OP 2025 001 sec"
+    },
+    "currentPage": {
+      "id": 2554982948,
+      "t": "Processing Budget Billing Plans",
+      "u": "147cce53118d4308e10000000a174cb4.html",
+      "loio": "147cce53118d4308e10000000a174cb4",
+      "deltaMtTranslate": false
+    },
+    "body": "<!DOCTYPE html\n  SYSTEM \"about:legacy-compat\">\n<html lang=\"en-us\" dir=\"ltr\"><head><title>Processing Budget Billing Plans</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" type=\"text/css\" media=\"screen,projection\" href=\"/resource/css/style-v2.css\"><script type=\"text/javascript\" src=\"js/sap-strings.js\"></script></head><body class=\"en-us sap-light centered navigation-default enumeration-disabled\"><div id=\"d4h5-main-container\" class=\"container_12\" role=\"application\"><div id=\"d4h5-section-container\" class=\"grid_12\"><div id=\"d4h5-main-content\" class=\"grid_8 alpha omega\"><section><div class=\"page topic  - topic-topic \" id=\"loio147cce53118d4308e10000000a174cb4\"><h1 class=\"title topictitle1\">Processing Budget Billing Plans </h1><div class=\"body\">\n<p class=\"p\"> When periodic billing documents are invoiced, a new budget billing plan is created automatically for contracts that were billed periodically. The budget billing plan is based on the budget billing extrapolation lines, which are generated by the billing document. A reference to the bill to be created is stored in the header of the budget billing plan in the\n<span class=\"ph uicontrol\">Inv. doc. no.</span>\nfield (invoicing document number), so that information about future budget billings is shown on the bill. For information about other options for grouping budget billings of the different contracts of a budget billing plan, see the documentation for the\n<span class=\"ph uicontrol\">Budget Billing Plan</span>\n(IS-U-IN-BB) component.\n</p>\n<p class=\"p\"> If budget billing plans relate to the billed period of a billing document, then they are processed in invoicing on the basis of the billing procedure used.</p>\n<p class=\"p\"> Invoicing can consist of the following steps:</p>\n<ul class=\"ul\"><li class=\"li\"><p class=\"p\"> Deactivate budget billing plan</p><p class=\"p\"> The invoicing document number appears automatically in the budget billing plan header in the\n<span class=\"ph uicontrol\">Deactivate</span>\nfield.\n</p><p class=\"p\"> This means that:</p><ul class=\"ul\"><li class=\"li\"><p class=\"p\"> You cannot further process the budget billing plan.</p></li><li class=\"li\"><p class=\"p\"> All budget billing plan items are deactivated.</p></li><li class=\"li\"><p class=\"p\"> The budget billing amounts cannot be paid, dunned or requested.</p></li></ul></li><li class=\"li\"><p class=\"p\"> Deactivate budget billing plan items</p><p class=\"p\"> Open items in the invoicing period are deactivated if the invoicing document number is set as the clearing document number.</p><p class=\"p\"><img class=\"inline\" src=\"loio454470533fe4761ee10000000a174cb4_LowRes.png\" alt=\"\" title=\"\">\nNote that the deactivated budget billing plan items:\n</p><ul class=\"ul\"><li class=\"li\"><p class=\"p\"> Cannot be further processed.</p></li><li class=\"li\"><p class=\"p\"> Cannot be paid, dunned or requested.</p></li></ul></li><li class=\"li\"><p class=\"p\"> Settle the budget billing payments (statistical budget billing plan procedure) or budget billing receivables against the amount invoiced for the contract (partial billing procedure).</p><p class=\"p\">On the basis of the selected budget billing procedure, budget billing payments or receivables that have been made, are deducted from the billing document. (See Customizing for\n<span class=\"ph menucascade\"><img src=\"themes/sap-light/img/navstart.gif\" alt=\"Start of the navigation path\" title=\"Start of the navigation path\"><span class=\"ph uicontrol\">SAP Utilities</span>&nbsp;<img src=\"themes/sap-light/img/navstep.gif\" alt=\"Next navigation step\" title=\"Next navigation step\">&nbsp;<span class=\"ph uicontrol\">Invoicing</span>&nbsp;<img src=\"themes/sap-light/img/navstep.gif\" alt=\"Next navigation step\" title=\"Next navigation step\">&nbsp;<span class=\"ph uicontrol\">Basic Settings</span>&nbsp;<img src=\"themes/sap-light/img/navstep.gif\" alt=\"Next navigation step\" title=\"Next navigation step\">&nbsp;<span class=\"ph uicontrol\">Define System Settings for Invoicing</span><img src=\"themes/sap-light/img/navend.gif\" alt=\"End of the navigation path\" title=\"End of the navigation path\"></span>\n).\n</p><ul class=\"ul\"><li class=\"li\"><p class=\"p\"> Budget billing payments which have been made and recorded as payments in contract accounts receivable and payable, can be reposted into the total in invoicing. This is part of the statistical budget billing plan procedure.</p><p class=\"p\"> As a result the budget billing and the new business partner item\n<span class=\"ph uicontrol\">budget billing reposting</span>\nare cleared by a new accounts receivable and payable document which is created in invoicing. The bill receivable of the invoicing document is cleared against the budget billing payments.\n</p></li><li class=\"li\"><p class=\"p\"> The bill receivable is reduced in invoicing by the budget billing amounts, which are set as debits in the partial billing procedure.</p><p class=\"p\"> As a result the business partner item from the billing document is cleared immediately. The offsetting posting is credited by the posted accounts in debit entry.</p></li></ul></li></ul>\n<p class=\"p\"> If final billing was performed for a contract, all active budget billing plans of that contract are deactivated. All paid budget billings or all budget billings entered as debits are settled.</p>\n<p class=\"p\"> If periodic billing was performed for a contract, all the budget billing plans that begin before the next date of the new budget billing period are deactivated. The paid budget billings or budget billing amounts entered as debits are settled.</p>\n<p class=\"p\"> If interim billing was performed for a contract, all the budget billing plans that begin before the end of the billing period are read. The budget billing plan items that fall before the end of the billing period of the billing document are then deactivated, and the budget billing payments or the budget billings entered as debits are settled.</p>\n<p class=\"p\"> When billing documents created manually are invoiced, the budget billing plan is not taken into account.</p>\n<p class=\"p\"> If several billing documents of a contract exist for joint invoicing, then the most current billing document is used for budget billing processing.</p>\n</div></div></section><div class=\"clear\"></div>\n</div></div></div></body></html>",
+    "isMachineTranslated": 0,
+    "githubLink": ""
+  }
+}

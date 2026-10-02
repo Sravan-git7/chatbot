@@ -1,0 +1,106 @@
+{
+ "schema_version": 1,
+ "note": "latency in ms on a 2-vCPU sandbox, warm process, extractive/evidence only unless an ollama config ran",
+ "configs": {
+  "baseline": {
+   "status": "RUN",
+   "latency_ms_real_routing": {
+    "route_ms": {
+     "median": 26.1,
+     "p95": 33.1,
+     "n": 113
+    },
+    "retrieve_ms": {
+     "median": 25.2,
+     "p95": 30.2,
+     "n": 41
+    },
+    "generate_ms": {
+     "median": 0.5,
+     "p95": 0.8,
+     "n": 37
+    },
+    "total_ms": {
+     "median": 29.4,
+     "p95": 68.2,
+     "n": 113
+    }
+   },
+   "latency_ms_oracle_routing": {
+    "route_ms": {
+     "median": 0.0,
+     "p95": 0.0,
+     "n": 81
+    },
+    "retrieve_ms": {
+     "median": 25.8,
+     "p95": 31.7,
+     "n": 80
+    },
+    "generate_ms": {
+     "median": 0.5,
+     "p95": 0.9,
+     "n": 71
+    },
+    "total_ms": {
+     "median": 36.3,
+     "p95": 44.2,
+     "n": 81
+    }
+   }
+  },
+  "evidence": {
+   "status": "RUN",
+   "latency_ms_real_routing": {
+    "route_ms": {
+     "median": 26.5,
+     "p95": 31.4,
+     "n": 113
+    },
+    "retrieve_ms": {
+     "median": 25.5,
+     "p95": 29.4,
+     "n": 41
+    },
+    "generate_ms": {
+     "median": 1.2,
+     "p95": 2.0,
+     "n": 37
+    },
+    "total_ms": {
+     "median": 29.4,
+     "p95": 69.2,
+     "n": 113
+    }
+   },
+   "latency_ms_oracle_routing": {
+    "route_ms": {
+     "median": 0.0,
+     "p95": 0.0,
+     "n": 81
+    },
+    "retrieve_ms": {
+     "median": 25.0,
+     "p95": 31.3,
+     "n": 80
+    },
+    "generate_ms": {
+     "median": 1.2,
+     "p95": 2.1,
+     "n": 71
+    },
+    "total_ms": {
+     "median": 36.3,
+     "p95": 42.8,
+     "n": 81
+    }
+   }
+  },
+  "ollama_raw": {
+   "status": "BLOCKED"
+  },
+  "ollama": {
+   "status": "BLOCKED"
+  }
+ }
+}

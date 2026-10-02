@@ -1,0 +1,999 @@
+{
+  "schema_version": 1,
+  "description": "Phase 8 page-level and end-to-end evaluation queries for the 7 ingested SAP Help pages",
+  "authorship": {
+    "authored_by": "AI coding assistant, after reading the ingested pages; not a human domain expert; no LLM generation at runtime",
+    "caveat": "answerable queries are paraphrases of page facts written with the page text in view; they are not blind. The set is small (per-page n of 6-10) and every metric derived from it is a point estimate with wide uncertainty.",
+    "written_before_evaluation": true,
+    "labels_changed_after_retrieval": false,
+    "out_of_domain_origin": "every 7th out_of_domain query (sorted by id) of data/evaluation/phase7F_ood_queries.json, first 8"
+  },
+  "preregistered": {
+    "declared_before_evaluation": true,
+    "default_chunk_strategy": "B_heading_200",
+    "router": "rank-1 of the card router, no similarity threshold (Phase 7F: min_cosine stays None)",
+    "k_chunks": 5,
+    "context_budget_tokens": 700,
+    "max_context_chunks": 4,
+    "ood_min_coverage": 0.25,
+    "context_min_coverage": 0.5,
+    "extractive_min_score": 0.34,
+    "min_sentence_support": 0.6,
+    "hit_definition": "a retrieved chunk whose text contains (whitespace-normalised) any evidence quote of the query",
+    "answer_correct_definition": "status == answered AND at least one cited chunk contains an evidence quote AND the cited page is the gold page",
+    "metrics_not_combined": [
+      "routing",
+      "identity",
+      "retrieval",
+      "generation",
+      "citation"
+    ],
+    "no_tuning_on_this_set": true
+  },
+  "counts": {
+    "answerable": 59,
+    "absent_detail": 11,
+    "not_ingested": 6,
+    "unresolved_identity": 4,
+    "out_of_domain": 8
+  },
+  "corpus_sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d",
+  "queries": [
+    {
+      "id": "P8-001",
+      "query": "Which transaction do I use to monitor meter reading results by different selection criteria?",
+      "type": "answerable",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        "You can use this transaction to monitor meter reading results based on different selection criteria."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-002",
+      "query": "If I start from a device, what can I display?",
+      "type": "answerable",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        "If you start by entering devices, you can display meter reading orders or meter reading results."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-003",
+      "query": "Which business function lets me display meter reading results when I begin with portions or reading units?",
+      "type": "answerable",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        "If the business function Utilities, Quantity Determination ( ISU_QD_1 ) is active, you can also display meter reading results."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-004",
+      "query": "Which transaction triggers automatic follow-on processing for meter reading orders?",
+      "type": "answerable",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        "trigger automatic follow-on processing for selected meter reading orders"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-005",
+      "query": "How can I see which meter reading documents were posted successfully after an IDoc upload?",
+      "type": "answerable",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        "display the successfully and unsuccessfully posted meter reading documents after uploading discrete meter reading data"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-006",
+      "query": "How do I get an overview of the devices in a reading unit?",
+      "type": "answerable",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        "You can use this transaction to get an overview of the devices of a meter reading unit."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-007",
+      "query": "What must be activated before I can run quantity determination from the result lists?",
+      "type": "answerable",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        "you have activated the business function Utilities, Quantity Determination ( ISU_QD_1 )"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-008",
+      "query": "How do I jump to the detailed view of an object in the monitoring lists?",
+      "type": "answerable",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        "you can navigate to the detailed display of an object by choosing Edit > Select or by double clicking on the field in question"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-009",
+      "query": "Why does the monitoring table mark some entries with an asterisk?",
+      "type": "answerable",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [
+        "At first the system displays a summarized list grouped by date"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-010",
+      "query": "What is the purpose of the device management component?",
+      "type": "answerable",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        "This component manages technical data, installations, meter readings, and the inspection of devices."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-011",
+      "query": "A device in IS-U corresponds to which object in the standard system?",
+      "type": "answerable",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        "Name in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-012",
+      "query": "What does the device number map to outside IS-U?",
+      "type": "answerable",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        "Name in IS-U: Device Number; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Serial Number"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-013",
+      "query": "Where does a device number originate?",
+      "type": "answerable",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        "The device number is created in MM with the Goods Receipt function and transferred to the device."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-014",
+      "query": "What makes a device unique and distinguishes it from other material with the same serial number?",
+      "type": "answerable",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        "The device is identified by a unique material and serial number combination"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-015",
+      "query": "At what point are equipment records generated?",
+      "type": "answerable",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        "Equipment records are created automatically during goods receipt"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-016",
+      "query": "Which purchasing component supplies requisitions and orders for device procurement?",
+      "type": "answerable",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        "Purchase Requisition and Purchase Order from Purchasing (MM-PUR)"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-017",
+      "query": "Which component takes care of billing in the device flow?",
+      "type": "answerable",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        "Billing is then carried out with the Sales and Distribution (SD) component."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-018",
+      "query": "Where can I read more about the advanced metering infrastructure?",
+      "type": "answerable",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [
+        "you can find more information under Advanced Metering Infrastructure"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-019",
+      "query": "Under what conditions should an installment plan be set up?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "You create an installment plan when both of the following apply"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-020",
+      "query": "Which transaction code starts the creation of an installment plan?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "choose Account > Installment Plan > Create (transaction FPR1 )"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-021",
+      "query": "Which indicator do I set to prioritize clearing of the original items when payments arrive?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "you set the Clrg Priority indicator"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-022",
+      "query": "Which fields does the system take over from the original item into the plan?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "the system copies the company code, contract, business area, and business place from the original item"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-023",
+      "query": "How can I avoid copying the company code and contract into the plan?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "you can do this by defining event 3000 accordingly"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-024",
+      "query": "Is it possible to have the first installment computed as a share of the plan total?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "The system can calculate the first installment as a percentage of the total amount of the installment plan."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-025",
+      "query": "What effect does the Distribute indicator have?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "If you set the Distribute indicator, the interest and charges are distributed over all of the due dates."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-026",
+      "query": "Where can the leftover amount of a plan be placed?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "In the Remaining Amount field, specify whether this remaining amount is to be included in the first or last installment, or in a new installment."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-027",
+      "query": "What can I edit in the installment plan proposal?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "An Installment Plan Proposal appears, in which you can make the following changes"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-028",
+      "query": "Which entries are mandatory when entering the plan parameters?",
+      "type": "answerable",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [
+        "You must enter the installment interval and the interval type, as well as the installment plan category."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-029",
+      "query": "What link does invoicing establish?",
+      "type": "answerable",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "Invoicing creates the link to contract accounting and provides the basis for bill creation."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-030",
+      "query": "What has to exist before invoicing can run?",
+      "type": "answerable",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "Billing documents from the Contract Billing (IS-U-BI) component, or budget billing plans"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-031",
+      "query": "What is the outcome of invoicing with bill creation?",
+      "type": "answerable",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "Invoicing with Bill Creation results in a print document and a contract accounting document."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-032",
+      "query": "Which document is needed to print a bill?",
+      "type": "answerable",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "To print the bill, you require the print document."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-033",
+      "query": "How do I tell customers about the number and due dates of their budget billings?",
+      "type": "answerable",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "you use either the Partial Bill Creation function or the Budget Billing Request function"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-034",
+      "query": "What do I use for bills that turn out to be wrong after they were updated in FI-CA?",
+      "type": "answerable",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "you must process them using the Bill Reversal function"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-035",
+      "query": "Which function reverses billing documents that were already invoiced?",
+      "type": "answerable",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "you can use the Full Reversal function"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-036",
+      "query": "When are postings made for a consumption bill that was outsorted?",
+      "type": "answerable",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "Postings do not take place until the bill is released using the Outsorting function."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-037",
+      "query": "What becomes of the bill once it has been created?",
+      "type": "answerable",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "After the bill has been created, it is sent to the bill recipient."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-038",
+      "query": "What does the contract account component enable?",
+      "type": "answerable",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "evidence": [
+        "This component enables you to create and manage contract account master data."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-039",
+      "query": "May one business partner own several contract accounts?",
+      "type": "answerable",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "evidence": [
+        "You can assign more than one contract account to a given business partner."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-040",
+      "query": "In utilities, which contracts are grouped in a single contract account?",
+      "type": "answerable",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "evidence": [
+        "one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-041",
+      "query": "Can an individual utility contract sit in more than one contract account?",
+      "type": "answerable",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "evidence": [
+        "each individual contract is assigned to one contract account only"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-042",
+      "query": "How many business partners can a telecommunications contract account have?",
+      "type": "answerable",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "evidence": [
+        "a contract account can be assigned to one business partner only"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-043",
+      "query": "Can a business transaction automatically block a contract account?",
+      "type": "answerable",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "evidence": [
+        "a return can result in a processing lock being set"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-044",
+      "query": "Are modifications to contract account master data recorded?",
+      "type": "answerable",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "evidence": [
+        "The system logs changes to master data."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-045",
+      "query": "How are contract accounts used for taxes in the public sector?",
+      "type": "answerable",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "evidence": [
+        "You set up the contract accounts of a business partner for the relevant taxes"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-046",
+      "query": "What data does billing use to determine the evaluation basis?",
+      "type": "answerable",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "Billing uses meter reading results or load profiles to determine the evaluation basis for schema execution."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-047",
+      "query": "What does the system do if a price changes in the middle of a billing period?",
+      "type": "answerable",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "a price change causes the system to divide the total period into subperiods"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-048",
+      "query": "At which step are the rate calculations carried out?",
+      "type": "answerable",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "All calculations required for rate creation are made during schema execution."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-049",
+      "query": "Is it allowed for master data to change while a billing period is running?",
+      "type": "answerable",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "All master and billing master data can change during a billing period."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-050",
+      "query": "How is consumption handled when a billing period is split?",
+      "type": "answerable",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "The system also divides the total consumption, which produces the corresponding partial amount."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-051",
+      "query": "Which period categories can be handled by the billing procedures?",
+      "type": "answerable",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "evidence": [
+        "You can process all known period categories using different billing procedures."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-052",
+      "query": "What does the move-in and move-out component let me do?",
+      "type": "answerable",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "evidence": [
+        "This component enables you to process a customer move-in or move-out."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-053",
+      "query": "What happens to the customer's contract on a move-out?",
+      "type": "answerable",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "evidence": [
+        "In a move-out, you terminate the customer's contract."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-054",
+      "query": "Which component produces welcome letters and move-out confirmations?",
+      "type": "answerable",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "evidence": [
+        "are created using the Print Workbench component"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-055",
+      "query": "Which activities can the system start by itself during a move-in or move-out?",
+      "type": "answerable",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "evidence": [
+        "You can have the system trigger a number of activities automatically."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-056",
+      "query": "Which component allows me to monitor and configure the workflow processes?",
+      "type": "answerable",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "evidence": [
+        "The SAP Business Workflow component (BC-BMT-WFM) enables you to monitor and configure the workflow processes."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-057",
+      "query": "What can I do about the business partner and contract account when a customer moves in?",
+      "type": "answerable",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "evidence": [
+        "you can create a business partner and contract account for the customer, or select existing ones"
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-058",
+      "query": "What happens to an installation when a new customer moves in after a move-out?",
+      "type": "answerable",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "evidence": [
+        "If a new customer moves into the installation, the installation is allocated to this customer's contract."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-059",
+      "query": "Can I adapt how the screen looks for move-in and move-out?",
+      "type": "answerable",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "evidence": [
+        "You can also configure the screen layout to suit your requirements."
+      ],
+      "expected_status": "answered"
+    },
+    {
+      "id": "P8-060",
+      "query": "Which authorization object controls access to the meter reading monitoring transaction?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [],
+      "absent_terms": [
+        "authorization"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-061",
+      "query": "How long are meter reading results retained before they are archived?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-07",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "evidence": [],
+      "absent_terms": [
+        "archived",
+        "retention"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-062",
+      "query": "How do I install a smart meter at a customer site step by step?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [],
+      "absent_terms": [
+        "step by step",
+        "smart meter"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-063",
+      "query": "What is the maximum number of devices that can be assigned to one installation?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-05",
+      "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "evidence": [],
+      "absent_terms": [
+        "maximum"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-064",
+      "query": "What interest rate applies to an installment plan?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [],
+      "absent_terms": [
+        "interest rate"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-065",
+      "query": "How do I cancel an installment plan after it was saved?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-24",
+      "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "evidence": [],
+      "absent_terms": [
+        "cancel"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-066",
+      "query": "Can invoices be delivered to customers by e-mail?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [],
+      "absent_terms": [
+        "e-mail",
+        "email"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-067",
+      "query": "Which tax rate is applied during invoicing?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-14",
+      "gold_doc_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
+      "evidence": [],
+      "absent_terms": [
+        "tax"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-068",
+      "query": "Which transaction creates a new contract account?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-17",
+      "gold_doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "evidence": [],
+      "absent_terms": [
+        "CAA1"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-069",
+      "query": "How do I start a billing run for a portion?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-11",
+      "gold_doc_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "evidence": [],
+      "absent_terms": [
+        "portion",
+        "billing run"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-070",
+      "query": "How long does a move-out take to post in the system?",
+      "type": "absent_detail",
+      "gold_source_id": "M2C-02",
+      "gold_doc_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
+      "evidence": [],
+      "absent_terms": [
+        "how long",
+        "duration"
+      ],
+      "expected_status": "insufficient_context"
+    },
+    {
+      "id": "P8-071",
+      "query": "How are dunning notices created for overdue receivables?",
+      "type": "not_ingested",
+      "gold_source_id": "M2C-26",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "page_not_ingested"
+    },
+    {
+      "id": "P8-072",
+      "query": "How do I disconnect a utility installation for non-payment?",
+      "type": "not_ingested",
+      "gold_source_id": "M2C-29",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "page_not_ingested"
+    },
+    {
+      "id": "P8-073",
+      "query": "How do I submit open receivables to a collection agency?",
+      "type": "not_ingested",
+      "gold_source_id": "M2C-27",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "page_not_ingested"
+    },
+    {
+      "id": "P8-074",
+      "query": "What clearing types exist for incoming payments?",
+      "type": "not_ingested",
+      "gold_source_id": "M2C-21",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "page_not_ingested"
+    },
+    {
+      "id": "P8-075",
+      "query": "How can I display or change an existing installment plan afterwards?",
+      "type": "not_ingested",
+      "gold_source_id": "M2C-25",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "page_not_ingested"
+    },
+    {
+      "id": "P8-076",
+      "query": "How do I analyse incoming payments that have not been assigned?",
+      "type": "not_ingested",
+      "gold_source_id": "M2C-19",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "page_not_ingested"
+    },
+    {
+      "id": "P8-077",
+      "query": "What is the contract account business object and what does it represent?",
+      "type": "unresolved_identity",
+      "gold_source_id": "M2C-18",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "unresolved_identity"
+    },
+    {
+      "id": "P8-078",
+      "query": "Which attributes does the contract account business object expose?",
+      "type": "unresolved_identity",
+      "gold_source_id": "M2C-18",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "unresolved_identity"
+    },
+    {
+      "id": "P8-079",
+      "query": "How is a budget billing plan set up for a customer?",
+      "type": "unresolved_identity",
+      "gold_source_id": "M2C-13",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "unresolved_identity"
+    },
+    {
+      "id": "P8-080",
+      "query": "How are business partner, premise and installation related in the utilities master data?",
+      "type": "unresolved_identity",
+      "gold_source_id": "M2C-01",
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "unresolved_identity"
+    },
+    {
+      "id": "P8-081",
+      "query": "What is a good recipe for vegetable biryani?",
+      "type": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "origin_id": "7F-O01"
+    },
+    {
+      "id": "P8-082",
+      "query": "How do you say good morning in Spanish?",
+      "type": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "origin_id": "7F-O08"
+    },
+    {
+      "id": "P8-083",
+      "query": "How do I set up two-factor authentication on Gmail?",
+      "type": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "origin_id": "7F-O15"
+    },
+    {
+      "id": "P8-084",
+      "query": "How do I post a vendor invoice in accounts payable?",
+      "type": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "origin_id": "7F-O22"
+    },
+    {
+      "id": "P8-085",
+      "query": "How do I schedule a background job in SM36?",
+      "type": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "origin_id": "7F-O29"
+    },
+    {
+      "id": "P8-086",
+      "query": "How do smart meters transmit consumption data to a head-end system over a mesh network?",
+      "type": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "origin_id": "7F-O36"
+    },
+    {
+      "id": "P8-087",
+      "query": "How does a demand response programme shed load during peak hours?",
+      "type": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "origin_id": "7F-O43"
+    },
+    {
+      "id": "P8-088",
+      "query": "How should I move out of a rented flat and get my deposit back?",
+      "type": "out_of_domain",
+      "gold_source_id": null,
+      "gold_doc_id": null,
+      "evidence": [],
+      "expected_status": "out_of_domain",
+      "origin_id": "7F-O50"
+    }
+  ]
+}

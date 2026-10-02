@@ -1,0 +1,2920 @@
+{
+  "collection": "sap_m2c_card_v1",
+  "vector_count": 29,
+  "embedding_model": "all-MiniLM-L6-v2",
+  "embedding_dimensions": 384,
+  "distance_space": "cosine",
+  "retrieval_units_file_sha256": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
+  "questions_file_sha256": "530f2d96cb644518fcbe20b0082870b01a08fd4bc524c10d208fd9c72c1ceb36",
+  "collection_manifest_sha256": "5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731",
+  "question_count": 50,
+  "metrics": {
+    "overall": {
+      "questions": 50,
+      "recall@1": 0.92,
+      "mean_expected_coverage@1": 0.8583,
+      "recall@3": 0.96,
+      "mean_expected_coverage@3": 0.955,
+      "recall@5": 1.0,
+      "mean_expected_coverage@5": 1.0,
+      "mrr": 0.95,
+      "hits@1": 46
+    },
+    "by_question_type": {
+      "ambiguous": {
+        "questions": 7,
+        "recall@1": 0.8571,
+        "mean_expected_coverage@1": 0.7143,
+        "recall@3": 1.0,
+        "mean_expected_coverage@3": 1.0,
+        "recall@5": 1.0,
+        "mean_expected_coverage@5": 1.0,
+        "mrr": 0.9286,
+        "hits@1": 6
+      },
+      "category": {
+        "questions": 4,
+        "recall@1": 1.0,
+        "mean_expected_coverage@1": 0.4792,
+        "recall@3": 1.0,
+        "mean_expected_coverage@3": 0.9375,
+        "recall@5": 1.0,
+        "mean_expected_coverage@5": 1.0,
+        "mrr": 1.0,
+        "hits@1": 4
+      },
+      "distinctive_term": {
+        "questions": 8,
+        "recall@1": 0.75,
+        "mean_expected_coverage@1": 0.75,
+        "recall@3": 0.75,
+        "mean_expected_coverage@3": 0.75,
+        "recall@5": 1.0,
+        "mean_expected_coverage@5": 1.0,
+        "mrr": 0.8125,
+        "hits@1": 6
+      },
+      "exact_title": {
+        "questions": 11,
+        "recall@1": 0.9091,
+        "mean_expected_coverage@1": 0.9091,
+        "recall@3": 1.0,
+        "mean_expected_coverage@3": 1.0,
+        "recall@5": 1.0,
+        "mean_expected_coverage@5": 1.0,
+        "mrr": 0.9545,
+        "hits@1": 10
+      },
+      "m2c_relevance": {
+        "questions": 10,
+        "recall@1": 1.0,
+        "mean_expected_coverage@1": 1.0,
+        "recall@3": 1.0,
+        "mean_expected_coverage@3": 1.0,
+        "recall@5": 1.0,
+        "mean_expected_coverage@5": 1.0,
+        "mrr": 1.0,
+        "hits@1": 10
+      },
+      "semantic": {
+        "questions": 10,
+        "recall@1": 1.0,
+        "mean_expected_coverage@1": 1.0,
+        "recall@3": 1.0,
+        "mean_expected_coverage@3": 1.0,
+        "recall@5": 1.0,
+        "mean_expected_coverage@5": 1.0,
+        "mrr": 1.0,
+        "hits@1": 10
+      }
+    },
+    "ambiguous_questions_only": {
+      "questions": 18,
+      "recall@1": 0.9444,
+      "mean_expected_coverage@1": 0.7731,
+      "recall@3": 1.0,
+      "mean_expected_coverage@3": 0.9861,
+      "recall@5": 1.0,
+      "mean_expected_coverage@5": 1.0,
+      "mrr": 0.9722,
+      "hits@1": 17
+    },
+    "unambiguous_questions_only": {
+      "questions": 32,
+      "recall@1": 0.9062,
+      "mean_expected_coverage@1": 0.9062,
+      "recall@3": 0.9375,
+      "mean_expected_coverage@3": 0.9375,
+      "recall@5": 1.0,
+      "mean_expected_coverage@5": 1.0,
+      "mrr": 0.9375,
+      "hits@1": 29
+    }
+  },
+  "failed_at_1": [
+    "Q07",
+    "Q39",
+    "Q42",
+    "Q49"
+  ],
+  "failed_at_3": [
+    "Q39",
+    "Q42"
+  ],
+  "failed_at_5": [],
+  "ambiguous_question_ids": [
+    "Q04",
+    "Q10",
+    "Q13",
+    "Q20",
+    "Q26",
+    "Q30",
+    "Q31",
+    "Q33",
+    "Q34",
+    "Q35",
+    "Q43",
+    "Q44",
+    "Q45",
+    "Q46",
+    "Q47",
+    "Q48",
+    "Q49",
+    "Q50"
+  ],
+  "per_question": [
+    {
+      "question_id": "Q01",
+      "question": "Move-In Process",
+      "question_type": "exact_title",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02",
+        "M2C-10"
+      ],
+      "expected_ranks": {
+        "M2C-03": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.4779
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.3997
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-10",
+          "title": "Meter Reading Data During Move-In",
+          "cosine_similarity": 0.2931
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.2242
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.1479
+        }
+      ]
+    },
+    {
+      "question_id": "Q02",
+      "question": "Move-Out Process",
+      "question_type": "exact_title",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02"
+      ],
+      "expected_ranks": {
+        "M2C-04": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.4914
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.4148
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.2939
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-10",
+          "title": "Meter Reading Data During Move-In",
+          "cosine_similarity": 0.2573
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.2516
+        }
+      ]
+    },
+    {
+      "question_id": "Q03",
+      "question": "Automatic Billing",
+      "question_type": "exact_title",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-12"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-11"
+      ],
+      "expected_ranks": {
+        "M2C-12": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-12",
+          "title": "Automatic Billing",
+          "cosine_similarity": 0.5091
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.3788
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.3672
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.3527
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.3481
+        }
+      ]
+    },
+    {
+      "question_id": "Q04",
+      "question": "Budget Billing Plan",
+      "question_type": "exact_title",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-15"
+      ],
+      "expected_ranks": {
+        "M2C-13": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.5675
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.5006
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.4317
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.3889
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-25",
+          "title": "Displaying and Changing Installment Plans",
+          "cosine_similarity": 0.3685
+        }
+      ]
+    },
+    {
+      "question_id": "Q05",
+      "question": "Clearing Types",
+      "question_type": "exact_title",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-21"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-20"
+      ],
+      "expected_ranks": {
+        "M2C-21": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-21",
+          "title": "Clearing Types",
+          "cosine_similarity": 0.4988
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-20",
+          "title": "Clearing Control in Incoming Payments",
+          "cosine_similarity": 0.3482
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-19",
+          "title": "Analyze Incoming Payments",
+          "cosine_similarity": 0.2415
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.1884
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-26",
+          "title": "FI-CA Dunning",
+          "cosine_similarity": 0.1863
+        }
+      ]
+    },
+    {
+      "question_id": "Q06",
+      "question": "FI-CA Dunning",
+      "question_type": "exact_title",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-26": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-26",
+          "title": "FI-CA Dunning",
+          "cosine_similarity": 0.3749
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-18",
+          "title": "Contract Account Business Object",
+          "cosine_similarity": 0.2631
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-28",
+          "title": "Collection Agency APIs and Enterprise Services",
+          "cosine_similarity": 0.2572
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-22",
+          "title": "Processing Incoming Payments from External Cash Desks",
+          "cosine_similarity": 0.2061
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.2011
+        }
+      ]
+    },
+    {
+      "question_id": "Q07",
+      "question": "Installment Plan Overview",
+      "question_type": "exact_title",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-24",
+        "M2C-25"
+      ],
+      "expected_ranks": {
+        "M2C-23": 2
+      },
+      "first_expected_rank": 2,
+      "hit@1": false,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": true,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.6323
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.6299
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-25",
+          "title": "Displaying and Changing Installment Plans",
+          "cosine_similarity": 0.5647
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.3771
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.3703
+        }
+      ]
+    },
+    {
+      "question_id": "Q08",
+      "question": "Collection Agency APIs and Enterprise Services",
+      "question_type": "exact_title",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-27"
+      ],
+      "expected_ranks": {
+        "M2C-28": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-28",
+          "title": "Collection Agency APIs and Enterprise Services",
+          "cosine_similarity": 0.6103
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.5201
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.3817
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-26",
+          "title": "FI-CA Dunning",
+          "cosine_similarity": 0.3757
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.3755
+        }
+      ]
+    },
+    {
+      "question_id": "Q09",
+      "question": "Reading Meters",
+      "question_type": "exact_title",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-06"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-07",
+        "M2C-05"
+      ],
+      "expected_ranks": {
+        "M2C-06": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-06",
+          "title": "Reading Meters",
+          "cosine_similarity": 0.4908
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-08",
+          "title": "Meter Reading Estimation",
+          "cosine_similarity": 0.4504
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-07",
+          "title": "Monitoring Meter Reading Results",
+          "cosine_similarity": 0.4272
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-10",
+          "title": "Meter Reading Data During Move-In",
+          "cosine_similarity": 0.3772
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-05",
+          "title": "Device Management Overview",
+          "cosine_similarity": 0.3358
+        }
+      ]
+    },
+    {
+      "question_id": "Q10",
+      "question": "Contract Accounts Overview",
+      "question_type": "exact_title",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-17"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-18"
+      ],
+      "expected_ranks": {
+        "M2C-17": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.5963
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-18",
+          "title": "Contract Account Business Object",
+          "cosine_similarity": 0.5824
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.3787
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.3612
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.3592
+        }
+      ]
+    },
+    {
+      "question_id": "Q11",
+      "question": "Disconnection/Reconnection of a Utility Installation",
+      "question_type": "exact_title",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-29": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.6246
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.254
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.2248
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.2233
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-05",
+          "title": "Device Management Overview",
+          "cosine_similarity": 0.1793
+        }
+      ]
+    },
+    {
+      "question_id": "Q12",
+      "question": "Which reference explains how billing results become invoices, print documents and postings in FI-CA?",
+      "question_type": "semantic",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-11"
+      ],
+      "expected_ranks": {
+        "M2C-14": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-14",
+          "title": "SAP Utilities Invoicing Procedure",
+          "cosine_similarity": 0.7217
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.5306
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.5289
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.5071
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.5059
+        }
+      ]
+    },
+    {
+      "question_id": "Q13",
+      "question": "What explains estimating a reading when the meter reading is missing or unavailable?",
+      "question_type": "semantic",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-09"
+      ],
+      "expected_ranks": {
+        "M2C-08": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-08",
+          "title": "Meter Reading Estimation",
+          "cosine_similarity": 0.6888
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-07",
+          "title": "Monitoring Meter Reading Results",
+          "cosine_similarity": 0.447
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-06",
+          "title": "Reading Meters",
+          "cosine_similarity": 0.4436
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-10",
+          "title": "Meter Reading Data During Move-In",
+          "cosine_similarity": 0.4157
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-09",
+          "title": "Estimation Procedure Details",
+          "cosine_similarity": 0.4053
+        }
+      ]
+    },
+    {
+      "question_id": "Q14",
+      "question": "How are incoming payment amounts assigned to open items?",
+      "question_type": "semantic",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-21",
+        "M2C-19"
+      ],
+      "expected_ranks": {
+        "M2C-20": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-20",
+          "title": "Clearing Control in Incoming Payments",
+          "cosine_similarity": 0.5745
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-19",
+          "title": "Analyze Incoming Payments",
+          "cosine_similarity": 0.3786
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.3606
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-22",
+          "title": "Processing Incoming Payments from External Cash Desks",
+          "cosine_similarity": 0.3568
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.3397
+        }
+      ]
+    },
+    {
+      "question_id": "Q15",
+      "question": "Which topic covers releasing, submitting, processing and recalling receivables handled by collection agencies?",
+      "question_type": "semantic",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-27"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-28"
+      ],
+      "expected_ranks": {
+        "M2C-27": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.6878
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-26",
+          "title": "FI-CA Dunning",
+          "cosine_similarity": 0.45
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-28",
+          "title": "Collection Agency APIs and Enterprise Services",
+          "cosine_similarity": 0.4435
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-19",
+          "title": "Analyze Incoming Payments",
+          "cosine_similarity": 0.3818
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.3696
+        }
+      ]
+    },
+    {
+      "question_id": "Q16",
+      "question": "How are source receivables redistributed into scheduled installment receivables?",
+      "question_type": "semantic",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-24"
+      ],
+      "expected_ranks": {
+        "M2C-23": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.5436
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.5262
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.3681
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-25",
+          "title": "Displaying and Changing Installment Plans",
+          "cosine_similarity": 0.3629
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-22",
+          "title": "Processing Incoming Payments from External Cash Desks",
+          "cosine_similarity": 0.3394
+        }
+      ]
+    },
+    {
+      "question_id": "Q17",
+      "question": "Temporary interruption and restoration of utility supply for collection or technical reasons",
+      "question_type": "semantic",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-29": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.4875
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.3139
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.2917
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.287
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.2679
+        }
+      ]
+    },
+    {
+      "question_id": "Q18",
+      "question": "How are notifications of incoming payments from external cash desks integrated into FI-CA?",
+      "question_type": "semantic",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-19"
+      ],
+      "expected_ranks": {
+        "M2C-22": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-22",
+          "title": "Processing Incoming Payments from External Cash Desks",
+          "cosine_similarity": 0.7249
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-20",
+          "title": "Clearing Control in Incoming Payments",
+          "cosine_similarity": 0.4759
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-28",
+          "title": "Collection Agency APIs and Enterprise Services",
+          "cosine_similarity": 0.4272
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-19",
+          "title": "Analyze Incoming Payments",
+          "cosine_similarity": 0.4036
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-14",
+          "title": "SAP Utilities Invoicing Procedure",
+          "cosine_similarity": 0.4031
+        }
+      ]
+    },
+    {
+      "question_id": "Q19",
+      "question": "Which source lists Business Partner, Contract Account, Contract, Point of Delivery, Connection Object, Premise, Device Location, Installation and Device?",
+      "question_type": "semantic",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-01"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-17",
+        "M2C-18"
+      ],
+      "expected_ranks": {
+        "M2C-01": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-01",
+          "title": "Utilities Master Data",
+          "cosine_similarity": 0.5117
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.4589
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-18",
+          "title": "Contract Account Business Object",
+          "cosine_similarity": 0.4518
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-05",
+          "title": "Device Management Overview",
+          "cosine_similarity": 0.4112
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-28",
+          "title": "Collection Agency APIs and Enterprise Services",
+          "cosine_similarity": 0.4051
+        }
+      ]
+    },
+    {
+      "question_id": "Q20",
+      "question": "What covers the creation of the customer-service relationship for a utility installation?",
+      "question_type": "semantic",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02"
+      ],
+      "expected_ranks": {
+        "M2C-03": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.5287
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.4142
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.4066
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-01",
+          "title": "Utilities Master Data",
+          "cosine_similarity": 0.3404
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-05",
+          "title": "Device Management Overview",
+          "cosine_similarity": 0.335
+        }
+      ]
+    },
+    {
+      "question_id": "Q21",
+      "question": "What covers the termination of the customer-service relationship and related final processing?",
+      "question_type": "semantic",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-04": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.5789
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.4482
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.427
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.4069
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.3295
+        }
+      ]
+    },
+    {
+      "question_id": "Q22",
+      "question": "Which source is important for estimated-bill and catch-up-bill reasoning?",
+      "question_type": "m2c_relevance",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-09"
+      ],
+      "expected_ranks": {
+        "M2C-08": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-08",
+          "title": "Meter Reading Estimation",
+          "cosine_similarity": 0.5027
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.483
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.4469
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-09",
+          "title": "Estimation Procedure Details",
+          "cosine_similarity": 0.4456
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-26",
+          "title": "FI-CA Dunning",
+          "cosine_similarity": 0.4226
+        }
+      ]
+    },
+    {
+      "question_id": "Q23",
+      "question": "Which reference is critical for distinguishing billing document, invoicing result, customer bill and FI-CA document?",
+      "question_type": "m2c_relevance",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-14": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-14",
+          "title": "SAP Utilities Invoicing Procedure",
+          "cosine_similarity": 0.6783
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.4968
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.4882
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.4882
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.485
+        }
+      ]
+    },
+    {
+      "question_id": "Q24",
+      "question": "Which source teaches that payment receipt and open-item clearing are distinct steps?",
+      "question_type": "m2c_relevance",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-20": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-20",
+          "title": "Clearing Control in Incoming Payments",
+          "cosine_similarity": 0.6449
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-19",
+          "title": "Analyze Incoming Payments",
+          "cosine_similarity": 0.4865
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-21",
+          "title": "Clearing Types",
+          "cosine_similarity": 0.4683
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.4429
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-22",
+          "title": "Processing Incoming Payments from External Cash Desks",
+          "cosine_similarity": 0.4002
+        }
+      ]
+    },
+    {
+      "question_id": "Q25",
+      "question": "Which source is the core reference for collections escalation logic within Meter-to-Cash?",
+      "question_type": "m2c_relevance",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-27"
+      ],
+      "expected_ranks": {
+        "M2C-26": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-26",
+          "title": "FI-CA Dunning",
+          "cosine_similarity": 0.6206
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.6119
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-28",
+          "title": "Collection Agency APIs and Enterprise Services",
+          "cosine_similarity": 0.5669
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.5332
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-05",
+          "title": "Device Management Overview",
+          "cosine_similarity": 0.5145
+        }
+      ]
+    },
+    {
+      "question_id": "Q26",
+      "question": "Why can interim or budget amounts affect the customer balance independently of final consumption billing?",
+      "question_type": "m2c_relevance",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-15"
+      ],
+      "expected_ranks": {
+        "M2C-13": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.5608
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.4377
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.3941
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.3633
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-25",
+          "title": "Displaying and Changing Installment Plans",
+          "cosine_similarity": 0.3437
+        }
+      ]
+    },
+    {
+      "question_id": "Q27",
+      "question": "Which card preserves the distinction between delinquency and disconnect eligibility?",
+      "question_type": "m2c_relevance",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-26"
+      ],
+      "expected_ranks": {
+        "M2C-29": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.3929
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.2127
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.1923
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-21",
+          "title": "Clearing Types",
+          "cosine_similarity": 0.1754
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.1665
+        }
+      ]
+    },
+    {
+      "question_id": "Q28",
+      "question": "Which source covers modern API and service integration beyond file-based exchanges?",
+      "question_type": "m2c_relevance",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-28": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-28",
+          "title": "Collection Agency APIs and Enterprise Services",
+          "cosine_similarity": 0.5423
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.3796
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-01",
+          "title": "Utilities Master Data",
+          "cosine_similarity": 0.3634
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.3629
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.3589
+        }
+      ]
+    },
+    {
+      "question_id": "Q29",
+      "question": "Which source is useful for differentiating payment-lot, cash-desk, account-maintenance and payment-run clearing contexts?",
+      "question_type": "m2c_relevance",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-21"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-20"
+      ],
+      "expected_ranks": {
+        "M2C-21": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-21",
+          "title": "Clearing Types",
+          "cosine_similarity": 0.5898
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-19",
+          "title": "Analyze Incoming Payments",
+          "cosine_similarity": 0.5187
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.5018
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-20",
+          "title": "Clearing Control in Incoming Payments",
+          "cosine_similarity": 0.4959
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.473
+        }
+      ]
+    },
+    {
+      "question_id": "Q30",
+      "question": "Which source is useful for operational monitoring, KPIs and exception-management of periodic billing and invoicing?",
+      "question_type": "m2c_relevance",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-16"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-07"
+      ],
+      "expected_ranks": {
+        "M2C-16": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.6763
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-07",
+          "title": "Monitoring Meter Reading Results",
+          "cosine_similarity": 0.4998
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.4958
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-14",
+          "title": "SAP Utilities Invoicing Procedure",
+          "cosine_similarity": 0.4608
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.4374
+        }
+      ]
+    },
+    {
+      "question_id": "Q31",
+      "question": "Which source helps with exception monitoring and support or troubleshooting scenarios for meter-reading results?",
+      "question_type": "m2c_relevance",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-16"
+      ],
+      "expected_ranks": {
+        "M2C-07": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-07",
+          "title": "Monitoring Meter Reading Results",
+          "cosine_similarity": 0.6785
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-06",
+          "title": "Reading Meters",
+          "cosine_similarity": 0.6067
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-08",
+          "title": "Meter Reading Estimation",
+          "cosine_similarity": 0.5425
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-05",
+          "title": "Device Management Overview",
+          "cosine_similarity": 0.4801
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-09",
+          "title": "Estimation Procedure Details",
+          "cosine_similarity": 0.4571
+        }
+      ]
+    },
+    {
+      "question_id": "Q32",
+      "question": "Which card is in the Disconnection & Reconnection category?",
+      "question_type": "category",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-29": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.5048
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.283
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.2556
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-22",
+          "title": "Processing Incoming Payments from External Cash Desks",
+          "cosine_similarity": 0.2501
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-25",
+          "title": "Displaying and Changing Installment Plans",
+          "cosine_similarity": 0.2444
+        }
+      ]
+    },
+    {
+      "question_id": "Q33",
+      "question": "Which cards belong to the Dunning & Collections category?",
+      "question_type": "category",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-26",
+        "M2C-27",
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-26": 1,
+        "M2C-27": 2,
+        "M2C-28": 3
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-26",
+          "title": "FI-CA Dunning",
+          "cosine_similarity": 0.4342
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.354
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-28",
+          "title": "Collection Agency APIs and Enterprise Services",
+          "cosine_similarity": 0.3301
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.2295
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.2235
+        }
+      ]
+    },
+    {
+      "question_id": "Q34",
+      "question": "Which cards belong to Payment Arrangements / Installment Plans?",
+      "question_type": "category",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-23",
+        "M2C-24",
+        "M2C-25"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-23": 1,
+        "M2C-24": 2,
+        "M2C-25": 3
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.478
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.474
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-25",
+          "title": "Displaying and Changing Installment Plans",
+          "cosine_similarity": 0.4032
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.3217
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-12",
+          "title": "Automatic Billing",
+          "cosine_similarity": 0.2985
+        }
+      ]
+    },
+    {
+      "question_id": "Q35",
+      "question": "Which cards are in the Payments & Clearing category?",
+      "question_type": "category",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-19",
+        "M2C-20",
+        "M2C-21",
+        "M2C-22"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-19": 3,
+        "M2C-20": 2,
+        "M2C-21": 1,
+        "M2C-22": 5
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-21",
+          "title": "Clearing Types",
+          "cosine_similarity": 0.4925
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-20",
+          "title": "Clearing Control in Incoming Payments",
+          "cosine_similarity": 0.4923
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-19",
+          "title": "Analyze Incoming Payments",
+          "cosine_similarity": 0.4363
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.3825
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-22",
+          "title": "Processing Incoming Payments from External Cash Desks",
+          "cosine_similarity": 0.3465
+        }
+      ]
+    },
+    {
+      "question_id": "Q36",
+      "question": "extrapolation and interpolation",
+      "question_type": "distinctive_term",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-09"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-08"
+      ],
+      "expected_ranks": {
+        "M2C-09": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-09",
+          "title": "Estimation Procedure Details",
+          "cosine_similarity": 0.2443
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-08",
+          "title": "Meter Reading Estimation",
+          "cosine_similarity": 0.1254
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-10",
+          "title": "Meter Reading Data During Move-In",
+          "cosine_similarity": 0.094
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.0628
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.0569
+        }
+      ]
+    },
+    {
+      "question_id": "Q37",
+      "question": "installation, rate type, schema, operand and price",
+      "question_type": "distinctive_term",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-12"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-11"
+      ],
+      "expected_ranks": {
+        "M2C-12": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-12",
+          "title": "Automatic Billing",
+          "cosine_similarity": 0.3644
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.343
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.3291
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-01",
+          "title": "Utilities Master Data",
+          "cosine_similarity": 0.2907
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.2853
+        }
+      ]
+    },
+    {
+      "question_id": "Q38",
+      "question": "dunning notices and dunning activities for overdue items",
+      "question_type": "distinctive_term",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-26": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-26",
+          "title": "FI-CA Dunning",
+          "cosine_similarity": 0.5317
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.4091
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-08",
+          "title": "Meter Reading Estimation",
+          "cosine_similarity": 0.2913
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-20",
+          "title": "Clearing Control in Incoming Payments",
+          "cosine_similarity": 0.2633
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-07",
+          "title": "Monitoring Meter Reading Results",
+          "cosine_similarity": 0.2585
+        }
+      ]
+    },
+    {
+      "question_id": "Q39",
+      "question": "payment clarification",
+      "question_type": "distinctive_term",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-19"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-20"
+      ],
+      "expected_ranks": {
+        "M2C-19": 4
+      },
+      "first_expected_rank": 4,
+      "hit@1": false,
+      "hit@3": false,
+      "hit@5": true,
+      "top1_is_also_relevant": true,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-20",
+          "title": "Clearing Control in Incoming Payments",
+          "cosine_similarity": 0.3839
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.3827
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.3713
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-19",
+          "title": "Analyze Incoming Payments",
+          "cosine_similarity": 0.3464
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.3232
+        }
+      ]
+    },
+    {
+      "question_id": "Q40",
+      "question": "monitoring meter-reading results across business objects and organizational criteria",
+      "question_type": "distinctive_term",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-06"
+      ],
+      "expected_ranks": {
+        "M2C-07": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-07",
+          "title": "Monitoring Meter Reading Results",
+          "cosine_similarity": 0.6602
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-06",
+          "title": "Reading Meters",
+          "cosine_similarity": 0.5762
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-10",
+          "title": "Meter Reading Data During Move-In",
+          "cosine_similarity": 0.552
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-08",
+          "title": "Meter Reading Estimation",
+          "cosine_similarity": 0.5136
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-05",
+          "title": "Device Management Overview",
+          "cosine_similarity": 0.4981
+        }
+      ]
+    },
+    {
+      "question_id": "Q41",
+      "question": "parent topic for devices and technical installations",
+      "question_type": "distinctive_term",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-05"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-01"
+      ],
+      "expected_ranks": {
+        "M2C-05": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-05",
+          "title": "Device Management Overview",
+          "cosine_similarity": 0.2722
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-01",
+          "title": "Utilities Master Data",
+          "cosine_similarity": 0.2442
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.2055
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.1531
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.1527
+        }
+      ]
+    },
+    {
+      "question_id": "Q42",
+      "question": "subledger processing",
+      "question_type": "distinctive_term",
+      "ambiguous": false,
+      "expected_source_ids": [
+        "M2C-17"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-18"
+      ],
+      "expected_ranks": {
+        "M2C-17": 4
+      },
+      "first_expected_rank": 4,
+      "hit@1": false,
+      "hit@3": false,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.2484
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.2414
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.2372
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.2278
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.2276
+        }
+      ]
+    },
+    {
+      "question_id": "Q43",
+      "question": "control role of the contract account for postings, payments and dunning",
+      "question_type": "distinctive_term",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-18"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-17"
+      ],
+      "expected_ranks": {
+        "M2C-18": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-18",
+          "title": "Contract Account Business Object",
+          "cosine_similarity": 0.547
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.4832
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-20",
+          "title": "Clearing Control in Incoming Payments",
+          "cosine_similarity": 0.3798
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.3474
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.3344
+        }
+      ]
+    },
+    {
+      "question_id": "Q44",
+      "question": "How does meter reading data take part in the move-in process?",
+      "question_type": "ambiguous",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-10"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-03",
+        "M2C-06"
+      ],
+      "expected_ranks": {
+        "M2C-10": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-10",
+          "title": "Meter Reading Data During Move-In",
+          "cosine_similarity": 0.6751
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-06",
+          "title": "Reading Meters",
+          "cosine_similarity": 0.4849
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.4684
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-08",
+          "title": "Meter Reading Estimation",
+          "cosine_similarity": 0.4635
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-05",
+          "title": "Device Management Overview",
+          "cosine_similarity": 0.456
+        }
+      ]
+    },
+    {
+      "question_id": "Q45",
+      "question": "How are budget billing plans treated in invoicing?",
+      "question_type": "ambiguous",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-15"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-13",
+        "M2C-14"
+      ],
+      "expected_ranks": {
+        "M2C-15": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.6631
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-14",
+          "title": "SAP Utilities Invoicing Procedure",
+          "cosine_similarity": 0.5118
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.5009
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.451
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-11",
+          "title": "SAP Utilities Billing Procedure",
+          "cosine_similarity": 0.4388
+        }
+      ]
+    },
+    {
+      "question_id": "Q46",
+      "question": "Explain the estimation procedure for meter readings",
+      "question_type": "ambiguous",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-08",
+        "M2C-09"
+      ],
+      "also_relevant_source_ids": [],
+      "expected_ranks": {
+        "M2C-08": 1,
+        "M2C-09": 2
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-08",
+          "title": "Meter Reading Estimation",
+          "cosine_similarity": 0.5716
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-09",
+          "title": "Estimation Procedure Details",
+          "cosine_similarity": 0.5275
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-06",
+          "title": "Reading Meters",
+          "cosine_similarity": 0.4315
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-10",
+          "title": "Meter Reading Data During Move-In",
+          "cosine_similarity": 0.4117
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-07",
+          "title": "Monitoring Meter Reading Results",
+          "cosine_similarity": 0.4036
+        }
+      ]
+    },
+    {
+      "question_id": "Q47",
+      "question": "Overview of starting and ending utility service",
+      "question_type": "ambiguous",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-02"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-03",
+        "M2C-04"
+      ],
+      "expected_ranks": {
+        "M2C-02": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.5611
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.4718
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.4423
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.4273
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-16",
+          "title": "Periodic Billing and Invoicing Analysis",
+          "cosine_similarity": 0.3598
+        }
+      ]
+    },
+    {
+      "question_id": "Q48",
+      "question": "How are installment plans created?",
+      "question_type": "ambiguous",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-24"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-23",
+        "M2C-25"
+      ],
+      "expected_ranks": {
+        "M2C-24": 1
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-24",
+          "title": "Creating Installment Plans",
+          "cosine_similarity": 0.6078
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.5887
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-25",
+          "title": "Displaying and Changing Installment Plans",
+          "cosine_similarity": 0.5092
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-15",
+          "title": "Processing Budget Billing Plans",
+          "cosine_similarity": 0.3537
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.3084
+        }
+      ]
+    },
+    {
+      "question_id": "Q49",
+      "question": "What is needed for final billing when a customer moves out?",
+      "question_type": "ambiguous",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02"
+      ],
+      "expected_ranks": {
+        "M2C-04": 2
+      },
+      "first_expected_rank": 2,
+      "hit@1": false,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": true,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-02",
+          "title": "Move-In/Out Overview",
+          "cosine_similarity": 0.4415
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-04",
+          "title": "Move-Out Process",
+          "cosine_similarity": 0.4335
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-03",
+          "title": "Move-In Process",
+          "cosine_similarity": 0.3794
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.35
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-13",
+          "title": "Budget Billing Plan",
+          "cosine_similarity": 0.3303
+        }
+      ]
+    },
+    {
+      "question_id": "Q50",
+      "question": "How does a collection agency get involved when receivables stay unpaid?",
+      "question_type": "ambiguous",
+      "ambiguous": true,
+      "expected_source_ids": [
+        "M2C-27",
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-26"
+      ],
+      "expected_ranks": {
+        "M2C-27": 1,
+        "M2C-28": 3
+      },
+      "first_expected_rank": 1,
+      "hit@1": true,
+      "hit@3": true,
+      "hit@5": true,
+      "top1_is_also_relevant": false,
+      "retrieved_top5": [
+        {
+          "rank": 1,
+          "source_id": "M2C-27",
+          "title": "Submission of Receivables to Collection Agency",
+          "cosine_similarity": 0.5757
+        },
+        {
+          "rank": 2,
+          "source_id": "M2C-23",
+          "title": "Installment Plan Overview",
+          "cosine_similarity": 0.3284
+        },
+        {
+          "rank": 3,
+          "source_id": "M2C-28",
+          "title": "Collection Agency APIs and Enterprise Services",
+          "cosine_similarity": 0.3252
+        },
+        {
+          "rank": 4,
+          "source_id": "M2C-29",
+          "title": "Disconnection/Reconnection of a Utility Installation",
+          "cosine_similarity": 0.2996
+        },
+        {
+          "rank": 5,
+          "source_id": "M2C-17",
+          "title": "Contract Accounts Overview",
+          "cosine_similarity": 0.2801
+        }
+      ]
+    }
+  ],
+  "control_full_text_in_memory": {
+    "note": "CONTROL ONLY: same model and questions ranked against embeddings of full_text (boilerplate included); nothing stored, not the evaluated collection",
+    "metrics": {
+      "overall": {
+        "questions": 50,
+        "recall@1": 0.88,
+        "mean_expected_coverage@1": 0.8183,
+        "recall@3": 0.98,
+        "mean_expected_coverage@3": 0.965,
+        "recall@5": 0.98,
+        "mean_expected_coverage@5": 0.97,
+        "mrr": 0.9262,
+        "hits@1": 44
+      },
+      "by_question_type": {
+        "ambiguous": {
+          "questions": 7,
+          "recall@1": 0.7143,
+          "mean_expected_coverage@1": 0.5714,
+          "recall@3": 1.0,
+          "mean_expected_coverage@3": 0.9286,
+          "recall@5": 1.0,
+          "mean_expected_coverage@5": 0.9286,
+          "mrr": 0.8333,
+          "hits@1": 5
+        },
+        "category": {
+          "questions": 4,
+          "recall@1": 1.0,
+          "mean_expected_coverage@1": 0.4792,
+          "recall@3": 1.0,
+          "mean_expected_coverage@3": 0.9375,
+          "recall@5": 1.0,
+          "mean_expected_coverage@5": 1.0,
+          "mrr": 1.0,
+          "hits@1": 4
+        },
+        "distinctive_term": {
+          "questions": 8,
+          "recall@1": 0.75,
+          "mean_expected_coverage@1": 0.75,
+          "recall@3": 0.875,
+          "mean_expected_coverage@3": 0.875,
+          "recall@5": 0.875,
+          "mean_expected_coverage@5": 0.875,
+          "mrr": 0.8095,
+          "hits@1": 6
+        },
+        "exact_title": {
+          "questions": 11,
+          "recall@1": 1.0,
+          "mean_expected_coverage@1": 1.0,
+          "recall@3": 1.0,
+          "mean_expected_coverage@3": 1.0,
+          "recall@5": 1.0,
+          "mean_expected_coverage@5": 1.0,
+          "mrr": 1.0,
+          "hits@1": 11
+        },
+        "m2c_relevance": {
+          "questions": 10,
+          "recall@1": 0.9,
+          "mean_expected_coverage@1": 0.9,
+          "recall@3": 1.0,
+          "mean_expected_coverage@3": 1.0,
+          "recall@5": 1.0,
+          "mean_expected_coverage@5": 1.0,
+          "mrr": 0.95,
+          "hits@1": 9
+        },
+        "semantic": {
+          "questions": 10,
+          "recall@1": 0.9,
+          "mean_expected_coverage@1": 0.9,
+          "recall@3": 1.0,
+          "mean_expected_coverage@3": 1.0,
+          "recall@5": 1.0,
+          "mean_expected_coverage@5": 1.0,
+          "mrr": 0.95,
+          "hits@1": 9
+        }
+      },
+      "ambiguous_questions_only": {
+        "questions": 18,
+        "recall@1": 0.8333,
+        "mean_expected_coverage@1": 0.662,
+        "recall@3": 1.0,
+        "mean_expected_coverage@3": 0.9583,
+        "recall@5": 1.0,
+        "mean_expected_coverage@5": 0.9722,
+        "mrr": 0.9074,
+        "hits@1": 15
+      },
+      "unambiguous_questions_only": {
+        "questions": 32,
+        "recall@1": 0.9062,
+        "mean_expected_coverage@1": 0.9062,
+        "recall@3": 0.9688,
+        "mean_expected_coverage@3": 0.9688,
+        "recall@5": 0.9688,
+        "mean_expected_coverage@5": 0.9688,
+        "mrr": 0.9368,
+        "hits@1": 29
+      }
+    },
+    "failed_at_1": [
+      "Q19",
+      "Q31",
+      "Q39",
+      "Q42",
+      "Q47",
+      "Q48"
+    ],
+    "failed_at_3": [
+      "Q42"
+    ],
+    "failed_at_5": [
+      "Q42"
+    ],
+    "first_expected_rank_by_question": {
+      "Q01": 1,
+      "Q02": 1,
+      "Q03": 1,
+      "Q04": 1,
+      "Q05": 1,
+      "Q06": 1,
+      "Q07": 1,
+      "Q08": 1,
+      "Q09": 1,
+      "Q10": 1,
+      "Q11": 1,
+      "Q12": 1,
+      "Q13": 1,
+      "Q14": 1,
+      "Q15": 1,
+      "Q16": 1,
+      "Q17": 1,
+      "Q18": 1,
+      "Q19": 2,
+      "Q20": 1,
+      "Q21": 1,
+      "Q22": 1,
+      "Q23": 1,
+      "Q24": 1,
+      "Q25": 1,
+      "Q26": 1,
+      "Q27": 1,
+      "Q28": 1,
+      "Q29": 1,
+      "Q30": 1,
+      "Q31": 2,
+      "Q32": 1,
+      "Q33": 1,
+      "Q34": 1,
+      "Q35": 1,
+      "Q36": 1,
+      "Q37": 1,
+      "Q38": 1,
+      "Q39": 3,
+      "Q40": 1,
+      "Q41": 1,
+      "Q42": 7,
+      "Q43": 1,
+      "Q44": 1,
+      "Q45": 1,
+      "Q46": 1,
+      "Q47": 3,
+      "Q48": 2,
+      "Q49": 1,
+      "Q50": 1
+    }
+  }
+}

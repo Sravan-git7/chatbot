@@ -1,0 +1,112 @@
+{
+  "acquisition": {
+    "body_sha256": "05a228f0ff3336d48e89e8bf030cabffc11d8ad2537e14ab60bfdae17f126c1c",
+    "build_no": null,
+    "deliverable_title": "Contract Accounting",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/17_40374790_9c9c2344851f412f823d5f8a9dc7c694.json",
+    "file_sha256": "5abc431322a464a3604505ab138dda5aa3273678a577f729d9c4e83accdf1ecc",
+    "html_chars": 11449,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374790",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Communicating with Collection Agencies by Using Enterprise Services or APIs",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "You can communicate with your collection agencies by using files (creation of submission and information files, import of collection agency files) or by using Enterprise Services or APIs. SAP provides the necessary APIs and Enterprise Services, and a service-oriented interface. If you activate the service-oriented interface, it replaces the file interface and offers the following additional functions:"
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Communicating with Collection Agencies by Using Enterprise Services or APIs",
+        "Use"
+      ],
+      "kind": "list",
+      "text": "- Groupings of collection items for submission, along with external grouping information (external collection cases or court cases), are supported by the application in the form of collection units.\n- External status information on the progress of processing is integrated in the submitting company's own status information by using the collection history (SAP Easy Access screen: Account > Further Information > Collection History (transaction FPCOLLHIST ).\n- Payments reported by the collection agency result in the posting of receivables which are credited to the collection agency. This means that the system posts these receivables to the contract account of the collection agency in FI-CA."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Communicating with Collection Agencies by Using Enterprise Services or APIs",
+        "Activities"
+      ],
+      "kind": "list",
+      "text": "1. To be able to use the service-oriented interface for submissions to collections, you have to activate it in Customizing for Contract Accounts Receivable and Payable. To do this, in Customizing for Contract Accounts Receivable and Payable, choose either Integration > Enterprise Services > Make Central Settings for Enterprise Services or Business Transactions > Submit to Collections > Activation of Communication Through API or Enterprise Service . Note For more information about the dependencies related to activating the service-oriented interface, see the documentation for the indicator you use to activate the service-oriented interface. Caution If you previously communicated with collection agencies by file, do not activate communication via Enterprise Service/API until you have processed all the information that you received by file and stored in the system. After you have activated communication by using Enterprise Services or APIs, you can no longer process information that you have received by file and stored in the system. When communicating with collection agencies by using files, the system saves the exchanged information in a different table than when communicating with collection agencies by using the available Enterprise Services/APIs. If you switch to communication by using Enterprise Services/APIs, you must migrate the data. To do this, in the SAP Easy Access screen, choose Administration > Migrate Collection Items for Service Communication (transaction FP03MIG ).\n2. Then you make the necessary settings for collection agency postings in Customizing for Contract Accounts Receivable and Payable in the activities Define Specifications for Processing Collection Agency Information and Define Specifications for Collection Agency Postings under Business Transactions > Submit to Collection Agency .\n3. You enter the allowed status information about the progress of processing at external collection agencies in Customizing for Contract Accounts Receivable and Payable, under Business Transactions > Submit to Collection Agency > Define Categories of Collection Units .\n4. You can classify collection units when you submit to collections; you enter the allowed categories in Customizing for Contract Accounts Receivable and Payable, under Business Transactions > Submit to Collection Agency > Define Categories of Collection Units .\n5. To display status information in the collection history, select the Coll. Hist. column in Customizing for Contract Accounts Receivable and Payable, under Business Transactions > Submit to Collection Agency > Define Submission Status and under Maintain Status of Collection Units .\n6. In addition, define a variant for the collection history with the event 0007 Submit for Collection in Customizing for Contract Accounts Receivable and Payable, under Business Transactions > Dunning > Collection History > Define Variants ."
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Communicating with Collection Agencies by Using Enterprise Services or APIs",
+        "Activities"
+      ],
+      "kind": "related",
+      "text": "Related Information: Commissioned Outstanding Collections Processing"
+    }
+  ],
+  "breadcrumb": [
+    "Contract Accounting",
+    "Credit and Collections Management",
+    "Submission of Receivables to Collection Agency",
+    "Submission of Receivables to Collection Agency",
+    "Communicating with Collection Agencies by Using Enterprise Services or APIs"
+  ],
+  "card": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_page_id": "9c9c2344851f412f823d5f8a9dc7c694",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Collection Agency APIs and Enterprise Services",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html",
+    "review_flag": false
+  },
+  "doc_id": "9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694",
+  "guide_id": "9442486404b54071b4ebeab6a16628e7",
+  "headings": [
+    "Communicating with Collection Agencies by Using Enterprise Services or APIs",
+    "Use",
+    "Activities"
+  ],
+  "html_title": "Communicating with Collection Agencies by Using Enterprise Services or APIs",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "9c9c2344851f412f823d5f8a9dc7c694",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-28"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html",
+  "structure": {
+    "blocks": 4,
+    "chrome_elements_removed": 0,
+    "headings": 3,
+    "kinds": {
+      "list": 2,
+      "paragraph": 1,
+      "related": 1
+    }
+  },
+  "text": "Communicating with Collection Agencies by Using Enterprise Services or APIs\nUse\nYou can communicate with your collection agencies by using files (creation of submission and information files, import of collection agency files) or by using Enterprise Services or APIs. SAP provides the necessary APIs and Enterprise Services, and a service-oriented interface. If you activate the service-oriented interface, it replaces the file interface and offers the following additional functions:\n- Groupings of collection items for submission, along with external grouping information (external collection cases or court cases), are supported by the application in the form of collection units.\n- External status information on the progress of processing is integrated in the submitting company's own status information by using the collection history (SAP Easy Access screen: Account > Further Information > Collection History (transaction FPCOLLHIST ).\n- Payments reported by the collection agency result in the posting of receivables which are credited to the collection agency. This means that the system posts these receivables to the contract account of the collection agency in FI-CA.\nActivities\n1. To be able to use the service-oriented interface for submissions to collections, you have to activate it in Customizing for Contract Accounts Receivable and Payable. To do this, in Customizing for Contract Accounts Receivable and Payable, choose either Integration > Enterprise Services > Make Central Settings for Enterprise Services or Business Transactions > Submit to Collections > Activation of Communication Through API or Enterprise Service . Note For more information about the dependencies related to activating the service-oriented interface, see the documentation for the indicator you use to activate the service-oriented interface. Caution If you previously communicated with collection agencies by file, do not activate communication via Enterprise Service/API until you have processed all the information that you received by file and stored in the system. After you have activated communication by using Enterprise Services or APIs, you can no longer process information that you have received by file and stored in the system. When communicating with collection agencies by using files, the system saves the exchanged information in a different table than when communicating with collection agencies by using the available Enterprise Services/APIs. If you switch to communication by using Enterprise Services/APIs, you must migrate the data. To do this, in the SAP Easy Access screen, choose Administration > Migrate Collection Items for Service Communication (transaction FP03MIG ).\n2. Then you make the necessary settings for collection agency postings in Customizing for Contract Accounts Receivable and Payable in the activities Define Specifications for Processing Collection Agency Information and Define Specifications for Collection Agency Postings under Business Transactions > Submit to Collection Agency .\n3. You enter the allowed status information about the progress of processing at external collection agencies in Customizing for Contract Accounts Receivable and Payable, under Business Transactions > Submit to Collection Agency > Define Categories of Collection Units .\n4. You can classify collection units when you submit to collections; you enter the allowed categories in Customizing for Contract Accounts Receivable and Payable, under Business Transactions > Submit to Collection Agency > Define Categories of Collection Units .\n5. To display status information in the collection history, select the Coll. Hist. column in Customizing for Contract Accounts Receivable and Payable, under Business Transactions > Submit to Collection Agency > Define Submission Status and under Maintain Status of Collection Units .\n6. In addition, define a variant for the collection history with the event 0007 Submit for Collection in Customizing for Contract Accounts Receivable and Payable, under Business Transactions > Dunning > Collection History > Define Variants .\nRelated Information: Commissioned Outstanding Collections Processing",
+  "text_sha256": "27ddf623dad61a556ca88a87719f67312509ab478bb234798b30cc33cfd42042",
+  "title": "Communicating with Collection Agencies by Using Enterprise Services or APIs",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 4156
+  }
+}

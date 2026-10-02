@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/17fcc5536a51204be10000000a174cb4",
+  "topic_id": 17,
+  "topic_title": "Contract Accounts Overview",
+  "topic_ids": [
+    17
+  ],
+  "topic_refs": [
+    {
+      "topic_id": 17,
+      "topic_title": "Contract Accounts Overview",
+      "role": "descendant",
+      "via_doc_id": null,
+      "pdf_file": "17_Contract_Accounts_Overview.pdf"
+    }
+  ],
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "numeric_deliverable_id": "40374631",
+  "build_no": "1779",
+  "page_id": "17fcc5536a51204be10000000a174cb4",
+  "file_path": "17fcc5536a51204be10000000a174cb4.html",
+  "alias_file_paths": [],
+  "parent_page_id": "3efcc5536a51204be10000000a174cb4",
+  "toc_path": [
+    "Contract Accounts",
+    "Creating, Changing, and Displaying Contract Accounts",
+    "Displaying or Editing Other Business Partners"
+  ],
+  "depth": 2,
+  "page_title": "Displaying or Editing Other Business Partners",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/17fcc5536a51204be10000000a174cb4.html",
+  "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/17fcc5536a51204be10000000a174cb4.html",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/051.json",
+  "page_hash": "bea255a61ae833ca84dda1147e82b27240d89ba533d8f9fd1408089fdb6a3f57",
+  "content_hash": "6b050d46241e908b937076eb0f4a26292d5e14ebc0530dc87c8d2174be336855",
+  "duplicate_of": null,
+  "duplicate_docs": [],
+  "text_raw": "Displaying or Editing Other Business Partners\nDisplaying or Editing Other Business Partners\nPrerequisites\nSeveral business partners must be assigned to the contract account.\nProcedure\nYou can use the\nOther\nPartner\nfunction to switch between the data of individual partners in the contract account.\nOn the SAP Easy Access screen, choose\nMaster Data\nContract Account\nDisplay\n(\nCAA3\n).\nEnter the required contract account.\nThen choose\nGoto\nOther\nPartner\n.\nThe system displays a selection window for the business partners already assigned to the contract account.\nChoose a business partner.\nThe data for this business partner is displayed and can be processed.",
+  "text": "Displaying or Editing Other Business Partners\nPrerequisites\nSeveral business partners must be assigned to the contract account.\nProcedure\nYou can use the Other\nPartner function to switch between the data of individual partners in the contract account.\nOn the SAP Easy Access screen, choose\nMaster Data\nContract Account\nDisplay\n(CAA3).\nEnter the required contract account.\nThen choose\nGoto\nOther\nPartner.\nThe system displays a selection window for the business partners already assigned to the contract account.\nChoose a business partner.\nThe data for this business partner is displayed and can be processed.",
+  "clean_stats": {
+    "title_duplicates_removed": 1,
+    "fragments_joined": 5,
+    "lines_in": 25,
+    "lines_out": 19
+  },
+  "status": "OK"
+}

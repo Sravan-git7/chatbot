@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/2cfcc5536a51204be10000000a174cb4",
+  "topic_id": 17,
+  "topic_title": "Contract Accounts Overview",
+  "topic_ids": [
+    17
+  ],
+  "topic_refs": [
+    {
+      "topic_id": 17,
+      "topic_title": "Contract Accounts Overview",
+      "role": "descendant",
+      "via_doc_id": null,
+      "pdf_file": "17_Contract_Accounts_Overview.pdf"
+    }
+  ],
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "numeric_deliverable_id": "40374631",
+  "build_no": "1779",
+  "page_id": "2cfcc5536a51204be10000000a174cb4",
+  "file_path": "2cfcc5536a51204be10000000a174cb4.html",
+  "alias_file_paths": [],
+  "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+  "toc_path": [
+    "Contract Accounts",
+    "Automatic Master Data Transfer"
+  ],
+  "depth": 1,
+  "page_title": "Automatic Master Data Transfer",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/2cfcc5536a51204be10000000a174cb4.html",
+  "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/2cfcc5536a51204be10000000a174cb4.html",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/047.json",
+  "page_hash": "b6623cd145453d6dc8cb2411778bacea12c0e21eb55d22d969f058fefef79b5c",
+  "content_hash": "a85826eda50d504ffd8e6a9439ffa07de7712bea1b8619c525ad4e15432b058c",
+  "duplicate_of": null,
+  "duplicate_docs": [],
+  "text_raw": "Automatic Master Data Transfer\nAutomatic Master Data Transfer\nUse\nYou use this function to transfer the contract account master data from legacy or operational systems.\nFeatures\nData is generally transferred in two steps:\nThe relevant data is read from the operational system and placed in a sequential file (operational system sender structure) by the data selection program. This transaction takes place outside of the SAP system and is not supported by SAP programs. Therefore the data selection program can make changes to data at this point.\nThe SAP transfer program reads the data from the sender structure, changes the data, and places the data in the receiver structure. Data can be changed or converted in this last step.\nActivities\nFor more information, and the programs involved, see the Implementation Guide for Contract Accounts Receivable and Payable:\nBasicFunctions\nContractAccounts\nDataTransfer\n.",
+  "text": "Automatic Master Data Transfer\nUse\nYou use this function to transfer the contract account master data from legacy or operational systems.\nFeatures\nData is generally transferred in two steps:\nThe relevant data is read from the operational system and placed in a sequential file (operational system sender structure) by the data selection program. This transaction takes place outside of the SAP system and is not supported by SAP programs. Therefore the data selection program can make changes to data at this point.\nThe SAP transfer program reads the data from the sender structure, changes the data, and places the data in the receiver structure. Data can be changed or converted in this last step.\nActivities\nFor more information, and the programs involved, see the Implementation Guide for Contract Accounts Receivable and Payable:\nBasicFunctions\nContractAccounts\nDataTransfer.",
+  "clean_stats": {
+    "title_duplicates_removed": 1,
+    "fragments_joined": 1,
+    "lines_in": 14,
+    "lines_out": 12
+  },
+  "status": "OK"
+}

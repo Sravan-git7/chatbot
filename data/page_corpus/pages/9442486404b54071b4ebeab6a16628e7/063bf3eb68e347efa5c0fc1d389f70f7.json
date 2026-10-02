@@ -1,0 +1,289 @@
+{
+  "acquisition": {
+    "body_sha256": "31db3b3e4a0a694626eb40081454c11733b82ec6b9109833be75019787c772b8",
+    "build_no": null,
+    "deliverable_title": "Contract Accounting",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/9_40374790_063bf3eb68e347efa5c0fc1d389f70f7.json",
+    "file_sha256": "9d349bf709c3d82e84b485dd40b51503c6d7b0a80524ffe55839674affea1797",
+    "html_chars": 8538,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374790",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Analyze Incoming Payments"
+      ],
+      "kind": "paragraph",
+      "text": "With the Analyze Incoming Payments (F5588) app, you can monitor and analyze incoming payments to optimize clarification processes and team workload."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can use this app to regularly do the following:"
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features"
+      ],
+      "kind": "list",
+      "text": "- Analyze how many payments have been clarified manually within a given period.\n- Analyze the effectiveness of the automated clarification process provided by the standard."
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features"
+      ],
+      "kind": "note",
+      "text": "Note: If you have licensed and are using SAP Cash Application, add-on for contract accounting , you can regularly validate the effectiveness of the applied machine learning to the clarification process."
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features"
+      ],
+      "kind": "paragraph",
+      "text": "You display the data per company code. You can refine the filter criteria as required by choosing Adapt Filters to include, for example, the posting date, and lot type."
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features"
+      ],
+      "kind": "paragraph",
+      "text": "The app analyzes payment lots, credit lots, and check lots, and displays an overview of which amount and number of payments in a payment lot has been cleared automatically or manually."
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features"
+      ],
+      "kind": "note",
+      "text": "Note: If you are using SAP Cash Application, add-on for contract accounting , the app analyzes payment lots, credit lots, and check lots, and displays an overview of which amount and number of payments in a payment lot has been cleared using machine learning."
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Views"
+      ],
+      "kind": "paragraph",
+      "text": "You can display the data by using the following view options:"
+    },
+    {
+      "block_index": 8,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Views"
+      ],
+      "kind": "list",
+      "text": "- The Chart View shows all payment lots matching the filter criteria. The default dimension is Lot . The default measures are Payments in Clarification , Payments Posted Automatically , Payments Posted Manually , and, if you are using SAP Cash Application, add-on for contract accounting , Payments Posted Using Cash App .\n- The Table View lists more details per payment lot than the Chart View , including the total number of payments in clarification, the total number of items in lots, and the total payment amount in the last row of the table."
+    },
+    {
+      "block_index": 9,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Views"
+      ],
+      "kind": "paragraph",
+      "text": "You can combine the table and chart view in a single display."
+    },
+    {
+      "block_index": 10,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Views"
+      ],
+      "kind": "paragraph",
+      "text": "For each view, you can change chart, dimensions, and measures in the Settings dialog. You change the display by selecting a chart type in combination with a dimension and measures."
+    },
+    {
+      "block_index": 11,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Views"
+      ],
+      "kind": "note",
+      "text": "Example: You group payments by house bank or origin of the lot."
+    },
+    {
+      "block_index": 12,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Details View"
+      ],
+      "kind": "paragraph",
+      "text": "The details view of individual payment lots shows various statistics, such as the following:"
+    },
+    {
+      "block_index": 13,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Details View"
+      ],
+      "kind": "list",
+      "text": "- Payment usage within a payment lot\n- Duration of clarification activities\n- Level of automation within one payment lot"
+    },
+    {
+      "block_index": 14,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Details View"
+      ],
+      "kind": "note",
+      "text": "Note: If you are using SAP Cash Application, add-on for contract accounting , the details view of individual payment lots shows the proposal rate."
+    },
+    {
+      "block_index": 15,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Examples for How to Configure Views"
+      ],
+      "kind": "paragraph",
+      "text": "To display the total payment amount in relation to the open payment amount in a lot, select the following:"
+    },
+    {
+      "block_index": 16,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Examples for How to Configure Views"
+      ],
+      "kind": "list",
+      "text": "- Chart : Combined Stacked Line Chart\n- Dimension : Lot\n- Measure : Amount of Open Items\n- Measure : Total Payment Amount"
+    },
+    {
+      "block_index": 17,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Examples for How to Configure Views"
+      ],
+      "kind": "paragraph",
+      "text": "To display the total amount in relation to the number of items in a lot, select the following:"
+    },
+    {
+      "block_index": 18,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Examples for How to Configure Views"
+      ],
+      "kind": "list",
+      "text": "- Chart : Combined Column Line Chart with 2 Y-Axes\n- Dimension : Lot\n- Measure : Number of Items in Lot / Axis 1\n- Measure : Total Payment Amount / Axis 2"
+    },
+    {
+      "block_index": 19,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Examples for How to Configure Views"
+      ],
+      "kind": "paragraph",
+      "text": "To display percentages, select the following:"
+    },
+    {
+      "block_index": 20,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "Key Features",
+        "Examples for How to Configure Views"
+      ],
+      "kind": "list",
+      "text": "- Chart : 100% Stacked Column Chart\n- Dimension : House Bank\n- Measure : Payments in Clarification\n- Measure : Payments Posted Manually\n- Measure : Payments Posted Automatically"
+    },
+    {
+      "block_index": 21,
+      "heading_path": [
+        "Analyze Incoming Payments",
+        "SAP Fiori Implementation Information"
+      ],
+      "kind": "paragraph",
+      "text": "In the SAP Fiori Apps Reference Library , see the details for the Analyze Incoming Payments app."
+    }
+  ],
+  "breadcrumb": [
+    "Contract Accounting",
+    "Information System",
+    "Key Figures in Contract Accounts Receivable and Payable",
+    "Analyze Incoming Payments"
+  ],
+  "card": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_page_id": "063bf3eb68e347efa5c0fc1d389f70f7",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Analyze Incoming Payments",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html",
+    "review_flag": false
+  },
+  "doc_id": "9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7",
+  "guide_id": "9442486404b54071b4ebeab6a16628e7",
+  "headings": [
+    "Analyze Incoming Payments",
+    "Key Features",
+    "Views",
+    "Details View",
+    "Examples for How to Configure Views",
+    "SAP Fiori Implementation Information"
+  ],
+  "html_title": "Analyze Incoming Payments",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "063bf3eb68e347efa5c0fc1d389f70f7",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-19"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html",
+  "structure": {
+    "blocks": 22,
+    "chrome_elements_removed": 0,
+    "headings": 6,
+    "kinds": {
+      "list": 6,
+      "note": 4,
+      "paragraph": 12
+    }
+  },
+  "text": "Analyze Incoming Payments\nWith the Analyze Incoming Payments (F5588) app, you can monitor and analyze incoming payments to optimize clarification processes and team workload.\nKey Features\nYou can use this app to regularly do the following:\n- Analyze how many payments have been clarified manually within a given period.\n- Analyze the effectiveness of the automated clarification process provided by the standard.\nNote: If you have licensed and are using SAP Cash Application, add-on for contract accounting , you can regularly validate the effectiveness of the applied machine learning to the clarification process.\nYou display the data per company code. You can refine the filter criteria as required by choosing Adapt Filters to include, for example, the posting date, and lot type.\nThe app analyzes payment lots, credit lots, and check lots, and displays an overview of which amount and number of payments in a payment lot has been cleared automatically or manually.\nNote: If you are using SAP Cash Application, add-on for contract accounting , the app analyzes payment lots, credit lots, and check lots, and displays an overview of which amount and number of payments in a payment lot has been cleared using machine learning.\nViews\nYou can display the data by using the following view options:\n- The Chart View shows all payment lots matching the filter criteria. The default dimension is Lot . The default measures are Payments in Clarification , Payments Posted Automatically , Payments Posted Manually , and, if you are using SAP Cash Application, add-on for contract accounting , Payments Posted Using Cash App .\n- The Table View lists more details per payment lot than the Chart View , including the total number of payments in clarification, the total number of items in lots, and the total payment amount in the last row of the table.\nYou can combine the table and chart view in a single display.\nFor each view, you can change chart, dimensions, and measures in the Settings dialog. You change the display by selecting a chart type in combination with a dimension and measures.\nExample: You group payments by house bank or origin of the lot.\nDetails View\nThe details view of individual payment lots shows various statistics, such as the following:\n- Payment usage within a payment lot\n- Duration of clarification activities\n- Level of automation within one payment lot\nNote: If you are using SAP Cash Application, add-on for contract accounting , the details view of individual payment lots shows the proposal rate.\nExamples for How to Configure Views\nTo display the total payment amount in relation to the open payment amount in a lot, select the following:\n- Chart : Combined Stacked Line Chart\n- Dimension : Lot\n- Measure : Amount of Open Items\n- Measure : Total Payment Amount\nTo display the total amount in relation to the number of items in a lot, select the following:\n- Chart : Combined Column Line Chart with 2 Y-Axes\n- Dimension : Lot\n- Measure : Number of Items in Lot / Axis 1\n- Measure : Total Payment Amount / Axis 2\nTo display percentages, select the following:\n- Chart : 100% Stacked Column Chart\n- Dimension : House Bank\n- Measure : Payments in Clarification\n- Measure : Payments Posted Manually\n- Measure : Payments Posted Automatically\nSAP Fiori Implementation Information\nIn the SAP Fiori Apps Reference Library , see the details for the Analyze Incoming Payments app.",
+  "text_sha256": "421b9c2fa797fa0088950ba44241c9e5cdb14b1e87fdc9cf2bb73aa0ee80d3c7",
+  "title": "Analyze Incoming Payments",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 3399
+  }
+}

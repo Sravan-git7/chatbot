@@ -1,0 +1,291 @@
+{
+  "acquisition": {
+    "body_sha256": "831b442e584bc10c0cd662a2076052f118ded85b24a6503f2bb1d663d1d610aa",
+    "build_no": null,
+    "deliverable_title": "Customer Service",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/18_40374682_8682ce53118d4308e10000000a174cb4.json",
+    "file_sha256": "1d9d38aaa89747a1ad3b34f7539f6fb373b2c1be4dc7ca1eadc161062c3aa44b",
+    "html_chars": 9324,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374682",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "This component enables you to manage disconnections and reconnections. This component is optional. You need to use it if you want to temporarily interrupt supply to customers (especially within the bounds of a legal dunning procedure). A disconnection is a temporary interruption in the supply of a utility service that does not involve the meter removal. This is due to the following reasons, for example:"
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Use"
+      ],
+      "kind": "list",
+      "text": "- Introduction of a collection procedure for outstanding payment\n- Technical disconnection due to request of utilities company or customer"
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "In the first instance, the service is resumed (reconnection) when the customer has paid the outstanding bill; in the second, it is done at the request of the customer."
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "Disconnections and Reconnections in an Advanced Metering Infrastructure Environment"
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "If you are working in an advanced metering infrastructure (AMI) environment, you can find more information under Advanced Metering Infrastructure ."
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "Notifying Customers of Upcoming Disconnections and Reconnections"
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "Depending on legal requirements or on intra-enterprise guidelines, y ou might be required to contact your customers before you carry out a disconnection or reconnection. The customer contact process is called Notification . In such situations, you (or a CRM agent) need to execute additional steps between the disconnection or reconnection request and the actual disconnection or reconnection."
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "Invoicing"
+    },
+    {
+      "block_index": 8,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "You can invoice flat-rate charges for a disconnection or reconnection using the SAP Utilities component (IS-U). For more information, see the Invoicing component."
+    },
+    {
+      "block_index": 9,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "If you create a service order for the field service employee, and want to invoice the order then you require the Customer Service (CS) and Sales and Distribution (SD) components. For more information, see View: Customer Service (CS) and Plant Maintenance (PM) and Sales and Distribution ."
+    },
+    {
+      "block_index": 10,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "Confirming Disconnection and Reconnection Order Data"
+    },
+    {
+      "block_index": 11,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "You can confirm disconnection and reconnection order data in the system using the IDoc ISU_DISC_UPLOAD ( IS-U/CCS : upload disconnection/reconnection order data)."
+    },
+    {
+      "block_index": 12,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "For more information about IDocs see the following documentation:"
+    },
+    {
+      "block_index": 13,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "list",
+      "text": "- For general information, see IDoc Interface/Electronic Data Interchange\n- For detailed information, see Using Documentation Tools Here you determine which documentation you can display for a certain IDoc category."
+    },
+    {
+      "block_index": 14,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "Creditworthiness Weighting"
+    },
+    {
+      "block_index": 15,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Integration"
+      ],
+      "kind": "paragraph",
+      "text": "If you disconnect a business partner because he/she has reached the disconnection dunning level, the system changes the creditworthiness of the business partner for each disconnection. To do this, go to Customizing under SAP Utilities > Customer Service > Process Execution > Disconnection/Reconnection > Define Processing Variants for Disconnection Documents and make an entry in the Creditworthiness Weighting field. The change is reversed if the disconnection that triggered it is canceled."
+    },
+    {
+      "block_index": 16,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Process"
+      ],
+      "kind": "paragraph",
+      "text": "The flow of the business process is not set by the system, but is rather controlled by workflows. There are two main workflows with corresponding sub-workflows. They are as follows:"
+    },
+    {
+      "block_index": 17,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Process"
+      ],
+      "kind": "list",
+      "text": "- Main Workflow for Disconnection/Reconnection/Collection (ISUDISCON12)\n- Create Disconnection Order Workflow (ISUDISC12)\n- Confirm Disconnection Order Workflow (ISUDISCREP12)\n- Reverse Disconnection Workflow (ISUDISCSTORN)\n- Interrupt Disonnection Workflow (ISUDISCBREAK)\n- Terminate Workflow with Follow-Up (ISUDISCSHUT1)\n- Create Reconnection Order Workflow (ISUREC12)\n- Confirm Reconnection Order Workflow (ISURECREP12)\n- Main Workflow for Disconnection at Customer Request (ISUDISCON12)"
+    },
+    {
+      "block_index": 18,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Process"
+      ],
+      "kind": "paragraph",
+      "text": "Main Workflow for Disconnection/Reconnection/Collection"
+    },
+    {
+      "block_index": 19,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Process"
+      ],
+      "kind": "caption",
+      "text": "Workflow Model"
+    },
+    {
+      "block_index": 20,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Process"
+      ],
+      "kind": "paragraph",
+      "text": "The process flow of the main workflow for Disconnection/Reconnection is as follows:"
+    },
+    {
+      "block_index": 21,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Process"
+      ],
+      "kind": "paragraph",
+      "text": "The Reverse Disconnection Workflow ( ISUDISCSTORN ) is not depicted in this model since it would affect clarity."
+    },
+    {
+      "block_index": 22,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Process"
+      ],
+      "kind": "paragraph",
+      "text": "You can configure the system to generate a contract-related proposal for the object to be disconnected/reconnected. You do this in Customizing under Define Processing Variants for Disconnection Documents . You can change this proposal in dialog."
+    },
+    {
+      "block_index": 23,
+      "heading_path": [
+        "Disconnection/Reconnection of a Utility Installation",
+        "Process"
+      ],
+      "kind": "note",
+      "text": "Caution: Workflows and Remote Disconnection and Reconnection of AMI Devices If you are working in an advanced metering infrastructure (AMI) environment , you cannot integrate activities that feature remote disconnection and reconnection of AMI devices (such as advanced meters or smart meters) into SAP Business Workflow processes – this would conflict with the direct communication processing used for these devices. Instead, you need to adjust your operating procedures to manually execute any workflow step related to remote disconnection and reconnection activities."
+    }
+  ],
+  "breadcrumb": [
+    "Process Execution",
+    "Disconnection/Reconnection of a Utility Installation"
+  ],
+  "card": {
+    "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+    "card_page_id": "8682ce53118d4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Disconnection/Reconnection of a Utility Installation",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4",
+  "guide_id": "f4a255a5de524e3992155767996fb1fd",
+  "headings": [
+    "Disconnection/Reconnection of a Utility Installation",
+    "Use",
+    "Integration",
+    "Process"
+  ],
+  "html_title": "Disconnection/Reconnection of a Utility Installation",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "8682ce53118d4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-29"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 24,
+    "chrome_elements_removed": 0,
+    "headings": 4,
+    "kinds": {
+      "caption": 1,
+      "list": 3,
+      "note": 1,
+      "paragraph": 19
+    }
+  },
+  "text": "Disconnection/Reconnection of a Utility Installation\nUse\nThis component enables you to manage disconnections and reconnections. This component is optional. You need to use it if you want to temporarily interrupt supply to customers (especially within the bounds of a legal dunning procedure). A disconnection is a temporary interruption in the supply of a utility service that does not involve the meter removal. This is due to the following reasons, for example:\n- Introduction of a collection procedure for outstanding payment\n- Technical disconnection due to request of utilities company or customer\nIn the first instance, the service is resumed (reconnection) when the customer has paid the outstanding bill; in the second, it is done at the request of the customer.\nDisconnections and Reconnections in an Advanced Metering Infrastructure Environment\nIf you are working in an advanced metering infrastructure (AMI) environment, you can find more information under Advanced Metering Infrastructure .\nIntegration\nNotifying Customers of Upcoming Disconnections and Reconnections\nDepending on legal requirements or on intra-enterprise guidelines, y ou might be required to contact your customers before you carry out a disconnection or reconnection. The customer contact process is called Notification . In such situations, you (or a CRM agent) need to execute additional steps between the disconnection or reconnection request and the actual disconnection or reconnection.\nInvoicing\nYou can invoice flat-rate charges for a disconnection or reconnection using the SAP Utilities component (IS-U). For more information, see the Invoicing component.\nIf you create a service order for the field service employee, and want to invoice the order then you require the Customer Service (CS) and Sales and Distribution (SD) components. For more information, see View: Customer Service (CS) and Plant Maintenance (PM) and Sales and Distribution .\nConfirming Disconnection and Reconnection Order Data\nYou can confirm disconnection and reconnection order data in the system using the IDoc ISU_DISC_UPLOAD ( IS-U/CCS : upload disconnection/reconnection order data).\nFor more information about IDocs see the following documentation:\n- For general information, see IDoc Interface/Electronic Data Interchange\n- For detailed information, see Using Documentation Tools Here you determine which documentation you can display for a certain IDoc category.\nCreditworthiness Weighting\nIf you disconnect a business partner because he/she has reached the disconnection dunning level, the system changes the creditworthiness of the business partner for each disconnection. To do this, go to Customizing under SAP Utilities > Customer Service > Process Execution > Disconnection/Reconnection > Define Processing Variants for Disconnection Documents and make an entry in the Creditworthiness Weighting field. The change is reversed if the disconnection that triggered it is canceled.\nProcess\nThe flow of the business process is not set by the system, but is rather controlled by workflows. There are two main workflows with corresponding sub-workflows. They are as follows:\n- Main Workflow for Disconnection/Reconnection/Collection (ISUDISCON12)\n- Create Disconnection Order Workflow (ISUDISC12)\n- Confirm Disconnection Order Workflow (ISUDISCREP12)\n- Reverse Disconnection Workflow (ISUDISCSTORN)\n- Interrupt Disonnection Workflow (ISUDISCBREAK)\n- Terminate Workflow with Follow-Up (ISUDISCSHUT1)\n- Create Reconnection Order Workflow (ISUREC12)\n- Confirm Reconnection Order Workflow (ISURECREP12)\n- Main Workflow for Disconnection at Customer Request (ISUDISCON12)\nMain Workflow for Disconnection/Reconnection/Collection\nWorkflow Model\nThe process flow of the main workflow for Disconnection/Reconnection is as follows:\nThe Reverse Disconnection Workflow ( ISUDISCSTORN ) is not depicted in this model since it would affect clarity.\nYou can configure the system to generate a contract-related proposal for the object to be disconnected/reconnected. You do this in Customizing under Define Processing Variants for Disconnection Documents . You can change this proposal in dialog.\nCaution: Workflows and Remote Disconnection and Reconnection of AMI Devices If you are working in an advanced metering infrastructure (AMI) environment , you cannot integrate activities that feature remote disconnection and reconnection of AMI devices (such as advanced meters or smart meters) into SAP Business Workflow processes – this would conflict with the direct communication processing used for these devices. Instead, you need to adjust your operating procedures to manually execute any workflow step related to remote disconnection and reconnection activities.",
+  "text_sha256": "e4806cd7ec5196865c945c05d737b061508d243f8e9f68d9fe106414a9d3a87d",
+  "title": "Disconnection/Reconnection of a Utility Installation",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 4721
+  }
+}

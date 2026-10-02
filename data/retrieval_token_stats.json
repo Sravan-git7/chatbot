@@ -1,0 +1,333 @@
+{
+  "tokenizer": {
+    "class": "BertTokenizer",
+    "vocab_size": 30522,
+    "model_name": "all-MiniLM-L6-v2",
+    "model_max_seq_length_sentence_transformers": 256,
+    "position_embeddings_limit": 512,
+    "special_tokens_counted": true,
+    "truncation_applied_when_counting": false
+  },
+  "full_text": {
+    "min": 214,
+    "median": 228.0,
+    "mean": 227.9,
+    "max": 245
+  },
+  "embedding_text": {
+    "min": 129,
+    "median": 143.0,
+    "mean": 142.9,
+    "max": 160
+  },
+  "max_seq_length": 256,
+  "embedding_text_over_limit": [],
+  "full_text_over_limit": [],
+  "sources": [
+    {
+      "source_id": "M2C-01",
+      "source_number": 1,
+      "full_text_tokens": 240,
+      "embedding_text_tokens": 155,
+      "embedding_text_chars": 600,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 101
+    },
+    {
+      "source_id": "M2C-02",
+      "source_number": 2,
+      "full_text_tokens": 228,
+      "embedding_text_tokens": 143,
+      "embedding_text_chars": 501,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 113
+    },
+    {
+      "source_id": "M2C-03",
+      "source_number": 3,
+      "full_text_tokens": 234,
+      "embedding_text_tokens": 149,
+      "embedding_text_chars": 520,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 107
+    },
+    {
+      "source_id": "M2C-04",
+      "source_number": 4,
+      "full_text_tokens": 228,
+      "embedding_text_tokens": 143,
+      "embedding_text_chars": 500,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 113
+    },
+    {
+      "source_id": "M2C-05",
+      "source_number": 5,
+      "full_text_tokens": 227,
+      "embedding_text_tokens": 142,
+      "embedding_text_chars": 506,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 114
+    },
+    {
+      "source_id": "M2C-06",
+      "source_number": 6,
+      "full_text_tokens": 235,
+      "embedding_text_tokens": 150,
+      "embedding_text_chars": 524,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 106
+    },
+    {
+      "source_id": "M2C-07",
+      "source_number": 7,
+      "full_text_tokens": 225,
+      "embedding_text_tokens": 140,
+      "embedding_text_chars": 519,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 116
+    },
+    {
+      "source_id": "M2C-08",
+      "source_number": 8,
+      "full_text_tokens": 224,
+      "embedding_text_tokens": 139,
+      "embedding_text_chars": 479,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 117
+    },
+    {
+      "source_id": "M2C-09",
+      "source_number": 9,
+      "full_text_tokens": 234,
+      "embedding_text_tokens": 149,
+      "embedding_text_chars": 518,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 107
+    },
+    {
+      "source_id": "M2C-10",
+      "source_number": 10,
+      "full_text_tokens": 230,
+      "embedding_text_tokens": 145,
+      "embedding_text_chars": 487,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 111
+    },
+    {
+      "source_id": "M2C-11",
+      "source_number": 11,
+      "full_text_tokens": 220,
+      "embedding_text_tokens": 135,
+      "embedding_text_chars": 485,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 121
+    },
+    {
+      "source_id": "M2C-12",
+      "source_number": 12,
+      "full_text_tokens": 222,
+      "embedding_text_tokens": 137,
+      "embedding_text_chars": 500,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 119
+    },
+    {
+      "source_id": "M2C-13",
+      "source_number": 13,
+      "full_text_tokens": 223,
+      "embedding_text_tokens": 138,
+      "embedding_text_chars": 492,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 118
+    },
+    {
+      "source_id": "M2C-14",
+      "source_number": 14,
+      "full_text_tokens": 233,
+      "embedding_text_tokens": 148,
+      "embedding_text_chars": 497,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 108
+    },
+    {
+      "source_id": "M2C-15",
+      "source_number": 15,
+      "full_text_tokens": 219,
+      "embedding_text_tokens": 134,
+      "embedding_text_chars": 458,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 122
+    },
+    {
+      "source_id": "M2C-16",
+      "source_number": 16,
+      "full_text_tokens": 226,
+      "embedding_text_tokens": 141,
+      "embedding_text_chars": 474,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 115
+    },
+    {
+      "source_id": "M2C-17",
+      "source_number": 17,
+      "full_text_tokens": 225,
+      "embedding_text_tokens": 140,
+      "embedding_text_chars": 482,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 116
+    },
+    {
+      "source_id": "M2C-18",
+      "source_number": 18,
+      "full_text_tokens": 235,
+      "embedding_text_tokens": 150,
+      "embedding_text_chars": 539,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 106
+    },
+    {
+      "source_id": "M2C-19",
+      "source_number": 19,
+      "full_text_tokens": 219,
+      "embedding_text_tokens": 134,
+      "embedding_text_chars": 478,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 122
+    },
+    {
+      "source_id": "M2C-20",
+      "source_number": 20,
+      "full_text_tokens": 230,
+      "embedding_text_tokens": 145,
+      "embedding_text_chars": 520,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 111
+    },
+    {
+      "source_id": "M2C-21",
+      "source_number": 21,
+      "full_text_tokens": 229,
+      "embedding_text_tokens": 144,
+      "embedding_text_chars": 472,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 112
+    },
+    {
+      "source_id": "M2C-22",
+      "source_number": 22,
+      "full_text_tokens": 223,
+      "embedding_text_tokens": 138,
+      "embedding_text_chars": 502,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 118
+    },
+    {
+      "source_id": "M2C-23",
+      "source_number": 23,
+      "full_text_tokens": 233,
+      "embedding_text_tokens": 148,
+      "embedding_text_chars": 532,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 108
+    },
+    {
+      "source_id": "M2C-24",
+      "source_number": 24,
+      "full_text_tokens": 214,
+      "embedding_text_tokens": 129,
+      "embedding_text_chars": 493,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 127
+    },
+    {
+      "source_id": "M2C-25",
+      "source_number": 25,
+      "full_text_tokens": 219,
+      "embedding_text_tokens": 134,
+      "embedding_text_chars": 531,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 122
+    },
+    {
+      "source_id": "M2C-26",
+      "source_number": 26,
+      "full_text_tokens": 228,
+      "embedding_text_tokens": 143,
+      "embedding_text_chars": 468,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 113
+    },
+    {
+      "source_id": "M2C-27",
+      "source_number": 27,
+      "full_text_tokens": 232,
+      "embedding_text_tokens": 147,
+      "embedding_text_chars": 534,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 109
+    },
+    {
+      "source_id": "M2C-28",
+      "source_number": 28,
+      "full_text_tokens": 228,
+      "embedding_text_tokens": 143,
+      "embedding_text_chars": 511,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 113
+    },
+    {
+      "source_id": "M2C-29",
+      "source_number": 29,
+      "full_text_tokens": 245,
+      "embedding_text_tokens": 160,
+      "embedding_text_chars": 588,
+      "full_text_truncated_by_model": false,
+      "embedding_text_truncated_by_model": false,
+      "embedding_text_headroom": 96
+    }
+  ],
+  "verdict": "PASS: every embedding_text fits the model input length",
+  "model": {
+    "model_name": "all-MiniLM-L6-v2",
+    "origin": "pip package gt-all-minilm-l6-v2 (third-party re-packaging of sentence-transformers/all-MiniLM-L6-v2)",
+    "directory": "/tmp/av/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
+    "files_sha256": {
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+    }
+  },
+  "units_file_sha256": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21"
+}

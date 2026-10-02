@@ -1,8 +1,9 @@
-@"
 __pycache__/
 *.pyc
 .venv/
 venv/
 .env
 chroma_db/
-"@ | Out-File -Encoding utf8 .gitignore
+
+# Phase 4 vector store (rebuild with scripts/build_card_collection.py --rebuild)
+data/vector_store/

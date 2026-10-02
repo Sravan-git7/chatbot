@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "page_id": "0bfcc5536a51204be10000000a174cb4",
+  "file_path": "0bfcc5536a51204be10000000a174cb4.html",
+  "page_title": "Contract Accounts",
+  "text_raw": "Contract Accounts\nContract Accounts\nPurpose\nThis component enables you to create and manage contract account master data. In\nContract Accounts Receivable and Payable\n, each business partner posting is assigned to one business partner and to one contract account. In the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. These include, for example, payment and dunning.\nIntegration\nMaster data can be changed automatically by certain business transactions. In this way, for example, a return can result in a processing lock being set.\nFeatures\nYou can assign more than one contract account to a given business partner. Similarly, a single contract account can be assigned to more than one business partner. Note however, that in the industry components listed below, different rules apply. You can transfer data manually or automatically. Contract accounts tend to be managed on an open item basis. See\nOpen Item Management\n. The system logs changes to master data. See\nLogging Changes\n.\nTelecommunications(IS-T) component\nIn this component, a contract account can be assigned to one business partner only.\nUtilities Industry (IS-U)Component\nIn\nUtilities\n,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. You assign your business partner contracts to the contract accounts. Although one contract account can contain more than one contract, each individual contract is assigned to one contract account only. This does not apply to one-time accounts.\nFor more information on contracts, see the\nUtility/Disposal Contracts\nsection in the\nUtilities Industry\ncomponent.\nInsurance(FS-CD) Industry Component\nYou assign contracts to the contract accounts for which there is a business partner. Each contract is only assigned to one contract account, however one contract account may have several contracts assigned to it.\nContract account master data is usually created and changed from the operational system using an interface.\nIndustry ComponentPublic Sector Contract Accounts Receivable and Payable(PSCD)\nYou set up the contract accounts of a business partner for the relevant taxes (property tax, income tax, and so on). You assign contract objects to a contract account for which relevant taxes are levied. If different taxes are levied for a contract object, you can make assignments to several contract accounts.\nFor more information about the contract objects, see the documentation for the industry-specific component\nPublic Sector\nContract Accounts Receivable and Payable\nunder\nContract Object\n.",
+  "page_hash": "9e560c083ca73e10715b14617c02c1c1b03d7ec2420e8b578a83af1da16b2cb3",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/041.json",
+  "current_page": {
+    "id": 2554982932,
+    "t": "Contract Accounts",
+    "u": "0bfcc5536a51204be10000000a174cb4.html",
+    "loio": "0bfcc5536a51204be10000000a174cb4",
+    "deltaMtTranslate": false
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "acquisition": {
+    "body_sha256": "b36e733a8ac4999de7f5fd99de69d1079e116a938f21fe00ae2f8a7a14085b1a",
+    "build_no": "1779",
+    "deliverable_title": "Contract Accounting",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+    "file_sha256": "769ae06af51e73a9fa7858ddf0d9c59a8164a4c38ae7c8f06ced0381733137aa",
+    "html_chars": 10762,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374790",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Creating Installment Plans",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "You create an installment plan when both of the following apply:"
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Creating Installment Plans",
+        "Use"
+      ],
+      "kind": "list",
+      "text": "- There are one or more open items on the contract account of a business partner.\n- The business partner is unable to meet his/her payment obligations in accordance with the usual payment rules."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Creating Installment Plans",
+        "Prerequisites"
+      ],
+      "kind": "paragraph",
+      "text": "To be able to prioritize the clearing of original items when payments are received, you set the Clrg Priority indicator. You do so in Customizing for Contract Accounts Payable and Receivable, under: Business Transactions > Deferral and Installment Plan > Activate Additional Installment Plan Enhancement"
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Creating Installment Plans",
+        "Key Features"
+      ],
+      "kind": "paragraph",
+      "text": "When you calculate interest, the system creates an interest document automatically. When you enter a charge amount, the system posts a document for the installment plan charges. During posting, interest and charges documents are automatically transferred to the installment plan for the original receivables (see Charging Interest and Surcharges for Installment Plans )."
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Creating Installment Plans",
+        "Key Features"
+      ],
+      "kind": "note",
+      "text": "Note: When you create an installment plan, the system copies the company code, contract, business area, and business place from the original item (in the standard system), as long as these fields have the same value in all original items selected. If you do not want to fill these fields in the installment plan, or want to enter other values, you can do this by defining event 3000 accordingly (see the documentation of the sample function module FKK_SAMPLE_3000)."
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Creating Installment Plans",
+        "Key Features"
+      ],
+      "kind": "paragraph",
+      "text": "The system can calculate the first installment as a percentage of the total amount of the installment plan. To do this, under: Business Transactions > Deferral and Installment Plan > Define Categories for Installment Plan , specify a percentage and activate the enhancement under Business Transactions > Deferral and Installment Plan > Activate Installment Plan Enhancement for Surcharges/Interest ."
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Creating Installment Plans",
+        "Key Features"
+      ],
+      "kind": "paragraph",
+      "text": "When you use a suitable installment plan category, the system calculates the first installment as a percentage."
+    },
+    {
+      "block_index": 7,
+      "heading_path": [
+        "Creating Installment Plans",
+        "Activities"
+      ],
+      "kind": "list",
+      "text": "1. In the SAP Easy Access screen, choose Account > Installment Plan > Create (transaction FPR1 ).\n2. Enter the selection criteria for open items and posting parameters.\n3. Choose Continue .\n4. Enter the installment plan parameters. You can either copy default values to the initial screen using the Installment Plan Type or enter the installment plan parameters manually. You must enter the installment interval and the interval type, as well as the installment plan category. You can also enter a value for the Remaining Amt of field. The system creates an installment plan proposal based on the parameters set. There are two ways to create an installment plan proposal.\n5. Enter an amount in the Installment Amount field. The installment amount and the total sum of the source items determine the number of installments. You can also add partial amounts to the installment plan.\n6. Enter values in the fields Rounding Amount and No. of Instmnts . The installment amount is calculated from the total sum of the original receivables, the rounding amount, and the number of installments. If you enter a rounding amount, the system automatically checks whether this amount complies with the rounding rules defined in Customizing. Regardless of whether you have the system create an installment plan proposal by entering the installment amount or by entering the rounding amount and number of installments, there may be a remaining amount when the individual installments are calculated. This is because the total of the individual installments must always equal the total of the original receivable (installment amount * number of installments + remaining amount = total of original receivable). In the Remaining Amount field, specify whether this remaining amount is to be included in the first or last installment, or in a new installment. If you set the Distribute indicator, the interest and charges are distributed over all of the due dates.\n7. A list of selected items appears. Select the open items that you want to include in the installment plan. The start date defines the due date of the first installment. You can assign numerical key figures in the Prio column. This enables you to influence the clearing priority of the selected original items when payments are received.\n8. Choose Continue . An Installment Plan Proposal appears, in which you can make the following changes:\n  - Add installments\n  - Delete installments\n  - Calculate or delete interest\n  - Create or delete an installment plan surcharge and/or an inflation surcharge The prerequisite in this case is that you activated the enhancement in Customizing under Business Transactions > Deferral and Installment Plans > Activate Installment Plan Enhancement for Charges/Interest .\n  - In the bottom right hand corner of the screen, a table appears with the most important account balances (such as open amount, due amount, installment plan, credit). If you select a balance, the account balance display appears and you can see the corresponding items.\n9. Save the installment plan."
+    }
+  ],
+  "breadcrumb": [
+    "Contract Accounting",
+    "Credit and Collections Management",
+    "Deferrals and Installment Plans",
+    "Creating Installment Plans"
+  ],
+  "card": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_page_id": "790dc5536a51204be10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Creating Installment Plans",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+  "guide_id": "9442486404b54071b4ebeab6a16628e7",
+  "headings": [
+    "Creating Installment Plans",
+    "Use",
+    "Prerequisites",
+    "Key Features",
+    "Activities"
+  ],
+  "html_title": "Creating Installment Plans",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "790dc5536a51204be10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-24"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
+  "structure": {
+    "blocks": 8,
+    "chrome_elements_removed": 0,
+    "headings": 5,
+    "kinds": {
+      "list": 2,
+      "note": 1,
+      "paragraph": 5
+    }
+  },
+  "text": "Creating Installment Plans\nUse\nYou create an installment plan when both of the following apply:\n- There are one or more open items on the contract account of a business partner.\n- The business partner is unable to meet his/her payment obligations in accordance with the usual payment rules.\nPrerequisites\nTo be able to prioritize the clearing of original items when payments are received, you set the Clrg Priority indicator. You do so in Customizing for Contract Accounts Payable and Receivable, under: Business Transactions > Deferral and Installment Plan > Activate Additional Installment Plan Enhancement\nKey Features\nWhen you calculate interest, the system creates an interest document automatically. When you enter a charge amount, the system posts a document for the installment plan charges. During posting, interest and charges documents are automatically transferred to the installment plan for the original receivables (see Charging Interest and Surcharges for Installment Plans ).\nNote: When you create an installment plan, the system copies the company code, contract, business area, and business place from the original item (in the standard system), as long as these fields have the same value in all original items selected. If you do not want to fill these fields in the installment plan, or want to enter other values, you can do this by defining event 3000 accordingly (see the documentation of the sample function module FKK_SAMPLE_3000).\nThe system can calculate the first installment as a percentage of the total amount of the installment plan. To do this, under: Business Transactions > Deferral and Installment Plan > Define Categories for Installment Plan , specify a percentage and activate the enhancement under Business Transactions > Deferral and Installment Plan > Activate Installment Plan Enhancement for Surcharges/Interest .\nWhen you use a suitable installment plan category, the system calculates the first installment as a percentage.\nActivities\n1. In the SAP Easy Access screen, choose Account > Installment Plan > Create (transaction FPR1 ).\n2. Enter the selection criteria for open items and posting parameters.\n3. Choose Continue .\n4. Enter the installment plan parameters. You can either copy default values to the initial screen using the Installment Plan Type or enter the installment plan parameters manually. You must enter the installment interval and the interval type, as well as the installment plan category. You can also enter a value for the Remaining Amt of field. The system creates an installment plan proposal based on the parameters set. There are two ways to create an installment plan proposal.\n5. Enter an amount in the Installment Amount field. The installment amount and the total sum of the source items determine the number of installments. You can also add partial amounts to the installment plan.\n6. Enter values in the fields Rounding Amount and No. of Instmnts . The installment amount is calculated from the total sum of the original receivables, the rounding amount, and the number of installments. If you enter a rounding amount, the system automatically checks whether this amount complies with the rounding rules defined in Customizing. Regardless of whether you have the system create an installment plan proposal by entering the installment amount or by entering the rounding amount and number of installments, there may be a remaining amount when the individual installments are calculated. This is because the total of the individual installments must always equal the total of the original receivable (installment amount * number of installments + remaining amount = total of original receivable). In the Remaining Amount field, specify whether this remaining amount is to be included in the first or last installment, or in a new installment. If you set the Distribute indicator, the interest and charges are distributed over all of the due dates.\n7. A list of selected items appears. Select the open items that you want to include in the installment plan. The start date defines the due date of the first installment. You can assign numerical key figures in the Prio column. This enables you to influence the clearing priority of the selected original items when payments are received.\n8. Choose Continue . An Installment Plan Proposal appears, in which you can make the following changes:\n  - Add installments\n  - Delete installments\n  - Calculate or delete interest\n  - Create or delete an installment plan surcharge and/or an inflation surcharge The prerequisite in this case is that you activated the enhancement in Customizing under Business Transactions > Deferral and Installment Plans > Activate Installment Plan Enhancement for Charges/Interest .\n  - In the bottom right hand corner of the screen, a table appears with the most important account balances (such as open amount, due amount, installment plan, credit). If you select a balance, the account balance display appears and you can see the corresponding items.\n9. Save the installment plan.",
+  "text_sha256": "48ecfb8340a9f065191f919295f9a0af730873964e9889d36fef5052a3f35c95",
+  "title": "Creating Installment Plans",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 5036
+  }
+}

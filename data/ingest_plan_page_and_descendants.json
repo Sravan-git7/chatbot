@@ -1,0 +1,600 @@
+{
+  "config": {
+    "default_scope": "page_and_descendants",
+    "topic_scopes": {},
+    "max_depth": null,
+    "out_dir": "data/sap_help"
+  },
+  "entry_count": 22,
+  "pages_per_topic": {
+    "17": 22
+  },
+  "skipped_topics": [
+    {
+      "topic_id": 1,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 2,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 3,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 4,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 5,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 6,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 7,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 8,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 9,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 10,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 11,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 12,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 13,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 14,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 15,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 16,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 18,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 19,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 20,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 21,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 22,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 23,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 24,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 25,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 26,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 27,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 28,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    },
+    {
+      "topic_id": 29,
+      "reason": "GUIDE_TOC_NOT_AVAILABLE"
+    }
+  ],
+  "entries": [
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "0bfcc5536a51204be10000000a174cb4",
+      "file_path": "0bfcc5536a51204be10000000a174cb4.html",
+      "title": "Contract Accounts",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts"
+      ],
+      "parent_page_id": null,
+      "depth": 0,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "topic_page"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "20fcc5536a51204be10000000a174cb4",
+      "file_path": "20fcc5536a51204be10000000a174cb4.html",
+      "title": "Contract Account Category",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/20fcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Contract Account Category"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/20fcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "23fcc5536a51204be10000000a174cb4",
+      "file_path": "23fcc5536a51204be10000000a174cb4.html",
+      "title": "Contract Account",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/23fcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Contract Account"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/23fcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "ac6b9953caddca11e10000000a44176d",
+      "file_path": "ac6b9953caddca11e10000000a44176d.html",
+      "title": "Controlling Specifications in Contract Accounts",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/ac6b9953caddca11e10000000a44176d.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Controlling Specifications in Contract Accounts"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/ac6b9953caddca11e10000000a44176d.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "35fcc5536a51204be10000000a174cb4",
+      "file_path": "35fcc5536a51204be10000000a174cb4.html",
+      "title": "Link: Contract Account - Business Partner",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/35fcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Link: Contract Account - Business Partner"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/35fcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "57fcc5536a51204be10000000a174cb4",
+      "file_path": "57fcc5536a51204be10000000a174cb4.html",
+      "title": "Logging of Changes to Contract Account",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/57fcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Logging of Changes to Contract Account"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/57fcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "2cfcc5536a51204be10000000a174cb4",
+      "file_path": "2cfcc5536a51204be10000000a174cb4.html",
+      "title": "Automatic Master Data Transfer",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/2cfcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Automatic Master Data Transfer"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/2cfcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "3efcc5536a51204be10000000a174cb4",
+      "file_path": "3efcc5536a51204be10000000a174cb4.html",
+      "title": "Creating, Changing, and Displaying Contract Accounts",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/3efcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Creating, Changing, and Displaying Contract Accounts"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/3efcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "fffbc5536a51204be10000000a174cb4",
+      "file_path": "fffbc5536a51204be10000000a174cb4.html",
+      "title": "Creating Contract Accounts",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/fffbc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Creating, Changing, and Displaying Contract Accounts",
+        "Creating Contract Accounts"
+      ],
+      "parent_page_id": "3efcc5536a51204be10000000a174cb4",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/fffbc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "44fcc5536a51204be10000000a174cb4",
+      "file_path": "44fcc5536a51204be10000000a174cb4.html",
+      "title": "Assigning Additional Business Partners",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/44fcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Creating, Changing, and Displaying Contract Accounts",
+        "Assigning Additional Business Partners"
+      ],
+      "parent_page_id": "3efcc5536a51204be10000000a174cb4",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/44fcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "17fcc5536a51204be10000000a174cb4",
+      "file_path": "17fcc5536a51204be10000000a174cb4.html",
+      "title": "Displaying or Editing Other Business Partners",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/17fcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Creating, Changing, and Displaying Contract Accounts",
+        "Displaying or Editing Other Business Partners"
+      ],
+      "parent_page_id": "3efcc5536a51204be10000000a174cb4",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/17fcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "05fcc5536a51204be10000000a174cb4",
+      "file_path": "05fcc5536a51204be10000000a174cb4.html",
+      "title": "Selecting Addresses for Business Partners",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/05fcc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Creating, Changing, and Displaying Contract Accounts",
+        "Selecting Addresses for Business Partners"
+      ],
+      "parent_page_id": "3efcc5536a51204be10000000a174cb4",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/05fcc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "f0fbc5536a51204be10000000a174cb4",
+      "file_path": "f0fbc5536a51204be10000000a174cb4.html",
+      "title": "Creating, Changing and Displaying Locks",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/f0fbc5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Creating, Changing, and Displaying Contract Accounts",
+        "Creating, Changing and Displaying Locks"
+      ],
+      "parent_page_id": "3efcc5536a51204be10000000a174cb4",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/f0fbc5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "6f1202271870470996b7b38ba9d19cab",
+      "file_path": "6f1202271870470996b7b38ba9d19cab.html",
+      "title": "Manage Contract Accounts",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/6f1202271870470996b7b38ba9d19cab.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Manage Contract Accounts"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/6f1202271870470996b7b38ba9d19cab.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "c4e7c5536a51204be10000000a174cb4",
+      "file_path": "c4e7c5536a51204be10000000a174cb4.html",
+      "title": "Correspondence for Master Data Changes",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/c4e7c5536a51204be10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Correspondence for Master Data Changes"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/c4e7c5536a51204be10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "e31ce056045c122fe10000000a441470",
+      "file_path": "e31ce056045c122fe10000000a441470.html",
+      "title": "Contract Account and Contract Special Features for IS-U",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/e31ce056045c122fe10000000a441470.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Contract Account and Contract Special Features for IS-U"
+      ],
+      "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+      "depth": 1,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/e31ce056045c122fe10000000a441470.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "5a6dce53118d4308e10000000a174cb4",
+      "file_path": "5a6dce53118d4308e10000000a174cb4.html",
+      "title": "Contracts (IS-U)",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/5a6dce53118d4308e10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Contract Account and Contract Special Features for IS-U",
+        "Contracts (IS-U)"
+      ],
+      "parent_page_id": "e31ce056045c122fe10000000a441470",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/5a6dce53118d4308e10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "f870ce53118d4308e10000000a174cb4",
+      "file_path": "f870ce53118d4308e10000000a174cb4.html",
+      "title": "Controlling Specifications in Contract Accounts (IS-U)",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/f870ce53118d4308e10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Contract Account and Contract Special Features for IS-U",
+        "Controlling Specifications in Contract Accounts (IS-U)"
+      ],
+      "parent_page_id": "e31ce056045c122fe10000000a441470",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/f870ce53118d4308e10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "456dce53118d4308e10000000a174cb4",
+      "file_path": "456dce53118d4308e10000000a174cb4.html",
+      "title": "Link Between Contract Accounts and Contracts (IS-U)",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/456dce53118d4308e10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Contract Account and Contract Special Features for IS-U",
+        "Link Between Contract Accounts and Contracts (IS-U)"
+      ],
+      "parent_page_id": "e31ce056045c122fe10000000a441470",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/456dce53118d4308e10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "fb70ce53118d4308e10000000a174cb4",
+      "file_path": "fb70ce53118d4308e10000000a174cb4.html",
+      "title": "Transferring Master Data Automatically (IS-U)",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/fb70ce53118d4308e10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Contract Account and Contract Special Features for IS-U",
+        "Transferring Master Data Automatically (IS-U)"
+      ],
+      "parent_page_id": "e31ce056045c122fe10000000a441470",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/fb70ce53118d4308e10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "fe70ce53118d4308e10000000a174cb4",
+      "file_path": "fe70ce53118d4308e10000000a174cb4.html",
+      "title": "Assigning Contracts to Contract Accounts (IS-U)",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/fe70ce53118d4308e10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Contract Account and Contract Special Features for IS-U",
+        "Assigning Contracts to Contract Accounts (IS-U)"
+      ],
+      "parent_page_id": "e31ce056045c122fe10000000a441470",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/fe70ce53118d4308e10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    },
+    {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "page_id": "c970ce53118d4308e10000000a174cb4",
+      "file_path": "c970ce53118d4308e10000000a174cb4.html",
+      "title": "Loans (IS-U)",
+      "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/c970ce53118d4308e10000000a174cb4.html",
+      "toc_path": [
+        "Contract Accounts",
+        "Contract Account and Contract Special Features for IS-U",
+        "Loans (IS-U)"
+      ],
+      "parent_page_id": "e31ce056045c122fe10000000a441470",
+      "depth": 2,
+      "storage_key": "e52c8ee6197147ec97dfc2eb8c46a3ad/c970ce53118d4308e10000000a174cb4.json",
+      "topic_roles": {
+        "17": "descendant"
+      },
+      "alias_file_paths": [],
+      "topic_ids": [
+        17
+      ]
+    }
+  ]
+}

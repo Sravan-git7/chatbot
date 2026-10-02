@@ -1,0 +1,146 @@
+{
+  "registry_schema_version": 1,
+  "note": "numeric_deliverable_id/build_no are never guessed; null = unresolved. Edit by hand only with evidence, and add it to 'evidence'.",
+  "guides": {
+    "021b182b0c47416c8fafed67ebfd78a9": {
+      "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "product": "SAP_S4HANA_ON-PREMISE",
+      "title": null,
+      "version": null,
+      "numeric_deliverable_id": null,
+      "build_no": null,
+      "toc_file": null,
+      "fetch_identifiers_status": "unresolved",
+      "evidence": [
+        "guide id known only from reference-card URL(s); no local TOC and no numeric deliverable id / build number in local files"
+      ],
+      "topic_ids": [
+        1,
+        5,
+        13,
+        16
+      ]
+    },
+    "f4a255a5de524e3992155767996fb1fd": {
+      "guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "product": "SAP_S4HANA_ON-PREMISE",
+      "title": null,
+      "version": null,
+      "numeric_deliverable_id": null,
+      "build_no": null,
+      "toc_file": null,
+      "fetch_identifiers_status": "unresolved",
+      "evidence": [
+        "guide id known only from reference-card URL(s); no local TOC and no numeric deliverable id / build number in local files"
+      ],
+      "topic_ids": [
+        2,
+        3,
+        4,
+        10,
+        29
+      ]
+    },
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758": {
+      "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "product": "SAP_S4HANA_ON-PREMISE",
+      "title": null,
+      "version": null,
+      "numeric_deliverable_id": null,
+      "build_no": null,
+      "toc_file": null,
+      "fetch_identifiers_status": "unresolved",
+      "evidence": [
+        "guide id known only from reference-card URL(s); no local TOC and no numeric deliverable id / build number in local files"
+      ],
+      "topic_ids": [
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "ed84b70c199d4470ae2e5ccb93b2e45b": {
+      "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+      "product": "SAP_S4HANA_ON-PREMISE",
+      "title": null,
+      "version": null,
+      "numeric_deliverable_id": null,
+      "build_no": null,
+      "toc_file": null,
+      "fetch_identifiers_status": "unresolved",
+      "evidence": [
+        "guide id known only from reference-card URL(s); no local TOC and no numeric deliverable id / build number in local files"
+      ],
+      "topic_ids": [
+        11,
+        12
+      ]
+    },
+    "a003b275c98148ee8a4c3fafe9588fe3": {
+      "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+      "product": "SAP_S4HANA_ON-PREMISE",
+      "title": null,
+      "version": null,
+      "numeric_deliverable_id": null,
+      "build_no": null,
+      "toc_file": null,
+      "fetch_identifiers_status": "unresolved",
+      "evidence": [
+        "guide id known only from reference-card URL(s); no local TOC and no numeric deliverable id / build number in local files"
+      ],
+      "topic_ids": [
+        14,
+        15
+      ]
+    },
+    "e52c8ee6197147ec97dfc2eb8c46a3ad": {
+      "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "product": "SAP_S4HANA_ON-PREMISE",
+      "title": "Master Data",
+      "version": "2025.001",
+      "numeric_deliverable_id": "40374631",
+      "build_no": "1779",
+      "toc_file": "master_data.json",
+      "fetch_identifiers_status": "verified",
+      "evidence": [
+        "fetch_sap_pages.py: DELIVERABLE_ID=40374631, BUILD_NO=1779; iterates the TOC saved in master_data.json",
+        "sap_pages/*.json source_url use numeric id 40374631",
+        "sap_pages/001.json text is byte-identical to the landing-page body in master_data.json (loio e52c8ee6197147ec97dfc2eb8c46a3ad) -> numeric 40374631 and loio e52c8ee6... serve the same content"
+      ],
+      "language": "en-US",
+      "toc_node_count": 81,
+      "landing_page_id": "e369ce53118d4308e10000000a174cb4",
+      "map_root_page_id": "0a6ace53118d4308e10000000a174cb4",
+      "topic_ids": [
+        17
+      ]
+    },
+    "9442486404b54071b4ebeab6a16628e7": {
+      "guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "product": "SAP_S4HANA_ON-PREMISE",
+      "title": null,
+      "version": null,
+      "numeric_deliverable_id": null,
+      "build_no": null,
+      "toc_file": null,
+      "fetch_identifiers_status": "unresolved",
+      "evidence": [
+        "guide id known only from reference-card URL(s); no local TOC and no numeric deliverable id / build number in local files"
+      ],
+      "topic_ids": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    }
+  }
+}

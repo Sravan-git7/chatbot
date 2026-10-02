@@ -1,0 +1,8 @@
+{
+  "fetchable_with_recorded_ids": 0,
+  "network_default": "off",
+  "not_fetchable_without_new_ids": 0,
+  "pages_to_fetch": [],
+  "robots_note": "help.sap.com/robots.txt has Disallow: / for generic agents (saved copy audit_out/robots.txt, 2025-10-17); fetching is a deliberate human decision (scripts/page_fetch.py --allow-network)",
+  "schema_version": "8.1"
+}

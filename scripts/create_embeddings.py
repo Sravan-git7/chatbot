@@ -1,10 +1,27 @@
+"""Embed chunks.json and (re)build the ChromaDB collection.
+
+Run from anywhere: python scripts/create_embeddings.py
+
+Note: the collection is created with ChromaDB's default distance (squared L2).
+Embeddings are normalized, so distance = 2 - 2 * cosine_similarity.  Retrieval
+thresholds in rag_core.py are tuned to that; do not switch the space without
+re-checking MAX_DISTANCE.
+"""
+
 import json
+
 import chromadb
 from sentence_transformers import SentenceTransformer
 
-INPUT_FILE = "chunks.json"
-DB_DIR = "chroma_db"
-COLLECTION_NAME = "sap_docs"
+from rag_core import COLLECTION_NAME, DB_DIR, EMBEDDING_MODEL_NAME, REPO_ROOT
+
+INPUT_FILE = REPO_ROOT / "chunks.json"
+
+if not INPUT_FILE.exists():
+    raise SystemExit(
+        f"{INPUT_FILE} not found. Run scripts/clean_sap_pages.py and "
+        "scripts/chunk_pages.py first."
+    )
 
 with open(INPUT_FILE, encoding="utf-8") as f:
     chunks = json.load(f)
@@ -12,9 +29,9 @@ with open(INPUT_FILE, encoding="utf-8") as f:
 print(f"Loaded {len(chunks)} chunks.")
 
 print("Loading embedding model...")
-model = SentenceTransformer("all-MiniLM-L6-v2")
+model = SentenceTransformer(EMBEDDING_MODEL_NAME)
 
-client = chromadb.PersistentClient(path=DB_DIR)
+client = chromadb.PersistentClient(path=str(DB_DIR))
 
 # Always recreate the collection so stale embeddings cannot remain.
 try:
@@ -27,7 +44,7 @@ collection = client.create_collection(
     name=COLLECTION_NAME,
     metadata={
         "description": "SAP S/4HANA Utilities documentation",
-        "embedding_model": "all-MiniLM-L6-v2"
+        "embedding_model": EMBEDDING_MODEL_NAME
     }
 )
 

@@ -1,0 +1,525 @@
+{
+  "corpus_level": {
+    "legacy": {
+      "pages": 81,
+      "unique_pages_by_text": 75,
+      "duplicate_pages": 6,
+      "chunks": 310,
+      "unique_chunks": 287,
+      "duplicate_chunks": 23,
+      "chunk_chars": {
+        "n": 310,
+        "avg": 795.8,
+        "median": 892.0,
+        "min": 45,
+        "max": 1046
+      },
+      "guides_covered": [
+        "40374631"
+      ],
+      "topics_covered_by_target_cards": [
+        17
+      ]
+    },
+    "new": {
+      "pages": 22,
+      "unique_canonical_pages": 22,
+      "duplicate_content_pages": 0,
+      "chunks": 51,
+      "unique_chunks": 51,
+      "duplicate_chunks": 0,
+      "chunk_chars": {
+        "n": 51,
+        "avg": 713.1,
+        "median": 815,
+        "min": 72,
+        "max": 999
+      },
+      "guides_covered": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad"
+      ],
+      "topics_resolved": 1,
+      "topics_total": 29,
+      "corpus_complete": false
+    },
+    "legacy_pages_not_in_new_corpus": 59,
+    "legacy_pages_not_in_new_corpus_note": "pages of the legacy scrape that no target topic (under the chosen scope) asks for - the noise the new corpus leaves out",
+    "legacy_pages_not_in_new_corpus_files": [
+      "001.json",
+      "002.json",
+      "003.json",
+      "004.json",
+      "005.json",
+      "006.json",
+      "007.json",
+      "008.json",
+      "009.json",
+      "010.json",
+      "011.json",
+      "012.json",
+      "013.json",
+      "014.json",
+      "015.json",
+      "016.json",
+      "017.json",
+      "018.json",
+      "019.json",
+      "020.json",
+      "021.json",
+      "022.json",
+      "023.json",
+      "024.json",
+      "025.json",
+      "026.json",
+      "027.json",
+      "028.json",
+      "029.json",
+      "030.json",
+      "031.json",
+      "032.json",
+      "033.json",
+      "034.json",
+      "035.json",
+      "036.json",
+      "037.json",
+      "038.json",
+      "039.json",
+      "040.json",
+      "063.json",
+      "064.json",
+      "065.json",
+      "066.json",
+      "067.json",
+      "068.json",
+      "069.json",
+      "070.json",
+      "071.json",
+      "072.json",
+      "073.json",
+      "074.json",
+      "075.json",
+      "076.json",
+      "077.json",
+      "078.json",
+      "079.json",
+      "080.json",
+      "081.json"
+    ]
+  },
+  "corpus_dir": "data/sap_help_e2e/page_and_descendants",
+  "pages": 22,
+  "matched_to_legacy_sap_pages": 22,
+  "legacy_files": [
+    "041.json",
+    "042.json",
+    "043.json",
+    "044.json",
+    "045.json",
+    "046.json",
+    "047.json",
+    "048.json",
+    "049.json",
+    "050.json",
+    "051.json",
+    "052.json",
+    "053.json",
+    "054.json",
+    "055.json",
+    "056.json",
+    "057.json",
+    "058.json",
+    "059.json",
+    "060.json",
+    "061.json",
+    "062.json"
+  ],
+  "raw_text_identical": 22,
+  "raw_text_different": [],
+  "cleaned_same_letters_as_legacy": 22,
+  "cleaned_different_letters": [],
+  "cleaned_chars": {
+    "legacy": 37049,
+    "new": 36175
+  },
+  "chunks": {
+    "legacy": 50,
+    "new": 51
+  },
+  "chunk_chars": {
+    "legacy": {
+      "n": 50,
+      "avg": 740.4,
+      "median": 814.5,
+      "min": 143,
+      "max": 999
+    },
+    "new": {
+      "n": 51,
+      "avg": 713.1,
+      "median": 815,
+      "min": 72,
+      "max": 999
+    }
+  },
+  "rows": [
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/05fcc5536a51204be10000000a174cb4",
+      "page_title": "Selecting Addresses for Business Partners",
+      "legacy_file": "052.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 1336,
+      "new_cleaned_chars": 1290,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 2,
+      "new_chunks": 2,
+      "new_chunk_chars": [
+        891,
+        398
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "page_title": "Contract Accounts",
+      "legacy_file": "041.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 2706,
+      "new_cleaned_chars": 2683,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 3,
+      "new_chunks": 4,
+      "new_chunk_chars": [
+        637,
+        997,
+        992,
+        72
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/17fcc5536a51204be10000000a174cb4",
+      "page_title": "Displaying or Editing Other Business Partners",
+      "legacy_file": "051.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 656,
+      "new_cleaned_chars": 607,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 1,
+      "new_chunks": 1,
+      "new_chunk_chars": [
+        607
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/20fcc5536a51204be10000000a174cb4",
+      "page_title": "Contract Account Category",
+      "legacy_file": "042.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 1054,
+      "new_cleaned_chars": 1026,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 2,
+      "new_chunks": 2,
+      "new_chunk_chars": [
+        945,
+        90
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/23fcc5536a51204be10000000a174cb4",
+      "page_title": "Contract Account",
+      "legacy_file": "043.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 2868,
+      "new_cleaned_chars": 2846,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 3,
+      "new_chunks": 3,
+      "new_chunk_chars": [
+        961,
+        979,
+        912
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/2cfcc5536a51204be10000000a174cb4",
+      "page_title": "Automatic Master Data Transfer",
+      "legacy_file": "047.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 912,
+      "new_cleaned_chars": 880,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 1,
+      "new_chunks": 1,
+      "new_chunk_chars": [
+        880
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/35fcc5536a51204be10000000a174cb4",
+      "page_title": "Link: Contract Account - Business Partner",
+      "legacy_file": "045.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 1313,
+      "new_cleaned_chars": 1270,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 2,
+      "new_chunks": 2,
+      "new_chunk_chars": [
+        942,
+        338
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/3efcc5536a51204be10000000a174cb4",
+      "page_title": "Creating, Changing, and Displaying Contract Accounts",
+      "legacy_file": "048.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 1694,
+      "new_cleaned_chars": 1638,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 2,
+      "new_chunks": 2,
+      "new_chunk_chars": [
+        766,
+        880
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/44fcc5536a51204be10000000a174cb4",
+      "page_title": "Assigning Additional Business Partners",
+      "legacy_file": "050.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 729,
+      "new_cleaned_chars": 688,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 1,
+      "new_chunks": 1,
+      "new_chunk_chars": [
+        688
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/456dce53118d4308e10000000a174cb4",
+      "page_title": "Link Between Contract Accounts and Contracts (IS-U)",
+      "legacy_file": "059.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 526,
+      "new_cleaned_chars": 474,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 1,
+      "new_chunks": 1,
+      "new_chunk_chars": [
+        474
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/57fcc5536a51204be10000000a174cb4",
+      "page_title": "Logging of Changes to Contract Account",
+      "legacy_file": "046.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 1515,
+      "new_cleaned_chars": 1476,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 2,
+      "new_chunks": 2,
+      "new_chunk_chars": [
+        936,
+        543
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/5a6dce53118d4308e10000000a174cb4",
+      "page_title": "Contracts (IS-U)",
+      "legacy_file": "057.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 716,
+      "new_cleaned_chars": 699,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 1,
+      "new_chunks": 1,
+      "new_chunk_chars": [
+        699
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/6f1202271870470996b7b38ba9d19cab",
+      "page_title": "Manage Contract Accounts",
+      "legacy_file": "054.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 1113,
+      "new_cleaned_chars": 1080,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 2,
+      "new_chunks": 2,
+      "new_chunk_chars": [
+        993,
+        91
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/ac6b9953caddca11e10000000a44176d",
+      "page_title": "Controlling Specifications in Contract Accounts",
+      "legacy_file": "044.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 5181,
+      "new_cleaned_chars": 5126,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 7,
+      "new_chunks": 6,
+      "new_chunk_chars": [
+        968,
+        962,
+        932,
+        954,
+        940,
+        410
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/c4e7c5536a51204be10000000a174cb4",
+      "page_title": "Correspondence for Master Data Changes",
+      "legacy_file": "055.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 5762,
+      "new_cleaned_chars": 5713,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 7,
+      "new_chunks": 8,
+      "new_chunk_chars": [
+        368,
+        815,
+        998,
+        759,
+        480,
+        999,
+        922,
+        430
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/c970ce53118d4308e10000000a174cb4",
+      "page_title": "Loans (IS-U)",
+      "legacy_file": "062.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 3001,
+      "new_cleaned_chars": 2988,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 4,
+      "new_chunks": 4,
+      "new_chunk_chars": [
+        576,
+        681,
+        964,
+        782
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e31ce056045c122fe10000000a441470",
+      "page_title": "Contract Account and Contract Special Features for IS-U",
+      "legacy_file": "056.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 289,
+      "new_cleaned_chars": 233,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 1,
+      "new_chunks": 1,
+      "new_chunk_chars": [
+        233
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/f0fbc5536a51204be10000000a174cb4",
+      "page_title": "Creating, Changing and Displaying Locks",
+      "legacy_file": "053.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 1868,
+      "new_cleaned_chars": 1828,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 2,
+      "new_chunks": 2,
+      "new_chunk_chars": [
+        915,
+        922
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/f870ce53118d4308e10000000a174cb4",
+      "page_title": "Controlling Specifications in Contract Accounts (IS-U)",
+      "legacy_file": "058.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 1312,
+      "new_cleaned_chars": 1257,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 2,
+      "new_chunks": 2,
+      "new_chunk_chars": [
+        992,
+        273
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/fb70ce53118d4308e10000000a174cb4",
+      "page_title": "Transferring Master Data Automatically (IS-U)",
+      "legacy_file": "060.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 782,
+      "new_cleaned_chars": 735,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 1,
+      "new_chunks": 1,
+      "new_chunk_chars": [
+        735
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/fe70ce53118d4308e10000000a174cb4",
+      "page_title": "Assigning Contracts to Contract Accounts (IS-U)",
+      "legacy_file": "061.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 490,
+      "new_cleaned_chars": 441,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 1,
+      "new_chunks": 1,
+      "new_chunk_chars": [
+        441
+      ]
+    },
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/fffbc5536a51204be10000000a174cb4",
+      "page_title": "Creating Contract Accounts",
+      "legacy_file": "049.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 1226,
+      "new_cleaned_chars": 1197,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 2,
+      "new_chunks": 2,
+      "new_chunk_chars": [
+        976,
+        230
+      ]
+    }
+  ]
+}

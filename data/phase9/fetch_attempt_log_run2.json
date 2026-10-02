@@ -1,0 +1,51 @@
+[
+  {
+    "network_enabled": true,
+    "started_at": "2026-10-01T12:20:59+00:00",
+    "robots": {
+      "http_status": null,
+      "error": "SSLError: HTTPSConnectionPool(host='help.sap.com', port=443): Max retries exceeded with url: /robots.txt (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:992)')))",
+      "disallow_all_for_generic_agents": null,
+      "note": "robots.txt could not be read; the first content request decides whether the host is reachable at all"
+    },
+    "attempts": [
+      {
+        "source_id": "M2C-03",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=0981ce53118d4308e10000000a174cb4.html",
+        "http_status": null,
+        "error": "SSLError: HTTPSConnectionPool(host='help.sap.com', port=443): Max retries exceeded with url: /http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=0981ce53118d4308e10000000a174cb4.html (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF",
+        "ok": false,
+        "reasons": [
+          "TRANSPORT_ERROR"
+        ],
+        "at": "2026-10-01T12:20:59+00:00"
+      },
+      {
+        "source_id": "M2C-04",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=0f81ce53118d4308e10000000a174cb4.html",
+        "http_status": null,
+        "error": "SSLError: HTTPSConnectionPool(host='help.sap.com', port=443): Max retries exceeded with url: /http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=0f81ce53118d4308e10000000a174cb4.html (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF",
+        "ok": false,
+        "reasons": [
+          "TRANSPORT_ERROR"
+        ],
+        "at": "2026-10-01T12:21:00+00:00"
+      },
+      {
+        "source_id": "M2C-06",
+        "url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=bc90d0533f8e4308e10000000a174cb4.html",
+        "http_status": null,
+        "error": "SSLError: HTTPSConnectionPool(host='help.sap.com', port=443): Max retries exceeded with url: /http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=bc90d0533f8e4308e10000000a174cb4.html (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF",
+        "ok": false,
+        "reasons": [
+          "TRANSPORT_ERROR"
+        ],
+        "at": "2026-10-01T12:21:01+00:00"
+      }
+    ],
+    "skipped": [],
+    "saved": [],
+    "stopped_reason": "CIRCUIT_BREAKER_3_CONSECUTIVE_FAILURES",
+    "finished_at": "2026-10-01T12:21:01+00:00"
+  }
+]

@@ -1,9 +1,11 @@
 import json
 import os
 import re
+from pathlib import Path
 
-INPUT_DIR = "sap_pages"
-OUTPUT_FILE = "cleaned_pages.json"
+REPO_ROOT = Path(__file__).resolve().parent.parent
+INPUT_DIR = str(REPO_ROOT / "sap_pages")
+OUTPUT_FILE = str(REPO_ROOT / "cleaned_pages.json")
 
 
 def normalize_text(text):

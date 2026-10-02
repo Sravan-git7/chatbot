@@ -1,0 +1,120 @@
+{
+  "_readme": "Declarative guide registrations; one object per guide, no code change needed. Fill numeric_id + build_no (or paste the browser's pagecontent request URL into pagecontent_url). toc_file is optional: if omitted the pipeline uses data/toc/<guide_id>.json, downloading it with --allow-network when missing. Keys starting with '_' are notes and ignored. How to get the two numbers: open the guide's card URL (_example_card_url) in a browser, DevTools > Network, reload, find the request to http.svc/pagecontent and copy its URL (deliverable_id=<numeric>&buildNo=<n>). Nothing is guessed: invalid or conflicting entries are reported and skipped; empty skeletons just leave the guide UNRESOLVED_GUIDE.",
+  "registrations": [
+    {
+      "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+      "evidence": "captured URL #1 (deliverable_id=40374657, buildNo=1779, file_path=8990d053…): the saved response has deliverable.loio=2ac7fe29a0c94cdd88fb80c2cb9f7758 (title 'Device Management', fullToc identical to response #3), currentPage.loio=8990d0533f8e4308e10000000a174cb4. That is Guide C, not 021b182b0c47416c8fafed67ebfd78a9, although card #5 names 021b182b for this page id. deliverable_id 40374657 was therefore NOT accepted for Guide A; Guide A needs its own response (loio 021b182b…). | USER-REPORTED browser evidence (2026-09-30, not machine-verified; no HAR in the worktree): opening card #5's original URL under 021b182b…/8990d053… resolves in the browser to 2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d053…; its pagecontent?deliverableInfo=1 request uses deliverable_id=40374657 and the response loio is 2ac7fe29…. So #5 currently resolves to Guide C; this URL is NOT evidence for Guide A (021b182b).",
+      "_topics": [
+        1,
+        5,
+        13,
+        16
+      ]
+    },
+    {
+      "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+      "numeric_id": "40374657",
+      "build_no": "1779",
+      "pagecontent_url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=4d76765c1e012b8ae10000000a42189b.html",
+      "captured_urls": [
+        "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374657&buildNo=1779&file_path=4d76765c1e012b8ae10000000a42189b.html"
+      ],
+      "captured_page_ids": [
+        "4d76765c1e012b8ae10000000a42189b"
+      ],
+      "verification": "response_loio_verified",
+      "evidence": "captured URL #3: response deliverable.loio == 2ac7fe29a0c94cdd88fb80c2cb9f7758, currentPage == requested page, card(s) [7] agree",
+      "_topics": [
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "guide_id": "9442486404b54071b4ebeab6a16628e7",
+      "numeric_id": "40374790",
+      "build_no": "1779",
+      "pagecontent_url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=790dc5536a51204be10000000a174cb4.html",
+      "captured_urls": [
+        "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374790&buildNo=1779&file_path=790dc5536a51204be10000000a174cb4.html"
+      ],
+      "captured_page_ids": [
+        "790dc5536a51204be10000000a174cb4"
+      ],
+      "verification": "response_loio_verified",
+      "evidence": "captured URL #6: response deliverable.loio == 9442486404b54071b4ebeab6a16628e7, currentPage == requested page, card(s) [24] agree",
+      "_topics": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+      "numeric_id": "40374633",
+      "build_no": "1779",
+      "pagecontent_url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374633&buildNo=1779&file_path=cc7bce53118d4308e10000000a174cb4.html",
+      "captured_urls": [
+        "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374633&buildNo=1779&file_path=cc7bce53118d4308e10000000a174cb4.html"
+      ],
+      "captured_page_ids": [
+        "cc7bce53118d4308e10000000a174cb4"
+      ],
+      "verification": "response_loio_verified",
+      "evidence": "captured URL #5: response deliverable.loio == a003b275c98148ee8a4c3fafe9588fe3, currentPage == requested page, card(s) [14] agree",
+      "_topics": [
+        14,
+        15
+      ]
+    },
+    {
+      "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+      "numeric_id": "40404052",
+      "build_no": "78",
+      "pagecontent_url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40404052&buildNo=78&file_path=147bce53118d4308e10000000a174cb4.html",
+      "captured_urls": [
+        "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40404052&buildNo=78&file_path=147bce53118d4308e10000000a174cb4.html"
+      ],
+      "captured_page_ids": [
+        "147bce53118d4308e10000000a174cb4"
+      ],
+      "verification": "response_loio_verified",
+      "evidence": "captured URL #4: response deliverable.loio == ed84b70c199d4470ae2e5ccb93b2e45b, currentPage == requested page, card(s) [11] agree",
+      "_topics": [
+        11,
+        12
+      ]
+    },
+    {
+      "guide_id": "f4a255a5de524e3992155767996fb1fd",
+      "numeric_id": "40374682",
+      "build_no": "1779",
+      "pagecontent_url": "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=8082ce53118d4308e10000000a174cb4.html",
+      "captured_urls": [
+        "https://help.sap.com/http.svc/pagecontent?deliverableInfo=1&deliverable_id=40374682&buildNo=1779&file_path=8082ce53118d4308e10000000a174cb4.html"
+      ],
+      "captured_page_ids": [
+        "8082ce53118d4308e10000000a174cb4"
+      ],
+      "verification": "response_loio_verified",
+      "evidence": "captured URL #2: response deliverable.loio == f4a255a5de524e3992155767996fb1fd, currentPage == requested page, card(s) [2] agree",
+      "_topics": [
+        2,
+        3,
+        4,
+        10,
+        29
+      ]
+    }
+  ]
+}

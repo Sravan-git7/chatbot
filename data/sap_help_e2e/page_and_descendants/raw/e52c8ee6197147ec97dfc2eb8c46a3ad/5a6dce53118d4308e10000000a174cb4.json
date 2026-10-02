@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "page_id": "5a6dce53118d4308e10000000a174cb4",
+  "file_path": "5a6dce53118d4308e10000000a174cb4.html",
+  "page_title": "Contracts (IS-U)",
+  "text_raw": "Contracts (IS-U)\nContracts (IS-U)\nDefinition\nContracts in IS-U.\nUse\nContracts represent the entities that are billed. You can bill one or more contracts together using a contract account.\nStructure\nYou can divide the data from contracts into three categories:\nGeneral data\nData relevant to billing (business)\nData regarding move-in and move-out.\nIntegration\nContracts are linked to installations in IS-U; these installations contain technical data with regard to billing. In the case of a move-out, the installation remains and the contract is ended. In the case of the next move-in, a new contract is created and linked to the installation. Only one contract can ever be assigned to an installation at any one time.",
+  "page_hash": "2fc77ff6966e96761362e1a25161120c6c4c593a838b43d8ab7df44cb4ea62c8",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/057.json",
+  "current_page": {
+    "id": 2554984535,
+    "t": "Contracts (IS-U)",
+    "u": "5a6dce53118d4308e10000000a174cb4.html",
+    "loio": "5a6dce53118d4308e10000000a174cb4",
+    "deltaMtTranslate": false
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "corpus_dir": "data/sap_help_e2e/page_only",
+  "pages": 1,
+  "matched_to_legacy_sap_pages": 1,
+  "legacy_files": [
+    "041.json"
+  ],
+  "raw_text_identical": 1,
+  "raw_text_different": [],
+  "cleaned_same_letters_as_legacy": 1,
+  "cleaned_different_letters": [],
+  "cleaned_chars": {
+    "legacy": 2706,
+    "new": 2683
+  },
+  "chunks": {
+    "legacy": 3,
+    "new": 4
+  },
+  "chunk_chars": {
+    "legacy": {
+      "n": 3,
+      "avg": 901.3,
+      "median": 932,
+      "min": 812,
+      "max": 960
+    },
+    "new": {
+      "n": 4,
+      "avg": 674.5,
+      "median": 814.5,
+      "min": 72,
+      "max": 997
+    }
+  },
+  "rows": [
+    {
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "page_title": "Contract Accounts",
+      "legacy_file": "041.json",
+      "status": "OK",
+      "raw_identical_to_legacy": true,
+      "legacy_cleaned_chars": 2706,
+      "new_cleaned_chars": 2683,
+      "same_letters_as_legacy_cleaned": true,
+      "legacy_chunks": 3,
+      "new_chunks": 4,
+      "new_chunk_chars": [
+        637,
+        997,
+        992,
+        72
+      ]
+    }
+  ]
+}

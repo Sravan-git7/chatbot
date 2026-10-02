@@ -1,0 +1,42 @@
+{
+  "embedder_load_s": 4.092,
+  "chunking_comparison_total_s": 10.253,
+  "pipeline_build_s": 0.173,
+  "per_query_ms_router_mode": {
+    "context_ms": {
+      "median": 2.24,
+      "p95": 3.31,
+      "max": 4.04,
+      "n": 31
+    },
+    "generate_ms": {
+      "median": 0.3,
+      "p95": 0.56,
+      "max": 0.6,
+      "n": 26
+    },
+    "retrieve_ms": {
+      "median": 12.29,
+      "p95": 13.69,
+      "max": 16.92,
+      "n": 31
+    },
+    "route_ms": {
+      "median": 12.51,
+      "p95": 16.88,
+      "max": 27.57,
+      "n": 88
+    },
+    "total_ms": {
+      "median": 13.59,
+      "p95": 32.77,
+      "max": 54.66,
+      "n": 88
+    }
+  },
+  "chunk_and_embed_seconds_A_legacy_1000c": 0.942,
+  "chunk_and_embed_seconds_B_heading_200": 1.061,
+  "chunk_and_embed_seconds_C_heading_128": 1.097,
+  "peak_rss_mb": 1145.9,
+  "note": "CPU, no GPU, extractive generator; LLM generation latency is NOT measured (no LLM available)"
+}

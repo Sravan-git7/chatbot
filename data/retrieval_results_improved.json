@@ -1,0 +1,947 @@
+[
+  {
+    "id": "q01",
+    "question": "What are the two types of master data?",
+    "category": "direct",
+    "expected_titles": [
+      "Master Data"
+    ],
+    "retrieved_titles": [
+      "Master Data"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e369ce53118d4308e10000000a174cb4.html"
+    ],
+    "distances": [
+      0.549036
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 1
+  },
+  {
+    "id": "q02",
+    "question": "What is a business partner?",
+    "category": "direct",
+    "expected_titles": [
+      "SAP Business Partner"
+    ],
+    "retrieved_titles": [
+      "SAP Business Partner",
+      "Link: Contract Account - Business Partner",
+      "BAPIs for Central Business Partner (IS-U)",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "Merging Business Partners (IS-U)"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3771ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4371ce53118d4308e10000000a174cb4.html"
+    ],
+    "distances": [
+      0.634766,
+      0.817623,
+      0.931405,
+      0.934678,
+      0.77611
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q03",
+    "question": "What is a contract account?",
+    "category": "direct",
+    "expected_titles": [
+      "Contract Account",
+      "Contract Accounts"
+    ],
+    "retrieved_titles": [
+      "Contract Account Category",
+      "Link: Contract Account - Business Partner",
+      "Contract Account",
+      "Contract Accounts",
+      "Manage Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/20fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/23fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/6f1202271870470996b7b38ba9d19cab.html"
+    ],
+    "distances": [
+      0.603475,
+      0.604032,
+      0.820528,
+      0.679015,
+      0.708371
+    ],
+    "match_ranks": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "strict_match_ranks": [
+      3,
+      4
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q04",
+    "question": "What is the purpose of the Manage Contract Accounts app?",
+    "category": "direct",
+    "expected_titles": [
+      "Manage Contract Accounts"
+    ],
+    "retrieved_titles": [
+      "Manage Contract Accounts",
+      "Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/6f1202271870470996b7b38ba9d19cab.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.609825,
+      0.842915
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 2
+  },
+  {
+    "id": "q05",
+    "question": "What does a contract account category determine?",
+    "category": "direct",
+    "expected_titles": [
+      "Contract Account Category"
+    ],
+    "retrieved_titles": [
+      "Contract Account Category",
+      "Link: Contract Account - Business Partner",
+      "Contract Accounts",
+      "Creating Contract Accounts",
+      "Controlling Specifications in Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/20fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fffbc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/ac6b9953caddca11e10000000a44176d.html"
+    ],
+    "distances": [
+      0.273237,
+      0.722444,
+      0.751488,
+      0.834908,
+      0.920572
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q06",
+    "question": "What business master data is included in SAP IS-U?",
+    "category": "direct",
+    "expected_titles": [
+      "Master Data"
+    ],
+    "retrieved_titles": [
+      "Master Data",
+      "Transferring Master Data Automatically (IS-U)",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "Automatic Master Data Transfer",
+      "IS-U Business Partner: Special Features"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e369ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fb70ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/2cfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/22fbe156e374be43e10000000a441470.html"
+    ],
+    "distances": [
+      0.60668,
+      0.837959,
+      0.830432,
+      0.90102,
+      0.771574
+    ],
+    "match_ranks": [
+      1,
+      2,
+      4
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q07",
+    "question": "What technical master data is included in SAP IS-U?",
+    "category": "direct",
+    "expected_titles": [
+      "Master Data"
+    ],
+    "retrieved_titles": [
+      "Master Data",
+      "Transferring Master Data Automatically (IS-U)",
+      "Automatic Master Data Transfer",
+      "Create Technical Point of Delivery",
+      "Contract Account and Contract Special Features for IS-U"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e369ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fb70ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/2cfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/ce69ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e31ce056045c122fe10000000a441470.html"
+    ],
+    "distances": [
+      0.643324,
+      0.836343,
+      0.889148,
+      0.919106,
+      0.75864
+    ],
+    "match_ranks": [
+      1,
+      2,
+      3
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q08",
+    "question": "What roles can a business partner have?",
+    "category": "direct",
+    "expected_titles": [
+      "SAP Business Partner"
+    ],
+    "retrieved_titles": [
+      "SAP Business Partner",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "Link: Contract Account - Business Partner",
+      "Merging Business Partners (IS-U)",
+      "Replication and Synchronization of Business Partners from SAP CRM to SAP S/4HANA"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4371ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/58dac53393d24e73a4044781c5d33a75.html"
+    ],
+    "distances": [
+      0.689311,
+      0.853363,
+      0.861777,
+      0.929298,
+      0.985082
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q09",
+    "question": "What is a business partner relationship?",
+    "category": "direct",
+    "expected_titles": [
+      "SAP Business Partner"
+    ],
+    "retrieved_titles": [
+      "SAP Business Partner",
+      "Link: Contract Account - Business Partner",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "Merging Business Partners (IS-U)",
+      "Change of Payment Data"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4371ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4f0ca46a06b0537de10000000a421937.html"
+    ],
+    "distances": [
+      0.687635,
+      0.718404,
+      0.994343,
+      0.899144,
+      0.933393
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q10",
+    "question": "How can a business partner be represented in an organization?",
+    "category": "direct",
+    "expected_titles": [
+      "SAP Business Partner"
+    ],
+    "retrieved_titles": [
+      "SAP Business Partner",
+      "Link: Contract Account - Business Partner",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "Merging Business Partners (IS-U)",
+      "Change of Payment Data"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4371ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4f0ca46a06b0537de10000000a421937.html"
+    ],
+    "distances": [
+      0.770389,
+      0.902411,
+      0.934814,
+      0.929235,
+      0.907513
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q11",
+    "question": "Can one business partner have multiple contract accounts?",
+    "category": "relationship",
+    "expected_titles": [
+      "Contract Accounts"
+    ],
+    "retrieved_titles": [
+      "Link: Contract Account - Business Partner",
+      "Contract Accounts",
+      "Objects in Contract Accounts Receivable and Payable",
+      "Creating, Changing, and Displaying Contract Accounts",
+      "Creating Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/1971ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3efcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fffbc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.520298,
+      0.54743,
+      0.674419,
+      0.653061,
+      0.796197
+    ],
+    "match_ranks": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "strict_match_ranks": [
+      2
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q12",
+    "question": "Can one contract account have multiple business partners?",
+    "category": "relationship",
+    "expected_titles": [
+      "Contract Accounts"
+    ],
+    "retrieved_titles": [
+      "Link: Contract Account - Business Partner",
+      "Contract Accounts",
+      "Assigning Additional Business Partners",
+      "Objects in Contract Accounts Receivable and Payable",
+      "Creating, Changing, and Displaying Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/44fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/1971ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3efcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.531429,
+      0.576264,
+      0.725845,
+      0.683075,
+      0.716128
+    ],
+    "match_ranks": [
+      2,
+      4,
+      5
+    ],
+    "strict_match_ranks": [
+      2
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q13",
+    "question": "What is the relationship between a business partner and a contract account?",
+    "category": "relationship",
+    "expected_titles": [
+      "Contract Accounts",
+      "Link: Contract Account - Business Partner"
+    ],
+    "retrieved_titles": [
+      "Link: Contract Account - Business Partner",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "SAP Business Partner",
+      "Contract Accounts",
+      "Creating, Changing, and Displaying Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3efcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.283447,
+      0.678474,
+      0.643326,
+      0.611637,
+      0.697863
+    ],
+    "match_ranks": [
+      1,
+      4,
+      5
+    ],
+    "strict_match_ranks": [
+      1,
+      4
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q14",
+    "question": "What procedures can be defined for a business partner in a contract account?",
+    "category": "detail",
+    "expected_titles": [
+      "Contract Accounts"
+    ],
+    "retrieved_titles": [
+      "Link: Contract Account - Business Partner",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "Change of Payment Data",
+      "Contract Accounts",
+      "Creating, Changing, and Displaying Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4f0ca46a06b0537de10000000a421937.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3efcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.591283,
+      0.784544,
+      0.590626,
+      0.702186,
+      0.708926
+    ],
+    "match_ranks": [
+      4,
+      5
+    ],
+    "strict_match_ranks": [
+      4
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q15",
+    "question": "What attributes are controlled by the contract account category?",
+    "category": "detail",
+    "expected_titles": [
+      "Contract Account Category"
+    ],
+    "retrieved_titles": [
+      "Contract Account Category",
+      "Link: Contract Account - Business Partner",
+      "Controlling Specifications in Contract Accounts",
+      "Controlling Specifications in Contract Accounts (IS-U)",
+      "Contract Account"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/20fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/ac6b9953caddca11e10000000a44176d.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/f870ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/23fcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.477311,
+      0.804907,
+      0.706068,
+      0.782675,
+      0.877719
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q16",
+    "question": "What can you do with the Manage Contract Accounts app?",
+    "category": "detail",
+    "expected_titles": [
+      "Manage Contract Accounts"
+    ],
+    "retrieved_titles": [
+      "Manage Contract Accounts",
+      "Contract Accounts",
+      "Creating, Changing, and Displaying Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/6f1202271870470996b7b38ba9d19cab.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3efcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.431322,
+      0.98852,
+      0.993565
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 3
+  },
+  {
+    "id": "q17",
+    "question": "How are business partner roles useful in SAP?",
+    "category": "detail",
+    "expected_titles": [
+      "SAP Business Partner"
+    ],
+    "retrieved_titles": [
+      "SAP Business Partner",
+      "Replication and Synchronization of Business Partners from SAP CRM to SAP S/4HANA",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "Merging Business Partners (IS-U)",
+      "Displaying or Editing Other Business Partners"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/58dac53393d24e73a4044781c5d33a75.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4371ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/17fcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.350097,
+      0.651679,
+      0.652738,
+      0.640407,
+      0.765647
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q18",
+    "question": "What is the purpose of master data in the Utilities Industry?",
+    "category": "detail",
+    "expected_titles": [
+      "Master Data"
+    ],
+    "retrieved_titles": [
+      "Master Data"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e369ce53118d4308e10000000a174cb4.html"
+    ],
+    "distances": [
+      0.477324
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 1
+  },
+  {
+    "id": "q19",
+    "question": "How is master data classified in SAP IS-U?",
+    "category": "paraphrased",
+    "expected_titles": [
+      "Master Data"
+    ],
+    "retrieved_titles": [
+      "Master Data",
+      "Automatic Master Data Transfer",
+      "Transferring Master Data Automatically (IS-U)",
+      "Contract Account and Contract Special Features for IS-U",
+      "Create Technical Point of Delivery"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e369ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/2cfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fb70ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e31ce056045c122fe10000000a441470.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/ce69ce53118d4308e10000000a174cb4.html"
+    ],
+    "distances": [
+      0.610167,
+      0.860833,
+      0.864765,
+      0.880575,
+      0.981616
+    ],
+    "match_ranks": [
+      1,
+      2,
+      3
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q20",
+    "question": "Explain what a contract account is in SAP.",
+    "category": "paraphrased",
+    "expected_titles": [
+      "Contract Account",
+      "Contract Accounts"
+    ],
+    "retrieved_titles": [
+      "Contract Account and Contract Special Features for IS-U",
+      "Creating Contract Accounts",
+      "Contract Account Category",
+      "Controlling Specifications in Contract Accounts",
+      "Manage Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e31ce056045c122fe10000000a441470.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fffbc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/20fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/ac6b9953caddca11e10000000a44176d.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/6f1202271870470996b7b38ba9d19cab.html"
+    ],
+    "distances": [
+      0.740866,
+      0.618644,
+      0.711931,
+      0.66812,
+      0.691976
+    ],
+    "match_ranks": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "strict_match_ranks": [],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q21",
+    "question": "Describe the SAP Business Partner concept.",
+    "category": "paraphrased",
+    "expected_titles": [
+      "SAP Business Partner"
+    ],
+    "retrieved_titles": [
+      "SAP Business Partner",
+      "Automatic Business Partner Merging",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "IS-U Business Partner: Special Features",
+      "Merging Business Partners (IS-U)"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/1071ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/22fbe156e374be43e10000000a441470.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4371ce53118d4308e10000000a174cb4.html"
+    ],
+    "distances": [
+      0.405751,
+      0.644181,
+      0.649251,
+      0.669992,
+      0.612861
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q22",
+    "question": "How does SAP define a contract account?",
+    "category": "paraphrased",
+    "expected_titles": [
+      "Contract Account"
+    ],
+    "retrieved_titles": [
+      "Creating Contract Accounts",
+      "Contract Account Category",
+      "Controlling Specifications in Contract Accounts",
+      "Manage Contract Accounts",
+      "Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/fffbc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/20fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/ac6b9953caddca11e10000000a44176d.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/6f1202271870470996b7b38ba9d19cab.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.552319,
+      0.749889,
+      0.693067,
+      0.776195,
+      0.800952
+    ],
+    "match_ranks": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "strict_match_ranks": [],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q23",
+    "question": "What is the difference between business master data and technical master data?",
+    "category": "comparison",
+    "expected_titles": [
+      "Master Data"
+    ],
+    "retrieved_titles": [
+      "Master Data",
+      "Contract Account"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/e369ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/23fcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.559738,
+      0.995447
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 2
+  },
+  {
+    "id": "q24",
+    "question": "What is the difference between a business partner and a contract account?",
+    "category": "comparison",
+    "expected_titles": [
+      "SAP Business Partner",
+      "Contract Account",
+      "Contract Accounts"
+    ],
+    "retrieved_titles": [
+      "Link: Contract Account - Business Partner",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "SAP Business Partner",
+      "Contract Accounts",
+      "Creating, Changing, and Displaying Contract Accounts"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/0bfcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3efcc5536a51204be10000000a174cb4.html"
+    ],
+    "distances": [
+      0.395617,
+      0.717309,
+      0.657579,
+      0.626505,
+      0.722237
+    ],
+    "match_ranks": [
+      1,
+      3,
+      4,
+      5
+    ],
+    "strict_match_ranks": [
+      3,
+      4
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q25",
+    "question": "What information is associated with a business partner?",
+    "category": "detail",
+    "expected_titles": [
+      "SAP Business Partner"
+    ],
+    "retrieved_titles": [
+      "SAP Business Partner",
+      "Business Partner in the Contract Partner Role (MKK)",
+      "BAPIs for Central Business Partner (IS-U)",
+      "Link: Contract Account - Business Partner",
+      "Merging Business Partners (IS-U)"
+    ],
+    "retrieved_urls": [
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/78d96b5740800322e10000000a44147b.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/98e7c5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/3771ce53118d4308e10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/35fcc5536a51204be10000000a174cb4.html",
+      "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/4371ce53118d4308e10000000a174cb4.html"
+    ],
+    "distances": [
+      0.652184,
+      0.689922,
+      0.83011,
+      0.813321,
+      0.886685
+    ],
+    "match_ranks": [
+      1
+    ],
+    "strict_match_ranks": [
+      1
+    ],
+    "distinct_documents": 5
+  },
+  {
+    "id": "q26",
+    "question": "What is SAP HANA licensing cost?",
+    "category": "out_of_domain",
+    "expected_titles": [],
+    "retrieved_titles": [],
+    "retrieved_urls": [],
+    "distances": [],
+    "match_ranks": [],
+    "strict_match_ranks": [],
+    "distinct_documents": 0
+  },
+  {
+    "id": "q27",
+    "question": "Who is the CEO of SAP?",
+    "category": "out_of_domain",
+    "expected_titles": [],
+    "retrieved_titles": [],
+    "retrieved_urls": [],
+    "distances": [],
+    "match_ranks": [],
+    "strict_match_ranks": [],
+    "distinct_documents": 0
+  },
+  {
+    "id": "q28",
+    "question": "What is Python?",
+    "category": "out_of_domain",
+    "expected_titles": [],
+    "retrieved_titles": [],
+    "retrieved_urls": [],
+    "distances": [],
+    "match_ranks": [],
+    "strict_match_ranks": [],
+    "distinct_documents": 0
+  },
+  {
+    "id": "q29",
+    "question": "How do I install Windows 11?",
+    "category": "out_of_domain",
+    "expected_titles": [],
+    "retrieved_titles": [],
+    "retrieved_urls": [],
+    "distances": [],
+    "match_ranks": [],
+    "strict_match_ranks": [],
+    "distinct_documents": 0
+  },
+  {
+    "id": "q30",
+    "question": "What is the weather today?",
+    "category": "out_of_domain",
+    "expected_titles": [],
+    "retrieved_titles": [],
+    "retrieved_urls": [],
+    "distances": [],
+    "match_ranks": [],
+    "strict_match_ranks": [],
+    "distinct_documents": 0
+  }
+]

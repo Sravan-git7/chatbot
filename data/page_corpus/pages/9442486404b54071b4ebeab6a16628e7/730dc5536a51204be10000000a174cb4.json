@@ -1,0 +1,101 @@
+{
+  "acquisition": {
+    "body_sha256": "37ee4b45c73791423efa5bdd00632d7e0cb0bb2135cc4dbb947f49fc776633a0",
+    "build_no": null,
+    "deliverable_title": "Contract Accounting",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/13_40374790_730dc5536a51204be10000000a174cb4.json",
+    "file_sha256": "f811091c5e65c9f56623177c91516cf01af50718ae68d88dc2df2665eb6d9bd3",
+    "html_chars": 2322,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374790",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.001"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Installment Plan",
+        "Definition"
+      ],
+      "kind": "paragraph",
+      "text": "With an installment plan you divide source items to several installment receivables that have a due date in the future. Once an installment plan has been posted, the items of the installment plan and not the source items are referred to when a bank collection is made, or when a dunning run is carried out."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Installment Plan",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. One or more source items can form part of an installment plan. However, only receivables and items in the same currency and in one contract account can be included in an installment plan."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Installment Plan",
+        "Structure"
+      ],
+      "kind": "paragraph",
+      "text": "An installment plan consists of a statistical document with several installment receivables. The individual installment receivable is cleared upon payment. The number of the installment plan is saved in the source items. This ensures a connection between the installment plan and the source receivables, and between the source receivables and the installment plan. If interest is payable on an installment plan, the installment plan will also have an interest supplement."
+    }
+  ],
+  "breadcrumb": [
+    "Contract Accounting",
+    "Credit and Collections Management",
+    "Deferrals and Installment Plans",
+    "Installment Plan"
+  ],
+  "card": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_page_id": "730dc5536a51204be10000000a174cb4",
+    "card_source_status": "needs_review",
+    "card_source_url_status": "needs_review",
+    "card_title": "Installment Plan Overview",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+    "review_flag": true
+  },
+  "doc_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4",
+  "guide_id": "9442486404b54071b4ebeab6a16628e7",
+  "headings": [
+    "Installment Plan",
+    "Definition",
+    "Use",
+    "Structure"
+  ],
+  "html_title": "Installment Plan",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "730dc5536a51204be10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-23"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+  "structure": {
+    "blocks": 3,
+    "chrome_elements_removed": 0,
+    "headings": 4,
+    "kinds": {
+      "paragraph": 3
+    }
+  },
+  "text": "Installment Plan\nDefinition\nWith an installment plan you divide source items to several installment receivables that have a due date in the future. Once an installment plan has been posted, the items of the installment plan and not the source items are referred to when a bank collection is made, or when a dunning run is carried out.\nUse\nYou create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. One or more source items can form part of an installment plan. However, only receivables and items in the same currency and in one contract account can be included in an installment plan.\nStructure\nAn installment plan consists of a statistical document with several installment receivables. The individual installment receivable is cleared upon payment. The number of the installment plan is saved in the source items. This ensures a connection between the installment plan and the source receivables, and between the source receivables and the installment plan. If interest is payable on an installment plan, the installment plan will also have an interest supplement.",
+  "text_sha256": "4463af872d18f5dd9edbaf4208be7a0793c2114959853b1fbda95a3e1c25527e",
+  "title": "Installment Plan",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 1154
+  }
+}

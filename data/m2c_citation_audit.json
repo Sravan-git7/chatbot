@@ -1,0 +1,1042 @@
+{
+  "card_count": 29,
+  "cards": [
+    {
+      "citation": "[01] Utilities Master Data (01_Utilities_Master_Data.pdf, sha256:c4aecd08f56a)",
+      "flags": [
+        "PAGE_CARD_IDENTITY_ONLY"
+      ],
+      "identity": {
+        "basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+        "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+        "card_page_id": "0a6ace53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": null,
+        "effective_page_id": null,
+        "hints": [
+          {
+            "authority": "non_authoritative_hint",
+            "guide_ids": [
+              "e52c8ee6197147ec97dfc2eb8c46a3ad"
+            ],
+            "kind": "page_is_map_root_of_saved_toc"
+          }
+        ],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "card_identity_only"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-01",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Utilities Master Data",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[02] Move-In/Out Overview (02_Move_In_Out_Overview.pdf, sha256:80c862abcf09)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "card_page_id": "8082ce53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "effective_page_id": "8082ce53118d4308e10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-02",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Move-In/Out Overview",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[03] Move-In Process (03_Move_In_Process.pdf, sha256:a360a36d72d1)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "card_page_id": "0981ce53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "effective_page_id": "0981ce53118d4308e10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-03",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Move-In Process",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[04] Move-Out Process (04_Move_Out_Process.pdf, sha256:2f06b2544b60)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "card_page_id": "0f81ce53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "effective_page_id": "0f81ce53118d4308e10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-04",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Move-Out Process",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[05] Device Management Overview (05_Device_Management_Overview.pdf, sha256:34c7b911e61c)",
+      "flags": [
+        "PAGE_CORRECTED_IDENTITY"
+      ],
+      "identity": {
+        "basis": "CORRECTION_APPLIED_PAGE_IN_CORRECTED_GUIDE_TOC",
+        "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+        "card_page_id": "8990d0533f8e4308e10000000a174cb4",
+        "conflict": null,
+        "correction": {
+          "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "card_page_id": "8990d0533f8e4308e10000000a174cb4",
+          "card_record_modified": false,
+          "machine_checked_saved_response_passed": true,
+          "matches_card_ids": true,
+          "registers_a_guide": false,
+          "resolved_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "user_reported_browser_observation_machine_verified": false
+        },
+        "disagreements": [],
+        "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "effective_page_id": "8990d0533f8e4308e10000000a174cb4",
+        "hints": [
+          {
+            "authority": "non_authoritative_hint",
+            "guide_ids": [
+              "2ac7fe29a0c94cdd88fb80c2cb9f7758"
+            ],
+            "kind": "page_also_in_other_saved_toc"
+          }
+        ],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "corrected_identity"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-05",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Device Management Overview",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[06] Reading Meters (06_Reading_Meters.pdf, sha256:7b2fbc621ab3)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "card_page_id": "bc90d0533f8e4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "effective_page_id": "bc90d0533f8e4308e10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-06",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Reading Meters",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[07] Monitoring Meter Reading Results (07_Monitoring_Meter_Reading_Results.pdf, sha256:1e5c1ca1c2b8)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "card_page_id": "4d76765c1e012b8ae10000000a42189b",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-07",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Monitoring Meter Reading Results",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[08] Meter Reading Estimation (08_Meter_Reading_Estimation.pdf, sha256:602af6717cf7)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "card_page_id": "d090d0533f8e4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "effective_page_id": "d090d0533f8e4308e10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-08",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Meter Reading Estimation",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[09] Estimation Procedure Details (09_Estimation_Procedure_Details.pdf, sha256:e10bdb4dd6e2)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "card_page_id": "bf74c1d28fd54f77b228772b98b72fba",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "effective_page_id": "bf74c1d28fd54f77b228772b98b72fba",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-09",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Estimation Procedure Details",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[10] Meter Reading Data During Move-In (10_Meter_Reading_Data_During_Move_In.pdf, sha256:a0acaa1f1a62)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "card_page_id": "b781ce53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "effective_page_id": "b781ce53118d4308e10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-10",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Meter Reading Data During Move-In",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[11] SAP Utilities Billing Procedure (11_SAP_Utilities_Billing_Procedure.pdf, sha256:b2381818bd89)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+        "card_page_id": "147bce53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+        "effective_page_id": "147bce53118d4308e10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-11",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "SAP Utilities Billing Procedure",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[12] Automatic Billing (12_Automatic_Billing.pdf, sha256:f8e3ce1a07ed)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+        "card_page_id": "297bce53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+        "effective_page_id": "297bce53118d4308e10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-12",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Automatic Billing",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[13] Budget Billing Plan (13_Budget_Billing_Plan.pdf, sha256:679da0708a9e)",
+      "flags": [
+        "PAGE_CARD_IDENTITY_ONLY"
+      ],
+      "identity": {
+        "basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+        "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+        "card_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": null,
+        "effective_page_id": null,
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "card_identity_only"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-13",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Budget Billing Plan",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[14] SAP Utilities Invoicing Procedure (14_SAP_Utilities_Invoicing_Procedure.pdf, sha256:ff53f87e163f)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+        "card_page_id": "cc7bce53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+        "effective_page_id": "cc7bce53118d4308e10000000a174cb4",
+        "hints": [
+          {
+            "authority": "non_authoritative_hint",
+            "guide_ids": [
+              "ed84b70c199d4470ae2e5ccb93b2e45b"
+            ],
+            "kind": "page_also_in_other_saved_toc"
+          }
+        ],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [
+        "the card is marked needs_review; it is shown with its flag and reasons, not corrected"
+      ],
+      "review_flag": true,
+      "review_reasons": [
+        "product segment 'sap_s4hana_on-premise' differs from 'SAP_S4HANA_ON-PREMISE' used by the other cards",
+        "product spelling 'sap_s4hana_on-premise' normalised to 'SAP_S4HANA_ON-PREMISE'"
+      ],
+      "source_id": "M2C-14",
+      "source_status": "needs_review",
+      "source_url_status": "needs_review",
+      "title": "SAP Utilities Invoicing Procedure",
+      "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[15] Processing Budget Billing Plans (15_Processing_Budget_Billing_Plans.pdf, sha256:ac9f2c91a906)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+        "card_page_id": "147cce53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+        "effective_page_id": "147cce53118d4308e10000000a174cb4",
+        "hints": [
+          {
+            "authority": "non_authoritative_hint",
+            "guide_ids": [
+              "ed84b70c199d4470ae2e5ccb93b2e45b"
+            ],
+            "kind": "page_also_in_other_saved_toc"
+          }
+        ],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-15",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Processing Budget Billing Plans",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[16] Periodic Billing and Invoicing Analysis (16_Periodic_Billing_and_Invoicing_Analysis.pdf, sha256:5c9154368920)",
+      "flags": [
+        "PAGE_CARD_IDENTITY_ONLY"
+      ],
+      "identity": {
+        "basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+        "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+        "card_page_id": "549661e6541f403ea56196782e040bcc",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": null,
+        "effective_page_id": null,
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "card_identity_only"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-16",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Periodic Billing and Invoicing Analysis",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[17] Contract Accounts Overview (17_Contract_Accounts_Overview.pdf, sha256:0b07f58bc21c)",
+      "flags": [],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_AND_LOCAL_RECORD_PRESENT",
+        "card_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+        "card_page_id": "0bfcc5536a51204be10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+        "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
+        "hints": [],
+        "local_content": {
+          "fresh_network_fetch_claimed": false,
+          "is_legacy_local_copy": true,
+          "note": "content origin is the record's own source_type/fetched_via; it is not relabelled as a network fetch",
+          "record_canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+          "record_fetched_via": "legacy_local:sap_pages/041.json",
+          "record_path": "data/sap_help/pages/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.json",
+          "record_source_type": "legacy_local_copy",
+          "record_source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+          "record_status": "OK",
+          "text_chars": 2683,
+          "text_sha256": "a89d267ca2bc8d9dbff49e6b02f74b7b70564665ce61146ead955a38a87c233e",
+          "validated": true
+        },
+        "local_page_available": true,
+        "local_page_path": "data/sap_help/pages/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.json",
+        "probe_evidence": [],
+        "status": "resolved_local_page"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-17",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Contract Accounts Overview",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[18] Contract Account Business Object (18_Contract_Account_Business_Object.pdf, sha256:36b4c4ac10ac)",
+      "flags": [
+        "PAGE_CONFLICTING_IDENTITY"
+      ],
+      "identity": {
+        "basis": "PAGE_NOT_IN_CARD_GUIDE_TOC_PAGE_SEEN_ELSEWHERE",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "b1a202c9bb3011da2b24000f20dac9ef",
+        "conflict": {
+          "other_loios_seen": [
+            "e4375c1cad104b2eb7d027369bd76638"
+          ],
+          "reasons": [
+            "PAGE_NOT_A_NODE_OF_CARD_GUIDE_TOC",
+            "PAGE_SEEN_IN_OTHER_DELIVERABLE"
+          ]
+        },
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": null,
+        "effective_page_id": null,
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [
+          {
+            "authority": "probe_evidence_only",
+            "file": "captured_responses/1_40374490_b1a202c9bb3011da2b24000f20dac9ef.json",
+            "numeric_deliverable_id": "40374490",
+            "response_loio": "e4375c1cad104b2eb7d027369bd76638",
+            "response_loio_registered_verified": false,
+            "used_as_effective_guide": false
+          }
+        ],
+        "status": "conflicting_identity"
+      },
+      "notes": [
+        "conflicting identity: no effective page is chosen; the conflict and probe evidence are shown, not resolved",
+        "the card is marked needs_review; it is shown with its flag and reasons, not corrected"
+      ],
+      "review_flag": true,
+      "review_reasons": [
+        "query string '?version=2025.001' present (not on most cards; version pin to be confirmed)",
+        "URL carries ?version=2025.001 (kept as url_version; not part of identity)"
+      ],
+      "source_id": "M2C-18",
+      "source_status": "needs_review",
+      "source_url_status": "needs_review",
+      "title": "Contract Account Business Object",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[19] Analyze Incoming Payments (19_Analyze_Incoming_Payments.pdf, sha256:eb1e19ef4d80)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "063bf3eb68e347efa5c0fc1d389f70f7",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "063bf3eb68e347efa5c0fc1d389f70f7",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-19",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Analyze Incoming Payments",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[20] Clearing Control in Incoming Payments (20_Clearing_Control_in_Incoming_Payments.pdf, sha256:9d03fe95450d)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "edcd0c5823854d3296f2591e9f5d118c",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-20",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Clearing Control in Incoming Payments",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[21] Clearing Types (21_Clearing_Types.pdf, sha256:66173bede3f7)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "e63529e1a3fd42e3a0e2c009ac783e0d",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "e63529e1a3fd42e3a0e2c009ac783e0d",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-21",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Clearing Types",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[22] Processing Incoming Payments from External Cash Desks (22_Processing_Incoming_Payments_from_External_Cash_Desks.pdf, sha256:3168dba2c1c0)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "3d0ac5536a51204be10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-22",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Processing Incoming Payments from External Cash Desks",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[23] Installment Plan Overview (23_Installment_Plan_Overview.pdf, sha256:5fc82f433e51)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "730dc5536a51204be10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "730dc5536a51204be10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [
+        "the card is marked needs_review; it is shown with its flag and reasons, not corrected"
+      ],
+      "review_flag": true,
+      "review_reasons": [
+        "query string '?version=2025.001' present (not on most cards; version pin to be confirmed)",
+        "URL carries ?version=2025.001 (kept as url_version; not part of identity)"
+      ],
+      "source_id": "M2C-23",
+      "source_status": "needs_review",
+      "source_url_status": "needs_review",
+      "title": "Installment Plan Overview",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[24] Creating Installment Plans (24_Creating_Installment_Plans.pdf, sha256:bf7eb138905e)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "790dc5536a51204be10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "790dc5536a51204be10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-24",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Creating Installment Plans",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[25] Displaying and Changing Installment Plans (25_Displaying_and_Changing_Installment_Plans.pdf, sha256:eead43bd7c78)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "630dc5536a51204be10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "630dc5536a51204be10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-25",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Displaying and Changing Installment Plans",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[26] FI-CA Dunning (26_FI_CA_Dunning.pdf, sha256:253fe0f03b87)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "b1ffc5536a51204be10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "b1ffc5536a51204be10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-26",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "FI-CA Dunning",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[27] Submission of Receivables to Collection Agency (27_Submission_of_Receivables_to_Collection_Agency.pdf, sha256:9ec0594c2ce2)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "10e7c5536a51204be10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "10e7c5536a51204be10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-27",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Submission of Receivables to Collection Agency",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[28] Collection Agency APIs and Enterprise Services (28_Collection_Agency_APIs_and_Enterprise_Services.pdf, sha256:521d033f5916)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "card_page_id": "9c9c2344851f412f823d5f8a9dc7c694",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "effective_page_id": "9c9c2344851f412f823d5f8a9dc7c694",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-28",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Collection Agency APIs and Enterprise Services",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    },
+    {
+      "citation": "[29] Disconnection/Reconnection of a Utility Installation (29_Disconnection_Reconnection_of_a_Utility_Installation.pdf, sha256:07dada4a63ff)",
+      "flags": [
+        "PAGE_IDENTIFIED_NOT_LOCAL"
+      ],
+      "identity": {
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+        "card_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "card_page_id": "8682ce53118d4308e10000000a174cb4",
+        "conflict": null,
+        "correction": null,
+        "disagreements": [],
+        "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+        "effective_page_id": "8682ce53118d4308e10000000a174cb4",
+        "hints": [],
+        "local_content": null,
+        "local_page_available": false,
+        "local_page_path": null,
+        "probe_evidence": [],
+        "status": "identified_not_local"
+      },
+      "notes": [],
+      "review_flag": false,
+      "review_reasons": [],
+      "source_id": "M2C-29",
+      "source_status": "verified",
+      "source_url_status": "ok",
+      "title": "Disconnection/Reconnection of a Utility Installation",
+      "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
+      "url_flag": null,
+      "used_as_answer_text": false
+    }
+  ],
+  "cards_with_local_content": [
+    "M2C-17"
+  ],
+  "identity_status_counts": {
+    "card_identity_only": 3,
+    "conflicting_identity": 1,
+    "corrected_identity": 1,
+    "identified_not_local": 23,
+    "resolved_local_page": 1
+  },
+  "recorded_numeric_pairs": {
+    "40374631": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+    "40374633": "a003b275c98148ee8a4c3fafe9588fe3",
+    "40374682": "f4a255a5de524e3992155767996fb1fd",
+    "40374790": "9442486404b54071b4ebeab6a16628e7",
+    "40404052": "ed84b70c199d4470ae2e5ccb93b2e45b"
+  },
+  "review_flag_cards": [
+    "M2C-14",
+    "M2C-18",
+    "M2C-23"
+  ],
+  "schema_version": 1,
+  "spec": "data/phase6_next_phase_spec.md#7D"
+}

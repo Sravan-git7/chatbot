@@ -1,8 +1,10 @@
 import json
 import re
+from pathlib import Path
 
-INPUT_FILE = "cleaned_pages.json"
-OUTPUT_FILE = "chunks.json"
+REPO_ROOT = Path(__file__).resolve().parent.parent
+INPUT_FILE = REPO_ROOT / "cleaned_pages.json"
+OUTPUT_FILE = REPO_ROOT / "chunks.json"
 
 with open(INPUT_FILE, encoding="utf-8") as f:
     pages = json.load(f)

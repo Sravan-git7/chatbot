@@ -1,0 +1,986 @@
+{
+  "schema_version": 1,
+  "description": "Card-level retrieval questions derived ONLY from the text of the 29 reference cards; written before any retrieval was run; no LLM involved.",
+  "source_units": "data/retrieval_units.json",
+  "question_count": 50,
+  "questions": [
+    {
+      "question_id": "Q01",
+      "question": "Move-In Process",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02",
+        "M2C-10"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-03",
+          "quote": "Move-In Process"
+        }
+      ],
+      "notes": "Title of card 03; cards 02 and 10 also concern move-in."
+    },
+    {
+      "question_id": "Q02",
+      "question": "Move-Out Process",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-04",
+          "quote": "Move-Out Process"
+        }
+      ],
+      "notes": "Title of card 04."
+    },
+    {
+      "question_id": "Q03",
+      "question": "Automatic Billing",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-12"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-11"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-12",
+          "quote": "Automatic Billing"
+        }
+      ],
+      "notes": "Title of card 12."
+    },
+    {
+      "question_id": "Q04",
+      "question": "Budget Billing Plan",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-15"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-13",
+          "quote": "Budget Billing Plan"
+        }
+      ],
+      "notes": "Title of card 13; card 15 'Processing Budget Billing Plans' is a near-title competitor."
+    },
+    {
+      "question_id": "Q05",
+      "question": "Clearing Types",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-21"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-20"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-21",
+          "quote": "Clearing Types"
+        }
+      ],
+      "notes": "Title of card 21."
+    },
+    {
+      "question_id": "Q06",
+      "question": "FI-CA Dunning",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-26",
+          "quote": "FI-CA Dunning"
+        }
+      ],
+      "notes": "Title of card 26."
+    },
+    {
+      "question_id": "Q07",
+      "question": "Installment Plan Overview",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-24",
+        "M2C-25"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-23",
+          "quote": "Installment Plan Overview"
+        }
+      ],
+      "notes": "Title of card 23."
+    },
+    {
+      "question_id": "Q08",
+      "question": "Collection Agency APIs and Enterprise Services",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-27"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-28",
+          "quote": "Collection Agency APIs and Enterprise Services"
+        }
+      ],
+      "notes": "Title of card 28."
+    },
+    {
+      "question_id": "Q09",
+      "question": "Reading Meters",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-06"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-07",
+        "M2C-05"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-06",
+          "quote": "Reading Meters"
+        }
+      ],
+      "notes": "Title of card 06."
+    },
+    {
+      "question_id": "Q10",
+      "question": "Contract Accounts Overview",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-17"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-18"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-17",
+          "quote": "Contract Accounts Overview"
+        }
+      ],
+      "notes": "Title of card 17; card 18 'Contract Account Business Object' is a near-title competitor."
+    },
+    {
+      "question_id": "Q11",
+      "question": "Disconnection/Reconnection of a Utility Installation",
+      "question_type": "exact_title",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-29",
+          "quote": "Disconnection/Reconnection of a Utility Installation"
+        }
+      ],
+      "notes": "Title of card 29."
+    },
+    {
+      "question_id": "Q12",
+      "question": "Which reference explains how billing results become invoices, print documents and postings in FI-CA?",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-11"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-14",
+          "quote": "how billing results become invoices, print documents and FI-CA postings"
+        }
+      ],
+      "notes": "Card 14 covers exactly this."
+    },
+    {
+      "question_id": "Q13",
+      "question": "What explains estimating a reading when the meter reading is missing or unavailable?",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-09"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-08",
+          "quote": "estimation when readings are missing, unavailable or unsuitable for direct use"
+        }
+      ],
+      "notes": "Card 08; card 09 (estimation procedure details) is a close competitor."
+    },
+    {
+      "question_id": "Q14",
+      "question": "How are incoming payment amounts assigned to open items?",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-21",
+        "M2C-19"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-20",
+          "quote": "incoming-payment amounts are assigned to open items using FI-CA clearing control"
+        }
+      ],
+      "notes": "Card 20."
+    },
+    {
+      "question_id": "Q15",
+      "question": "Which topic covers releasing, submitting, processing and recalling receivables handled by collection agencies?",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-27"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-28"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-27",
+          "quote": "releasing, submitting, processing and recalling receivables handled by collection agencies"
+        }
+      ],
+      "notes": "Card 27."
+    },
+    {
+      "question_id": "Q16",
+      "question": "How are source receivables redistributed into scheduled installment receivables?",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-23"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-24"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-23",
+          "quote": "source receivables are redistributed into scheduled installment receivables"
+        }
+      ],
+      "notes": "Card 23."
+    },
+    {
+      "question_id": "Q17",
+      "question": "Temporary interruption and restoration of utility supply for collection or technical reasons",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-29",
+          "quote": "temporary interruption and restoration of utility supply for collection or technical reasons"
+        }
+      ],
+      "notes": "Card 29."
+    },
+    {
+      "question_id": "Q18",
+      "question": "How are notifications of incoming payments from external cash desks integrated into FI-CA?",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-22"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-19"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-22",
+          "quote": "integration of incoming-payment notifications from external cash desks into FI-CA"
+        }
+      ],
+      "notes": "Card 22."
+    },
+    {
+      "question_id": "Q19",
+      "question": "Which source lists Business Partner, Contract Account, Contract, Point of Delivery, Connection Object, Premise, Device Location, Installation and Device?",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-01"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-17",
+        "M2C-18"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-01",
+          "quote": "Business Partner, Contract Account, Contract, Point of Delivery, Connection Object, Premise, Device Location, Installation and Device"
+        }
+      ],
+      "notes": "Card 01 names these objects."
+    },
+    {
+      "question_id": "Q20",
+      "question": "What covers the creation of the customer-service relationship for a utility installation?",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-03"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-03",
+          "quote": "creation of the customer-service relationship for a utility installation"
+        }
+      ],
+      "notes": "Card 03; card 04 mentions the opposite (termination) of the same relationship."
+    },
+    {
+      "question_id": "Q21",
+      "question": "What covers the termination of the customer-service relationship and related final processing?",
+      "question_type": "semantic",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-04",
+          "quote": "termination of the customer-service relationship and related final processing"
+        }
+      ],
+      "notes": "Card 04."
+    },
+    {
+      "question_id": "Q22",
+      "question": "Which source is important for estimated-bill and catch-up-bill reasoning?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-08"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-09"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-08",
+          "quote": "estimated-bill and catch-up-bill reasoning"
+        }
+      ],
+      "notes": "Relevance line of card 08."
+    },
+    {
+      "question_id": "Q23",
+      "question": "Which reference is critical for distinguishing billing document, invoicing result, customer bill and FI-CA document?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-14"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-14",
+          "quote": "distinguishing billing document, invoicing result, customer bill and FI-CA document"
+        }
+      ],
+      "notes": "Relevance line of card 14."
+    },
+    {
+      "question_id": "Q24",
+      "question": "Which source teaches that payment receipt and open-item clearing are distinct steps?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-20"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-20",
+          "quote": "payment receipt and open-item clearing are distinct steps"
+        }
+      ],
+      "notes": "Relevance line of card 20."
+    },
+    {
+      "question_id": "Q25",
+      "question": "Which source is the core reference for collections escalation logic within Meter-to-Cash?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-27"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-26",
+          "quote": "collections escalation logic"
+        }
+      ],
+      "notes": "Relevance line of card 26."
+    },
+    {
+      "question_id": "Q26",
+      "question": "Why can interim or budget amounts affect the customer balance independently of final consumption billing?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-13"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-15"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-13",
+          "quote": "interim/budget amounts can affect the customer balance independently of final consumption billing"
+        }
+      ],
+      "notes": "Relevance line of card 13; card 15 is budget billing in invoicing."
+    },
+    {
+      "question_id": "Q27",
+      "question": "Which card preserves the distinction between delinquency and disconnect eligibility?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-26"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-29",
+          "quote": "distinction between delinquency and disconnect eligibility"
+        }
+      ],
+      "notes": "Relevance line of card 29."
+    },
+    {
+      "question_id": "Q28",
+      "question": "Which source covers modern API and service integration beyond file-based exchanges?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-28",
+          "quote": "modern API/service integration knowledge beyond file-based exchanges"
+        }
+      ],
+      "notes": "Relevance line of card 28."
+    },
+    {
+      "question_id": "Q29",
+      "question": "Which source is useful for differentiating payment-lot, cash-desk, account-maintenance and payment-run clearing contexts?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-21"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-20"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-21",
+          "quote": "payment-lot, cash-desk, account-maintenance and payment-run clearing contexts"
+        }
+      ],
+      "notes": "Relevance line of card 21."
+    },
+    {
+      "question_id": "Q30",
+      "question": "Which source is useful for operational monitoring, KPIs and exception-management of periodic billing and invoicing?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-16"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-07"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-16",
+          "quote": "operational monitoring, KPIs and exception-management use cases"
+        }
+      ],
+      "notes": "Relevance line of card 16; card 07 is exception monitoring for meter-reading results."
+    },
+    {
+      "question_id": "Q31",
+      "question": "Which source helps with exception monitoring and support or troubleshooting scenarios for meter-reading results?",
+      "question_type": "m2c_relevance",
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-16"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-07",
+          "quote": "exception monitoring and support/troubleshooting scenarios"
+        }
+      ],
+      "notes": "Relevance line of card 07; card 16 also mentions exception management."
+    },
+    {
+      "question_id": "Q32",
+      "question": "Which card is in the Disconnection & Reconnection category?",
+      "question_type": "category",
+      "expected_source_ids": [
+        "M2C-29"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-29",
+          "quote": "Category: Disconnection & Reconnection"
+        }
+      ],
+      "notes": "The only card in this category."
+    },
+    {
+      "question_id": "Q33",
+      "question": "Which cards belong to the Dunning & Collections category?",
+      "question_type": "category",
+      "expected_source_ids": [
+        "M2C-26",
+        "M2C-27",
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-26",
+          "quote": "Category: Dunning & Collections"
+        },
+        {
+          "source_id": "M2C-27",
+          "quote": "Category: Dunning & Collections"
+        },
+        {
+          "source_id": "M2C-28",
+          "quote": "Category: Dunning & Collections"
+        }
+      ],
+      "notes": "Three cards share the category; any of them is a hit, and coverage of all three is also reported."
+    },
+    {
+      "question_id": "Q34",
+      "question": "Which cards belong to Payment Arrangements / Installment Plans?",
+      "question_type": "category",
+      "expected_source_ids": [
+        "M2C-23",
+        "M2C-24",
+        "M2C-25"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-23",
+          "quote": "Category: Payment Arrangements / Installment Plans"
+        },
+        {
+          "source_id": "M2C-24",
+          "quote": "Category: Payment Arrangements / Installment Plans"
+        },
+        {
+          "source_id": "M2C-25",
+          "quote": "Category: Payment Arrangements / Installment Plans"
+        }
+      ],
+      "notes": "Three cards share the category."
+    },
+    {
+      "question_id": "Q35",
+      "question": "Which cards are in the Payments & Clearing category?",
+      "question_type": "category",
+      "expected_source_ids": [
+        "M2C-19",
+        "M2C-20",
+        "M2C-21",
+        "M2C-22"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-19",
+          "quote": "Category: Payments & Clearing"
+        },
+        {
+          "source_id": "M2C-20",
+          "quote": "Category: Payments & Clearing"
+        },
+        {
+          "source_id": "M2C-21",
+          "quote": "Category: Payments & Clearing"
+        },
+        {
+          "source_id": "M2C-22",
+          "quote": "Category: Payments & Clearing"
+        }
+      ],
+      "notes": "Four cards share the category."
+    },
+    {
+      "question_id": "Q36",
+      "question": "extrapolation and interpolation",
+      "question_type": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-09"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-08"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-09",
+          "quote": "extrapolation/interpolation"
+        }
+      ],
+      "notes": "Term appears only on card 09."
+    },
+    {
+      "question_id": "Q37",
+      "question": "installation, rate type, schema, operand and price",
+      "question_type": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-12"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-11"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-12",
+          "quote": "installation, rate type, schema, operand, price and billing relationships"
+        }
+      ],
+      "notes": "Term list on card 12 (card 11 mentions rate/schema)."
+    },
+    {
+      "question_id": "Q38",
+      "question": "dunning notices and dunning activities for overdue items",
+      "question_type": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-26"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-26",
+          "quote": "overdue items, dunning notices and dunning activities"
+        }
+      ],
+      "notes": "Card 26."
+    },
+    {
+      "question_id": "Q39",
+      "question": "payment clarification",
+      "question_type": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-19"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-20"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-19",
+          "quote": "payment clarification"
+        }
+      ],
+      "notes": "Term appears only on card 19."
+    },
+    {
+      "question_id": "Q40",
+      "question": "monitoring meter-reading results across business objects and organizational criteria",
+      "question_type": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-07"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-06"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-07",
+          "quote": "across business objects and organizational criteria"
+        }
+      ],
+      "notes": "Card 07."
+    },
+    {
+      "question_id": "Q41",
+      "question": "parent topic for devices and technical installations",
+      "question_type": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-05"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-01"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-05",
+          "quote": "Parent topic for devices, technical installations"
+        }
+      ],
+      "notes": "Card 05."
+    },
+    {
+      "question_id": "Q42",
+      "question": "subledger processing",
+      "question_type": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-17"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-18"
+      ],
+      "ambiguous": false,
+      "evidence": [
+        {
+          "source_id": "M2C-17",
+          "quote": "subledger processing"
+        }
+      ],
+      "notes": "Term appears only on card 17."
+    },
+    {
+      "question_id": "Q43",
+      "question": "control role of the contract account for postings, payments and dunning",
+      "question_type": "distinctive_term",
+      "expected_source_ids": [
+        "M2C-18"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-17"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-18",
+          "quote": "control role for postings, payments and dunning"
+        }
+      ],
+      "notes": "Card 18; card 17 also ties contract accounts to payments and dunning."
+    },
+    {
+      "question_id": "Q44",
+      "question": "How does meter reading data take part in the move-in process?",
+      "question_type": "ambiguous",
+      "expected_source_ids": [
+        "M2C-10"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-03",
+        "M2C-06"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-10",
+          "quote": "how meter-reading data participates in the move-in process"
+        }
+      ],
+      "notes": "Card 10; cards 03 (move-in) and 06 (meter reading) each match half of the question."
+    },
+    {
+      "question_id": "Q45",
+      "question": "How are budget billing plans treated in invoicing?",
+      "question_type": "ambiguous",
+      "expected_source_ids": [
+        "M2C-15"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-13",
+        "M2C-14"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-15",
+          "quote": "treatment of budget billing plans in the invoicing process"
+        }
+      ],
+      "notes": "Card 15; cards 13 and 14 match half of the question."
+    },
+    {
+      "question_id": "Q46",
+      "question": "Explain the estimation procedure for meter readings",
+      "question_type": "ambiguous",
+      "expected_source_ids": [
+        "M2C-08",
+        "M2C-09"
+      ],
+      "also_relevant_source_ids": [],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-08",
+          "quote": "Explains estimation"
+        },
+        {
+          "source_id": "M2C-09",
+          "quote": "Deeper reference for estimation procedures"
+        }
+      ],
+      "notes": "Both estimation cards are acceptable; any is a hit."
+    },
+    {
+      "question_id": "Q47",
+      "question": "Overview of starting and ending utility service",
+      "question_type": "ambiguous",
+      "expected_source_ids": [
+        "M2C-02"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-03",
+        "M2C-04"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-02",
+          "quote": "customer service lifecycle around starting and ending utility service"
+        }
+      ],
+      "notes": "Card 02; cards 03 and 04 are the detailed halves."
+    },
+    {
+      "question_id": "Q48",
+      "question": "How are installment plans created?",
+      "question_type": "ambiguous",
+      "expected_source_ids": [
+        "M2C-24"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-23",
+        "M2C-25"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-24",
+          "quote": "creation of installment plans"
+        }
+      ],
+      "notes": "Card 24; cards 23 and 25 are in the same family."
+    },
+    {
+      "question_id": "Q49",
+      "question": "What is needed for final billing when a customer moves out?",
+      "question_type": "ambiguous",
+      "expected_source_ids": [
+        "M2C-04"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-02"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-04",
+          "quote": "final meter reading, final billing and downstream account effects"
+        }
+      ],
+      "notes": "Card 04; card 02 also mentions final billing."
+    },
+    {
+      "question_id": "Q50",
+      "question": "How does a collection agency get involved when receivables stay unpaid?",
+      "question_type": "ambiguous",
+      "expected_source_ids": [
+        "M2C-27",
+        "M2C-28"
+      ],
+      "also_relevant_source_ids": [
+        "M2C-26"
+      ],
+      "ambiguous": true,
+      "evidence": [
+        {
+          "source_id": "M2C-27",
+          "quote": "receivables handled by collection agencies"
+        },
+        {
+          "source_id": "M2C-28",
+          "quote": "external collection agencies"
+        }
+      ],
+      "notes": "Cards 27 and 28 concern collection agencies; any is a hit."
+    }
+  ]
+}

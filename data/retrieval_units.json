@@ -1,0 +1,1780 @@
+{
+  "schema_version": 1,
+  "strategy": "whole_document (Strategy A of data/chunk_candidates)",
+  "embedding_text_rule": "embedding_text = full_text minus the heading line and body of the sections `library_use` and `copyright_note`; all other sections are kept verbatim in their original order with their original separator whitespace; no text is rewritten, added or summarised; leading/trailing whitespace is stripped.",
+  "boilerplate_section_keys": [
+    "library_use",
+    "copyright_note"
+  ],
+  "source_corpus": {
+    "path": "data/source_corpus.json",
+    "file_sha256": "0ee5cb8bda192250a14acdde95617e15b71f6fd803847fe25bae9999ea7e9e76",
+    "content_fingerprint": "8eed668f4ac4cf951bd41df5ff94688abb7331bd05e283da1045abd1eb017cda",
+    "manifest_sha256": "08ad208c0187e935377c828faef36ec9fe077704cd580bb38004356f51b740b1"
+  },
+  "unit_count": 29,
+  "stats": {
+    "full_text_chars_total": 29674,
+    "embedding_text_chars_total": 14710,
+    "excluded_chars_total_incl_separators": 14964
+  },
+  "units": [
+    {
+      "retrieval_unit_id": "M2C-01",
+      "source_id": "M2C-01",
+      "source_number": 1,
+      "filename": "01_Utilities_Master_Data.pdf",
+      "title": "Utilities Master Data",
+      "category": "Master Data & Customer Lifecycle",
+      "embedding_text": "SAP Utilities M2C Source Reference 01\nUtilities Master Data\nCategory: Master Data & Customer Lifecycle\n\nWhat it covers\nFoundation source for Business Partner, Contract Account, Contract, Point of Delivery, Connection Object, Premise, Device Location, Installation and Device.\n\nMeter-to-Cash relevance\nUse this to establish SAP Utilities business and technical master-data relationships before teaching transactions.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 01\nUtilities Master Data\nCategory: Master Data & Customer Lifecycle\n\nWhat it covers\nFoundation source for Business Partner, Contract Account, Contract, Point of Delivery, Connection Object, Premise, Device Location, Installation and Device.\n\nMeter-to-Cash relevance\nUse this to establish SAP Utilities business and technical master-data relationships before teaching transactions.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "c4aecd08f56a9cfda1dd8b10914e341478bb2f76f68c2e6f669a7c31266fce40",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[01] Utilities Master Data (01_Utilities_Master_Data.pdf, sha256:c4aecd08f56a)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-01",
+        "pdf_filename": "01_Utilities_Master_Data.pdf",
+        "pdf_sha256": "c4aecd08f56a9cfda1dd8b10914e341478bb2f76f68c2e6f669a7c31266fce40",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-01#reference_line",
+          "M2C-01#title",
+          "M2C-01#category",
+          "M2C-01#what_it_covers",
+          "M2C-01#meter_to_cash_relevance",
+          "M2C-01#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-01#library_use",
+            "key": "library_use",
+            "char_start": 602,
+            "char_end": 879
+          },
+          {
+            "section_id": "M2C-01#copyright_note",
+            "key": "copyright_note",
+            "char_start": 881,
+            "char_end": 1116
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1116
+        ]
+      },
+      "embedding_text_sha256": "a28c77050cf2f0ea36b854bb53f089a755481b2636bdd0cc48fe554144cc75d3",
+      "full_text_sha256": "94bcdaaf0dcc2e3831e42288402c0226ba96a6a3ac776f75e475aeb66e8650eb",
+      "char_counts": {
+        "full_text": 1116,
+        "embedding_text": 600
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-02",
+      "source_id": "M2C-02",
+      "source_number": 2,
+      "filename": "02_Move_In_Out_Overview.pdf",
+      "title": "Move-In/Out Overview",
+      "category": "Master Data & Customer Lifecycle",
+      "embedding_text": "SAP Utilities M2C Source Reference 02\nMove-In/Out Overview\nCategory: Master Data & Customer Lifecycle\n\nWhat it covers\nOverview of the customer service lifecycle around starting and ending utility service.\n\nMeter-to-Cash relevance\nUseful for connecting customer/service setup to billing eligibility and final billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 02\nMove-In/Out Overview\nCategory: Master Data & Customer Lifecycle\n\nWhat it covers\nOverview of the customer service lifecycle around starting and ending utility service.\n\nMeter-to-Cash relevance\nUseful for connecting customer/service setup to billing eligibility and final billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "80c862abcf09508bd079014fb7ae1463d49dbe9e7901c5a59b2e781ad2620f04",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[02] Move-In/Out Overview (02_Move_In_Out_Overview.pdf, sha256:80c862abcf09)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-02",
+        "pdf_filename": "02_Move_In_Out_Overview.pdf",
+        "pdf_sha256": "80c862abcf09508bd079014fb7ae1463d49dbe9e7901c5a59b2e781ad2620f04",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-02#reference_line",
+          "M2C-02#title",
+          "M2C-02#category",
+          "M2C-02#what_it_covers",
+          "M2C-02#meter_to_cash_relevance",
+          "M2C-02#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-02#library_use",
+            "key": "library_use",
+            "char_start": 503,
+            "char_end": 780
+          },
+          {
+            "section_id": "M2C-02#copyright_note",
+            "key": "copyright_note",
+            "char_start": 782,
+            "char_end": 1017
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1017
+        ]
+      },
+      "embedding_text_sha256": "1bf00e793244d79cb9aabc77cf8c68a91cacd54b37d6a68467f5f7ceef37dd54",
+      "full_text_sha256": "084333fca0eea1824b4feb7f0b301935e8fd834b2feb15d9744c47e73be9b49e",
+      "char_counts": {
+        "full_text": 1017,
+        "embedding_text": 501
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-03",
+      "source_id": "M2C-03",
+      "source_number": 3,
+      "filename": "03_Move_In_Process.pdf",
+      "title": "Move-In Process",
+      "category": "Master Data & Customer Lifecycle",
+      "embedding_text": "SAP Utilities M2C Source Reference 03\nMove-In Process\nCategory: Master Data & Customer Lifecycle\n\nWhat it covers\nExplains the move-in process and creation of the customer-service relationship for a utility installation.\n\nMeter-to-Cash relevance\nUse for service-start reasoning and the transition from master data into billable service.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 03\nMove-In Process\nCategory: Master Data & Customer Lifecycle\n\nWhat it covers\nExplains the move-in process and creation of the customer-service relationship for a utility installation.\n\nMeter-to-Cash relevance\nUse for service-start reasoning and the transition from master data into billable service.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "a360a36d72d1c8bf0ac9de392ad28c9f4a976ea2b619f91723d0f2a5730a93f0",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[03] Move-In Process (03_Move_In_Process.pdf, sha256:a360a36d72d1)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-03",
+        "pdf_filename": "03_Move_In_Process.pdf",
+        "pdf_sha256": "a360a36d72d1c8bf0ac9de392ad28c9f4a976ea2b619f91723d0f2a5730a93f0",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-03#reference_line",
+          "M2C-03#title",
+          "M2C-03#category",
+          "M2C-03#what_it_covers",
+          "M2C-03#meter_to_cash_relevance",
+          "M2C-03#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-03#library_use",
+            "key": "library_use",
+            "char_start": 522,
+            "char_end": 799
+          },
+          {
+            "section_id": "M2C-03#copyright_note",
+            "key": "copyright_note",
+            "char_start": 801,
+            "char_end": 1036
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1036
+        ]
+      },
+      "embedding_text_sha256": "06e85e14a5812659a07704bd43190eb3ef53a1f216a3d2256af544b8e027e473",
+      "full_text_sha256": "0e245451fc23b699c648289f313e03a024087e3679a32ac866329f3ef9ba18e4",
+      "char_counts": {
+        "full_text": 1036,
+        "embedding_text": 520
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-04",
+      "source_id": "M2C-04",
+      "source_number": 4,
+      "filename": "04_Move_Out_Process.pdf",
+      "title": "Move-Out Process",
+      "category": "Master Data & Customer Lifecycle",
+      "embedding_text": "SAP Utilities M2C Source Reference 04\nMove-Out Process\nCategory: Master Data & Customer Lifecycle\n\nWhat it covers\nExplains termination of the customer-service relationship and related final processing.\n\nMeter-to-Cash relevance\nUse for service stop, final meter reading, final billing and downstream account effects.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 04\nMove-Out Process\nCategory: Master Data & Customer Lifecycle\n\nWhat it covers\nExplains termination of the customer-service relationship and related final processing.\n\nMeter-to-Cash relevance\nUse for service stop, final meter reading, final billing and downstream account effects.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "2f06b2544b60e7f8e8200d2935dc4975f9528effc756bdce1745e85459f96745",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[04] Move-Out Process (04_Move_Out_Process.pdf, sha256:2f06b2544b60)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-04",
+        "pdf_filename": "04_Move_Out_Process.pdf",
+        "pdf_sha256": "2f06b2544b60e7f8e8200d2935dc4975f9528effc756bdce1745e85459f96745",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-04#reference_line",
+          "M2C-04#title",
+          "M2C-04#category",
+          "M2C-04#what_it_covers",
+          "M2C-04#meter_to_cash_relevance",
+          "M2C-04#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-04#library_use",
+            "key": "library_use",
+            "char_start": 502,
+            "char_end": 779
+          },
+          {
+            "section_id": "M2C-04#copyright_note",
+            "key": "copyright_note",
+            "char_start": 781,
+            "char_end": 1016
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1016
+        ]
+      },
+      "embedding_text_sha256": "7f4111f08bd87d5025265777839a003c3049feaf1aaf3e4e4e237acebfb66c93",
+      "full_text_sha256": "7abcef30a9f8b1701a6ce43961a998cbdb61f4bb43ba4252d6b7d6dbab3a5546",
+      "char_counts": {
+        "full_text": 1016,
+        "embedding_text": 500
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-05",
+      "source_id": "M2C-05",
+      "source_number": 5,
+      "filename": "05_Device_Management_Overview.pdf",
+      "title": "Device Management Overview",
+      "category": "Device Management & Meter Reading",
+      "embedding_text": "SAP Utilities M2C Source Reference 05\nDevice Management Overview\nCategory: Device Management & Meter Reading\n\nWhat it covers\nParent topic for devices, technical installations, meter reading and related device processes.\n\nMeter-to-Cash relevance\nEstablishes how physical metering assets connect to the Meter-to-Cash chain.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 05\nDevice Management Overview\nCategory: Device Management & Meter Reading\n\nWhat it covers\nParent topic for devices, technical installations, meter reading and related device processes.\n\nMeter-to-Cash relevance\nEstablishes how physical metering assets connect to the Meter-to-Cash chain.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "34c7b911e61c2ded45ff0d86b179d24b56d1818a64ed989ea7f496ac557ef6d3",
+      "has_source_correction": true,
+      "source_correction": {
+        "type": "card_guide_correction",
+        "note": "SAP resolves the ORIGINAL card #5 URL (under 021b182b...) to guide 2ac7fe29... ('Device Management'); page 8990d053... is that guide's landing page / first TOC root. Guide A (021b182b) is NOT registered from this and nothing is inferred for topics 1, 13, 16.",
+        "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+        "resolved_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+        "evidence_kinds": [
+          "saved_response",
+          "user_reported_browser"
+        ],
+        "source_file": "data/topic_corrections.json",
+        "applied_to_content": false
+      },
+      "review_reasons": [],
+      "citation": "[05] Device Management Overview (05_Device_Management_Overview.pdf, sha256:34c7b911e61c)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-05",
+        "pdf_filename": "05_Device_Management_Overview.pdf",
+        "pdf_sha256": "34c7b911e61c2ded45ff0d86b179d24b56d1818a64ed989ea7f496ac557ef6d3",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-05#reference_line",
+          "M2C-05#title",
+          "M2C-05#category",
+          "M2C-05#what_it_covers",
+          "M2C-05#meter_to_cash_relevance",
+          "M2C-05#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-05#library_use",
+            "key": "library_use",
+            "char_start": 508,
+            "char_end": 785
+          },
+          {
+            "section_id": "M2C-05#copyright_note",
+            "key": "copyright_note",
+            "char_start": 787,
+            "char_end": 1022
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1022
+        ]
+      },
+      "embedding_text_sha256": "b14d2f9176ee1522d4212e583a47dff4ba5cd977693fefb26268ca506af5cec7",
+      "full_text_sha256": "a90b4dc0b9001c74ae91de25563b8adc36299c07366d5c1a06f6d8020e5ef94d",
+      "char_counts": {
+        "full_text": 1022,
+        "embedding_text": 506
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-06",
+      "source_id": "M2C-06",
+      "source_number": 6,
+      "filename": "06_Reading_Meters.pdf",
+      "title": "Reading Meters",
+      "category": "Device Management & Meter Reading",
+      "embedding_text": "SAP Utilities M2C Source Reference 06\nReading Meters\nCategory: Device Management & Meter Reading\n\nWhat it covers\nCovers meter-reading orders, meter-reading results, validation/correction and transfer of results toward billing.\n\nMeter-to-Cash relevance\nCore source for teaching meter-read lifecycle and the handoff from metering to billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 06\nReading Meters\nCategory: Device Management & Meter Reading\n\nWhat it covers\nCovers meter-reading orders, meter-reading results, validation/correction and transfer of results toward billing.\n\nMeter-to-Cash relevance\nCore source for teaching meter-read lifecycle and the handoff from metering to billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "7b2fbc621ab30b94c45acf3f5e93f13cd9706dc9126ef9640702072b8f0bc245",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[06] Reading Meters (06_Reading_Meters.pdf, sha256:7b2fbc621ab3)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-06",
+        "pdf_filename": "06_Reading_Meters.pdf",
+        "pdf_sha256": "7b2fbc621ab30b94c45acf3f5e93f13cd9706dc9126ef9640702072b8f0bc245",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-06#reference_line",
+          "M2C-06#title",
+          "M2C-06#category",
+          "M2C-06#what_it_covers",
+          "M2C-06#meter_to_cash_relevance",
+          "M2C-06#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-06#library_use",
+            "key": "library_use",
+            "char_start": 526,
+            "char_end": 803
+          },
+          {
+            "section_id": "M2C-06#copyright_note",
+            "key": "copyright_note",
+            "char_start": 805,
+            "char_end": 1040
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1040
+        ]
+      },
+      "embedding_text_sha256": "926d2d9b207eb0c9c27e83658263c08946276898632230eaac4b85e3e64f6cb1",
+      "full_text_sha256": "b6cfe71111f474d4762568fe7628d2a0834bfdfe9f87c1042ce804a4b2a59938",
+      "char_counts": {
+        "full_text": 1040,
+        "embedding_text": 524
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-07",
+      "source_id": "M2C-07",
+      "source_number": 7,
+      "filename": "07_Monitoring_Meter_Reading_Results.pdf",
+      "title": "Monitoring Meter Reading Results",
+      "category": "Device Management & Meter Reading",
+      "embedding_text": "SAP Utilities M2C Source Reference 07\nMonitoring Meter Reading Results\nCategory: Device Management & Meter Reading\n\nWhat it covers\nCovers operational monitoring of meter-reading results across business objects and organizational criteria.\n\nMeter-to-Cash relevance\nUseful for exception monitoring and support/troubleshooting scenarios.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
+      "full_text": "SAP Utilities M2C Source Reference 07\nMonitoring Meter Reading Results\nCategory: Device Management & Meter Reading\n\nWhat it covers\nCovers operational monitoring of meter-reading results across business objects and organizational criteria.\n\nMeter-to-Cash relevance\nUseful for exception monitoring and support/troubleshooting scenarios.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
+      "source_url_status": "ok",
+      "sha256": "1e5c1ca1c2b882afaa888bfb08170deebd6dc7dec8e8f2cadb3c65995ea37ffd",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[07] Monitoring Meter Reading Results (07_Monitoring_Meter_Reading_Results.pdf, sha256:1e5c1ca1c2b8)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-07",
+        "pdf_filename": "07_Monitoring_Meter_Reading_Results.pdf",
+        "pdf_sha256": "1e5c1ca1c2b882afaa888bfb08170deebd6dc7dec8e8f2cadb3c65995ea37ffd",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-07#reference_line",
+          "M2C-07#title",
+          "M2C-07#category",
+          "M2C-07#what_it_covers",
+          "M2C-07#meter_to_cash_relevance",
+          "M2C-07#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-07#library_use",
+            "key": "library_use",
+            "char_start": 521,
+            "char_end": 798
+          },
+          {
+            "section_id": "M2C-07#copyright_note",
+            "key": "copyright_note",
+            "char_start": 800,
+            "char_end": 1035
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1035
+        ]
+      },
+      "embedding_text_sha256": "073411a1eb32c3a79223e650e79ad343d50fcc4afc9733eb1bbae038b5bda8c0",
+      "full_text_sha256": "105937f25c148facdb9f2955611b831c61e71e60e185951ad34f83859e7dbfd4",
+      "char_counts": {
+        "full_text": 1035,
+        "embedding_text": 519
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-08",
+      "source_id": "M2C-08",
+      "source_number": 8,
+      "filename": "08_Meter_Reading_Estimation.pdf",
+      "title": "Meter Reading Estimation",
+      "category": "Device Management & Meter Reading",
+      "embedding_text": "SAP Utilities M2C Source Reference 08\nMeter Reading Estimation\nCategory: Device Management & Meter Reading\n\nWhat it covers\nExplains estimation when readings are missing, unavailable or unsuitable for direct use.\n\nMeter-to-Cash relevance\nImportant for estimated-bill and catch-up-bill reasoning.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 08\nMeter Reading Estimation\nCategory: Device Management & Meter Reading\n\nWhat it covers\nExplains estimation when readings are missing, unavailable or unsuitable for direct use.\n\nMeter-to-Cash relevance\nImportant for estimated-bill and catch-up-bill reasoning.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "602af6717cf73977c8e1d01f0bccad5d634856df54bf42e26af8bffa3da40532",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[08] Meter Reading Estimation (08_Meter_Reading_Estimation.pdf, sha256:602af6717cf7)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-08",
+        "pdf_filename": "08_Meter_Reading_Estimation.pdf",
+        "pdf_sha256": "602af6717cf73977c8e1d01f0bccad5d634856df54bf42e26af8bffa3da40532",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-08#reference_line",
+          "M2C-08#title",
+          "M2C-08#category",
+          "M2C-08#what_it_covers",
+          "M2C-08#meter_to_cash_relevance",
+          "M2C-08#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-08#library_use",
+            "key": "library_use",
+            "char_start": 481,
+            "char_end": 758
+          },
+          {
+            "section_id": "M2C-08#copyright_note",
+            "key": "copyright_note",
+            "char_start": 760,
+            "char_end": 995
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          995
+        ]
+      },
+      "embedding_text_sha256": "d6195786e9432d7aa301e8a0f5d0807d891a2c1febb2a32bd3d2994057164dcd",
+      "full_text_sha256": "59243902da2f308700469774dff649f8b31193106e37fd6f2ddd226576a48fbd",
+      "char_counts": {
+        "full_text": 995,
+        "embedding_text": 479
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-09",
+      "source_id": "M2C-09",
+      "source_number": 9,
+      "filename": "09_Estimation_Procedure_Details.pdf",
+      "title": "Estimation Procedure Details",
+      "category": "Device Management & Meter Reading",
+      "embedding_text": "SAP Utilities M2C Source Reference 09\nEstimation Procedure Details\nCategory: Device Management & Meter Reading\n\nWhat it covers\nDeeper reference for estimation procedures such as extrapolation/interpolation and use in meter-reading/billing contexts.\n\nMeter-to-Cash relevance\nUse for advanced estimation logic and validation scenarios.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html",
+      "full_text": "SAP Utilities M2C Source Reference 09\nEstimation Procedure Details\nCategory: Device Management & Meter Reading\n\nWhat it covers\nDeeper reference for estimation procedures such as extrapolation/interpolation and use in meter-reading/billing contexts.\n\nMeter-to-Cash relevance\nUse for advanced estimation logic and validation scenarios.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html",
+      "source_url_status": "ok",
+      "sha256": "e10bdb4dd6e295b4dd7d8be40193f30ba5f05eea41ccd77a73059cea36fc24db",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[09] Estimation Procedure Details (09_Estimation_Procedure_Details.pdf, sha256:e10bdb4dd6e2)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-09",
+        "pdf_filename": "09_Estimation_Procedure_Details.pdf",
+        "pdf_sha256": "e10bdb4dd6e295b4dd7d8be40193f30ba5f05eea41ccd77a73059cea36fc24db",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-09#reference_line",
+          "M2C-09#title",
+          "M2C-09#category",
+          "M2C-09#what_it_covers",
+          "M2C-09#meter_to_cash_relevance",
+          "M2C-09#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-09#library_use",
+            "key": "library_use",
+            "char_start": 520,
+            "char_end": 797
+          },
+          {
+            "section_id": "M2C-09#copyright_note",
+            "key": "copyright_note",
+            "char_start": 799,
+            "char_end": 1034
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1034
+        ]
+      },
+      "embedding_text_sha256": "6a6d39def0e9c7bba66f96399ac047955520500aa840a32786a8fe7d03523ae8",
+      "full_text_sha256": "1fcf2cd682c456bfb99fdeceedda5d53a7a0d92135858896257418a70433c8e2",
+      "char_counts": {
+        "full_text": 1034,
+        "embedding_text": 518
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-10",
+      "source_id": "M2C-10",
+      "source_number": 10,
+      "filename": "10_Meter_Reading_Data_During_Move_In.pdf",
+      "title": "Meter Reading Data During Move-In",
+      "category": "Device Management & Meter Reading",
+      "embedding_text": "SAP Utilities M2C Source Reference 10\nMeter Reading Data During Move-In\nCategory: Device Management & Meter Reading\n\nWhat it covers\nShows how meter-reading data participates in the move-in process.\n\nMeter-to-Cash relevance\nGood cross-process example connecting customer lifecycle, metering and billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 10\nMeter Reading Data During Move-In\nCategory: Device Management & Meter Reading\n\nWhat it covers\nShows how meter-reading data participates in the move-in process.\n\nMeter-to-Cash relevance\nGood cross-process example connecting customer lifecycle, metering and billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "a0acaa1f1a625505bae741d5ac8d04960c386914f97a2382a6ba7b3185133c9f",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[10] Meter Reading Data During Move-In (10_Meter_Reading_Data_During_Move_In.pdf, sha256:a0acaa1f1a62)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-10",
+        "pdf_filename": "10_Meter_Reading_Data_During_Move_In.pdf",
+        "pdf_sha256": "a0acaa1f1a625505bae741d5ac8d04960c386914f97a2382a6ba7b3185133c9f",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-10#reference_line",
+          "M2C-10#title",
+          "M2C-10#category",
+          "M2C-10#what_it_covers",
+          "M2C-10#meter_to_cash_relevance",
+          "M2C-10#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-10#library_use",
+            "key": "library_use",
+            "char_start": 489,
+            "char_end": 766
+          },
+          {
+            "section_id": "M2C-10#copyright_note",
+            "key": "copyright_note",
+            "char_start": 768,
+            "char_end": 1003
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1003
+        ]
+      },
+      "embedding_text_sha256": "ecfbaadb56b174253553f2e561558c2935c8e910844aaede9b490389bea5b11d",
+      "full_text_sha256": "a71426f407b0e1367653445a593c153319b1824da21b2f818c879e920c542f47",
+      "char_counts": {
+        "full_text": 1003,
+        "embedding_text": 487
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-11",
+      "source_id": "M2C-11",
+      "source_number": 11,
+      "filename": "11_SAP_Utilities_Billing_Procedure.pdf",
+      "title": "SAP Utilities Billing Procedure",
+      "category": "Billing",
+      "embedding_text": "SAP Utilities M2C Source Reference 11\nSAP Utilities Billing Procedure\nCategory: Billing\n\nWhat it covers\nExplains the billing procedure from consumption/profile data through rate/schema calculation to billing results.\n\nMeter-to-Cash relevance\nPrimary business-process source for SAP Utilities billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 11\nSAP Utilities Billing Procedure\nCategory: Billing\n\nWhat it covers\nExplains the billing procedure from consumption/profile data through rate/schema calculation to billing results.\n\nMeter-to-Cash relevance\nPrimary business-process source for SAP Utilities billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "b2381818bd893be3217aa562e94639741223cbb98244c008bd7e77432e009579",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[11] SAP Utilities Billing Procedure (11_SAP_Utilities_Billing_Procedure.pdf, sha256:b2381818bd89)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-11",
+        "pdf_filename": "11_SAP_Utilities_Billing_Procedure.pdf",
+        "pdf_sha256": "b2381818bd893be3217aa562e94639741223cbb98244c008bd7e77432e009579",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-11#reference_line",
+          "M2C-11#title",
+          "M2C-11#category",
+          "M2C-11#what_it_covers",
+          "M2C-11#meter_to_cash_relevance",
+          "M2C-11#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-11#library_use",
+            "key": "library_use",
+            "char_start": 487,
+            "char_end": 764
+          },
+          {
+            "section_id": "M2C-11#copyright_note",
+            "key": "copyright_note",
+            "char_start": 766,
+            "char_end": 1001
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1001
+        ]
+      },
+      "embedding_text_sha256": "251ff937cea979efd17901a4c529d40a05f32ff87b8cadb8b713f22da6a74c15",
+      "full_text_sha256": "ddd16c2ea2d30471a64727fc62a0b08a40248e1e3e0fba07d5f9b59cac76d1b2",
+      "char_counts": {
+        "full_text": 1001,
+        "embedding_text": 485
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-12",
+      "source_id": "M2C-12",
+      "source_number": 12,
+      "filename": "12_Automatic_Billing.pdf",
+      "title": "Automatic Billing",
+      "category": "Billing",
+      "embedding_text": "SAP Utilities M2C Source Reference 12\nAutomatic Billing\nCategory: Billing\n\nWhat it covers\nDescribes automatic billing and the master/configuration elements participating in rate calculation.\n\nMeter-to-Cash relevance\nUseful for understanding installation, rate type, schema, operand, price and billing relationships.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 12\nAutomatic Billing\nCategory: Billing\n\nWhat it covers\nDescribes automatic billing and the master/configuration elements participating in rate calculation.\n\nMeter-to-Cash relevance\nUseful for understanding installation, rate type, schema, operand, price and billing relationships.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "f8e3ce1a07ed48b0f3b84fe4f323177a58f0ff85c07c34e2f71b980f239cb628",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[12] Automatic Billing (12_Automatic_Billing.pdf, sha256:f8e3ce1a07ed)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-12",
+        "pdf_filename": "12_Automatic_Billing.pdf",
+        "pdf_sha256": "f8e3ce1a07ed48b0f3b84fe4f323177a58f0ff85c07c34e2f71b980f239cb628",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-12#reference_line",
+          "M2C-12#title",
+          "M2C-12#category",
+          "M2C-12#what_it_covers",
+          "M2C-12#meter_to_cash_relevance",
+          "M2C-12#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-12#library_use",
+            "key": "library_use",
+            "char_start": 502,
+            "char_end": 779
+          },
+          {
+            "section_id": "M2C-12#copyright_note",
+            "key": "copyright_note",
+            "char_start": 781,
+            "char_end": 1016
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1016
+        ]
+      },
+      "embedding_text_sha256": "f8112be4c4422fe18e5f2209dbc1456bbc65aaf680eafd01e41ec6bd9b1e82e3",
+      "full_text_sha256": "947226b8683bc8f2c47292b39ef7048711d092a7832cd07c5367c2e398e10b35",
+      "char_counts": {
+        "full_text": 1016,
+        "embedding_text": 500
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-13",
+      "source_id": "M2C-13",
+      "source_number": 13,
+      "filename": "13_Budget_Billing_Plan.pdf",
+      "title": "Budget Billing Plan",
+      "category": "Billing",
+      "embedding_text": "SAP Utilities M2C Source Reference 13\nBudget Billing Plan\nCategory: Billing\n\nWhat it covers\nReference for utility budget billing plans and periodic payment concepts.\n\nMeter-to-Cash relevance\nImportant because interim/budget amounts can affect the customer balance independently of final consumption billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
+      "full_text": "SAP Utilities M2C Source Reference 13\nBudget Billing Plan\nCategory: Billing\n\nWhat it covers\nReference for utility budget billing plans and periodic payment concepts.\n\nMeter-to-Cash relevance\nImportant because interim/budget amounts can affect the customer balance independently of final consumption billing.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
+      "source_url_status": "ok",
+      "sha256": "679da0708a9e35159e40aef0e4bafaa6b97c925751f6d7726a37fc37a6c25a3c",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[13] Budget Billing Plan (13_Budget_Billing_Plan.pdf, sha256:679da0708a9e)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-13",
+        "pdf_filename": "13_Budget_Billing_Plan.pdf",
+        "pdf_sha256": "679da0708a9e35159e40aef0e4bafaa6b97c925751f6d7726a37fc37a6c25a3c",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-13#reference_line",
+          "M2C-13#title",
+          "M2C-13#category",
+          "M2C-13#what_it_covers",
+          "M2C-13#meter_to_cash_relevance",
+          "M2C-13#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-13#library_use",
+            "key": "library_use",
+            "char_start": 494,
+            "char_end": 771
+          },
+          {
+            "section_id": "M2C-13#copyright_note",
+            "key": "copyright_note",
+            "char_start": 773,
+            "char_end": 1008
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1008
+        ]
+      },
+      "embedding_text_sha256": "431d5354a68c0bce9c2a18e6f5ee70284ce50ca193054f9b1c583ccd4697ac8c",
+      "full_text_sha256": "40a536459824f10248968c2e9e66a26376e11b8c43fb9b431ea57c784b384edd",
+      "char_counts": {
+        "full_text": 1008,
+        "embedding_text": 492
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-14",
+      "source_id": "M2C-14",
+      "source_number": 14,
+      "filename": "14_SAP_Utilities_Invoicing_Procedure.pdf",
+      "title": "SAP Utilities Invoicing Procedure",
+      "category": "Invoicing",
+      "embedding_text": "SAP Utilities M2C Source Reference 14\nSAP Utilities Invoicing Procedure\nCategory: Invoicing\n\nWhat it covers\nExplains how billing results become invoices, print documents and FI-CA postings.\n\nMeter-to-Cash relevance\nCritical for distinguishing billing document, invoicing result, customer bill and FI-CA document.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 14\nSAP Utilities Invoicing Procedure\nCategory: Invoicing\n\nWhat it covers\nExplains how billing results become invoices, print documents and FI-CA postings.\n\nMeter-to-Cash relevance\nCritical for distinguishing billing document, invoicing result, customer bill and FI-CA document.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "needs_review",
+      "source_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+      "source_url_status": "needs_review",
+      "sha256": "ff53f87e163f55f3a5807fc9ababbdb157e0ce28cf278cf433552b6b1e74b8d1",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [
+        "URL: product segment 'sap_s4hana_on-premise' differs from 'SAP_S4HANA_ON-PREMISE' used by the other cards"
+      ],
+      "citation": "[14] SAP Utilities Invoicing Procedure (14_SAP_Utilities_Invoicing_Procedure.pdf, sha256:ff53f87e163f)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-14",
+        "pdf_filename": "14_SAP_Utilities_Invoicing_Procedure.pdf",
+        "pdf_sha256": "ff53f87e163f55f3a5807fc9ababbdb157e0ce28cf278cf433552b6b1e74b8d1",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-14#reference_line",
+          "M2C-14#title",
+          "M2C-14#category",
+          "M2C-14#what_it_covers",
+          "M2C-14#meter_to_cash_relevance",
+          "M2C-14#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-14#library_use",
+            "key": "library_use",
+            "char_start": 499,
+            "char_end": 776
+          },
+          {
+            "section_id": "M2C-14#copyright_note",
+            "key": "copyright_note",
+            "char_start": 778,
+            "char_end": 1013
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1013
+        ]
+      },
+      "embedding_text_sha256": "c2c6eaeb93fd1f2ac605932c8558681ed59401bdfa5ea185c247642fc2436d46",
+      "full_text_sha256": "d045836c44bc434ae91dc64ff3222b5aa046a52ffe561aa2773fc7c89756ad8b",
+      "char_counts": {
+        "full_text": 1013,
+        "embedding_text": 497
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-15",
+      "source_id": "M2C-15",
+      "source_number": 15,
+      "filename": "15_Processing_Budget_Billing_Plans.pdf",
+      "title": "Processing Budget Billing Plans",
+      "category": "Invoicing",
+      "embedding_text": "SAP Utilities M2C Source Reference 15\nProcessing Budget Billing Plans\nCategory: Invoicing\n\nWhat it covers\nExplains treatment of budget billing plans in the invoicing process.\n\nMeter-to-Cash relevance\nUse to connect budget billing with periodic invoicing and reconciliation.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 15\nProcessing Budget Billing Plans\nCategory: Invoicing\n\nWhat it covers\nExplains treatment of budget billing plans in the invoicing process.\n\nMeter-to-Cash relevance\nUse to connect budget billing with periodic invoicing and reconciliation.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "ac9f2c91a9064e47fbd4983278f92a6f7498bac863a98c676998228cd1f162f5",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[15] Processing Budget Billing Plans (15_Processing_Budget_Billing_Plans.pdf, sha256:ac9f2c91a906)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-15",
+        "pdf_filename": "15_Processing_Budget_Billing_Plans.pdf",
+        "pdf_sha256": "ac9f2c91a9064e47fbd4983278f92a6f7498bac863a98c676998228cd1f162f5",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-15#reference_line",
+          "M2C-15#title",
+          "M2C-15#category",
+          "M2C-15#what_it_covers",
+          "M2C-15#meter_to_cash_relevance",
+          "M2C-15#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-15#library_use",
+            "key": "library_use",
+            "char_start": 460,
+            "char_end": 737
+          },
+          {
+            "section_id": "M2C-15#copyright_note",
+            "key": "copyright_note",
+            "char_start": 739,
+            "char_end": 974
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          974
+        ]
+      },
+      "embedding_text_sha256": "31a30b0c0df02d53a2bcee21420c977024cc4618ebb068d8c0c26cb0e15dc805",
+      "full_text_sha256": "2ff79b9ddd971a38dde5f79237933e8bde3e6a6500735886f92ac41948e53737",
+      "char_counts": {
+        "full_text": 974,
+        "embedding_text": 458
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-16",
+      "source_id": "M2C-16",
+      "source_number": 16,
+      "filename": "16_Periodic_Billing_and_Invoicing_Analysis.pdf",
+      "title": "Periodic Billing and Invoicing Analysis",
+      "category": "Invoicing",
+      "embedding_text": "SAP Utilities M2C Source Reference 16\nPeriodic Billing and Invoicing Analysis\nCategory: Invoicing\n\nWhat it covers\nModern analytical view of periodic billing/invoicing execution and status.\n\nMeter-to-Cash relevance\nUseful for operational monitoring, KPIs and exception-management use cases.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
+      "full_text": "SAP Utilities M2C Source Reference 16\nPeriodic Billing and Invoicing Analysis\nCategory: Invoicing\n\nWhat it covers\nModern analytical view of periodic billing/invoicing execution and status.\n\nMeter-to-Cash relevance\nUseful for operational monitoring, KPIs and exception-management use cases.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
+      "source_url_status": "ok",
+      "sha256": "5c91543689208443f5f2bedb19a5584d31ac2400b5c3ee5db569ba3fc2d51232",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[16] Periodic Billing and Invoicing Analysis (16_Periodic_Billing_and_Invoicing_Analysis.pdf, sha256:5c9154368920)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-16",
+        "pdf_filename": "16_Periodic_Billing_and_Invoicing_Analysis.pdf",
+        "pdf_sha256": "5c91543689208443f5f2bedb19a5584d31ac2400b5c3ee5db569ba3fc2d51232",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-16#reference_line",
+          "M2C-16#title",
+          "M2C-16#category",
+          "M2C-16#what_it_covers",
+          "M2C-16#meter_to_cash_relevance",
+          "M2C-16#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-16#library_use",
+            "key": "library_use",
+            "char_start": 476,
+            "char_end": 753
+          },
+          {
+            "section_id": "M2C-16#copyright_note",
+            "key": "copyright_note",
+            "char_start": 755,
+            "char_end": 990
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          990
+        ]
+      },
+      "embedding_text_sha256": "dc56ec5773fd75fc8a25566285760d75145d90636cad29596b1c6ee42103f0a9",
+      "full_text_sha256": "bb93f9bea77caf7486956066b51ea7e7292b9170c58ed2f191054a6d7fcba1f9",
+      "char_counts": {
+        "full_text": 990,
+        "embedding_text": 474
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-17",
+      "source_id": "M2C-17",
+      "source_number": 17,
+      "filename": "17_Contract_Accounts_Overview.pdf",
+      "title": "Contract Accounts Overview",
+      "category": "FI-CA / Contract Accounting",
+      "embedding_text": "SAP Utilities M2C Source Reference 17\nContract Accounts Overview\nCategory: FI-CA / Contract Accounting\n\nWhat it covers\nFoundation reference for contract accounts and their role in subledger processing.\n\nMeter-to-Cash relevance\nUse to connect utility invoicing to receivables, payments and dunning.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 17\nContract Accounts Overview\nCategory: FI-CA / Contract Accounting\n\nWhat it covers\nFoundation reference for contract accounts and their role in subledger processing.\n\nMeter-to-Cash relevance\nUse to connect utility invoicing to receivables, payments and dunning.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "0b07f58bc21c42dd9380e5ff0362c3cc609afa7e92fd890b55a469ebd29eb5e1",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[17] Contract Accounts Overview (17_Contract_Accounts_Overview.pdf, sha256:0b07f58bc21c)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-17",
+        "pdf_filename": "17_Contract_Accounts_Overview.pdf",
+        "pdf_sha256": "0b07f58bc21c42dd9380e5ff0362c3cc609afa7e92fd890b55a469ebd29eb5e1",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-17#reference_line",
+          "M2C-17#title",
+          "M2C-17#category",
+          "M2C-17#what_it_covers",
+          "M2C-17#meter_to_cash_relevance",
+          "M2C-17#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-17#library_use",
+            "key": "library_use",
+            "char_start": 484,
+            "char_end": 761
+          },
+          {
+            "section_id": "M2C-17#copyright_note",
+            "key": "copyright_note",
+            "char_start": 763,
+            "char_end": 998
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          998
+        ]
+      },
+      "embedding_text_sha256": "0cf060651bb077de3acf1d6ebb807ab18ae90c5b3b7190ddef7e5d1cf34ce510",
+      "full_text_sha256": "7f3d1a7b2aeb58fcd04fb9dac8b78abf32a7be71541390d81d2cb20bb5accf92",
+      "char_counts": {
+        "full_text": 998,
+        "embedding_text": 482
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-18",
+      "source_id": "M2C-18",
+      "source_number": 18,
+      "filename": "18_Contract_Account_Business_Object.pdf",
+      "title": "Contract Account Business Object",
+      "category": "FI-CA / Contract Accounting",
+      "embedding_text": "SAP Utilities M2C Source Reference 18\nContract Account Business Object\nCategory: FI-CA / Contract Accounting\n\nWhat it covers\nCurrent FI-CA definition of the contract account and its control role for postings, payments and dunning.\n\nMeter-to-Cash relevance\nImportant for teaching Business Partner/Contract Account financial relationships.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+      "full_text": "SAP Utilities M2C Source Reference 18\nContract Account Business Object\nCategory: FI-CA / Contract Accounting\n\nWhat it covers\nCurrent FI-CA definition of the contract account and its control role for postings, payments and dunning.\n\nMeter-to-Cash relevance\nImportant for teaching Business Partner/Contract Account financial relationships.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "needs_review",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+      "source_url_status": "needs_review",
+      "sha256": "36b4c4ac10ac684edbf63899161d03fb64f172e876aa53b3ca27229af1881203",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [
+        "URL: query string '?version=2025.001' present (not on most cards; version pin to be confirmed)"
+      ],
+      "citation": "[18] Contract Account Business Object (18_Contract_Account_Business_Object.pdf, sha256:36b4c4ac10ac)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-18",
+        "pdf_filename": "18_Contract_Account_Business_Object.pdf",
+        "pdf_sha256": "36b4c4ac10ac684edbf63899161d03fb64f172e876aa53b3ca27229af1881203",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-18#reference_line",
+          "M2C-18#title",
+          "M2C-18#category",
+          "M2C-18#what_it_covers",
+          "M2C-18#meter_to_cash_relevance",
+          "M2C-18#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-18#library_use",
+            "key": "library_use",
+            "char_start": 541,
+            "char_end": 818
+          },
+          {
+            "section_id": "M2C-18#copyright_note",
+            "key": "copyright_note",
+            "char_start": 820,
+            "char_end": 1055
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1055
+        ]
+      },
+      "embedding_text_sha256": "035d35e1ee4f7a7b078a2a1695621e058f70c86639061c71678e4309097d1a7c",
+      "full_text_sha256": "356df9d6cb85bba088f6ab3423e491a0bc50eb0ce6bf77fa4eb35207f6a976b1",
+      "char_counts": {
+        "full_text": 1055,
+        "embedding_text": 539
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-19",
+      "source_id": "M2C-19",
+      "source_number": 19,
+      "filename": "19_Analyze_Incoming_Payments.pdf",
+      "title": "Analyze Incoming Payments",
+      "category": "Payments & Clearing",
+      "embedding_text": "SAP Utilities M2C Source Reference 19\nAnalyze Incoming Payments\nCategory: Payments & Clearing\n\nWhat it covers\nCurrent functionality for analysis of incoming payments and payment clarification.\n\nMeter-to-Cash relevance\nUseful for operations, exception management and payment-analysis scenarios.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html",
+      "full_text": "SAP Utilities M2C Source Reference 19\nAnalyze Incoming Payments\nCategory: Payments & Clearing\n\nWhat it covers\nCurrent functionality for analysis of incoming payments and payment clarification.\n\nMeter-to-Cash relevance\nUseful for operations, exception management and payment-analysis scenarios.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html",
+      "source_url_status": "ok",
+      "sha256": "eb1e19ef4d803f4198719e94e0fb23fb5c7166240eafec145f046b4530f6877b",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[19] Analyze Incoming Payments (19_Analyze_Incoming_Payments.pdf, sha256:eb1e19ef4d80)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-19",
+        "pdf_filename": "19_Analyze_Incoming_Payments.pdf",
+        "pdf_sha256": "eb1e19ef4d803f4198719e94e0fb23fb5c7166240eafec145f046b4530f6877b",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-19#reference_line",
+          "M2C-19#title",
+          "M2C-19#category",
+          "M2C-19#what_it_covers",
+          "M2C-19#meter_to_cash_relevance",
+          "M2C-19#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-19#library_use",
+            "key": "library_use",
+            "char_start": 480,
+            "char_end": 757
+          },
+          {
+            "section_id": "M2C-19#copyright_note",
+            "key": "copyright_note",
+            "char_start": 759,
+            "char_end": 994
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          994
+        ]
+      },
+      "embedding_text_sha256": "7eea13bd761e7ff6c9bae26552f793b46e682baab0d148276806a5ef998a9596",
+      "full_text_sha256": "206a258e7173167c0b1fdec0c57b8a3672d3c2deea48332c879e3ad1bc464cc6",
+      "char_counts": {
+        "full_text": 994,
+        "embedding_text": 478
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-20",
+      "source_id": "M2C-20",
+      "source_number": 20,
+      "filename": "20_Clearing_Control_in_Incoming_Payments.pdf",
+      "title": "Clearing Control in Incoming Payments",
+      "category": "Payments & Clearing",
+      "embedding_text": "SAP Utilities M2C Source Reference 20\nClearing Control in Incoming Payments\nCategory: Payments & Clearing\n\nWhat it covers\nExplains how incoming-payment amounts are assigned to open items using FI-CA clearing control.\n\nMeter-to-Cash relevance\nEssential source for teaching that payment receipt and open-item clearing are distinct steps.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
+      "full_text": "SAP Utilities M2C Source Reference 20\nClearing Control in Incoming Payments\nCategory: Payments & Clearing\n\nWhat it covers\nExplains how incoming-payment amounts are assigned to open items using FI-CA clearing control.\n\nMeter-to-Cash relevance\nEssential source for teaching that payment receipt and open-item clearing are distinct steps.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
+      "source_url_status": "ok",
+      "sha256": "9d03fe95450dd7cc0289d4af9c50ea0ce131d7243cf5690fb84d177685c32199",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[20] Clearing Control in Incoming Payments (20_Clearing_Control_in_Incoming_Payments.pdf, sha256:9d03fe95450d)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-20",
+        "pdf_filename": "20_Clearing_Control_in_Incoming_Payments.pdf",
+        "pdf_sha256": "9d03fe95450dd7cc0289d4af9c50ea0ce131d7243cf5690fb84d177685c32199",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-20#reference_line",
+          "M2C-20#title",
+          "M2C-20#category",
+          "M2C-20#what_it_covers",
+          "M2C-20#meter_to_cash_relevance",
+          "M2C-20#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-20#library_use",
+            "key": "library_use",
+            "char_start": 522,
+            "char_end": 799
+          },
+          {
+            "section_id": "M2C-20#copyright_note",
+            "key": "copyright_note",
+            "char_start": 801,
+            "char_end": 1036
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1036
+        ]
+      },
+      "embedding_text_sha256": "f2d73fcc559361b685c45e228b84266d476552e8f0d3dd2113f9506ae4bca012",
+      "full_text_sha256": "8abf11403d59ad3eb4c284dfc64ae59ecbb04ad008ee418b256012de3979a1a0",
+      "char_counts": {
+        "full_text": 1036,
+        "embedding_text": 520
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-21",
+      "source_id": "M2C-21",
+      "source_number": 21,
+      "filename": "21_Clearing_Types.pdf",
+      "title": "Clearing Types",
+      "category": "Payments & Clearing",
+      "embedding_text": "SAP Utilities M2C Source Reference 21\nClearing Types\nCategory: Payments & Clearing\n\nWhat it covers\nReference for clearing types used across FI-CA processes.\n\nMeter-to-Cash relevance\nUseful for differentiating payment-lot, cash-desk, account-maintenance and payment-run clearing contexts.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
+      "full_text": "SAP Utilities M2C Source Reference 21\nClearing Types\nCategory: Payments & Clearing\n\nWhat it covers\nReference for clearing types used across FI-CA processes.\n\nMeter-to-Cash relevance\nUseful for differentiating payment-lot, cash-desk, account-maintenance and payment-run clearing contexts.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
+      "source_url_status": "ok",
+      "sha256": "66173bede3f79219fbd8b75ca75443c782370f9e5cb7483d4c867dbbaaee6c07",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[21] Clearing Types (21_Clearing_Types.pdf, sha256:66173bede3f7)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-21",
+        "pdf_filename": "21_Clearing_Types.pdf",
+        "pdf_sha256": "66173bede3f79219fbd8b75ca75443c782370f9e5cb7483d4c867dbbaaee6c07",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-21#reference_line",
+          "M2C-21#title",
+          "M2C-21#category",
+          "M2C-21#what_it_covers",
+          "M2C-21#meter_to_cash_relevance",
+          "M2C-21#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-21#library_use",
+            "key": "library_use",
+            "char_start": 474,
+            "char_end": 751
+          },
+          {
+            "section_id": "M2C-21#copyright_note",
+            "key": "copyright_note",
+            "char_start": 753,
+            "char_end": 988
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          988
+        ]
+      },
+      "embedding_text_sha256": "96a1937430b0eaa8096c17dbf9c4c1b26927ecaeb694d3104db72beea3ddcc91",
+      "full_text_sha256": "cb1928c8bf4a04f913b10b181f5f5a164c3f28eb694c447bec25b6cbe1e30a2c",
+      "char_counts": {
+        "full_text": 988,
+        "embedding_text": 472
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-22",
+      "source_id": "M2C-22",
+      "source_number": 22,
+      "filename": "22_Processing_Incoming_Payments_from_External_Cash_Desks.pdf",
+      "title": "Processing Incoming Payments from External Cash Desks",
+      "category": "Payments & Clearing",
+      "embedding_text": "SAP Utilities M2C Source Reference 22\nProcessing Incoming Payments from External Cash Desks\nCategory: Payments & Clearing\n\nWhat it covers\nExplains integration of incoming-payment notifications from external cash desks into FI-CA.\n\nMeter-to-Cash relevance\nRelevant to real-time external payment and reversal scenarios.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 22\nProcessing Incoming Payments from External Cash Desks\nCategory: Payments & Clearing\n\nWhat it covers\nExplains integration of incoming-payment notifications from external cash desks into FI-CA.\n\nMeter-to-Cash relevance\nRelevant to real-time external payment and reversal scenarios.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "3168dba2c1c0a49d9796c6595940e88f0b81193d319d4c5a22fb189dc80fff2d",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[22] Processing Incoming Payments from External Cash Desks (22_Processing_Incoming_Payments_from_External_Cash_Desks.pdf, sha256:3168dba2c1c0)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-22",
+        "pdf_filename": "22_Processing_Incoming_Payments_from_External_Cash_Desks.pdf",
+        "pdf_sha256": "3168dba2c1c0a49d9796c6595940e88f0b81193d319d4c5a22fb189dc80fff2d",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-22#reference_line",
+          "M2C-22#title",
+          "M2C-22#category",
+          "M2C-22#what_it_covers",
+          "M2C-22#meter_to_cash_relevance",
+          "M2C-22#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-22#library_use",
+            "key": "library_use",
+            "char_start": 504,
+            "char_end": 781
+          },
+          {
+            "section_id": "M2C-22#copyright_note",
+            "key": "copyright_note",
+            "char_start": 783,
+            "char_end": 1018
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1018
+        ]
+      },
+      "embedding_text_sha256": "fe1f5dfac5c7570b4703279caebcff7c46b63deaba715ffdb085d1d8253b69b7",
+      "full_text_sha256": "bd1985171fc9094d1af1c5a0035eb11e47e8078be3aca21e5259fea67202ae93",
+      "char_counts": {
+        "full_text": 1018,
+        "embedding_text": 502
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-23",
+      "source_id": "M2C-23",
+      "source_number": 23,
+      "filename": "23_Installment_Plan_Overview.pdf",
+      "title": "Installment Plan Overview",
+      "category": "Payment Arrangements / Installment Plans",
+      "embedding_text": "SAP Utilities M2C Source Reference 23\nInstallment Plan Overview\nCategory: Payment Arrangements / Installment Plans\n\nWhat it covers\nDefines installment plans and how source receivables are redistributed into scheduled installment receivables.\n\nMeter-to-Cash relevance\nCore source for debt-arrangement concepts and future due dates.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+      "full_text": "SAP Utilities M2C Source Reference 23\nInstallment Plan Overview\nCategory: Payment Arrangements / Installment Plans\n\nWhat it covers\nDefines installment plans and how source receivables are redistributed into scheduled installment receivables.\n\nMeter-to-Cash relevance\nCore source for debt-arrangement concepts and future due dates.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "needs_review",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+      "source_url_status": "needs_review",
+      "sha256": "5fc82f433e51e612e5fe78e47d1cfb47c5d40fc2bfecb00ac8086009193a9d3b",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [
+        "URL: query string '?version=2025.001' present (not on most cards; version pin to be confirmed)"
+      ],
+      "citation": "[23] Installment Plan Overview (23_Installment_Plan_Overview.pdf, sha256:5fc82f433e51)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-23",
+        "pdf_filename": "23_Installment_Plan_Overview.pdf",
+        "pdf_sha256": "5fc82f433e51e612e5fe78e47d1cfb47c5d40fc2bfecb00ac8086009193a9d3b",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-23#reference_line",
+          "M2C-23#title",
+          "M2C-23#category",
+          "M2C-23#what_it_covers",
+          "M2C-23#meter_to_cash_relevance",
+          "M2C-23#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-23#library_use",
+            "key": "library_use",
+            "char_start": 534,
+            "char_end": 811
+          },
+          {
+            "section_id": "M2C-23#copyright_note",
+            "key": "copyright_note",
+            "char_start": 813,
+            "char_end": 1048
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1048
+        ]
+      },
+      "embedding_text_sha256": "1ebb10071d65ef5055520d079f2e4cdf241bb6e73369877d31ecd1f05364990a",
+      "full_text_sha256": "d7fc7e4e09a2db318868b50c5d739342657fbabe6f79e45d409ab8ebe7a1b9ff",
+      "char_counts": {
+        "full_text": 1048,
+        "embedding_text": 532
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-24",
+      "source_id": "M2C-24",
+      "source_number": 24,
+      "filename": "24_Creating_Installment_Plans.pdf",
+      "title": "Creating Installment Plans",
+      "category": "Payment Arrangements / Installment Plans",
+      "embedding_text": "SAP Utilities M2C Source Reference 24\nCreating Installment Plans\nCategory: Payment Arrangements / Installment Plans\n\nWhat it covers\nExplains creation of installment plans and relevant processing considerations.\n\nMeter-to-Cash relevance\nUseful for eligibility, setup and downstream clearing/dunning reasoning.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 24\nCreating Installment Plans\nCategory: Payment Arrangements / Installment Plans\n\nWhat it covers\nExplains creation of installment plans and relevant processing considerations.\n\nMeter-to-Cash relevance\nUseful for eligibility, setup and downstream clearing/dunning reasoning.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "bf7eb138905ead845cc1471d9aa7d1ea384ac9cdabe95f5d95ed0be739344863",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[24] Creating Installment Plans (24_Creating_Installment_Plans.pdf, sha256:bf7eb138905e)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-24",
+        "pdf_filename": "24_Creating_Installment_Plans.pdf",
+        "pdf_sha256": "bf7eb138905ead845cc1471d9aa7d1ea384ac9cdabe95f5d95ed0be739344863",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-24#reference_line",
+          "M2C-24#title",
+          "M2C-24#category",
+          "M2C-24#what_it_covers",
+          "M2C-24#meter_to_cash_relevance",
+          "M2C-24#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-24#library_use",
+            "key": "library_use",
+            "char_start": 495,
+            "char_end": 772
+          },
+          {
+            "section_id": "M2C-24#copyright_note",
+            "key": "copyright_note",
+            "char_start": 774,
+            "char_end": 1009
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1009
+        ]
+      },
+      "embedding_text_sha256": "b39a63c5174bfe0e4e58fc8247bd89d5f6b2c45eb73312a0e72fd7eb960266e7",
+      "full_text_sha256": "1634bb5e041f7b085d823e2124a2fcf09d06b92c1c0144581bd28f622168540a",
+      "char_counts": {
+        "full_text": 1009,
+        "embedding_text": 493
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-25",
+      "source_id": "M2C-25",
+      "source_number": 25,
+      "filename": "25_Displaying_and_Changing_Installment_Plans.pdf",
+      "title": "Displaying and Changing Installment Plans",
+      "category": "Payment Arrangements / Installment Plans",
+      "embedding_text": "SAP Utilities M2C Source Reference 25\nDisplaying and Changing Installment Plans\nCategory: Payment Arrangements / Installment Plans\n\nWhat it covers\nCovers ongoing lifecycle processing for installment plans, including display/change functions.\n\nMeter-to-Cash relevance\nUseful for maintenance and exception scenarios after an arrangement is created.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 25\nDisplaying and Changing Installment Plans\nCategory: Payment Arrangements / Installment Plans\n\nWhat it covers\nCovers ongoing lifecycle processing for installment plans, including display/change functions.\n\nMeter-to-Cash relevance\nUseful for maintenance and exception scenarios after an arrangement is created.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "eead43bd7c78f6a4c54a8804db73673e2bfc68ce0f84cac9f2174551e300adb4",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[25] Displaying and Changing Installment Plans (25_Displaying_and_Changing_Installment_Plans.pdf, sha256:eead43bd7c78)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-25",
+        "pdf_filename": "25_Displaying_and_Changing_Installment_Plans.pdf",
+        "pdf_sha256": "eead43bd7c78f6a4c54a8804db73673e2bfc68ce0f84cac9f2174551e300adb4",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-25#reference_line",
+          "M2C-25#title",
+          "M2C-25#category",
+          "M2C-25#what_it_covers",
+          "M2C-25#meter_to_cash_relevance",
+          "M2C-25#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-25#library_use",
+            "key": "library_use",
+            "char_start": 533,
+            "char_end": 810
+          },
+          {
+            "section_id": "M2C-25#copyright_note",
+            "key": "copyright_note",
+            "char_start": 812,
+            "char_end": 1047
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1047
+        ]
+      },
+      "embedding_text_sha256": "a036c1086c3373fa618012d7070f46d090427138f56a676c7ce05104e1cc0611",
+      "full_text_sha256": "c689d99253a3df761e6fdef3c204196fd7e3c6568bc9c6cb4be6dc517d97a45f",
+      "char_counts": {
+        "full_text": 1047,
+        "embedding_text": 531
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-26",
+      "source_id": "M2C-26",
+      "source_number": 26,
+      "filename": "26_FI_CA_Dunning.pdf",
+      "title": "FI-CA Dunning",
+      "category": "Dunning & Collections",
+      "embedding_text": "SAP Utilities M2C Source Reference 26\nFI-CA Dunning\nCategory: Dunning & Collections\n\nWhat it covers\nPrimary reference for FI-CA dunning, overdue items, dunning notices and dunning activities.\n\nMeter-to-Cash relevance\nCore source for collections escalation logic within Meter-to-Cash.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 26\nFI-CA Dunning\nCategory: Dunning & Collections\n\nWhat it covers\nPrimary reference for FI-CA dunning, overdue items, dunning notices and dunning activities.\n\nMeter-to-Cash relevance\nCore source for collections escalation logic within Meter-to-Cash.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "253fe0f03b875557018379d0e55f56b2ce90dd90b4702e96630a9625bfdaec46",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[26] FI-CA Dunning (26_FI_CA_Dunning.pdf, sha256:253fe0f03b87)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-26",
+        "pdf_filename": "26_FI_CA_Dunning.pdf",
+        "pdf_sha256": "253fe0f03b875557018379d0e55f56b2ce90dd90b4702e96630a9625bfdaec46",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-26#reference_line",
+          "M2C-26#title",
+          "M2C-26#category",
+          "M2C-26#what_it_covers",
+          "M2C-26#meter_to_cash_relevance",
+          "M2C-26#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-26#library_use",
+            "key": "library_use",
+            "char_start": 470,
+            "char_end": 747
+          },
+          {
+            "section_id": "M2C-26#copyright_note",
+            "key": "copyright_note",
+            "char_start": 749,
+            "char_end": 984
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          984
+        ]
+      },
+      "embedding_text_sha256": "24f384a1bd1493a49680bf064c3c09f00533f9b8071f3dfd6c232d516c9b886d",
+      "full_text_sha256": "68838f1891a9b05fee6cb552c2c52c5157cffcd9c1e8a3b3f25cf8032c833eb9",
+      "char_counts": {
+        "full_text": 984,
+        "embedding_text": 468
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-27",
+      "source_id": "M2C-27",
+      "source_number": 27,
+      "filename": "27_Submission_of_Receivables_to_Collection_Agency.pdf",
+      "title": "Submission of Receivables to Collection Agency",
+      "category": "Dunning & Collections",
+      "embedding_text": "SAP Utilities M2C Source Reference 27\nSubmission of Receivables to Collection Agency\nCategory: Dunning & Collections\n\nWhat it covers\nExplains the process for releasing, submitting, processing and recalling receivables handled by collection agencies.\n\nMeter-to-Cash relevance\nUseful for late-stage collections and external-agency lifecycle knowledge.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 27\nSubmission of Receivables to Collection Agency\nCategory: Dunning & Collections\n\nWhat it covers\nExplains the process for releasing, submitting, processing and recalling receivables handled by collection agencies.\n\nMeter-to-Cash relevance\nUseful for late-stage collections and external-agency lifecycle knowledge.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "9ec0594c2ce2ee45bb0fb5f631b7527daa0b5f6a6bd67d44bb97d9fc6c3835ac",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[27] Submission of Receivables to Collection Agency (27_Submission_of_Receivables_to_Collection_Agency.pdf, sha256:9ec0594c2ce2)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-27",
+        "pdf_filename": "27_Submission_of_Receivables_to_Collection_Agency.pdf",
+        "pdf_sha256": "9ec0594c2ce2ee45bb0fb5f631b7527daa0b5f6a6bd67d44bb97d9fc6c3835ac",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-27#reference_line",
+          "M2C-27#title",
+          "M2C-27#category",
+          "M2C-27#what_it_covers",
+          "M2C-27#meter_to_cash_relevance",
+          "M2C-27#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-27#library_use",
+            "key": "library_use",
+            "char_start": 536,
+            "char_end": 813
+          },
+          {
+            "section_id": "M2C-27#copyright_note",
+            "key": "copyright_note",
+            "char_start": 815,
+            "char_end": 1050
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1050
+        ]
+      },
+      "embedding_text_sha256": "cda39054aa22345fd5f68cbbca4db0ede8eaebd02beb25c370c733404f2738c0",
+      "full_text_sha256": "01506bb58537d73a63efc1161787f5b806fc24426bd9012d90cae386dda98bc2",
+      "char_counts": {
+        "full_text": 1050,
+        "embedding_text": 534
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-28",
+      "source_id": "M2C-28",
+      "source_number": 28,
+      "filename": "28_Collection_Agency_APIs_and_Enterprise_Services.pdf",
+      "title": "Collection Agency APIs and Enterprise Services",
+      "category": "Dunning & Collections",
+      "embedding_text": "SAP Utilities M2C Source Reference 28\nCollection Agency APIs and Enterprise Services\nCategory: Dunning & Collections\n\nWhat it covers\nReference for integration mechanisms between FI-CA and external collection agencies.\n\nMeter-to-Cash relevance\nImportant for modern API/service integration knowledge beyond file-based exchanges.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html",
+      "full_text": "SAP Utilities M2C Source Reference 28\nCollection Agency APIs and Enterprise Services\nCategory: Dunning & Collections\n\nWhat it covers\nReference for integration mechanisms between FI-CA and external collection agencies.\n\nMeter-to-Cash relevance\nImportant for modern API/service integration knowledge beyond file-based exchanges.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html",
+      "source_url_status": "ok",
+      "sha256": "521d033f5916316b87f0b94537584c1d40a81a6b8f3153a00233d2c316a178bd",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[28] Collection Agency APIs and Enterprise Services (28_Collection_Agency_APIs_and_Enterprise_Services.pdf, sha256:521d033f5916)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-28",
+        "pdf_filename": "28_Collection_Agency_APIs_and_Enterprise_Services.pdf",
+        "pdf_sha256": "521d033f5916316b87f0b94537584c1d40a81a6b8f3153a00233d2c316a178bd",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-28#reference_line",
+          "M2C-28#title",
+          "M2C-28#category",
+          "M2C-28#what_it_covers",
+          "M2C-28#meter_to_cash_relevance",
+          "M2C-28#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-28#library_use",
+            "key": "library_use",
+            "char_start": 513,
+            "char_end": 790
+          },
+          {
+            "section_id": "M2C-28#copyright_note",
+            "key": "copyright_note",
+            "char_start": 792,
+            "char_end": 1027
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1027
+        ]
+      },
+      "embedding_text_sha256": "d43742d012fb04dc6298eab5dd48a216cbb38cb998e168a86670a32d1b11cd07",
+      "full_text_sha256": "6111002d999818e274abfc51e949c50bc923b8646cd907627e03b1b42af00fc8",
+      "char_counts": {
+        "full_text": 1027,
+        "embedding_text": 511
+      }
+    },
+    {
+      "retrieval_unit_id": "M2C-29",
+      "source_id": "M2C-29",
+      "source_number": 29,
+      "filename": "29_Disconnection_Reconnection_of_a_Utility_Installation.pdf",
+      "title": "Disconnection/Reconnection of a Utility Installation",
+      "category": "Disconnection & Reconnection",
+      "embedding_text": "SAP Utilities M2C Source Reference 29\nDisconnection/Reconnection of a Utility Installation\nCategory: Disconnection & Reconnection\n\nWhat it covers\nExplains temporary interruption and restoration of utility supply for collection or technical reasons.\n\nMeter-to-Cash relevance\nConnects overdue debt/dunning to service actions while preserving the distinction between delinquency and disconnect eligibility.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
+      "full_text": "SAP Utilities M2C Source Reference 29\nDisconnection/Reconnection of a Utility Installation\nCategory: Disconnection & Reconnection\n\nWhat it covers\nExplains temporary interruption and restoration of utility supply for collection or technical reasons.\n\nMeter-to-Cash relevance\nConnects overdue debt/dunning to service actions while preserving the distinction between delinquency and disconnect eligibility.\n\nAuthoritative SAP Help source\nOpen this topic on SAP Help Portal\nhttps://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html\n\nLibrary use\nUse this reference sheet as an index record for the Utilities AI knowledge library. The SAP Help page is the authoritative source. Store product knowledge separately from client-specific configuration, custom developments, regulatory rules and operating procedures.\n\nCopyright / distribution note\nThis file is an original reference summary and link index. It is not a reproduction of SAP documentation. SAP product names and documentation remain the property of SAP and their respective rights holders.",
+      "source_status": "verified",
+      "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
+      "source_url_status": "ok",
+      "sha256": "07dada4a63ff2ff0f5631f23f01ed42c14916ff0701da8f1e44ae71745145851",
+      "has_source_correction": false,
+      "source_correction": null,
+      "review_reasons": [],
+      "citation": "[29] Disconnection/Reconnection of a Utility Installation (29_Disconnection_Reconnection_of_a_Utility_Installation.pdf, sha256:07dada4a63ff)",
+      "provenance": {
+        "corpus_document": "data/source_corpus.json#M2C-29",
+        "pdf_filename": "29_Disconnection_Reconnection_of_a_Utility_Installation.pdf",
+        "pdf_sha256": "07dada4a63ff2ff0f5631f23f01ed42c14916ff0701da8f1e44ae71745145851",
+        "page_start": 1,
+        "page_end": 1,
+        "page_count": 1
+      },
+      "embedding_text_spec": {
+        "kept_section_ids": [
+          "M2C-29#reference_line",
+          "M2C-29#title",
+          "M2C-29#category",
+          "M2C-29#what_it_covers",
+          "M2C-29#meter_to_cash_relevance",
+          "M2C-29#authoritative_source"
+        ],
+        "excluded_sections": [
+          {
+            "section_id": "M2C-29#library_use",
+            "key": "library_use",
+            "char_start": 590,
+            "char_end": 867
+          },
+          {
+            "section_id": "M2C-29#copyright_note",
+            "key": "copyright_note",
+            "char_start": 869,
+            "char_end": 1104
+          }
+        ],
+        "full_text_char_range": [
+          0,
+          1104
+        ]
+      },
+      "embedding_text_sha256": "e41a2e47fb91ad136bfc737934cb63bc1608bc4e978c6e0df80a09ce83cc9881",
+      "full_text_sha256": "1e6529e4b29dbea605cfb5e690d6a03b5ca5569ce0cb05c4af8bd016863a9425",
+      "char_counts": {
+        "full_text": 1104,
+        "embedding_text": 588
+      }
+    }
+  ]
+}

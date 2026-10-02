@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/6f1202271870470996b7b38ba9d19cab",
+  "topic_id": 17,
+  "topic_title": "Contract Accounts Overview",
+  "topic_ids": [
+    17
+  ],
+  "topic_refs": [
+    {
+      "topic_id": 17,
+      "topic_title": "Contract Accounts Overview",
+      "role": "descendant",
+      "via_doc_id": null,
+      "pdf_file": "17_Contract_Accounts_Overview.pdf"
+    }
+  ],
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "numeric_deliverable_id": "40374631",
+  "build_no": "1779",
+  "page_id": "6f1202271870470996b7b38ba9d19cab",
+  "file_path": "6f1202271870470996b7b38ba9d19cab.html",
+  "alias_file_paths": [],
+  "parent_page_id": "0bfcc5536a51204be10000000a174cb4",
+  "toc_path": [
+    "Contract Accounts",
+    "Manage Contract Accounts"
+  ],
+  "depth": 1,
+  "page_title": "Manage Contract Accounts",
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/6f1202271870470996b7b38ba9d19cab.html",
+  "canonical_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/6f1202271870470996b7b38ba9d19cab.html",
+  "retrieved_at": null,
+  "source_type": "legacy_local_copy",
+  "fetched_via": "legacy_local:sap_pages/054.json",
+  "page_hash": "ab1296f5f3e7f48327fe42441963b12df1c5f0a9d78eecace6033ef67fa0965b",
+  "content_hash": "1443e51dd63d574152b6a650f8f15c6ca22063fb8d7913ba5612dcea112b8346",
+  "duplicate_of": null,
+  "duplicate_docs": [],
+  "text_raw": "Manage Contract Accounts\nManage Contract Accounts\nThe\nManage Contract Accounts\n(\nF5474\n) app provides a central entry point for\ncontract account maintenance.\nKey Features\nYou can use this app to do the following:\nDisplay a list of contract accounts\nFilter the list according to your needs, for example, by business partner and company code\nDisplay a contract account by clicking on it\nChange a contract account\nTo change a contract account, select the desired contract account in the list and press\nChange\n. This takes you to the\napp for changing contract accounts.\nCreate contract accounts\nTo create a new contract account, press\nCreate\n. This takes you to the app for creating contract\naccounts.\nNote\nFrom the\nManage Contract Accounts\napp, you can access the following transactions:\nCreate Contract Account\n(transaction\nCAA1\n)\nChange Contract Account\n(transaction\nCAA2\n)\nDisplay Contract Account\n(transaction\nCAA3\n)\nImplementation Information\nIn the\nSAP Fiori Apps Reference Library\n, see the details for the\nManage Contract\nAccounts\napp.\nRelated Information\nCreating, Changing, and Displaying Contract Accounts",
+  "text": "Manage Contract Accounts\nThe Manage Contract Accounts\n(F5474) app provides a central entry point for contract account maintenance.\nKey Features\nYou can use this app to do the following:\nDisplay a list of contract accounts\nFilter the list according to your needs, for example, by business partner and company code\nDisplay a contract account by clicking on it\nChange a contract account\nTo change a contract account, select the desired contract account in the list and press\nChange. This takes you to the app for changing contract accounts.\nCreate contract accounts\nTo create a new contract account, press\nCreate. This takes you to the app for creating contract accounts.\nNote\nFrom the Manage Contract Accounts app, you can access the following transactions:\nCreate Contract Account\n(transaction CAA1)\nChange Contract Account\n(transaction CAA2)\nDisplay Contract Account\n(transaction CAA3)\nImplementation Information\nIn the SAP Fiori Apps Reference Library, see the details for the Manage Contract\nAccounts app.\nRelated Information\nCreating, Changing, and Displaying Contract Accounts",
+  "clean_stats": {
+    "title_duplicates_removed": 1,
+    "fragments_joined": 20,
+    "lines_in": 48,
+    "lines_out": 27
+  },
+  "status": "OK"
+}
