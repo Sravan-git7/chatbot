@@ -1,0 +1,12 @@
+{
+  "total_queries": 113,
+  "unoptimized_rerank_median_ms": 68.35,
+  "unoptimized_rerank_mean_ms": 69.79,
+  "optimized_rerank_median_ms": 20.59,
+  "optimized_rerank_mean_ms": 22.49,
+  "total_routing_median_ms": 36.02,
+  "total_routing_mean_ms": 40.02,
+  "latency_reduction_pct": 69.88,
+  "ranking_discrepancies": 0,
+  "score_discrepancies": 0
+}

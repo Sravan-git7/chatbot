@@ -83,20 +83,29 @@ class PageRetriever:
     def count(self) -> int:
         return int(self.collection.count())
 
-    def _query(self, query: str, top_k: int, where: Optional[Dict[str, Any]]) -> List[ChunkHit]:
+    def _query(self, query: str, top_k: int, where: Optional[Dict[str, Any]], query_embedding: Optional[Any] = None) -> List[ChunkHit]:
         if not str(query or "").strip():
             return []
-        kw: Dict[str, Any] = {"query_embeddings": self.embed([query]), "n_results": max(1, int(top_k)), "include": ["documents", "metadatas", "distances"]}
+        if query_embedding is not None:
+            if isinstance(query_embedding, (list, tuple)) and query_embedding and isinstance(query_embedding[0], (list, tuple)):
+                q_embs = query_embedding
+            elif hasattr(query_embedding, "ndim") and query_embedding.ndim == 2:
+                q_embs = query_embedding
+            else:
+                q_embs = [query_embedding]
+        else:
+            q_embs = self.embed([query])
+        kw: Dict[str, Any] = {"query_embeddings": q_embs, "n_results": max(1, int(top_k)), "include": ["documents", "metadatas", "distances"]}
         if where:
             kw["where"] = where
         res = self.collection.query(**kw)
         docs, mds, dists = res["documents"][0], res["metadatas"][0], res["distances"][0]
         return [_hit(i + 1, d, m, x) for i, (d, m, x) in enumerate(zip(docs, mds, dists))]
 
-    def retrieve_in_page(self, query: str, guide_id: str, page_id: str, top_k: int = 5) -> List[ChunkHit]:
+    def retrieve_in_page(self, query: str, guide_id: str, page_id: str, top_k: int = 5, query_embedding: Optional[Any] = None) -> List[ChunkHit]:
         if not guide_id or not page_id:
             raise ValueError("guide_id and page_id are required for identity-constrained retrieval")
-        hits = self._query(query, top_k, {"$and": [{"guide_id": guide_id}, {"page_id": page_id}]})
+        hits = self._query(query, top_k, {"$and": [{"guide_id": guide_id}, {"page_id": page_id}]}, query_embedding=query_embedding)
         bad = [h.chunk_id for h in hits if h.guide_id != guide_id or h.page_id != page_id]
         if bad:
             raise LeakageError(f"chunks outside {guide_id}/{page_id}: {bad}")

@@ -1,0 +1,37 @@
+{
+  "queries_count": 113,
+  "router_all": {
+    "baseline_R@1": 0.5048,
+    "reranked_R@1": 0.7333,
+    "baseline_R@3": 0.7524,
+    "reranked_R@3": 0.8,
+    "baseline_R@5": 0.8571,
+    "reranked_R@5": 0.8571,
+    "baseline_MRR": 0.6504,
+    "reranked_MRR": 0.7861
+  },
+  "router_answerable": {
+    "baseline_R@1": 0.4615,
+    "reranked_R@1": 0.7692,
+    "baseline_R@3": 0.7231,
+    "reranked_R@3": 0.8154,
+    "baseline_MRR": 0.6082,
+    "reranked_MRR": 0.8039
+  },
+  "answer_metrics_evidence": {
+    "baseline_real_correct": 21,
+    "reranked_real_correct": 41,
+    "delta_correct": 20,
+    "baseline_wrong_page": 5,
+    "reranked_wrong_page": 2,
+    "baseline_unsupported_answered": 9,
+    "reranked_unsupported_answered": 12,
+    "oracle_correct": 52
+  },
+  "selection_changes": {
+    "total_changed": 54,
+    "improved_correctness": 20,
+    "regressed_correctness": 0,
+    "net_gain": 20
+  }
+}

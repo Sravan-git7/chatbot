@@ -51,6 +51,7 @@ class PipelineConfig:
     max_context_chunks: int = DEFAULT_MAX_CHUNKS
     ood_min_coverage: float = OOD_MIN_COVERAGE
     context_min_coverage: float = CONTEXT_MIN_COVERAGE
+    rerank_router: bool = True
 
     def to_dict(self) -> Dict[str, Any]:
         return dict(self.__dict__)
@@ -101,15 +102,33 @@ class RagPipeline:
         # ---- 1. card routing -------------------------------------------------------------------------------
         t = time.perf_counter()
         card: Any = None
+        q_emb: Any = None
         if oracle_source_id:
             card = self.cards.get(oracle_source_id)
             if card is None:
                 raise KeyError(f"unknown card {oracle_source_id}")
         else:
             outcome = route_to_page(query, self.backend, self.ctx.page_index, top_k=self.cfg.top_k_cards, selector=select_top_ranked)
-            out["routing"]["candidates"] = [{"rank": c.rank, "source_id": c.source_id, "title": c.title, "similarity": round(1.0 - c.distance, 4),
-                                             "distance": round(c.distance, 6)} for c in outcome.candidates]
-            card = outcome.selected_card
+            if getattr(self.cfg, "rerank_router", False) and outcome.candidates:
+                import phase13_reranker as PR13
+                if hasattr(self.retriever, "embed"):
+                    q_emb = self.retriever.embed([query])
+                card, scored = PR13.rerank_candidates(
+                    query,
+                    outcome.candidates,
+                    self.cards,
+                    self.retriever,
+                    self.ctx,
+                    self.corpus,
+                    top_k_evaluate=self.cfg.top_k_cards,
+                    query_embedding=q_emb,
+                )
+                out["routing"]["mode"] = f"router_reranked_top{self.cfg.top_k_cards}"
+                out["routing"]["candidates"] = [s.to_dict() for s in scored]
+            else:
+                out["routing"]["candidates"] = [{"rank": c.rank, "source_id": c.source_id, "title": c.title, "similarity": round(1.0 - c.distance, 4),
+                                                 "distance": round(c.distance, 6)} for c in outcome.candidates]
+                card = outcome.selected_card
             dbg["routing_outcome_state_7a"] = outcome.state
         timings["route_ms"] = (time.perf_counter() - t) * 1000
         if card is None:
@@ -152,7 +171,13 @@ class RagPipeline:
 
         # ---- 5. identity-constrained retrieval -------------------------------------------------------------------------
         t = time.perf_counter()
-        hits = self.retriever.retrieve_in_page(query, identity.effective_guide_id, identity.effective_page_id, top_k=self.cfg.k_chunks)
+        hits = self.retriever.retrieve_in_page(
+            query,
+            identity.effective_guide_id,
+            identity.effective_page_id,
+            top_k=self.cfg.k_chunks,
+            query_embedding=q_emb,
+        )
         timings["retrieve_ms"] = (time.perf_counter() - t) * 1000
         dbg["retrieved"] = [h.to_dict(with_text=False) for h in hits]
         if not hits:
