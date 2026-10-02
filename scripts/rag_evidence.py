@@ -235,11 +235,35 @@ def focus_weights(needs: QuestionNeeds, units: Sequence[Unit]) -> Dict[str, floa
     return out
 
 
-def unit_score(u: Unit, needs: QuestionNeeds, w: Optional[Dict[str, float]] = None) -> float:
+# Structural frame patterns for deterministic structural evidence normalization
+_NUM_STEP_PAT = re.compile(r"(?:^|\n|\.\s+)\d+[\.\)]\s+[A-Z]")
+_ASTERISK_PAT = re.compile(r"\(\*\)|\*\s+[A-Z]")
+_TASK_PAT = re.compile(r"(?:^|\n)(?:Activities|Tasks|Process Flow)\b|(?:^|\n)-\s+[A-Z]")
+
+
+def structural_evidence_present(term: str, units: Sequence[Unit]) -> bool:
+    """Checks whether a structural question term ('step', 'asterisk', 'task') is satisfied by concrete SAP document structures."""
+    if term in ("step", "procedur"):
+        return any(bool(_NUM_STEP_PAT.search(u.full_text()) or _NUM_STEP_PAT.search(u.chunk_text)) for u in units)
+    if term in ("asterisk", "footnote"):
+        return any(bool(_ASTERISK_PAT.search(u.full_text()) or _ASTERISK_PAT.search(u.chunk_text)) for u in units)
+    if term in ("task", "activ"):
+        return any(bool(_TASK_PAT.search(u.full_text()) or _TASK_PAT.search(u.chunk_text)) for u in units)
+    return False
+
+
+def unit_score(u: Unit, needs: QuestionNeeds, w: Optional[Dict[str, float]] = None, frame_normalization: bool = False) -> float:
     if not needs.focus:
         return 0.0
     f = set(needs.focus)
     own = u.own | frozenset(terms2(u.prev_line or ""))
+    if frame_normalization:
+        if "step" in f and (_NUM_STEP_PAT.search(u.full_text()) or _NUM_STEP_PAT.search(u.chunk_text)):
+            own = own | {"step"}
+        if "asterisk" in f and (_ASTERISK_PAT.search(u.full_text()) or _ASTERISK_PAT.search(u.chunk_text)):
+            own = own | {"asterisk"}
+        if "task" in f and (_TASK_PAT.search(u.full_text()) or _TASK_PAT.search(u.chunk_text)):
+            own = own | {"task"}
     if not (own & f):
         return 0.0
     weight = (lambda t: w[t]) if w else (lambda t: 1.0)
@@ -254,7 +278,7 @@ class Decision:
     detail: Dict[str, Any] = field(default_factory=dict)
 
 
-def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU) -> Tuple[Decision, List[Unit]]:
+def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_normalization: bool = False) -> Tuple[Decision, List[Unit]]:
     """Decide whether the evidence supports an answer; return the supporting units (best first, document order not applied)."""
     if not needs.focus:
         return Decision(False, "NO_QUERY_TERMS"), []
@@ -264,13 +288,15 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU) -> Tup
     for u in units:
         present |= u.own | u.head | frozenset(terms2(u.prev_line or ""))
     missing = [a for a in needs.asked if a not in present]
+    if missing and frame_normalization:
+        missing = [a for a in missing if not structural_evidence_present(a, units)]
     if missing:
         return Decision(False, "ASKED_TERM_NOT_IN_EVIDENCE", {"missing": missing}), []
     pool = [u for u in units if unit_kinds_ok(u, needs)]
     if needs.kinds and not pool:
         return Decision(False, "KIND_NOT_IN_EVIDENCE", {"kinds": list(needs.kinds)}), []
     w = focus_weights(needs, units)
-    scored = sorted(((unit_score(u, needs, w), u) for u in pool), key=lambda p: (-p[0], p[1].rank, p[1].order))
+    scored = sorted(((unit_score(u, needs, w, frame_normalization=frame_normalization), u) for u in pool), key=lambda p: (-p[0], p[1].rank, p[1].order))
     if not scored or scored[0][0] < tau:
         return Decision(False, "LOW_FOCUS_COVERAGE", {"best": round(scored[0][0], 3) if scored else 0.0, "tau": tau}), []
     best = scored[0][0]
@@ -283,14 +309,15 @@ class EvidenceExtractiveGenerator:
     """Deterministic extractive generator with an evidence-sufficiency decision. Public name stays ``extractive`` (same generator family, same API contract)."""
     name = "extractive"
 
-    def __init__(self, tau: float = TAU) -> None:
+    def __init__(self, tau: float = TAU, frame_normalization: bool = False) -> None:
         self.tau = tau
+        self.frame_normalization = frame_normalization
         self.last: Optional[Dict[str, Any]] = None
 
     def generate(self, question: str, context: Any) -> GenerationResult:
         needs = analyze_question(question)
         units = build_units(context.items)
-        decision, chosen = assess(needs, units, self.tau)
+        decision, chosen = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
         self.last = record
         if not decision.supported:
@@ -304,7 +331,7 @@ class EvidenceExtractiveGenerator:
             lines.append(f"{u.text} [{u.marker}]")
             if u.follow:
                 lines.append(f"{u.follow} [{u.marker}]")
-            record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text, "coverage": round(unit_score(u, needs, weights), 3), "kinds_ok": unit_kinds_ok(u, needs)})
+            record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text, "coverage": round(unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3), "kinds_ok": unit_kinds_ok(u, needs)})
         dedup: List[str] = []
         for ln in lines:                                                    # a header line attached to two neighbouring sentences is shown once
             if ln not in dedup:
@@ -316,15 +343,16 @@ class EvidenceExtractiveGenerator:
 class EvidenceGuard:
     """Pre/post evidence checks around any generator (used for the LLM generator; tested with stub clients only)."""
 
-    def __init__(self, inner: Any, tau: float = TAU) -> None:
+    def __init__(self, inner: Any, tau: float = TAU, frame_normalization: bool = False) -> None:
         self.inner, self.tau = inner, tau
+        self.frame_normalization = frame_normalization
         self.name = getattr(inner, "name", "generator")
         self.last: Optional[Dict[str, Any]] = None
 
     def generate(self, question: str, context: Any) -> GenerationResult:
         needs = analyze_question(question)
         units = build_units(context.items)
-        decision, _ = assess(needs, units, self.tau)
+        decision, _ = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         self.last = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
         if not decision.supported:                                          # the model is not even asked: the evidence cannot contain the answer
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "")
@@ -392,9 +420,10 @@ def verify_support_chain(answer: str, context: Any) -> Dict[str, Any]:
     return {"ok": ok and bool(records), "verbatim_all": ok and bool(records), "sentences": records}
 
 
-def build_evidence_pipeline(base: Any, tau: float = TAU, widen: bool = True, generator: str = "extractive", llm_client: Any = None) -> Any:
+def build_evidence_pipeline(base: Any, tau: float = TAU, widen: bool = True, generator: str = "extractive", llm_client: Any = None, frame_normalization: Optional[bool] = None) -> Any:
     """A ``RagPipeline`` identical to ``base`` except for the retriever wrapper (optional) and the evidence-checked generator."""
     import rag_pipeline as RP
     retriever = EvidenceRetriever(base.retriever, tau) if widen else base.retriever
-    gen = EvidenceExtractiveGenerator(tau) if generator == "extractive" else EvidenceGuard(base.generator, tau)
+    fn = frame_normalization if frame_normalization is not None else getattr(base.cfg, "evidence_frame_normalization", False)
+    gen = EvidenceExtractiveGenerator(tau, frame_normalization=fn) if generator == "extractive" else EvidenceGuard(base.generator, tau, frame_normalization=fn)
     return RP.RagPipeline(base.backend, retriever, base.ctx, base.corpus, gen, base.count_tokens, cards=list(base.cards.values()), config=base.cfg)

@@ -34,6 +34,7 @@ MIN_SENTENCE_SUPPORT = 0.6          # pre-declared (not tuned): share of a sente
 EXTRACTIVE_MIN_SCORE = 0.34         # pre-declared (not tuned): minimum share of question terms a sentence must contain to be extracted
 EXTRACTIVE_MAX_SENTENCES = 3
 _MARKER = re.compile(r"\[S(\d+)\]")
+_COMPOUND_MARKER = re.compile(r"\[(S\d+(?:[\s,/\-–]+(?:and\s+)?S?\d+)*)\]")
 _URL = re.compile(r"https?://\S+|www\.\S+|help\.sap\.com\S*", re.I)
 _HEX_ID = re.compile(r"\b[0-9a-f]{32}\b", re.I)
 
@@ -160,7 +161,14 @@ class GroundingReport:
                 "cited_markers": self.cited_markers, "phantom_markers": self.phantom_markers}
 
 
-def verify_grounding(answer: str, context: ContextBlock, min_support: float = MIN_SENTENCE_SUPPORT, require_citations: bool = True) -> GroundingReport:
+def verify_grounding(
+    answer: str,
+    context: ContextBlock,
+    min_support: float = MIN_SENTENCE_SUPPORT,
+    require_citations: bool = True,
+    in_page_grounding: bool = False,
+    citation_normalization: bool = False,
+) -> GroundingReport:
     text = (answer or "").strip()
     if not text or NO_ANSWER_TEXT.lower() in text.lower():
         return GroundingReport(ok=True, refusal=True)
@@ -178,40 +186,101 @@ def verify_grounding(answer: str, context: ContextBlock, min_support: float = MI
     for h in _HEX_ID.findall(text):
         if h.lower() not in all_context.lower():
             violate("IDENTIFIER_NOT_IN_CONTEXT", h)
-    cited_ok: List[str] = []
-    for line in T.split_cited_sentences(text):
-        markers = _MARKER.findall(line)
-        marker_names = [f"S{m}" for m in markers]
-        body = _MARKER.sub("", line).strip()
+
+    raw_lines = T.split_cited_sentences(text)
+    parsed_lines: List[Dict[str, Any]] = []
+    all_explicit_good_markers: List[str] = []
+
+    for line in raw_lines:
+        if citation_normalization:
+            marker_names = []
+            for g in _COMPOUND_MARKER.findall(line):
+                for num in re.findall(r"\d+", g):
+                    mname = f"S{num}"
+                    if mname not in marker_names:
+                        marker_names.append(mname)
+            body = _COMPOUND_MARKER.sub("", line).strip()
+        else:
+            markers = _MARKER.findall(line)
+            marker_names = [f"S{m}" for m in markers]
+            body = _MARKER.sub("", line).strip()
+
         if not T.terms(body) and not T.code_tokens(body):
             continue                                              # marker-only / punctuation-only line
+
         phantom = [m for m in marker_names if m not in valid]
         for m in phantom:
             rep.phantom_markers.append(m)
             violate("PHANTOM_MARKER", m, line)
+
         good = [m for m in marker_names if m in valid]
+        for m in good:
+            if m not in all_explicit_good_markers:
+                all_explicit_good_markers.append(m)
+
+        parsed_lines.append({
+            "line": line,
+            "body": body,
+            "markers": marker_names,
+            "good": good,
+        })
+
+    cited_ok: List[str] = []
+    for idx, p in enumerate(parsed_lines):
+        line = p["line"]
+        body = p["body"]
+        marker_names = p["markers"]
+        good = list(p["good"])
+
+        # Citation inheritance for bullet lists or multi-sentence answers
+        if not good and citation_normalization and all_explicit_good_markers:
+            candidate_markers = []
+            for next_p in parsed_lines[idx + 1:]:
+                if next_p["good"]:
+                    candidate_markers = next_p["good"]
+                    break
+            if not candidate_markers:
+                candidate_markers = all_explicit_good_markers
+
+            cand_text = "\n".join(valid[m].text for m in candidate_markers)
+            bt = set(T.terms(body))
+            cand_sup = (len(bt & T.term_set(cand_text)) / len(bt)) if bt else 1.0
+            cand_unsupported = sorted(t for t in T.code_tokens(body) if t not in cand_text and t not in all_context)
+            cand_in_other = sorted(t for t in T.code_tokens(body) if t not in cand_text and t in all_context)
+            cand_tokens_ok = (not cand_unsupported) and (not cand_in_other or in_page_grounding)
+
+            # Accept inheritance only if verified supported and no unsupported tokens
+            if cand_sup >= min_support and cand_tokens_ok:
+                good = candidate_markers
+
         entry: Dict[str, Any] = {"text": body, "markers": marker_names, "support": None, "unsupported_tokens": []}
         if not good:
             if require_citations:
                 violate("NO_CITATION", "sentence has no valid [S#] marker", line)
             else:
                 good = list(valid)
+
         cited_text = "\n".join(valid[m].text for m in good)
         unsupported = sorted(t for t in T.code_tokens(body) if t not in cited_text and t not in all_context)
         in_other = sorted(t for t in T.code_tokens(body) if t not in cited_text and t in all_context)
+
         if unsupported:
             entry["unsupported_tokens"] = unsupported
             violate("TOKEN_NOT_IN_CONTEXT", ", ".join(unsupported), line)
-        if in_other:
+        if in_other and not in_page_grounding:
             violate("TOKEN_NOT_IN_CITED_CHUNK", ", ".join(in_other), line)
+
         bt = set(T.terms(body))
         sup = (len(bt & T.term_set(cited_text)) / len(bt)) if bt else 1.0
         entry["support"] = round(sup, 3)
         if good and sup < min_support:
             violate("LOW_SUPPORT", f"{sup:.2f} < {min_support}", line)
+
         rep.sentences.append(entry)
-        if good and sup >= min_support and not unsupported and not in_other:
+        tokens_ok = (not unsupported) and (not in_other or in_page_grounding)
+        if good and sup >= min_support and tokens_ok:
             cited_ok += [m for m in good if m not in cited_ok]
+
     if not rep.sentences:
         violate("EMPTY_ANSWER", "no answer sentence found")
     rep.cited_markers = sorted(cited_ok, key=lambda m: int(m[1:])) if rep.ok else []

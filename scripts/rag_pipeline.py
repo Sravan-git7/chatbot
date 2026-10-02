@@ -53,6 +53,11 @@ class PipelineConfig:
     context_min_coverage: float = CONTEXT_MIN_COVERAGE
     rerank_router: bool = True
     code_aware_router: bool = False
+    in_page_grounding: bool = False
+    citation_normalization: bool = False
+    relaxed_context_gate: bool = False
+    evidence_frame_normalization: bool = False
+    phase16_context_experiment: bool = False
 
     def to_dict(self) -> Dict[str, Any]:
         return dict(self.__dict__)
@@ -279,8 +284,10 @@ class RagPipeline:
         dbg["context"] = context.to_dict(with_text=True)
         ctx_text = "\n".join(f"{' '.join(i.heading_path)} {i.rendered_text}" for i in context.items)
         ccov = T.coverage(qterms, ctx_text)
-        dbg["gate_context"] = {"coverage": round(ccov, 3), "min": self.cfg.context_min_coverage}
-        if ccov < self.cfg.context_min_coverage:
+        relaxed_gate = getattr(self.cfg, "relaxed_context_gate", False) or getattr(self.cfg, "phase16_context_experiment", False)
+        ccov_min = 0.25 if relaxed_gate else self.cfg.context_min_coverage
+        dbg["gate_context"] = {"coverage": round(ccov, 3), "min": ccov_min}
+        if ccov < ccov_min:
             out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, None, entry)
             return self._finish(out, INSUFFICIENT, "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT", MESSAGES[INSUFFICIENT], dbg, debug, timings, t0)
 
@@ -288,7 +295,9 @@ class RagPipeline:
         t = time.perf_counter()
         gen = self.generator.generate(query, context)
         timings["generate_ms"] = (time.perf_counter() - t) * 1000
-        report = verify_grounding(gen.text, context)
+        in_page = getattr(self.cfg, "in_page_grounding", False) or getattr(self.cfg, "phase16_context_experiment", False)
+        cit_norm = getattr(self.cfg, "citation_normalization", False) or getattr(self.cfg, "phase16_context_experiment", False)
+        report = verify_grounding(gen.text, context, in_page_grounding=in_page, citation_normalization=cit_norm)
         dbg["generation"] = {"generator": gen.generator, "refused": gen.refused, "raw_text": gen.raw_text, "prompt": gen.prompt}
         dbg["grounding"] = report.to_dict()
         if gen.refused or report.refusal:
