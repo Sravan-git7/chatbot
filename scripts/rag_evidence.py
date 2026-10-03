@@ -22,10 +22,13 @@ Everything is lexical and deterministic; it cannot prove semantic faithfulness (
 """
 from __future__ import annotations
 
+import copy
 import dataclasses
 import math
 import re
 import sys
+import threading
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
@@ -306,22 +309,36 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
 
 # ------------------------------------------------------------------------------------------------------------ generator
 class EvidenceExtractiveGenerator:
-    """Deterministic extractive generator with an evidence-sufficiency decision. Public name stays ``extractive`` (same generator family, same API contract)."""
+    """Deterministic extractive generator with an evidence-sufficiency decision. Public name stays ``extractive`` (same generator family, same API contract).
+    Returns request-local evidence metadata explicitly via ``GenerationResult.evidence`` and isolates ``.last`` via thread-local storage reset per request.
+    """
     name = "extractive"
 
     def __init__(self, tau: float = TAU, frame_normalization: bool = False) -> None:
         self.tau = tau
         self.frame_normalization = frame_normalization
-        self.last: Optional[Dict[str, Any]] = None
+        self._tls = threading.local()
+
+    @property
+    def last(self) -> Optional[Dict[str, Any]]:
+        return getattr(self._tls, "last", None)
+
+    @last.setter
+    def last(self, value: Optional[Dict[str, Any]]) -> None:
+        self._tls.last = copy.deepcopy(value) if value is not None else None
+
+    def reset_request_state(self) -> None:
+        self._tls.last = None
 
     def generate(self, question: str, context: Any) -> GenerationResult:
+        self._tls.last = None
         needs = analyze_question(question)
         units = build_units(context.items)
         decision, chosen = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
-        self.last = record
         if not decision.supported:
-            return GenerationResult(NO_ANSWER_TEXT, True, self.name, "")
+            self.last = record
+            return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
         chosen = sorted(chosen, key=lambda u: u.order)
         weights = focus_weights(needs, units)
         lines: List[str] = []
@@ -337,32 +354,70 @@ class EvidenceExtractiveGenerator:
             if ln not in dedup:
                 dedup.append(ln)
         text = "\n".join(dedup)
-        return GenerationResult(text, False, self.name, text)
+        self.last = record
+        return GenerationResult(text, False, self.name, text, evidence=copy.deepcopy(record))
 
 
 class EvidenceGuard:
-    """Pre/post evidence checks around any generator (used for the LLM generator; tested with stub clients only)."""
+    """Pre/post evidence checks around any generator (used for the LLM generator; tested with stub clients only).
+    Pre-check and post-check run outside the generation semaphore; only ``inner.generate`` acquires ``_gen_sem``.
+    Returns request-local evidence metadata explicitly via ``GenerationResult.evidence`` and isolates ``.last`` via thread-local storage reset per request.
+    """
 
-    def __init__(self, inner: Any, tau: float = TAU, frame_normalization: bool = False) -> None:
+    def __init__(self, inner: Any, tau: float = TAU, frame_normalization: bool = False, generation_concurrency: int = 1) -> None:
         self.inner, self.tau = inner, tau
         self.frame_normalization = frame_normalization
         self.name = getattr(inner, "name", "generator")
-        self.last: Optional[Dict[str, Any]] = None
+        self.generation_concurrency = max(1, int(generation_concurrency))
+        self._gen_sem = threading.BoundedSemaphore(self.generation_concurrency)
+        self._llm_lock = self._gen_sem
+        self._tls = threading.local()
+
+    @property
+    def last(self) -> Optional[Dict[str, Any]]:
+        return getattr(self._tls, "last", None)
+
+    @last.setter
+    def last(self, value: Optional[Dict[str, Any]]) -> None:
+        self._tls.last = copy.deepcopy(value) if value is not None else None
+
+    def reset_request_state(self) -> None:
+        self._tls.last = None
+        client = getattr(self.inner, "client", None)
+        if client is not None and hasattr(client, "reset_request_state"):
+            client.reset_request_state()
 
     def generate(self, question: str, context: Any) -> GenerationResult:
+        self.reset_request_state()
         needs = analyze_question(question)
         units = build_units(context.items)
         decision, _ = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
-        self.last = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
+        record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
         if not decision.supported:                                          # the model is not even asked: the evidence cannot contain the answer
-            return GenerationResult(NO_ANSWER_TEXT, True, self.name, "")
-        res = self.inner.generate(question, context)
+            self.last = record
+            return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
+        if self._gen_sem.acquire(blocking=False):
+            queue_wait_ms = 0.0
+        else:
+            t_wait0 = time.perf_counter()
+            self._gen_sem.acquire()
+            queue_wait_ms = round((time.perf_counter() - t_wait0) * 1000.0, 3)
+        try:
+            res = self.inner.generate(question, context)
+        finally:
+            self._gen_sem.release()
+        raw_tel = getattr(res, "telemetry", None)
+        tel: Optional[Dict[str, Any]] = dict(raw_tel) if raw_tel is not None else {"queue_wait_ms": queue_wait_ms}
+        if tel is not None and "queue_wait_ms" not in tel:
+            tel["queue_wait_ms"] = queue_wait_ms
         if not res.refused:
             body = re.sub(r"\[S\d+\]", "", res.text)
             if not all(kind_satisfied(k, body, needs) for k in needs.kinds):  # the produced text lacks the kind of detail that was asked for
-                self.last.update({"supported": False, "reason": "ANSWER_LACKS_ASKED_DETAIL"})
-                return GenerationResult(NO_ANSWER_TEXT, True, self.name, res.raw_text, res.prompt)
-        return res
+                record.update({"supported": False, "reason": "ANSWER_LACKS_ASKED_DETAIL"})
+                self.last = record
+                return GenerationResult(NO_ANSWER_TEXT, True, self.name, res.raw_text, res.prompt, tel, evidence=copy.deepcopy(record))
+        self.last = record
+        return GenerationResult(res.text, res.refused, res.generator, res.raw_text, res.prompt, tel, evidence=copy.deepcopy(record))
 
 
 # ------------------------------------------------------------------------------------------------------------ retrieval widening
@@ -373,7 +428,18 @@ class EvidenceRetriever:
     def __init__(self, base: Any, tau: float = TAU) -> None:
         self._base = base
         self.tau = tau
-        self.last_promoted: Optional[str] = None
+        self._tls = threading.local()
+
+    @property
+    def last_promoted(self) -> Optional[str]:
+        return getattr(self._tls, "last_promoted", None)
+
+    @last_promoted.setter
+    def last_promoted(self, value: Optional[str]) -> None:
+        self._tls.last_promoted = value
+
+    def reset_request_state(self) -> None:
+        self._tls.last_promoted = None
 
     def __getattr__(self, name: str) -> Any:
         return getattr(self._base, name)
@@ -382,26 +448,86 @@ class EvidenceRetriever:
         w = focus_weights(needs, weight_units or units)
         return any(unit_kinds_ok(u, needs) and unit_score(u, needs, w) >= self.tau for u in units)
 
-    def retrieve_in_page(self, query: str, guide_id: str, page_id: str, top_k: int = 5) -> List[Any]:
-        self.last_promoted = None
-        hits = self._base.retrieve_in_page(query, guide_id, page_id, top_k=top_k)
+    def _call_base_retrieve(self, query: str, guide_id: str, page_id: str, top_k: int,
+                            query_embedding: Optional[Sequence[float]] = None) -> List[Any]:
+        if query_embedding is not None:
+            try:
+                return self._base.retrieve_in_page(query, guide_id, page_id, top_k=top_k, query_embedding=query_embedding)
+            except TypeError:
+                pass
+        return self._base.retrieve_in_page(query, guide_id, page_id, top_k=top_k)
+
+    def retrieve_in_page_with_promotion(
+        self,
+        query: str,
+        guide_id: str,
+        page_id: str,
+        top_k: int = 5,
+        query_embedding: Optional[Sequence[float]] = None,
+    ) -> Tuple[List[Any], Optional[str]]:
+        self._tls.last_promoted = None
+        hits = self._call_base_retrieve(query, guide_id, page_id, top_k=top_k, query_embedding=query_embedding)
         needs = analyze_question(query)
         if not needs.kinds or not hits:
-            return hits
+            return hits, None
         if self._supplies(needs, build_units(hits)):
-            return hits
+            return hits, None
         total = len(self._base.page_chunks(guide_id, page_id))
-        ranked = self._base.retrieve_in_page(query, guide_id, page_id, top_k=max(top_k, total))
+        ranked = self._call_base_retrieve(query, guide_id, page_id, top_k=max(top_k, total), query_embedding=query_embedding)
         have = {h.chunk_id for h in hits}
         for h in ranked:
             if h.chunk_id in have:
                 continue
             if self._supplies(needs, build_units([h]), build_units(hits) + build_units([h])):
-                self.last_promoted = h.chunk_id
+                self._tls.last_promoted = h.chunk_id
                 promoted = dataclasses.replace(h, rank=1, metadata={**dict(h.metadata), "promoted": "detail_evidence", "dense_rank": h.rank})
                 rest = [dataclasses.replace(x, rank=i + 2) for i, x in enumerate(hits[: max(0, top_k - 1)])]
-                return [promoted] + rest
+                return [promoted] + rest, h.chunk_id
+        return hits, None
+
+    def retrieve_in_page(self, query: str, guide_id: str, page_id: str, top_k: int = 5,
+                         query_embedding: Optional[Sequence[float]] = None) -> List[Any]:
+        hits, _ = self.retrieve_in_page_with_promotion(query, guide_id, page_id, top_k=top_k, query_embedding=query_embedding)
         return hits
+
+    def retrieve_many_pages(
+        self,
+        query: str,
+        pages: Sequence[Tuple[str, str]],
+        top_k: int = 5,
+        query_embedding: Optional[Sequence[float]] = None,
+    ) -> Dict[Tuple[str, str], List[Any]]:
+        self._tls.last_promoted = None
+        if not hasattr(self._base, "retrieve_many_pages") or "retrieve_in_page" in getattr(self._base, "__dict__", {}):
+            return {
+                (str(g), str(p)): self.retrieve_in_page(query, str(g), str(p), top_k=top_k, query_embedding=query_embedding)
+                for g, p in dict.fromkeys((str(g), str(p)) for g, p in pages)
+            }
+        unique_pages = list(dict.fromkeys((str(g), str(p)) for g, p in pages))
+        needs = analyze_question(query)
+        if not needs.kinds:
+            return self._base.retrieve_many_pages(query, unique_pages, top_k=top_k, query_embedding=query_embedding)
+        max_total = max((len(self._base.page_chunks(g, p)) for g, p in unique_pages), default=top_k)
+        all_ranked = self._base.retrieve_many_pages(query, unique_pages, top_k=max(top_k, max_total), query_embedding=query_embedding)
+        out: Dict[Tuple[str, str], List[Any]] = {}
+        for g, p in unique_pages:
+            ranked = all_ranked.get((g, p), [])
+            hits = list(ranked[:top_k])
+            if not hits or self._supplies(needs, build_units(hits)):
+                out[(g, p)] = hits
+                continue
+            have = {h.chunk_id for h in hits}
+            promoted_list = None
+            for h in ranked:
+                if h.chunk_id in have:
+                    continue
+                if self._supplies(needs, build_units([h]), build_units(hits) + build_units([h])):
+                    promoted = dataclasses.replace(h, rank=1, metadata={**dict(h.metadata), "promoted": "detail_evidence", "dense_rank": h.rank})
+                    rest = [dataclasses.replace(x, rank=i + 2) for i, x in enumerate(hits[: max(0, top_k - 1)])]
+                    promoted_list = [promoted] + rest
+                    break
+            out[(g, p)] = promoted_list if promoted_list is not None else hits
+        return out
 
 
 # ------------------------------------------------------------------------------------------------------------ support chain
@@ -420,10 +546,15 @@ def verify_support_chain(answer: str, context: Any) -> Dict[str, Any]:
     return {"ok": ok and bool(records), "verbatim_all": ok and bool(records), "sentences": records}
 
 
-def build_evidence_pipeline(base: Any, tau: float = TAU, widen: bool = True, generator: str = "extractive", llm_client: Any = None, frame_normalization: Optional[bool] = None) -> Any:
+def build_evidence_pipeline(base: Any, tau: float = TAU, widen: bool = True, generator: str = "extractive", llm_client: Any = None,
+                            frame_normalization: Optional[bool] = None, generation_concurrency: int = 1) -> Any:
     """A ``RagPipeline`` identical to ``base`` except for the retriever wrapper (optional) and the evidence-checked generator."""
     import rag_pipeline as RP
     retriever = EvidenceRetriever(base.retriever, tau) if widen else base.retriever
     fn = frame_normalization if frame_normalization is not None else getattr(base.cfg, "evidence_frame_normalization", False)
-    gen = EvidenceExtractiveGenerator(tau, frame_normalization=fn) if generator == "extractive" else EvidenceGuard(base.generator, tau, frame_normalization=fn)
+    gen = (
+        EvidenceExtractiveGenerator(tau, frame_normalization=fn)
+        if generator == "extractive"
+        else EvidenceGuard(base.generator, tau, frame_normalization=fn, generation_concurrency=generation_concurrency)
+    )
     return RP.RagPipeline(base.backend, retriever, base.ctx, base.corpus, gen, base.count_tokens, cards=list(base.cards.values()), config=base.cfg)

@@ -34,7 +34,8 @@ class TestProductionPipelineConfig(unittest.TestCase):
 
     def test_phase18_experimental_flags_stay_off_in_production(self):
         cfg = S.production_pipeline_config()
-        self.assertFalse(cfg.phrase_reranker)
+        self.assertTrue(cfg.phrase_reranker)
+        self.assertEqual(cfg.phrase_min_corroboration, 2)
         self.assertFalse(cfg.full_page_coverage)
         self.assertFalse(cfg.citation_repair)
 

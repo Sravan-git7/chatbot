@@ -1,0 +1,332 @@
+{
+  "phase": "19C",
+  "status": "VALIDATED",
+  "ready_to_close_phase19": true,
+  "final_architecture": {
+    "service_request_semaphore": "_FIFOBoundedSemaphore(max_concurrency=4)",
+    "generation_semaphore": "_FIFOBoundedSemaphore(generation_concurrency=1) around inner LLMGenerator.generate() only",
+    "pre_check_and_post_check": "Concurrent outside _gen_sem (EvidenceGuard.assess before _gen_sem; kind_satisfied and verify_grounding after _gen_sem)",
+    "request_isolation": "Dual isolation: explicit GenerationResult.evidence / GenerationResult.telemetry return values + thread-local (.last, .last_promoted, .last_telemetry) explicitly reset via reset_request_state() at the start of every request",
+    "reranker_page_retrieval": "Phase 19B Candidate R4 (PageRetriever.retrieve_many_pages single batched Chroma query per rerank_candidates call + thread-safe bounded caches returning defensive copies)"
+  },
+  "final_concurrency_settings": {
+    "MAX_CONCURRENT_REQUESTS": 4,
+    "DEFAULT_GENERATION_CONCURRENCY": 1,
+    "coarse_lock": false
+  },
+  "isolation_audit": {
+    "EvidenceGuard_isolated_and_reset_per_request": true,
+    "EvidenceRetriever_isolated_and_reset_per_request": true,
+    "EvidenceExtractiveGenerator_isolated_and_reset_per_request": true,
+    "OllamaClient_isolated_and_reset_per_request": true,
+    "RagService_isolated_and_reset_per_request": true,
+    "sequential_same_thread_leaks": 0
+  },
+  "concurrency_results_max_concurrency_4": {
+    "1": {
+      "workers": 1,
+      "requests": 113,
+      "wall_time_s": 3.963,
+      "throughput_rps": 28.51,
+      "errors": 0,
+      "determinism_mismatches": 0,
+      "evidence_contamination": 0,
+      "citation_contamination": 0,
+      "grounding_regressions": 0,
+      "queue_wait_ms": {
+        "min": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.01,
+        "max": 0.01,
+        "mean": 0.0
+      },
+      "route_ms": {
+        "min": 24.39,
+        "p50": 28.71,
+        "p90": 34.05,
+        "p95": 35.73,
+        "p99": 41.89,
+        "max": 47.36,
+        "mean": 29.42
+      },
+      "total_ms": {
+        "min": 26.59,
+        "p50": 34.26,
+        "p90": 39.96,
+        "p95": 43.64,
+        "p99": 51.2,
+        "max": 56.25,
+        "mean": 35.01
+      }
+    },
+    "2": {
+      "workers": 2,
+      "requests": 113,
+      "wall_time_s": 2.97,
+      "throughput_rps": 38.05,
+      "errors": 0,
+      "determinism_mismatches": 0,
+      "evidence_contamination": 0,
+      "citation_contamination": 0,
+      "grounding_regressions": 0,
+      "queue_wait_ms": {
+        "min": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.01,
+        "max": 0.01,
+        "mean": 0.0
+      },
+      "route_ms": {
+        "min": 30.19,
+        "p50": 42.48,
+        "p90": 52.95,
+        "p95": 57.6,
+        "p99": 67.42,
+        "max": 68.45,
+        "mean": 43.52
+      },
+      "total_ms": {
+        "min": 33.55,
+        "p50": 50.83,
+        "p90": 64.69,
+        "p95": 69.16,
+        "p99": 75.47,
+        "max": 80.21,
+        "mean": 52.16
+      }
+    },
+    "5": {
+      "workers": 5,
+      "requests": 113,
+      "wall_time_s": 2.98,
+      "throughput_rps": 37.91,
+      "errors": 0,
+      "determinism_mismatches": 0,
+      "evidence_contamination": 0,
+      "citation_contamination": 0,
+      "grounding_regressions": 0,
+      "queue_wait_ms": {
+        "min": 0.0,
+        "p50": 24.24,
+        "p90": 52.83,
+        "p95": 59.93,
+        "p99": 81.05,
+        "max": 97.19,
+        "mean": 27.07
+      },
+      "route_ms": {
+        "min": 37.14,
+        "p50": 94.11,
+        "p90": 116.13,
+        "p95": 122.11,
+        "p99": 130.74,
+        "max": 133.53,
+        "mean": 92.38
+      },
+      "total_ms": {
+        "min": 63.33,
+        "p50": 133.04,
+        "p90": 162.66,
+        "p95": 178.25,
+        "p99": 190.99,
+        "max": 202.93,
+        "mean": 130.43
+      }
+    },
+    "10": {
+      "workers": 10,
+      "requests": 113,
+      "wall_time_s": 2.797,
+      "throughput_rps": 40.4,
+      "errors": 0,
+      "determinism_mismatches": 0,
+      "evidence_contamination": 0,
+      "citation_contamination": 0,
+      "grounding_regressions": 0,
+      "queue_wait_ms": {
+        "min": 0.0,
+        "p50": 148.34,
+        "p90": 181.55,
+        "p95": 185.13,
+        "p99": 194.51,
+        "max": 205.23,
+        "mean": 142.62
+      },
+      "route_ms": {
+        "min": 34.71,
+        "p50": 83.44,
+        "p90": 112.9,
+        "p95": 119.68,
+        "p99": 127.96,
+        "max": 135.03,
+        "mean": 85.22
+      },
+      "total_ms": {
+        "min": 54.29,
+        "p50": 243.68,
+        "p90": 288.22,
+        "p95": 300.63,
+        "p99": 315.64,
+        "max": 325.6,
+        "mean": 238.83
+      }
+    },
+    "20": {
+      "workers": 20,
+      "requests": 113,
+      "wall_time_s": 2.78,
+      "throughput_rps": 40.65,
+      "errors": 0,
+      "determinism_mismatches": 0,
+      "evidence_contamination": 0,
+      "citation_contamination": 0,
+      "grounding_regressions": 0,
+      "queue_wait_ms": {
+        "min": 0.0,
+        "p50": 389.21,
+        "p90": 422.53,
+        "p95": 427.48,
+        "p99": 431.67,
+        "max": 435.45,
+        "mean": 354.35
+      },
+      "route_ms": {
+        "min": 32.49,
+        "p50": 84.39,
+        "p90": 111.33,
+        "p95": 120.57,
+        "p99": 131.36,
+        "max": 131.76,
+        "mean": 85.98
+      },
+      "total_ms": {
+        "min": 81.51,
+        "p50": 478.75,
+        "p90": 533.33,
+        "p95": 540.62,
+        "p99": 558.2,
+        "max": 565.14,
+        "mean": 450.24
+      }
+    }
+  },
+  "semaphore_comparison_2_4_6": {
+    "2": {
+      "10_workers": {
+        "max_concurrency": 2,
+        "workers": 10,
+        "throughput_rps": 38.02,
+        "p50_ms": 262.56,
+        "p95_ms": 296.55,
+        "p99_ms": 304.85,
+        "errors": 0,
+        "determinism_mismatches": 0
+      },
+      "20_workers": {
+        "max_concurrency": 2,
+        "workers": 20,
+        "throughput_rps": 39.24,
+        "p50_ms": 503.72,
+        "p95_ms": 549.6,
+        "p99_ms": 552.44,
+        "errors": 0,
+        "determinism_mismatches": 0
+      }
+    },
+    "4": {
+      "10_workers": {
+        "max_concurrency": 4,
+        "workers": 10,
+        "throughput_rps": 34.58,
+        "p50_ms": 274.94,
+        "p95_ms": 356.12,
+        "p99_ms": 445.56,
+        "errors": 0,
+        "determinism_mismatches": 0
+      },
+      "20_workers": {
+        "max_concurrency": 4,
+        "workers": 20,
+        "throughput_rps": 40.43,
+        "p50_ms": 487.77,
+        "p95_ms": 554.41,
+        "p99_ms": 563.76,
+        "errors": 0,
+        "determinism_mismatches": 0
+      }
+    },
+    "6": {
+      "10_workers": {
+        "max_concurrency": 6,
+        "workers": 10,
+        "throughput_rps": 39.2,
+        "p50_ms": 247.06,
+        "p95_ms": 325.08,
+        "p99_ms": 334.82,
+        "errors": 0,
+        "determinism_mismatches": 0
+      },
+      "20_workers": {
+        "max_concurrency": 6,
+        "workers": 20,
+        "throughput_rps": 35.96,
+        "p50_ms": 526.66,
+        "p95_ms": 638.86,
+        "p99_ms": 684.2,
+        "errors": 0,
+        "determinism_mismatches": 0
+      }
+    }
+  },
+  "windows_ollama_validation": {
+    "accessible_in_current_environment": false,
+    "status": "NOT VERIFIED (Windows Ollama host not accessible from Linux sandbox; no live numbers fabricated)",
+    "evaluated_candidates": {
+      "ollama_num_predict": 192,
+      "ollama_keep_alive": -1
+    },
+    "promoted_to_production": false,
+    "production_settings_unchanged": true
+  },
+  "production_generation_configuration": {
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "seed": 42,
+    "ollama_num_predict": null,
+    "ollama_keep_alive": null,
+    "context_budget_tokens": 700,
+    "max_context_chunks": 4,
+    "pipeline_config": {
+      "top_k_cards": 10,
+      "k_chunks": 5,
+      "context_budget_tokens": 700,
+      "max_context_chunks": 4,
+      "ood_min_coverage": 0.25,
+      "context_min_coverage": 0.5,
+      "rerank_router": true,
+      "code_aware_router": true,
+      "in_page_grounding": true,
+      "citation_normalization": true,
+      "relaxed_context_gate": true,
+      "evidence_frame_normalization": false,
+      "phase16_context_experiment": false,
+      "phrase_reranker": true,
+      "phrase_min_corroboration": 2,
+      "full_page_coverage": false,
+      "citation_repair": false,
+      "ollama_num_predict": null,
+      "ollama_keep_alive": null
+    }
+  },
+  "test_suite": {
+    "test_files_count": 13,
+    "total_tests": 172,
+    "passed": 172,
+    "failed": 0,
+    "pass_rate": "100%"
+  }
+}

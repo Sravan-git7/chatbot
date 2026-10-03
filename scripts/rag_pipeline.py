@@ -20,7 +20,9 @@ thresholds, and the card router is given no threshold at all (Phase 7F). Their m
 """
 from __future__ import annotations
 
+import copy
 import sys
+import threading
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -31,9 +33,62 @@ import m2c_page_identity as pid  # noqa: E402
 import page_citations as PCIT  # noqa: E402
 import page_corpus as PC  # noqa: E402
 import rag_text as T  # noqa: E402
-from m2c_orchestrator import route_to_page, select_top_ranked  # noqa: E402
+from m2c_orchestrator import route_to_page as _orch_route_to_page, select_top_ranked  # noqa: E402
 from rag_context import DEFAULT_BUDGET_TOKENS, DEFAULT_MAX_CHUNKS, build_context  # noqa: E402
 from rag_generate import NO_ANSWER_TEXT, ExtractiveGenerator, verify_grounding  # noqa: E402
+
+_CARD_OPEN_LOCK = threading.Lock()
+MAX_PAGE_TEXTS_CACHE = 64
+
+
+class _PrecomputedQueryBackend:
+    """Per-request adapter supplying a precomputed query embedding to ChromaCardBackend
+    without mutating shared backend state or recomputing the query embedding."""
+
+    def __init__(self, inner: Any, query_embedding: Optional[Any]) -> None:
+        self.inner = inner
+        self.query_embedding = query_embedding
+        self.distance_metric = getattr(inner, "distance_metric", "cosine")
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self.inner, name)
+
+    def query(self, query: str, n_results: int) -> Mapping[str, Any]:
+        if self.query_embedding is not None and hasattr(self.inner, "_open"):
+            from m2c_router import CardStoreUnavailable
+            if getattr(self.inner, "_collection", None) is None:
+                with _CARD_OPEN_LOCK:
+                    collection = self.inner._open()
+            else:
+                collection = self.inner._open()
+            n = min(int(n_results), int(collection.count()))
+            if n < 1:
+                raise CardStoreUnavailable(f"collection {self.inner.collection_name!r} is empty")
+            vec = (
+                self.query_embedding[0]
+                if isinstance(self.query_embedding, (list, tuple))
+                and self.query_embedding
+                and isinstance(self.query_embedding[0], (list, tuple))
+                else self.query_embedding
+            )
+            return collection.query(
+                query_embeddings=[[float(x) for x in vec]],
+                n_results=n,
+                include=["metadatas", "distances"],
+            )
+        return self.inner.query(query, n_results)
+
+
+def route_to_page(
+    query: str,
+    backend: Any,
+    page_index: Any,
+    top_k: int = 10,
+    selector: Any = select_top_ranked,
+    query_embedding: Optional[Any] = None,
+) -> Any:
+    req_backend = _PrecomputedQueryBackend(backend, query_embedding) if query_embedding is not None else backend
+    return _orch_route_to_page(query, req_backend, page_index, top_k=top_k, selector=selector)
 
 SCHEMA_VERSION = "8.1"
 ANSWERED, INSUFFICIENT, UNRESOLVED, NOT_INGESTED, OUT_OF_DOMAIN, NO_PAGE = ("answered", "insufficient_context", "unresolved_identity", "page_not_ingested",
@@ -63,6 +118,9 @@ class PipelineConfig:
     phrase_min_corroboration: int = 1      # E1a-v2: unique phrases a page must own before it earns the channel (1 = run-1 behaviour)
     full_page_coverage: bool = False       # E1b: reranker coverage over the candidate's full page text
     citation_repair: bool = False          # E2: deterministic in-page marker repair after grounding
+    # Phase 19B (optional Ollama generation tuning knobs; None = default rag_core options):
+    ollama_num_predict: Optional[int] = None
+    ollama_keep_alive: Optional[Any] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return dict(self.__dict__)
@@ -83,6 +141,8 @@ class PageCorpusIndex:
         self.corpus_sha256 = manifest["corpus_sha256"]
         self.corpus_dir = Path(corpus_dir or PC.CORPUS_DIR)
         self._page_texts: Dict[str, str] = {}
+        self._page_texts_lower: Dict[str, str] = {}
+        self._lock = threading.Lock()
 
     @classmethod
     def from_dir(cls, out_dir: Path = PC.CORPUS_DIR) -> "PageCorpusIndex":
@@ -90,23 +150,39 @@ class PageCorpusIndex:
         return cls(json.loads((out_dir / "manifest.json").read_text(encoding="utf-8")), corpus_dir=out_dir)
 
     def entry(self, source_id: str) -> Optional[Dict[str, Any]]:
-        return self.entries.get(source_id)
+        e = self.entries.get(source_id)
+        return dict(e) if e is not None else None
 
     def page_text(self, source_id: str) -> str:
-        if source_id in self._page_texts:
-            return self._page_texts[source_id]
-        entry = self.entries.get(source_id) or {}
+        key = str(source_id)
+        cached = self._page_texts.get(key)
+        if cached is not None:
+            return cached
+        with self._lock:
+            if key in self._page_texts:
+                return self._page_texts[key]
+        entry = self.entries.get(key) or {}
         rec = entry.get("record")
+        txt = ""
         if rec and (self.corpus_dir / rec).is_file():
             import json
             try:
-                txt = json.loads((self.corpus_dir / rec).read_text(encoding="utf-8")).get("text", "")
-                self._page_texts[source_id] = txt
-                return txt
+                txt = str(json.loads((self.corpus_dir / rec).read_text(encoding="utf-8")).get("text", "") or "")
             except Exception:
-                pass
-        self._page_texts[source_id] = ""
-        return ""
+                txt = ""
+        txt_low = txt.lower()
+        with self._lock:
+            if len(self._page_texts) < MAX_PAGE_TEXTS_CACHE or key in self._page_texts:
+                self._page_texts[key] = txt
+                self._page_texts_lower[key] = txt_low
+        return txt
+
+    def page_text_lower(self, source_id: str) -> str:
+        key = str(source_id)
+        cached = self._page_texts_lower.get(key)
+        if cached is not None:
+            return cached
+        return self.page_text(key).lower()
 
 
 class RagPipeline:
@@ -118,7 +194,12 @@ class RagPipeline:
         self.cfg = config or PipelineConfig()
         self.cards = {c["source_id"]: dict(c) for c in (cards if cards is not None else pid.load_cards(ctx.root if hasattr(ctx, "root") else PC.ROOT))}
 
-    def _inject_code_aware_candidates(self, query: str, dense_candidates: Sequence[Any]) -> List[Any]:
+    def _inject_code_aware_candidates(
+        self,
+        query: str,
+        dense_candidates: Sequence[Any],
+        query_embedding: Optional[Any] = None,
+    ) -> List[Any]:
         """Phase 15: If query contains technical codes or discriminative phrases matching page text,
         inject matching cards into the candidate pool (replacing lowest-ranked dense candidates to keep pool <= top_k_cards).
         """
@@ -140,7 +221,10 @@ class RagPipeline:
                     continue
                 candidate_phrases.append(" ".join(ngram))
 
-        page_texts = {sid: self.corpus.page_text(sid).lower() for sid in self.corpus.entries if self.corpus.page_text(sid)}
+        if hasattr(self.corpus, "page_text_lower"):
+            page_texts = {sid: self.corpus.page_text_lower(sid) for sid in self.corpus.entries if self.corpus.page_text_lower(sid)}
+        else:
+            page_texts = {sid: self.corpus.page_text(sid).lower() for sid in self.corpus.entries if self.corpus.page_text(sid)}
 
         matched_sids: List[str] = []
 
@@ -165,7 +249,8 @@ class RagPipeline:
             return list(dense_candidates)
 
         # Query all cards to obtain properly normalized CardCandidate objects with true Chroma distances
-        all_raw = self.backend.query(query.strip(), len(self.cards))
+        req_backend = _PrecomputedQueryBackend(self.backend, query_embedding) if query_embedding is not None else self.backend
+        all_raw = req_backend.query(query.strip(), len(self.cards))
         all_candidates_by_id = {}
         for i, (cid, meta, dist) in enumerate(zip(all_raw["ids"][0], all_raw["metadatas"][0], all_raw["distances"][0]), start=1):
             all_candidates_by_id[meta["source_id"]] = rt.normalize_candidate(i, cid, meta, dist)
@@ -184,6 +269,10 @@ class RagPipeline:
     def answer(self, query: str, debug: bool = False, oracle_source_id: Optional[str] = None) -> Dict[str, Any]:
         """``oracle_source_id`` bypasses the router (evaluation only: isolates retrieval/generation from routing errors)."""
         t0 = time.perf_counter()
+        if hasattr(self.generator, "reset_request_state"):
+            self.generator.reset_request_state()
+        if hasattr(self.retriever, "reset_request_state"):
+            self.retriever.reset_request_state()
         timings: Dict[str, float] = {}
         dbg: Dict[str, Any] = {"config": self.cfg.to_dict(), "oracle_routing": oracle_source_id is not None}
         out: Dict[str, Any] = {"schema_version": SCHEMA_VERSION, "query": query, "status": None, "answer": None, "reason_code": None, "message": None,
@@ -194,19 +283,29 @@ class RagPipeline:
         t = time.perf_counter()
         card: Any = None
         q_emb: Any = None
+        rerank_hits_cache: Dict[Any, Any] = {}
         if oracle_source_id:
             card = self.cards.get(oracle_source_id)
             if card is None:
                 raise KeyError(f"unknown card {oracle_source_id}")
         else:
-            outcome = route_to_page(query, self.backend, self.ctx.page_index, top_k=self.cfg.top_k_cards, selector=select_top_ranked)
+            if query and query.strip() and hasattr(self.retriever, "embed"):
+                q_emb = self.retriever.embed([query.strip()])
+            outcome = route_to_page(
+                query,
+                self.backend,
+                self.ctx.page_index,
+                top_k=self.cfg.top_k_cards,
+                selector=select_top_ranked,
+                query_embedding=q_emb,
+            )
             candidates = list(outcome.candidates)
             if getattr(self.cfg, "code_aware_router", False):
-                candidates = self._inject_code_aware_candidates(query, candidates)
+                candidates = self._inject_code_aware_candidates(query, candidates, query_embedding=q_emb)
 
             if getattr(self.cfg, "rerank_router", False) and candidates:
                 import phase13_reranker as PR13
-                if hasattr(self.retriever, "embed"):
+                if q_emb is None and hasattr(self.retriever, "embed"):
                     q_emb = self.retriever.embed([query])
                 card, scored = PR13.rerank_candidates(
                     query,
@@ -221,6 +320,8 @@ class RagPipeline:
                     phrase_reranker=getattr(self.cfg, "phrase_reranker", False),
                     phrase_min_corroboration=getattr(self.cfg, "phrase_min_corroboration", 1),
                     full_page_coverage=getattr(self.cfg, "full_page_coverage", False),
+                    k_chunks=self.cfg.k_chunks,
+                    hits_out=rerank_hits_cache,
                 )
                 mode_str = f"router_reranked_top{self.cfg.top_k_cards}"
                 if getattr(self.cfg, "code_aware_router", False):
@@ -273,13 +374,17 @@ class RagPipeline:
 
         # ---- 5. identity-constrained retrieval -------------------------------------------------------------------------
         t = time.perf_counter()
-        hits = self.retriever.retrieve_in_page(
-            query,
-            identity.effective_guide_id,
-            identity.effective_page_id,
-            top_k=self.cfg.k_chunks,
-            query_embedding=q_emb,
-        )
+        win_page_key_k = (identity.effective_guide_id, identity.effective_page_id, self.cfg.k_chunks)
+        if win_page_key_k in rerank_hits_cache:
+            hits = list(rerank_hits_cache[win_page_key_k][: self.cfg.k_chunks])
+        else:
+            hits = self.retriever.retrieve_in_page(
+                query,
+                identity.effective_guide_id,
+                identity.effective_page_id,
+                top_k=self.cfg.k_chunks,
+                query_embedding=q_emb,
+            )
         timings["retrieve_ms"] = (time.perf_counter() - t) * 1000
         dbg["retrieved"] = [h.to_dict(with_text=False) for h in hits]
         if not hits:
@@ -307,6 +412,12 @@ class RagPipeline:
         cit_norm = getattr(self.cfg, "citation_normalization", False) or getattr(self.cfg, "phase16_context_experiment", False)
         report = verify_grounding(gen.text, context, in_page_grounding=in_page, citation_normalization=cit_norm)
         dbg["generation"] = {"generator": gen.generator, "refused": gen.refused, "raw_text": gen.raw_text, "prompt": gen.prompt}
+        if getattr(gen, "telemetry", None):
+            dbg["generation"]["telemetry"] = dict(gen.telemetry)
+            if "queue_wait_ms" in gen.telemetry:
+                timings["queue_wait_ms"] = float(gen.telemetry["queue_wait_ms"])
+        if getattr(gen, "evidence", None) is not None:
+            dbg["evidence"] = gen.evidence
         dbg["grounding"] = report.to_dict()
         if gen.refused or report.refusal:
             out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, None, entry)
@@ -390,5 +501,11 @@ def build_pipeline(generator: str = "extractive", llm_client: Any = None, config
     backend = rt.ChromaCardBackend(embedder=embed)
     retriever = PR.PageRetriever.from_store(embed=embed)
     ctx = pid.IdentityContext.from_root(root)
-    gen = ExtractiveGenerator() if generator == "extractive" else LLMGenerator(llm_client or OllamaClient(), name="ollama" if llm_client is None else "llm")
+    client = llm_client
+    if generator != "extractive" and client is None:
+        client = OllamaClient(
+            num_predict=getattr(config, "ollama_num_predict", None),
+            keep_alive=getattr(config, "ollama_keep_alive", None),
+        )
+    gen = ExtractiveGenerator() if generator == "extractive" else LLMGenerator(client, name="ollama" if llm_client is None else "llm")
     return RagPipeline(backend, retriever, ctx, PageCorpusIndex.from_dir(), gen, count, config=config)

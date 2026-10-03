@@ -111,6 +111,7 @@ def score_candidate(
     phrase_match: float = 0.0,
     tech_regime: Optional[bool] = None,
     full_page_coverage: bool = False,
+    k_chunks: int = 3,
 ) -> ScoredCandidate:
     qterms = qterms if qterms is not None else T.terms(query)
     if tech_regime is None:
@@ -135,18 +136,24 @@ def score_candidate(
     if ingested:
         try:
             page_key = (identity.effective_guide_id, identity.effective_page_id)
-            if hits_cache is not None and page_key in hits_cache:
-                hits = hits_cache[page_key]
+            fetch_k = max(3, int(k_chunks))
+            page_key_k = (identity.effective_guide_id, identity.effective_page_id, fetch_k)
+            if hits_cache is not None and page_key_k in hits_cache:
+                raw_hits = hits_cache[page_key_k]
+            elif hits_cache is not None and page_key in hits_cache and int(k_chunks) <= 3:
+                raw_hits = hits_cache[page_key]
             else:
-                hits = retriever.retrieve_in_page(
+                raw_hits = retriever.retrieve_in_page(
                     query,
                     identity.effective_guide_id,
                     identity.effective_page_id,
-                    top_k=3,
+                    top_k=fetch_k,
                     query_embedding=query_embedding,
                 )
                 if hits_cache is not None:
-                    hits_cache[page_key] = hits
+                    hits_cache[page_key] = raw_hits
+                    hits_cache[page_key_k] = raw_hits
+            hits = list(raw_hits)[:3] if raw_hits else []
             if hits:
                 page_sim = round(max(h.similarity for h in hits), 4)
                 note = f"page_hits={len(hits)}_top_chunk_sim={page_sim}"
@@ -234,12 +241,13 @@ def unique_phrase_page_map(phrases: Sequence[str], corpus: Any, min_corroboratio
     if not phrases or not hasattr(corpus, "entries") or not hasattr(corpus, "page_text"):
         return out
     page_texts: Dict[str, str] = {}
+    has_low = hasattr(corpus, "page_text_lower")
     for sid in sorted(corpus.entries):
         if corpus.entries[sid].get("corpus_status") != PC.S_INGESTED:
             continue
-        txt = corpus.page_text(sid)
+        txt = corpus.page_text_lower(sid) if has_low else (corpus.page_text(sid) or "").lower()
         if txt:
-            page_texts[sid] = txt.lower()
+            page_texts[sid] = txt
     if not page_texts:
         return out
     by_page: Dict[str, List[str]] = {}
@@ -251,6 +259,14 @@ def unique_phrase_page_map(phrases: Sequence[str], corpus: Any, min_corroboratio
         if len(owned) >= min_corroboration:
             out.update({ph: page for ph in owned})
     return out
+
+
+def _can_batch_retrieve(retriever: Any) -> bool:
+    return (
+        hasattr(retriever, "retrieve_many_pages")
+        and "retrieve_in_page" not in getattr(retriever, "__dict__", {})
+        and "_query" not in getattr(retriever, "__dict__", {})
+    )
 
 
 def rerank_candidates(
@@ -266,6 +282,8 @@ def rerank_candidates(
     phrase_reranker: bool = False,
     phrase_min_corroboration: int = 1,
     full_page_coverage: bool = False,
+    k_chunks: int = 3,
+    hits_out: Optional[Dict[Tuple[str, str], Any]] = None,
 ) -> Tuple[CardCandidate, List[ScoredCandidate]]:
     """Rerank the top_k_evaluate candidates using page evidence and return (selected_card, scored_candidates)."""
     if not candidates:
@@ -295,7 +313,36 @@ def rerank_candidates(
     if query_embedding is None and hasattr(retriever, "embed"):
         query_embedding = retriever.embed([query])
 
-    hits_cache: Dict[Tuple[str, str], Any] = {}
+    hits_cache: Dict[Tuple[Any, ...], Any] = hits_out if hits_out is not None else {}
+
+    if _can_batch_retrieve(retriever):
+        fetch_k = max(3, int(k_chunks))
+        pages_to_fetch: List[Tuple[str, str]] = []
+        for cand in to_eval:
+            card_obj = cards_map.get(cand.source_id, {})
+            ident = pid.resolve_identity(card_obj if card_obj else cand, ctx)
+            entry = corpus.entry(cand.source_id) or {}
+            ingested = bool(
+                entry.get("corpus_status") == "ingested"
+                and ident.effective_guide_id
+                and ident.effective_page_id
+            )
+            if ingested:
+                pk = (str(ident.effective_guide_id), str(ident.effective_page_id))
+                pk_k = (pk[0], pk[1], fetch_k)
+                if pk_k not in hits_cache and pk not in pages_to_fetch:
+                    pages_to_fetch.append(pk)
+        if pages_to_fetch:
+            batched = retriever.retrieve_many_pages(
+                query,
+                pages_to_fetch,
+                top_k=fetch_k,
+                query_embedding=query_embedding,
+            )
+            for pk, raw_hits in batched.items():
+                hits_list = list(raw_hits)
+                hits_cache[pk] = hits_list
+                hits_cache[(pk[0], pk[1], fetch_k)] = hits_list
 
     scored: List[ScoredCandidate] = []
     for cand in to_eval:
@@ -316,6 +363,7 @@ def rerank_candidates(
             phrase_match=p_match,
             tech_regime=tech_regime,
             full_page_coverage=full_page_coverage,
+            k_chunks=k_chunks,
         )
         scored.append(sc)
 

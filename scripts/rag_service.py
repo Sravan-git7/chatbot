@@ -19,6 +19,8 @@ Contract rules (all tested in ``tests/test_phase11_service.py`` / ``tests/test_p
 """
 from __future__ import annotations
 
+from collections import deque
+import copy
 import re
 import sys
 import threading
@@ -96,16 +98,96 @@ def resolve_conversation_id(conversation_id: Optional[str]) -> str:
     return conversation_id
 
 
-class GeneratorGuard:
-    """Wraps the pipeline's generator so that an exception inside generation is reported as ``GeneratorFailure`` (and never as any other status)."""
+DEFAULT_GENERATION_CONCURRENCY = 1
+MAX_CONCURRENT_REQUESTS = 4
 
-    def __init__(self, inner: Any) -> None:
+
+class _FIFOBoundedSemaphore:
+    """Fair FIFO bounded semaphore so concurrent workers acquire permits in arrival order without starvation."""
+
+    def __init__(self, value: int = 1) -> None:
+        if value < 1:
+            raise ValueError("Semaphore initial value must be >= 1")
+        self._value = int(value)
+        self._max_value = int(value)
+        self._lock = threading.Lock()
+        self._waiters: deque[threading.Event] = deque()
+
+    def acquire(self, blocking: bool = True, timeout: Optional[float] = None) -> bool:
+        with self._lock:
+            if self._value > 0 and not self._waiters:
+                self._value -= 1
+                return True
+            if not blocking:
+                return False
+            ev = threading.Event()
+            self._waiters.append(ev)
+        if not ev.wait(timeout=timeout):
+            with self._lock:
+                if ev in self._waiters:
+                    self._waiters.remove(ev)
+                    return False
+                return True
+        return True
+
+    def release(self) -> None:
+        with self._lock:
+            if self._waiters:
+                ev = self._waiters.popleft()
+                ev.set()
+                return
+            if self._value >= self._max_value:
+                raise ValueError("Semaphore released too many times")
+            self._value += 1
+
+    def __enter__(self) -> "_FIFOBoundedSemaphore":
+        self.acquire()
+        return self
+
+    def __exit__(self, exc_type: Any, exc: Any, tb: Any) -> None:
+        self.release()
+
+
+class GeneratorGuard:
+    """Wraps the pipeline's generator so that an exception inside generation is reported as ``GeneratorFailure`` (and never as any other status).
+    When wrapping a raw non-extractive generator (without ``EvidenceGuard``), gates LLM calls with ``gen_sem``.
+    When wrapping ``EvidenceGuard``, shares ``gen_sem`` so pre-check and post-check run outside the generation lock.
+    """
+
+    def __init__(self, inner: Any, gen_sem: Optional[threading.BoundedSemaphore] = None) -> None:
         self.inner = inner
         self.name = getattr(inner, "name", "generator")
+        self._gen_sem = gen_sem
+        if gen_sem is not None and hasattr(inner, "_gen_sem"):
+            inner._gen_sem = gen_sem
+            inner._llm_lock = gen_sem
+
+    def reset_request_state(self) -> None:
+        if hasattr(self.inner, "reset_request_state"):
+            self.inner.reset_request_state()
+        elif hasattr(self.inner, "last"):
+            self.inner.last = None
 
     def generate(self, question: str, context: Any) -> Any:
         try:
-            return self.inner.generate(question, context)
+            if hasattr(self.inner, "_gen_sem") or getattr(self.inner, "name", "") == "extractive" or self._gen_sem is None:
+                return self.inner.generate(question, context)
+            if self._gen_sem.acquire(blocking=False):
+                queue_wait_ms = 0.0
+            else:
+                t_wait0 = time.perf_counter()
+                self._gen_sem.acquire()
+                queue_wait_ms = round((time.perf_counter() - t_wait0) * 1000.0, 3)
+            try:
+                res = self.inner.generate(question, context)
+            finally:
+                self._gen_sem.release()
+            if hasattr(res, "telemetry"):
+                raw_tel = getattr(res, "telemetry", None)
+                tel = dict(raw_tel) if raw_tel is not None else {}
+                tel.setdefault("queue_wait_ms", queue_wait_ms)
+                res.telemetry = tel
+            return res
         except Exception as e:                                       # noqa: BLE001 - re-raised as a typed, controlled failure
             raise GeneratorFailure(f"The answer generator failed ({type(e).__name__}). No answer was produced.") from e
 
@@ -164,36 +246,107 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
 
 
 class RagService:
-    """Holds one pipeline (guarded generator) and serialises calls: the embedder / Chroma client are not documented as thread-safe."""
+    """Holds one pipeline (guarded generator) with bounded request concurrency and fine-grained generation locking.
+    Deterministic routing, retrieval, context construction, EvidenceGuard pre-check,
+    EvidenceGuard post-check, grounding verification, and response assembly execute concurrently
+    up to ``max_concurrency`` (default 4); only actual LLM generation acquires ``_gen_sem`` (default 1).
+    """
 
-    def __init__(self, pipeline: Any, generator: str) -> None:
+    def __init__(
+        self,
+        pipeline: Any,
+        generator: str,
+        max_concurrency: int = MAX_CONCURRENT_REQUESTS,
+        generation_concurrency: int = DEFAULT_GENERATION_CONCURRENCY,
+        *,
+        coarse_lock: bool = False,
+    ) -> None:
         import rag_pipeline as RP
         self.generator_name = generator
-        self._evidence_gen = pipeline.generator                      # Phase 11.1: exposes ``.last`` (the evidence-sufficiency record of the latest call)
-        self.pipeline = RP.RagPipeline(pipeline.backend, pipeline.retriever, pipeline.ctx, pipeline.corpus, GeneratorGuard(pipeline.generator), pipeline.count_tokens,
-                                       cards=list(pipeline.cards.values()), config=pipeline.cfg)
+        self.max_concurrency = max(1, int(max_concurrency))
+        self.generation_concurrency = max(1, int(generation_concurrency))
+        self.coarse_lock = bool(coarse_lock)
+        self._request_sem = _FIFOBoundedSemaphore(self.max_concurrency)
+        self._gen_sem = _FIFOBoundedSemaphore(self.generation_concurrency)
         self._lock = threading.Lock()
+        self._evidence_gen = pipeline.generator
+        self.pipeline = RP.RagPipeline(
+            pipeline.backend,
+            pipeline.retriever,
+            pipeline.ctx,
+            pipeline.corpus,
+            GeneratorGuard(pipeline.generator, gen_sem=self._gen_sem),
+            pipeline.count_tokens,
+            cards=list(pipeline.cards.values()),
+            config=pipeline.cfg,
+        )
 
     def info(self) -> Dict[str, Any]:
         entries = self.pipeline.corpus.entries
         return {"generator": self.generator_name, "topics": len(self.pipeline.cards),
                 "pages_available": sum(1 for e in entries.values() if e.get("corpus_status") == "ingested")}
 
+    def _reset_request_state(self) -> None:
+        if hasattr(self._evidence_gen, "reset_request_state"):
+            self._evidence_gen.reset_request_state()
+        elif hasattr(self._evidence_gen, "last"):
+            self._evidence_gen.last = None
+        if hasattr(self.pipeline.retriever, "reset_request_state"):
+            self.pipeline.retriever.reset_request_state()
+        elif hasattr(self.pipeline.retriever, "last_promoted"):
+            self.pipeline.retriever.last_promoted = None
+
+    def _run_pipeline_request(self, q: str, queue_wait_ms: Optional[float] = None) -> tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
+        self._reset_request_state()
+        raw = self.pipeline.answer(q, debug=True)
+        dbg_dict = raw.get("debug")
+        evidence: Optional[Dict[str, Any]] = None
+        if isinstance(dbg_dict, dict) and "evidence" in dbg_dict:
+            ev_raw = dbg_dict.pop("evidence", None)
+            if ev_raw is not None:
+                evidence = dict(ev_raw)
+        elif hasattr(self._evidence_gen, "last") and self._evidence_gen.last is not None:
+            evidence = dict(self._evidence_gen.last)
+        timings = raw.get("timings_ms")
+        if isinstance(timings, dict):
+            if queue_wait_ms is not None:
+                timings["queue_wait_ms"] = round(max(float(timings.get("queue_wait_ms", 0.0)), float(queue_wait_ms)), 2)
+            else:
+                timings.setdefault("queue_wait_ms", 0.0)
+        if self.generator_name == "extractive" and raw["status"] == "answered":
+            chain = support_chain(raw["answer"], raw.get("debug") or {})
+            evidence = dict(evidence or {}, support_chain=chain)
+            if not chain["ok"]:                                      # support cannot be established -> abstain, never "answered"
+                raw = dict(raw, status="insufficient_context", answer=None, reason_code="SUPPORT_CHAIN_FAILED", citations={"answer_sources": []})
+        return raw, evidence
+
     def ask(self, question: Any, conversation_id: Optional[str] = None, debug: bool = False) -> Dict[str, Any]:
         q = clean_question(question)
         cid = resolve_conversation_id(conversation_id)
         t0 = time.perf_counter()
         try:
-            with self._lock:
-                if hasattr(self._evidence_gen, "last"):
-                    self._evidence_gen.last = None
-                raw = self.pipeline.answer(q, debug=True)
-                evidence = getattr(self._evidence_gen, "last", None)
-                if self.generator_name == "extractive" and raw["status"] == "answered":
-                    chain = support_chain(raw["answer"], raw.get("debug") or {})
-                    evidence = dict(evidence or {}, support_chain=chain)
-                    if not chain["ok"]:                              # support cannot be established -> abstain, never "answered"
-                        raw = dict(raw, status="insufficient_context", answer=None, reason_code="SUPPORT_CHAIN_FAILED", citations={"answer_sources": []})
+            if self.coarse_lock:
+                if self._lock.acquire(blocking=False):
+                    q_wait = 0.0
+                else:
+                    t_w0 = time.perf_counter()
+                    self._lock.acquire()
+                    q_wait = (time.perf_counter() - t_w0) * 1000.0
+                try:
+                    raw, evidence = self._run_pipeline_request(q, queue_wait_ms=q_wait)
+                finally:
+                    self._lock.release()
+            else:
+                if self._request_sem.acquire(blocking=False):
+                    q_wait = 0.0
+                else:
+                    t_w0 = time.perf_counter()
+                    self._request_sem.acquire()
+                    q_wait = (time.perf_counter() - t_w0) * 1000.0
+                try:
+                    raw, evidence = self._run_pipeline_request(q, queue_wait_ms=q_wait)
+                finally:
+                    self._request_sem.release()
         except ServiceError:
             raise
         except Exception as e:                                       # noqa: BLE001
@@ -222,8 +375,9 @@ def production_pipeline_config():
         citation_normalization=True,
         relaxed_context_gate=True,
         evidence_frame_normalization=False,
-        # Phase 18 experimental flags stay OFF until the Phase 18 adoption rules pass:
-        phrase_reranker=False,
+        # Phase 18/19A adopted production configuration (e1a_v2_corroborated, R1-R4 PASS):
+        phrase_reranker=True,
+        phrase_min_corroboration=2,
         full_page_coverage=False,
         citation_repair=False,
     )
