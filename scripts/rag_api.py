@@ -12,6 +12,9 @@ Errors always have the shape ``{"error": {"code": str, "message": str}}``: ``inv
 is stored; every question is answered independently (the pipeline has no conversational memory).
 
 The generator is chosen explicitly (``--generator`` / ``RAG_GENERATOR``); there is no fallback from one generator to another.
+
+Static responses carry a fixed Content-Security-Policy; only ``frame-ancestors`` is deployment-dependent. The default is
+``'none'``; a deployment that embeds the UI in a frame opts in with ``RAG_CSP_FRAME_ANCESTORS`` (space-separated sources).
 """
 from __future__ import annotations
 
@@ -36,7 +39,20 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_STATIC_DIR = ROOT / "web" / "dist"
 DEFAULT_CORS = ("http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:4173", "http://127.0.0.1:4173", "http://localhost:8000", "http://127.0.0.1:8000")
 MAX_BODY_BYTES = 16 * 1024
-CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+# Only ``frame-ancestors`` is deployment-dependent: the shipped default stays 'none' (clickjacking protection unchanged).
+# A deployment that embeds the UI in a frame (e.g. an internal preview pane) opts in explicitly via
+# RAG_CSP_FRAME_ANCESTORS="'self' https://host.example" - a space-separated CSP source list.
+FRAME_ANCESTORS_ENV = "RAG_CSP_FRAME_ANCESTORS"
+CSP_TEMPLATE = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors {frame_ancestors}"
+
+
+def build_csp(frame_ancestors: Optional[str] = None) -> str:
+    """The Content-Security-Policy for static (non-API) responses; ``frame-ancestors`` is overridable, everything else is fixed."""
+    value = frame_ancestors if frame_ancestors is not None else os.environ.get(FRAME_ANCESTORS_ENV)
+    return CSP_TEMPLATE.format(frame_ancestors=(value or "'none'").strip() or "'none'")
+
+
+CSP = build_csp()
 
 
 class ChatRequest(BaseModel):
@@ -104,6 +120,7 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
     gen = generator or os.environ.get("RAG_GENERATOR", "extractive")
     origins = list(cors_origins) if cors_origins is not None else ([o.strip() for o in os.environ["RAG_CORS_ORIGINS"].split(",") if o.strip()] if os.environ.get("RAG_CORS_ORIGINS") else list(DEFAULT_CORS))
     debug_on = enable_debug if enable_debug is not None else os.environ.get("RAG_ENABLE_DEBUG", "1") != "0"
+    csp = build_csp()
     sdir = Path(static_dir) if static_dir is not None else Path(os.environ.get("RAG_STATIC_DIR", DEFAULT_STATIC_DIR))
     state: Dict[str, Any] = {"service": service, "error": None}
 
@@ -131,7 +148,7 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         if request.url.path.startswith("/api/"):
             resp.headers.setdefault("Cache-Control", "no-store")
         else:
-            resp.headers.setdefault("Content-Security-Policy", CSP)
+            resp.headers.setdefault("Content-Security-Policy", csp)
         return resp
 
     @app.exception_handler(S.ServiceError)
