@@ -41,15 +41,26 @@ export function Thinking() {
           <span className="dot sura-dot sura-dot-2" style={{ animationDelay: '.15s' }} />
           <span className="dot sura-dot sura-dot-3" style={{ animationDelay: '.3s' }} />
         </span>
-        <span key={stageIdx} data-testid="thinking-stage" className="font-medium text-stone-700 animate-stage-fade">
-          {THINKING_STAGES[stageIdx]}
+        {/*
+          The backend reports only one in-flight operation, so the headline states exactly that.
+          The line below is a decorative UI hint of the work in progress - it never claims a step finished.
+        */}
+        <span className="font-medium text-stone-700">
+          Searching the SAP Utilities documentation and preparing an answer
         </span>
       </div>
       <div className="mt-2.5 h-1 w-full rounded-full sura-shimmer-track" aria-hidden="true">
         <div className="sura-shimmer-bar rounded-full" />
       </div>
-      <div className="mt-1.5 text-[11px] text-stone-400">
-        Searching the SAP Utilities documentation and verifying citations…
+      <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-stone-400">
+        <span
+          key={stageIdx}
+          data-testid="thinking-stage"
+          className="animate-stage-fade"
+          aria-hidden="true"
+        >
+          {THINKING_STAGES[stageIdx]}
+        </span>
       </div>
     </div>
   )
