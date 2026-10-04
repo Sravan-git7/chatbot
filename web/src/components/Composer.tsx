@@ -42,7 +42,7 @@ export default function Composer({ disabled, onSend, focusKey }: Props) {
         e.preventDefault()
         submit()
       }}
-      className="mx-auto w-full max-w-3xl px-3 pb-3 sm:px-4"
+      className="mx-auto w-full max-w-3xl px-3 pb-3 sm:px-4 xl:max-w-[52rem]"
       aria-label="Ask a question"
     >
       <div className="flex items-end gap-2 rounded-3xl border border-stone-300 bg-white py-2 pl-4 pr-2 shadow-sm transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15 focus-within:shadow-md">

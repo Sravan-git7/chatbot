@@ -28,14 +28,14 @@ export function Sources({
   }
 
   return (
-    <section aria-label="Sources" className="mt-5 sura-sources-reveal">
+    <section aria-label="Sources" className="mt-5 sm:mt-6 sura-sources-reveal">
       <div className="mb-2 flex items-center justify-between">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-500">
           Sources ({groups.length})
         </h3>
         <span className="text-[11px] text-stone-400">SAP Help Portal</span>
       </div>
-      <ul className="space-y-2">
+      <ul className={groups.length > 1 ? "grid gap-2 lg:grid-cols-2 lg:auto-rows-min" : "space-y-2"}>
         {groups.map((g) => {
           const active = !!highlight && g.markers.includes(highlight)
           const hasValidUrl = isHttpUrl(g.url)
@@ -44,7 +44,7 @@ export function Sources({
             <li
               key={g.key}
               tabIndex={-1}
-              className={`rounded-xl border px-3.5 py-2.5 text-sm transition-all duration-150 outline-none ${
+              className={`rounded-xl border px-3.5 py-3 text-sm transition-all duration-150 outline-none sm:px-4 ${
                 active
                   ? 'border-accent bg-accent-soft ring-2 ring-accent/20 shadow-xs sura-cite-active'
                   : 'border-stone-200 bg-white hover:border-stone-300'
@@ -64,16 +64,16 @@ export function Sources({
                     ))}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <div className="font-medium text-stone-800">{g.title}</div>
+                    <div className="font-medium leading-snug text-stone-800">{g.title}</div>
                     {g.section && g.section !== g.title && (
-                      <div className="text-xs text-stone-500">{g.section}</div>
+                      <div className="mt-0.5 text-xs leading-relaxed text-stone-500">{g.section}</div>
                     )}
                     {hasValidUrl ? (
                       <a
                         href={g.url!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-0.5 inline-flex max-w-full items-center gap-1.5 text-xs text-accent underline-offset-2 hover:underline"
+                        className="mt-1 inline-flex max-w-full items-center gap-1.5 text-xs text-accent underline-offset-2 hover:underline"
                         title={g.url!}
                       >
                         <span className="truncate">{displayUrl(g.url!)}</span>

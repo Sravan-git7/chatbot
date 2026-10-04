@@ -26,7 +26,7 @@ export default function Welcome({
   return (
     <div
       data-testid="welcome-screen"
-      className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-8 sm:py-10 text-center animate-answer-reveal"
+      className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-10 text-center sm:py-14 xl:max-w-[52rem] animate-answer-reveal"
     >
       <div
         className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-sm font-bold text-white shadow-xs"
@@ -44,11 +44,11 @@ export default function Welcome({
         <span>Hi, I'm SURA — your SAP Utilities documentation assistant</span>
       </div>
 
-      <h1 className="text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+      <h1 className="text-balance text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
         Ask SAP Utilities anything.
       </h1>
 
-      <p className="mt-2.5 max-w-xl text-[15px] leading-relaxed text-stone-600">
+      <p className="mt-2.5 max-w-xl text-answer text-stone-600">
         Hi, I'm SURA. I'm your SAP Utilities documentation assistant. Ask me about billing, invoicing,
         contract accounts, business partners, and other topics covered by the documentation.
       </p>
@@ -82,7 +82,7 @@ export default function Welcome({
               type="button"
               disabled={disabled}
               onClick={() => onPick(p)}
-              className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-left text-sm text-stone-800 shadow-2xs transition enabled:hover:border-accent enabled:hover:bg-accent-soft/35 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
+              className="rounded-2xl border border-stone-200 bg-white px-4 py-3.5 text-left text-ui leading-snug text-stone-800 shadow-2xs transition enabled:hover:border-accent enabled:hover:bg-accent-soft/35 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
             >
               {p}
             </button>
@@ -94,7 +94,7 @@ export default function Welcome({
       <section
         data-testid="explore-topics"
         aria-label="Explore SAP Utilities"
-        className="mt-6 w-full max-w-2xl rounded-2xl border border-stone-200 bg-white p-4 text-left shadow-2xs"
+        className="mt-7 w-full max-w-2xl rounded-2xl border border-stone-200 bg-white p-4 text-left shadow-2xs sm:p-5"
       >
         <div className="mb-2.5 flex flex-wrap items-center justify-between gap-1">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-500">

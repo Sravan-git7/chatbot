@@ -242,7 +242,7 @@ export default function App() {
           aria-live="off"
         >
           {current ? (
-            <div className="mx-auto w-full max-w-3xl space-y-7 px-3 pb-10 pt-6 sm:px-4">
+            <div className="mx-auto w-full max-w-3xl space-y-6 px-3 pb-12 pt-6 sm:space-y-7 sm:px-4 sm:pt-8 xl:max-w-[52rem]">
               {current.messages.map((m, idx) => {
                 const prevUser =
                   m.role === 'assistant'

@@ -102,7 +102,7 @@ export default function MessageView({
   if (message.role === 'user') {
     return (
       <div className="flex justify-end animate-answer-reveal" data-testid="user-message">
-        <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl bg-stone-200/70 px-4 py-2.5 text-[15px] leading-relaxed text-stone-900">
+        <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl bg-stone-200/70 px-4 py-2.5 text-answer text-stone-900 lg:max-w-[75%] xl:text-base">
           {message.content}
         </div>
       </div>
@@ -123,7 +123,7 @@ export default function MessageView({
     r && r.status === 'answered' ? getFollowUpQuestions(questionText ?? '', r) : []
 
   return (
-    <div className="flex gap-3 sm:gap-4" data-testid="assistant-message">
+    <div className="flex gap-3 sm:gap-4 lg:gap-5" data-testid="assistant-message">
       <div
         className="mt-1 hidden h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent text-[11px] font-bold text-white sm:flex"
         aria-hidden="true"
@@ -193,7 +193,7 @@ export default function MessageView({
               <div
                 data-testid="follow-up-questions"
                 aria-label="You might also want to know"
-                className="mt-4 rounded-xl border border-stone-200/80 bg-white/80 p-3 sura-followups-reveal"
+                className="mt-5 rounded-xl border border-stone-200/80 bg-white/80 p-3.5 sura-followups-reveal"
               >
                 <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-stone-500">
                   You might also want to know
@@ -218,7 +218,7 @@ export default function MessageView({
 
         {r && r.status !== 'answered' && (
           <div
-            className="rounded-xl border border-amber-200 bg-amber-50/70 px-4 py-3 text-[15px] text-stone-800 animate-answer-reveal"
+            className="rounded-xl border border-amber-200 bg-amber-50/70 px-4 py-3 text-answer text-stone-800 xl:text-base animate-answer-reveal"
             data-testid="status-note"
             data-status={r.status}
           >
