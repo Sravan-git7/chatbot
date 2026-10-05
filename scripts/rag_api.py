@@ -23,10 +23,11 @@ import os
 import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Sequence
+from typing import Any, Callable, Dict, List, Literal, Optional, Sequence
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_service as S  # noqa: E402
+import rag_followup as FU  # noqa: E402  conversational follow-up resolution (query rewrite only; no retrieval code)
 
 from fastapi import FastAPI, Request  # noqa: E402
 from fastapi.exceptions import RequestValidationError  # noqa: E402
@@ -55,11 +56,19 @@ def build_csp(frame_ancestors: Optional[str] = None) -> str:
 CSP = build_csp()
 
 
+class ChatContext(BaseModel):
+    """Previous turns used only to resolve short context-dependent follow-up messages."""
+    model_config = ConfigDict(extra="forbid")
+    questions: List[str] = Field(default_factory=list, max_length=FU.MAX_QUESTIONS + 2)
+    answer: Optional[str] = Field(default=None, max_length=FU.MAX_ANSWER_CHARS)
+
+
 class ChatRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     message: str = Field(..., max_length=S.MAX_MESSAGE_CHARS * 2)
     conversation_id: Optional[str] = Field(default=None, max_length=128)
     debug: bool = False
+    context: Optional[ChatContext] = None
 
 
 class Source(BaseModel):
@@ -87,6 +96,11 @@ class Grounding(BaseModel):
     cited_markers: List[str] = []
 
 
+class ElaborationSection(BaseModel):
+    key: Literal["what_it_is_does", "how_it_works_relationships", "conditions_prerequisites", "key_details"]
+    lines: List[str] = Field(..., min_length=1)
+
+
 class Metadata(BaseModel):
     card_id: Optional[str] = None
     card_title: Optional[str] = None
@@ -98,6 +112,7 @@ class Metadata(BaseModel):
     pipeline_status: str
     reason_code: Optional[str] = None
     latency_ms: float
+    elaboration_sections: Optional[List[ElaborationSection]] = None
 
 
 class ChatResponse(BaseModel):
@@ -177,8 +192,11 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
     def chat(req: ChatRequest):
         if req.debug and not debug_on:
             return JSONResponse(error_body("debug_disabled", "Debug output is disabled on this server."), status_code=403)
-        result = current().ask(req.message, conversation_id=req.conversation_id, debug=req.debug)
+        context = req.context.model_dump(exclude_none=True) if req.context else None
+        result = current().ask(req.message, conversation_id=req.conversation_id, debug=req.debug, context=context)
         data = ChatResponse(**result).model_dump()                  # schema check: a malformed service result fails loudly instead of reaching the UI
+        if not data["metadata"].get("elaboration_sections"):
+            data["metadata"].pop("elaboration_sections", None)
         if not req.debug:
             data.pop("debug", None)
         return JSONResponse(data)

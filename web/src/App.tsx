@@ -5,6 +5,7 @@ import Composer from './components/Composer'
 import MessageView from './components/MessageView'
 import Sidebar from './components/Sidebar'
 import Welcome from './components/Welcome'
+import { turnContext } from './followup'
 import { loadConversations, loadSettings, newId, saveConversations, saveSettings, titleFrom } from './storage'
 import type { ChatError, Conversation, Health, Message, Settings } from './types'
 
@@ -102,8 +103,9 @@ export default function App() {
       })
       setCurrentId(convId)
       const startedAt = Date.now()
+      const context = turnContext(conversations.find((c) => c.id === convId) ?? null)
       try {
-        const result = await sendChat(text, convId, settingsRef.current.developerMode)
+        const result = await sendChat(text, convId, settingsRef.current.developerMode, { context })
         const elapsed = Date.now() - startedAt
         if (MIN_THINKING_MS > 0 && elapsed < MIN_THINKING_MS) {
           await new Promise((r) => setTimeout(r, MIN_THINKING_MS - elapsed))
@@ -117,16 +119,17 @@ export default function App() {
         patchMessage(convId, reply.id, { pending: false, error })
       }
     },
-    [currentId, patchMessage],
+    [currentId, patchMessage, conversations],
   )
 
   const retryMessage = useCallback(
-    async (convId: string, replyId: string, questionText: string) => {
+    async (convId: string, replyId: string, userMessageId: string, questionText: string) => {
       if (!questionText.trim() || pending) return
       patchMessage(convId, replyId, { pending: true, error: undefined })
       const startedAt = Date.now()
+      const context = turnContext(conversations.find((c) => c.id === convId) ?? null, userMessageId)
       try {
-        const result = await sendChat(questionText, convId, settingsRef.current.developerMode)
+        const result = await sendChat(questionText, convId, settingsRef.current.developerMode, { context })
         const elapsed = Date.now() - startedAt
         if (MIN_THINKING_MS > 0 && elapsed < MIN_THINKING_MS) {
           await new Promise((r) => setTimeout(r, MIN_THINKING_MS - elapsed))
@@ -140,7 +143,7 @@ export default function App() {
         patchMessage(convId, replyId, { pending: false, error })
       }
     },
-    [pending, patchMessage],
+    [pending, patchMessage, conversations],
   )
 
   const select = (id: string) => {
@@ -244,13 +247,14 @@ export default function App() {
           {current ? (
             <div className="mx-auto w-full max-w-3xl space-y-6 px-3 pb-12 pt-6 sm:space-y-7 sm:px-4 sm:pt-8 xl:max-w-[52rem]">
               {current.messages.map((m, idx) => {
-                const prevUser =
+                const prevUserMessage =
                   m.role === 'assistant'
                     ? current.messages
                         .slice(0, idx)
                         .reverse()
-                        .find((x) => x.role === 'user')?.content ?? ''
-                    : ''
+                        .find((x) => x.role === 'user') ?? null
+                    : null
+                const prevUser = prevUserMessage?.content ?? ''
                 return (
                   <MessageView
                     key={m.id}
@@ -258,7 +262,7 @@ export default function App() {
                     developerMode={settings.developerMode}
                     questionText={prevUser}
                     onAskFollowUp={send}
-                    onRetry={prevUser ? () => retryMessage(current.id, m.id, prevUser) : undefined}
+                    onRetry={prevUserMessage ? () => retryMessage(current.id, m.id, prevUserMessage.id, prevUser) : undefined}
                     disabled={pending}
                   />
                 )

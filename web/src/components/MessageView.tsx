@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { ApiStatus, Message } from '../types'
+import type { ApiStatus, ElaborationSectionKey, Message } from '../types'
 import { answerForClipboard, copyText, getFollowUpQuestions } from '../util'
 import DebugPanel from './DebugPanel'
 import Markdown from './Markdown'
@@ -9,6 +9,13 @@ const STATUS_HEADLINE: Record<Exclude<ApiStatus, 'answered'>, string> = {
   documentation_unavailable: 'Documentation unavailable',
   unable_to_verify: 'Unable to verify',
   out_of_scope: 'Out of scope',
+}
+
+const ELABORATION_SECTION_HEADINGS: Record<ElaborationSectionKey, string> = {
+  what_it_is_does: 'What it is / does',
+  how_it_works_relationships: 'How it works / relationships',
+  conditions_prerequisites: 'Important conditions or prerequisites',
+  key_details: 'Key details',
 }
 
 export const THINKING_STAGES = [
@@ -121,6 +128,20 @@ export default function MessageView({
 
   const followUps =
     r && r.status === 'answered' ? getFollowUpQuestions(questionText ?? '', r) : []
+  const elaborationSections = r?.metadata.elaboration_sections
+  const showElaborationSections = Boolean(
+    r?.status === 'answered' &&
+      Array.isArray(elaborationSections) &&
+      elaborationSections.length > 0 &&
+      elaborationSections.every(
+        (section) =>
+          Object.prototype.hasOwnProperty.call(ELABORATION_SECTION_HEADINGS, section.key) &&
+          Array.isArray(section.lines) &&
+          section.lines.length > 0 &&
+          section.lines.every((line) => typeof line === 'string' && line.trim().length > 0),
+      ) &&
+      elaborationSections.flatMap((section) => section.lines).join('\n') === r.answer,
+  )
 
   return (
     <div className="flex gap-3 sm:gap-4 lg:gap-5" data-testid="assistant-message">
@@ -170,11 +191,28 @@ export default function MessageView({
 
         {r && r.status === 'answered' && (
           <div className="animate-answer-reveal">
-            <Markdown
-              text={r.answer}
-              markers={new Set(r.sources.map((s) => s.marker).filter((m): m is string => !!m))}
-              onCite={cite}
-            />
+            {showElaborationSections && elaborationSections ? (
+              <div className="space-y-4" data-testid="elaboration-sections">
+                {elaborationSections.map((section, index) => (
+                  <section key={`${section.key}-${index}`} className="space-y-1.5">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-500">
+                      {ELABORATION_SECTION_HEADINGS[section.key]}
+                    </h3>
+                    <Markdown
+                      text={section.lines.join('\n')}
+                      markers={new Set(r.sources.map((s) => s.marker).filter((m): m is string => !!m))}
+                      onCite={cite}
+                    />
+                  </section>
+                ))}
+              </div>
+            ) : (
+              <Markdown
+                text={r.answer}
+                markers={new Set(r.sources.map((s) => s.marker).filter((m): m is string => !!m))}
+                onCite={cite}
+              />
+            )}
             <Sources messageId={message.id} sources={r.sources} highlight={highlight} />
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <CopyButton text={answerForClipboard(r.answer, r.sources)} />

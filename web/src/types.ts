@@ -26,6 +26,18 @@ export interface Grounding {
   cited_markers: string[]
 }
 
+export type ElaborationSectionKey =
+  | 'what_it_is_does'
+  | 'how_it_works_relationships'
+  | 'conditions_prerequisites'
+  | 'key_details'
+
+/** Exact answer lines grouped for display; headings are chosen by the UI, not part of the answer. */
+export interface ElaborationSection {
+  key: ElaborationSectionKey
+  lines: string[]
+}
+
 export interface Metadata {
   card_id: string | null
   card_title: string | null
@@ -37,6 +49,8 @@ export interface Metadata {
   pipeline_status: string
   reason_code: string | null
   latency_ms: number
+  /** Present only for an answered scoped extractive elaboration. */
+  elaboration_sections?: ElaborationSection[]
 }
 
 export interface ChatResult {
@@ -48,6 +62,12 @@ export interface ChatResult {
   topic_reference: TopicReference | null
   metadata: Metadata
   debug?: Record<string, unknown> | null
+}
+
+/** Previous turns sent only to resolve context-dependent follow-up wording. */
+export interface ChatContext {
+  questions: string[]
+  answer?: string
 }
 
 export interface Health {

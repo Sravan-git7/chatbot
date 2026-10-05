@@ -30,6 +30,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import rag_elaborate as EL  # noqa: E402  scoped follow-up elaboration (wider evidence, same gates; see the module docstring)
+import rag_followup as FU  # noqa: E402  conversational follow-up query resolution (pure; no retrieval code)
 
 SCHEMA_VERSION = "11.1"
 MAX_MESSAGE_CHARS = 2000
@@ -218,7 +220,8 @@ def support_chain(answer: str, dbg: Mapping[str, Any]) -> Dict[str, Any]:
 
 
 def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str, latency_ms: float, debug: bool = False,
-                   evidence: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
+                   evidence: Optional[Mapping[str, Any]] = None,
+                   presentation_sections: Optional[List[Mapping[str, Any]]] = None) -> Dict[str, Any]:
     """Translate one ``RagPipeline.answer`` dict (produced with ``debug=True``) into the public chat result."""
     pstatus = raw["status"]
     status = STATUS_MAP[pstatus]
@@ -237,6 +240,19 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     meta = {"card_id": topic.get("source_id") if routed else None, "card_title": topic.get("title") if routed else None,
             "identity_status": topic.get("identity_status") if routed else None, "page_available": (topic.get("corpus_status") == "ingested") if routed else None, "generator": generator, "grounded": status == ANSWERED and _grounding(dbg, pstatus)["ok"] is True,
             "grounding": _grounding(dbg, pstatus), "pipeline_status": pstatus, "reason_code": raw.get("reason_code"), "latency_ms": round(latency_ms, 1)}
+    if status == ANSWERED and presentation_sections:
+        safe_sections: List[Dict[str, Any]] = []
+        valid_sections = True
+        for section in presentation_sections:
+            key = section.get("key")
+            lines = section.get("lines")
+            if key not in EL.PRESENTATION_SECTION_KEYS or not isinstance(lines, list) or not lines or any(not isinstance(line, str) or not line.strip() for line in lines):
+                valid_sections = False
+                break
+            safe_sections.append({"key": key, "lines": list(lines)})
+        flattened = "\n".join(line for section in safe_sections for line in section["lines"])
+        if valid_sections and safe_sections and flattened == answer:
+            meta["elaboration_sections"] = safe_sections
     out: Dict[str, Any] = {"schema_version": SCHEMA_VERSION, "conversation_id": conversation_id, "status": status, "answer": answer, "sources": sources,
                            "topic_reference": reference, "metadata": meta}
     if debug:
@@ -296,9 +312,10 @@ class RagService:
         elif hasattr(self.pipeline.retriever, "last_promoted"):
             self.pipeline.retriever.last_promoted = None
 
-    def _run_pipeline_request(self, q: str, queue_wait_ms: Optional[float] = None) -> tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
+    def _run_pipeline_request(self, q: str, queue_wait_ms: Optional[float] = None,
+                              pipeline: Optional[Any] = None) -> tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
         self._reset_request_state()
-        raw = self.pipeline.answer(q, debug=True)
+        raw = (pipeline or self.pipeline).answer(q, debug=True)
         dbg_dict = raw.get("debug")
         evidence: Optional[Dict[str, Any]] = None
         if isinstance(dbg_dict, dict) and "evidence" in dbg_dict:
@@ -320,9 +337,38 @@ class RagService:
                 raw = dict(raw, status="insufficient_context", answer=None, reason_code="SUPPORT_CHAIN_FAILED", citations={"answer_sources": []})
         return raw, evidence
 
-    def ask(self, question: Any, conversation_id: Optional[str] = None, debug: bool = False) -> Dict[str, Any]:
+    def ask(self, question: Any, conversation_id: Optional[str] = None, debug: bool = False,
+            context: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
+        """Answer one question.
+
+        ``context`` carries the previous turns of the conversation (``{"questions": [...most recent first...],
+        "answer": str}``) and is used for two things, both of them scoped to a short context-dependent follow-up:
+        the message is rewritten into a standalone query built from the previous turn (``rag_followup``), and - when
+        the follow-up asks for more material (elaborate / explain in detail / tell me more / why / simplify / example /
+        what happens next / relate to X) - the pipeline runs once more with a wider evidence window and an
+        intent-aware selection (``rag_elaborate``, see the module docstring). Routing, the ranker, EvidenceGuard,
+        grounding and citation verification are the same objects and the same checks in both passes; the follow-up
+        pass may only return verbatim documentation sentences, and it refuses (honest abstention) when the
+        documentation holds nothing beyond what the user already saw. Standalone questions are left byte-identical and
+        always run the production pipeline exactly once.
+        """
         q = clean_question(question)
         cid = resolve_conversation_id(conversation_id)
+        follow_up = FU.resolve(q, context)
+        pipeline_query = follow_up["query"] if follow_up else q
+        scoped: Optional[Any] = None
+        if follow_up and self.generator_name == "extractive" and EL.is_elaboration_intent(follow_up["category"]):
+            # A follow-up that asks for more must not come back as the previous answer: run the same pipeline once with
+            # a wider evidence window and an intent-aware selection (rag_elaborate). Same routing, same ranker, same
+            # EvidenceGuard, same grounding/citation verification; for a pure follow-up the retrieval query is the
+            # anchor question itself, which is the query that already routed to this topic.
+            previous_answer = ""
+            if isinstance(context, Mapping) and isinstance(context.get("answer"), str):
+                previous_answer = context["answer"]
+            scoped = EL.scoped_pipeline(self.pipeline, follow_up["category"], previous_answer=previous_answer,
+                                        anchor=follow_up["anchor"],
+                                        new_terms=EL.new_terms_of(q, follow_up["anchor"]) if follow_up.get("form") == "message" else ())
+            pipeline_query = follow_up["anchor"] if follow_up.get("form") == "clause" else follow_up["query"]
         t0 = time.perf_counter()
         try:
             if self.coarse_lock:
@@ -333,7 +379,7 @@ class RagService:
                     self._lock.acquire()
                     q_wait = (time.perf_counter() - t_w0) * 1000.0
                 try:
-                    raw, evidence = self._run_pipeline_request(q, queue_wait_ms=q_wait)
+                    raw, evidence = self._run_pipeline_request(pipeline_query, queue_wait_ms=q_wait, pipeline=scoped)
                 finally:
                     self._lock.release()
             else:
@@ -344,14 +390,26 @@ class RagService:
                     self._request_sem.acquire()
                     q_wait = (time.perf_counter() - t_w0) * 1000.0
                 try:
-                    raw, evidence = self._run_pipeline_request(q, queue_wait_ms=q_wait)
+                    raw, evidence = self._run_pipeline_request(pipeline_query, queue_wait_ms=q_wait, pipeline=scoped)
                 finally:
                     self._request_sem.release()
         except ServiceError:
             raise
         except Exception as e:                                       # noqa: BLE001
             raise PipelineFailure(f"The retrieval pipeline failed ({type(e).__name__}). No answer was produced.") from e
-        return to_chat_result(raw, self.generator_name, cid, (time.perf_counter() - t0) * 1000, debug=debug, evidence=evidence)
+        if follow_up is not None and isinstance(raw.get("debug"), dict):
+            # Developer view only: it lands in the debug block (``to_chat_result`` returns that block only when asked).
+            view = FU.debug_view(follow_up, q)
+            if scoped is not None:
+                view["pass"] = "elaboration"
+                view["retrieval_query"] = pipeline_query
+                view["selected"] = [u.get("sentence") for u in (evidence or {}).get("selected") or []]
+            raw["debug"]["follow_up"] = view
+        presentation_sections = None
+        if scoped is not None and raw.get("status") == "answered" and (evidence or {}).get("elaborated") is True:
+            presentation_sections = (evidence or {}).get("presentation_sections")
+        return to_chat_result(raw, self.generator_name, cid, (time.perf_counter() - t0) * 1000, debug=debug, evidence=evidence,
+                              presentation_sections=presentation_sections)
 
 
 # Phase 18 - the VERIFIED production pipeline configuration (data/phase16/phase16_comparison.json,
@@ -395,7 +453,9 @@ def build_service(generator: str = "extractive") -> RagService:
 
 
 def answer_question(question: str, service: Optional[RagService] = None, generator: str = "extractive", conversation_id: Optional[str] = None,
-                    debug: bool = False) -> Dict[str, Any]:
-    """The single public entry point: validate, run the real pipeline, return the chat result (raises ``ServiceError`` subclasses)."""
+                    debug: bool = False, context: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
+    """The single public entry point: validate, run the real pipeline, return the chat result (raises ``ServiceError`` subclasses).
+
+    ``context`` is the previous turns, used only to resolve a context-dependent follow-up (see ``RagService.ask``)."""
     svc = service or build_service(generator)
-    return svc.ask(question, conversation_id=conversation_id, debug=debug)
+    return svc.ask(question, conversation_id=conversation_id, debug=debug, context=context)
