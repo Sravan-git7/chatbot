@@ -131,15 +131,60 @@ def _norm(message: str) -> str:
     return text.lower()
 
 
+def _one_edit_apart(left: str, right: str) -> bool:
+    """Whether two short words differ by at most one insertion, deletion, substitution, or adjacent transposition."""
+    if abs(len(left) - len(right)) > 1:
+        return False
+    i = j = edits = 0
+    while i < len(left) and j < len(right):
+        if left[i] == right[j]:
+            i += 1
+            j += 1
+            continue
+        edits += 1
+        if edits > 1:
+            return False
+        if len(left) == len(right):
+            # Treat one adjacent-key transposition as one typo ("elabroate").
+            if i + 1 < len(left) and j + 1 < len(right) and left[i] == right[j + 1] and left[i + 1] == right[j]:
+                i += 2
+                j += 2
+            else:
+                i += 1
+                j += 1
+        elif len(left) < len(right):
+            j += 1
+        else:
+            i += 1
+    if i < len(left) or j < len(right):
+        edits += 1
+    return edits <= 1
+
+
+def _is_bounded_elaboration_typo(text: str) -> bool:
+    """Recognise only a one-word, one-edit typo of ``elaborate``; never fuzzy-match phrases or topic words."""
+    if " " in text or not (len("elaborate") - 1 <= len(text) <= len("elaborate") + 1):
+        return False
+    # These are valid English inflections, not misspellings or requests for elaboration.
+    if text in {"elaborated", "elaborates"}:
+        return False
+    return _one_edit_apart(text, "elaborate")
+
+
 def classify(message: str) -> Optional[str]:
-    """The follow-up category of ``message``, or ``None`` when it stands on its own (the conservative default)."""
+    """The follow-up category of ``message``, or ``None`` when it stands on its own (the conservative default).
+
+    A single bounded edit of the one-word ``elaborate`` prompt is accepted so a typo in a prior turn cannot become a
+    false topic anchor. It remains context-dependent: :func:`resolve` still needs a usable earlier topic before it
+    rewrites anything. Longer phrases and domain words are never fuzzy-matched.
+    """
     text = _norm(message)
     if not text or len(text) > MAX_MESSAGE_CHARS:
         return None
     for pattern, category in _COMPILED:
         if pattern.match(text):
             return category
-    return None
+    return "elaborate" if _is_bounded_elaboration_typo(text) else None
 
 
 def _carries_own_topic(message: str, anchor: str) -> bool:

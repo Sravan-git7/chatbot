@@ -15,7 +15,8 @@ const clip = (text: string, max: number): string => (text ?? '').replace(/\s+/g,
 
 /**
  * The context of the turns *before* `beforeMessageId` (or before the end of the conversation when omitted):
- * the previous questions, most recent first, and the last completed answer as a fallback anchor.
+ * the previous questions, most recent first, and the answer paired with the latest assistant turn only when it is a
+ * verified answered result. Non-answers and failed turns never lend an older answer to a newer topic.
  * Returns undefined when there is nothing to send, so a first question never carries context.
  */
 export function turnContext(conversation: Conversation | null, beforeMessageId?: string): ChatContext | undefined {
@@ -23,15 +24,34 @@ export function turnContext(conversation: Conversation | null, beforeMessageId?:
   const found = beforeMessageId ? conversation.messages.findIndex((m) => m.id === beforeMessageId) : conversation.messages.length
   const prior = conversation.messages.slice(0, found < 0 ? conversation.messages.length : found)
 
-  const questions = prior
+  // Only questions no newer than the last assistant turn can describe the answer sent below. If the conversation has
+  // an unfinished user turn after it, keep that question but deliberately send no stale answer.
+  let lastAssistantIndex = -1
+  for (let i = prior.length - 1; i >= 0; i -= 1) {
+    if (prior[i].role === 'assistant') {
+      lastAssistantIndex = i
+      break
+    }
+  }
+  const throughLastAssistant = lastAssistantIndex >= 0 ? prior.slice(0, lastAssistantIndex + 1) : prior
+  const lastAssistant = lastAssistantIndex >= 0 ? prior[lastAssistantIndex] : undefined
+  const laterUserTurn = lastAssistantIndex >= 0 && prior.slice(lastAssistantIndex + 1).some((m) => m.role === 'user')
+  const relevantHistory = laterUserTurn ? prior : throughLastAssistant
+  const questions = relevantHistory
     .filter((m) => m.role === 'user')
     .map((m) => clip(m.content, MAX_CONTEXT_QUESTION_CHARS))
     .filter(Boolean)
     .reverse()
     .slice(0, MAX_CONTEXT_QUESTIONS)
-
-  const lastAnswer = [...prior].reverse().find((m) => m.role === 'assistant' && !m.pending && !m.error && m.content.trim())
-  const answer = lastAnswer ? clip(lastAnswer.content, MAX_CONTEXT_ANSWER_CHARS) : ''
+  const answer = lastAssistant?.role === 'assistant'
+    && !lastAssistant.pending
+    && !lastAssistant.error
+    && !laterUserTurn
+    // Older local conversations predate stored ChatResult status; their completed assistant text remains usable.
+    && (!lastAssistant.result || lastAssistant.result.status === 'answered')
+    && lastAssistant.content.trim()
+    ? clip(lastAssistant.content, MAX_CONTEXT_ANSWER_CHARS)
+    : ''
   if (!questions.length && !answer) return undefined
   return answer ? { questions, answer } : { questions }
 }

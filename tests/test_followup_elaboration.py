@@ -349,6 +349,119 @@ class Selection(unittest.TestCase):
                     self.assertTrue(any(any(sentence in text for text in joined.get(m, ())) for m in markers), f"{intent}: {line}")
 
 
+class EvidenceQuality(unittest.TestCase):
+    """Navigation and extraction debris is excluded before it can count as explanatory evidence."""
+
+    def test_navigation_and_ocr_fragments_are_rejected_but_short_facts_are_not(self):
+        fragments = (
+            "Billing Execution 4",
+            "Simulation/Billing Simulation 4",
+            "Simulation Execution 4",
+            "Contract Accounts > Installment Plans",
+            "Menu: Billing, Payments, Invoicing",
+            "Table of Contents",
+            "B1lling Executi0n 4",
+        )
+        for fragment in fragments:
+            with self.subTest(fragment=fragment):
+                self.assertTrue(EL._is_low_quality_fragment(fragment), fragment)
+        self.assertTrue(EL._is_low_quality_fragment("Creating Installment Plans", ("SAP Utilities", "Creating Installment Plans")))
+
+        for short_fact in ("One account is enough.", "Use the billing simulation.", "Billing charges apply.", "Payments due."):
+            with self.subTest(short_fact=short_fact):
+                self.assertFalse(EL._is_low_quality_fragment(short_fact), short_fact)
+
+    def test_heading_neighbors_are_removed_without_dropping_a_short_explanation(self):
+        sentence = "Billing charges apply."
+        unit = EV.Unit(
+            marker="S1", chunk_id="billing", rank=0, order=1, text=sentence,
+            own=frozenset(), head=frozenset(), prev_line="Billing Execution 4",
+            follow="Simulation/Billing Simulation 4", chunk_text=f"Billing Execution 4\n{sentence}",
+        )
+        needs = SimpleNamespace(kinds=("example",), focus=(), to_dict=lambda: {})
+        decision = SimpleNamespace(supported=True, reason="SUPPORTED", detail={})
+        generator = EL.IntentExtractiveGenerator("example", anchor="How is billing handled?")
+        generator._choose = lambda *_: [unit]
+        with (
+            patch.object(EL.EV, "analyze_question", return_value=needs),
+            patch.object(EL.EV, "build_units", return_value=[unit]),
+            patch.object(EL.EV, "assess", return_value=(decision, [unit])),
+            patch.object(EL.EV, "focus_weights", return_value={}),
+            patch.object(EL.EV, "kind_satisfied", return_value=False),
+            patch.object(EL.EV, "unit_score", return_value=0.8),
+            patch.object(EL.EV, "unit_kinds_ok", return_value=True),
+        ):
+            result = generator.generate("Give me an example", _Ctx([]))
+
+        self.assertEqual(result.text, f"{sentence} [S1]")
+        self.assertIsNone(unit.prev_line)
+        self.assertIsNone(unit.follow)
+        self.assertEqual(generator.last["quality_filter"]["excluded_adjacent_fragments"], 2)
+
+    def test_fragments_are_removed_before_selection_sections_and_citations(self):
+        core = "Billing is the process of calculating charges for a utility service period."
+        new_one = "The billing run handles selected consumption items by using the billing schema."
+        new_two = "A billing document records the charges calculated for the billing period."
+        fragments = (
+            "Billing Execution 4",
+            "Simulation/Billing Simulation 4",
+            "Simulation Execution 4",
+        )
+        texts = (*fragments, core, new_one, new_two)
+        context = _Ctx([_Item(f"S{i + 1}", f"billing-{i + 1}", i, text,
+                              heading=text if i < len(fragments) else "SAP Utilities Billing")
+                       for i, text in enumerate(texts)])
+        generator = EL.IntentExtractiveGenerator("elaborate", previous_answer=f"{core} [S4]", anchor="How is billing handled?")
+        result = generator.generate("How is billing handled?", context)
+
+        self.assertFalse(result.refused)
+        self.assertIn(core, result.text)                         # retain the useful core answer when it is evidence-backed
+        self.assertIn(new_one, result.text)
+        self.assertIn(new_two, result.text)                      # add current-topic evidence rather than repeating only
+        for fragment in fragments:
+            self.assertNotIn(fragment, result.text)
+        quality = generator.last["quality_filter"]
+        self.assertEqual(quality["excluded_units"], 3)
+        self.assertEqual(quality["excluded_markers"], ["S1", "S2", "S3"])
+        self.assertEqual(quality["markers_with_fragments"], ["S1", "S2", "S3"])
+
+        lines = result.text.split("\n")
+        sections = generator.last["presentation_sections"]
+        self.assertEqual(_reconstruct_sections(sections), result.text)
+        self.assertEqual(len({section["key"] for section in sections}), len(sections))
+        answer_markers = {marker for line in lines for marker in re.findall(r"\[(S\d+)\]", line)}
+        selected_markers = {item["marker"] for item in generator.last["selected"]}
+        self.assertEqual(answer_markers, selected_markers)
+        self.assertTrue(answer_markers.isdisjoint({"S1", "S2", "S3"}))
+        self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
+        import rag_pipeline as RP
+        citation_context = RP._citation_context_after_scope(context, generator.last)
+        self.assertTrue({"S1", "S2", "S3"}.isdisjoint({item.marker for item in citation_context.items}))
+        report = RG.verify_grounding(result.text, citation_context, in_page_grounding=True, citation_normalization=True)
+        self.assertTrue(report.ok, report.to_dict())
+        self.assertEqual(set(report.cited_markers), answer_markers)
+
+    def test_installment_plan_elaboration_keeps_the_core_and_adds_supported_steps(self):
+        core = "An installment plan lets a customer repay an outstanding amount in installments."
+        new_one = "You can create an installment plan for open items with the same due date."
+        new_two = "The installment plan recalculates due dates for the open items covered by the agreement."
+        context = _Ctx([_Item("S1", "plan-1", 0, core, "Creating Installment Plans"),
+                        _Item("S2", "plan-2", 1, new_one, "Creating Installment Plans"),
+                        _Item("S3", "plan-3", 2, new_two, "Creating Installment Plans")])
+        generator = EL.IntentExtractiveGenerator(
+            "elaborate", previous_answer=f"{core} [S1]", anchor="How do I create an installment plan?",
+        )
+        result = generator.generate("How do I create an installment plan?", context)
+
+        self.assertFalse(result.refused)
+        self.assertIn(core, result.text)
+        self.assertIn(new_one, result.text)
+        self.assertIn(new_two, result.text)
+        self.assertGreaterEqual(generator.last["added"], EL.REQUIRED_NEW_ELABORATE)
+        self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
+        self.assertEqual(_reconstruct_sections(generator.last["presentation_sections"]), result.text)
+
+
 class PresentationSections(unittest.TestCase):
     def test_section_classification_is_deterministic_and_conservative(self):
         cases = (
@@ -394,13 +507,14 @@ class PresentationSections(unittest.TestCase):
         grouped_lines = [line for section in sections for line in section["lines"]]
         self.assertEqual(_reconstruct_sections(sections), result.text)
         self.assertEqual(len({section["key"] for section in sections}), len(sections))
+        self.assertEqual(len(grouped_lines), len(set(grouped_lines)))  # no sentence appears in two presentation sections
         indexed = sorted((order, line) for section in sections for order, line in zip(section["line_orders"], section["lines"]))
         self.assertEqual([order for order, _ in indexed], list(range(len(result.text.split("\n")))) )
         self.assertEqual([line for _, line in indexed], result.text.split("\n"))
         self.assertTrue(all(re.search(r"\[S\d+\]$", line) for line in grouped_lines))
 
     def test_context_and_follow_lines_stay_attached_to_their_cited_sentence(self):
-        context_line = "Contract account overview"
+        context_line = "The contract account has a master record."
         sentence = "A contract account is a master data record."
         follow = "The account posts recurring payment details."
         unit = EV.Unit(

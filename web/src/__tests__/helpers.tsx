@@ -1,5 +1,5 @@
 import { vi } from 'vitest'
-import type { ChatResult, Health, Source } from '../types'
+import type { ChatContext, ChatResult, Health, Source } from '../types'
 
 export const HEALTH: Health = { status: 'ok', ready: true, generator: 'extractive', topics: 29, pages_available: 7, debug_enabled: true }
 
@@ -18,13 +18,13 @@ export function result(over: Partial<ChatResult> = {}): ChatResult {
   }
 }
 
-type Handler = (body: { message: string; conversation_id: string; debug: boolean }) => Response | Promise<Response>
+type Handler = (body: { message: string; conversation_id: string; debug: boolean; context?: ChatContext }) => Response | Promise<Response>
 
 export const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } })
 
 /** Replaces `fetch` for UI unit tests only; the full UI -> API -> RAG chain is exercised separately (web/e2e and scripts/phase11_e2e.py). */
 export function stubBackend(chat: Handler, health: Health | null = HEALTH) {
-  const calls: { message: string; conversation_id: string; debug: boolean }[] = []
+  const calls: { message: string; conversation_id: string; debug: boolean; context?: ChatContext }[] = []
   const f = vi.fn(async (url: RequestInfo | URL, init?: RequestInit) => {
     const u = String(url)
     if (u.endsWith('/api/health')) {

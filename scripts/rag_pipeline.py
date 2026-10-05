@@ -189,11 +189,18 @@ def _citation_context_after_scope(context: Any, generation_evidence: Any) -> Any
     """Apply scoped elaboration's rejected source markers to grounding and citation construction only.
 
     The request's original context remains intact for retrieval/debug/support-chain auditing. The generator has already
-    selected only allowed units; this narrower view prevents a rejected marker from being accepted by grounding or
-    appearing in answer_sources/context_not_cited. With no scoped exclusions it is an identity operation.
+    selected only allowed units; this narrower view prevents rejected industry or all-fragment markers from being
+    accepted by grounding or appearing in answer_sources/context_not_cited. With no scoped exclusions it is an identity
+    operation. The unchanged support-chain verifier still checks answer lines against the original evidence context.
     """
-    industry_scope = generation_evidence.get("industry_scope") if isinstance(generation_evidence, Mapping) else None
-    excluded_markers = {str(marker) for marker in (industry_scope or {}).get("excluded_markers", ())}
+    evidence = generation_evidence if isinstance(generation_evidence, Mapping) else {}
+    industry_scope = evidence.get("industry_scope") or {}
+    quality_filter = evidence.get("quality_filter") or {}
+    excluded_markers = {
+        str(marker)
+        for marker in (*industry_scope.get("excluded_markers", ()), *quality_filter.get("excluded_markers", ()))
+        if marker
+    }
     if not excluded_markers:
         return context
     filtered = copy.copy(context)

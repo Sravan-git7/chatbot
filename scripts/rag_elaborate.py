@@ -21,6 +21,8 @@ with a narrow, explicitly scoped difference:
 * **intent handling** - elaboration skips what the previous answer already said and adds new evidence; an example
   requires a sentence that actually introduces an example; a reason requires a reason-bearing sentence; continuation
   prefers evidence from later in the document; simplification picks the shortest sentences that still carry the topic;
+* **fragment quality** - a conservative pre-selection filter drops standalone headings, breadcrumbs, menu/TOC labels,
+  numbered navigation fragments and malformed OCR-like text, while retaining short clauses with an explanatory predicate;
 * **the same verification** - the composed text is verified by the unchanged ``verify_grounding`` (in-page grounding +
   citation normalisation) inside ``RagPipeline`` and by the unchanged ``support_chain`` check in ``rag_service``. Every
   sentence is a verbatim span of the chunk its marker names.
@@ -67,6 +69,30 @@ _DEFINING = re.compile(r"\b(is|are|enables?|means?|refers?|represents?|contains?
 _REASON = re.compile(r"\b(because|since|due to|therefore|thus|so that|in order to|reason|reasons|result[s]? in|hence)\b", re.I)
 _CONTINUE = re.compile(r"\b(next|after|then|subsequent|following|once|finally|step)\b", re.I)
 _CITE = re.compile(r"\[S\d+\]")
+
+# The scoped follow-up pass can see more of a page than the minimal normal answer. Discard structural labels before
+# they can affect support/scoring or be emitted as evidence. This predicate list is intentionally conservative: a
+# short explanatory clause or imperative survives, while a short unpunctuated noun/path fragment does not.
+_EXPLANATORY_PREDICATE = re.compile(
+    r"\b(?:am|is|are|was|were|be|being|been|has|have|had|do|does|did|can|could|may|might|must|shall|should|will|would|"
+    r"add(?:s|ed)?|appl(?:y|ies|ied)|assign(?:s|ed)?|calculat(?:e|es|ed)|chang(?:e|es|ed)|clear(?:s|ed)?|"
+    r"contain(?:s|ed)?|creat(?:e|es|ed)|defin(?:e|es|ed)|depend(?:s|ed)?|determin(?:e|es|ed)|differ(?:s|ed)?|"
+    r"handl(?:e|es|ed)|"
+    r"display(?:s|ed)?|enter(?:s|ed)?|execut(?:e|es|ed)|exist(?:s|ed)?|includ(?:e|es|ed)|lead(?:s|ing|ed)?|"
+    r"link(?:s|ed)?|manag(?:e|es|ed)|mean(?:s|t)|occur(?:s|red)?|post(?:s|ed)?|"
+    r"provid(?:e|es|ed)|receiv(?:e|s|ed)|record(?:s|ed)?|refer(?:s|red)?|remain(?:s|ed)?|"
+    r"requir(?:e|s|ed)|result(?:s|ed)?|run(?:s|ning)|select(?:s|ed)?|serv(?:e|s|ed)|start(?:s|ed)?|"
+    r"stop(?:s|ped)?|transfer(?:s|red)?|updat(?:e|es|ed)|us(?:e|es|ed)|vary|varies|work(?:s|ed)?)\b",
+    re.I,
+)
+_NAVIGATION_LABEL = re.compile(
+    r"\b(?:navigation|breadcrumbs?|menu|table\s+of\s+contents|contents|toc|simulation|execution|overview|"
+    r"screen|dashboard|activities|process\s+flow|workflow|section\s+list)\b",
+    re.I,
+)
+_STRUCTURAL_SEPARATOR = re.compile(r"(?:/|\\|\||>|›|»|→|::)")
+_TRAILING_PAGE_NUMBER = re.compile(r"(?:\b(?:page|step|p)\s*)?\d{1,3}$", re.I)
+_OCR_DIGIT_IN_WORD = re.compile(r"\b[A-Za-z]{2,}\d[A-Za-z]{2,}\b")
 
 # Presentation-only categories. These keys are stable API values; labels are rendered by the UI.
 SECTION_WHAT_IT_IS_DOES = "what_it_is_does"
@@ -157,6 +183,100 @@ def _item_heading_text(item: Any) -> str:
     heading_path = getattr(item, "heading_path", ()) or ()
     parts.extend([heading_path] if isinstance(heading_path, str) else heading_path)
     return " ".join(str(part) for part in parts if part)
+
+
+def _item_heading_labels(item: Any) -> Tuple[str, ...]:
+    """Individual page/section labels used to detect when extracted body text is only a repeated heading."""
+    parts = [getattr(item, "title", ""), getattr(item, "section_title", "")]
+    heading_path = getattr(item, "heading_path", ()) or ()
+    parts.extend([heading_path] if isinstance(heading_path, str) else heading_path)
+    return tuple(dict.fromkeys(str(part).strip() for part in parts if part and str(part).strip()))
+
+
+def _quality_norm(text: str) -> str:
+    text = _CITE.sub("", str(text or ""))
+    return re.sub(r"[^\w]+", " ", text.casefold(), flags=re.UNICODE).strip()
+
+
+def _has_explanatory_predicate(text: str) -> bool:
+    if _EXPLANATORY_PREDICATE.search(text or ""):
+        return True
+    # Imperative procedure evidence is useful; the same words in a trailing noun label are not predicates.
+    return bool(re.match(r"^\s*(?:run|open|select|choose|click|enter|save|set|specify|maintain|pay|settle|send|"
+                         r"create|use|assign|execute|display|calculate|post|manage|record|transfer)\b", text or "", re.I))
+
+
+def _is_low_quality_fragment(text: str, heading_labels: Iterable[str] = ()) -> bool:
+    """Conservatively reject a label/fragment, not a short sentence with an explanatory predicate.
+
+    Structural cues are stronger than length: metadata-identical headings, breadcrumbs, menu/TOC labels, numbered
+    navigation titles and OCR digits embedded in words are rejected even when they resemble a short sentence. The
+    generic fallback is limited to at most five unpunctuated words with no recognized predicate; short explanatory
+    statements such as "One account is enough." and imperatives such as "Use the simulation." remain eligible.
+    """
+    raw = re.sub(r"\s+", " ", str(text or "")).strip()
+    if not raw:
+        return True
+    clean = _CITE.sub("", raw).strip()
+    normalized = _quality_norm(clean)
+    if not normalized:
+        return True
+    has_predicate = _has_explanatory_predicate(clean)
+    if has_predicate:
+        return False
+
+    labels = {_quality_norm(label) for label in heading_labels if _quality_norm(label)}
+    if normalized in labels:
+        return True
+    if _STRUCTURAL_SEPARATOR.search(clean):
+        return True
+    if re.search(r"\b(?:navigation|breadcrumbs?|menu|table\s+of\s+contents|contents|toc)\b", clean, re.I):
+        return True
+    trimmed = clean.rstrip(" .!?;,:\"'”’)]}")
+    if _NAVIGATION_LABEL.search(clean) and (
+        _TRAILING_PAGE_NUMBER.search(trimmed) or len(re.findall(r"\b\w+\b", clean)) <= 5
+    ):
+        return True
+    if _OCR_DIGIT_IN_WORD.search(clean):
+        return True
+    compact = [char for char in clean if not char.isspace()]
+    if len(compact) >= 8 and sum(char.isalpha() for char in compact) / len(compact) < 0.55:
+        return True
+    has_sentence_punctuation = bool(re.search(r"[.!?][\"'”’)}\]]*\s*$", clean))
+    word_count = len(re.findall(r"\b\w+\b", clean, re.UNICODE))
+    return word_count <= 5 and not has_sentence_punctuation
+
+
+def _elaboration_quality_filter(units: Sequence[Any], context: Any) -> Tuple[List[Any], List[Any], int]:
+    """Remove navigation/OCR fragments before support checks and clear fragment-only adjacent context lines."""
+    headings_by_marker: Dict[str, List[str]] = {}
+    headings_by_chunk: Dict[str, List[str]] = {}
+    for item in getattr(context, "items", ()) or ():
+        labels = list(_item_heading_labels(item))
+        marker = str(getattr(item, "marker", "") or "")
+        chunk_id = getattr(item, "chunk_id", None)
+        if marker and labels:
+            headings_by_marker.setdefault(marker, []).extend(labels)
+        if chunk_id is not None and labels:
+            headings_by_chunk.setdefault(str(chunk_id), []).extend(labels)
+
+    kept: List[Any] = []
+    excluded: List[Any] = []
+    excluded_adjacent = 0
+    for unit in units:
+        marker = str(getattr(unit, "marker", "") or "")
+        chunk_id = str(getattr(unit, "chunk_id", ""))
+        labels = [*headings_by_marker.get(marker, ()), *headings_by_chunk.get(chunk_id, ())]
+        if _is_low_quality_fragment(getattr(unit, "text", ""), labels):
+            excluded.append(unit)
+            continue
+        for attr in ("prev_line", "follow"):
+            line = getattr(unit, attr, None)
+            if line and _is_low_quality_fragment(line, labels):
+                setattr(unit, attr, None)
+                excluded_adjacent += 1
+        kept.append(unit)
+    return kept, excluded, excluded_adjacent
 
 
 def _industry_scope_units(units: Sequence[Any], context: Any, anchor: str, previous_answer: str,
@@ -305,6 +425,11 @@ class IntentExtractiveGenerator:
         units, industry_scope, excluded_industry_units, excluded_industry_markers = _industry_scope_units(
             units, context, self.anchor or question, self.previous_answer, self.new_terms
         )
+        units, excluded_quality_units, excluded_adjacent_fragments = _elaboration_quality_filter(units, context)
+        quality_fragment_markers = sorted({str(getattr(unit, "marker", "")) for unit in excluded_quality_units
+                                           if getattr(unit, "marker", None)})
+        usable_quality_markers = {str(getattr(unit, "marker", "")) for unit in units if getattr(unit, "marker", None)}
+        fully_excluded_quality_markers = [marker for marker in quality_fragment_markers if marker not in usable_quality_markers]
         if self.new_terms:                                           # a relationship follow-up: the terms the *message* added
             present: set = set()                                     # count only when the routed evidence actually covers them
             for u in units:
@@ -315,6 +440,13 @@ class IntentExtractiveGenerator:
         decision, baseline = EV.assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason,
                                   "detail": decision.detail, **needs.to_dict(), "intent": self.intent, "selected": []}
+        if excluded_quality_units or excluded_adjacent_fragments:
+            record["quality_filter"] = {
+                "excluded_units": len(excluded_quality_units),
+                "excluded_markers": fully_excluded_quality_markers,
+                "markers_with_fragments": quality_fragment_markers,
+                "excluded_adjacent_fragments": excluded_adjacent_fragments,
+            }
         if industry_scope:
             record["industry_scope"] = {"preferred": industry_scope, "excluded_units": excluded_industry_units,
                                         "excluded_markers": excluded_industry_markers}
