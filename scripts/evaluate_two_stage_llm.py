@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
+from collections import Counter
 import hashlib
 import json
 import os
@@ -99,24 +100,37 @@ USER REQUEST: {request}
 JSON:
 """
 
-TWO_STAGE_SYNTH_PROMPT = """You are an SAP documentation editor. Rewrite the verified facts below as one natural, readable explanation.
+TWO_STAGE_SYNTH_PROMPT = """You are an SAP documentation editor performing strict, claim-preserving rewrites.
+
+The numbered entries below are the ONLY factual input. Each entry is one already-validated claim. The claim_id is only a routing label.
+
+Return JSON only, exactly in this shape:
+{"rewrites":[{"claim_id":1,"sentence":"..."}]}
 
 RULES
-1. Use ONLY the facts in the list. Never add facts, examples, benefits, numbers, names, transaction codes or advice that are not in the list.
-2. Every sentence must stay supported by the fact(s) it rephrases. Do not generalize, do not speculate, do not add examples.
-3. Do not write citation markers such as [S1] - citations are added later.
-4. Keep the exact SAP terminology of the facts. You may join facts and add short connecting words.
-5. Write 2 to {max_sentences} sentences, one paragraph, no heading, no title, no closing sentence.
-6. If the list is empty, reply exactly: {no_answer}
+1. Return exactly one rewrite for every supplied claim_id, once each. Do not add, omit, merge, split or combine claims.
+2. Rewrite each claim independently. A sentence may use a different word order, but it must map to ONLY its own claim_id.
+3. Preserve the claim's complete factual meaning, qualifiers, negation, modality, relationships, entities, identifiers, numbers and SAP terminology.
+4. Do not add facts, benefits, examples, interpretations, causal or temporal explanations, advice, entities, numbers, codes or SAP terms absent from that same claim.
+5. Do not add content words or logical/negation/modality/causal words absent from that claim. If a safe paraphrase is uncertain, copy the claim verbatim.
+6. Each sentence must be one short, complete sentence. No citation markers, source markers, headings, bullets, extra fields or prose outside JSON.
+7. If unable to produce the exact claim_id set, return {"rewrites":[]} so the harness falls back safely.
 
-VERIFIED FACTS:
+VALIDATED CLAIMS:
 {claims}
 
-TOPIC: {question}
-USER REQUEST: {request}
-
-EXPLANATION:
+JSON:
 """
+
+_STAGE2_OPERATOR_RE = re.compile(
+    r"\b(?:cannot|can't|won't|wouldn't|shouldn't|mustn't|shan't|isn't|aren't|wasn't|weren't|"
+    r"doesn't|don't|didn't|hasn't|haven't|hadn't|not|no|never|without|none|neither|nor|"
+    r"only|all|any|some|each|every|both|either|and|or|but|can|could|may|might|must|shall|should|will|would|"
+    r"because|therefore|thus|hence|so|since|if|unless|before|after|when|while|until|"
+    r"always|usually|sometimes|occasionally|more|less|fewer|most|least|instead|rather|except|such)\b",
+    re.IGNORECASE,
+)
+_STAGE2_WORD_RE = re.compile(r"[A-Za-z0-9]+(?:[_/-][A-Za-z0-9]+)*")
 
 
 def _fill(template: str, **kw: Any) -> str:
@@ -298,74 +312,150 @@ def validate_claim_plan(text: str, context: Any, question: str, *, base: Any = N
 
 
 def attach_citations(text: str, validated: List[Dict[str, Any]], context: Any, question: str) -> Dict[str, Any]:
-    """Deterministic stage-2 acceptance + citation attachment.
+    """Require one Stage-2 rewrite per validated claim and attach that claim's citations programmatically.
 
-    Every sentence of the synthesis must map back to one or more validated claims (greedy set cover over its terms),
-    and its acronyms / numbers / code tokens must exist in the excerpts those claims cite. Citations are attached from
-    the claim->source mapping the claim plan already carries; nothing is repaired and no marker is invented.
+    The JSON claim_id is the only mapping key: every output sentence is checked against exactly one source claim.
+    New or omitted claim content, changed logical operators, multiple sentences, markers, or malformed output cause a
+    refusal so the existing scoped extractive fallback handles the request. No text is repaired.
     """
     import rag_text as T
-    items = {i.marker: i for i in context.items}
-    stripped = len(re.findall(r"\[S\d+\]", text or ""))
-    cleaned = re.sub(r"\s+", " ", re.sub(r"\[S\d+\]", " ", text or "")).strip()
-    claims = []
-    for idx, c in enumerate(validated):
-        terms = T.term_set(c["claim"])
-        srcs = [m for m in (c.get("metrics", {}).get("sources") or c.get("sources") or []) if m in items]
-        if terms and srcs:
-            claims.append({"index": idx, "claim": c["claim"], "terms": terms, "sources": srcs})
-    problems: List[Dict[str, Any]] = []
-    kept: List[Dict[str, Any]] = []
-    dropped: List[str] = []
-    for s in T.split_sentences(cleaned):
-        s = s.strip()
-        if not s:
-            continue
-        terms = T.term_set(s)
-        if not terms:
-            dropped.append(s)
-            continue
-        scored = sorted(claims, key=lambda c: len(terms & c["terms"]) / len(terms), reverse=True)
-        if not scored or (len(terms & scored[0]["terms"]) / len(terms)) < ELAB2_MATCH_FLOOR:
-            problems.append({"kind": "SENTENCE_NOT_BACKED", "sentence": s})
-            continue
-        matched = [scored[0]]
-        covered = terms & scored[0]["terms"]
-        remaining = terms - covered
-        while remaining and (len(covered) / len(terms)) < ELAB2_SENTENCE_COVER_FLOOR:
-            best = max((c for c in claims if c not in matched), key=lambda c: len(remaining & c["terms"]), default=None)
-            if best is None or (len(remaining & best["terms"]) / len(remaining)) < 0.25:
-                break
-            matched.append(best)
-            covered |= (terms & best["terms"])
-            remaining = terms - covered
-        cover = len(covered) / len(terms)
-        if cover < ELAB2_SENTENCE_COVER_FLOOR:
-            problems.append({"kind": "SENTENCE_NEW_CONTENT", "detail": f"{cover:.2f} < {ELAB2_SENTENCE_COVER_FLOOR}", "sentence": s})
-            continue
-        cited_text = "\n".join(items[m].text for c in matched for m in c["sources"])
-        cited_lower = cited_text.lower()
-        bad_entities = sorted({e for e in re.findall(ELAB_ENTITY_RE, s) if e.lower() not in cited_lower})
-        bad_tokens = sorted(t for t in T.code_tokens(s) if t not in cited_text)
-        if bad_entities:
-            problems.append({"kind": "SENTENCE_UNSUPPORTED_ENTITY", "detail": ",".join(bad_entities[:5]), "sentence": s})
-            continue
-        if bad_tokens:
-            problems.append({"kind": "SENTENCE_UNSUPPORTED_TOKEN", "detail": ",".join(bad_tokens[:5]), "sentence": s})
-            continue
-        markers: List[str] = []
-        for c in matched:
-            for m in c["sources"]:
-                if m not in markers:
-                    markers.append(m)
-        markers.sort(key=lambda m: int(m[1:]))
-        kept.append({"text": s, "markers": markers, "claims": [c["index"] for c in matched], "coverage": round(cover, 3)})
-    result: Dict[str, Any] = {"stripped_markers": stripped, "dropped": dropped, "problems": problems,
-                              "sentences": kept, "claims": len(claims)}
-    if problems or not kept:
-        result.update({"ok": False, "answer": ""})
+    raw = text or ""
+    result: Dict[str, Any] = {"marker_attempts": 0, "dropped": [], "problems": [], "sentences": [],
+                              "claims": len(validated), "ok": False, "answer": ""}
+
+    def fail(kind: str, detail: str = "", sentence: Optional[str] = None) -> Dict[str, Any]:
+        problem: Dict[str, Any] = {"kind": kind}
+        if detail:
+            problem["detail"] = detail
+        if sentence is not None:
+            problem["sentence"] = sentence
+        result["problems"].append(problem)
         return result
-    result.update({"ok": True, "answer": "\n".join(f"{k['text']} " + "".join(f"[{m}]" for m in k["markers"]) for k in kept)})
+
+    marker_re = re.compile(r"\[\s*S\d+\s*\]", re.IGNORECASE)
+    raw_markers = marker_re.findall(raw)
+    result["marker_attempts"] = len(raw_markers)
+    if raw_markers:
+        return fail("SYNTH_MARKER_FORBIDDEN", f"{len(raw_markers)} citation/source marker(s) were generated")
+
+    try:
+        data = json.loads(raw)
+    except Exception as exc:  # noqa: BLE001 - refusal or malformed JSON must use the scoped fallback
+        refusal = re.search(r"\b(?:i\s+(?:cannot|can't|am unable)|i'm sorry|unable to)\b", raw, re.IGNORECASE)
+        kind = "SYNTH_REFUSAL" if refusal else "SYNTH_INVALID_JSON"
+        return fail(kind, type(exc).__name__)
+    if not isinstance(data, dict) or set(data) != {"rewrites"} or not isinstance(data.get("rewrites"), list):
+        return fail("SYNTH_INVALID_SHAPE", "expected exactly {\"rewrites\": [...]} ")
+
+    expected_ids = set(range(1, len(validated) + 1))
+    by_id: Dict[int, str] = {}
+    rows = data["rewrites"]
+    if len(rows) != len(validated):
+        return fail("SYNTH_CLAIM_SET_MISMATCH", f"expected {len(validated)} rewrites, got {len(rows)}")
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != {"claim_id", "sentence"}:
+            return fail("SYNTH_INVALID_REWRITE", "each rewrite must contain only claim_id and sentence")
+        claim_id = row.get("claim_id")
+        sentence = row.get("sentence")
+        if type(claim_id) is not int or claim_id not in expected_ids or claim_id in by_id:
+            return fail("SYNTH_CLAIM_SET_MISMATCH", "claim_id is invalid, duplicated, or unexpected")
+        if not isinstance(sentence, str) or not sentence:
+            return fail("SYNTH_INVALID_REWRITE", f"claim_id {claim_id} has no sentence")
+        by_id[claim_id] = sentence
+    if set(by_id) != expected_ids:
+        return fail("SYNTH_CLAIM_SET_MISMATCH", "one rewrite per validated claim is required")
+
+    items = {i.marker: i for i in context.items}
+    kept: List[Dict[str, Any]] = []
+    for claim_id, claim_row in enumerate(validated, start=1):
+        sentence = by_id[claim_id]
+        sentence_markers = marker_re.findall(sentence)
+        if sentence_markers:
+            result["marker_attempts"] += len(sentence_markers)
+            fail("SYNTH_MARKER_FORBIDDEN", f"{len(sentence_markers)} citation/source marker(s) were generated", sentence)
+            continue
+        if sentence != sentence.strip() or "\n" in sentence or "\r" in sentence:
+            fail("SYNTH_NOT_ONE_SENTENCE", "sentence must be a single trimmed line", sentence)
+            continue
+        parsed_sentences = T.split_sentences(sentence)
+        if (len(parsed_sentences) != 1 or parsed_sentences[0] != sentence
+                or sentence[-1:] not in (".", "!", "?")):
+            fail("SYNTH_NOT_ONE_SENTENCE", "exactly one complete sentence is required", sentence)
+            continue
+
+        claim = claim_row.get("claim") or ""
+        sentence_words = Counter(x.casefold() for x in _STAGE2_WORD_RE.findall(sentence))
+        claim_words = Counter(x.casefold() for x in _STAGE2_WORD_RE.findall(claim))
+        extra_words, omitted_words = sentence_words - claim_words, claim_words - sentence_words
+        sentence_terms, claim_terms = Counter(T.terms(sentence)), Counter(T.terms(claim))
+        extra_terms, omitted_terms = sentence_terms - claim_terms, claim_terms - sentence_terms
+        sentence_entities = Counter(x.casefold() for x in re.findall(ELAB_ENTITY_RE, sentence))
+        claim_entities = Counter(x.casefold() for x in re.findall(ELAB_ENTITY_RE, claim))
+        extra_entities, omitted_entities = sentence_entities - claim_entities, claim_entities - sentence_entities
+        sentence_codes = Counter(x.upper() for x in T.code_tokens(sentence))
+        claim_codes = Counter(x.upper() for x in T.code_tokens(claim))
+        extra_codes, omitted_codes = sentence_codes - claim_codes, claim_codes - sentence_codes
+        sentence_operators = Counter(x.casefold() for x in _STAGE2_OPERATOR_RE.findall(sentence))
+        claim_operators = Counter(x.casefold() for x in _STAGE2_OPERATOR_RE.findall(claim))
+        extra_operators, omitted_operators = sentence_operators - claim_operators, claim_operators - sentence_operators
+
+        additions = []
+        if extra_words:
+            additions.append("words=" + ",".join(sorted(extra_words.elements())))
+        if extra_terms:
+            additions.append("terms=" + ",".join(sorted(extra_terms.elements())))
+        if extra_entities:
+            additions.append("entities/numbers=" + ",".join(sorted(extra_entities.elements())))
+        if extra_codes:
+            additions.append("identifiers=" + ",".join(sorted(extra_codes.elements())))
+        if extra_operators:
+            additions.append("logic/modality/causality=" + ",".join(sorted(extra_operators.elements())))
+        if additions:
+            fail("SENTENCE_NEW_CONTENT", "; ".join(additions), sentence)
+
+        omissions = []
+        if omitted_words:
+            omissions.append("words=" + ",".join(sorted(omitted_words.elements())))
+        if omitted_terms:
+            omissions.append("terms=" + ",".join(sorted(omitted_terms.elements())))
+        if omitted_entities:
+            omissions.append("entities/numbers=" + ",".join(sorted(omitted_entities.elements())))
+        if omitted_codes:
+            omissions.append("identifiers=" + ",".join(sorted(omitted_codes.elements())))
+        if omitted_operators:
+            omissions.append("logic/modality/causality=" + ",".join(sorted(omitted_operators.elements())))
+        if omissions:
+            fail("SENTENCE_NOT_BACKED", "claim content omitted or changed: " + "; ".join(omissions), sentence)
+        if additions or omissions:
+            continue
+
+        source_values = claim_row.get("metrics", {}).get("sources") or claim_row.get("sources") or []
+        sources = list(dict.fromkeys(m for m in source_values if m in items))
+        if not sources:
+            fail("SYNTH_SOURCE_MAPPING_INVALID", f"claim_id {claim_id} has no valid source mapping", sentence)
+            continue
+        if not sentence_terms or not claim_terms:
+            fail("SENTENCE_NOT_BACKED", "no content terms map to the source claim", sentence)
+            continue
+        match = sum((sentence_terms & claim_terms).values()) / sum(sentence_terms.values())
+        cover = sum((sentence_terms & claim_terms).values()) / sum(sentence_terms.values())
+        if match < ELAB2_MATCH_FLOOR:
+            fail("SENTENCE_NOT_BACKED", f"{match:.2f} < {ELAB2_MATCH_FLOOR}", sentence)
+            continue
+        if cover < ELAB2_SENTENCE_COVER_FLOOR:
+            fail("SENTENCE_NEW_CONTENT", f"{cover:.2f} < {ELAB2_SENTENCE_COVER_FLOOR}", sentence)
+            continue
+
+        sources.sort(key=lambda m: int(m[1:]))
+        kept.append({"text": sentence, "markers": sources, "claims": [claim_row.get("index", claim_id - 1)],
+                     "coverage": round(cover, 3), "claim_id": claim_id})
+
+    result["sentences"] = kept
+    if result["problems"] or len(kept) != len(validated):
+        return result
+    result["ok"] = True
+    result["answer"] = "\n".join(f"{row['text']} " + "".join(f"[{marker}]" for marker in row["markers"])
+                                    for row in kept)
     return result
 
 
@@ -446,17 +536,17 @@ class TwoStageElaborationGenerator:
             stats["synth_ms"] = 0.0
             self.stats = stats
             return RG.GenerationResult(RG.NO_ANSWER_TEXT, True, self.name, raw1, plan_prompt, telemetry=dict(stats))
-        claims_text = "\n".join(f"{i + 1}. {c['claim']}" for i, c in enumerate(plan["validated"]))
-        synth_prompt = _fill(TWO_STAGE_SYNTH_PROMPT, max_sentences=ELAB2_MAX_SENTENCES, no_answer=RG.NO_ANSWER_TEXT,
-                             claims=claims_text, question=question, request=self.request)
+        claims_text = "\n".join(json.dumps({"claim_id": i, "claim": c["claim"]}, ensure_ascii=False)
+                                  for i, c in enumerate(plan["validated"], start=1))
+        synth_prompt = _fill(TWO_STAGE_SYNTH_PROMPT, claims=claims_text)
         synth_fn = getattr(self.client, "synthesize", None)
-        if callable(synth_fn):                                    # stub: it sees the validated claim texts only
-            raw2, t2, e2, ms2 = synth_fn([c["claim"] for c in plan["validated"]], question, self.request) or "", False, "", 0.0
+        if callable(synth_fn):                                    # stub receives validated claim texts only
+            raw2, t2, e2, ms2 = synth_fn([c["claim"] for c in plan["validated"]]) or "", False, "", 0.0
         else:
             raw2, t2, e2, ms2 = self._model(synth_prompt)
         self.calls.append({"stage": "synth", "prompt": synth_prompt, "raw": raw2, "timeout": t2, "error": e2})
         final = attach_citations(raw2, plan["validated"], context, question)
-        stats.update({"synth_chars": len(raw2), "synth_ms": ms2, "stage2_markers_stripped": final["stripped_markers"],
+        stats.update({"synth_chars": len(raw2), "synth_ms": ms2, "stage2_marker_attempts": final["marker_attempts"],
                       "dropped_fragments": final["dropped"], "sentences_kept": len(final["sentences"]),
                       "sentence_mapping": [{"markers": k["markers"], "claims": k["claims"], "coverage": k["coverage"]}
                                            for k in final["sentences"]],
@@ -516,27 +606,20 @@ class TwoStageStubClient:
             claims.append({"claim": "The component also supports automatic processing of the documents.", "sources": []})
         return json.dumps({"claims": claims})
 
-    def synthesize(self, claims: List[str], question: str, request: str) -> str:
+    def synthesize(self, claims: List[str]) -> str:
         self.calls += 1
-        if not claims:
-            return ""
-
-        def lower1(s: str) -> str:
-            return s[:1].lower() + s[1:] if s else s
-
-        merged = f"{claims[0].rstrip('.')}, and {lower1(claims[1])}" if len(claims) > 1 else claims[0].rstrip(".")
-        text = merged.rstrip(".") + "."
-        if len(claims) > 2:
-            text += " " + " ".join(c if c.endswith((".", "!", "?")) else c + "." for c in claims[2:])
+        rewrites = [{"claim_id": i, "sentence": claim.strip()} for i, claim in enumerate(claims, start=1)]
+        if not rewrites:
+            return json.dumps({"rewrites": []})
         if self.mode == "synth_markers":
-            return f"{claims[0]} [S1] " + " ".join(claims[1:])
-        if self.mode == "synth_newfact":
-            return text + " The system also sends an automatic notification to the customer."
-        if self.mode == "synth_example":
-            return text + " For example, a customer receives a bill every month."
-        if self.mode == "synth_filler":
-            return text + " This is important for compliance and should be configured carefully."
-        return text
+            rewrites[0]["sentence"] += " [S1]"
+        elif self.mode == "synth_newfact":
+            rewrites[0]["sentence"] = rewrites[0]["sentence"].rstrip(".!?") + " and it enables ZXQ9 notifications."
+        elif self.mode == "synth_example":
+            rewrites[0]["sentence"] = rewrites[0]["sentence"].rstrip(".!?") + " such as ZXQ9."
+        elif self.mode == "synth_filler":
+            rewrites[0]["sentence"] += " This is important for compliance."
+        return json.dumps({"rewrites": rewrites})
 
     def generate(self, prompt: str) -> str:
         return ""
@@ -746,8 +829,8 @@ def main() -> int:
         b["median_synth_ms"] = median((r.get("two_stage") or {}).get("synth_ms") for r in d_runs)
 
     ts: Dict[str, Any] = {"runs": 0, "answered": 0, "claims_total": 0, "claims_valid": 0, "claims_rejected": 0,
-                          "rejection_reasons": {}, "aborts": {}, "final_failures": {}, "stage2_markers_stripped": 0,
-                          "unsupported_claims": 0, "plan_parse_errors": 0}
+                          "rejection_reasons": {}, "aborts": {}, "final_failures": {}, "stage2_marker_attempts": 0,
+                          "sentence_new_content_failures": 0, "unsupported_claims": 0, "plan_parse_errors": 0}
     for rec in records:
         for arm, run in rec["runs"].items():
             if not arm.startswith("D_two_stage"):
@@ -758,7 +841,7 @@ def main() -> int:
             ts["claims_total"] += int(info.get("claims_total") or 0)
             ts["claims_valid"] += int(info.get("claims_valid") or 0)
             ts["claims_rejected"] += int(info.get("claims_rejected") or 0)
-            ts["stage2_markers_stripped"] += int(info.get("stage2_markers_stripped") or 0)
+            ts["stage2_marker_attempts"] += int(info.get("stage2_marker_attempts") or 0)
             ts["plan_parse_errors"] += 1 if info.get("plan_parse_error") else 0
             for rej in info.get("claim_rejections") or []:
                 for reason in rej.get("reasons") or []:
@@ -773,6 +856,8 @@ def main() -> int:
             for p in info.get("final_problems") or []:
                 key = p.get("kind")
                 ts["final_failures"][key] = ts["final_failures"].get(key, 0) + 1
+                if key == "SENTENCE_NEW_CONTENT":
+                    ts["sentence_new_content_failures"] += 1
 
     payload = {"schema_version": 1,
                "experiment": "two-stage elaboration: claim plan -> deterministic validation -> synthesis -> citations (measurement only)",
@@ -810,7 +895,8 @@ def _markdown(payload: Dict[str, Any]) -> str:
             f"plan parse errors {t['plan_parse_errors']}",
             f"* claim rejection reasons: {t['rejection_reasons'] or '—'}",
             f"* aborts: {t['aborts'] or '—'} | final-validation failures: {t['final_failures'] or '—'}",
-            f"* stage-2 citation markers stripped: {t['stage2_markers_stripped']}", ""]
+            f"* stage-2 citation-marker attempts rejected: {t['stage2_marker_attempts']} | "
+            f"SENTENCE_NEW_CONTENT failures: {t['sentence_new_content_failures']}", ""]
     for rec in records:
         out += [f"## {rec['id']} — {rec['question']} → *{rec['message']}*", ""]
         if rec.get("expect"):
@@ -825,7 +911,7 @@ def _markdown(payload: Dict[str, Any]) -> str:
                 if info:
                     out += [f"two-stage: claims {info.get('claims_valid')}/{info.get('claims_total')} valid | "
                             f"abort {info.get('abort') or '—'} | plan {info.get('plan_ms')} ms | synth {info.get('synth_ms')} ms | "
-                            f"markers stripped {info.get('stage2_markers_stripped')} | sentences kept {info.get('sentences_kept')}", ""]
+                            f"marker attempts rejected {info.get('stage2_marker_attempts')} | sentences kept {info.get('sentences_kept')}", ""]
                 if info.get("claim_rejections"):
                     out += ["```json", json.dumps(info["claim_rejections"], indent=1)[:1400], "```", ""]
     return "\\n".join(out) + "\\n"
