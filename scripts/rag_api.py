@@ -99,6 +99,7 @@ class Grounding(BaseModel):
 class ElaborationSection(BaseModel):
     key: Literal["what_it_is_does", "how_it_works_relationships", "conditions_prerequisites", "key_details"]
     lines: List[str] = Field(..., min_length=1)
+    line_orders: Optional[List[int]] = Field(default=None, min_length=1)
 
 
 class Metadata(BaseModel):

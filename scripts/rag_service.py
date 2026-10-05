@@ -243,15 +243,42 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     if status == ANSWERED and presentation_sections:
         safe_sections: List[Dict[str, Any]] = []
         valid_sections = True
+        seen_keys = set()
+        order_flags = [isinstance(section, Mapping) and "line_orders" in section for section in presentation_sections]
+        has_order_metadata = any(order_flags)
+        if has_order_metadata and not all(order_flags):
+            valid_sections = False
+        next_legacy_order = 0
         for section in presentation_sections:
-            key = section.get("key")
-            lines = section.get("lines")
-            if key not in EL.PRESENTATION_SECTION_KEYS or not isinstance(lines, list) or not lines or any(not isinstance(line, str) or not line.strip() for line in lines):
+            if not isinstance(section, Mapping):
                 valid_sections = False
                 break
-            safe_sections.append({"key": key, "lines": list(lines)})
-        flattened = "\n".join(line for section in safe_sections for line in section["lines"])
-        if valid_sections and safe_sections and flattened == answer:
+            key = section.get("key")
+            lines = section.get("lines")
+            if (key not in EL.PRESENTATION_SECTION_KEYS or key in seen_keys or not isinstance(lines, list) or not lines
+                    or any(not isinstance(line, str) or not line.strip() for line in lines)):
+                valid_sections = False
+                break
+            seen_keys.add(key)
+            line_orders = section.get("line_orders")
+            if has_order_metadata:
+                if (not isinstance(line_orders, list) or len(line_orders) != len(lines)
+                        or any(type(order) is not int or order < 0 for order in line_orders)):
+                    valid_sections = False
+                    break
+                orders = list(line_orders)
+            else:
+                # Backward-compatible contiguous metadata is accepted only if its section order already matches answer.
+                orders = list(range(next_legacy_order, next_legacy_order + len(lines)))
+                next_legacy_order += len(lines)
+            safe_sections.append({"key": key, "lines": list(lines), "line_orders": orders})
+        ordered_lines = sorted(
+            ((order, line) for section in safe_sections for order, line in zip(section["line_orders"], section["lines"])),
+            key=lambda pair: pair[0],
+        )
+        orders = [order for order, _ in ordered_lines]
+        reconstructed = "\n".join(line for _, line in ordered_lines)
+        if valid_sections and safe_sections and orders == list(range(len(ordered_lines))) and reconstructed == answer:
             meta["elaboration_sections"] = safe_sections
     out: Dict[str, Any] = {"schema_version": SCHEMA_VERSION, "conversation_id": conversation_id, "status": status, "answer": answer, "sources": sources,
                            "topic_reference": reference, "metadata": meta}

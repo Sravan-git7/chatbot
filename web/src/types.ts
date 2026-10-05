@@ -32,10 +32,11 @@ export type ElaborationSectionKey =
   | 'conditions_prerequisites'
   | 'key_details'
 
-/** Exact answer lines grouped for display; headings are chosen by the UI, not part of the answer. */
+/** Exact answer lines grouped for display; `line_orders` reconstructs their original canonical-answer order. */
 export interface ElaborationSection {
   key: ElaborationSectionKey
   lines: string[]
+  line_orders?: number[]
 }
 
 export interface Metadata {

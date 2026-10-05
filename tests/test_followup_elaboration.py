@@ -92,6 +92,28 @@ def _generate(intent: str, previous: str = "", new_terms=(), question: str = CON
     return result, gen.last
 
 
+def _reconstruct_sections(sections):
+    indexed = [(order, line) for section in sections for order, line in zip(section["line_orders"], section["lines"])]
+    return "\n".join(line for _, line in sorted(indexed))
+
+
+def _industry_context():
+    items = (
+        _Item("S1", "isu-definition", 0, FIRST, "SAP Utilities > Contract Accounts"),
+        _Item("S2", "isu-detail", 1,
+              "Utilities Industry (IS-U): One contract account can contain several utility contracts for a business partner.",
+              "Utilities Industry (IS-U) > Contract Accounts"),
+        _Item("S3", "insurance", 2,
+              "Insurance (FS-CD) Industry Component: Each insurance contract is assigned to one contract account.",
+              "Contract Accounts"),
+        _Item("S4", "pscd", 3,
+              "Industry ComponentPublic Sector Contract Accounts Receivable and Payable(PSCD): A public sector business partner may have several contract accounts.",
+              "Contract Accounts"),
+        _Item("S5", "isu-additional", 4, MANY, "SAP Utilities > Contract Accounts"),
+    )
+    return _Ctx(list(items))
+
+
 class Selection(unittest.TestCase):
     """The intent rules, on synthetic evidence (fast, no stores)."""
 
@@ -104,6 +126,31 @@ class Selection(unittest.TestCase):
         self.assertNotIn(UNRELATED, result.text)                 # off-topic sentences are never pulled in
         # document order, no duplicates
         self.assertEqual([l for l in result.text.split("\n")], sorted(set(result.text.split("\n")), key=result.text.split("\n").index))
+
+    def test_utilities_context_excludes_insurance_and_malformed_pscd_evidence_with_valid_citations(self):
+        context = _industry_context()
+        generator = EL.IntentExtractiveGenerator("elaborate", previous_answer=f"{FIRST} [S1]", anchor=CONTRACT)
+        result = generator.generate("Elaborate.", context)
+
+        self.assertFalse(result.refused)
+        self.assertIn("Utilities Industry (IS-U)", result.text)
+        self.assertNotIn("Insurance", result.text)
+        self.assertNotIn("FS-CD", result.text)
+        self.assertNotIn("Public Sector", result.text)
+        self.assertNotIn("PSCD", result.text)
+        self.assertEqual(generator.last["industry_scope"], {"preferred": "IS-U", "excluded_units": 2})
+        selected_lines = [f"{unit['sentence']} [{unit['marker']}]" for unit in generator.last["selected"]]
+        self.assertEqual(result.text, "\n".join(selected_lines))  # grouped display metadata does not rewrite evidence
+        self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
+        self.assertTrue(all(re.search(r"\[S\d+\]$", line) for line in result.text.split("\n")))
+
+    def test_normal_standalone_rag_does_not_use_the_scoped_industry_filter(self):
+        context = _industry_context()
+        baseline = RG.ExtractiveGenerator().generate(CONTRACT, context)
+        with patch.object(EL, "_industry_scope_units", side_effect=AssertionError("scoped filter leaked into normal RAG")):
+            normal = RG.ExtractiveGenerator().generate(CONTRACT, context)
+        self.assertFalse(normal.refused)
+        self.assertEqual(normal.text, baseline.text)
 
     def test_elaboration_refuses_honestly_when_the_documentation_has_nothing_to_add(self):
         everything = "\n".join(x + " [S1]" for x in (FIRST, ASSIGNED, MASTER, INCLUDE, MANY))
@@ -196,14 +243,33 @@ class PresentationSections(unittest.TestCase):
         self.assertEqual([section["key"] for section in sections], [EL.SECTION_WHAT_IT_IS_DOES, EL.SECTION_KEY_DETAILS])
         self.assertTrue(all(section["lines"] for section in sections))
 
+    def test_each_category_has_one_heading_and_original_line_order_is_preserved(self):
+        lines = ("Definition [S1]", "Relationship [S2]", "Additional definition [S3]", "Condition [S4]", "More relationship [S5]")
+        sections = EL.group_presentation_lines((
+            (EL.SECTION_WHAT_IT_IS_DOES, lines[0]),
+            (EL.SECTION_HOW_IT_WORKS_RELATIONSHIPS, lines[1]),
+            (EL.SECTION_WHAT_IT_IS_DOES, lines[2]),
+            (EL.SECTION_CONDITIONS_PREREQUISITES, lines[3]),
+            (EL.SECTION_HOW_IT_WORKS_RELATIONSHIPS, lines[4]),
+        ))
+        keys = [section["key"] for section in sections]
+        self.assertEqual(keys, [EL.SECTION_WHAT_IT_IS_DOES, EL.SECTION_HOW_IT_WORKS_RELATIONSHIPS,
+                                EL.SECTION_CONDITIONS_PREREQUISITES])
+        self.assertEqual(len(keys), len(set(keys)))
+        self.assertEqual(_reconstruct_sections(sections), "\n".join(lines))
+        self.assertEqual([section["line_orders"] for section in sections], [[0, 2], [1, 4], [3]])
+
     def test_flattened_sections_reproduce_the_canonical_answer_and_citations(self):
         result, evidence = _generate("elaborate", previous=FIRST)
         self.assertFalse(result.refused)
         sections = evidence["presentation_sections"]
-        flattened = [line for section in sections for line in section["lines"]]
-        self.assertEqual("\n".join(flattened), result.text)
-        self.assertEqual(flattened, result.text.split("\n"))
-        self.assertTrue(all(re.search(r"\[S\d+\]$", line) for line in flattened))
+        grouped_lines = [line for section in sections for line in section["lines"]]
+        self.assertEqual(_reconstruct_sections(sections), result.text)
+        self.assertEqual(len({section["key"] for section in sections}), len(sections))
+        indexed = sorted((order, line) for section in sections for order, line in zip(section["line_orders"], section["lines"]))
+        self.assertEqual([order for order, _ in indexed], list(range(len(result.text.split("\n")))) )
+        self.assertEqual([line for _, line in indexed], result.text.split("\n"))
+        self.assertTrue(all(re.search(r"\[S\d+\]$", line) for line in grouped_lines))
 
     def test_context_and_follow_lines_stay_attached_to_their_cited_sentence(self):
         context_line = "Contract account overview"
@@ -231,8 +297,8 @@ class PresentationSections(unittest.TestCase):
 
         expected = [f"{context_line} [S1]", f"{sentence} [S1]", f"{follow} [S1]"]
         self.assertEqual(result.text.split("\n"), expected)
-        self.assertEqual(generator.last["presentation_sections"], [{"key": EL.SECTION_WHAT_IT_IS_DOES, "lines": expected}])
-        self.assertEqual("\n".join(line for section in generator.last["presentation_sections"] for line in section["lines"]), result.text)
+        self.assertEqual(generator.last["presentation_sections"], [{"key": EL.SECTION_WHAT_IT_IS_DOES, "lines": expected, "line_orders": [0, 1, 2]}])
+        self.assertEqual(_reconstruct_sections(generator.last["presentation_sections"]), result.text)
 
 
 class Detector(unittest.TestCase):
@@ -301,6 +367,15 @@ class Wiring(unittest.TestCase):
         self.assertNotIn(EV.stem2("relate"), terms)                          # follow-up wording is not a topic
         self.assertEqual(EL.new_terms_of("Elaborate.", CONTRACT), ())
 
+        explicit_component = EL.new_terms_of("How does it relate to FS-CD?", CONTRACT)
+        self.assertIn("fs-cd", explicit_component)  # short component codes survive lexical tokenization for scope checks
+        context = _industry_context()
+        units = EV.build_units(context.items)
+        unchanged, scope, excluded = EL._industry_scope_units(units, context, CONTRACT, "", explicit_component)
+        self.assertIsNone(scope)
+        self.assertEqual(excluded, 0)
+        self.assertEqual(len(unchanged), len(units))
+
 
 def _sentences(answer: str) -> set:
     return {re.sub(r"\s+", " ", x).strip().lower() for x in re.split(r"(?<=[.!?])\s+", re.sub(r"\[S\d+\]", "", answer or "")) if x.strip()}
@@ -330,8 +405,11 @@ def _verbatim_violations(answer: str, items) -> list:
 
 
 class PresentationMetadata(unittest.TestCase):
-    def test_sections_are_public_only_when_scoped_and_match_the_canonical_answer(self):
-        answer = f"{FIRST} [S1]\n{ASSIGNED} [S2]"
+    def test_sections_preserve_the_canonical_answer_when_global_grouping_reorders_categories(self):
+        first = f"{FIRST} [S1]"
+        relation = f"{ASSIGNED} [S2]"
+        later_definition = f"{MANY} [S3]"
+        answer = "\n".join((first, relation, later_definition))
         raw = {
             "status": "answered",
             "answer": answer,
@@ -340,8 +418,8 @@ class PresentationMetadata(unittest.TestCase):
             "debug": {},
         }
         sections = [
-            {"key": EL.SECTION_WHAT_IT_IS_DOES, "lines": [f"{FIRST} [S1]"]},
-            {"key": EL.SECTION_HOW_IT_WORKS_RELATIONSHIPS, "lines": [f"{ASSIGNED} [S2]"]},
+            {"key": EL.SECTION_WHAT_IT_IS_DOES, "lines": [first, later_definition], "line_orders": [0, 2]},
+            {"key": EL.SECTION_HOW_IT_WORKS_RELATIONSHIPS, "lines": [relation], "line_orders": [1]},
         ]
         normal = S.to_chat_result(raw, "extractive", "conv-normal", 1.0,
                                   evidence={"presentation_sections": sections})
@@ -349,13 +427,21 @@ class PresentationMetadata(unittest.TestCase):
 
         elaborated = S.to_chat_result(raw, "extractive", "conv-elaboration", 1.0,
                                       presentation_sections=sections)
-        self.assertEqual(elaborated["answer"], answer)
+        self.assertEqual(elaborated["answer"], answer)  # the canonical answer remains byte-for-byte unchanged
         self.assertEqual(elaborated["metadata"]["elaboration_sections"], sections)
-        self.assertEqual("\n".join(line for section in sections for line in section["lines"]), answer)
+        self.assertEqual(_reconstruct_sections(elaborated["metadata"]["elaboration_sections"]), answer)
+        self.assertNotEqual("\n".join(line for section in sections for line in section["lines"]), answer)
+        self.assertEqual(len({section["key"] for section in elaborated["metadata"]["elaboration_sections"]}), 2)
 
-        mismatched = S.to_chat_result(raw, "extractive", "conv-mismatch", 1.0,
-                                      presentation_sections=[{"key": EL.SECTION_KEY_DETAILS, "lines": [FIRST]}])
-        self.assertNotIn("elaboration_sections", mismatched["metadata"])
+        invalid_order = [dict(sections[0], line_orders=[1, 2]), sections[1]]
+        mismatch = S.to_chat_result(raw, "extractive", "conv-mismatch", 1.0,
+                                    presentation_sections=invalid_order)
+        self.assertNotIn("elaboration_sections", mismatch["metadata"])
+
+        duplicate_heading = [sections[0], {"key": EL.SECTION_WHAT_IT_IS_DOES, "lines": [relation], "line_orders": [1]}]
+        duplicate = S.to_chat_result(raw, "extractive", "conv-duplicate", 1.0,
+                                     presentation_sections=duplicate_heading)
+        self.assertNotIn("elaboration_sections", duplicate["metadata"])
 
 
 @NEED_STORES
@@ -548,7 +634,7 @@ class ApiElaborationTests(unittest.TestCase):
         self.assertEqual(follow_up["retrieval_query"], Q_PLAN)
         self.assertEqual(follow_up["anchor"], Q_PLAN)
         sections = body["metadata"]["elaboration_sections"]
-        self.assertEqual("\n".join(line for section in sections for line in section["lines"]), body["answer"])
+        self.assertEqual(_reconstruct_sections(sections), body["answer"])
         # whatever came back is grounded in the context of this answer
         items = body["debug"]["pipeline"]["context"]["items"]
         self.assertEqual(_verbatim_violations(body["answer"], items), [])

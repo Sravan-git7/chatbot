@@ -104,6 +104,16 @@ _SECTION_WHAT_IT_IS_DOES = re.compile(
 # the follow-up wording, stemmed the same way as the evidence layer stems its focus terms
 _FOLLOWUP_STEMS = frozenset(t for w in FU._FOLLOWUP_VOCAB for t in EV.terms2(w))
 
+# If the routed page identifies the Utilities/IS-U domain, a sentence explicitly about another industry component is
+# not evidence for this scoped elaboration just because it repeats "contract account". Keep this filter deliberately
+# local to the scoped pass; the normal RAG generator and its standalone answers are untouched.
+_ISU_SCOPE = re.compile(r"\b(?:SAP\s+Utilities\b|Utilities\s+Industry\b|IS\s*[-‐‑‒–—]?\s*U\b)", re.I)
+_OTHER_INDUSTRY_COMPONENT = re.compile(
+    r"\b(?:FS\s*[-‐‑‒–—]?\s*CD|Insurance|PSCD|Public\s+Sector|"
+    r"IS\s*[-‐‑‒–—]?\s*T|Telecommunications)\b",
+    re.I,
+)
+
 
 def presentation_section_key(sentence: str) -> str:
     """Conservatively classify one evidence sentence for display; this never changes answer text."""
@@ -118,16 +128,83 @@ def presentation_section_key(sentence: str) -> str:
 
 
 def group_presentation_lines(classified_lines: Iterable[Tuple[str, str]]) -> List[Dict[str, Any]]:
-    """Build ordered, contiguous presentation sections without dropping or reordering answer lines."""
+    """Consolidate each category once while retaining original answer order per line.
+
+    Category grouping can reorder interleaved lines (A, B, A becomes the A section and then the B section), so every
+    line carries its zero-based position in the canonical answer. Consumers reconstruct/validate the original answer
+    by sorting on ``line_orders``; the evidence text itself is never changed.
+    """
     sections: List[Dict[str, Any]] = []
+    by_key: Dict[str, Dict[str, Any]] = {}
+    line_order = 0
     for key, line in classified_lines:
         if key not in PRESENTATION_SECTION_KEYS or not line or not line.strip():
             continue
-        if sections and sections[-1]["key"] == key:
-            sections[-1]["lines"].append(line)
-        else:
-            sections.append({"key": key, "lines": [line]})
+        section = by_key.get(key)
+        if section is None:
+            section = {"key": key, "lines": [], "line_orders": []}
+            by_key[key] = section
+            sections.append(section)
+        section["lines"].append(line)
+        section["line_orders"].append(line_order)
+        line_order += 1
     return sections
+
+
+def _item_heading_text(item: Any) -> str:
+    """The short, local metadata that can identify an evidence unit's section."""
+    parts = [getattr(item, "title", ""), getattr(item, "section_title", "")]
+    heading_path = getattr(item, "heading_path", ()) or ()
+    parts.extend([heading_path] if isinstance(heading_path, str) else heading_path)
+    return " ".join(str(part) for part in parts if part)
+
+
+def _industry_scope_units(units: Sequence[Any], context: Any, anchor: str, previous_answer: str,
+                          new_terms: Iterable[str]) -> Tuple[List[Any], Optional[str], int]:
+    """Exclude explicit non-Utilities component snippets only when the routed evidence establishes an IS-U scope.
+
+    The question/relationship terms can explicitly request another industry (or a comparison); in that case the
+    evidence is left alone. For detection, broad chunk text is useful because several component labels can occur in
+    one SAP chunk. For exclusion, inspect only the individual sentence, its adjacent local context, and its section
+    headings so an IS-U sentence is not lost merely because a sibling sentence in the same chunk mentions FS-CD.
+    """
+    original = list(units)
+    terms = {str(term).casefold() for term in new_terms}
+    explicit_alternate = bool(_OTHER_INDUSTRY_COMPONENT.search(anchor or "")) or bool(
+        terms & {"insurance", "insur", "pscd", "telecommunications", "telecommunication", "fs-cd", "is-t"}
+    ) or {"public", "sector"}.issubset(terms) or {"fs", "cd"}.issubset(terms)
+    if explicit_alternate:
+        return original, None, 0
+
+    scope_parts = [anchor or "", previous_answer or ""]
+    local_headings: Dict[str, str] = {}
+    for item in getattr(context, "items", ()) or ():
+        heading_text = _item_heading_text(item)
+        chunk_id = getattr(item, "chunk_id", None)
+        if chunk_id is not None and heading_text:
+            local_headings[str(chunk_id)] = " ".join(filter(None, (local_headings.get(str(chunk_id), ""), heading_text)))
+        for attr in ("text", "rendered_text"):
+            value = getattr(item, attr, "")
+            if value:
+                scope_parts.append(str(value))
+        if heading_text:
+            scope_parts.append(heading_text)
+    for unit in original:
+        scope_parts.extend((getattr(unit, "text", ""), getattr(unit, "chunk_text", "")))
+        if getattr(unit, "prev_line", None):
+            scope_parts.append(unit.prev_line)
+    if not _ISU_SCOPE.search(" ".join(str(part) for part in scope_parts if part)):
+        return original, None, 0
+
+    relevant: List[Any] = []
+    for unit in original:
+        local_text = " ".join(str(part) for part in (
+            getattr(unit, "prev_line", None), getattr(unit, "text", ""), getattr(unit, "follow", None),
+            local_headings.get(str(getattr(unit, "chunk_id", "")), ""),
+        ) if part)
+        if not _OTHER_INDUSTRY_COMPONENT.search(local_text):
+            relevant.append(unit)
+    return relevant, "IS-U", len(original) - len(relevant)
 
 
 def scoped_config(base_config: Any) -> Any:
@@ -178,6 +255,7 @@ class IntentExtractiveGenerator:
         self.anchor = anchor            # the previous subject: the sufficiency analysis is done on it, never on the message's own wording
         self.tau = tau
         self.frame_normalization = frame_normalization
+        self.previous_answer = previous_answer
         self.previous = set(sentences_of(previous_answer))
         # for a "relationship" follow-up: the terms the *message* brought in (they must stay covered)
         self.new_terms = {t for t in (focus_terms or ()) }
@@ -200,6 +278,9 @@ class IntentExtractiveGenerator:
         self._tls.last = None
         needs = EV.analyze_question(self.anchor or question)
         units = EV.build_units(context.items)
+        units, industry_scope, excluded_industry_units = _industry_scope_units(
+            units, context, self.anchor or question, self.previous_answer, self.new_terms
+        )
         if self.new_terms:                                           # a relationship follow-up: the terms the *message* added
             present: set = set()                                     # count only when the routed evidence actually covers them
             for u in units:
@@ -210,6 +291,8 @@ class IntentExtractiveGenerator:
         decision, baseline = EV.assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason,
                                   "detail": decision.detail, **needs.to_dict(), "intent": self.intent, "selected": []}
+        if industry_scope:
+            record["industry_scope"] = {"preferred": industry_scope, "excluded_units": excluded_industry_units}
         if not decision.supported:
             # the topic itself is not supported by the retrieved evidence: unchanged behaviour (abstain -> no answer)
             record["elaborated"] = None
@@ -247,8 +330,8 @@ class IntentExtractiveGenerator:
             if ln not in dedup:
                 dedup.append(ln)
         text = "\n".join(dedup)
-        # Keep the exact answer lines, citations, and document order. Section changes only group adjacent lines;
-        # context lines inherit the category of their selected evidence sentence.
+        # Keep the exact answer lines and citations. Categories are grouped globally for display; line_orders on each
+        # section reconstruct the unchanged document order. Context lines inherit the category of their evidence sentence.
         record["presentation_sections"] = group_presentation_lines(
             (line_sections[ln], ln) for ln in dedup
         )
@@ -363,5 +446,11 @@ def is_elaboration_intent(category: Optional[str]) -> bool:
 def new_terms_of(message: str, anchor: str) -> Tuple[str, ...]:
     """Content terms the follow-up message brings that the anchor question does not have (relationship questions)."""
     anchor_terms = set(EV.terms2(anchor))
-    return tuple(dict.fromkeys(t for t in EV.terms2(message)
-                              if t not in anchor_terms and t not in EV.FRAME_STEMS and t not in _FOLLOWUP_STEMS))
+    terms = [t for t in EV.terms2(message)
+             if t not in anchor_terms and t not in EV.FRAME_STEMS and t not in _FOLLOWUP_STEMS]
+    # The lexical tokenizer discards short code fragments such as FS-CD; retain the explicit component code so the
+    # scoped domain filter can distinguish a relationship/comparison request from an unrelated extracted passage.
+    for code, pattern in (("fs-cd", r"\bFS\s*[-‐‑‒–—]?\s*CD\b"), ("is-t", r"\bIS\s*[-‐‑‒–—]?\s*T\b")):
+        if re.search(pattern, message or "", re.I):
+            terms.append(code)
+    return tuple(dict.fromkeys(terms))

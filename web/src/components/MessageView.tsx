@@ -18,6 +18,51 @@ const ELABORATION_SECTION_HEADINGS: Record<ElaborationSectionKey, string> = {
   key_details: 'Key details',
 }
 
+function hasValidElaborationPresentation(sections: unknown, answer: string): boolean {
+  if (!Array.isArray(sections) || sections.length === 0) return false
+
+  const seenKeys = new Set<string>()
+  const orderedLines: Array<{ order: number; line: string }> = []
+  let hasOrders = false
+  let missingOrders = false
+
+  for (const rawSection of sections) {
+    if (!rawSection || typeof rawSection !== 'object') return false
+    const section = rawSection as Record<string, unknown>
+    const key = section.key
+    const lines = section.lines
+    if (
+      typeof key !== 'string' ||
+      !Object.prototype.hasOwnProperty.call(ELABORATION_SECTION_HEADINGS, key) ||
+      seenKeys.has(key) ||
+      !Array.isArray(lines) ||
+      lines.length === 0 ||
+      !lines.every((line) => typeof line === 'string' && line.trim().length > 0)
+    ) return false
+    seenKeys.add(key)
+
+    if (section.line_orders === undefined || section.line_orders === null) {
+      missingOrders = true
+      continue
+    }
+    hasOrders = true
+    const orders = section.line_orders
+    if (!Array.isArray(orders) || orders.length !== lines.length) return false
+    for (let index = 0; index < orders.length; index += 1) {
+      const order = orders[index]
+      if (typeof order !== 'number' || !Number.isInteger(order) || order < 0) return false
+      orderedLines.push({ order, line: lines[index] as string })
+    }
+  }
+
+  if (hasOrders && missingOrders) return false
+  if (!hasOrders) return sections.flatMap((section) => section.lines as string[]).join('\n') === answer
+
+  orderedLines.sort((left, right) => left.order - right.order)
+  if (orderedLines.some((entry, index) => entry.order !== index)) return false
+  return orderedLines.map((entry) => entry.line).join('\n') === answer
+}
+
 export const THINKING_STAGES = [
   'Searching SAP documentation...',
   'Finding relevant evidence...',
@@ -130,17 +175,7 @@ export default function MessageView({
     r && r.status === 'answered' ? getFollowUpQuestions(questionText ?? '', r) : []
   const elaborationSections = r?.metadata.elaboration_sections
   const showElaborationSections = Boolean(
-    r?.status === 'answered' &&
-      Array.isArray(elaborationSections) &&
-      elaborationSections.length > 0 &&
-      elaborationSections.every(
-        (section) =>
-          Object.prototype.hasOwnProperty.call(ELABORATION_SECTION_HEADINGS, section.key) &&
-          Array.isArray(section.lines) &&
-          section.lines.length > 0 &&
-          section.lines.every((line) => typeof line === 'string' && line.trim().length > 0),
-      ) &&
-      elaborationSections.flatMap((section) => section.lines).join('\n') === r.answer,
+    r?.status === 'answered' && hasValidElaborationPresentation(elaborationSections, r.answer),
   )
 
   return (
