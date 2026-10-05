@@ -109,7 +109,7 @@ _FOLLOWUP_STEMS = frozenset(t for w in FU._FOLLOWUP_VOCAB for t in EV.terms2(w))
 # local to the scoped pass; the normal RAG generator and its standalone answers are untouched.
 _ISU_SCOPE = re.compile(r"\b(?:SAP\s+Utilities\b|Utilities\s+Industry\b|IS\s*[-‐‑‒–—]?\s*U\b)", re.I)
 _OTHER_INDUSTRY_COMPONENT = re.compile(
-    r"\b(?:FS\s*[-‐‑‒–—]?\s*CD|Insurance|PSCD|Public\s+Sector|"
+    r"\b(?:FS\s*[-‐‑‒–—]?\s*CD|Insurance|PS\s*[-‐‑‒–—]?\s*CD|Public\s+Sector|"
     r"IS\s*[-‐‑‒–—]?\s*T|Telecommunications)\b",
     re.I,
 )
@@ -160,13 +160,14 @@ def _item_heading_text(item: Any) -> str:
 
 
 def _industry_scope_units(units: Sequence[Any], context: Any, anchor: str, previous_answer: str,
-                          new_terms: Iterable[str]) -> Tuple[List[Any], Optional[str], int]:
-    """Exclude explicit non-Utilities component snippets only when the routed evidence establishes an IS-U scope.
+                          new_terms: Iterable[str]) -> Tuple[List[Any], Optional[str], int, List[str]]:
+    """Exclude explicit non-Utilities component evidence only in a routed IS-U elaboration.
 
     The question/relationship terms can explicitly request another industry (or a comparison); in that case the
-    evidence is left alone. For detection, broad chunk text is useful because several component labels can occur in
-    one SAP chunk. For exclusion, inspect only the individual sentence, its adjacent local context, and its section
-    headings so an IS-U sentence is not lost merely because a sibling sentence in the same chunk mentions FS-CD.
+    evidence is left alone. A context marker names a whole chunk, not one sentence: when that chunk's heading or text
+    explicitly identifies Insurance/FS-CD, PSCD/Public Sector, or IS-T, reject its marker and all of its units before
+    selection. Otherwise a clean sibling sentence could keep the rejected chunk in citations and Sources. The
+    sentence-local check below also catches an explicit component label attached to an individual evidence unit.
     """
     original = list(units)
     terms = {str(term).casefold() for term in new_terms}
@@ -174,37 +175,60 @@ def _industry_scope_units(units: Sequence[Any], context: Any, anchor: str, previ
         terms & {"insurance", "insur", "pscd", "telecommunications", "telecommunication", "fs-cd", "is-t"}
     ) or {"public", "sector"}.issubset(terms) or {"fs", "cd"}.issubset(terms)
     if explicit_alternate:
-        return original, None, 0
+        return original, None, 0, []
 
     scope_parts = [anchor or "", previous_answer or ""]
-    local_headings: Dict[str, str] = {}
+    headings_by_marker: Dict[str, List[str]] = {}
+    headings_by_chunk: Dict[str, List[str]] = {}
+    excluded_markers: set = set()
     for item in getattr(context, "items", ()) or ():
         heading_text = _item_heading_text(item)
+        marker = str(getattr(item, "marker", "") or "")
         chunk_id = getattr(item, "chunk_id", None)
-        if chunk_id is not None and heading_text:
-            local_headings[str(chunk_id)] = " ".join(filter(None, (local_headings.get(str(chunk_id), ""), heading_text)))
+        item_text: List[str] = []
         for attr in ("text", "rendered_text"):
             value = getattr(item, attr, "")
             if value:
-                scope_parts.append(str(value))
+                value = str(value)
+                item_text.append(value)
+                scope_parts.append(value)
         if heading_text:
             scope_parts.append(heading_text)
+            if marker:
+                headings_by_marker.setdefault(marker, []).append(heading_text)
+            if chunk_id is not None:
+                headings_by_chunk.setdefault(str(chunk_id), []).append(heading_text)
+        # Reject the source marker at chunk granularity. This covers headings stored on a ContextItem even when its
+        # chunk id is absent/mismatched, as well as malformed PSCD labels embedded in the chunk body.
+        if marker and _OTHER_INDUSTRY_COMPONENT.search(" ".join((heading_text, *item_text))):
+            excluded_markers.add(marker)
+
     for unit in original:
         scope_parts.extend((getattr(unit, "text", ""), getattr(unit, "chunk_text", "")))
         if getattr(unit, "prev_line", None):
             scope_parts.append(unit.prev_line)
     if not _ISU_SCOPE.search(" ".join(str(part) for part in scope_parts if part)):
-        return original, None, 0
+        return original, None, 0, []
 
-    relevant: List[Any] = []
+    candidates: List[Any] = []
     for unit in original:
+        marker = str(getattr(unit, "marker", "") or "")
+        if marker and marker in excluded_markers:
+            continue
+        chunk_id = str(getattr(unit, "chunk_id", ""))
+        local_headings = " ".join([*headings_by_marker.get(marker, ()), *headings_by_chunk.get(chunk_id, ())])
         local_text = " ".join(str(part) for part in (
-            getattr(unit, "prev_line", None), getattr(unit, "text", ""), getattr(unit, "follow", None),
-            local_headings.get(str(getattr(unit, "chunk_id", "")), ""),
+            getattr(unit, "prev_line", None), getattr(unit, "text", ""), getattr(unit, "follow", None), local_headings,
         ) if part)
-        if not _OTHER_INDUSTRY_COMPONENT.search(local_text):
-            relevant.append(unit)
-    return relevant, "IS-U", len(original) - len(relevant)
+        if _OTHER_INDUSTRY_COMPONENT.search(local_text):
+            if marker:
+                excluded_markers.add(marker)
+        else:
+            candidates.append(unit)
+    # A citation marker is chunk-wide. If any of its units carries an explicit other-industry label, remove every
+    # unit under that marker so neither answer text nor verifier-derived citations can retain the rejected source.
+    relevant = [u for u in candidates if str(getattr(u, "marker", "") or "") not in excluded_markers]
+    return relevant, "IS-U", len(original) - len(relevant), sorted(excluded_markers)
 
 
 def scoped_config(base_config: Any) -> Any:
@@ -278,7 +302,7 @@ class IntentExtractiveGenerator:
         self._tls.last = None
         needs = EV.analyze_question(self.anchor or question)
         units = EV.build_units(context.items)
-        units, industry_scope, excluded_industry_units = _industry_scope_units(
+        units, industry_scope, excluded_industry_units, excluded_industry_markers = _industry_scope_units(
             units, context, self.anchor or question, self.previous_answer, self.new_terms
         )
         if self.new_terms:                                           # a relationship follow-up: the terms the *message* added
@@ -292,7 +316,8 @@ class IntentExtractiveGenerator:
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason,
                                   "detail": decision.detail, **needs.to_dict(), "intent": self.intent, "selected": []}
         if industry_scope:
-            record["industry_scope"] = {"preferred": industry_scope, "excluded_units": excluded_industry_units}
+            record["industry_scope"] = {"preferred": industry_scope, "excluded_units": excluded_industry_units,
+                                        "excluded_markers": excluded_industry_markers}
         if not decision.supported:
             # the topic itself is not supported by the retrieved evidence: unchanged behaviour (abstain -> no answer)
             record["elaborated"] = None

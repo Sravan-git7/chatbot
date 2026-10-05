@@ -114,6 +114,36 @@ def _industry_context():
     return _Ctx(list(items))
 
 
+def _utilities_source_context(insurance_text=None, insurance_section=None):
+    """Exact source blocks for the browser case: [1] Purpose, [4] IS-U, and [5] the misheaded PSCD fragment."""
+    page_path = ROOT / "data/page_corpus/pages/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.json"
+    page = json.loads(page_path.read_text(encoding="utf-8"))
+    blocks = {block["block_index"]: block for block in page["blocks"]}
+    # These are the actual ordered blocks from the saved Contract Accounts page; block 8 is the malformed PSCD line
+    # stored under the Insurance (FS-CD) heading, exactly as in the browser report.
+    selected_indexes = (0, 1, 3, 4, 8)
+    card = page["card"]
+    items = []
+    for number, block_index in enumerate(selected_indexes, start=1):
+        block = blocks[block_index]
+        heading_path = list(block["heading_path"])
+        section = heading_path[-1]
+        body = block["text"]
+        if block_index == 8:
+            if insurance_section is not None:
+                section = insurance_section
+                heading_path[-1] = section
+            if insurance_text is not None:
+                body = insurance_text
+        items.append(SimpleNamespace(
+            marker=f"S{number}", chunk_id=f"contract-accounts-block-{block_index}", rank=number - 1,
+            chunk_index=block_index, title=card["card_title"], section_title=section, heading_path=heading_path,
+            text=body, rendered_text=body, source_url=card["card_url"], guide_id=page["guide_id"],
+            page_id=page["page_id"], content_hash=f"contract-accounts-block-{block_index}",
+        ))
+    return _Ctx(items)
+
+
 class Selection(unittest.TestCase):
     """The intent rules, on synthetic evidence (fast, no stores)."""
 
@@ -138,11 +168,109 @@ class Selection(unittest.TestCase):
         self.assertNotIn("FS-CD", result.text)
         self.assertNotIn("Public Sector", result.text)
         self.assertNotIn("PSCD", result.text)
-        self.assertEqual(generator.last["industry_scope"], {"preferred": "IS-U", "excluded_units": 2})
+        self.assertEqual(generator.last["industry_scope"], {"preferred": "IS-U", "excluded_units": 2,
+                                                              "excluded_markers": ["S3", "S4"]})
         selected_lines = [f"{unit['sentence']} [{unit['marker']}]" for unit in generator.last["selected"]]
         self.assertEqual(result.text, "\n".join(selected_lines))  # grouped display metadata does not rewrite evidence
         self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
         self.assertTrue(all(re.search(r"\[S\d+\]$", line) for line in result.text.split("\n")))
+
+    def test_utilities_elaboration_excludes_pscd_and_its_insurance_marker_from_all_response_surfaces(self):
+        import rag_pipeline as RP
+        import page_citations as PCIT
+
+        context = _utilities_source_context()
+        self.assertIs(RP._citation_context_after_scope(context, None), context)  # no normal-RAG mutation
+        generator = EL.IntentExtractiveGenerator(
+            "elaborate", previous_answer=f"{FIRST} [S1]", anchor=CONTRACT,
+        )
+        generated = generator.generate("Elaborate.", context)
+        evidence = generator.last
+        self.assertFalse(generated.refused)
+        self.assertIn("[S1]", generated.text)  # Purpose remains usable.
+        self.assertIn("[S4]", generated.text)  # Utilities Industry (IS-U) evidence remains usable.
+        self.assertNotIn("[S5]", generated.text)
+        self.assertNotIn("Industry ComponentPublic Sector Contract Accounts Receivable and Payable(PSCD)", generated.text)
+        self.assertNotIn("Insurance", generated.text)
+        self.assertNotIn("FS-CD", generated.text)
+        self.assertNotIn("Public Sector", generated.text)
+        self.assertNotIn("IS-T", generated.text)
+
+        sections = evidence["presentation_sections"]
+        self.assertEqual(_reconstruct_sections(sections), generated.text)
+        self.assertNotIn("[S5]", "\n".join(line for section in sections for line in section["lines"]))
+        self.assertEqual(evidence["industry_scope"]["excluded_markers"], ["S3", "S5"])
+
+        # The same rejected-marker set narrows the unchanged grounding verifier and the citation builder. This proves
+        # the forbidden source is absent from answer_sources and context_not_cited, not just from the visible answer.
+        citation_context = RP._citation_context_after_scope(context, evidence)
+        self.assertIn("S5", {item.marker for item in context.items})  # the source context remains for audit/support-chain
+        self.assertNotIn("S5", {item.marker for item in citation_context.items})
+        report = RG.verify_grounding(generated.text, citation_context, in_page_grounding=True, citation_normalization=True)
+        self.assertTrue(report.ok, report.to_dict())
+        self.assertNotIn("S5", report.cited_markers)
+        self.assertTrue(EV.verify_support_chain(generated.text, context)["ok"])
+
+        card_url = context.items[0].source_url
+        guide_id, page_id = context.items[0].guide_id, context.items[0].page_id
+        identity = SimpleNamespace(
+            source_id="M2C-17", card_title="Contract Accounts Overview", card_url=card_url,
+            card_guide_id=guide_id, card_page_id=page_id, effective_guide_id=guide_id, effective_page_id=page_id,
+            resolution_basis="resolved_local_page", resolution_status="resolved_local_page", local_page_path=None,
+            local_page_available=False, evidence=(), card_needs_review=False, card_source_status="verified",
+            card_source_url_status="ok", disagreements=(),
+        )
+        identity_context = SimpleNamespace(registrations={}, registry={}, stale_final_manifest={})
+        card = {"source_id": "M2C-17", "title": "Contract Accounts Overview", "source_url": card_url,
+                "source_status": "verified", "source_url_status": "ok", "citation": "SAP Help"}
+        citations = PCIT.build_citations(
+            card, identity, identity_context, citation_context, report,
+            {"corpus_status": "ingested", "doc_id": f"{guide_id}/{page_id}", "reason": None},
+        )
+        citation_json = json.dumps(citations, sort_keys=True)
+        self.assertNotIn("S5", citation_json)
+        self.assertNotIn("Insurance", citation_json)
+        self.assertNotIn("PSCD", citation_json)
+        self.assertTrue({"S1", "S4"} <= {source["marker"] for source in citations["answer_sources"]})
+
+        raw = {
+            "status": "answered", "answer": generated.text, "citations": citations,
+            "topic": {"source_id": "M2C-17", "title": "Contract Accounts Overview",
+                      "identity_status": "resolved_local_page", "corpus_status": "ingested"},
+            "debug": {"grounding": report.to_dict()},
+        }
+        public = S.to_chat_result(raw, "extractive", "conv-utilities", 1.0,
+                                  evidence=evidence, presentation_sections=sections)
+        self.assertEqual(public["answer"], generated.text)
+        self.assertEqual(_reconstruct_sections(public["metadata"]["elaboration_sections"]), public["answer"])
+        public_source_markers = {source["marker"] for source in public["sources"]}
+        self.assertTrue({"S1", "S4"} <= public_source_markers)
+        self.assertNotIn("S5", public_source_markers)
+        source_sections = {source["marker"]: source["section"] for source in public["sources"]}
+        self.assertIn("Purpose", source_sections["S1"])
+        self.assertIn("Utilities Industry (IS-U)", source_sections["S4"])
+
+    def test_insurance_section_heading_excludes_its_source_marker_even_if_body_is_generic(self):
+        context = _utilities_source_context(insurance_text="A contract account may have several contracts assigned to it.")
+        generator = EL.IntentExtractiveGenerator("elaborate", previous_answer=f"{FIRST} [S1]", anchor=CONTRACT)
+        result = generator.generate("Elaborate.", context)
+        self.assertFalse(result.refused)
+        self.assertIn("[S4]", result.text)
+        self.assertNotIn("[S5]", result.text)
+        self.assertEqual(generator.last["industry_scope"]["excluded_markers"], ["S3", "S5"])
+
+    def test_pscd_body_is_rejected_without_relying_on_an_insurance_heading(self):
+        context = _utilities_source_context(
+            insurance_text="Industry ComponentPublic Sector Contract Accounts Receivable and Payable(PSCD)",
+            insurance_section="Contract Accounts",
+        )
+        generator = EL.IntentExtractiveGenerator("elaborate", previous_answer=f"{FIRST} [S1]", anchor=CONTRACT)
+        result = generator.generate("Elaborate.", context)
+        self.assertFalse(result.refused)
+        self.assertIn("[S4]", result.text)
+        self.assertNotIn("[S5]", result.text)
+        self.assertNotIn("PSCD", result.text)
+        self.assertIn("S5", generator.last["industry_scope"]["excluded_markers"])
 
     def test_normal_standalone_rag_does_not_use_the_scoped_industry_filter(self):
         context = _industry_context()
@@ -371,9 +499,10 @@ class Wiring(unittest.TestCase):
         self.assertIn("fs-cd", explicit_component)  # short component codes survive lexical tokenization for scope checks
         context = _industry_context()
         units = EV.build_units(context.items)
-        unchanged, scope, excluded = EL._industry_scope_units(units, context, CONTRACT, "", explicit_component)
+        unchanged, scope, excluded, excluded_markers = EL._industry_scope_units(units, context, CONTRACT, "", explicit_component)
         self.assertIsNone(scope)
         self.assertEqual(excluded, 0)
+        self.assertEqual(excluded_markers, [])
         self.assertEqual(len(unchanged), len(units))
 
 

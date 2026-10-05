@@ -185,6 +185,22 @@ class PageCorpusIndex:
         return self.page_text(key).lower()
 
 
+def _citation_context_after_scope(context: Any, generation_evidence: Any) -> Any:
+    """Apply scoped elaboration's rejected source markers to grounding and citation construction only.
+
+    The request's original context remains intact for retrieval/debug/support-chain auditing. The generator has already
+    selected only allowed units; this narrower view prevents a rejected marker from being accepted by grounding or
+    appearing in answer_sources/context_not_cited. With no scoped exclusions it is an identity operation.
+    """
+    industry_scope = generation_evidence.get("industry_scope") if isinstance(generation_evidence, Mapping) else None
+    excluded_markers = {str(marker) for marker in (industry_scope or {}).get("excluded_markers", ())}
+    if not excluded_markers:
+        return context
+    filtered = copy.copy(context)
+    filtered.items = [item for item in context.items if str(item.marker) not in excluded_markers]
+    return filtered
+
+
 class RagPipeline:
     def __init__(self, card_backend: Any, retriever: Any, ctx: "pid.IdentityContext", corpus: PageCorpusIndex, generator: Any, count_tokens: Any,
                  cards: Optional[Sequence[Mapping[str, Any]]] = None, config: Optional[PipelineConfig] = None) -> None:
@@ -410,7 +426,9 @@ class RagPipeline:
         timings["generate_ms"] = (time.perf_counter() - t) * 1000
         in_page = getattr(self.cfg, "in_page_grounding", False) or getattr(self.cfg, "phase16_context_experiment", False)
         cit_norm = getattr(self.cfg, "citation_normalization", False) or getattr(self.cfg, "phase16_context_experiment", False)
-        report = verify_grounding(gen.text, context, in_page_grounding=in_page, citation_normalization=cit_norm)
+        generation_evidence = getattr(gen, "evidence", None)
+        citation_context = _citation_context_after_scope(context, generation_evidence)
+        report = verify_grounding(gen.text, citation_context, in_page_grounding=in_page, citation_normalization=cit_norm)
         dbg["generation"] = {"generator": gen.generator, "refused": gen.refused, "raw_text": gen.raw_text, "prompt": gen.prompt}
         if getattr(gen, "telemetry", None):
             dbg["generation"]["telemetry"] = dict(gen.telemetry)
@@ -420,10 +438,10 @@ class RagPipeline:
             dbg["evidence"] = gen.evidence
         dbg["grounding"] = report.to_dict()
         if gen.refused or report.refusal:
-            out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, None, entry)
+            out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry)
             return self._finish(out, INSUFFICIENT, "GENERATOR_REFUSED", MESSAGES[INSUFFICIENT], dbg, debug, timings, t0)
         if not report.ok:
-            out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, None, entry)
+            out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry)
             dbg["answer_withheld"] = gen.text
             return self._finish(out, INSUFFICIENT, "GROUNDING_VERIFICATION_FAILED", MESSAGES[INSUFFICIENT] + " (a generated answer was withheld because it failed the grounding check)",
                                 dbg, debug, timings, t0)
@@ -434,9 +452,9 @@ class RagPipeline:
         repaired_text = gen.text
         if getattr(self.cfg, "citation_repair", False):
             import rag_citation_repair as CRC
-            repaired_text, repair_log = CRC.repair_citations(gen.text, context, citation_normalization=bool(cit_norm))
+            repaired_text, repair_log = CRC.repair_citations(gen.text, citation_context, citation_normalization=bool(cit_norm))
             if repair_log.get("changed"):
-                repaired_report = verify_grounding(repaired_text, context, in_page_grounding=in_page, citation_normalization=cit_norm)
+                repaired_report = verify_grounding(repaired_text, citation_context, in_page_grounding=in_page, citation_normalization=cit_norm)
                 if repaired_report.ok and not repaired_report.refusal:
                     report = repaired_report
                 else:
@@ -445,7 +463,7 @@ class RagPipeline:
             dbg["citation_repair"] = repair_log
 
         out["answer"] = repaired_text
-        out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, report, entry)
+        out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, report, entry)
         return self._finish(out, ANSWERED, None, None, dbg, debug, timings, t0)
 
     # ------------------------------------------------------------------------------------------------------------
