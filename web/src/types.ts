@@ -39,6 +39,24 @@ export interface ElaborationSection {
   line_orders?: number[]
 }
 
+export interface TopicIdentity {
+  source_id: string
+  title?: string
+  guide_id?: string
+  page_id?: string
+  industry?: string
+}
+
+/** Client-carried active topic, created only from a successful grounded standalone answer. */
+export interface ActiveTopicContext {
+  query: string
+  /** Immutable answer to the standalone query; elaborations do not replace it. */
+  answer: string
+  identity: TopicIdentity
+  /** Successful elaboration answers retained separately for cumulative novelty filtering. */
+  seen_answers: string[]
+}
+
 export interface Metadata {
   card_id: string | null
   card_title: string | null
@@ -50,6 +68,10 @@ export interface Metadata {
   pipeline_status: string
   reason_code: string | null
   latency_ms: number
+  /** Page identity used by the active-topic consistency gate and next follow-up. */
+  topic_identity?: TopicIdentity | null
+  /** Non-null when the user message was resolved as a contextual follow-up. */
+  follow_up_category?: string | null
   /** Present only for an answered scoped extractive elaboration. */
   elaboration_sections?: ElaborationSection[]
 }
@@ -65,10 +87,11 @@ export interface ChatResult {
   debug?: Record<string, unknown> | null
 }
 
-/** Previous turns sent only to resolve context-dependent follow-up wording. */
+/** Explicit active state sent only to resolve context-dependent follow-up wording. */
 export interface ChatContext {
   questions: string[]
   answer?: string
+  active_topic?: ActiveTopicContext
 }
 
 export interface Health {

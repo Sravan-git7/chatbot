@@ -27,7 +27,7 @@ if HAVE_API:
 
 INTERNAL_ID = re.compile(r"\bM2C-\d+\b")
 RESPONSE_KEYS = {"schema_version", "conversation_id", "status", "answer", "sources", "topic_reference", "metadata"}
-META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "grounding", "pipeline_status", "reason_code", "latency_ms"}
+META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "grounding", "pipeline_status", "reason_code", "latency_ms", "topic_identity"}
 SOURCE_KEYS = {"type", "marker", "title", "section", "url", "source_id", "chunk_id"}
 
 

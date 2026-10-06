@@ -49,6 +49,7 @@ USER_TEXT = {
 }
 UNRESOLVED_TEXT = "I couldn't verify the relevant documentation."
 REFERENCE_NOTE = "Topic reference only - not used as evidence for any answer."
+ACTIVE_INDUSTRY_CONTEXT = "SAP Utilities/IS-U"
 
 
 class ServiceError(Exception):
@@ -221,7 +222,8 @@ def support_chain(answer: str, dbg: Mapping[str, Any]) -> Dict[str, Any]:
 
 def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str, latency_ms: float, debug: bool = False,
                    evidence: Optional[Mapping[str, Any]] = None,
-                   presentation_sections: Optional[List[Mapping[str, Any]]] = None) -> Dict[str, Any]:
+                   presentation_sections: Optional[List[Mapping[str, Any]]] = None,
+                   follow_up_category: Optional[str] = None) -> Dict[str, Any]:
     """Translate one ``RagPipeline.answer`` dict (produced with ``debug=True``) into the public chat result."""
     pstatus = raw["status"]
     status = STATUS_MAP[pstatus]
@@ -240,6 +242,14 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     meta = {"card_id": topic.get("source_id") if routed else None, "card_title": topic.get("title") if routed else None,
             "identity_status": topic.get("identity_status") if routed else None, "page_available": (topic.get("corpus_status") == "ingested") if routed else None, "generator": generator, "grounded": status == ANSWERED and _grounding(dbg, pstatus)["ok"] is True,
             "grounding": _grounding(dbg, pstatus), "pipeline_status": pstatus, "reason_code": raw.get("reason_code"), "latency_ms": round(latency_ms, 1)}
+    if (status == ANSWERED and topic.get("source_id") and topic.get("effective_guide_id") and topic.get("effective_page_id")):
+        meta["topic_identity"] = {
+            "source_id": topic["source_id"], "title": topic.get("title"),
+            "guide_id": topic["effective_guide_id"], "page_id": topic["effective_page_id"],
+            "industry": ACTIVE_INDUSTRY_CONTEXT,
+        }
+    if follow_up_category:
+        meta["follow_up_category"] = follow_up_category
     if status == ANSWERED and presentation_sections:
         safe_sections: List[Dict[str, Any]] = []
         valid_sections = True
@@ -339,10 +349,60 @@ class RagService:
         elif hasattr(self.pipeline.retriever, "last_promoted"):
             self.pipeline.retriever.last_promoted = None
 
+    def _canonical_active_topic(self, context: Optional[Mapping[str, Any]]) -> Optional[Dict[str, Any]]:
+        """Validate client-carried state against the server's card/page registry before it can anchor retrieval."""
+        if not isinstance(context, Mapping) or "active_topic" not in context:
+            return None
+        active = context.get("active_topic")
+        if not isinstance(active, Mapping):
+            return None
+        query = str(active.get("query") or "").strip()
+        answer = active.get("answer")
+        identity_data = active.get("identity")
+        if (not query or len(query) > FU.MAX_QUESTION_CHARS or FU.classify(query) is not None
+                or not isinstance(answer, str) or not answer.strip() or not isinstance(identity_data, Mapping)):
+            return None
+        source_id = str(identity_data.get("source_id") or "").strip()
+        card = self.pipeline.cards.get(source_id)
+        if not source_id or card is None:
+            return None
+
+        import m2c_page_identity as PID
+        resolved = PID.resolve_identity(card, self.pipeline.ctx)
+        guide_id = str(resolved.effective_guide_id or "")
+        page_id = str(resolved.effective_page_id or "")
+        if not guide_id or not page_id:
+            return None
+
+        def norm(value: Any) -> str:
+            return " ".join(str(value or "").split()).casefold()
+
+        for field, canonical in (("guide_id", guide_id), ("page_id", page_id)):
+            supplied = str(identity_data.get(field) or "")
+            if supplied and norm(supplied) != norm(canonical):
+                return None
+        supplied_title = identity_data.get("title")
+        if supplied_title and norm(supplied_title) != norm(resolved.card_title):
+            return None
+        supplied_industry = identity_data.get("industry")
+        if supplied_industry and norm(supplied_industry) != norm(ACTIVE_INDUSTRY_CONTEXT):
+            return None
+
+        seen = active.get("seen_answers")
+        seen_answers = [str(text).strip() for text in seen if isinstance(text, str) and text.strip()] if isinstance(seen, (list, tuple)) else []
+        identity = {"source_id": source_id, "title": resolved.card_title, "guide_id": guide_id,
+                    "page_id": page_id, "industry": ACTIVE_INDUSTRY_CONTEXT}
+        return {"query": query, "answer": answer.strip(), "identity": identity, "seen_answers": seen_answers[-4:]}
+
     def _run_pipeline_request(self, q: str, queue_wait_ms: Optional[float] = None,
-                              pipeline: Optional[Any] = None) -> tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
+                              pipeline: Optional[Any] = None,
+                              expected_topic: Optional[Mapping[str, Any]] = None) -> tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
         self._reset_request_state()
-        raw = (pipeline or self.pipeline).answer(q, debug=True)
+        active_pipeline = pipeline or self.pipeline
+        if expected_topic is None:
+            raw = active_pipeline.answer(q, debug=True)
+        else:
+            raw = active_pipeline.answer(q, debug=True, expected_topic=expected_topic)
         dbg_dict = raw.get("debug")
         evidence: Optional[Dict[str, Any]] = None
         if isinstance(dbg_dict, dict) and "evidence" in dbg_dict:
@@ -357,7 +417,9 @@ class RagService:
                 timings["queue_wait_ms"] = round(max(float(timings.get("queue_wait_ms", 0.0)), float(queue_wait_ms)), 2)
             else:
                 timings.setdefault("queue_wait_ms", 0.0)
-        if self.generator_name == "extractive" and raw["status"] == "answered":
+        request_generator = getattr(active_pipeline, "generator", self._evidence_gen)
+        actual_generator = str(getattr(request_generator, "name", self.generator_name))
+        if actual_generator == "extractive" and raw["status"] == "answered":
             chain = support_chain(raw["answer"], raw.get("debug") or {})
             evidence = dict(evidence or {}, support_chain=chain)
             if not chain["ok"]:                                      # support cannot be established -> abstain, never "answered"
@@ -368,9 +430,11 @@ class RagService:
             context: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
         """Answer one question.
 
-        ``context`` carries the previous turns of the conversation (``{"questions": [...most recent first...],
-        "answer": str}``) and is used for two things, both of them scoped to a short context-dependent follow-up:
-        the message is rewritten into a standalone query built from the previous turn (``rag_followup``), and - when
+        ``context`` carries an explicit ``active_topic`` produced from a successful grounded standalone answer
+        (with ``query``, immutable base ``answer``, verified page identity, and separately tracked ``seen_answers``).
+        Follow-ups read this state; only a new successful standalone query replaces it. The legacy ``questions`` / ``answer``
+        fields are compatibility-only. When a contextual follow-up is detected, the message is rewritten into a
+        standalone query built from the active topic (``rag_followup``), and - when
         the follow-up asks for more material (elaborate / explain in detail / tell me more / why / simplify / example /
         what happens next / relate to X) - the pipeline runs once more with a wider evidence window and an
         intent-aware selection (``rag_elaborate``, see the module docstring). Routing, the ranker, EvidenceGuard,
@@ -381,21 +445,43 @@ class RagService:
         """
         q = clean_question(question)
         cid = resolve_conversation_id(conversation_id)
-        follow_up = FU.resolve(q, context)
+
+        # Structured state is validated against this service's own card/page registry. If a caller supplied an invalid
+        # active_topic, preserve the key with an invalid sentinel so FU.resolve fails closed instead of scanning history.
+        active_topic = self._canonical_active_topic(context)
+        resolution_context = context
+        if isinstance(context, Mapping) and "active_topic" in context:
+            resolution_context = dict(context)
+            resolution_context["active_topic"] = active_topic if active_topic is not None else {}
+        follow_up = FU.resolve(q, resolution_context)
+
+        previous_answer = ""
+        if active_topic is not None:
+            answers = [active_topic["answer"], *active_topic.get("seen_answers", ())]
+            previous_answer = "\n".join(dict.fromkeys(str(answer) for answer in answers if str(answer).strip()))
+        elif isinstance(context, Mapping) and isinstance(context.get("answer"), str):
+            previous_answer = context["answer"]
+
         pipeline_query = follow_up["query"] if follow_up else q
         scoped: Optional[Any] = None
-        if follow_up and self.generator_name == "extractive" and EL.is_elaboration_intent(follow_up["category"]):
-            # A follow-up that asks for more must not come back as the previous answer: run the same pipeline once with
-            # a wider evidence window and an intent-aware selection (rag_elaborate). Same routing, same ranker, same
-            # EvidenceGuard, same grounding/citation verification; for a pure follow-up the retrieval query is the
-            # anchor question itself, which is the query that already routed to this topic.
-            previous_answer = ""
-            if isinstance(context, Mapping) and isinstance(context.get("answer"), str):
-                previous_answer = context["answer"]
-            scoped = EL.scoped_pipeline(self.pipeline, follow_up["category"], previous_answer=previous_answer,
-                                        anchor=follow_up["anchor"],
-                                        new_terms=EL.new_terms_of(q, follow_up["anchor"]) if follow_up.get("form") == "message" else ())
+        expected_topic = active_topic if follow_up and active_topic is not None else None
+        deterministic_elaboration = bool(follow_up and follow_up["category"] == "elaborate")
+        use_scoped_pass = bool(follow_up and (
+            deterministic_elaboration
+            or (self.generator_name == "extractive" and EL.is_elaboration_intent(follow_up["category"]))
+        ))
+        if use_scoped_pass and follow_up:
+            # Every explicit "elaborate" uses this deterministic extractive path, regardless of the normal-answer
+            # generator. It widens only same-page evidence and cannot silently fall back to the previous answer.
+            active_identity = active_topic["identity"] if active_topic is not None else None
+            scoped = EL.scoped_pipeline(
+                self.pipeline, follow_up["category"], previous_answer=previous_answer,
+                anchor=follow_up["anchor"],
+                new_terms=EL.new_terms_of(q, follow_up["anchor"]) if follow_up.get("form") == "message" else (),
+                active_identity=active_identity,
+            )
             pipeline_query = follow_up["anchor"] if follow_up.get("form") == "clause" else follow_up["query"]
+
         t0 = time.perf_counter()
         try:
             if self.coarse_lock:
@@ -406,7 +492,9 @@ class RagService:
                     self._lock.acquire()
                     q_wait = (time.perf_counter() - t_w0) * 1000.0
                 try:
-                    raw, evidence = self._run_pipeline_request(pipeline_query, queue_wait_ms=q_wait, pipeline=scoped)
+                    raw, evidence = self._run_pipeline_request(
+                        pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
+                    )
                 finally:
                     self._lock.release()
             else:
@@ -417,13 +505,37 @@ class RagService:
                     self._request_sem.acquire()
                     q_wait = (time.perf_counter() - t_w0) * 1000.0
                 try:
-                    raw, evidence = self._run_pipeline_request(pipeline_query, queue_wait_ms=q_wait, pipeline=scoped)
+                    raw, evidence = self._run_pipeline_request(
+                        pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
+                    )
                 finally:
                     self._request_sem.release()
         except ServiceError:
             raise
         except Exception as e:                                       # noqa: BLE001
             raise PipelineFailure(f"The retrieval pipeline failed ({type(e).__name__}). No answer was produced.") from e
+
+        # Final defense against a wiring/routing regression: an elaboration may add no novel supported sentence only
+        # by abstaining. Grounding alone cannot make an identical replay a valid elaboration.
+        novelty_check: Optional[Dict[str, Any]] = None
+        if (follow_up and follow_up["category"] == "elaborate" and raw.get("status") == "answered"
+                and previous_answer.strip()):
+            prior_sentences = EL.sentences_of(previous_answer)
+            answer_sentences = EL.sentences_of(str(raw.get("answer") or ""))
+            novel = [sentence for sentence in answer_sentences
+                     if not EL._is_redundant_evidence(sentence, prior_sentences)[0]]
+            novelty_check = {"ok": bool(novel), "novel_sentences": len(novel), "compared_sentences": len(prior_sentences)}
+            if not novel:
+                evidence = dict(evidence or {})
+                evidence["final_novelty_check"] = novelty_check
+                if isinstance(raw.get("debug"), dict):
+                    raw["debug"]["final_novelty_check"] = novelty_check
+                citations = dict(raw.get("citations") or {})
+                citations["answer_sources"] = []
+                citations["context_not_cited"] = []
+                raw = dict(raw, status="insufficient_context", answer=None,
+                           reason_code="NO_ADDITIONAL_SUPPORTED_DETAILS", citations=citations)
+
         if follow_up is not None and isinstance(raw.get("debug"), dict):
             # Developer view only: it lands in the debug block (``to_chat_result`` returns that block only when asked).
             view = FU.debug_view(follow_up, q)
@@ -435,8 +547,11 @@ class RagService:
         presentation_sections = None
         if scoped is not None and raw.get("status") == "answered" and (evidence or {}).get("elaborated") is True:
             presentation_sections = (evidence or {}).get("presentation_sections")
-        return to_chat_result(raw, self.generator_name, cid, (time.perf_counter() - t0) * 1000, debug=debug, evidence=evidence,
-                              presentation_sections=presentation_sections)
+        request_generator = getattr(scoped or self.pipeline, "generator", None)
+        response_generator = str(getattr(request_generator, "name", self.generator_name))
+        return to_chat_result(raw, response_generator, cid, (time.perf_counter() - t0) * 1000, debug=debug, evidence=evidence,
+                              presentation_sections=presentation_sections,
+                              follow_up_category=follow_up["category"] if follow_up else None)
 
 
 # Phase 18 - the VERIFIED production pipeline configuration (data/phase16/phase16_comparison.json,

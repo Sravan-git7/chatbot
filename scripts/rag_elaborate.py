@@ -44,7 +44,7 @@ import re
 import sys
 import threading
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_evidence as EV  # noqa: E402  shared deterministic analysis, scoring, and evidence-quality helpers
@@ -188,8 +188,56 @@ def _elaboration_quality_filter(units: Sequence[Any], context: Any) -> Tuple[Lis
     return kept, excluded, int(details["excluded_adjacent_fragments"])
 
 
+def _topic_identity_filter(units: Sequence[Any], context: Any, active_identity: Optional[Mapping[str, Any]]) -> Tuple[List[Any], Optional[Dict[str, Any]]]:
+    """Keep only units whose source chunks match the active answer's verified guide/page/industry identity."""
+    if not isinstance(active_identity, Mapping):
+        return list(units), None
+    expected = {
+        "guide_id": str(active_identity.get("guide_id") or ""),
+        "page_id": str(active_identity.get("page_id") or ""),
+        "industry": str(active_identity.get("industry") or ""),
+    }
+    supported_industry = expected["industry"].strip().casefold() in {
+        "sap utilities/isu", "sap utilities/is-u", "sap utilities (is-u)", "sap utilities / is-u", "is-u", "isu",
+    }
+    items = list(getattr(context, "items", ()) or ())
+    rejected_markers: set = set()
+    mismatches: List[Dict[str, str]] = []
+    if not expected["guide_id"] or not expected["page_id"] or not supported_industry or not items:
+        rejected_markers = {str(getattr(unit, "marker", "") or "") for unit in units if getattr(unit, "marker", None)}
+        details = {"ok": False, "reason": "ACTIVE_TOPIC_IDENTITY_INCOMPLETE", "expected": expected,
+                   "excluded_markers": sorted(m for m in rejected_markers if m)}
+        return [], details
+
+    allowed_markers: set = set()
+    for item in items:
+        marker = str(getattr(item, "marker", "") or "")
+        guide_id = str(getattr(item, "guide_id", "") or "")
+        page_id = str(getattr(item, "page_id", "") or "")
+        valid = (guide_id.casefold() == expected["guide_id"].casefold()
+                 and page_id.casefold() == expected["page_id"].casefold())
+        if marker and valid:
+            allowed_markers.add(marker)
+        elif marker:
+            rejected_markers.add(marker)
+            mismatches.append({"marker": marker, "guide_id": guide_id, "page_id": page_id})
+
+    kept = [unit for unit in units if str(getattr(unit, "marker", "") or "") in allowed_markers]
+    for unit in units:
+        marker = str(getattr(unit, "marker", "") or "")
+        if marker and marker not in allowed_markers:
+            rejected_markers.add(marker)
+    details = {
+        "ok": bool(kept),
+        "expected": expected,
+        "excluded_markers": sorted(marker for marker in rejected_markers if marker),
+        "mismatches": mismatches,
+    }
+    return kept, details
+
+
 def _industry_scope_units(units: Sequence[Any], context: Any, anchor: str, previous_answer: str,
-                          new_terms: Iterable[str]) -> Tuple[List[Any], Optional[str], int, List[str]]:
+                          new_terms: Iterable[str], expected_industry: Optional[str] = None) -> Tuple[List[Any], Optional[str], int, List[str]]:
     """Exclude explicit non-Utilities component evidence only in a routed IS-U elaboration.
 
     The question/relationship terms can explicitly request another industry (or a comparison); in that case the
@@ -236,7 +284,10 @@ def _industry_scope_units(units: Sequence[Any], context: Any, anchor: str, previ
         scope_parts.extend((getattr(unit, "text", ""), getattr(unit, "chunk_text", "")))
         if getattr(unit, "prev_line", None):
             scope_parts.append(unit.prev_line)
-    if not _ISU_SCOPE.search(" ".join(str(part) for part in scope_parts if part)):
+    industry_is_isu = str(expected_industry or "").strip().casefold() in {
+        "sap utilities/isu", "sap utilities/is-u", "sap utilities (is-u)", "sap utilities / is-u", "is-u", "isu",
+    }
+    if not industry_is_isu and not _ISU_SCOPE.search(" ".join(str(part) for part in scope_parts if part)):
         return original, None, 0, []
 
     candidates: List[Any] = []
@@ -388,11 +439,12 @@ class IntentExtractiveGenerator:
 
     def __init__(self, intent: str, previous_answer: str = "", tau: float = EV.SHIPPED_TAU,
                  frame_normalization: bool = False, focus_terms: Optional[Iterable[str]] = None,
-                 anchor: str = "") -> None:
+                 anchor: str = "", active_identity: Optional[Mapping[str, Any]] = None) -> None:
         if intent not in ELABORATION_INTENTS:
             raise ValueError(f"unknown intent: {intent}")
         self.intent = intent
         self.anchor = anchor            # the previous subject: the sufficiency analysis is done on it, never on the message's own wording
+        self.active_identity = dict(active_identity) if isinstance(active_identity, Mapping) else None
         self.tau = tau
         self.frame_normalization = frame_normalization
         self.previous_answer = previous_answer
@@ -417,9 +469,17 @@ class IntentExtractiveGenerator:
     def generate(self, question: str, context: Any) -> RG.GenerationResult:
         self._tls.last = None
         needs = EV.analyze_question(self.anchor or question)
-        units = EV.build_units(context.items)
+        units, topic_consistency = _topic_identity_filter(EV.build_units(context.items), context, self.active_identity)
+        if topic_consistency is not None and not topic_consistency.get("ok"):
+            record = {"checked": True, "supported": False, "reason": "ACTIVE_TOPIC_MISMATCH",
+                      "detail": {"reason": "selected evidence does not match the active page identity"},
+                      **needs.to_dict(), "intent": self.intent, "selected": [], "topic_consistency": topic_consistency,
+                      "elaborated": None}
+            self.last = record
+            return RG.GenerationResult(RG.NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
+        expected_industry = self.active_identity.get("industry") if self.active_identity else None
         units, industry_scope, excluded_industry_units, excluded_industry_markers = _industry_scope_units(
-            units, context, self.anchor or question, self.previous_answer, self.new_terms
+            units, context, self.anchor or question, self.previous_answer, self.new_terms, expected_industry=expected_industry
         )
         units, excluded_quality_units, quality_filter_details = EV.filter_quality_units(units, context)
         excluded_adjacent_fragments = quality_filter_details["excluded_adjacent_fragments"]
@@ -440,6 +500,8 @@ class IntentExtractiveGenerator:
         decision, baseline = EV.assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason,
                                   "detail": decision.detail, **needs.to_dict(), "intent": self.intent, "selected": []}
+        if topic_consistency is not None:
+            record["topic_consistency"] = topic_consistency
         if excluded_quality_units or excluded_adjacent_fragments:
             record["quality_filter"] = {
                 "excluded_units": len(excluded_quality_units),
@@ -626,14 +688,15 @@ class IntentExtractiveGenerator:
         return best
 
 def scoped_pipeline(base: Any, intent: str, previous_answer: str = "", anchor: str = "",
-                    new_terms: Iterable[str] = (), tau: float = EV.SHIPPED_TAU) -> Any:
+                    new_terms: Iterable[str] = (), tau: float = EV.SHIPPED_TAU,
+                    active_identity: Optional[Mapping[str, Any]] = None) -> Any:
     """A ``RagPipeline`` that shares every heavy object of ``base`` (retriever, corpus, cards, backend) but runs the
     follow-up pass: wider config + the intent-aware generator. Building it is cheap - nothing is loaded again."""
     import rag_pipeline as RP
 
     fn = bool(getattr(base.cfg, "evidence_frame_normalization", False))
     gen = IntentExtractiveGenerator(intent, previous_answer=previous_answer, tau=tau, frame_normalization=fn,
-                                    focus_terms=new_terms, anchor=anchor)
+                                    focus_terms=new_terms, anchor=anchor, active_identity=active_identity)
     return RP.RagPipeline(base.backend, base.retriever, base.ctx, base.corpus, gen, base.count_tokens,
                           cards=list(base.cards.values()), config=scoped_config(base.cfg, intent=intent))
 

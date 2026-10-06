@@ -13,7 +13,9 @@ export function result(over: Partial<ChatResult> = {}): ChatResult {
     schema_version: '11.1', conversation_id: 'c', status: 'answered', answer: 'Choose Account > Installment Plan > Create. [S1]\nA plan has an interval. [S1]',
     sources: [SOURCE], topic_reference: null,
     metadata: { card_id: 'M2C-24', card_title: 'Creating Installment Plans', identity_status: 'identified_not_local', page_available: true, generator: 'extractive', grounded: true,
-      grounding: { checked: true, ok: true, sentences: 2, violations: 0, cited_markers: ['S1'] }, pipeline_status: 'answered', reason_code: null, latency_ms: 12 },
+      grounding: { checked: true, ok: true, sentences: 2, violations: 0, cited_markers: ['S1'] }, pipeline_status: 'answered', reason_code: null, latency_ms: 12,
+      topic_identity: { source_id: 'M2C-24', title: 'Creating Installment Plans', guide_id: 'guide-plan', page_id: 'page-plan', industry: 'SAP Utilities/IS-U' },
+      follow_up_category: null },
     ...over,
   }
 }

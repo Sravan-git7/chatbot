@@ -64,6 +64,7 @@ FOLLOW_UP_EXAMPLES = {
     "how?": "reference",
     "why?": "reason",
     "why is that?": "reason",
+    "Explain why companies use it.": "reason",
     "give me an example": "example",
     "show me an example": "example",
     "what happens next?": "continuation",
@@ -142,11 +143,40 @@ class Resolution(unittest.TestCase):
         self.assertIn("business partner", r["query"])
         self.assertTrue(r["query"].startswith(CONTRACT))
 
+    def test_anaphoric_why_question_uses_the_active_topic_without_guessing_from_its_own_words(self):
+        message = "Explain why companies use it."
+        active = {"active_topic": {"query": CONTRACT, "answer": self.ctx["answer"],
+                                   "identity": {"source_id": "M2C-17", "guide_id": "contract-guide", "page_id": "contract-page"},
+                                   "seen_answers": []}}
+        resolved = FU.resolve(message, active)
+        self.assertEqual(resolved["category"], "reason")
+        self.assertEqual(resolved["anchor"], CONTRACT)
+        self.assertEqual(resolved["anchor_source"], "active_topic")
+        self.assertEqual(resolved["form"], "message")
+        self.assertEqual(resolved["query"], f"{CONTRACT} {message}")
+        self.assertIsNone(FU.resolve(message, None))
+
     def test_the_anchor_is_the_most_recent_question_that_stands_on_its_own(self):
         chained = {"questions": ["elaborate", "give me an example", CONTRACT], "answer": "..."}
         r = FU.resolve("elaborate", chained)
         self.assertEqual(r["anchor"], CONTRACT)
         self.assertEqual(r["anchor_index"], 2)
+
+    def test_explicit_active_topic_beats_history_and_recommendation_text(self):
+        active = {"query": BILLING, "answer": "Billing was answered.",
+                  "identity": {"source_id": "M2C-12", "guide_id": "billing-guide", "page_id": "billing-page"},
+                  "seen_answers": []}
+        context = {"active_topic": active, "questions": [CONTRACT], "answer": "Contract Account suggestion text."}
+        resolved = FU.resolve("elaborate", context)
+        self.assertEqual(resolved["anchor"], BILLING)
+        self.assertEqual(resolved["anchor_source"], "active_topic")
+        self.assertEqual(resolved["anchor_index"], -1)
+
+    def test_invalid_explicit_state_and_answerless_legacy_history_fail_closed(self):
+        invalid = {"active_topic": {}, "questions": [BILLING], "answer": "Billing was answered."}
+        self.assertIsNone(FU.resolve("elaborate", invalid))
+        # A weather question may be the newest failed turn; without a successful-answer state, do not skip back to Billing.
+        self.assertIsNone(FU.resolve("elaborate", {"questions": ["What is the weather today?", BILLING]}))
 
     def test_topic_switches_and_revisits_anchor_to_the_current_topic(self):
         plan = "How do I create an installment plan?"
@@ -186,7 +216,7 @@ class Resolution(unittest.TestCase):
     def test_only_the_preceding_turns_are_used(self):
         wide = {"questions": ["something else entirely", CONTRACT], "answer": "..."}
         self.assertEqual(FU.resolve("elaborate", wide)["anchor"], "something else entirely")  # most recent first
-        self.assertEqual(FU.resolve("elaborate", {"questions": [CONTRACT]})["anchor"], CONTRACT)
+        self.assertEqual(FU.resolve("elaborate", {"questions": [CONTRACT], "answer": "The contract account is master data."})["anchor"], CONTRACT)
 
     def test_the_previous_answer_is_only_a_fallback_anchor(self):
         r = FU.resolve("elaborate", {"questions": [], "answer": "A contract account holds master data. More text."})

@@ -96,6 +96,7 @@ ANSWERED, INSUFFICIENT, UNRESOLVED, NOT_INGESTED, OUT_OF_DOMAIN, NO_PAGE = ("ans
 STATUSES = (ANSWERED, INSUFFICIENT, UNRESOLVED, NOT_INGESTED, OUT_OF_DOMAIN, NO_PAGE)
 OOD_MIN_COVERAGE = 0.25               # pre-declared: share of question content terms found in the routed card text (+ page text if ingested)
 CONTEXT_MIN_COVERAGE = 0.5            # pre-declared: share of question content terms found in the retrieved context (+ page title/headings)
+ACTIVE_INDUSTRY_CONTEXT = "SAP Utilities/IS-U"
 
 # A deterministic second retrieval view used only by the scoped "elaborate" pass. The resolved question stays at
 # the front of the query; the suffix broadens which facets of that SAME page are considered without using the word
@@ -227,6 +228,42 @@ class PageCorpusIndex:
         return self.page_text(key).lower()
 
 
+def _identity_value(value: Any) -> str:
+    return " ".join(str(value or "").split()).casefold()
+
+
+def _active_topic_consistency(expected_topic: Optional[Mapping[str, Any]], source_id: str, identity: Any) -> Optional[Dict[str, Any]]:
+    """Compare a newly routed topic with the successfully answered topic that owns this follow-up.
+
+    This gate is intentionally independent of grounding: valid evidence from a different card/page is still the wrong
+    answer. The production corpus is SAP Utilities, so its industry label is checked as part of the same state tuple.
+    """
+    if expected_topic is None:
+        return None
+    expected_identity = expected_topic.get("identity") if isinstance(expected_topic.get("identity"), Mapping) else expected_topic
+    expected = {
+        "source_id": str(expected_identity.get("source_id") or ""),
+        "title": str(expected_identity.get("title") or ""),
+        "guide_id": str(expected_identity.get("guide_id") or ""),
+        "page_id": str(expected_identity.get("page_id") or ""),
+        "industry": str(expected_identity.get("industry") or ""),
+    }
+    actual = {
+        "source_id": str(source_id or ""),
+        "title": str(getattr(identity, "card_title", "") or ""),
+        "guide_id": str(getattr(identity, "effective_guide_id", "") or ""),
+        "page_id": str(getattr(identity, "effective_page_id", "") or ""),
+        "industry": ACTIVE_INDUSTRY_CONTEXT,
+    }
+    mismatches = []
+    for field in ("source_id", "guide_id", "page_id", "industry"):
+        if not expected[field] or _identity_value(expected[field]) != _identity_value(actual[field]):
+            mismatches.append(field)
+    if expected["title"] and _identity_value(expected["title"]) != _identity_value(actual["title"]):
+        mismatches.append("title")
+    return {"ok": not mismatches, "expected": expected, "actual": actual, "mismatches": mismatches}
+
+
 def _citation_context_after_scope(context: Any, generation_evidence: Any) -> Any:
     """Apply scoped elaboration's rejected source markers to grounding and citation construction only.
 
@@ -240,10 +277,11 @@ def _citation_context_after_scope(context: Any, generation_evidence: Any) -> Any
     industry_scope = evidence.get("industry_scope") or {}
     quality_filter = evidence.get("quality_filter") or {}
     novelty_filter = evidence.get("novelty_filter") or {}
+    topic_consistency = evidence.get("topic_consistency") or {}
     excluded_markers = {
         str(marker)
         for marker in (*industry_scope.get("excluded_markers", ()), *quality_filter.get("excluded_markers", ()),
-                       *novelty_filter.get("excluded_markers", ()))
+                       *novelty_filter.get("excluded_markers", ()), *topic_consistency.get("excluded_markers", ()))
         if marker
     }
     if not excluded_markers:
@@ -334,8 +372,9 @@ class RagPipeline:
         return pool
 
     # ------------------------------------------------------------------------------------------------------------
-    def answer(self, query: str, debug: bool = False, oracle_source_id: Optional[str] = None) -> Dict[str, Any]:
-        """``oracle_source_id`` bypasses the router (evaluation only: isolates retrieval/generation from routing errors)."""
+    def answer(self, query: str, debug: bool = False, oracle_source_id: Optional[str] = None,
+               expected_topic: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
+        """``oracle_source_id`` is evaluation-only; ``expected_topic`` is the active-state gate for a user follow-up."""
         t0 = time.perf_counter()
         if hasattr(self.generator, "reset_request_state"):
             self.generator.reset_request_state()
@@ -411,9 +450,21 @@ class RagPipeline:
         identity = pid.resolve_identity(card, self.ctx)
         entry = self.corpus.entry(sid) or {}
         out["topic"] = self._topic(identity, entry)
-        out["citations"] = PCIT.build_citations(card, identity, self.ctx, corpus_entry=entry)
         dbg["identity"] = identity.to_dict()
         dbg["corpus_entry"] = {k: entry.get(k) for k in ("corpus_status", "reason", "doc_id", "text_sha256")}
+
+        # A follow-up must stay on the exact active card and resolved page before any second retrieval or generation.
+        # This is a topic-consistency gate, not a grounding check: a well-grounded answer from another SAP page is wrong.
+        topic_consistency = _active_topic_consistency(expected_topic, sid, identity)
+        if topic_consistency is not None:
+            dbg["topic_consistency"] = topic_consistency
+            if not topic_consistency["ok"]:
+                out["topic"] = {}  # do not surface the incorrectly routed page as a topic reference
+                out["citations"] = {"topic_pointer": None, "answer_sources": [], "context_not_cited": [],
+                                    "label": PCIT.LABEL_NONE, "notes": []}
+                return self._finish(out, INSUFFICIENT, "ACTIVE_TOPIC_MISMATCH", MESSAGES[INSUFFICIENT], dbg, debug, timings, t0)
+
+        out["citations"] = PCIT.build_citations(card, identity, self.ctx, corpus_entry=entry)
 
         # ---- 3. lexical topic gate (heuristic; see module docstring) -------------------------------------------------
         qterms = T.terms(query)

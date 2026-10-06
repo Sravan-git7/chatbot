@@ -21,9 +21,9 @@ focus terms). Measured (status + routed card) over six anchors x clause, compare
     "give an example"          6/6 same status    "what happens next"     2/6
     "what happens after that"  6/6 identical
 
-Only the immediately preceding turns are used: the most recent previous *question that stands on its own* is the topic
-anchor (so a chain of follow-ups still resolves against the real subject), with the previous answer's opening sentence
-as the fallback when no usable previous question was sent.
+The current UI carries an explicit active-topic record created only by a successful grounded standalone answer. Follow-ups
+read that record without replacing it; failed, out-of-scope, and recommendation-only text never becomes an anchor. A
+bounded legacy history form is still accepted for older clients when it includes a completed answer.
 """
 from __future__ import annotations
 
@@ -76,6 +76,9 @@ _PATTERNS: Tuple[Tuple[str, str], ...] = (
     (r"(?:an?\s+)?example(?:s)?(?:\s+please)?", "example"),
     (r"for\s+example(?:\s+please)?", "example"),
     # REASON
+    # A pronoun at the end marks an anaphoric question (e.g. "Explain why companies use it."); keep it on the
+    # previously answered topic instead of sending its context-dependent wording through standalone card routing.
+    (r"(?:please\s+)?explain\s+why\s+.+\b(?:that|this|it|they|them|those|these)\b(?:\s+please)?", "reason"),
     (r"(?:and\s+)?why(?:\s+(?:is\s+|are\s+)?(?:that|this|it|so|though|tho))?(?:\s+please)?", "reason"),
     (r"why\s+(?:does|do|did|would|should|is|are)\s+(?:that|this|it|they|those|these)(?:\s+\w+)?", "reason"),
     (r"(?:what|what's|whats)\s+the\s+reason(?:\s+for\s+(?:that|this|it))?(?:\s+please)?", "reason"),
@@ -200,26 +203,49 @@ def _usable_question(raw: Any) -> Optional[str]:
 
 
 def _anchor(context: Optional[Mapping[str, Any]]) -> Tuple[Optional[str], str, int]:
-    """Pick the topic anchor: the most recent previous question that is itself not a follow-up.
+    """Read the active topic, never infer it from a failed or merely suggested turn.
 
-    Returns ``(text, source, index)`` with ``source`` in ``{"previous_question", "previous_answer"}`` (``index`` is the
-    position in the sent list, most recent first; ``-1`` for the answer fallback). ``(None, "", -1)`` when the context
-    carries nothing usable - the caller then leaves the message untouched.
+    New clients send ``active_topic`` only after a successful, grounded standalone answer. Follow-ups preserve that
+    value. A present-but-invalid active state fails closed rather than falling back to a different question in history.
+    The legacy ``questions``/``answer`` shape remains accepted for older clients, but only while it carries a completed
+    answer; the current UI sends a single, explicitly selected active question instead of raw history.
+
+    Returns ``(text, source, index)``; ``index`` is the position in the legacy question list, or ``-1`` for an explicit
+    active topic / answer fallback. ``(None, "", -1)`` means there is no safe anchor.
     """
     if not isinstance(context, Mapping):
         return None, "", -1
+
+    # A structured state is authoritative. Never scan recommendation text or stale/failed questions when it exists.
+    if "active_topic" in context:
+        active = context.get("active_topic")
+        if not isinstance(active, Mapping):
+            return None, "", -1
+        text = _usable_question(active.get("query"))
+        identity = active.get("identity")
+        answer = active.get("answer")
+        if (not text or classify(text) is not None or not isinstance(identity, Mapping)
+                or not str(identity.get("source_id") or "").strip()
+                or not isinstance(answer, str) or not answer.strip()):
+            return None, "", -1
+        return text, "active_topic", -1
+
+    # A legacy history without a completed answer may contain an out-of-scope question, a typo, or a pending turn.
+    # It is not enough to establish active state, so do not skip back to an older question.
+    answer = context.get("answer")
+    if not isinstance(answer, str) or not answer.strip():
+        return None, "", -1
+
     questions = context.get("questions")
     if isinstance(questions, (list, tuple)):
         for i, raw in enumerate(list(questions)[:MAX_QUESTIONS]):
             text = _usable_question(raw)
             if text and classify(text) is None:
                 return text, "previous_question", i
-    answer = context.get("answer")
-    if isinstance(answer, str) and answer.strip():
-        first = (T.split_sentences(answer.strip()) or [""])[0]
-        first = re.sub(r"\s+", " ", first).strip()[:MAX_ANSWER_ANCHOR_CHARS]
-        if len(T.terms(first)) >= 2:                       # a one-word "sentence" anchors nothing
-            return first.rstrip(" .!?;:") + ".", "previous_answer", -1
+    first = (T.split_sentences(answer.strip()) or [""])[0]
+    first = re.sub(r"\s+", " ", first).strip()[:MAX_ANSWER_ANCHOR_CHARS]
+    if len(T.terms(first)) >= 2:                       # a one-word "sentence" anchors nothing
+        return first.rstrip(" .!?;:") + ".", "previous_answer", -1
     return None, "", -1
 
 

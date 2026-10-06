@@ -56,11 +56,31 @@ def build_csp(frame_ancestors: Optional[str] = None) -> str:
 CSP = build_csp()
 
 
+class TopicIdentity(BaseModel):
+    """Server-issued page identity echoed back only as a follow-up consistency constraint."""
+    model_config = ConfigDict(extra="forbid")
+    source_id: str = Field(..., min_length=1, max_length=64)
+    title: Optional[str] = Field(default=None, max_length=300)
+    guide_id: Optional[str] = Field(default=None, max_length=200)
+    page_id: Optional[str] = Field(default=None, max_length=200)
+    industry: Optional[str] = Field(default=None, max_length=100)
+
+
+class ActiveTopicContext(BaseModel):
+    """A successfully answered standalone query and its immutable page identity."""
+    model_config = ConfigDict(extra="forbid")
+    query: str = Field(..., min_length=1, max_length=FU.MAX_QUESTION_CHARS)
+    answer: str = Field(..., min_length=1, max_length=FU.MAX_ANSWER_CHARS)
+    identity: TopicIdentity
+    seen_answers: List[str] = Field(default_factory=list, max_length=4)
+
+
 class ChatContext(BaseModel):
-    """Previous turns used only to resolve short context-dependent follow-up messages."""
+    """Active conversation state; legacy history fields are accepted only for older clients."""
     model_config = ConfigDict(extra="forbid")
     questions: List[str] = Field(default_factory=list, max_length=FU.MAX_QUESTIONS + 2)
     answer: Optional[str] = Field(default=None, max_length=FU.MAX_ANSWER_CHARS)
+    active_topic: Optional[ActiveTopicContext] = None
 
 
 class ChatRequest(BaseModel):
@@ -113,6 +133,8 @@ class Metadata(BaseModel):
     pipeline_status: str
     reason_code: Optional[str] = None
     latency_ms: float
+    topic_identity: Optional[TopicIdentity] = None
+    follow_up_category: Optional[str] = None
     elaboration_sections: Optional[List[ElaborationSection]] = None
 
 
@@ -198,6 +220,9 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         data = ChatResponse(**result).model_dump()                  # schema check: a malformed service result fails loudly instead of reaching the UI
         if not data["metadata"].get("elaboration_sections"):
             data["metadata"].pop("elaboration_sections", None)
+        for field in ("topic_identity", "follow_up_category"):
+            if data["metadata"].get(field) is None:
+                data["metadata"].pop(field, None)
         if not req.debug:
             data.pop("debug", None)
         return JSONResponse(data)
