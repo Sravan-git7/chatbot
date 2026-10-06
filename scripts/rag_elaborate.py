@@ -23,14 +23,16 @@ with a narrow, explicitly scoped difference:
 * **intent handling** - an example requires a sentence that actually introduces an example; a reason requires a
   reason-bearing sentence; continuation prefers evidence from later in the document; simplification picks the shortest
   sentences that still carry the topic;
-* **fragment quality** - a conservative pre-selection filter drops standalone headings, breadcrumbs, menu/TOC labels,
-  numbered navigation fragments and malformed OCR-like text, while retaining short clauses with an explanatory predicate;
+* **fragment quality** - the shared evidence-layer pre-selection filter drops standalone headings, breadcrumbs,
+  menu/TOC labels, numbered navigation fragments, malformed OCR-like text, and incomplete list lead-ins; short clauses
+  with an explanatory predicate remain eligible;
 * **the same verification** - the composed text is verified by the unchanged ``verify_grounding`` (in-page grounding +
   citation normalisation) inside ``RagPipeline`` and by the unchanged ``support_chain`` check in ``rag_service``. Every
   sentence is a verbatim span of the chunk its marker names.
 
-Everything else is untouched: routing, the ranker, EvidenceGuard, the gates, the generator used for normal questions,
-citations. If the wider pass cannot find anything *new* the generator refuses, and the existing abstention path
+Everything else remains untouched: routing, the ranker, EvidenceGuard, the gates, normal QA settings, and citation
+validation. The sole normal-QA change is this shared deterministic pre-selection quality filter. If the wider pass cannot
+find anything *new* the generator refuses, and the existing abstention path
 (``GENERATOR_REFUSED`` -> ``unable_to_verify``) tells the user the documentation does not provide more - it never
 invents and never pads.
 """
@@ -45,7 +47,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import rag_evidence as EV  # noqa: E402  the evidence layer's own analysis/scoring helpers (reused, not changed)
+import rag_evidence as EV  # noqa: E402  shared deterministic analysis, scoring, and evidence-quality helpers
 import rag_followup as FU  # noqa: E402  the follow-up vocabulary (so "elaborate" never counts as a new topic term)
 import rag_generate as RG  # noqa: E402  GenerationResult / NO_ANSWER_TEXT
 import rag_text as T  # noqa: E402
@@ -79,30 +81,7 @@ _REASON = re.compile(r"\b(because|since|due to|therefore|thus|so that|in order t
 _CONTINUE = re.compile(r"\b(next|after|then|subsequent|following|once|finally|step)\b", re.I)
 _CITE = re.compile(r"\[S\d+\]")
 
-# The scoped follow-up pass can see more of a page than the minimal normal answer. Discard structural labels before
-# they can affect support/scoring or be emitted as evidence. This predicate list is intentionally conservative: a
-# short explanatory clause or imperative survives, while a short unpunctuated noun/path fragment does not.
-_EXPLANATORY_PREDICATE = re.compile(
-    r"\b(?:am|is|are|was|were|be|being|been|has|have|had|do|does|did|can|could|may|might|must|shall|should|will|would|"
-    r"add(?:s|ed)?|appl(?:y|ies|ied)|assign(?:s|ed)?|calculat(?:e|es|ed)|chang(?:e|es|ed)|clear(?:s|ed)?|"
-    r"contain(?:s|ed)?|creat(?:e|es|ed)|defin(?:e|es|ed)|depend(?:s|ed)?|determin(?:e|es|ed)|differ(?:s|ed)?|"
-    r"handl(?:e|es|ed)|"
-    r"display(?:s|ed)?|enter(?:s|ed)?|execut(?:e|es|ed)|exist(?:s|ed)?|includ(?:e|es|ed)|lead(?:s|ing|ed)?|"
-    r"link(?:s|ed)?|manag(?:e|es|ed)|mean(?:s|t)|occur(?:s|red)?|post(?:s|ed)?|"
-    r"provid(?:e|es|ed)|receiv(?:e|s|ed)|record(?:s|ed)?|refer(?:s|red)?|remain(?:s|ed)?|"
-    r"requir(?:e|s|ed)|result(?:s|ed)?|run(?:s|ning)|select(?:s|ed)?|serv(?:e|s|ed)|start(?:s|ed)?|"
-    r"stop(?:s|ped)?|transfer(?:s|red)?|updat(?:e|es|ed)|us(?:e|es|ed)|vary|varies|work(?:s|ed)?)\b",
-    re.I,
-)
-_NAVIGATION_LABEL = re.compile(
-    r"\b(?:navigation|breadcrumbs?|menu|table\s+of\s+contents|contents|toc|simulation|execution|overview|"
-    r"screen|dashboard|activities|process\s+flow|workflow|section\s+list)\b",
-    re.I,
-)
-_STRUCTURAL_SEPARATOR = re.compile(r"(?:/|\\|\||>|›|»|→|::)")
-_TRAILING_PAGE_NUMBER = re.compile(r"(?:\b(?:page|step|p)\s*)?\d{1,3}$", re.I)
-_OCR_DIGIT_IN_WORD = re.compile(r"\b[A-Za-z]{2,}\d[A-Za-z]{2,}\b")
-
+# Shared evidence-quality predicates live in rag_evidence and run before normal or scoped-follow-up scoring.
 # Presentation-only categories. These keys are stable API values; labels are rendered by the UI.
 SECTION_WHAT_IT_IS_DOES = "what_it_is_does"
 SECTION_HOW_IT_WORKS_RELATIONSHIPS = "how_it_works_relationships"
@@ -194,98 +173,19 @@ def _item_heading_text(item: Any) -> str:
     return " ".join(str(part) for part in parts if part)
 
 
-def _item_heading_labels(item: Any) -> Tuple[str, ...]:
-    """Individual page/section labels used to detect when extracted body text is only a repeated heading."""
-    parts = [getattr(item, "title", ""), getattr(item, "section_title", "")]
-    heading_path = getattr(item, "heading_path", ()) or ()
-    parts.extend([heading_path] if isinstance(heading_path, str) else heading_path)
-    return tuple(dict.fromkeys(str(part).strip() for part in parts if part and str(part).strip()))
-
-
 def _quality_norm(text: str) -> str:
-    text = _CITE.sub("", str(text or ""))
-    return re.sub(r"[^\w]+", " ", text.casefold(), flags=re.UNICODE).strip()
-
-
-def _has_explanatory_predicate(text: str) -> bool:
-    if _EXPLANATORY_PREDICATE.search(text or ""):
-        return True
-    # Imperative procedure evidence is useful; the same words in a trailing noun label are not predicates.
-    return bool(re.match(r"^\s*(?:run|open|select|choose|click|enter|save|set|specify|maintain|pay|settle|send|"
-                         r"create|use|assign|execute|display|calculate|post|manage|record|transfer)\b", text or "", re.I))
+    return EV.quality_norm(text)
 
 
 def _is_low_quality_fragment(text: str, heading_labels: Iterable[str] = ()) -> bool:
-    """Conservatively reject a label/fragment, not a short sentence with an explanatory predicate.
-
-    Structural cues are stronger than length: metadata-identical headings, breadcrumbs, menu/TOC labels, numbered
-    navigation titles and OCR digits embedded in words are rejected even when they resemble a short sentence. The
-    generic fallback is limited to at most five unpunctuated words with no recognized predicate; short explanatory
-    statements such as "One account is enough." and imperatives such as "Use the simulation." remain eligible.
-    """
-    raw = re.sub(r"\s+", " ", str(text or "")).strip()
-    if not raw:
-        return True
-    clean = _CITE.sub("", raw).strip()
-    normalized = _quality_norm(clean)
-    if not normalized:
-        return True
-    has_predicate = _has_explanatory_predicate(clean)
-    if has_predicate:
-        return False
-
-    labels = {_quality_norm(label) for label in heading_labels if _quality_norm(label)}
-    if normalized in labels:
-        return True
-    if _STRUCTURAL_SEPARATOR.search(clean):
-        return True
-    if re.search(r"\b(?:navigation|breadcrumbs?|menu|table\s+of\s+contents|contents|toc)\b", clean, re.I):
-        return True
-    trimmed = clean.rstrip(" .!?;,:\"'”’)]}")
-    if _NAVIGATION_LABEL.search(clean) and (
-        _TRAILING_PAGE_NUMBER.search(trimmed) or len(re.findall(r"\b\w+\b", clean)) <= 5
-    ):
-        return True
-    if _OCR_DIGIT_IN_WORD.search(clean):
-        return True
-    compact = [char for char in clean if not char.isspace()]
-    if len(compact) >= 8 and sum(char.isalpha() for char in compact) / len(compact) < 0.55:
-        return True
-    has_sentence_punctuation = bool(re.search(r"[.!?][\"'”’)}\]]*\s*$", clean))
-    word_count = len(re.findall(r"\b\w+\b", clean, re.UNICODE))
-    return word_count <= 5 and not has_sentence_punctuation
+    """Compatibility shim for the shared evidence-layer quality predicate."""
+    return EV.is_low_quality_fragment(text, tuple(heading_labels))
 
 
 def _elaboration_quality_filter(units: Sequence[Any], context: Any) -> Tuple[List[Any], List[Any], int]:
-    """Remove navigation/OCR fragments before support checks and clear fragment-only adjacent context lines."""
-    headings_by_marker: Dict[str, List[str]] = {}
-    headings_by_chunk: Dict[str, List[str]] = {}
-    for item in getattr(context, "items", ()) or ():
-        labels = list(_item_heading_labels(item))
-        marker = str(getattr(item, "marker", "") or "")
-        chunk_id = getattr(item, "chunk_id", None)
-        if marker and labels:
-            headings_by_marker.setdefault(marker, []).extend(labels)
-        if chunk_id is not None and labels:
-            headings_by_chunk.setdefault(str(chunk_id), []).extend(labels)
-
-    kept: List[Any] = []
-    excluded: List[Any] = []
-    excluded_adjacent = 0
-    for unit in units:
-        marker = str(getattr(unit, "marker", "") or "")
-        chunk_id = str(getattr(unit, "chunk_id", ""))
-        labels = [*headings_by_marker.get(marker, ()), *headings_by_chunk.get(chunk_id, ())]
-        if _is_low_quality_fragment(getattr(unit, "text", ""), labels):
-            excluded.append(unit)
-            continue
-        for attr in ("prev_line", "follow"):
-            line = getattr(unit, attr, None)
-            if line and _is_low_quality_fragment(line, labels):
-                setattr(unit, attr, None)
-                excluded_adjacent += 1
-        kept.append(unit)
-    return kept, excluded, excluded_adjacent
+    """Compatibility wrapper around the quality filter shared with normal QA."""
+    kept, excluded, details = EV.filter_quality_units(units, context)
+    return kept, excluded, int(details["excluded_adjacent_fragments"])
 
 
 def _industry_scope_units(units: Sequence[Any], context: Any, anchor: str, previous_answer: str,
@@ -521,7 +421,8 @@ class IntentExtractiveGenerator:
         units, industry_scope, excluded_industry_units, excluded_industry_markers = _industry_scope_units(
             units, context, self.anchor or question, self.previous_answer, self.new_terms
         )
-        units, excluded_quality_units, excluded_adjacent_fragments = _elaboration_quality_filter(units, context)
+        units, excluded_quality_units, quality_filter_details = EV.filter_quality_units(units, context)
+        excluded_adjacent_fragments = quality_filter_details["excluded_adjacent_fragments"]
         novelty_filter: Optional[Dict[str, Any]] = None
         if self.intent == "elaborate":
             units, novelty_filter = _novelty_filter_units(units, self.previous_answer)
@@ -545,6 +446,7 @@ class IntentExtractiveGenerator:
                 "excluded_markers": fully_excluded_quality_markers,
                 "markers_with_fragments": quality_fragment_markers,
                 "excluded_adjacent_fragments": excluded_adjacent_fragments,
+                "excluded_list_leadins": quality_filter_details["excluded_list_leadins"],
             }
         if industry_scope:
             record["industry_scope"] = {"preferred": industry_scope, "excluded_units": excluded_industry_units,
@@ -558,6 +460,15 @@ class IntentExtractiveGenerator:
             return RG.GenerationResult(RG.NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
 
         chosen = self._choose(needs, units, baseline, context)
+        if self.intent == "elaborate" and chosen:
+            # A list introduction is useful only when its attached list item will actually survive novelty filtering
+            # and appear with it. Never leave the colon-ended lead-in alone if that context line is repeated/dropped.
+            candidate_texts = tuple(unit.text for unit in chosen)
+            chosen = [
+                unit for unit in chosen
+                if not EV.is_incomplete_list_leadin(unit.text, unit.follow, getattr(unit, "heading_labels", ()))
+                or (unit.follow and not _is_redundant_evidence(unit.follow, (*self.previous, *candidate_texts))[0])
+            ]
         if not chosen:
             # the documentation supports the topic but has nothing to add to what the user already has
             record.update(elaborated=False, reason_added="NO_ADDITIONAL_EVIDENCE")

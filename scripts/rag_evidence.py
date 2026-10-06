@@ -179,6 +179,7 @@ class Unit:
     prev_line: Optional[str] = None             # an immediately preceding short heading-like line (e.g. "Transaction EL43")
     follow: Optional[str] = None                # the sentence after a list introduction ending in ":"
     chunk_text: str = ""
+    heading_labels: Tuple[str, ...] = ()           # page/section labels used by shared evidence-quality checks
 
     def full_text(self) -> str:
         return " ".join(x for x in (self.prev_line, self.text) if x)
@@ -197,6 +198,13 @@ def _lines(text: str) -> List[Tuple[str, List[str]]]:
     return out
 
 
+def _item_heading_labels(item: Any) -> Tuple[str, ...]:
+    parts = [getattr(item, "title", ""), getattr(item, "section_title", "")]
+    heading_path = getattr(item, "heading_path", ()) or ()
+    parts.extend([heading_path] if isinstance(heading_path, str) else heading_path)
+    return tuple(dict.fromkeys(str(part).strip() for part in parts if part and str(part).strip()))
+
+
 def build_units(items: Sequence[Any]) -> List[Unit]:
     """Sentence units from context items (``ContextItem``: rendered_text) or chunk hits (``ChunkHit``: text)."""
     units: List[Unit] = []
@@ -204,7 +212,12 @@ def build_units(items: Sequence[Any]) -> List[Unit]:
     for it in items:
         body = getattr(it, "rendered_text", None) or it.text
         marker = getattr(it, "marker", "")
-        head = frozenset(terms2(" ".join(it.heading_path) if it.heading_path else it.title))
+        heading_path = getattr(it, "heading_path", ()) or ()
+        if isinstance(heading_path, str):
+            heading_path = (heading_path,)
+        title = getattr(it, "title", "") or ""
+        head = frozenset(terms2(" ".join(heading_path) if heading_path else title))
+        heading_labels = _item_heading_labels(it)
         lines = _lines(body)
         for li, (line, sents) in enumerate(lines):
             for si, s in enumerate(sents):
@@ -215,8 +228,249 @@ def build_units(items: Sequence[Any]) -> List[Unit]:
                     if len(pl.split()) <= 8 and not re.search(r"[.!?:]\s*$", pl):
                         prev = pl
                 follow = sents[si + 1] if s.rstrip().endswith(":") and si + 1 < len(sents) else None
-                units.append(Unit(marker, it.chunk_id, int(getattr(it, "rank", 0)), order, s, frozenset(terms2(s)), head, prev, follow, it.text))
+                units.append(Unit(marker, it.chunk_id, int(getattr(it, "rank", 0)), order, s, frozenset(terms2(s)), head,
+                                  prev, follow, it.text, heading_labels))
     return units
+
+
+# Shared deterministic evidence-quality checks. These run before normal sufficiency scoring and are also reused by
+# the scoped elaboration selector. Keep them structural and conservative: a short clause with a recognized predicate
+# remains evidence; navigation/page-heading fragments and incomplete list introductions do not.
+_QUALITY_CITE = re.compile(r"\[S\d+\]")
+_QUALITY_EXPLANATORY_PREDICATE = re.compile(
+    r"\b(?:am|is|are|was|were|be|being|been|has|have|had|do|does|did|can|could|may|might|must|shall|should|will|would|"
+    r"add(?:s|ed)?|appl(?:y|ies|ied)|assign(?:s|ed)?|calculat(?:e|es|ed)|chang(?:e|s|ed)|clear(?:s|ed)?|"
+    r"contain(?:s|ed)?|creat(?:e|es|ed)|defin(?:e|es|ed)|depend(?:s|ed)?|determin(?:e|es|ed)|differ(?:s|ed)?|"
+    r"handl(?:e|es|ed)|display(?:s|ed)?|enter(?:s|ed)?|execut(?:e|es|ed)|exist(?:s|ed)?|includ(?:e|es|ed)|lead(?:s|ing|ed)?|"
+    r"link(?:s|ed)?|manag(?:e|es|ed)|mean(?:s|t)|occur(?:s|red)?|post(?:s|ed)?|provid(?:e|es|ed)|receiv(?:e|s|ed)|"
+    r"record(?:s|ed)?|refer(?:s|red)?|remain(?:s|ed)?|requir(?:e|s|ed)|result(?:s|ed)?|run(?:s|ning)|select(?:s|ed)?|"
+    r"serv(?:e|s|ed)|start(?:s|ed)?|stop(?:s|ped)?|transfer(?:s|red)?|updat(?:e|s|ed)|us(?:e|es|ed)|vary|varies|"
+    r"work(?:s|ed)?)\b",
+    re.I,
+)
+_QUALITY_NAVIGATION_LABEL = re.compile(
+    r"\b(?:navigation|breadcrumbs?|menu|table\s+of\s+contents|contents|toc|simulation|execution|overview|"
+    r"screen|dashboard|activities|process\s+flow|workflow|section\s+list)\b",
+    re.I,
+)
+_QUALITY_STRUCTURAL_SEPARATOR = re.compile(r"[/\\|>›»→]|::")
+_QUALITY_TRAILING_PAGE_NUMBER = re.compile(r"(?:\b(?:page|step|p)\s*)?\b\d{1,3}$", re.I)
+_QUALITY_OCR_DIGIT_IN_WORD = re.compile(r"\b[A-Za-z]{2,}\d[A-Za-z]{2,}\b")
+_QUALITY_LIST_LEADIN = re.compile(
+    r"(?:"
+    r"\b(?:both\s+of\s+)?the\s+following"
+    r"(?:\s+(?:(?:two|three|four|several|multiple)|(?:items?|conditions?|requirements?|prerequisites?|steps?|options?|ways?|criteria|rules?|points?)))*"
+    r"(?:\s+(?:apply|applies|are|is|must|can|need|needs|should|will|have|has|meet|satisfy|be\s+met|be\s+true))?"
+    r"|\bas\s+follows"
+    r"|\bfollowing\s+(?:are|is)"
+    r"|\b(?:there\s+(?:are|is)\s+)?(?:two|three|four|several|multiple|\d+)\s+"
+    r"(?:ways?|options?|steps?|conditions?|requirements?|items?)(?:\s+(?:to|apply|are|must|need|needs))?"
+    r"|\b(?:choose|select|consider|follow|complete|perform|meet|satisfy)\s+(?:(?:from|the)\s+)*(?:the\s+)?following"
+    r")\s*[:：]\s*$",
+    re.I,
+)
+
+
+def quality_norm(text: str) -> str:
+    text = _QUALITY_CITE.sub("", str(text or ""))
+    return re.sub(r"[^\w]+", " ", text.casefold(), flags=re.UNICODE).strip()
+
+
+def _has_explanatory_predicate(text: str) -> bool:
+    if _QUALITY_EXPLANATORY_PREDICATE.search(text or ""):
+        return True
+    # Keep the documented imperative forms; a bare noun/path fragment is not made valid by word count alone.
+    return bool(re.match(r"^\s*(?:run|open|select|choose|click|enter|save|set|specify|maintain|pay|settle|send|"
+                         r"create|use|assign|execute|display|calculate|post|manage|record|transfer)\b", text or "", re.I))
+
+
+def is_low_quality_fragment(text: str, heading_labels: Sequence[str] = ()) -> bool:
+    """Reject obvious headings/breadcrumbs/OCR fragments while retaining short explanatory clauses.
+
+    Structural/title overlap, absent predicate/punctuation, navigation vocabulary and trailing page numbers are used
+    together; there is no general minimum-length threshold for rejecting evidence.
+    """
+    raw = re.sub(r"\s+", " ", str(text or "")).strip()
+    if not raw:
+        return True
+    clean = _QUALITY_CITE.sub("", raw).strip()
+    normalized = quality_norm(clean)
+    if not normalized:
+        return True
+    if isinstance(heading_labels, str):
+        heading_labels = (heading_labels,)
+    labels = {quality_norm(label) for label in heading_labels if quality_norm(label)}
+    if normalized in labels:
+        return True
+
+    has_predicate = _has_explanatory_predicate(clean)
+    if has_predicate:
+        return False
+    if _QUALITY_STRUCTURAL_SEPARATOR.search(clean):
+        return True
+    if re.search(r"\b(?:navigation|breadcrumbs?|menu|table\s+of\s+contents|contents|toc)\b", clean, re.I):
+        return True
+
+    trimmed = clean.rstrip(" .!?;,:\"'”’)]}")
+    words = re.findall(r"\b\w+\b", clean, re.UNICODE)
+    has_sentence_punctuation = bool(re.search(r"[.!?][\"'”’)}\]]*\s*$", clean))
+    trailing_page_number = bool(_QUALITY_TRAILING_PAGE_NUMBER.search(trimmed))
+    if _QUALITY_NAVIGATION_LABEL.search(clean) and (trailing_page_number or not has_sentence_punctuation):
+        return True
+    if _QUALITY_OCR_DIGIT_IN_WORD.search(clean):
+        return True
+
+    # A short, unpunctuated label that substantially repeats its page/section title is a heading fragment, even if
+    # the title has an attached number (e.g. "Billing Execution 4"). A finite-predicate sentence bypasses this.
+    candidate_words = set(quality_norm(clean).split())
+    if not has_sentence_punctuation and len(candidate_words) <= 8:
+        for label in labels:
+            label_words = set(label.split())
+            overlap = len(candidate_words & label_words)
+            if overlap >= 2 and overlap / max(1, len(candidate_words)) >= 0.66:
+                return True
+    if trailing_page_number and not has_sentence_punctuation and len(words) <= 8:
+        return True
+
+    compact = [char for char in clean if not char.isspace()]
+    if len(compact) >= 8 and sum(char.isalpha() for char in compact) / len(compact) < 0.55:
+        return True
+    return False
+
+
+def is_incomplete_list_leadin(text: str, supporting_follow: Optional[str] = None,
+                              heading_labels: Sequence[str] = ()) -> bool:
+    """Identify only clear colon-ended list introductions whose list content is not attached to this evidence unit."""
+    clean = _QUALITY_CITE.sub("", str(text or "")).strip()
+    if not clean or not _QUALITY_LIST_LEADIN.search(clean):
+        return False
+    follow = _QUALITY_CITE.sub("", str(supporting_follow or "")).strip()
+    if not follow or _QUALITY_LIST_LEADIN.search(follow):
+        return True
+    if is_low_quality_fragment(follow, heading_labels):
+        return True
+    bullet_item = re.match(r"^\s*(?:[-*•]|\d+[.)])\s+\S", follow)
+    has_terminal_punctuation = bool(re.search(r"[.!?][\"'”’)}\]]*\s*$", follow))
+    return not (bullet_item or _has_explanatory_predicate(follow) or has_terminal_punctuation)
+
+
+def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[List[Unit], List[Unit], Dict[str, Any]]:
+    """Apply the shared deterministic quality filter before evidence scoring/selection.
+
+    Returns usable units, rejected units, and marker-level accounting for citation/grounding filtering. Adjacent
+    fragment-only context lines are cleared so a rejected title cannot leak around an otherwise useful sentence.
+    """
+    original = list(units)
+    headings_by_marker: Dict[str, List[str]] = {}
+    headings_by_chunk: Dict[str, List[str]] = {}
+    for item in getattr(context, "items", ()) or ():
+        labels = _item_heading_labels(item)
+        marker = str(getattr(item, "marker", "") or "")
+        chunk_id = getattr(item, "chunk_id", None)
+        if marker and labels:
+            headings_by_marker.setdefault(marker, []).extend(labels)
+        if chunk_id is not None and labels:
+            headings_by_chunk.setdefault(str(chunk_id), []).extend(labels)
+
+    kept: List[Unit] = []
+    excluded: List[Unit] = []
+    excluded_adjacent = 0
+    excluded_list_leadins = 0
+    for unit in original:
+        marker = str(getattr(unit, "marker", "") or "")
+        chunk_id = str(getattr(unit, "chunk_id", ""))
+        unit_labels = getattr(unit, "heading_labels", ()) or ()
+        if isinstance(unit_labels, str):
+            unit_labels = (unit_labels,)
+        labels = tuple(dict.fromkeys((*unit_labels, *headings_by_marker.get(marker, ()), *headings_by_chunk.get(chunk_id, ()))))
+        if is_low_quality_fragment(getattr(unit, "text", ""), labels):
+            excluded.append(unit)
+            continue
+        if is_incomplete_list_leadin(getattr(unit, "text", ""), getattr(unit, "follow", None), labels):
+            excluded.append(unit)
+            excluded_list_leadins += 1
+            continue
+        for attr in ("prev_line", "follow"):
+            line = getattr(unit, attr, None)
+            # Compact transaction/code headings can be the only source for an asked code; keep them as attached
+            # context even though, by themselves, they are not explanatory evidence.
+            code_context = bool(_CODE_TOKEN.search(str(line or "")))
+            if line and not code_context and (is_low_quality_fragment(line, labels) or is_incomplete_list_leadin(line, None, labels)):
+                setattr(unit, attr, None)
+                excluded_adjacent += 1
+        kept.append(unit)
+
+    candidate_markers = {str(getattr(unit, "marker", "")) for unit in original if getattr(unit, "marker", None)}
+    kept_markers = {str(getattr(unit, "marker", "")) for unit in kept if getattr(unit, "marker", None)}
+    fragment_markers = sorted({str(getattr(unit, "marker", "")) for unit in excluded if getattr(unit, "marker", None)})
+    details = {
+        "excluded_units": len(excluded),
+        "excluded_markers": sorted(candidate_markers - kept_markers),
+        "markers_with_fragments": fragment_markers,
+        "excluded_adjacent_fragments": excluded_adjacent,
+        "excluded_list_leadins": excluded_list_leadins,
+    }
+    return kept, excluded, details
+
+
+def _context_without_rejected_units(context: Any, rejected_units: Sequence[Unit]) -> Any:
+    """Copy a context for an optional guarded generator, omitting quality-rejected text from its prompt and post-check.
+
+    The original context remains untouched for audit/support-chain verification; only the inner generator sees this
+    sentence-filtered view. Unaffected requests preserve object identity and the shipped prompt byte-for-byte.
+    """
+    if not rejected_units:
+        return context
+    rejected_by_marker: Dict[str, set] = {}
+    for unit in rejected_units:
+        marker = str(getattr(unit, "marker", "") or "")
+        text = str(getattr(unit, "text", "") or "").strip()
+        if marker and text:
+            rejected_by_marker.setdefault(marker, set()).add(text)
+    if not rejected_by_marker:
+        return context
+
+    filtered = copy.copy(context)
+    filtered_items: List[Any] = []
+
+    def is_rejected_heading(label: str, fragments: Sequence[str]) -> bool:
+        label_norm = quality_norm(label)
+        if not label_norm:
+            return False
+        label_words = set(label_norm.split())
+        for fragment in fragments:
+            fragment_norm = quality_norm(fragment)
+            if not fragment_norm or label_norm == fragment_norm:
+                return True
+            fragment_words = set(fragment_norm.split())
+            overlap = len(label_words & fragment_words)
+            if len(label_words) <= len(fragment_words) + 1 and overlap >= 2 and overlap / max(1, len(fragment_words)) >= 0.66:
+                return True
+        return False
+
+    for item in getattr(context, "items", ()) or ():
+        marker = str(getattr(item, "marker", "") or "")
+        rejected_texts = tuple(rejected_by_marker.get(marker, ()))
+        rendered = str(getattr(item, "rendered_text", None) or getattr(item, "text", "") or "")
+        clean = rendered
+        for fragment in sorted(rejected_texts, key=len, reverse=True):
+            clean = clean.replace(fragment, "")
+        clean = "\n".join(line for line in clean.splitlines() if line.strip())
+        if not clean.strip():
+            continue
+        cloned = copy.copy(item)
+        cloned.text = clean
+        if hasattr(cloned, "rendered_text"):
+            cloned.rendered_text = clean
+        heading_path = getattr(cloned, "heading_path", ()) or ()
+        if isinstance(heading_path, str):
+            heading_path = (heading_path,)
+        cloned.heading_path = [label for label in heading_path if not is_rejected_heading(str(label), rejected_texts)]
+        if is_rejected_heading(str(getattr(cloned, "title", "") or ""), rejected_texts):
+            cloned.title = ""
+        filtered_items.append(cloned)
+    filtered.items = filtered_items
+    return filtered
 
 
 def unit_kinds_ok(u: Unit, needs: QuestionNeeds) -> bool:
@@ -333,9 +587,11 @@ class EvidenceExtractiveGenerator:
     def generate(self, question: str, context: Any) -> GenerationResult:
         self._tls.last = None
         needs = analyze_question(question)
-        units = build_units(context.items)
+        units, excluded_quality_units, quality_filter = filter_quality_units(build_units(context.items), context)
         decision, chosen = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
+        if excluded_quality_units or quality_filter["excluded_adjacent_fragments"]:
+            record["quality_filter"] = quality_filter
         if not decision.supported:
             self.last = record
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
@@ -390,12 +646,15 @@ class EvidenceGuard:
     def generate(self, question: str, context: Any) -> GenerationResult:
         self.reset_request_state()
         needs = analyze_question(question)
-        units = build_units(context.items)
+        units, excluded_quality_units, quality_filter = filter_quality_units(build_units(context.items), context)
         decision, _ = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
+        if excluded_quality_units or quality_filter["excluded_adjacent_fragments"]:
+            record["quality_filter"] = quality_filter
         if not decision.supported:                                          # the model is not even asked: the evidence cannot contain the answer
             self.last = record
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
+        model_context = _context_without_rejected_units(context, excluded_quality_units)
         if self._gen_sem.acquire(blocking=False):
             queue_wait_ms = 0.0
         else:
@@ -403,7 +662,7 @@ class EvidenceGuard:
             self._gen_sem.acquire()
             queue_wait_ms = round((time.perf_counter() - t_wait0) * 1000.0, 3)
         try:
-            res = self.inner.generate(question, context)
+            res = self.inner.generate(question, model_context)
         finally:
             self._gen_sem.release()
         raw_tel = getattr(res, "telemetry", None)
@@ -412,6 +671,14 @@ class EvidenceGuard:
             tel["queue_wait_ms"] = queue_wait_ms
         if not res.refused:
             body = re.sub(r"\[S\d+\]", "", res.text)
+            normalized_answer = quality_norm(body)
+            if excluded_quality_units and any(
+                quality_norm(getattr(unit, "text", "")) in normalized_answer
+                for unit in excluded_quality_units if quality_norm(getattr(unit, "text", ""))
+            ):
+                record.update({"supported": False, "reason": "ANSWER_INCLUDES_REJECTED_FRAGMENT"})
+                self.last = record
+                return GenerationResult(NO_ANSWER_TEXT, True, self.name, res.raw_text, res.prompt, tel, evidence=copy.deepcopy(record))
             if not all(kind_satisfied(k, body, needs) for k in needs.kinds):  # the produced text lacks the kind of detail that was asked for
                 record.update({"supported": False, "reason": "ANSWER_LACKS_ASKED_DETAIL"})
                 self.last = record
