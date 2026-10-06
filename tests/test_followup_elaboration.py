@@ -21,6 +21,7 @@ import re
 import sys
 import time
 import unittest
+from dataclasses import dataclass
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -147,13 +148,16 @@ def _utilities_source_context(insurance_text=None, insurance_section=None):
 class Selection(unittest.TestCase):
     """The intent rules, on synthetic evidence (fast, no stores)."""
 
-    def test_elaboration_keeps_the_anchor_and_adds_new_documentation_sentences(self):
+    def test_elaboration_omits_seen_evidence_and_adds_novel_documentation_sentences(self):
         result, evidence = _generate("elaborate", previous=FIRST)
         self.assertFalse(result.refused)
-        self.assertIn(FIRST, result.text)                        # the opening sentence keeps the answer readable
-        self.assertIn(MANY, result.text)                         # ... and the rest is material the user has not seen
+        self.assertNotIn(FIRST, result.text)                     # the user already has this evidence above
+        self.assertIn(MANY, result.text)                         # the follow-up adds unseen page evidence
         self.assertGreaterEqual(evidence["added"], EL.REQUIRED_NEW_ELABORATE)
+        self.assertEqual(evidence["novelty_filter"]["excluded_units"], 1)
         self.assertNotIn(UNRELATED, result.text)                 # off-topic sentences are never pulled in
+        self.assertTrue(all(not EL._is_redundant_evidence(line, (FIRST,))[0]
+                            for line in result.text.split("\n")))
         # document order, no duplicates
         self.assertEqual([l for l in result.text.split("\n")], sorted(set(result.text.split("\n")), key=result.text.split("\n").index))
 
@@ -415,7 +419,7 @@ class EvidenceQuality(unittest.TestCase):
         result = generator.generate("How is billing handled?", context)
 
         self.assertFalse(result.refused)
-        self.assertIn(core, result.text)                         # retain the useful core answer when it is evidence-backed
+        self.assertNotIn(core, result.text)                      # repeated evidence is removed, not used as an opener
         self.assertIn(new_one, result.text)
         self.assertIn(new_two, result.text)                      # add current-topic evidence rather than repeating only
         for fragment in fragments:
@@ -424,6 +428,7 @@ class EvidenceQuality(unittest.TestCase):
         self.assertEqual(quality["excluded_units"], 3)
         self.assertEqual(quality["excluded_markers"], ["S1", "S2", "S3"])
         self.assertEqual(quality["markers_with_fragments"], ["S1", "S2", "S3"])
+        self.assertEqual(generator.last["novelty_filter"]["excluded_markers"], ["S4"])
 
         lines = result.text.split("\n")
         sections = generator.last["presentation_sections"]
@@ -432,16 +437,16 @@ class EvidenceQuality(unittest.TestCase):
         answer_markers = {marker for line in lines for marker in re.findall(r"\[(S\d+)\]", line)}
         selected_markers = {item["marker"] for item in generator.last["selected"]}
         self.assertEqual(answer_markers, selected_markers)
-        self.assertTrue(answer_markers.isdisjoint({"S1", "S2", "S3"}))
+        self.assertTrue(answer_markers.isdisjoint({"S1", "S2", "S3", "S4"}))
         self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
         import rag_pipeline as RP
         citation_context = RP._citation_context_after_scope(context, generator.last)
-        self.assertTrue({"S1", "S2", "S3"}.isdisjoint({item.marker for item in citation_context.items}))
+        self.assertTrue({"S1", "S2", "S3", "S4"}.isdisjoint({item.marker for item in citation_context.items}))
         report = RG.verify_grounding(result.text, citation_context, in_page_grounding=True, citation_normalization=True)
         self.assertTrue(report.ok, report.to_dict())
         self.assertEqual(set(report.cited_markers), answer_markers)
 
-    def test_installment_plan_elaboration_keeps_the_core_and_adds_supported_steps(self):
+    def test_installment_plan_elaboration_uses_only_novel_supported_steps(self):
         core = "An installment plan lets a customer repay an outstanding amount in installments."
         new_one = "You can create an installment plan for open items with the same due date."
         new_two = "The installment plan recalculates due dates for the open items covered by the agreement."
@@ -454,10 +459,11 @@ class EvidenceQuality(unittest.TestCase):
         result = generator.generate("How do I create an installment plan?", context)
 
         self.assertFalse(result.refused)
-        self.assertIn(core, result.text)
+        self.assertNotIn(core, result.text)
         self.assertIn(new_one, result.text)
         self.assertIn(new_two, result.text)
         self.assertGreaterEqual(generator.last["added"], EL.REQUIRED_NEW_ELABORATE)
+        self.assertEqual(generator.last["novelty_filter"]["excluded_markers"], ["S1"])
         self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
         self.assertEqual(_reconstruct_sections(generator.last["presentation_sections"]), result.text)
 
@@ -571,16 +577,95 @@ class Detector(unittest.TestCase):
 
 
 class Wiring(unittest.TestCase):
-    def test_the_scoped_pass_widens_only_the_evidence_window(self):
+    def test_the_scoped_pass_widens_only_elaboration_retrieval_settings(self):
         import rag_pipeline as RP
-        base = RP.PipelineConfig()
-        scoped = EL.scoped_config(base)
         import dataclasses
+        base = RP.PipelineConfig()
+        scoped = EL.scoped_config(base, intent="elaborate")
         self.assertEqual(set(f.name for f in dataclasses.fields(base)), set(f.name for f in dataclasses.fields(scoped)))
         self.assertEqual({f.name for f in dataclasses.fields(base) if getattr(base, f.name) != getattr(scoped, f.name)},
-                         {"k_chunks", "max_context_chunks", "context_budget_tokens"})
-        self.assertGreaterEqual(scoped.k_chunks, EL.WIDE_K_CHUNKS)
+                         {"k_chunks", "max_context_chunks", "context_budget_tokens", "elaboration_candidate_pool_size",
+                          "elaboration_retrieval_enabled"})
+        self.assertEqual(scoped.k_chunks, EL.ELABORATION_CANDIDATE_POOL_SIZE)
+        self.assertEqual(scoped.max_context_chunks, EL.ELABORATION_MAX_CONTEXT_CHUNKS)
+        self.assertEqual(scoped.context_budget_tokens, EL.ELABORATION_CONTEXT_BUDGET_TOKENS)
+        self.assertEqual(scoped.elaboration_candidate_pool_size, EL.ELABORATION_CANDIDATE_POOL_SIZE)
+        self.assertTrue(scoped.elaboration_retrieval_enabled)
+        self.assertFalse(scoped.full_page_coverage)
+        requested = EL.scoped_config(dataclasses.replace(base, elaboration_candidate_pool_size=9), intent="elaborate")
+        self.assertEqual((requested.k_chunks, requested.elaboration_candidate_pool_size), (9, 9))
+        clamped = EL.scoped_config(dataclasses.replace(base, elaboration_candidate_pool_size=2), intent="elaborate")
+        self.assertEqual(clamped.elaboration_candidate_pool_size, EL.ELABORATION_MIN_CANDIDATE_POOL_SIZE)
+        legacy = EL.scoped_config(base)
+        self.assertEqual(legacy.k_chunks, EL.WIDE_K_CHUNKS)
+        self.assertEqual(legacy.elaboration_candidate_pool_size, 0)
+        self.assertFalse(legacy.elaboration_retrieval_enabled)
+        other = EL.scoped_config(base, intent="example")
+        self.assertEqual(other.elaboration_candidate_pool_size, 0)
+        self.assertFalse(other.elaboration_retrieval_enabled)
+        self.assertEqual(other.k_chunks, EL.WIDE_K_CHUNKS)
+        self.assertEqual(other.max_context_chunks, EL.WIDE_MAX_CONTEXT_CHUNKS)
+        self.assertEqual(other.context_budget_tokens, EL.WIDE_CONTEXT_BUDGET_TOKENS)
         self.assertEqual(base.k_chunks, RP.PipelineConfig().k_chunks)          # the base config is not mutated
+        self.assertEqual(base.elaboration_candidate_pool_size, 0)             # normal QA never opts into dual retrieval
+        self.assertFalse(base.elaboration_retrieval_enabled)
+
+    def test_dual_view_pool_includes_aspect_only_chunks_and_deduplicates_identity(self):
+        import rag_pipeline as RP
+
+        @dataclass(frozen=True)
+        class Hit:
+            rank: int
+            chunk_id: str
+
+        primary = [Hit(i + 1, f"chunk-{i}") for i in range(12)]
+        aspect = [Hit(1, "chunk-0"), Hit(2, "chunk-1"), *[Hit(i + 3, f"aspect-{i}") for i in range(10)]]
+        merged = RP._interleave_page_candidates(primary, aspect, 12)
+        ids = [hit.chunk_id for hit in merged]
+        self.assertEqual(len(ids), 12)
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual(ids[:4], ["chunk-0", "aspect-0", "chunk-1", "aspect-1"])
+        self.assertEqual(ids[7], "aspect-3")  # the secondary view contributes novel chunks within the fixed pool
+        self.assertEqual([hit.rank for hit in merged], list(range(1, 13)))
+
+    def test_elaboration_novelty_filter_catches_near_duplicates_without_embeddings(self):
+        previous = "An installment plan lets a customer repay an outstanding amount in installments."
+        near_duplicate = "The installment plan lets customers repay outstanding amounts in installments."
+        distinct_fact = "Choose Continue to save the installment plan proposal."
+        repeated, scores = EL._is_redundant_evidence(near_duplicate, (previous,))
+        self.assertTrue(repeated, scores)
+        self.assertGreaterEqual(scores["overlap"], 4)
+        self.assertFalse(EL._is_redundant_evidence(distinct_fact, (previous,))[0])
+        # Very short facts are not discarded merely because they share a few topical words.
+        self.assertFalse(EL._is_redundant_evidence(
+            "A customer can repay an amount.", ("The customer repays amounts through a payment plan.",)
+        )[0])
+
+    @unittest.skipUnless(HAVE_CHROMA and HAVE_BS4, "chromadb / bs4 not installed")
+    def test_elaboration_retrieval_is_two_view_but_stays_on_the_resolved_page(self):
+        import rag_pipeline as RP
+        query = "How do I create an installment plan?"
+        base = make_pipeline(RG.ExtractiveGenerator(), {query: ["M2C-24"]}, config=S.production_pipeline_config())
+        normal = base.answer(query, debug=True)
+        self.assertEqual(len(normal["debug"]["retrieved"]), 5)  # normal QA keeps its shipped retrieval window
+        self.assertNotIn("retrieval", normal["debug"])           # no aspect-query pass on a normal question
+        self.assertEqual(normal["debug"]["config"]["elaboration_candidate_pool_size"], 0)
+        self.assertFalse(normal["debug"]["config"]["elaboration_retrieval_enabled"])
+        scoped = EL.scoped_pipeline(base, "elaborate", previous_answer="", anchor=query)
+        result = scoped.answer(query, debug=True)
+        self.assertEqual(result["status"], RP.ANSWERED)
+        retrieval = result["debug"]["retrieval"]
+        self.assertEqual(retrieval["scope"], "resolved_active_page")
+        self.assertEqual(retrieval["strategy"], "topic_anchor_plus_aspect_query")
+        self.assertEqual(retrieval["anchor_query"], query)
+        self.assertTrue(retrieval["aspect_query"].startswith(query))
+        self.assertNotIn("elaborate", retrieval["aspect_query"].casefold())
+        self.assertEqual(retrieval["pool_limit"], EL.ELABORATION_CANDIDATE_POOL_SIZE)
+        self.assertLessEqual(retrieval["candidates_returned"], 12)
+        self.assertGreater(retrieval["candidates_returned"], 0)
+        self.assertEqual(retrieval["page_expansion"], "disabled")
+        self.assertEqual({hit["page_id"] for hit in result["debug"]["retrieved"]}, {retrieval["page_id"]})
+        self.assertTrue(result["debug"]["grounding"]["ok"])
 
     def test_the_scoped_pipeline_shares_the_heavy_objects_of_the_base_pipeline(self):
         base = make_pipeline(RG.ExtractiveGenerator(), dict(RANKING))

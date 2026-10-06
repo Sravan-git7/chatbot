@@ -24,7 +24,7 @@ import copy
 import sys
 import threading
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 
@@ -97,6 +97,45 @@ STATUSES = (ANSWERED, INSUFFICIENT, UNRESOLVED, NOT_INGESTED, OUT_OF_DOMAIN, NO_
 OOD_MIN_COVERAGE = 0.25               # pre-declared: share of question content terms found in the routed card text (+ page text if ingested)
 CONTEXT_MIN_COVERAGE = 0.5            # pre-declared: share of question content terms found in the retrieved context (+ page title/headings)
 
+# A deterministic second retrieval view used only by the scoped "elaborate" pass. The resolved question stays at
+# the front of the query; the suffix broadens which facets of that SAME page are considered without using the word
+# "elaborate" as a search query or leaving the identity-constrained retriever.
+_ELABORATION_ASPECT_SUFFIX = "prerequisites conditions process steps inputs outputs results rules exceptions"
+
+
+def _elaboration_aspect_query(anchor: str) -> str:
+    topic = " ".join(str(anchor or "").split())
+    return f"{topic} {_ELABORATION_ASPECT_SUFFIX}".strip()
+
+
+def _interleave_page_candidates(primary: Sequence[Any], aspect: Sequence[Any], limit: int) -> List[Any]:
+    """Merge two ranked views of one page, reserving pool slots for aspect-only chunks when available."""
+    limit = max(1, int(limit))
+
+    def unique_hits(source: Sequence[Any], already_seen: Optional[set] = None) -> List[Any]:
+        seen = set(already_seen or ())
+        out: List[Any] = []
+        for index, hit in enumerate(source):
+            chunk_id = str(getattr(hit, "chunk_id", "") or "")
+            key = chunk_id or (getattr(hit, "guide_id", None), getattr(hit, "page_id", None), index, id(hit))
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(hit)
+        return out
+
+    anchor_unique = unique_hits(primary)
+    anchor_keys = {str(getattr(hit, "chunk_id", "") or "") for hit in anchor_unique}
+    aspect_unique = unique_hits(aspect, anchor_keys)
+    merged: List[Any] = []
+    for rank in range(max(len(anchor_unique), len(aspect_unique))):
+        for view in (anchor_unique, aspect_unique):
+            if rank < len(view):
+                merged.append(replace(view[rank], rank=len(merged) + 1))
+                if len(merged) >= limit:
+                    return merged
+    return merged
+
 
 @dataclass(frozen=True)
 class PipelineConfig:
@@ -118,6 +157,9 @@ class PipelineConfig:
     phrase_min_corroboration: int = 1      # E1a-v2: unique phrases a page must own before it earns the channel (1 = run-1 behaviour)
     full_page_coverage: bool = False       # E1b: reranker coverage over the candidate's full page text
     citation_repair: bool = False          # E2: deterministic in-page marker repair after grounding
+    # Elaboration-only dual-view retrieval; both flags are OFF/zero on every normal QA request.
+    elaboration_candidate_pool_size: int = 0
+    elaboration_retrieval_enabled: bool = False
     # Phase 19B (optional Ollama generation tuning knobs; None = default rag_core options):
     ollama_num_predict: Optional[int] = None
     ollama_keep_alive: Optional[Any] = None
@@ -189,16 +231,19 @@ def _citation_context_after_scope(context: Any, generation_evidence: Any) -> Any
     """Apply scoped elaboration's rejected source markers to grounding and citation construction only.
 
     The request's original context remains intact for retrieval/debug/support-chain auditing. The generator has already
-    selected only allowed units; this narrower view prevents rejected industry or all-fragment markers from being
-    accepted by grounding or appearing in answer_sources/context_not_cited. With no scoped exclusions it is an identity
-    operation. The unchanged support-chain verifier still checks answer lines against the original evidence context.
+    selected only allowed units; this narrower view prevents rejected industry, all-fragment, or fully repeated-evidence
+    markers from being accepted by grounding or appearing in answer_sources/context_not_cited. With no scoped exclusions
+    it is an identity operation. The unchanged support-chain verifier still checks answer lines against the original
+    evidence context.
     """
     evidence = generation_evidence if isinstance(generation_evidence, Mapping) else {}
     industry_scope = evidence.get("industry_scope") or {}
     quality_filter = evidence.get("quality_filter") or {}
+    novelty_filter = evidence.get("novelty_filter") or {}
     excluded_markers = {
         str(marker)
-        for marker in (*industry_scope.get("excluded_markers", ()), *quality_filter.get("excluded_markers", ()))
+        for marker in (*industry_scope.get("excluded_markers", ()), *quality_filter.get("excluded_markers", ()),
+                       *novelty_filter.get("excluded_markers", ()))
         if marker
     }
     if not excluded_markers:
@@ -397,17 +442,60 @@ class RagPipeline:
 
         # ---- 5. identity-constrained retrieval -------------------------------------------------------------------------
         t = time.perf_counter()
-        win_page_key_k = (identity.effective_guide_id, identity.effective_page_id, self.cfg.k_chunks)
-        if win_page_key_k in rerank_hits_cache:
-            hits = list(rerank_hits_cache[win_page_key_k][: self.cfg.k_chunks])
-        else:
-            hits = self.retriever.retrieve_in_page(
-                query,
+        elaboration_pool_size = max(0, int(getattr(self.cfg, "elaboration_candidate_pool_size", 0) or 0))
+        elaboration_retrieval_enabled = bool(getattr(self.cfg, "elaboration_retrieval_enabled", False))
+        if elaboration_retrieval_enabled and elaboration_pool_size:
+            # The card reranker already fetched the anchor-query page hits (and cached them) at k_chunks. Reuse that
+            # ranked view, then add one deterministic aspect-oriented query under the exact same guide/page identity.
+            # Alternating the two ranked lists preserves the anchor retrieval while allowing lower-ranked, novel
+            # page evidence to enter the bounded candidate pool.
+            anchor_cache_key = (identity.effective_guide_id, identity.effective_page_id, self.cfg.k_chunks)
+            if anchor_cache_key in rerank_hits_cache:
+                anchor_hits = list(rerank_hits_cache[anchor_cache_key][:elaboration_pool_size])
+            else:
+                anchor_hits = self.retriever.retrieve_in_page(
+                    query,
+                    identity.effective_guide_id,
+                    identity.effective_page_id,
+                    top_k=elaboration_pool_size,
+                    query_embedding=q_emb,
+                )
+            aspect_query = _elaboration_aspect_query(query)
+            aspect_embedding = self.retriever.embed([aspect_query]) if hasattr(self.retriever, "embed") else None
+            aspect_hits = self.retriever.retrieve_in_page(
+                aspect_query,
                 identity.effective_guide_id,
                 identity.effective_page_id,
-                top_k=self.cfg.k_chunks,
-                query_embedding=q_emb,
+                top_k=elaboration_pool_size,
+                query_embedding=aspect_embedding,
             )
+            hits = _interleave_page_candidates(anchor_hits, aspect_hits, elaboration_pool_size)
+            dbg["retrieval"] = {
+                "scope": "resolved_active_page",
+                "strategy": "topic_anchor_plus_aspect_query",
+                "anchor_query": query,
+                "aspect_query": aspect_query,
+                "guide_id": identity.effective_guide_id,
+                "page_id": identity.effective_page_id,
+                "pool_limit": elaboration_pool_size,
+                "anchor_candidates": len(anchor_hits),
+                "aspect_candidates": len(aspect_hits),
+                "unique_candidates_before_limit": len({str(getattr(h, "chunk_id", "")) for h in (*anchor_hits, *aspect_hits)}),
+                "candidates_returned": len(hits),
+                "page_expansion": "disabled",
+            }
+        else:
+            win_page_key_k = (identity.effective_guide_id, identity.effective_page_id, self.cfg.k_chunks)
+            if win_page_key_k in rerank_hits_cache:
+                hits = list(rerank_hits_cache[win_page_key_k][: self.cfg.k_chunks])
+            else:
+                hits = self.retriever.retrieve_in_page(
+                    query,
+                    identity.effective_guide_id,
+                    identity.effective_page_id,
+                    top_k=self.cfg.k_chunks,
+                    query_embedding=q_emb,
+                )
         timings["retrieve_ms"] = (time.perf_counter() - t) * 1000
         dbg["retrieved"] = [h.to_dict(with_text=False) for h in hits]
         if not hits:

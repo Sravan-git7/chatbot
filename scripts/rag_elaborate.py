@@ -14,13 +14,15 @@ What this module adds
 For a follow-up whose intent asks for *more* (or for a different kind of content), the same pipeline is run once more
 with a narrow, explicitly scoped difference:
 
-* **wider evidence** - the follow-up pass reads more of the already-routed document (``k_chunks``/``max_context_chunks``/
-  budget raised for this pass only) instead of the top few chunks;
-* **wider selection** - every sentence that is still clearly on-topic is eligible (30% of the best score instead of
-  60%), ordered in document reading order, deduplicated by section;
-* **intent handling** - elaboration skips what the previous answer already said and adds new evidence; an example
-  requires a sentence that actually introduces an example; a reason requires a reason-bearing sentence; continuation
-  prefers evidence from later in the document; simplification picks the shortest sentences that still carry the topic;
+* **wider evidence** - "elaborate" uses a 12-candidate pool and a 12-chunk / 2,000-token context only for this pass;
+  its primary query is the resolved topic, plus one deterministic aspect query over the same identity-verified page;
+  the two ranked lists are interleaved and deduplicated, while other intents keep their shipped scoped settings;
+* **novel selection** - for "elaborate", exact and high-overlap evidence already present in the previous answer is removed
+  before sufficiency checks and selection, and near-duplicate selected facts are collapsed; up to six supported units
+  are emitted, with no repeated opener. Other intent-specific selection rules remain as before;
+* **intent handling** - an example requires a sentence that actually introduces an example; a reason requires a
+  reason-bearing sentence; continuation prefers evidence from later in the document; simplification picks the shortest
+  sentences that still carry the topic;
 * **fragment quality** - a conservative pre-selection filter drops standalone headings, breadcrumbs, menu/TOC labels,
   numbered navigation fragments and malformed OCR-like text, while retaining short clauses with an explanatory predicate;
 * **the same verification** - the composed text is verified by the unchanged ``verify_grounding`` (in-page grounding +
@@ -49,15 +51,22 @@ import rag_generate as RG  # noqa: E402  GenerationResult / NO_ANSWER_TEXT
 import rag_text as T  # noqa: E402
 
 # ---------------------------------------------------------------------------------------------------------------- scope
-# Only the follow-up pass uses these; PipelineConfig defaults and the production service stay exactly as they are.
+# Legacy wider settings for the other already-shipped follow-up intents; their retrieval/selection remains unchanged.
 WIDE_K_CHUNKS = 10
 WIDE_MAX_CONTEXT_CHUNKS = 8
 WIDE_CONTEXT_BUDGET_TOKENS = 1400
+# The "elaborate" intent uses one wider, two-view pool. It stays on the selected page; no page-family expansion is
+# enabled because current admitted pages are short and page expansion would add scope without measured benefit.
+ELABORATION_MIN_CANDIDATE_POOL_SIZE = 8
+ELABORATION_CANDIDATE_POOL_SIZE = 12
+ELABORATION_MAX_CONTEXT_CHUNKS = 12
+ELABORATION_CONTEXT_BUDGET_TOKENS = 2000
+ELABORATION_MAX_SELECTED_UNITS = 6
 RICH_RATIO = 0.30                    # keep sentences scoring >= 30% of the best (minimal path: 0.6)
 MAX_RICH_SENTENCES = 8
 MAX_SIMPLE_SENTENCES = 2
 MAX_EXAMPLE_SENTENCES = 3
-REQUIRED_NEW_ELABORATE = 2           # an elaboration must add at least this many sentences the user has not seen
+REQUIRED_NEW_ELABORATE = 2           # minimum novel units; also preserves the shipped threshold for other wide intents
 ELABORATION_INTENTS = ("elaborate", "example", "simplify", "reason", "continuation", "reference")
 
 _EXAMPLES = re.compile(r"\b(for example|for instance|e\.g\.|such as|example[s]? of|an example)\b", re.I)
@@ -351,13 +360,31 @@ def _industry_scope_units(units: Sequence[Any], context: Any, anchor: str, previ
     return relevant, "IS-U", len(original) - len(relevant), sorted(excluded_markers)
 
 
-def scoped_config(base_config: Any) -> Any:
-    """The production configuration with a wider evidence window - for this pass only."""
+def scoped_config(base_config: Any, intent: Optional[str] = None) -> Any:
+    """Return a follow-up-only config; only an explicit "elaborate" intent activates dual-view retrieval."""
+    if intent == "elaborate":
+        requested_pool_size = int(
+            getattr(base_config, "elaboration_candidate_pool_size", 0) or ELABORATION_CANDIDATE_POOL_SIZE
+        )
+        candidate_pool_size = min(
+            ELABORATION_CANDIDATE_POOL_SIZE,
+            max(ELABORATION_MIN_CANDIDATE_POOL_SIZE, requested_pool_size),
+        )
+        return dataclasses.replace(
+            base_config,
+            k_chunks=max(int(getattr(base_config, "k_chunks", 5)), candidate_pool_size),
+            max_context_chunks=max(int(getattr(base_config, "max_context_chunks", 4)), ELABORATION_MAX_CONTEXT_CHUNKS),
+            context_budget_tokens=max(int(getattr(base_config, "context_budget_tokens", 700)), ELABORATION_CONTEXT_BUDGET_TOKENS),
+            elaboration_candidate_pool_size=candidate_pool_size,
+            elaboration_retrieval_enabled=True,
+        )
     return dataclasses.replace(
         base_config,
         k_chunks=max(int(getattr(base_config, "k_chunks", 5)), WIDE_K_CHUNKS),
         max_context_chunks=max(int(getattr(base_config, "max_context_chunks", 4)), WIDE_MAX_CONTEXT_CHUNKS),
         context_budget_tokens=max(int(getattr(base_config, "context_budget_tokens", 700)), WIDE_CONTEXT_BUDGET_TOKENS),
+        elaboration_candidate_pool_size=0,
+        elaboration_retrieval_enabled=False,
     )
 
 
@@ -377,6 +404,75 @@ def sentences_of(answer: str) -> Tuple[str, ...]:
 
 def _norm(s: str) -> str:
     return re.sub(r"\s+", " ", (s or "").strip().lower()).strip(" .,:;")
+
+
+def _evidence_overlap(left: str, right: str) -> Dict[str, Any]:
+    """Cheap, conservative lexical near-duplicate score; no embeddings or paraphrase model are used."""
+    left_norm, right_norm = _quality_norm(_CITE.sub("", str(left or ""))), _quality_norm(_CITE.sub("", str(right or "")))
+    if left_norm and left_norm == right_norm:
+        return {"exact": True, "overlap": len(EV.terms2(left_norm)), "jaccard": 1.0, "shorter_coverage": 1.0}
+    left_terms, right_terms = set(EV.terms2(left_norm)), set(EV.terms2(right_norm))
+    if not left_terms or not right_terms:
+        return {"exact": False, "overlap": 0, "jaccard": 0.0, "shorter_coverage": 0.0}
+    overlap = len(left_terms & right_terms)
+    return {
+        "exact": False,
+        "overlap": overlap,
+        "jaccard": overlap / len(left_terms | right_terms),
+        "shorter_coverage": overlap / min(len(left_terms), len(right_terms)),
+    }
+
+
+def _is_redundant_evidence(candidate: str, references: Iterable[str]) -> Tuple[bool, Dict[str, Any]]:
+    """Exact/high-overlap repeats are removed; excerpts with fewer than four content stems need an exact match."""
+    best: Dict[str, Any] = {"exact": False, "overlap": 0, "jaccard": 0.0, "shorter_coverage": 0.0}
+    for reference in references:
+        score = _evidence_overlap(candidate, reference)
+        if score["exact"]:
+            return True, score
+        if score["overlap"] >= best["overlap"]:
+            best = score
+    redundant = (
+        (best["overlap"] >= 5 and best["jaccard"] >= 0.72)
+        or (best["overlap"] >= 4 and best["shorter_coverage"] >= 0.90)
+    )
+    return redundant, best
+
+
+def _novelty_filter_units(units: Sequence[Any], previous_answer: str) -> Tuple[List[Any], Dict[str, Any]]:
+    """Drop elaboration evidence already shown, and detach repeated adjacent lines before selection/grounding."""
+    previous = sentences_of(previous_answer)
+    kept: List[Any] = []
+    repeated: List[Dict[str, Any]] = []
+    removed_adjacent = 0
+    candidate_markers = {str(getattr(unit, "marker", "") or "") for unit in units if getattr(unit, "marker", None)}
+    kept_markers: set = set()
+    for unit in units:
+        duplicate, score = _is_redundant_evidence(getattr(unit, "text", ""), previous)
+        if duplicate:
+            marker = str(getattr(unit, "marker", "") or "")
+            repeated.append({"marker": marker or None, "overlap": int(score["overlap"]),
+                             "jaccard": round(float(score["jaccard"]), 3), "exact": bool(score["exact"])})
+            continue
+        for attr in ("prev_line", "follow"):
+            line = getattr(unit, attr, None)
+            if line and _is_redundant_evidence(line, previous)[0]:
+                setattr(unit, attr, None)
+                removed_adjacent += 1
+        kept.append(unit)
+        marker = str(getattr(unit, "marker", "") or "")
+        if marker:
+            kept_markers.add(marker)
+    excluded_markers = sorted(marker for marker in candidate_markers if marker not in kept_markers)
+    return kept, {
+        "enabled": True,
+        "candidate_units": len(units),
+        "excluded_units": len(repeated),
+        "excluded_adjacent_lines": removed_adjacent,
+        "excluded_markers": excluded_markers,
+        "markers_with_repeated_evidence": sorted({item["marker"] for item in repeated if item["marker"]}),
+        "repeats": repeated,
+    }
 
 
 class IntentExtractiveGenerator:
@@ -426,6 +522,9 @@ class IntentExtractiveGenerator:
             units, context, self.anchor or question, self.previous_answer, self.new_terms
         )
         units, excluded_quality_units, excluded_adjacent_fragments = _elaboration_quality_filter(units, context)
+        novelty_filter: Optional[Dict[str, Any]] = None
+        if self.intent == "elaborate":
+            units, novelty_filter = _novelty_filter_units(units, self.previous_answer)
         quality_fragment_markers = sorted({str(getattr(unit, "marker", "")) for unit in excluded_quality_units
                                            if getattr(unit, "marker", None)})
         usable_quality_markers = {str(getattr(unit, "marker", "")) for unit in units if getattr(unit, "marker", None)}
@@ -450,6 +549,8 @@ class IntentExtractiveGenerator:
         if industry_scope:
             record["industry_scope"] = {"preferred": industry_scope, "excluded_units": excluded_industry_units,
                                         "excluded_markers": excluded_industry_markers}
+        if novelty_filter is not None:
+            record["novelty_filter"] = novelty_filter
         if not decision.supported:
             # the topic itself is not supported by the retrieved evidence: unchanged behaviour (abstain -> no answer)
             record["elaborated"] = None
@@ -466,19 +567,30 @@ class IntentExtractiveGenerator:
         weights = EV.focus_weights(needs, units)
         lines: List[str] = []
         line_sections: Dict[str, str] = {}
+        chosen_texts = [unit.text for unit in chosen]
+        emitted_context_lines: List[str] = []
+
+        def append_context_line(sentence: str, marker: str, section_key: str) -> None:
+            if self.intent == "elaborate":
+                references = (*self.previous, *chosen_texts, *emitted_context_lines)
+                if _is_redundant_evidence(sentence, references)[0]:
+                    return
+            line = f"{sentence} [{marker}]"
+            if line not in lines:
+                lines.append(line)
+                line_sections.setdefault(line, section_key)
+                emitted_context_lines.append(sentence)
+
         for u in chosen:
             section_key = presentation_section_key(u.text)
             if u.prev_line and needs.kinds and not EV.kind_satisfied(needs.kinds[0], u.text, needs):
-                line = f"{u.prev_line} [{u.marker}]"
-                lines.append(line)
-                line_sections.setdefault(line, section_key)
+                append_context_line(u.prev_line, u.marker, section_key)
             line = f"{u.text} [{u.marker}]"
-            lines.append(line)
-            line_sections.setdefault(line, section_key)
-            if u.follow:
-                line = f"{u.follow} [{u.marker}]"
+            if line not in lines:
                 lines.append(line)
                 line_sections.setdefault(line, section_key)
+            if u.follow:
+                append_context_line(u.follow, u.marker, section_key)
             record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text,
                                        "coverage": round(EV.unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3),
                                        "kinds_ok": EV.unit_kinds_ok(u, needs)})
@@ -493,7 +605,10 @@ class IntentExtractiveGenerator:
             (line_sections[ln], ln) for ln in dedup
         )
         record["elaborated"] = True
-        record["added"] = sum(1 for u in chosen if _norm(u.text) not in self.previous)
+        if self.intent == "elaborate":
+            record["added"] = sum(1 for u in chosen if not _is_redundant_evidence(u.text, self.previous)[0])
+        else:
+            record["added"] = sum(1 for u in chosen if _norm(u.text) not in self.previous)
         self.last = record
         return RG.GenerationResult(text, False, self.name, text, evidence=copy.deepcopy(record))
 
@@ -512,6 +627,22 @@ class IntentExtractiveGenerator:
             return []
         best = max(s for s, _ in scored)
         keep = [u for s, u in sorted(scored, key=lambda p: (-p[0], p[1].rank, p[1].order)) if s >= RICH_RATIO * best]
+
+        if self.intent == "elaborate":
+            # The original answer is already visible above this turn: select only novel, non-redundant evidence.
+            # Keep the existing evidence score/rerank ordering, then show the chosen facts in document order.
+            novel: List[Any] = []
+            for unit in keep:
+                if _is_redundant_evidence(unit.text, self.previous)[0]:
+                    continue
+                if any(_is_redundant_evidence(unit.text, (picked.text,))[0] for picked in novel):
+                    continue
+                novel.append(unit)
+                if len(novel) >= ELABORATION_MAX_SELECTED_UNITS:
+                    break
+            if self.previous and len(novel) < REQUIRED_NEW_ELABORATE:
+                return []
+            return sorted(novel, key=lambda unit: unit.order)
 
         if self.intent == "continuation":
             # "what happens next": the material that follows the part already shown - new sentences, with the ones
@@ -556,8 +687,8 @@ class IntentExtractiveGenerator:
             covering = [u for u in keep if self.new_terms and (u.own & self.new_terms)]
             keep = covering or keep
 
-        if self.intent in ("elaborate", "reason", "continuation", "reference"):
-            # never hand back only what the user has already read: keep one anchor sentence, require fresh evidence
+        if self.intent in ("reason", "continuation", "reference"):
+            # Preserve the established rules for the non-elaborate follow-up intents.
             fresh = [u for u in keep if _norm(u.text) not in self.previous]
             if self.previous:
                 if len(fresh) < REQUIRED_NEW_ELABORATE:
@@ -593,7 +724,7 @@ def scoped_pipeline(base: Any, intent: str, previous_answer: str = "", anchor: s
     gen = IntentExtractiveGenerator(intent, previous_answer=previous_answer, tau=tau, frame_normalization=fn,
                                     focus_terms=new_terms, anchor=anchor)
     return RP.RagPipeline(base.backend, base.retriever, base.ctx, base.corpus, gen, base.count_tokens,
-                          cards=list(base.cards.values()), config=scoped_config(base.cfg))
+                          cards=list(base.cards.values()), config=scoped_config(base.cfg, intent=intent))
 
 
 def is_elaboration_intent(category: Optional[str]) -> bool:
