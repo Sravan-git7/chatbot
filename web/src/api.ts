@@ -1,4 +1,4 @@
-import type { ChatContext, ChatError, ChatResult, Health } from './types'
+import type { ChatError, ChatResult, Health } from './types'
 
 const BASE = (import.meta.env?.VITE_API_BASE as string | undefined) ?? ''
 export const REQUEST_TIMEOUT_MS = 60_000
@@ -51,7 +51,7 @@ export async function sendChat(
   message: string,
   conversationId: string,
   debug: boolean,
-  opts: { signal?: AbortSignal; timeoutMs?: number; context?: ChatContext } = {},
+  opts: { signal?: AbortSignal; timeoutMs?: number } = {},
 ): Promise<ChatResult> {
   const ctl = new AbortController()
   let timedOut = false
@@ -62,7 +62,7 @@ export async function sendChat(
     res = await fetch(`${BASE}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(opts.context ? { message, conversation_id: conversationId, debug, context: opts.context } : { message, conversation_id: conversationId, debug }),
+      body: JSON.stringify({ message, conversation_id: conversationId, debug }),
       signal: ctl.signal,
     })
   } catch {

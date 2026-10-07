@@ -1,0 +1,85 @@
+"""Tests for deterministic response composer (scripts/rag_response.py)."""
+from __future__ import annotations
+
+import unittest
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+import rag_response as RR
+
+
+class RagResponseTests(unittest.TestCase):
+    def setUp(self):
+        self.sample_answer = (
+            "SAP Utilities installment plans allow customers to pay outstanding amounts in installments [S1].\n"
+            "To configure an installment plan, use transaction code FPR1 [S2].\n"
+            "A prerequisite is that the items must be open and not in a dunning lock [S1]."
+        )
+        self.sample_sources = [
+            {"marker": "S1", "title": "Installment Plan Overview", "section": "Basics", "url": "https://help.sap.com/1"},
+            {"marker": "S2", "title": "Installment Plan Creation", "section": "Configuration", "url": "https://help.sap.com/2"},
+        ]
+        self.sample_meta = {"card_title": "Installment Plans", "pipeline_status": "answered"}
+
+    def test_compose_response_answered(self):
+        result = RR.compose_response(self.sample_answer, self.sample_sources, "answered", self.sample_meta)
+        self.assertIn("structured_answer", result)
+        self.assertIn("documentation_coverage", result)
+
+        sa = result["structured_answer"]
+        self.assertIsNotNone(sa)
+        self.assertTrue(len(sa["sections"]) > 0)
+        self.assertEqual(sa["citations"], ["S1", "S2"])
+
+        for sec in sa["sections"]:
+            self.assertIn("title", sec)
+            self.assertIn("key", sec)
+            self.assertIn("lines", sec)
+            self.assertIn("content", sec)
+            self.assertIn("citations", sec)
+
+        cov = result["documentation_coverage"]
+        self.assertTrue(cov["covered"])
+        self.assertGreater(cov["coverage_percentage"], 0)
+        self.assertEqual(cov["total_sources_cited"], 2)
+        self.assertEqual(cov["matched_topics"], ["Installment Plans"])
+        self.assertEqual(cov["uncovered_aspects"], [])
+
+    def test_compose_response_unanswered(self):
+        for status in ("out_of_scope", "unable_to_verify", "documentation_unavailable"):
+            result = RR.compose_response("", [], status, {"card_title": "OOS"})
+            self.assertIsNone(result["structured_answer"])
+            cov = result["documentation_coverage"]
+            self.assertFalse(cov["covered"])
+            self.assertEqual(cov["coverage_percentage"], 0.0)
+            self.assertEqual(cov["total_sources_cited"], 0)
+            self.assertIn(status, cov["uncovered_aspects"])
+
+    def test_no_new_prose_synthesized(self):
+        result = RR.compose_response(self.sample_answer, self.sample_sources, "answered", self.sample_meta)
+        sa = result["structured_answer"]
+        self.assertIsNotNone(sa)
+
+        # Ensure all section lines exist verbatim in the sample answer
+        for sec in sa["sections"]:
+            for line in sec["lines"]:
+                self.assertIn(line, self.sample_answer)
+
+    def test_deterministic(self):
+        res1 = RR.compose_response(self.sample_answer, self.sample_sources, "answered", self.sample_meta)
+        res2 = RR.compose_response(self.sample_answer, self.sample_sources, "answered", self.sample_meta)
+        self.assertEqual(res1, res2)
+
+    def test_citation_extraction(self):
+        text = "Fact one [S3] and fact two [S1] repeated [S3]."
+        cits = RR.extract_citations(text)
+        self.assertEqual(cits, ["S3", "S1"])
+
+    def test_empty_answer_returns_none_structured(self):
+        result = RR.compose_response("   \n  ", self.sample_sources, "answered")
+        self.assertIsNone(result["structured_answer"])
+
+
+if __name__ == "__main__":
+    unittest.main()

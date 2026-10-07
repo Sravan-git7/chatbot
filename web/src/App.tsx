@@ -5,7 +5,6 @@ import Composer from './components/Composer'
 import MessageView from './components/MessageView'
 import Sidebar from './components/Sidebar'
 import Welcome from './components/Welcome'
-import { turnContext } from './followup'
 import { loadConversations, loadSettings, newId, saveConversations, saveSettings, titleFrom } from './storage'
 import type { ChatError, Conversation, Health, Message, Settings } from './types'
 
@@ -103,9 +102,8 @@ export default function App() {
       })
       setCurrentId(convId)
       const startedAt = Date.now()
-      const context = turnContext(conversations.find((c) => c.id === convId) ?? null)
       try {
-        const result = await sendChat(text, convId, settingsRef.current.developerMode, { context })
+        const result = await sendChat(text, convId, settingsRef.current.developerMode)
         const elapsed = Date.now() - startedAt
         if (MIN_THINKING_MS > 0 && elapsed < MIN_THINKING_MS) {
           await new Promise((r) => setTimeout(r, MIN_THINKING_MS - elapsed))
@@ -119,17 +117,16 @@ export default function App() {
         patchMessage(convId, reply.id, { pending: false, error })
       }
     },
-    [currentId, patchMessage, conversations],
+    [currentId, patchMessage, conversations, pending],
   )
 
   const retryMessage = useCallback(
-    async (convId: string, replyId: string, userMessageId: string, questionText: string) => {
+    async (convId: string, replyId: string, _userMessageId: string, questionText: string) => {
       if (!questionText.trim() || pending) return
       patchMessage(convId, replyId, { pending: true, error: undefined })
       const startedAt = Date.now()
-      const context = turnContext(conversations.find((c) => c.id === convId) ?? null, userMessageId)
       try {
-        const result = await sendChat(questionText, convId, settingsRef.current.developerMode, { context })
+        const result = await sendChat(questionText, convId, settingsRef.current.developerMode)
         const elapsed = Date.now() - startedAt
         if (MIN_THINKING_MS > 0 && elapsed < MIN_THINKING_MS) {
           await new Promise((r) => setTimeout(r, MIN_THINKING_MS - elapsed))

@@ -30,8 +30,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import rag_elaborate as EL  # noqa: E402  scoped follow-up elaboration (wider evidence, same gates; see the module docstring)
-import rag_followup as FU  # noqa: E402  conversational follow-up query resolution (pure; no retrieval code)
+import rag_response as RR  # noqa: E402  deterministic response composer
 
 SCHEMA_VERSION = "11.1"
 MAX_MESSAGE_CHARS = 2000
@@ -248,50 +247,24 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
             "guide_id": topic["effective_guide_id"], "page_id": topic["effective_page_id"],
             "industry": ACTIVE_INDUSTRY_CONTEXT,
         }
-    if follow_up_category:
-        meta["follow_up_category"] = follow_up_category
-    if status == ANSWERED and presentation_sections:
-        safe_sections: List[Dict[str, Any]] = []
-        valid_sections = True
-        seen_keys = set()
-        order_flags = [isinstance(section, Mapping) and "line_orders" in section for section in presentation_sections]
-        has_order_metadata = any(order_flags)
-        if has_order_metadata and not all(order_flags):
-            valid_sections = False
-        next_legacy_order = 0
-        for section in presentation_sections:
-            if not isinstance(section, Mapping):
-                valid_sections = False
-                break
-            key = section.get("key")
-            lines = section.get("lines")
-            if (key not in EL.PRESENTATION_SECTION_KEYS or key in seen_keys or not isinstance(lines, list) or not lines
-                    or any(not isinstance(line, str) or not line.strip() for line in lines)):
-                valid_sections = False
-                break
-            seen_keys.add(key)
-            line_orders = section.get("line_orders")
-            if has_order_metadata:
-                if (not isinstance(line_orders, list) or len(line_orders) != len(lines)
-                        or any(type(order) is not int or order < 0 for order in line_orders)):
-                    valid_sections = False
-                    break
-                orders = list(line_orders)
-            else:
-                # Backward-compatible contiguous metadata is accepted only if its section order already matches answer.
-                orders = list(range(next_legacy_order, next_legacy_order + len(lines)))
-                next_legacy_order += len(lines)
-            safe_sections.append({"key": key, "lines": list(lines), "line_orders": orders})
-        ordered_lines = sorted(
-            ((order, line) for section in safe_sections for order, line in zip(section["line_orders"], section["lines"])),
-            key=lambda pair: pair[0],
-        )
-        orders = [order for order, _ in ordered_lines]
-        reconstructed = "\n".join(line for _, line in ordered_lines)
-        if valid_sections and safe_sections and orders == list(range(len(ordered_lines))) and reconstructed == answer:
-            meta["elaboration_sections"] = safe_sections
-    out: Dict[str, Any] = {"schema_version": SCHEMA_VERSION, "conversation_id": conversation_id, "status": status, "answer": answer, "sources": sources,
-                           "topic_reference": reference, "metadata": meta}
+
+    # Deterministic response composer
+    composed = RR.compose_response(answer, sources, status=status, metadata=meta)
+    structured_answer = composed.get("structured_answer")
+    documentation_coverage = composed.get("documentation_coverage")
+    meta["documentation_coverage"] = documentation_coverage
+
+    out: Dict[str, Any] = {
+        "schema_version": SCHEMA_VERSION,
+        "conversation_id": conversation_id,
+        "status": status,
+        "answer": answer,
+        "sources": sources,
+        "topic_reference": reference,
+        "metadata": meta,
+        "structured_answer": structured_answer,
+        "documentation_coverage": documentation_coverage,
+    }
     if debug:
         out["debug"] = {"pipeline_message": raw.get("message"), "routing": raw.get("routing"), "topic": topic, "citations": raw.get("citations"), "pipeline": dbg,
                         "timings_ms": raw.get("timings_ms"), "evidence": dict(evidence) if evidence else None}
@@ -350,49 +323,7 @@ class RagService:
             self.pipeline.retriever.last_promoted = None
 
     def _canonical_active_topic(self, context: Optional[Mapping[str, Any]]) -> Optional[Dict[str, Any]]:
-        """Validate client-carried state against the server's card/page registry before it can anchor retrieval."""
-        if not isinstance(context, Mapping) or "active_topic" not in context:
-            return None
-        active = context.get("active_topic")
-        if not isinstance(active, Mapping):
-            return None
-        query = str(active.get("query") or "").strip()
-        answer = active.get("answer")
-        identity_data = active.get("identity")
-        if (not query or len(query) > FU.MAX_QUESTION_CHARS or FU.classify(query) is not None
-                or not isinstance(answer, str) or not answer.strip() or not isinstance(identity_data, Mapping)):
-            return None
-        source_id = str(identity_data.get("source_id") or "").strip()
-        card = self.pipeline.cards.get(source_id)
-        if not source_id or card is None:
-            return None
-
-        import m2c_page_identity as PID
-        resolved = PID.resolve_identity(card, self.pipeline.ctx)
-        guide_id = str(resolved.effective_guide_id or "")
-        page_id = str(resolved.effective_page_id or "")
-        if not guide_id or not page_id:
-            return None
-
-        def norm(value: Any) -> str:
-            return " ".join(str(value or "").split()).casefold()
-
-        for field, canonical in (("guide_id", guide_id), ("page_id", page_id)):
-            supplied = str(identity_data.get(field) or "")
-            if supplied and norm(supplied) != norm(canonical):
-                return None
-        supplied_title = identity_data.get("title")
-        if supplied_title and norm(supplied_title) != norm(resolved.card_title):
-            return None
-        supplied_industry = identity_data.get("industry")
-        if supplied_industry and norm(supplied_industry) != norm(ACTIVE_INDUSTRY_CONTEXT):
-            return None
-
-        seen = active.get("seen_answers")
-        seen_answers = [str(text).strip() for text in seen if isinstance(text, str) and text.strip()] if isinstance(seen, (list, tuple)) else []
-        identity = {"source_id": source_id, "title": resolved.card_title, "guide_id": guide_id,
-                    "page_id": page_id, "industry": ACTIVE_INDUSTRY_CONTEXT}
-        return {"query": query, "answer": answer.strip(), "identity": identity, "seen_answers": seen_answers[-4:]}
+        return None
 
     def _run_pipeline_request(self, q: str, queue_wait_ms: Optional[float] = None,
                               pipeline: Optional[Any] = None,
@@ -431,56 +362,11 @@ class RagService:
         """Answer one question.
 
         ``context`` carries an explicit ``active_topic`` produced from a successful grounded standalone answer
-        (with ``query``, immutable base ``answer``, verified page identity, and separately tracked ``seen_answers``).
-        Follow-ups read this state; only a new successful standalone query replaces it. The legacy ``questions`` / ``answer``
-        fields are compatibility-only. When a contextual follow-up is detected, the message is rewritten into a
-        standalone query built from the active topic (``rag_followup``), and - when
-        the follow-up asks for more material (elaborate / explain in detail / tell me more / why / simplify / example /
-        what happens next / relate to X) - the pipeline runs once more with a wider evidence window and an
-        intent-aware selection (``rag_elaborate``, see the module docstring). Routing, the ranker, EvidenceGuard,
-        grounding and citation verification are the same objects and the same checks in both passes; the follow-up
-        pass may only return verbatim documentation sentences, and it refuses (honest abstention) when the
-        documentation holds nothing beyond what the user already saw. Standalone questions are left byte-identical and
-        always run the production pipeline exactly once.
+        The service runs the production pipeline deterministically and translates the result into a stable contract.
         """
+
         q = clean_question(question)
         cid = resolve_conversation_id(conversation_id)
-
-        # Structured state is validated against this service's own card/page registry. If a caller supplied an invalid
-        # active_topic, preserve the key with an invalid sentinel so FU.resolve fails closed instead of scanning history.
-        active_topic = self._canonical_active_topic(context)
-        resolution_context = context
-        if isinstance(context, Mapping) and "active_topic" in context:
-            resolution_context = dict(context)
-            resolution_context["active_topic"] = active_topic if active_topic is not None else {}
-        follow_up = FU.resolve(q, resolution_context)
-
-        previous_answer = ""
-        if active_topic is not None:
-            answers = [active_topic["answer"], *active_topic.get("seen_answers", ())]
-            previous_answer = "\n".join(dict.fromkeys(str(answer) for answer in answers if str(answer).strip()))
-        elif isinstance(context, Mapping) and isinstance(context.get("answer"), str):
-            previous_answer = context["answer"]
-
-        pipeline_query = follow_up["query"] if follow_up else q
-        scoped: Optional[Any] = None
-        expected_topic = active_topic if follow_up and active_topic is not None else None
-        deterministic_elaboration = bool(follow_up and follow_up["category"] == "elaborate")
-        use_scoped_pass = bool(follow_up and (
-            deterministic_elaboration
-            or (self.generator_name == "extractive" and EL.is_elaboration_intent(follow_up["category"]))
-        ))
-        if use_scoped_pass and follow_up:
-            # Every explicit "elaborate" uses this deterministic extractive path, regardless of the normal-answer
-            # generator. It widens only same-page evidence and cannot silently fall back to the previous answer.
-            active_identity = active_topic["identity"] if active_topic is not None else None
-            scoped = EL.scoped_pipeline(
-                self.pipeline, follow_up["category"], previous_answer=previous_answer,
-                anchor=follow_up["anchor"],
-                new_terms=EL.new_terms_of(q, follow_up["anchor"]) if follow_up.get("form") == "message" else (),
-                active_identity=active_identity,
-            )
-            pipeline_query = follow_up["anchor"] if follow_up.get("form") == "clause" else follow_up["query"]
 
         t0 = time.perf_counter()
         try:
@@ -493,7 +379,7 @@ class RagService:
                     q_wait = (time.perf_counter() - t_w0) * 1000.0
                 try:
                     raw, evidence = self._run_pipeline_request(
-                        pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
+                        q, queue_wait_ms=q_wait
                     )
                 finally:
                     self._lock.release()
@@ -506,7 +392,7 @@ class RagService:
                     q_wait = (time.perf_counter() - t_w0) * 1000.0
                 try:
                     raw, evidence = self._run_pipeline_request(
-                        pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
+                        q, queue_wait_ms=q_wait
                     )
                 finally:
                     self._request_sem.release()
@@ -515,43 +401,7 @@ class RagService:
         except Exception as e:                                       # noqa: BLE001
             raise PipelineFailure(f"The retrieval pipeline failed ({type(e).__name__}). No answer was produced.") from e
 
-        # Final defense against a wiring/routing regression: an elaboration may add no novel supported sentence only
-        # by abstaining. Grounding alone cannot make an identical replay a valid elaboration.
-        novelty_check: Optional[Dict[str, Any]] = None
-        if (follow_up and follow_up["category"] == "elaborate" and raw.get("status") == "answered"
-                and previous_answer.strip()):
-            prior_sentences = EL.sentences_of(previous_answer)
-            answer_sentences = EL.sentences_of(str(raw.get("answer") or ""))
-            novel = [sentence for sentence in answer_sentences
-                     if not EL._is_redundant_evidence(sentence, prior_sentences)[0]]
-            novelty_check = {"ok": bool(novel), "novel_sentences": len(novel), "compared_sentences": len(prior_sentences)}
-            if not novel:
-                evidence = dict(evidence or {})
-                evidence["final_novelty_check"] = novelty_check
-                if isinstance(raw.get("debug"), dict):
-                    raw["debug"]["final_novelty_check"] = novelty_check
-                citations = dict(raw.get("citations") or {})
-                citations["answer_sources"] = []
-                citations["context_not_cited"] = []
-                raw = dict(raw, status="insufficient_context", answer=None,
-                           reason_code="NO_ADDITIONAL_SUPPORTED_DETAILS", citations=citations)
-
-        if follow_up is not None and isinstance(raw.get("debug"), dict):
-            # Developer view only: it lands in the debug block (``to_chat_result`` returns that block only when asked).
-            view = FU.debug_view(follow_up, q)
-            if scoped is not None:
-                view["pass"] = "elaboration"
-                view["retrieval_query"] = pipeline_query
-                view["selected"] = [u.get("sentence") for u in (evidence or {}).get("selected") or []]
-            raw["debug"]["follow_up"] = view
-        presentation_sections = None
-        if scoped is not None and raw.get("status") == "answered" and (evidence or {}).get("elaborated") is True:
-            presentation_sections = (evidence or {}).get("presentation_sections")
-        request_generator = getattr(scoped or self.pipeline, "generator", None)
-        response_generator = str(getattr(request_generator, "name", self.generator_name))
-        return to_chat_result(raw, response_generator, cid, (time.perf_counter() - t0) * 1000, debug=debug, evidence=evidence,
-                              presentation_sections=presentation_sections,
-                              follow_up_category=follow_up["category"] if follow_up else None)
+        return to_chat_result(raw, self.generator_name, cid, (time.perf_counter() - t0) * 1000, debug=debug, evidence=evidence)
 
 
 # Phase 18 - the VERIFIED production pipeline configuration (data/phase16/phase16_comparison.json,

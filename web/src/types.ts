@@ -26,17 +26,26 @@ export interface Grounding {
   cited_markers: string[]
 }
 
-export type ElaborationSectionKey =
-  | 'what_it_is_does'
-  | 'how_it_works_relationships'
-  | 'conditions_prerequisites'
-  | 'key_details'
+export interface StructuredSection {
+  title: string
+  key: string
+  lines?: string[]
+  content?: string
+  citations?: string[]
+}
 
-/** Exact answer lines grouped for display; `line_orders` reconstructs their original canonical-answer order. */
-export interface ElaborationSection {
-  key: ElaborationSectionKey
-  lines: string[]
-  line_orders?: number[]
+export interface StructuredAnswer {
+  summary?: string
+  sections: StructuredSection[]
+  citations?: string[]
+}
+
+export interface DocumentationCoverage {
+  covered: boolean
+  coverage_percentage?: number
+  total_sources_cited?: number
+  matched_topics?: string[]
+  uncovered_aspects?: string[]
 }
 
 export interface TopicIdentity {
@@ -47,14 +56,23 @@ export interface TopicIdentity {
   industry?: string
 }
 
-/** Client-carried active topic, created only from a successful grounded standalone answer. */
 export interface ActiveTopicContext {
   query: string
-  /** Immutable answer to the standalone query; elaborations do not replace it. */
   answer: string
   identity: TopicIdentity
-  /** Successful elaboration answers retained separately for cumulative novelty filtering. */
   seen_answers: string[]
+}
+
+export type ElaborationSectionKey =
+  | 'what_it_is_does'
+  | 'how_it_works_relationships'
+  | 'conditions_prerequisites'
+  | 'key_details'
+
+export interface ElaborationSection {
+  key: ElaborationSectionKey
+  lines: string[]
+  line_orders?: number[]
 }
 
 export interface Metadata {
@@ -68,11 +86,9 @@ export interface Metadata {
   pipeline_status: string
   reason_code: string | null
   latency_ms: number
-  /** Page identity used by the active-topic consistency gate and next follow-up. */
   topic_identity?: TopicIdentity | null
-  /** Non-null when the user message was resolved as a contextual follow-up. */
+  documentation_coverage?: DocumentationCoverage | null
   follow_up_category?: string | null
-  /** Present only for an answered scoped extractive elaboration. */
   elaboration_sections?: ElaborationSection[]
 }
 
@@ -85,6 +101,8 @@ export interface ChatResult {
   topic_reference: TopicReference | null
   metadata: Metadata
   debug?: Record<string, unknown> | null
+  structured_answer?: StructuredAnswer | null
+  documentation_coverage?: DocumentationCoverage | null
 }
 
 /** Explicit active state sent only to resolve context-dependent follow-up wording. */

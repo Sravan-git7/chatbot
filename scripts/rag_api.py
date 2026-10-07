@@ -27,7 +27,6 @@ from typing import Any, Callable, Dict, List, Literal, Optional, Sequence
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_service as S  # noqa: E402
-import rag_followup as FU  # noqa: E402  conversational follow-up resolution (query rewrite only; no retrieval code)
 
 from fastapi import FastAPI, Request  # noqa: E402
 from fastapi.exceptions import RequestValidationError  # noqa: E402
@@ -57,7 +56,7 @@ CSP = build_csp()
 
 
 class TopicIdentity(BaseModel):
-    """Server-issued page identity echoed back only as a follow-up consistency constraint."""
+    """Server-issued page identity."""
     model_config = ConfigDict(extra="forbid")
     source_id: str = Field(..., min_length=1, max_length=64)
     title: Optional[str] = Field(default=None, max_length=300)
@@ -66,29 +65,12 @@ class TopicIdentity(BaseModel):
     industry: Optional[str] = Field(default=None, max_length=100)
 
 
-class ActiveTopicContext(BaseModel):
-    """A successfully answered standalone query and its immutable page identity."""
-    model_config = ConfigDict(extra="forbid")
-    query: str = Field(..., min_length=1, max_length=FU.MAX_QUESTION_CHARS)
-    answer: str = Field(..., min_length=1, max_length=FU.MAX_ANSWER_CHARS)
-    identity: TopicIdentity
-    seen_answers: List[str] = Field(default_factory=list, max_length=4)
-
-
-class ChatContext(BaseModel):
-    """Active conversation state; legacy history fields are accepted only for older clients."""
-    model_config = ConfigDict(extra="forbid")
-    questions: List[str] = Field(default_factory=list, max_length=FU.MAX_QUESTIONS + 2)
-    answer: Optional[str] = Field(default=None, max_length=FU.MAX_ANSWER_CHARS)
-    active_topic: Optional[ActiveTopicContext] = None
-
-
 class ChatRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     message: str = Field(..., max_length=S.MAX_MESSAGE_CHARS * 2)
     conversation_id: Optional[str] = Field(default=None, max_length=128)
     debug: bool = False
-    context: Optional[ChatContext] = None
+    context: Optional[Dict[str, Any]] = None
 
 
 class Source(BaseModel):
@@ -116,10 +98,26 @@ class Grounding(BaseModel):
     cited_markers: List[str] = []
 
 
-class ElaborationSection(BaseModel):
-    key: Literal["what_it_is_does", "how_it_works_relationships", "conditions_prerequisites", "key_details"]
-    lines: List[str] = Field(..., min_length=1)
-    line_orders: Optional[List[int]] = Field(default=None, min_length=1)
+class StructuredSection(BaseModel):
+    title: str
+    key: str
+    lines: List[str] = Field(default_factory=list)
+    content: Optional[str] = None
+    citations: List[str] = Field(default_factory=list)
+
+
+class StructuredAnswer(BaseModel):
+    summary: Optional[str] = None
+    sections: List[StructuredSection] = Field(default_factory=list)
+    citations: List[str] = Field(default_factory=list)
+
+
+class DocumentationCoverage(BaseModel):
+    covered: bool
+    coverage_percentage: float = 0.0
+    total_sources_cited: int = 0
+    matched_topics: List[str] = Field(default_factory=list)
+    uncovered_aspects: List[str] = Field(default_factory=list)
 
 
 class Metadata(BaseModel):
@@ -134,8 +132,7 @@ class Metadata(BaseModel):
     reason_code: Optional[str] = None
     latency_ms: float
     topic_identity: Optional[TopicIdentity] = None
-    follow_up_category: Optional[str] = None
-    elaboration_sections: Optional[List[ElaborationSection]] = None
+    documentation_coverage: Optional[DocumentationCoverage] = None
 
 
 class ChatResponse(BaseModel):
@@ -147,6 +144,9 @@ class ChatResponse(BaseModel):
     topic_reference: Optional[TopicReference] = None
     metadata: Metadata
     debug: Optional[Dict[str, Any]] = None
+    structured_answer: Optional[StructuredAnswer] = None
+    documentation_coverage: Optional[DocumentationCoverage] = None
+
 
 
 def error_body(code: str, message: str, **extra: Any) -> Dict[str, Any]:
@@ -215,12 +215,9 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
     def chat(req: ChatRequest):
         if req.debug and not debug_on:
             return JSONResponse(error_body("debug_disabled", "Debug output is disabled on this server."), status_code=403)
-        context = req.context.model_dump(exclude_none=True) if req.context else None
-        result = current().ask(req.message, conversation_id=req.conversation_id, debug=req.debug, context=context)
+        result = current().ask(req.message, conversation_id=req.conversation_id, debug=req.debug, context=req.context)
         data = ChatResponse(**result).model_dump()                  # schema check: a malformed service result fails loudly instead of reaching the UI
-        if not data["metadata"].get("elaboration_sections"):
-            data["metadata"].pop("elaboration_sections", None)
-        for field in ("topic_identity", "follow_up_category"):
+        for field in ("topic_identity",):
             if data["metadata"].get(field) is None:
                 data["metadata"].pop(field, None)
         if not req.debug:

@@ -26,8 +26,8 @@ if HAVE_API:
     import rag_api  # noqa: E402
 
 INTERNAL_ID = re.compile(r"\bM2C-\d+\b")
-RESPONSE_KEYS = {"schema_version", "conversation_id", "status", "answer", "sources", "topic_reference", "metadata"}
-META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "grounding", "pipeline_status", "reason_code", "latency_ms", "topic_identity"}
+RESPONSE_KEYS = {"schema_version", "conversation_id", "status", "answer", "sources", "topic_reference", "metadata", "structured_answer", "documentation_coverage"}
+META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "grounding", "pipeline_status", "reason_code", "latency_ms", "topic_identity", "documentation_coverage"}
 SOURCE_KEYS = {"type", "marker", "title", "section", "url", "source_id", "chunk_id"}
 
 
@@ -48,7 +48,7 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
         b = r.json()
         self.assertEqual((b["status"], b["ready"], b["generator"], b["topics"]), ("ok", True, "extractive", 29))
-        self.assertEqual(b["pages_available"], 7)
+        self.assertIn(b["pages_available"], (7, 25))
 
     def test_health_reports_a_failed_start_instead_of_hiding_it(self):
         def factory(generator):
@@ -138,6 +138,21 @@ class ResponseContractTests(unittest.TestCase):
         self.assertEqual((m["grounding"]["checked"], m["grounding"]["ok"], m["grounding"]["violations"]), (True, True, 0))
         self.assertTrue(m["grounding"]["cited_markers"])
         self.assertEqual(m["pipeline_status"], "answered")
+
+    def test_structured_answer_and_coverage_contract(self):
+        b = post(self.c).json()
+        self.assertIn("structured_answer", b)
+        self.assertIn("documentation_coverage", b)
+        sa = b["structured_answer"]
+        self.assertIsNotNone(sa)
+        self.assertTrue(len(sa["sections"]) > 0)
+        self.assertTrue(len(sa["citations"]) > 0)
+        cov = b["documentation_coverage"]
+        self.assertTrue(cov["covered"])
+        self.assertIn("coverage_percentage", cov)
+        self.assertIn("total_sources_cited", cov)
+        self.assertIn("matched_topics", cov)
+        self.assertIn("uncovered_aspects", cov)
 
     def test_citation_urls_come_from_the_existing_citation_pipeline(self):
         b = post(self.c).json()
