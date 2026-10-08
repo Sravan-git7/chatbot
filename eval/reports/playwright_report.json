@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-08T09:12:58.888Z",
+  "timestamp": "2026-10-08T11:01:02.078Z",
   "total_tests": 15,
   "passed_tests": 15,
   "failed_tests": 0,
@@ -7,27 +7,27 @@
     {
       "name": "billing",
       "passed": true,
-      "detail": "Length: 815, citations: true"
+      "detail": "Length: 825, citations: true"
     },
     {
       "name": "contract account",
       "passed": true,
-      "detail": "Length: 856"
+      "detail": "Length: 866"
     },
     {
       "name": "installment plan",
       "passed": true,
-      "detail": "Length: 1129"
+      "detail": "Length: 1139"
     },
     {
       "name": "incoming payments",
       "passed": true,
-      "detail": "Length: 1027"
+      "detail": "Length: 1037"
     },
     {
       "name": "billing paraphrase",
       "passed": true,
-      "detail": "Length: 465"
+      "detail": "Length: 475"
     },
     {
       "name": "today's news / OOS",

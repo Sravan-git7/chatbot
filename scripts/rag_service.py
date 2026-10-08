@@ -30,6 +30,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import rag_elaborate as EL  # noqa: E402
+import rag_followup as FU  # noqa: E402
 import rag_response as RR  # noqa: E402  deterministic response composer
 
 SCHEMA_VERSION = "11.1"
@@ -102,6 +104,8 @@ def resolve_conversation_id(conversation_id: Optional[str]) -> str:
 
 DEFAULT_GENERATION_CONCURRENCY = 1
 MAX_CONCURRENT_REQUESTS = 4
+MAX_CONVERSATION_HISTORY = 1000
+CONVERSATION_TTL_SECONDS = 3600.0  # 1 hour TTL
 
 
 class _FIFOBoundedSemaphore:
@@ -231,6 +235,9 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     if status == ANSWERED:
         answer = raw["answer"]
         sources = [_source(s) for s in raw["citations"]["answer_sources"]]
+    elif raw.get("reason_code") == "NO_ADDITIONAL_SUPPORTED_DETAILS":
+        answer = "I can expand this, but the available documentation does not provide additional verified detail."
+        sources = []
     else:
         answer = UNRESOLVED_TEXT if pstatus == "unresolved_identity" else USER_TEXT[status]
         sources = []
@@ -259,6 +266,10 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
             "guide_id": topic["effective_guide_id"], "page_id": topic["effective_page_id"],
             "industry": ACTIVE_INDUSTRY_CONTEXT,
         }
+    if follow_up_category:
+        meta["follow_up_category"] = follow_up_category
+    if presentation_sections:
+        meta["elaboration_sections"] = list(presentation_sections)
     if evidence and "additional_evidence" in evidence:
         meta["additional_evidence"] = evidence["additional_evidence"]
 
@@ -309,6 +320,7 @@ class RagService:
         self._request_sem = _FIFOBoundedSemaphore(self.max_concurrency)
         self._gen_sem = _FIFOBoundedSemaphore(self.generation_concurrency)
         self._lock = threading.Lock()
+        self._conversations: Dict[str, Dict[str, Any]] = {}
         self._evidence_gen = pipeline.generator
         self.pipeline = RP.RagPipeline(
             pipeline.backend,
@@ -320,6 +332,18 @@ class RagService:
             cards=list(pipeline.cards.values()),
             config=pipeline.cfg,
         )
+
+    def _prune_conversations(self, current_time: float) -> None:
+        """Evict expired conversations (TTL) and enforce bounded capacity (LRU/FIFO)."""
+        expired = [
+            c for c, item in self._conversations.items()
+            if current_time - item.get("updated_at", current_time) > CONVERSATION_TTL_SECONDS
+        ]
+        for c in expired:
+            self._conversations.pop(c, None)
+        while len(self._conversations) > MAX_CONVERSATION_HISTORY:
+            oldest_cid = next(iter(self._conversations))
+            self._conversations.pop(oldest_cid, None)
 
     def info(self) -> Dict[str, Any]:
         entries = self.pipeline.corpus.entries
@@ -337,7 +361,26 @@ class RagService:
             self.pipeline.retriever.last_promoted = None
 
     def _canonical_active_topic(self, context: Optional[Mapping[str, Any]]) -> Optional[Dict[str, Any]]:
-        return None
+        import m2c_page_identity as PID
+        if not isinstance(context, Mapping) or "active_topic" not in context:
+            return None
+        active = context.get("active_topic")
+        if not isinstance(active, Mapping):
+            return None
+        identity = active.get("identity")
+        if not isinstance(identity, Mapping):
+            return None
+        card_id = str(identity.get("source_id") or "").strip()
+        card = self.pipeline.cards.get(card_id)
+        if card is None:
+            return None
+        resolved = PID.resolve_identity(card, self.pipeline.ctx)
+        if not resolved.effective_guide_id or not resolved.effective_page_id:
+            return None
+        if (str(identity.get("guide_id") or "").casefold() != resolved.effective_guide_id.casefold() or
+            str(identity.get("page_id") or "").casefold() != resolved.effective_page_id.casefold()):
+            return None
+        return dict(active)
 
     def _run_pipeline_request(self, q: str, queue_wait_ms: Optional[float] = None,
                               pipeline: Optional[Any] = None,
@@ -375,12 +418,66 @@ class RagService:
             context: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
         """Answer one question.
 
-        ``context`` carries an explicit ``active_topic`` produced from a successful grounded standalone answer
-        The service runs the production pipeline deterministically and translates the result into a stable contract.
+        ``context`` carries an explicit ``active_topic`` produced from a successful grounded standalone answer,
+        or legacy conversation history (questions/answer).
+        When the immediately previous assistant response is an answerable grounded SAP Utilities answer,
+        follow-up requests (such as "elaborate", "explain more", etc.) are handled deterministically
+        via scoped elaboration on the grounded topic without generative LLM calls.
         """
-
         q = clean_question(question)
         cid = resolve_conversation_id(conversation_id)
+
+        # Context resolution: explicit caller context beats internal session state
+        effective_context: Optional[Mapping[str, Any]] = None
+        if isinstance(context, Mapping) and context:
+            effective_context = dict(context)
+        else:
+            with self._lock:
+                now = time.time()
+                self._prune_conversations(now)
+                prev = self._conversations.get(cid)
+                if prev and prev.get("status") == ANSWERED and prev.get("grounded") and prev.get("answer"):
+                    effective_context = {
+                        "questions": [prev["query"]],
+                        "answer": prev["answer"],
+                        "active_topic": {
+                            "query": prev["query"],
+                            "answer": prev["answer"],
+                            "identity": prev.get("topic_identity"),
+                            "seen_answers": prev.get("seen_answers", []),
+                        } if prev.get("topic_identity") else None,
+                    }
+
+        follow_up = FU.resolve(q, effective_context) if effective_context else None
+        category = follow_up["category"] if follow_up else None
+        pipeline_query = follow_up["query"] if follow_up else q
+        scoped: Optional[Any] = None
+        expected_topic: Optional[Dict[str, Any]] = None
+        anchor_query = q
+        previous_answer = ""
+
+        if follow_up and EL.is_elaboration_intent(category):
+            active_topic = self._canonical_active_topic(effective_context)
+            if active_topic:
+                expected_topic = {"identity": active_topic["identity"]}
+                active_identity = active_topic["identity"]
+                anchor_query = active_topic["query"]
+                seen_answers = active_topic.get("seen_answers") or []
+                previous_answer = "\n".join([active_topic["answer"], *seen_answers]) if seen_answers else active_topic["answer"]
+            else:
+                active_identity = None
+                anchor_query = follow_up["anchor"]
+                previous_answer = str(effective_context.get("answer") or "") if effective_context else ""
+
+            scoped = EL.scoped_pipeline(
+                self.pipeline,
+                category,
+                previous_answer=previous_answer,
+                anchor=anchor_query,
+                new_terms=EL.new_terms_of(q, anchor_query) if follow_up.get("form") == "message" else (),
+                active_identity=active_identity,
+            )
+            pipeline_query = anchor_query if follow_up.get("form") == "clause" else follow_up["query"]
 
         t0 = time.perf_counter()
         try:
@@ -393,7 +490,7 @@ class RagService:
                     q_wait = (time.perf_counter() - t_w0) * 1000.0
                 try:
                     raw, evidence = self._run_pipeline_request(
-                        q, queue_wait_ms=q_wait
+                        pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
                     )
                 finally:
                     self._lock.release()
@@ -406,7 +503,7 @@ class RagService:
                     q_wait = (time.perf_counter() - t_w0) * 1000.0
                 try:
                     raw, evidence = self._run_pipeline_request(
-                        q, queue_wait_ms=q_wait
+                        pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
                     )
                 finally:
                     self._request_sem.release()
@@ -415,7 +512,94 @@ class RagService:
         except Exception as e:                                       # noqa: BLE001
             raise PipelineFailure(f"The retrieval pipeline failed ({type(e).__name__}). No answer was produced.") from e
 
-        return to_chat_result(raw, self.generator_name, cid, (time.perf_counter() - t0) * 1000, debug=debug, evidence=evidence)
+        # Scoped elaboration validation & novelty check
+        if scoped is not None:
+            if raw.get("status") == "answered":
+                answer_body = raw.get("answer") or ""
+                # Redundancy check: cannot simply repeat the previous answer
+                is_redundant = answer_body.strip() == previous_answer.strip()
+                if is_redundant:
+                    raw = dict(
+                        raw,
+                        status="insufficient_context",
+                        answer=None,
+                        reason_code="NO_ADDITIONAL_SUPPORTED_DETAILS",
+                        citations={"answer_sources": []},
+                    )
+                    if evidence is not None:
+                        evidence["final_novelty_check"] = {"ok": False}
+                    else:
+                        evidence = {"final_novelty_check": {"ok": False}}
+            elif raw.get("reason_code") in ("GENERATOR_REFUSED", "NO_ADDITIONAL_SUPPORTED_DETAILS"):
+                raw = dict(
+                    raw,
+                    status="insufficient_context",
+                    answer=None,
+                    reason_code="NO_ADDITIONAL_SUPPORTED_DETAILS",
+                    citations={"answer_sources": []},
+                )
+                if evidence is not None:
+                    evidence.setdefault("final_novelty_check", {"ok": False})
+                    evidence.setdefault("reason_added", "NO_ADDITIONAL_EVIDENCE")
+                else:
+                    evidence = {"final_novelty_check": {"ok": False}, "reason_added": "NO_ADDITIONAL_EVIDENCE"}
+
+        if follow_up is not None and isinstance(raw.get("debug"), dict):
+            view = FU.debug_view(follow_up, q)
+            if scoped is not None:
+                view["pass"] = "elaboration"
+                view["retrieval_query"] = pipeline_query
+                view["selected"] = [u.get("sentence") for u in (evidence or {}).get("selected") or []]
+            raw["debug"]["follow_up"] = view
+
+        presentation_sections = None
+        if scoped is not None and raw.get("status") == "answered" and (evidence or {}).get("elaborated") is True:
+            presentation_sections = (evidence or {}).get("presentation_sections")
+
+        result = to_chat_result(
+            raw,
+            "extractive" if scoped is not None else self.generator_name,
+            cid,
+            (time.perf_counter() - t0) * 1000,
+            debug=debug,
+            evidence=evidence,
+            presentation_sections=presentation_sections,
+            follow_up_category=category if follow_up else None,
+        )
+
+        # Update per-conversation state with bounded capacity and TTL
+        with self._lock:
+            now = time.time()
+            self._prune_conversations(now)
+            if result["status"] == ANSWERED:
+                seen = []
+                if cid in self._conversations and self._conversations[cid].get("query") == anchor_query:
+                    seen = list(self._conversations[cid].get("seen_answers", []))
+                if result["answer"] not in seen:
+                    seen.append(result["answer"])
+                self._conversations[cid] = {
+                    "query": anchor_query,
+                    "answer": result["answer"],
+                    "status": result["status"],
+                    "grounded": result.get("metadata", {}).get("grounded", False),
+                    "topic_identity": result.get("metadata", {}).get("topic_identity"),
+                    "sources": result.get("sources", []),
+                    "seen_answers": seen,
+                    "updated_at": now,
+                }
+            else:
+                self._conversations[cid] = {
+                    "query": q,
+                    "answer": result.get("answer", ""),
+                    "status": result["status"],
+                    "grounded": False,
+                    "topic_identity": None,
+                    "sources": [],
+                    "seen_answers": [],
+                    "updated_at": now,
+                }
+
+        return result
 
 
 # Phase 18 - the VERIFIED production pipeline configuration (data/phase16/phase16_comparison.json,

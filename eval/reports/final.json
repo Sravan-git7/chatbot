@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-08T09:12:13Z",
+  "timestamp": "2026-10-08T10:59:32Z",
   "schema_version": "1.0",
   "system_state": {
     "total_topic_inventory": 29,
@@ -24,8 +24,8 @@
     "citation_validity": 1.0,
     "key_fact_coverage": 0.7183,
     "paraphrase_document_overlap": 0.8222,
-    "latency_p50_ms": 23.92,
-    "latency_p95_ms": 29.92,
+    "latency_p50_ms": 24.02,
+    "latency_p95_ms": 31.92,
     "single_source_answer_count": 59,
     "less_than_3_sentence_answers": 43,
     "topic_reference_precision": 1.0,
@@ -46,7 +46,7 @@
       "question": "How is the Print Workbench component used in move-in?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 1956.52,
+      "latency_ms": 213.68,
       "sources": [
         "M2C-02"
       ],
@@ -62,7 +62,7 @@
       "question": "What happens when a new customer moves into an installation during a move-out?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.96,
+      "latency_ms": 34.23,
       "sources": [
         "M2C-02"
       ],
@@ -78,7 +78,7 @@
       "question": "What activities are carried out using the move-in function?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.2,
+      "latency_ms": 30.86,
       "sources": [
         "M2C-03",
         "M2C-03"
@@ -95,7 +95,7 @@
       "question": "What installations are required to create a move-in?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.35,
+      "latency_ms": 41.99,
       "sources": [
         "M2C-03",
         "M2C-03"
@@ -112,7 +112,7 @@
       "question": "What happens to the allocation of a contract on the move-out date?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.19,
+      "latency_ms": 30.86,
       "sources": [
         "M2C-04",
         "M2C-04",
@@ -130,7 +130,7 @@
       "question": "What happens to budget billing plans when a move-out is processed?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.68,
+      "latency_ms": 33.55,
       "sources": [
         "M2C-04"
       ],
@@ -146,7 +146,7 @@
       "question": "What does the Device Management component manage?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.12,
+      "latency_ms": 27.37,
       "sources": [
         "M2C-05",
         "M2C-05"
@@ -163,7 +163,7 @@
       "question": "What standard component corresponds to a device in the Utilities Industry component?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 30.22,
+      "latency_ms": 35.12,
       "sources": [
         "M2C-05"
       ],
@@ -179,7 +179,7 @@
       "question": "How are meter reading orders and results selected using BAPIs?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.1,
+      "latency_ms": 25.59,
       "sources": [
         "M2C-06"
       ],
@@ -195,7 +195,7 @@
       "question": "When are devices read aperiodically?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.35,
+      "latency_ms": 22.73,
       "sources": [
         "M2C-06"
       ],
@@ -211,7 +211,7 @@
       "question": "Where can you find the transactions to monitor meter reading results in the menu?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.7,
+      "latency_ms": 28.78,
       "sources": [
         "M2C-07",
         "M2C-07",
@@ -229,7 +229,7 @@
       "question": "When does the Meter Reading Estimation component estimate meter reading results automatically?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 20.51,
+      "latency_ms": 21.65,
       "sources": [
         "M2C-08"
       ],
@@ -245,7 +245,7 @@
       "question": "What is the difference between extrapolation and interpolation in meter reading estimation?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.07,
+      "latency_ms": 28.99,
       "sources": [
         "M2C-09",
         "M2C-09"
@@ -262,7 +262,7 @@
       "question": "What is the base period in meter reading estimation?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.7,
+      "latency_ms": 25.94,
       "sources": [
         "M2C-09",
         "M2C-09"
@@ -279,7 +279,7 @@
       "question": "What happens if you adopt the meter reading result proposed during a move-in?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.65,
+      "latency_ms": 25.08,
       "sources": [
         "M2C-10"
       ],
@@ -295,7 +295,7 @@
       "question": "What determines the evaluation basis for schema execution in billing?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.45,
+      "latency_ms": 23.81,
       "sources": [
         "M2C-11"
       ],
@@ -311,7 +311,7 @@
       "question": "What happens in billing when a price change occurs during a billing period?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.64,
+      "latency_ms": 21.47,
       "sources": [
         "M2C-11"
       ],
@@ -327,7 +327,7 @@
       "question": "What contracts are selected during automatic billing?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.36,
+      "latency_ms": 23.57,
       "sources": [
         "M2C-12",
         "M2C-12"
@@ -344,7 +344,7 @@
       "question": "How does scheduling determine billing runs in automatic billing?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.56,
+      "latency_ms": 26.71,
       "sources": [
         "M2C-12",
         "M2C-12"
@@ -361,7 +361,7 @@
       "question": "What documents are produced by invoicing with bill creation?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 29.92,
+      "latency_ms": 24.02,
       "sources": [
         "M2C-14",
         "M2C-14",
@@ -379,7 +379,7 @@
       "question": "How does invoicing relate to contract accounting and bill creation?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.06,
+      "latency_ms": 26.21,
       "sources": [
         "M2C-14",
         "M2C-14"
@@ -396,7 +396,7 @@
       "question": "When are new budget billing plans created automatically during invoicing?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.59,
+      "latency_ms": 25.31,
       "sources": [
         "M2C-15",
         "M2C-15"
@@ -413,7 +413,7 @@
       "question": "What does deactivation of a budget billing plan in invoicing mean?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.2,
+      "latency_ms": 27.57,
       "sources": [
         "M2C-15",
         "M2C-15"
@@ -430,7 +430,7 @@
       "question": "Can a single contract account be assigned to multiple business partners in Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.68,
+      "latency_ms": 26.81,
       "sources": [
         "M2C-17",
         "M2C-17"
@@ -447,7 +447,7 @@
       "question": "What does a contract account contain in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 32.5,
+      "latency_ms": 28.9,
       "sources": [
         "M2C-17"
       ],
@@ -463,7 +463,7 @@
       "question": "What is the purpose of the Analyze Incoming Payments F5588 app?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 28.3,
+      "latency_ms": 27.17,
       "sources": [
         "M2C-19",
         "M2C-19",
@@ -481,7 +481,7 @@
       "question": "What does the Analyze Incoming Payments app monitor?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.85,
+      "latency_ms": 23.85,
       "sources": [
         "M2C-19",
         "M2C-19",
@@ -499,7 +499,7 @@
       "question": "In which event does the system attempt to assign incoming payment amounts to open items?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.74,
+      "latency_ms": 20.18,
       "sources": [
         "M2C-20"
       ],
@@ -515,7 +515,7 @@
       "question": "What fields does clearing control take into account during incoming payment processing?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.86,
+      "latency_ms": 21.57,
       "sources": [
         "M2C-20"
       ],
@@ -531,7 +531,7 @@
       "question": "Where are clearing types defined in Customizing?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.01,
+      "latency_ms": 24.15,
       "sources": [
         "M2C-21",
         "M2C-21"
@@ -548,7 +548,7 @@
       "question": "What does a clearing type represent in Contract Accounts Receivable and Payable?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.83,
+      "latency_ms": 25.05,
       "sources": [
         "M2C-21",
         "M2C-21"
@@ -565,7 +565,7 @@
       "question": "Where can detailed information about payments from external cash desks be displayed?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.78,
+      "latency_ms": 22.65,
       "sources": [
         "M2C-22"
       ],
@@ -581,7 +581,7 @@
       "question": "What is an installment plan in Contract Accounts Receivable and Payable?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.65,
+      "latency_ms": 22.47,
       "sources": [
         "M2C-23",
         "M2C-23"
@@ -598,7 +598,7 @@
       "question": "When can you create an installment plan for a business partner?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.03,
+      "latency_ms": 26.79,
       "sources": [
         "M2C-23"
       ],
@@ -614,7 +614,7 @@
       "question": "What transaction code is used to create an installment plan?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.34,
+      "latency_ms": 25.09,
       "sources": [
         "M2C-24"
       ],
@@ -630,7 +630,7 @@
       "question": "Which transaction is used to display an installment plan?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.94,
+      "latency_ms": 25.03,
       "sources": [
         "M2C-25"
       ],
@@ -646,7 +646,7 @@
       "question": "Why do you create payment reminders or dunning letters in FI-CA?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.14,
+      "latency_ms": 25.47,
       "sources": [
         "M2C-26"
       ],
@@ -662,7 +662,7 @@
       "question": "What functions are available to submit receivables to a collection agency?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.78,
+      "latency_ms": 23.03,
       "sources": [
         "M2C-27",
         "M2C-27"
@@ -679,7 +679,7 @@
       "question": "How can you communicate with collection agencies in FI-CA?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 28.51,
+      "latency_ms": 28.88,
       "sources": [
         "M2C-28",
         "M2C-28"
@@ -696,7 +696,7 @@
       "question": "Why is a utility installation disconnected?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.96,
+      "latency_ms": 24.07,
       "sources": [
         "M2C-29",
         "M2C-29"
@@ -713,7 +713,7 @@
       "question": "How do I create an installment plan?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.05,
+      "latency_ms": 25.08,
       "sources": [
         "M2C-24",
         "M2C-24",
@@ -731,7 +731,7 @@
       "question": "How can I create an installment plan for open items?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.06,
+      "latency_ms": 25.41,
       "sources": [
         "M2C-24",
         "M2C-24",
@@ -749,7 +749,7 @@
       "question": "How are installment plans created for a customer?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.15,
+      "latency_ms": 28.55,
       "sources": [
         "M2C-24",
         "M2C-24",
@@ -767,7 +767,7 @@
       "question": "How can I display an existing installment plan?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.2,
+      "latency_ms": 38.01,
       "sources": [
         "M2C-25"
       ],
@@ -783,7 +783,7 @@
       "question": "Where do I view saved installment plans in transaction FPR3?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 28.27,
+      "latency_ms": 28.02,
       "sources": [
         "M2C-25"
       ],
@@ -799,7 +799,7 @@
       "question": "What is the transaction to display an installment plan?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.57,
+      "latency_ms": 26.77,
       "sources": [
         "M2C-25"
       ],
@@ -815,7 +815,7 @@
       "question": "What happens during a move-in?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.39,
+      "latency_ms": 25.64,
       "sources": [
         "M2C-03"
       ],
@@ -831,7 +831,7 @@
       "question": "How does move-in processing work in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 37.52,
+      "latency_ms": 31.99,
       "sources": [
         "M2C-03",
         "M2C-03"
@@ -848,7 +848,7 @@
       "question": "What is the process to execute a customer move-in?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 28.59,
+      "latency_ms": 27.68,
       "sources": [
         "M2C-03",
         "M2C-03"
@@ -865,7 +865,7 @@
       "question": "How does a move-out work?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 29.94,
+      "latency_ms": 23.8,
       "sources": [
         "M2C-04"
       ],
@@ -881,7 +881,7 @@
       "question": "What happens when a customer moves out in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 31.89,
+      "latency_ms": 29.68,
       "sources": [
         "M2C-03"
       ],
@@ -897,7 +897,7 @@
       "question": "How is a move-out processed?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 36.25,
+      "latency_ms": 25.19,
       "sources": [
         "M2C-04",
         "M2C-04"
@@ -914,7 +914,7 @@
       "question": "How does meter reading estimation work?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.51,
+      "latency_ms": 20.92,
       "sources": [
         "M2C-08"
       ],
@@ -930,7 +930,7 @@
       "question": "When does the system estimate meter readings?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.21,
+      "latency_ms": 18.31,
       "sources": [
         "M2C-08"
       ],
@@ -946,7 +946,7 @@
       "question": "How are meter reading results estimated automatically?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.4,
+      "latency_ms": 25.85,
       "sources": [
         "M2C-07",
         "M2C-07"
@@ -963,7 +963,7 @@
       "question": "What estimation procedures are used in meter reading?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.18,
+      "latency_ms": 24.27,
       "sources": [
         "M2C-09",
         "M2C-09",
@@ -981,7 +981,7 @@
       "question": "How are extrapolation and interpolation applied in meter estimation?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.87,
+      "latency_ms": 24.3,
       "sources": [
         "M2C-09",
         "M2C-09"
@@ -998,7 +998,7 @@
       "question": "Which methods does SAP Utilities use to estimate meter values?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.41,
+      "latency_ms": 24.0,
       "sources": [
         "M2C-09"
       ],
@@ -1014,7 +1014,7 @@
       "question": "How are devices managed in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.96,
+      "latency_ms": 23.02,
       "sources": [
         "M2C-05",
         "M2C-05"
@@ -1031,7 +1031,7 @@
       "question": "What does the device management component do?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.32,
+      "latency_ms": 23.45,
       "sources": [
         "M2C-05",
         "M2C-05"
@@ -1048,7 +1048,7 @@
       "question": "What technical data is managed under device management?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.7,
+      "latency_ms": 23.19,
       "sources": [
         "M2C-05",
         "M2C-05"
@@ -1065,7 +1065,7 @@
       "question": "How are meter readings organized?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.02,
+      "latency_ms": 25.08,
       "sources": [
         "M2C-07"
       ],
@@ -1081,7 +1081,7 @@
       "question": "What is the process for reading meters in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.38,
+      "latency_ms": 25.94,
       "sources": [
         "M2C-07"
       ],
@@ -1097,7 +1097,7 @@
       "question": "How are periodic and aperiodic meter readings carried out?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.5,
+      "latency_ms": 21.99,
       "sources": [
         "M2C-06"
       ],
@@ -1113,7 +1113,7 @@
       "question": "How do you monitor meter reading results?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.3,
+      "latency_ms": 24.65,
       "sources": [
         "M2C-07",
         "M2C-07",
@@ -1131,7 +1131,7 @@
       "question": "What does monitoring of meter reading results do?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.25,
+      "latency_ms": 24.94,
       "sources": [
         "M2C-07",
         "M2C-07",
@@ -1149,7 +1149,7 @@
       "question": "Where can I monitor meter reading orders and results?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.1,
+      "latency_ms": 27.48,
       "sources": [
         "M2C-07"
       ],
@@ -1165,7 +1165,7 @@
       "question": "How does billing work in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 18.13,
+      "latency_ms": 20.43,
       "sources": [
         "M2C-11"
       ],
@@ -1181,7 +1181,7 @@
       "question": "What is the billing procedure in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 19.87,
+      "latency_ms": 21.62,
       "sources": [
         "M2C-14",
         "M2C-14"
@@ -1198,7 +1198,7 @@
       "question": "How are rate calculations and schema execution handled in billing?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 18.72,
+      "latency_ms": 21.13,
       "sources": [
         "M2C-11"
       ],
@@ -1214,7 +1214,7 @@
       "question": "How does automatic billing work?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 20.69,
+      "latency_ms": 22.22,
       "sources": [
         "M2C-12",
         "M2C-12",
@@ -1232,7 +1232,7 @@
       "question": "What is the automatic billing procedure in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.7,
+      "latency_ms": 26.27,
       "sources": [
         "M2C-12",
         "M2C-12",
@@ -1250,7 +1250,7 @@
       "question": "How are contracts billed automatically?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.08,
+      "latency_ms": 22.04,
       "sources": [
         "M2C-12",
         "M2C-12"
@@ -1267,7 +1267,7 @@
       "question": "What is the invoicing process in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.37,
+      "latency_ms": 21.89,
       "sources": [
         "M2C-14",
         "M2C-14",
@@ -1285,7 +1285,7 @@
       "question": "How does invoicing create the link to contract accounting?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.13,
+      "latency_ms": 24.11,
       "sources": [
         "M2C-14"
       ],
@@ -1301,7 +1301,7 @@
       "question": "What steps are involved in invoicing and bill creation?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.53,
+      "latency_ms": 23.99,
       "sources": [
         "M2C-14",
         "M2C-14",
@@ -1319,7 +1319,7 @@
       "question": "What is a contract account?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.2,
+      "latency_ms": 23.16,
       "sources": [
         "M2C-17"
       ],
@@ -1335,7 +1335,7 @@
       "question": "How is a contract account defined in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.17,
+      "latency_ms": 24.2,
       "sources": [
         "M2C-17",
         "M2C-17"
@@ -1352,7 +1352,7 @@
       "question": "What does a contract account contain in Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.03,
+      "latency_ms": 24.24,
       "sources": [
         "M2C-17"
       ],
@@ -1368,7 +1368,7 @@
       "question": "What is clearing control in incoming payments?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 19.09,
+      "latency_ms": 19.11,
       "sources": [
         "M2C-20"
       ],
@@ -1384,7 +1384,7 @@
       "question": "How does clearing control assign payments to open items?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 20.89,
+      "latency_ms": 18.63,
       "sources": [
         "M2C-20"
       ],
@@ -1400,7 +1400,7 @@
       "question": "What happens during clearing control for incoming payments?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 20.88,
+      "latency_ms": 19.28,
       "sources": [
         "M2C-20"
       ],
@@ -1416,7 +1416,7 @@
       "question": "How does dunning work in FI-CA?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 27.16,
+      "latency_ms": 29.6,
       "sources": [
         "M2C-26"
       ],
@@ -1432,7 +1432,7 @@
       "question": "How are dunning notices created in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 28.36,
+      "latency_ms": 22.74,
       "sources": [
         "M2C-26",
         "M2C-26"
@@ -1449,7 +1449,7 @@
       "question": "What is the FI-CA dunning procedure for overdue payments?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.31,
+      "latency_ms": 26.14,
       "sources": [
         "M2C-26",
         "M2C-26"
@@ -1466,7 +1466,7 @@
       "question": "What is the capital of Australia?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 17.38,
+      "latency_ms": 18.31,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1478,7 +1478,7 @@
       "question": "Give me a Python script to sort an array using quicksort.",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 17.32,
+      "latency_ms": 18.15,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1490,7 +1490,7 @@
       "question": "Which football team won the 2018 World Cup?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 20.41,
+      "latency_ms": 21.13,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1502,7 +1502,7 @@
       "question": "How do I bake chocolate chip cookies at home?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 21.37,
+      "latency_ms": 17.71,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1514,7 +1514,7 @@
       "question": "What is the weather in Hyderabad today?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 16.82,
+      "latency_ms": 17.55,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1526,7 +1526,7 @@
       "question": "Explain how photosynthesis works in green plants.",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 20.4,
+      "latency_ms": 17.74,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1538,7 +1538,7 @@
       "question": "What is the capital of France?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 24.4,
+      "latency_ms": 17.45,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1550,7 +1550,7 @@
       "question": "What is the boiling point of liquid nitrogen?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 19.37,
+      "latency_ms": 17.76,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1562,7 +1562,7 @@
       "question": "Who is the CEO of Microsoft in 2024?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 21.82,
+      "latency_ms": 20.32,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1574,7 +1574,7 @@
       "question": "How do I reset network settings on an Apple iPhone?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 18.49,
+      "latency_ms": 18.5,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1586,7 +1586,7 @@
       "question": "Write a haiku about the rainy season.",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 20.85,
+      "latency_ms": 17.93,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1598,7 +1598,7 @@
       "question": "What are the health benefits of green tea?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 21.73,
+      "latency_ms": 17.62,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1610,7 +1610,7 @@
       "question": "Who wrote the play Romeo and Juliet?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 20.72,
+      "latency_ms": 18.45,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1622,7 +1622,7 @@
       "question": "What is the distance between the Earth and the Moon?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 20.51,
+      "latency_ms": 19.14,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1634,7 +1634,7 @@
       "question": "Can you recommend a good hotel in Tokyo for tourists?",
       "expected_route": "out_of_scope",
       "actual_status": "out_of_scope",
-      "latency_ms": 18.4,
+      "latency_ms": 19.51,
       "sources": [],
       "top_doc": null,
       "gold_docs": [],
@@ -1646,7 +1646,7 @@
       "question": "Which authorization object is needed to run the monitoring transaction?",
       "expected_route": "unable_to_verify",
       "actual_status": "unable_to_verify",
-      "latency_ms": 25.33,
+      "latency_ms": 31.92,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1660,7 +1660,7 @@
       "question": "What is the exact database table for meter reading orders in IS-U?",
       "expected_route": "unable_to_verify",
       "actual_status": "unable_to_verify",
-      "latency_ms": 22.2,
+      "latency_ms": 21.92,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1674,7 +1674,7 @@
       "question": "What is the maximum number of installments allowed per installment plan?",
       "expected_route": "unable_to_verify",
       "actual_status": "unable_to_verify",
-      "latency_ms": 21.76,
+      "latency_ms": 22.0,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1688,7 +1688,7 @@
       "question": "Which ABAP user exit is called during billing schema execution?",
       "expected_route": "unable_to_verify",
       "actual_status": "unable_to_verify",
-      "latency_ms": 22.34,
+      "latency_ms": 21.45,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1702,7 +1702,7 @@
       "question": "What is the exact transaction code for mass move-in simulation?",
       "expected_route": "unable_to_verify",
       "actual_status": "out_of_scope",
-      "latency_ms": 20.65,
+      "latency_ms": 18.9,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1716,7 +1716,7 @@
       "question": "Which background job program executes mass invoicing for multiple contract accounts?",
       "expected_route": "unable_to_verify",
       "actual_status": "unable_to_verify",
-      "latency_ms": 24.15,
+      "latency_ms": 24.17,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1730,7 +1730,7 @@
       "question": "What is the specific event function module name for clearing rule priority 99?",
       "expected_route": "unable_to_verify",
       "actual_status": "unable_to_verify",
-      "latency_ms": 28.56,
+      "latency_ms": 28.02,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1744,7 +1744,7 @@
       "question": "Which spool recipient receives the dunning print log spool list?",
       "expected_route": "unable_to_verify",
       "actual_status": "unable_to_verify",
-      "latency_ms": 23.32,
+      "latency_ms": 24.0,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1758,7 +1758,7 @@
       "question": "What is the technical field length of the IS-U equipment serial number?",
       "expected_route": "unable_to_verify",
       "actual_status": "unable_to_verify",
-      "latency_ms": 23.14,
+      "latency_ms": 24.17,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1772,7 +1772,7 @@
       "question": "What is the legal notice waiting period in business days before service disconnection?",
       "expected_route": "unable_to_verify",
       "actual_status": "unable_to_verify",
-      "latency_ms": 24.55,
+      "latency_ms": 26.24,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1786,7 +1786,7 @@
       "question": "How does billing work?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.52,
+      "latency_ms": 22.44,
       "sources": [
         "M2C-12",
         "M2C-12"
@@ -1803,7 +1803,7 @@
       "question": "What is a contract account?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.29,
+      "latency_ms": 22.83,
       "sources": [
         "M2C-17"
       ],
@@ -1819,7 +1819,7 @@
       "question": "What is the invoicing process?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 20.67,
+      "latency_ms": 22.71,
       "sources": [
         "M2C-14",
         "M2C-14",
@@ -1837,7 +1837,7 @@
       "question": "How does a contract account relate to a business partner?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.61,
+      "latency_ms": 24.64,
       "sources": [
         "M2C-17"
       ],
@@ -1853,7 +1853,7 @@
       "question": "How do I create an installment plan?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.92,
+      "latency_ms": 25.18,
       "sources": [
         "M2C-24",
         "M2C-24",
@@ -1871,7 +1871,7 @@
       "question": "How are devices managed?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.5,
+      "latency_ms": 23.17,
       "sources": [
         "M2C-05",
         "M2C-05"
@@ -1888,7 +1888,7 @@
       "question": "Tell me about Utilities Master Data.",
       "expected_route": "documentation_unavailable",
       "actual_status": "unable_to_verify",
-      "latency_ms": 21.1,
+      "latency_ms": 22.11,
       "sources": [],
       "top_doc": null,
       "gold_docs": [
@@ -1902,7 +1902,7 @@
       "question": "Tell me about Move-In/Out Overview.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 18.7,
+      "latency_ms": 23.61,
       "sources": [
         "M2C-02"
       ],
@@ -1918,7 +1918,7 @@
       "question": "Tell me about Move-In Process.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.7,
+      "latency_ms": 24.17,
       "sources": [
         "M2C-03",
         "M2C-03",
@@ -1936,7 +1936,7 @@
       "question": "Tell me about Move-Out Process.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.5,
+      "latency_ms": 22.6,
       "sources": [
         "M2C-04",
         "M2C-04"
@@ -1953,7 +1953,7 @@
       "question": "Tell me about Device Management Overview.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.98,
+      "latency_ms": 23.21,
       "sources": [
         "M2C-05",
         "M2C-05"
@@ -1970,7 +1970,7 @@
       "question": "Tell me about Reading Meters.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 20.04,
+      "latency_ms": 20.99,
       "sources": [
         "M2C-06"
       ],
@@ -1986,7 +1986,7 @@
       "question": "Tell me about Monitoring Meter Reading Results.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.74,
+      "latency_ms": 24.43,
       "sources": [
         "M2C-07",
         "M2C-07",
@@ -2004,7 +2004,7 @@
       "question": "Tell me about Meter Reading Estimation.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 17.14,
+      "latency_ms": 18.08,
       "sources": [
         "M2C-08"
       ],
@@ -2020,7 +2020,7 @@
       "question": "Tell me about Estimation Procedure Details.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.28,
+      "latency_ms": 24.35,
       "sources": [
         "M2C-09"
       ],
@@ -2036,7 +2036,7 @@
       "question": "Tell me about Meter Reading Data During Move-In.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.59,
+      "latency_ms": 21.89,
       "sources": [
         "M2C-10"
       ],
@@ -2052,7 +2052,7 @@
       "question": "Tell me about SAP Utilities Billing Procedure.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 19.69,
+      "latency_ms": 19.49,
       "sources": [
         "M2C-11"
       ],
@@ -2068,7 +2068,7 @@
       "question": "Tell me about Automatic Billing.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.92,
+      "latency_ms": 22.06,
       "sources": [
         "M2C-12",
         "M2C-12"
@@ -2085,7 +2085,7 @@
       "question": "Tell me about Budget Billing Plan.",
       "expected_route": "documentation_unavailable",
       "actual_status": "answered",
-      "latency_ms": 24.75,
+      "latency_ms": 24.02,
       "sources": [
         "M2C-15"
       ],
@@ -2101,7 +2101,7 @@
       "question": "Tell me about SAP Utilities Invoicing Procedure.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.54,
+      "latency_ms": 22.29,
       "sources": [
         "M2C-14",
         "M2C-14"
@@ -2118,7 +2118,7 @@
       "question": "Tell me about Processing Budget Billing Plans.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.67,
+      "latency_ms": 23.9,
       "sources": [
         "M2C-15",
         "M2C-15",
@@ -2136,7 +2136,7 @@
       "question": "Tell me about Periodic Billing and Invoicing Analysis.",
       "expected_route": "documentation_unavailable",
       "actual_status": "answered",
-      "latency_ms": 24.37,
+      "latency_ms": 24.02,
       "sources": [
         "M2C-15"
       ],
@@ -2152,7 +2152,7 @@
       "question": "Tell me about Contract Accounts Overview.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.51,
+      "latency_ms": 24.04,
       "sources": [
         "M2C-17"
       ],
@@ -2168,7 +2168,7 @@
       "question": "Tell me about Contract Account Business Object.",
       "expected_route": "documentation_unavailable",
       "actual_status": "answered",
-      "latency_ms": 24.46,
+      "latency_ms": 25.85,
       "sources": [
         "M2C-17",
         "M2C-17"
@@ -2185,7 +2185,7 @@
       "question": "Tell me about Analyze Incoming Payments.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.34,
+      "latency_ms": 21.96,
       "sources": [
         "M2C-19",
         "M2C-19"
@@ -2202,7 +2202,7 @@
       "question": "Tell me about Clearing Control in Incoming Payments.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 20.1,
+      "latency_ms": 19.26,
       "sources": [
         "M2C-20"
       ],
@@ -2218,7 +2218,7 @@
       "question": "Tell me about Clearing Types.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.28,
+      "latency_ms": 23.56,
       "sources": [
         "M2C-21"
       ],
@@ -2234,7 +2234,7 @@
       "question": "Tell me about Processing Incoming Payments from External Cash Desks.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.15,
+      "latency_ms": 22.86,
       "sources": [
         "M2C-22",
         "M2C-22"
@@ -2251,7 +2251,7 @@
       "question": "Tell me about Installment Plan Overview.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 19.05,
+      "latency_ms": 20.47,
       "sources": [
         "M2C-23"
       ],
@@ -2267,7 +2267,7 @@
       "question": "Tell me about Creating Installment Plans.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.73,
+      "latency_ms": 24.04,
       "sources": [
         "M2C-24",
         "M2C-24"
@@ -2284,7 +2284,7 @@
       "question": "Tell me about Displaying and Changing Installment Plans.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.18,
+      "latency_ms": 25.89,
       "sources": [
         "M2C-25",
         "M2C-25"
@@ -2301,7 +2301,7 @@
       "question": "Tell me about FI-CA Dunning.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.73,
+      "latency_ms": 25.4,
       "sources": [
         "M2C-26"
       ],
@@ -2317,7 +2317,7 @@
       "question": "Tell me about Submission of Receivables to Collection Agency.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.55,
+      "latency_ms": 22.22,
       "sources": [
         "M2C-27",
         "M2C-27"
@@ -2334,7 +2334,7 @@
       "question": "Tell me about Collection Agency APIs and Enterprise Services.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.85,
+      "latency_ms": 27.48,
       "sources": [
         "M2C-28",
         "M2C-28"
@@ -2351,7 +2351,7 @@
       "question": "Tell me about Disconnection/Reconnection of a Utility Installation.",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.29,
+      "latency_ms": 25.78,
       "sources": [
         "M2C-29",
         "M2C-29",
@@ -2369,7 +2369,7 @@
       "question": "How are incoming payments analyzed and cleared?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 21.65,
+      "latency_ms": 31.85,
       "sources": [
         "M2C-19",
         "M2C-19",
@@ -2387,7 +2387,7 @@
       "question": "How does invoicing create the link to contract accounting?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.41,
+      "latency_ms": 24.66,
       "sources": [
         "M2C-14"
       ],
@@ -2403,7 +2403,7 @@
       "question": "How does move-in processing work?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 26.57,
+      "latency_ms": 27.01,
       "sources": [
         "M2C-03",
         "M2C-03"
@@ -2420,7 +2420,7 @@
       "question": "How does move-out processing work?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 24.53,
+      "latency_ms": 24.26,
       "sources": [
         "M2C-04",
         "M2C-04"
@@ -2437,7 +2437,7 @@
       "question": "What does monitoring of meter reading results do?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.72,
+      "latency_ms": 24.87,
       "sources": [
         "M2C-07",
         "M2C-07",
@@ -2455,7 +2455,7 @@
       "question": "How does automatic billing work?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.55,
+      "latency_ms": 22.7,
       "sources": [
         "M2C-12",
         "M2C-12",
@@ -2473,7 +2473,7 @@
       "question": "How do I create an installment plan?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.48,
+      "latency_ms": 26.27,
       "sources": [
         "M2C-24",
         "M2C-24",
@@ -2491,7 +2491,7 @@
       "question": "How does meter reading estimation work?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 18.01,
+      "latency_ms": 18.64,
       "sources": [
         "M2C-08"
       ],
@@ -2507,7 +2507,7 @@
       "question": "What transaction code creates an installment plan?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.22,
+      "latency_ms": 23.62,
       "sources": [
         "M2C-24"
       ],
@@ -2523,7 +2523,7 @@
       "question": "What happens during a move-in?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 22.46,
+      "latency_ms": 24.86,
       "sources": [
         "M2C-03"
       ],
@@ -2539,7 +2539,7 @@
       "question": "What is the invoicing procedure in SAP Utilities?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 25.49,
+      "latency_ms": 22.81,
       "sources": [
         "M2C-14",
         "M2C-14"
@@ -2556,7 +2556,7 @@
       "question": "What activities are carried out using the move-in function?",
       "expected_route": "answered",
       "actual_status": "answered",
-      "latency_ms": 23.0,
+      "latency_ms": 24.44,
       "sources": [
         "M2C-03",
         "M2C-03"

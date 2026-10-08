@@ -359,8 +359,8 @@ class RealFollowUpTests(unittest.TestCase):
         first = self.turn(CONTRACT)
         self.assertEqual(first["status"], ANSWERED)
         self.assertTrue(first["sources"])
-        # the reported failure, without context ...
-        self.assertEqual(self.turn("elaborate")["status"], OUT_OF_SCOPE)
+        # the reported failure, without prior context ...
+        self.assertEqual(self.turn("elaborate", cid="conv-fresh")["status"], OUT_OF_SCOPE)
         # ... and the fix
         second = self.turn("elaborate", self.context_of((CONTRACT, first["answer"])), cid=first["conversation_id"])
         self.assertEqual(second["status"], ANSWERED, second["answer"])

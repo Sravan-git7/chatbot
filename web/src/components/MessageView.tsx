@@ -197,6 +197,32 @@ export default function MessageView({
               {/* Answer Footer Actions & Verification */}
               <div className="mt-4 flex flex-wrap items-center gap-3 pt-1">
                 <CopyButton text={answerForClipboard(r.answer, r.sources)} />
+                {onAskFollowUp && (
+                  <button
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => onAskFollowUp('elaborate')}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-medium text-stone-600 shadow-2xs transition hover:border-stone-300 hover:bg-stone-50 hover:text-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50 cursor-pointer"
+                    aria-label="Elaborate"
+                    data-testid="elaborate-button"
+                  >
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-stone-400"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                    Elaborate
+                  </button>
+                )}
                 {r.metadata.grounded && (
                   <span
                     className="inline-flex items-center gap-1.5 text-xs text-stone-500"

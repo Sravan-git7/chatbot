@@ -30,6 +30,7 @@ from typing import Any, Callable, Dict, List, Literal, Optional, Sequence
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_service as S  # noqa: E402
+import rag_followup as FU  # noqa: E402
 
 from fastapi import FastAPI, Request  # noqa: E402
 from fastapi.exceptions import RequestValidationError  # noqa: E402
@@ -111,12 +112,29 @@ class TopicIdentity(BaseModel):
     industry: Optional[str] = Field(default=None, max_length=100)
 
 
+class ActiveTopicContext(BaseModel):
+    """A successfully answered standalone query and its immutable page identity."""
+    model_config = ConfigDict(extra="forbid")
+    query: str = Field(..., min_length=1, max_length=FU.MAX_QUESTION_CHARS)
+    answer: str = Field(..., min_length=1, max_length=FU.MAX_ANSWER_CHARS)
+    identity: TopicIdentity
+    seen_answers: List[str] = Field(default_factory=list, max_length=4)
+
+
+class ChatContext(BaseModel):
+    """Previous turns used only to resolve short context-dependent follow-up messages."""
+    model_config = ConfigDict(extra="forbid")
+    questions: List[str] = Field(default_factory=list, max_length=FU.MAX_QUESTIONS + 2)
+    answer: Optional[str] = Field(default=None, max_length=FU.MAX_ANSWER_CHARS)
+    active_topic: Optional[ActiveTopicContext] = None
+
+
 class ChatRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    message: str = Field(..., max_length=S.MAX_MESSAGE_CHARS)
+    message: str = Field(..., max_length=S.MAX_MESSAGE_CHARS * 2)
     conversation_id: Optional[str] = Field(default=None, max_length=128)
     debug: bool = False
-    context: Optional[Dict[str, Any]] = None
+    context: Optional[ChatContext] = None
 
     @field_validator("message")
     @classmethod
@@ -186,6 +204,8 @@ class Metadata(BaseModel):
     reason_code: Optional[str] = None
     latency_ms: float
     topic_identity: Optional[TopicIdentity] = None
+    follow_up_category: Optional[str] = None
+    elaboration_sections: Optional[List[Dict[str, Any]]] = None
     documentation_coverage: Optional[DocumentationCoverage] = None
 
 
@@ -367,7 +387,8 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         t_req0 = time.perf_counter()
         svc = current()
         try:
-            result = svc.ask(req.message, conversation_id=req.conversation_id, debug=req.debug, context=req.context)
+            context = req.context.model_dump(exclude_none=True) if req.context else None
+            result = svc.ask(req.message, conversation_id=req.conversation_id, debug=req.debug, context=context)
         except S.ServiceError:
             raise
         except Exception as exc:
@@ -423,7 +444,7 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
             pass
 
         data = ChatResponse(**result).model_dump()
-        for field in ("topic_identity",):
+        for field in ("topic_identity", "follow_up_category", "elaboration_sections"):
             if data["metadata"].get(field) is None:
                 data["metadata"].pop(field, None)
         if not req.debug:

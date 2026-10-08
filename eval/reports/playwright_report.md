@@ -1,15 +1,15 @@
 # SURA Phase 4 Playwright E2E Verification Report
 
-**Execution Date:** 2026-10-08T09:12:58.888Z
+**Execution Date:** 2026-10-08T11:01:02.078Z
 **Passed:** 15 / 15 (100%)
 
 | Test Scenario | Status | Details |
 | :--- | :--- | :--- |
-| **billing** | PASS | Length: 815, citations: true |
-| **contract account** | PASS | Length: 856 |
-| **installment plan** | PASS | Length: 1129 |
-| **incoming payments** | PASS | Length: 1027 |
-| **billing paraphrase** | PASS | Length: 465 |
+| **billing** | PASS | Length: 825, citations: true |
+| **contract account** | PASS | Length: 866 |
+| **installment plan** | PASS | Length: 1139 |
+| **incoming payments** | PASS | Length: 1037 |
+| **billing paraphrase** | PASS | Length: 475 |
 | **today's news / OOS** | PASS | SU
 OUT OF SCOPE
 

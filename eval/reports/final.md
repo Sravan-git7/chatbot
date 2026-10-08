@@ -1,6 +1,6 @@
 # SURA Golden Evaluation Final Release Verification (Phase 6)
 
-**Execution Date:** 2026-10-08T09:12:13Z
+**Execution Date:** 2026-10-08T10:59:32Z
 **Generator:** extractive
 **Total Evaluated Cases:** 157
 
@@ -28,8 +28,8 @@ As audited in Phase 0:
 | **Citation Validity** | 100.0% | **100.0%** | **100% (STRICT PASS)** |
 | **Key-Fact Coverage** | 71.8% | **71.8%** | No change (Preserved) |
 | **Paraphrase Overlap** | 82.2% | **82.2%** | No change (Preserved) |
-| **Latency p50** | 24.6 ms | **23.9 ms** | Baseline measured in optimized single-thread run |
-| **Latency p95** | 30.4 ms | **29.9 ms** | Baseline measured in optimized single-thread run |
+| **Latency p50** | 24.6 ms | **24.0 ms** | Baseline measured in optimized single-thread run |
+| **Latency p95** | 30.4 ms | **31.9 ms** | Baseline measured in optimized single-thread run |
 | **Single-Source Answers** | 59 | **59** | Preserved |
 | **< 3 Sentence Answers** | 43 | **43** | Preserved |
 | **Topic-Reference Precision** | 100.0% | **100.0%** | **100% (STRICT PASS)** |

@@ -67,6 +67,8 @@ _PATTERNS: Tuple[Tuple[str, str], ...] = (
     (r"(?:please\s+)?go\s+(?:in|into)?\s*(?:to\s+)?(?:more\s+)?detail(?:s)?(?:\s+please)?", "elaborate"),
     (r"(?:some\s+|a\s+bit\s+|much\s+)?more\s+detail(?:s)?(?:\s+please)?", "elaborate"),
     (r"(?:in\s+)?more\s+detail(?:\s+please)?", "elaborate"),
+    (r"(?:please\s+)?(?:give|provide)\s+(?:me\s+)?(?:more\s+)?detail(?:s)?(?:\s+please)?", "elaborate"),
+    (r"(?:please\s+)?go\s+(?:a\s+bit\s+)?deeper(?:\s+(?:on|into)\s+(?:that|this|it))?(?:\s+please)?", "elaborate"),
     (r"(?:please\s+)?(?:continue|go\s+on|keep\s+going|carry\s+on)(?:\s+please)?", "elaborate"),
     (r"(?:and\s+)?what\s+else(?:\s+about\s+(?:that|this|it))?(?:\s+please)?", "elaborate"),
     (r"what\s+(?:more|other)\s+(?:can\s+you\s+tell\s+me|do\s+you\s+know)(?:\s+about\s+(?:that|this|it))?", "elaborate"),
@@ -119,7 +121,7 @@ _FOLLOWUP_VOCAB = (
     "elaborate", "expand", "explain", "detail", "further", "again", "continue", "example", "simplify", "simple",
     "term", "next", "happen", "mean", "reason", "relate", "related", "connect", "connected", "connection", "link",
     "linked", "relationship", "difference", "work", "workflow", "step", "point", "part",
-    "stage", "item", "option", "else", "then", "more", "other",
+    "stage", "item", "option", "else", "then", "more", "other", "deep", "deeper",
 )
 _FOLLOWUP_TERMS = frozenset(T.stem(w) for w in _FOLLOWUP_VOCAB)
 
