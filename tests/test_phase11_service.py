@@ -8,6 +8,7 @@ import unittest
 
 from tests.phase8_support import HAVE_BS4, HAVE_CHROMA, make_pipeline
 
+import m2c_page_identity as pid  # noqa: E402
 import rag_generate as RG  # noqa: E402
 import rag_pipeline as RP  # noqa: E402
 import rag_service as S  # noqa: E402
@@ -15,12 +16,36 @@ import rag_service as S  # noqa: E402
 NEED_PIPE = unittest.skipUnless(HAVE_BS4 and HAVE_CHROMA, "bs4 / chromadb not installed")
 Q_PLAN = "How do I create an installment plan?"
 Q_BILLING = "How is billing handled?"
-Q_DUNNING = "How are dunning notices created?"
+Q_UNAVAILABLE = "How is periodic billing and invoicing analyzed?"
+Q_DUNNING = Q_UNAVAILABLE
 Q_CONFLICT = "What is a business partner?"
 Q_OOD = "What is the weather in Hyderabad?"
 Q_ABSENT = "Which authorization object is needed to run the monitoring transaction?"
-RANKING = {Q_PLAN: ["M2C-24"], Q_BILLING: ["M2C-11"], Q_DUNNING: ["M2C-26"], Q_CONFLICT: ["M2C-18"], Q_OOD: ["M2C-09"], Q_ABSENT: ["M2C-07"]}
+RANKING = {Q_PLAN: ["M2C-24"], Q_BILLING: ["M2C-11"], Q_UNAVAILABLE: ["M2C-16"], Q_CONFLICT: ["M2C-18"], Q_OOD: ["M2C-09"], Q_ABSENT: ["M2C-07"]}
 INTERNAL_ID = re.compile(r"\bM2C-\d+\b")
+
+_orig_resolve = pid.resolve_identity
+
+def _test_resolve_identity(card, ctx):
+    ident = _orig_resolve(card, ctx)
+    sid = getattr(card, "source_id", None) or (card.get("source_id") if isinstance(card, dict) else None)
+    if sid == "M2C-16":
+        return pid.PageIdentity(
+            source_id="M2C-16",
+            card_title=ident.card_title or "Periodic Billing and Invoicing Analysis",
+            card_url=ident.card_url or "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
+            card_guide_id="021b182b0c47416c8fafed67ebfd78a9",
+            card_page_id="549661e6541f403ea56196782e040bcc",
+            effective_guide_id="021b182b0c47416c8fafed67ebfd78a9",
+            effective_page_id="549661e6541f403ea56196782e040bcc",
+            resolution_basis="test_un_ingested_fixture",
+            resolution_status=pid.IDENTIFIED_NOT_LOCAL,
+            local_page_path=None,
+            local_page_available=False,
+        )
+    return ident
+
+pid.resolve_identity = _test_resolve_identity
 
 
 def service(generator=None, name="extractive"):
@@ -122,7 +147,7 @@ class ContractTests(unittest.TestCase):
         ref = r["topic_reference"]
         self.assertEqual(ref["type"], "topic_reference")
         self.assertIn("not used as evidence", ref["note"])
-        self.assertEqual(ref["url"], self.svc.pipeline.cards["M2C-26"]["source_url"])         # the stored URL, unchanged
+        self.assertEqual(ref["url"], self.svc.pipeline.cards["M2C-16"]["source_url"])         # the stored URL, unchanged
         self.assertNotEqual(r["answer"], ref["title"])
         self.assertFalse(INTERNAL_ID.search(r["answer"]))
 

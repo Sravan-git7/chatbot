@@ -86,7 +86,7 @@ export default function Sidebar({
               <span className="text-xs font-semibold tracking-tight text-stone-900">
                 SURA
               </span>
-              <span className="text-[10px] text-stone-500">
+              <span className="text-[10px] text-stone-700">
                 SAP Utilities Assistant
               </span>
             </div>
@@ -138,7 +138,7 @@ export default function Sidebar({
               </svg>
               New chat
             </span>
-            <span aria-hidden="true" className="rounded-md bg-stone-100 px-1.5 py-0.5 text-[10px] text-stone-400">
+            <span aria-hidden="true" className="rounded-md bg-stone-100 px-1.5 py-0.5 text-[10px] text-stone-600">
               ⌘K
             </span>
           </button>
@@ -151,10 +151,10 @@ export default function Sidebar({
         >
           {sorted.length === 0 ? (
             <div className="px-3 py-8 text-center">
-              <p className="text-xs text-stone-400">
+              <p className="text-xs text-stone-600">
                 No recent conversations
               </p>
-              <p className="mt-1 text-[11px] text-stone-400/80">
+              <p className="mt-1 text-[11px] text-stone-600">
                 Conversations are saved locally in this browser.
               </p>
             </div>
@@ -162,7 +162,7 @@ export default function Sidebar({
             <div className="space-y-4">
               {groups.map((group) => (
                 <div key={group.label}>
-                  <div className="px-2 pb-1.5 pt-1 text-[10px] font-semibold uppercase tracking-wider text-stone-400">
+                  <div className="px-2 pb-1.5 pt-1 text-[10px] font-semibold uppercase tracking-wider text-stone-600">
                     {group.label}
                   </div>
                   <ul className="space-y-0.5">
@@ -182,7 +182,7 @@ export default function Sidebar({
                             title={c.title}
                           >
                             <span className="truncate">{c.title}</span>
-                            <span className="shrink-0 pl-1 text-[10px] font-normal text-stone-400">
+                            <span className="shrink-0 pl-1 text-[10px] font-normal text-stone-600">
                               {relativeTime(c.updatedAt)}
                             </span>
                           </button>

@@ -396,8 +396,15 @@ class RagPipeline:
             if card is None:
                 raise KeyError(f"unknown card {oracle_source_id}")
         else:
-            if query and query.strip() and hasattr(self.retriever, "embed"):
-                q_emb = self.retriever.embed([query.strip()])
+            retrieval_query = query.strip() if query else ""
+            try:
+                import rag_completeness as RC
+                if RC.is_intent_aware_enabled():
+                    retrieval_query = RC.normalize_retrieval_query(query)
+            except Exception:
+                pass
+            if retrieval_query and hasattr(self.retriever, "embed"):
+                q_emb = self.retriever.embed([retrieval_query])
             outcome = route_to_page(
                 query,
                 self.backend,

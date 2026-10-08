@@ -78,7 +78,7 @@ export default function Composer({ disabled, onSend, focusKey }: Props) {
           </svg>
         </button>
       </div>
-      <p className="mt-2 px-2 text-center text-[11px] text-stone-400">
+      <p className="mt-2 px-2 text-center text-[11px] text-stone-600">
         {text.length > MAX_MESSAGE_CHARS - 200 ? `${text.length}/${MAX_MESSAGE_CHARS} characters. ` : ''}
         Answers are grounded in available documentation and answered individually.
       </p>

@@ -33,11 +33,16 @@ def extract_citations(text: str) -> List[str]:
 def categorize_line(line: str) -> str:
     """Deterministically categorize an answer line into a section key."""
     lower = line.lower()
-    if any(k in lower for k in ("step", "prerequisite", "condition", "required", "must", "before")):
+    # Prerequisites & requirements: explicit dependency or requirement phrases
+    if any(k in lower for k in ("prerequisite", "prerequisites", "must first", "before you can", "required before")):
         return "conditions_and_prerequisites"
-    if any(k in lower for k in ("how to", "procedure", "process", "configure", "execute", "run", "transaction")):
+    # Procedure & usage: direct instructions, navigation paths, or procedural actions
+    if any(k in lower for k in ("how to", "procedure:", "steps to", "choose ", "navigate to", "transaction code", "transaction ", "to create", "to execute", "to display", "to change", "to configure")):
         return "procedure_and_usage"
-    if any(k in lower for k in ("note", "important", "detail", "parameter", "code", "table")):
+    if ">" in line and any(k in lower for k in ("choose", "menu", "path", "create", "display", "change")):
+        return "procedure_and_usage"
+    # Key details: technical specifics, parameters, tables, constraints
+    if any(k in lower for k in ("note:", "important:", "parameter ", "database table", "customizing table")):
         return "key_details"
     return "overview"
 
@@ -65,14 +70,43 @@ def compose_structured_answer(
     if not raw_lines:
         return None
 
+    all_citations = extract_citations(answer)
+
+    # For short answers (< 3 lines), consolidate into a single clean Overview section
+    if len(raw_lines) < 3:
+        return {
+            "summary": raw_lines[0],
+            "sections": [{
+                "title": "Overview",
+                "key": "overview",
+                "lines": raw_lines,
+                "content": "\n".join(raw_lines),
+                "citations": all_citations,
+            }],
+            "citations": all_citations,
+        }
+
     # Group lines by category while preserving exact content
     sections_by_key: Dict[str, List[str]] = {}
     for line in raw_lines:
         cat = categorize_line(line)
         sections_by_key.setdefault(cat, []).append(line)
 
+    # If only a single category exists, title it "Overview"
+    if len(sections_by_key) <= 1:
+        return {
+            "summary": raw_lines[0],
+            "sections": [{
+                "title": "Overview",
+                "key": "overview",
+                "lines": raw_lines,
+                "content": "\n".join(raw_lines),
+                "citations": all_citations,
+            }],
+            "citations": all_citations,
+        }
+
     sections: List[Dict[str, Any]] = []
-    all_citations = extract_citations(answer)
 
     # Standard section ordering
     ordered_keys = [
@@ -178,10 +212,15 @@ def compose_response(
         }
 
     structured = compose_structured_answer(answer, sources)
+    if structured and metadata and "additional_evidence" in metadata:
+        structured["additional_evidence"] = metadata["additional_evidence"]
     all_cits = structured.get("citations", []) if structured else []
     cov = compute_documentation_coverage(status, sources, metadata, all_cits)
 
-    return {
+    res = {
         "structured_answer": structured,
         "documentation_coverage": cov,
     }
+    if metadata and "additional_evidence" in metadata:
+        res["additional_evidence"] = metadata["additional_evidence"]
+    return res

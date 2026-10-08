@@ -3,7 +3,7 @@ import type { ApiStatus, Message } from '../types'
 import { answerForClipboard, copyText, getFollowUpQuestions } from '../util'
 import DebugPanel from './DebugPanel'
 import { Sources, TopicReferenceCard, sourceDomId } from './Sources'
-import StructuredAnswer from './StructuredAnswer'
+import StructuredAnswer, { buildMarkerMap } from './StructuredAnswer'
 
 const STATUS_HEADLINE: Record<Exclude<ApiStatus, 'answered'>, string> = {
   documentation_unavailable: 'Documentation unavailable',
@@ -180,57 +180,62 @@ export default function MessageView({
           </div>
         )}
 
-        {r && r.status === 'answered' && (
-          <div className="animate-answer-reveal">
-            <StructuredAnswer
-              structuredAnswer={r.structured_answer}
-              fallbackAnswer={r.answer}
-              sources={r.sources}
-              onCite={cite}
-            />
-            <Sources messageId={message.id} sources={r.sources} highlight={highlight} />
+        {r && r.status === 'answered' && (() => {
+          const markerMap = buildMarkerMap(r.answer)
+          return (
+            <div className="animate-answer-reveal">
+              <h2 className="sr-only">Answer</h2>
+              <StructuredAnswer
+                structuredAnswer={r.structured_answer}
+                fallbackAnswer={r.answer}
+                sources={r.sources}
+                markerMap={markerMap}
+                onCite={cite}
+              />
+              <Sources messageId={message.id} sources={r.sources} markerMap={markerMap} highlight={highlight} />
 
-            {/* Answer Footer Actions & Verification */}
-            <div className="mt-4 flex flex-wrap items-center gap-3 pt-1">
-              <CopyButton text={answerForClipboard(r.answer, r.sources)} />
-              {r.metadata.grounded && (
-                <span
-                  className="inline-flex items-center gap-1.5 text-xs text-stone-500"
-                  title="Every sentence was checked against the cited documentation text"
+              {/* Answer Footer Actions & Verification */}
+              <div className="mt-4 flex flex-wrap items-center gap-3 pt-1">
+                <CopyButton text={answerForClipboard(r.answer, r.sources)} />
+                {r.metadata.grounded && (
+                  <span
+                    className="inline-flex items-center gap-1.5 text-xs text-stone-500"
+                    title="Every sentence was checked against the cited documentation text"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+                    Checked against the documentation
+                  </span>
+                )}
+              </div>
+
+              {/* Suggested Follow-ups */}
+              {followUps.length > 0 && onAskFollowUp && (
+                <div
+                  data-testid="follow-up-questions"
+                  aria-label="You might also want to know"
+                  className="mt-6 rounded-xl border border-stone-200/80 bg-white/70 p-4 shadow-2xs sura-followups-reveal"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-                  Checked against the documentation
-                </span>
+                  <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+                    You might also want to know
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {followUps.map((q) => (
+                      <button
+                        key={q}
+                        type="button"
+                        disabled={disabled}
+                        onClick={() => onAskFollowUp(q)}
+                        className="inline-flex items-center rounded-lg border border-stone-200/90 bg-white px-3 py-1.5 text-left text-xs font-medium text-stone-700 shadow-2xs transition enabled:hover:border-accent enabled:hover:bg-accent-soft/40 enabled:hover:text-stone-900 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
+                      >
+                        {q}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
-
-            {/* Suggested Follow-ups */}
-            {followUps.length > 0 && onAskFollowUp && (
-              <div
-                data-testid="follow-up-questions"
-                aria-label="You might also want to know"
-                className="mt-6 rounded-xl border border-stone-200/80 bg-white/70 p-4 shadow-2xs sura-followups-reveal"
-              >
-                <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-stone-500">
-                  You might also want to know
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {followUps.map((q) => (
-                    <button
-                      key={q}
-                      type="button"
-                      disabled={disabled}
-                      onClick={() => onAskFollowUp(q)}
-                      className="inline-flex items-center rounded-lg border border-stone-200/90 bg-white px-3 py-1.5 text-left text-xs font-medium text-stone-700 shadow-2xs transition enabled:hover:border-accent enabled:hover:bg-accent-soft/40 enabled:hover:text-stone-900 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
-                    >
-                      {q}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
+          )
+        })()}
 
         {/* Soft, intentional out of scope / unable to verify treatment */}
         {r && r.status !== 'answered' && (
@@ -244,6 +249,33 @@ export default function MessageView({
               {STATUS_HEADLINE[r.status]}
             </div>
             <p className="mt-2.5 leading-relaxed text-stone-700">{r.answer}</p>
+            {r.status === 'out_of_scope' && (
+              <div className="mt-2 text-xs text-stone-500">
+                <p>
+                  SURA answers questions about topics covered by the available SAP Utilities documentation, such as billing, invoicing, contract accounts, and incoming payments.
+                </p>
+                {onAskFollowUp && (
+                  <div className="mt-2.5 flex flex-wrap gap-2">
+                    {['How does billing work?', 'What is a contract account?'].map((ex) => (
+                      <button
+                        key={ex}
+                        type="button"
+                        disabled={disabled}
+                        onClick={() => onAskFollowUp(ex)}
+                        className="inline-flex items-center rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-medium text-stone-700 shadow-2xs hover:border-accent hover:text-stone-900 cursor-pointer transition"
+                      >
+                        {ex}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            {r.status === 'unable_to_verify' && r.metadata?.pipeline_status !== 'unresolved_identity' && (
+              <p className="mt-1.5 text-xs text-stone-500">
+                Try including the SAP Utilities topic or component you're asking about.
+              </p>
+            )}
             {r.topic_reference && <TopicReferenceCard reference={r.topic_reference} />}
           </div>
         )}

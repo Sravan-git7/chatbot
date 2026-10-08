@@ -6,13 +6,27 @@ export function sourceDomId(messageId: string, marker: string): string {
   return `src-${messageId}-${marker}`
 }
 
+function cleanBreadcrumb(section: string | null | undefined, title: string): string | null {
+  if (!section) return null
+  const s = section.trim()
+  const t = title.trim()
+  if (s === t) return null
+  if (s.startsWith(t)) {
+    const remainder = s.slice(t.length).replace(/^[\s>]+/, '').trim()
+    return remainder || null
+  }
+  return s
+}
+
 export function Sources({
   messageId,
   sources,
+  markerMap,
   highlight,
 }: {
   messageId: string
   sources: Source[]
+  markerMap?: Record<string, number>
   highlight?: string | null
 }) {
   const groups = groupSources(sources)
@@ -30,10 +44,10 @@ export function Sources({
   return (
     <section aria-label="Sources" className="mt-6 sm:mt-7 sura-sources-reveal">
       <div className="mb-2.5 flex items-center justify-between">
-        <h3 className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+        <h3 className="text-[11px] font-semibold uppercase tracking-wider text-stone-700">
           Sources · {groups.length}
         </h3>
-        <span className="text-[11px] font-medium text-stone-400">
+        <span className="text-[11px] font-medium text-stone-600">
           SAP Help Portal
         </span>
       </div>
@@ -42,6 +56,7 @@ export function Sources({
           const active = !!highlight && g.markers.includes(highlight)
           const hasValidUrl = isHttpUrl(g.url)
           const isCopied = hasValidUrl && copiedUrl === g.url
+          const breadcrumb = cleanBreadcrumb(g.section, g.title)
           return (
             <li
               key={g.key}
@@ -59,17 +74,25 @@ export function Sources({
               <div className="flex items-start justify-between gap-3">
                 <div className="flex min-w-0 flex-1 items-start gap-2.5">
                   <span className="mt-0.5 flex shrink-0 gap-1">
-                    {g.markers.map((m) => (
-                      <span key={m} className="cite-chip cite-chip-static">
-                        {m.slice(1)}
-                      </span>
-                    ))}
+                    {g.markers.map((m) => {
+                      const displayNum =
+                        markerMap && markerMap[m] !== undefined
+                          ? markerMap[m]
+                          : m.startsWith('S')
+                            ? m.slice(1)
+                            : m
+                      return (
+                        <span key={m} className="cite-chip cite-chip-static">
+                          {displayNum}
+                        </span>
+                      )
+                    })}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="font-semibold leading-snug text-stone-900">{g.title}</div>
-                    {g.section && g.section !== g.title && (
+                    {breadcrumb && (
                       <div className="mt-0.5 text-[11px] leading-relaxed text-stone-500">
-                        {g.section}
+                        {breadcrumb}
                       </div>
                     )}
                     {hasValidUrl ? (
@@ -81,7 +104,7 @@ export function Sources({
                         title={g.url!}
                       >
                         <span className="truncate">{displayUrl(g.url!)}</span>
-                        <span aria-hidden="true" className="shrink-0 text-[11px] opacity-80">
+                        <span aria-hidden="true" className="shrink-0 text-[11px] text-accent-dark font-medium">
                           · Open source ↗
                         </span>
                       </a>

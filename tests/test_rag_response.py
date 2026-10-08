@@ -76,9 +76,26 @@ class RagResponseTests(unittest.TestCase):
         cits = RR.extract_citations(text)
         self.assertEqual(cits, ["S3", "S1"])
 
-    def test_empty_answer_returns_none_structured(self):
-        result = RR.compose_response("   \n  ", self.sample_sources, "answered")
-        self.assertIsNone(result["structured_answer"])
+    def test_short_answer_consolidates_into_overview(self):
+        short_ans = "A contract account is a master data object. [S1]\nIt contains payment terms. [S1]"
+        result = RR.compose_response(short_ans, self.sample_sources, "answered", self.sample_meta)
+        sa = result["structured_answer"]
+        self.assertIsNotNone(sa)
+        self.assertEqual(len(sa["sections"]), 1)
+        self.assertEqual(sa["sections"][0]["title"], "Overview")
+        self.assertEqual(sa["sections"][0]["key"], "overview")
+
+    def test_single_category_answer_consolidates_into_overview(self):
+        single_cat = (
+            "Line one is general description [S1].\n"
+            "Line two is also general description [S1].\n"
+            "Line three concludes the description [S1]."
+        )
+        result = RR.compose_response(single_cat, self.sample_sources, "answered", self.sample_meta)
+        sa = result["structured_answer"]
+        self.assertIsNotNone(sa)
+        self.assertEqual(len(sa["sections"]), 1)
+        self.assertEqual(sa["sections"][0]["title"], "Overview")
 
 
 if __name__ == "__main__":

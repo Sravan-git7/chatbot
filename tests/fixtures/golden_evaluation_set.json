@@ -1,0 +1,84 @@
+[
+  {
+    "id": "ans_01",
+    "query": "How does billing work?",
+    "category": "answerable",
+    "expected_status": "answered",
+    "expected_topic_id": "M2C-11"
+  },
+  {
+    "id": "ans_02",
+    "query": "What is a contract account?",
+    "category": "answerable",
+    "expected_status": "answered",
+    "expected_topic_id": "M2C-17"
+  },
+  {
+    "id": "ans_03",
+    "query": "How do I create an installment plan?",
+    "category": "answerable",
+    "expected_status": "answered",
+    "expected_topic_id": "M2C-24"
+  },
+  {
+    "id": "ans_04",
+    "query": "How are incoming payments analyzed and cleared?",
+    "category": "answerable",
+    "expected_status": "answered",
+    "expected_topic_id": "M2C-21"
+  },
+  {
+    "id": "ans_05",
+    "query": "How is billing handled?",
+    "category": "answerable",
+    "expected_status": "answered",
+    "expected_topic_id": "M2C-11"
+  },
+  {
+    "id": "para_01",
+    "query": "How does automatic billing function?",
+    "category": "paraphrase",
+    "expected_status": "answered",
+    "expected_topic_id": "M2C-11"
+  },
+  {
+    "id": "para_02",
+    "query": "Explain what a contract account is in SAP",
+    "category": "paraphrase",
+    "expected_status": "answered",
+    "expected_topic_id": "M2C-17"
+  },
+  {
+    "id": "oos_01",
+    "query": "today's news updates",
+    "category": "out_of_scope",
+    "expected_status": "unable_to_verify",
+    "allow_topic_reference": false
+  },
+  {
+    "id": "oos_02",
+    "query": "who won the soccer world cup in 2022?",
+    "category": "out_of_scope",
+    "expected_status": "out_of_scope",
+    "allow_topic_reference": false
+  },
+  {
+    "id": "oos_03",
+    "query": "asdfghjkl qwertyuiop",
+    "category": "out_of_scope",
+    "expected_status": "out_of_scope",
+    "allow_topic_reference": false
+  },
+  {
+    "id": "near_01",
+    "query": "What is the penalty fee for late installment plan payments?",
+    "category": "unanswerable",
+    "expected_status": "unable_to_verify"
+  },
+  {
+    "id": "near_02",
+    "query": "What is the quantum encryption algorithm used in SAP Utilities billing?",
+    "category": "unanswerable",
+    "expected_status": "unable_to_verify"
+  }
+]

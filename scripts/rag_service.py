@@ -33,7 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_response as RR  # noqa: E402  deterministic response composer
 
 SCHEMA_VERSION = "11.1"
-MAX_MESSAGE_CHARS = 2000
+MAX_MESSAGE_CHARS = 500
 CONVERSATION_ID_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
 ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE = "answered", "documentation_unavailable", "unable_to_verify", "out_of_scope"
@@ -235,7 +235,19 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
         answer = UNRESOLVED_TEXT if pstatus == "unresolved_identity" else USER_TEXT[status]
         sources = []
     reference = None
-    if status in (DOC_UNAVAILABLE, UNABLE_TO_VERIFY) and pstatus != "unresolved_identity" and topic.get("title") and _safe_url(topic.get("card_url")):
+    candidates = raw.get("routing", {}).get("candidates") or []
+    cand = candidates[0] if candidates else {}
+    has_routing_relevance = bool(
+        cand.get("coverage", 0.0) > 0.0
+        or cand.get("phrase_match", 0.0) > 0.0
+        or cand.get("code_match", 0.0) > 0.0
+    )
+    if not any(k in cand for k in ("coverage", "phrase_match", "code_match")):
+        has_routing_relevance = bool(topic.get("title"))
+
+    is_relevant_topic = has_routing_relevance if status == UNABLE_TO_VERIFY else True
+
+    if status in (DOC_UNAVAILABLE, UNABLE_TO_VERIFY) and pstatus != "unresolved_identity" and topic.get("title") and _safe_url(topic.get("card_url")) and is_relevant_topic:
         reference = {"type": "topic_reference", "title": topic["title"], "url": _safe_url(topic["card_url"]), "note": REFERENCE_NOTE}
     routed = status != OUT_OF_SCOPE
     meta = {"card_id": topic.get("source_id") if routed else None, "card_title": topic.get("title") if routed else None,
@@ -247,6 +259,8 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
             "guide_id": topic["effective_guide_id"], "page_id": topic["effective_page_id"],
             "industry": ACTIVE_INDUSTRY_CONTEXT,
         }
+    if evidence and "additional_evidence" in evidence:
+        meta["additional_evidence"] = evidence["additional_evidence"]
 
     # Deterministic response composer
     composed = RR.compose_response(answer, sources, status=status, metadata=meta)

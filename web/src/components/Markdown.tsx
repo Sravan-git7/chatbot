@@ -7,6 +7,7 @@ interface Props {
   text: string
   /** markers that exist as sources of this message; only these become citation chips */
   markers: Set<string>
+  markerMap?: Record<string, number>
   onCite?: (marker: string) => void
 }
 
@@ -22,9 +23,11 @@ const FENCE = /^\s*(```|~~~)/
 const BLOCK = /^\s*(?:[-*+]\s|\d+[.)]\s|\||#{1,6}\s|>)/
 
 export function prepare(text: string): string {
-  // The extractive generator returns one cited sentence per line: such plain lines become separate paragraphs.
-  // Markdown structure (lists, tables, headings, quotes, fenced code) is left exactly as written.
-  const lines = text.replace(/\r\n/g, '\n').split('\n')
+  // Collapse consecutive duplicate citation markers like [S1] [S1] or [S1][S1] into [S1]
+  const collapsed = text.replace(/(\[(S\d+)\])(?:\s*\1)+/g, '$1')
+  // Clean presentation-only whitespace before punctuation without altering underlying spans
+  const normalized = collapsed.replace(/\s+,/g, ',')
+  const lines = normalized.replace(/\r\n/g, '\n').split('\n')
   const out: string[] = []
   let fenced = false
   lines.forEach((line, i) => {
@@ -65,7 +68,7 @@ function CodeBlock({ children }: { children: ReactNode }) {
   )
 }
 
-function MarkdownView({ text, markers, onCite }: Props) {
+function MarkdownView({ text, markers, markerMap, onCite }: Props) {
   return (
     <div className="prose-chat">
       <ReactMarkdown
@@ -76,9 +79,15 @@ function MarkdownView({ text, markers, onCite }: Props) {
           a: ({ href, children }) => {
             const m = href?.startsWith('#cite-') ? href.slice(6) : null
             if (m && markers.has(m)) {
+              const displayNum = markerMap && markerMap[m] !== undefined ? markerMap[m] : (m.startsWith('S') ? m.slice(1) : m)
               return (
-                <button type="button" className="cite-chip" aria-label={`Source ${m.slice(1)}`} onClick={() => onCite?.(m)}>
-                  {m.slice(1)}
+                <button
+                  type="button"
+                  className="cite-chip cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                  aria-label={`Source ${displayNum}`}
+                  onClick={() => onCite?.(m)}
+                >
+                  {displayNum}
                 </button>
               )
             }

@@ -3,10 +3,11 @@ import type { Source } from '../types'
 export interface CitationsProps {
   citations: string[]
   sources?: Source[]
+  markerMap?: Record<string, number>
   onCite?: (marker: string) => void
 }
 
-export default function Citations({ citations, sources, onCite }: CitationsProps) {
+export default function Citations({ citations, sources, markerMap, onCite }: CitationsProps) {
   if (!citations || citations.length === 0) {
     return null
   }
@@ -15,7 +16,7 @@ export default function Citations({ citations, sources, onCite }: CitationsProps
     <span className="inline-flex flex-wrap items-center gap-1 align-baseline text-xs" data-testid="citations-container">
       {citations.map((marker) => {
         const source = sources?.find((s) => s.marker === marker)
-        const label = marker.startsWith('S') ? marker.slice(1) : marker
+        const label = markerMap && markerMap[marker] !== undefined ? markerMap[marker] : (marker.startsWith('S') ? marker.slice(1) : marker)
         return (
           <button
             key={marker}

@@ -557,8 +557,13 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
     if not scored or scored[0][0] < tau:
         return Decision(False, "LOW_FOCUS_COVERAGE", {"best": round(scored[0][0], 3) if scored else 0.0, "tau": tau}), []
     best = scored[0][0]
-    keep = [(s, u) for s, u in scored if s >= max(tau, KEEP_RATIO * best)][:EXTRACTIVE_MAX_SENTENCES]
-    return Decision(True, "SUPPORTED", {"best": round(best, 3), "tau": tau}), [u for _, u in keep]
+    import rag_completeness as RC
+    if RC.is_section_selection_enabled():
+        chosen_units = RC.select_complementary_units(scored, tau, KEEP_RATIO, max_sentences=EXTRACTIVE_MAX_SENTENCES)
+    else:
+        keep = [(s, u) for s, u in scored if s >= max(tau, KEEP_RATIO * best)][:EXTRACTIVE_MAX_SENTENCES]
+        chosen_units = [u for _, u in keep]
+    return Decision(True, "SUPPORTED", {"best": round(best, 3), "tau": tau}), chosen_units
 
 
 # ------------------------------------------------------------------------------------------------------------ generator
@@ -605,6 +610,14 @@ class EvidenceExtractiveGenerator:
             if u.follow:
                 lines.append(f"{u.follow} [{u.marker}]")
             record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text, "coverage": round(unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3), "kinds_ok": unit_kinds_ok(u, needs)})
+        import rag_completeness as RC
+        if RC.is_additional_evidence_enabled():
+            add_ev = RC.extract_additional_evidence(
+                units, chosen, needs, weights,
+                unit_score_fn=lambda un, nds, w: unit_score(un, nds, w, frame_normalization=self.frame_normalization)
+            )
+            if add_ev:
+                record["additional_evidence"] = add_ev
         dedup: List[str] = []
         for ln in lines:                                                    # a header line attached to two neighbouring sentences is shown once
             if ln not in dedup:

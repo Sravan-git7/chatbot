@@ -216,9 +216,9 @@ export default function App() {
                 </button>
               </>
             )}
-            <span className="min-w-0 flex-1 truncate px-2 text-xs font-semibold text-stone-700">
-              {current?.title ?? ''}
-            </span>
+            <h1 className="min-w-0 flex-1 truncate px-2 text-xs font-semibold text-stone-800">
+              {current?.title || 'SURA — SAP Utilities Documentation Assistant'}
+            </h1>
           </div>
 
           <div className="flex items-center gap-2">

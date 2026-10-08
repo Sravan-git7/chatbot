@@ -17,7 +17,7 @@ import rag_service as S  # noqa: E402
 
 HAVE_API = importlib.util.find_spec("fastapi") is not None and importlib.util.find_spec("httpx") is not None
 NEED_API = unittest.skipUnless(HAVE_API and HAVE_BS4 and HAVE_CHROMA, "fastapi / httpx / bs4 / chromadb not installed")
-from tests.test_phase11_service import Boom, Q_ABSENT, Q_BILLING, Q_CONFLICT, Q_DUNNING, Q_OOD, Q_PLAN, RANKING  # noqa: E402
+from tests.test_phase11_service import Boom, Q_ABSENT, Q_BILLING, Q_CONFLICT, Q_DUNNING, Q_OOD, Q_PLAN, Q_UNAVAILABLE, RANKING  # noqa: E402
 
 if HAVE_API:
     import warnings
@@ -166,7 +166,7 @@ class ResponseContractTests(unittest.TestCase):
         self.assertEqual((b["status"], b["sources"], b["metadata"]["grounded"], b["metadata"]["page_available"]), ("documentation_unavailable", [], False, False))
         self.assertIn("not currently available", b["answer"])
         self.assertEqual(b["topic_reference"]["type"], "topic_reference")
-        self.assertEqual(b["topic_reference"]["url"], self.svc.pipeline.cards["M2C-26"]["source_url"])
+        self.assertEqual(b["topic_reference"]["url"], self.svc.pipeline.cards["M2C-16"]["source_url"])
 
     def test_unresolved_identity(self):
         b = post(self.c, Q_CONFLICT).json()
@@ -313,7 +313,7 @@ class RealPipelineTests(unittest.TestCase):
 
     def test_health_is_ready_with_the_real_corpus(self):
         b = self.c.get("/api/health").json()
-        self.assertEqual((b["ready"], b["topics"], b["pages_available"]), (True, 29, 7))
+        self.assertEqual((b["ready"], b["topics"], b["pages_available"]), (True, 29, 25))
 
     def test_real_question_gets_a_real_grounded_cited_answer(self):
         r = post(self.c, "How do I create an installment plan?")
@@ -333,9 +333,10 @@ class RealPipelineTests(unittest.TestCase):
             self.assertIn(marker, {s["marker"] for s in b["sources"]})
 
     def test_real_missing_page_is_not_answered_from_the_card(self):
-        b = post(self.c, "How are dunning notices created?").json()
-        self.assertEqual((b["status"], b["sources"]), ("documentation_unavailable", []))
-        self.assertEqual(b["metadata"]["page_available"], False)
+        with unittest.mock.patch("phase13_reranker.rerank_candidates", return_value=(self.c.app.state.rag["service"].pipeline.cards["M2C-16"], [])):
+            b = post(self.c, Q_UNAVAILABLE).json()
+            self.assertEqual((b["status"], b["sources"]), ("documentation_unavailable", []))
+            self.assertEqual(b["metadata"]["page_available"], False)
 
     def test_real_out_of_scope_and_absent_detail(self):
         self.assertEqual(post(self.c, "What is the weather in Hyderabad?").json()["status"], "out_of_scope")

@@ -78,10 +78,10 @@ export default function Welcome({
       {/* Suggested Questions (Max 6) */}
       <div className="mt-9 w-full max-w-2xl text-left">
         <div className="mb-2.5 flex items-center justify-between px-1">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-700">
             Suggested questions
           </span>
-          <span className="text-[11px] text-stone-400">Click to ask</span>
+          <span className="text-[11px] text-stone-600">Click to ask</span>
         </div>
         <div className="grid w-full grid-cols-1 gap-2.5 sm:grid-cols-2">
           {EXAMPLE_PROMPTS.map((p) => (
@@ -119,10 +119,10 @@ export default function Welcome({
         className="mt-8 w-full max-w-2xl rounded-2xl border border-stone-200/90 bg-white p-4 text-left shadow-2xs sm:p-5"
       >
         <div className="mb-3 flex flex-wrap items-center justify-between gap-1">
-          <h2 className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+          <h2 className="text-[11px] font-semibold uppercase tracking-wider text-stone-700">
             Explore SAP Utilities
           </h2>
-          <span className="text-[11px] text-stone-400">Browse by topic area</span>
+          <span className="text-[11px] text-stone-600">Browse by topic area</span>
         </div>
 
         {/* Polished Segmented Control */}
