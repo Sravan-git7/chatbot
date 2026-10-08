@@ -41,7 +41,9 @@ class HealthReadyTests(unittest.TestCase):
         self.assertTrue(data["ready"])
         self.assertEqual(data["generator"], "extractive")
         self.assertEqual(data["topics"], 29)
-        self.assertTrue(data["pages_available"] > 0)
+        self.assertGreater(data["pages_available"], 0)
+        self.assertEqual(data["pages_available"], self.svc.info()["pages_available"],
+                         "readiness must report admitted/searchable pages, not merely registered topic cards")
         self.assertIn("X-Request-Id", r.headers)
 
     def test_api_health_backward_compatibility(self):

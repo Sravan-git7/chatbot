@@ -151,12 +151,16 @@ class DispatchAndNovelty(unittest.TestCase):
              patch.object(S, "support_chain", return_value={"ok": True, "verbatim_all": True}):
             result = service.ask("elaborate", context={"questions": [BILLING], "answer": BASE_ANSWER}, debug=True)
 
-        self.assertEqual(result["status"], "unable_to_verify")
+        # Exhausted elaboration is its own deterministic state: NOT unable_to_verify, NOT documentation_unavailable.
+        self.assertEqual(result["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
         self.assertNotEqual(result["answer"], BASE_ANSWER)
+        self.assertEqual(result["answer"], S.USER_TEXT[S.NO_ADDITIONAL_VERIFIED_EVIDENCE])
         self.assertEqual(result["sources"], [])
+        self.assertIsNone(result["topic_reference"])          # the used page is never claimed to be missing
         self.assertEqual(result["metadata"]["reason_code"], "NO_ADDITIONAL_SUPPORTED_DETAILS")
         self.assertEqual(result["metadata"]["follow_up_category"], "elaborate")
         self.assertFalse(result["metadata"]["grounded"])
+        self.assertFalse(result["metadata"]["can_elaborate"])
         self.assertEqual(result["debug"]["evidence"]["final_novelty_check"]["ok"], False)
 
     def test_server_canonicalizes_active_page_identity_and_fails_closed_on_mismatch(self):
@@ -182,6 +186,172 @@ class DispatchAndNovelty(unittest.TestCase):
         self.assertEqual(context["identity"]["guide_id"], resolved.effective_guide_id)
         active["identity"]["page_id"] = "a-different-page"
         self.assertIsNone(service._canonical_active_topic({"active_topic": active}))
+
+
+def _raw_refusal() -> dict:
+    return {
+        "schema_version": "8.1", "status": "insufficient_context", "answer": None, "reason_code": "GENERATOR_REFUSED",
+        "topic": {"source_id": "M2C-12", "title": "Automatic Billing", "card_url": "https://help.sap.com/billing",
+                  "identity_status": "resolved_local_page", "effective_guide_id": "billing-guide",
+                  "effective_page_id": "billing-page", "corpus_status": "ingested"},
+        "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
+        "debug": {"grounding": {"ok": False, "sentences": [], "violations": [], "cited_markers": []}},
+        "timings_ms": {},
+    }
+
+
+def _raw_out_of_domain() -> dict:
+    return {
+        "schema_version": "8.1", "status": "out_of_domain", "answer": None,
+        "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+        "topic": {"source_id": None, "title": None, "card_url": None, "identity_status": None,
+                  "effective_guide_id": None, "effective_page_id": None, "corpus_status": None},
+        "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
+        "debug": {},
+        "timings_ms": {},
+    }
+
+
+class _ScriptedPipeline:
+    """A base-pipeline stand-in that answers each scripted query with the given raw result."""
+
+    def __init__(self, script):
+        self.script = dict(script)
+        self.generator = SimpleNamespace(name="extractive", reset_request_state=lambda: None)
+        self.retriever = SimpleNamespace()
+        self.calls = []
+
+    def answer(self, query, debug=False, **kwargs):
+        self.calls.append(query)
+        return self.script.get(query, _raw_out_of_domain())
+
+
+class ExhaustedElaborationState(unittest.TestCase):
+    """The active topic survives an exhausted elaboration; repeated elaboration never falls through to OOS."""
+
+    def _service_with_script(self, script):
+        service = _service("extractive")
+        base = _ScriptedPipeline(script)
+        service.pipeline.answer = base.answer
+        return service, base
+
+    def test_repeated_elaborate_after_exhaustion_never_becomes_out_of_scope(self):
+        service, base = self._service_with_script({BILLING: _raw_answer(BASE_ANSWER)})
+        scoped_answer = _FakeRequestPipeline(NOVEL_ANSWER)
+        scoped_refused = _FakeRequestPipeline.__new__(_FakeRequestPipeline)
+        scoped_refused.generator = SimpleNamespace(name="extractive")
+        scoped_refused.retriever = SimpleNamespace()
+        scoped_refused.calls = []
+        scoped_refused.answer = lambda query, debug=False, **kwargs: _raw_refusal()
+        scoped_pipelines = [scoped_answer, scoped_refused]
+        built = []
+
+        def fake_scoped(*args, **kwargs):
+            built.append(kwargs)
+            return scoped_pipelines[min(len(built) - 1, len(scoped_pipelines) - 1)]
+
+        with patch.object(EL, "scoped_pipeline", side_effect=fake_scoped), \
+             patch.object(S, "support_chain", return_value={"ok": True, "verbatim_all": True}):
+            first = service.ask(BILLING, conversation_id="conv-exhausted")
+            self.assertEqual(first["status"], "answered")
+            self.assertTrue(first["metadata"]["can_elaborate"])
+
+            second = service.ask("elaborate", conversation_id="conv-exhausted")
+            self.assertEqual(second["status"], "answered")                    # expanded grounded elaboration
+            self.assertTrue(second["metadata"]["can_elaborate"])
+
+            third = service.ask("elaborate", conversation_id="conv-exhausted")
+            self.assertEqual(third["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
+            self.assertEqual(third["answer"], S.USER_TEXT[S.NO_ADDITIONAL_VERIFIED_EVIDENCE])
+            self.assertEqual(third["metadata"]["reason_code"], "NO_ADDITIONAL_SUPPORTED_DETAILS")
+            self.assertEqual(third["metadata"]["follow_up_category"], "elaborate")
+            self.assertFalse(third["metadata"]["can_elaborate"])
+            self.assertIsNone(third["topic_reference"])                       # never claims the used page is missing
+            self.assertEqual(third["sources"], [])
+
+            scoped_calls_before = len(built)
+            base_calls_before = len(base.calls)
+            for phrase in ("elaborate", "explain more", "tell me more", "go deeper"):
+                again = service.ask(phrase, conversation_id="conv-exhausted", debug=True)
+                self.assertEqual(again["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE, phrase)
+                self.assertEqual(again["answer"], S.USER_TEXT[S.NO_ADDITIONAL_VERIFIED_EVIDENCE], phrase)
+                self.assertEqual(again["metadata"]["follow_up_category"], "elaborate", phrase)
+                self.assertFalse(again["metadata"]["can_elaborate"], phrase)
+                self.assertIsNone(again["topic_reference"], phrase)
+                self.assertEqual(again["debug"]["pipeline"]["follow_up"]["pass"], "elaboration_exhausted", phrase)
+            # the exhausted state is served from the backend state: no retrieval, no generation, no gates
+            self.assertEqual(len(built), scoped_calls_before)
+            self.assertEqual(len(base.calls), base_calls_before)
+
+    def test_a_new_query_after_exhaustion_routes_normally_and_re_anchors(self):
+        service, base = self._service_with_script({BILLING: _raw_answer(BASE_ANSWER)})
+        scoped_refused = _FakeRequestPipeline.__new__(_FakeRequestPipeline)
+        scoped_refused.generator = SimpleNamespace(name="extractive")
+        scoped_refused.retriever = SimpleNamespace()
+        scoped_refused.calls = []
+        scoped_refused.answer = lambda query, debug=False, **kwargs: _raw_refusal()
+        with patch.object(EL, "scoped_pipeline", return_value=scoped_refused), \
+             patch.object(S, "support_chain", return_value={"ok": True, "verbatim_all": True}):
+            service.ask(BILLING, conversation_id="conv-switch")
+            exhausted = service.ask("elaborate", conversation_id="conv-switch")
+            self.assertEqual(exhausted["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
+
+            contract_raw = _raw_answer("A contract account is a master data record. [S1]")
+            contract_raw["topic"] = {"source_id": "M2C-17", "title": "Contract Accounts Overview",
+                                     "card_url": "https://help.sap.com/contracts", "identity_status": "resolved_local_page",
+                                     "effective_guide_id": "contract-guide", "effective_page_id": "contract-page",
+                                     "corpus_status": "ingested"}
+            base.script["What is a contract account?"] = contract_raw
+            switched = service.ask("What is a contract account?", conversation_id="conv-switch")
+            self.assertEqual(switched["status"], "answered")
+            self.assertEqual(switched["metadata"]["card_id"], "M2C-17")
+            self.assertTrue(switched["metadata"]["can_elaborate"])
+
+    def test_an_out_of_scope_turn_after_exhaustion_clears_the_anchor_safely(self):
+        service, base = self._service_with_script({BILLING: _raw_answer(BASE_ANSWER)})
+        scoped_refused = _FakeRequestPipeline.__new__(_FakeRequestPipeline)
+        scoped_refused.generator = SimpleNamespace(name="extractive")
+        scoped_refused.retriever = SimpleNamespace()
+        scoped_refused.calls = []
+        scoped_refused.answer = lambda query, debug=False, **kwargs: _raw_refusal()
+        with patch.object(EL, "scoped_pipeline", return_value=scoped_refused), \
+             patch.object(S, "support_chain", return_value={"ok": True, "verbatim_all": True}):
+            service.ask(BILLING, conversation_id="conv-oos")
+            exhausted = service.ask("elaborate", conversation_id="conv-oos")
+            self.assertEqual(exhausted["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
+
+            oos = service.ask("What is the capital of France?", conversation_id="conv-oos")
+            self.assertEqual(oos["status"], "out_of_scope")
+
+            # no active topic is left, so "elaborate" keeps the pinned fresh-chat behaviour (safe OOS)
+            after = service.ask("elaborate", conversation_id="conv-oos")
+            self.assertEqual(after["status"], "out_of_scope")
+            self.assertIn("elaborate", base.calls)                            # the raw message reached the pipeline
+
+    def test_a_non_elaborate_follow_up_after_exhaustion_keeps_the_anchor_without_spending_it(self):
+        service, base = self._service_with_script({BILLING: _raw_answer(BASE_ANSWER)})
+        scoped_refused = _FakeRequestPipeline.__new__(_FakeRequestPipeline)
+        scoped_refused.generator = SimpleNamespace(name="extractive")
+        scoped_refused.retriever = SimpleNamespace()
+        scoped_refused.calls = []
+        scoped_refused.answer = lambda query, debug=False, **kwargs: _raw_refusal()
+        with patch.object(EL, "scoped_pipeline", return_value=scoped_refused) as build_scoped, \
+             patch.object(S, "support_chain", return_value={"ok": True, "verbatim_all": True}):
+            service.ask(BILLING, conversation_id="conv-example")
+            exhausted = service.ask("elaborate", conversation_id="conv-example")
+            self.assertEqual(exhausted["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
+            calls_after_exhaustion = build_scoped.call_count
+
+            # "give me an example" is a different intent: it runs its own scoped pass (not the short-circuit) ...
+            example = service.ask("give me an example", conversation_id="conv-example")
+            self.assertEqual(example["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
+            self.assertEqual(build_scoped.call_count, calls_after_exhaustion + 1)
+            self.assertEqual(build_scoped.call_args.kwargs["previous_answer"].split("\n")[0], BASE_ANSWER)
+
+            # ... and the topic is still anchored, so a later "elaborate" resolves instead of falling to OOS
+            again = service.ask("elaborate", conversation_id="conv-example")
+            self.assertEqual(again["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
+            self.assertNotEqual(again["status"], "out_of_scope")
 
 
 class TopicConsistency(unittest.TestCase):

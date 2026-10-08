@@ -199,6 +199,9 @@ class Metadata(BaseModel):
     page_available: Optional[bool] = None
     generator: str
     grounded: bool
+    # The backend is authoritative about elaboration availability: true for a grounded answer, false once the
+    # verified evidence of the active topic is exhausted (status no_additional_verified_evidence).
+    can_elaborate: bool = True
     grounding: Grounding
     pipeline_status: str
     reason_code: Optional[str] = None
@@ -337,7 +340,11 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
                     return JSONResponse(error_body("model_unavailable", "Ollama model is not reachable.", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
         except Exception as e:
             return JSONResponse(error_body("service_not_ready", f"Readiness check failed: {e}", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
-        return JSONResponse({"status": "ok", "ready": True, "topics": len(svc.pipeline.cards), "pages_available": len(svc.pipeline.corpus.entries), "generator": svc.generator_name}, headers={"X-Request-Id": req_id})
+        # Match /api/health: count pages actually admitted/searchable, not the 29 registered topic cards (25/29 today).
+        # This is a reporting correction only; the readiness checks above and the response shape stay unchanged.
+        return JSONResponse({"status": "ok", "ready": True, "topics": len(svc.pipeline.cards),
+                             "pages_available": svc.info()["pages_available"], "generator": svc.generator_name},
+                            headers={"X-Request-Id": req_id})
 
     @app.get("/api/health")
     def api_health(request: Request):

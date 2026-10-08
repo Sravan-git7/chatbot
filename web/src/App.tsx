@@ -82,6 +82,25 @@ export default function App() {
     )
   }, [])
 
+  const disableElaborationForTopic = useCallback((convId: string, sourceId: string | null) => {
+    if (!sourceId) return
+    // The backend has authoritatively exhausted this topic's verified evidence. Apply that can_elaborate=false
+    // decision to its earlier grounded answer cards as well, so scrolling up cannot expose a stale action. This is
+    // a presentation update only; it does not infer evidence availability or alter any answer/citation.
+    setConversations((list) => list.map((conversation) => conversation.id !== convId ? conversation : ({
+      ...conversation,
+      messages: conversation.messages.map((message) => {
+        const result = message.result
+        const messageTopic = result?.metadata.topic_identity?.source_id ?? result?.metadata.card_id
+        if (message.role !== 'assistant' || result?.status !== 'answered' || messageTopic !== sourceId) return message
+        return {
+          ...message,
+          result: { ...result, metadata: { ...result.metadata, can_elaborate: false } },
+        }
+      }),
+    })))
+  }, [])
+
   const send = useCallback(
     async (text: string) => {
       const now = Date.now()
@@ -108,6 +127,9 @@ export default function App() {
         if (MIN_THINKING_MS > 0 && elapsed < MIN_THINKING_MS) {
           await new Promise((r) => setTimeout(r, MIN_THINKING_MS - elapsed))
         }
+        if (result.status === 'no_additional_verified_evidence' && result.metadata.can_elaborate === false) {
+          disableElaborationForTopic(convId, result.metadata.topic_identity?.source_id ?? result.metadata.card_id)
+        }
         patchMessage(convId, reply.id, { pending: false, content: result.answer, result, error: undefined })
       } catch (e) {
         const error: ChatError =
@@ -117,7 +139,7 @@ export default function App() {
         patchMessage(convId, reply.id, { pending: false, error })
       }
     },
-    [currentId, patchMessage, conversations, pending],
+    [currentId, patchMessage, disableElaborationForTopic, conversations, pending],
   )
 
   const retryMessage = useCallback(
@@ -131,6 +153,9 @@ export default function App() {
         if (MIN_THINKING_MS > 0 && elapsed < MIN_THINKING_MS) {
           await new Promise((r) => setTimeout(r, MIN_THINKING_MS - elapsed))
         }
+        if (result.status === 'no_additional_verified_evidence' && result.metadata.can_elaborate === false) {
+          disableElaborationForTopic(convId, result.metadata.topic_identity?.source_id ?? result.metadata.card_id)
+        }
         patchMessage(convId, replyId, { pending: false, content: result.answer, result, error: undefined })
       } catch (e) {
         const error: ChatError =
@@ -140,7 +165,7 @@ export default function App() {
         patchMessage(convId, replyId, { pending: false, error })
       }
     },
-    [pending, patchMessage, conversations],
+    [pending, patchMessage, disableElaborationForTopic, conversations],
   )
 
   const select = (id: string) => {

@@ -135,8 +135,17 @@ export function Sources({
   )
 }
 
-export function TopicReferenceCard({ reference }: { reference: TopicReference }) {
+export function TopicReferenceCard({
+  reference,
+  pageAvailable,
+}: {
+  reference: TopicReference
+  /** Backend-reported corpus state of the referenced page; the "not in the local knowledge base" claim is only
+   *  shown when the source is genuinely unavailable. */
+  pageAvailable?: boolean | null
+}) {
   if (!isHttpUrl(reference.url)) return null
+  const genuinelyUnavailable = pageAvailable === false
   return (
     <section
       aria-label="Related SAP Help topic"
@@ -154,7 +163,9 @@ export function TopicReferenceCard({ reference }: { reference: TopicReference })
         {reference.title} ↗
       </a>
       <div className="mt-1 text-stone-500">
-        Reference only: this page is not in the local knowledge base and was not used to answer.
+        {genuinelyUnavailable
+          ? 'Reference only: this page is not in the local knowledge base and was not used to answer.'
+          : 'Reference only: this page was not used as evidence for the answer.'}
       </div>
     </section>
   )

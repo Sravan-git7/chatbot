@@ -44,8 +44,14 @@ describe('api client', () => {
     expect((await catchErr(sendChat('q', 'c', false))).info.kind).toBe('offline')
   })
 
-  it('shape validation rejects wrong status values, missing metadata and bad source urls', () => {
-    expect(isChatResult(result())).toBe(true)
+  it('shape validation accepts the distinct exhausted-elaboration status', () => {
+    const exhausted = result({
+      status: 'no_additional_verified_evidence',
+      answer: "That's all the additional detail I could verify from the available documentation.",
+      sources: [],
+      metadata: { ...result().metadata, grounded: false, can_elaborate: false, reason_code: 'NO_ADDITIONAL_SUPPORTED_DETAILS' },
+    })
+    expect(isChatResult(exhausted)).toBe(true)
     expect(isChatResult({ ...result(), status: 'maybe' })).toBe(false)
     expect(isChatResult({ ...result(), metadata: undefined })).toBe(false)
     expect(isChatResult({ ...result(), sources: [{ url: 5 }] })).toBe(false)

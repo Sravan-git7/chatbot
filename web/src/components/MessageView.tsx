@@ -9,6 +9,7 @@ const STATUS_HEADLINE: Record<Exclude<ApiStatus, 'answered'>, string> = {
   documentation_unavailable: 'Documentation unavailable',
   unable_to_verify: 'Unable to verify',
   out_of_scope: 'Out of scope',
+  no_additional_verified_evidence: 'No more verified detail',
 }
 
 export const THINKING_STAGES = [
@@ -197,7 +198,7 @@ export default function MessageView({
               {/* Answer Footer Actions & Verification */}
               <div className="mt-4 flex flex-wrap items-center gap-3 pt-1">
                 <CopyButton text={answerForClipboard(r.answer, r.sources)} />
-                {onAskFollowUp && (
+                {onAskFollowUp && r.metadata.can_elaborate !== false && (
                   <button
                     type="button"
                     disabled={disabled}
@@ -302,7 +303,12 @@ export default function MessageView({
                 Try including the SAP Utilities topic or component you're asking about.
               </p>
             )}
-            {r.topic_reference && <TopicReferenceCard reference={r.topic_reference} />}
+            {r.status === 'no_additional_verified_evidence' && (
+              <p className="mt-1.5 text-xs text-stone-500">
+                Ask a new question about this topic, or switch to another SAP Utilities topic.
+              </p>
+            )}
+            {r.topic_reference && <TopicReferenceCard reference={r.topic_reference} pageAvailable={r.metadata?.page_available} />}
           </div>
         )}
 

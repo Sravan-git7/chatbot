@@ -15,7 +15,7 @@ export const EXPLORE_TOPICS: TopicCategory[] = [
     questions: [
       'How is billing handled?',
       'How does automatic billing work?',
-      'How does a budget billing plan work?',
+      'How are budget billing plans processed?',
     ],
   },
   {
@@ -32,7 +32,8 @@ export const EXPLORE_TOPICS: TopicCategory[] = [
     label: 'Contract Accounts',
     description: 'Contract account master data, payment terms, and structure',
     questions: [
-      'What is the contract account business object?',
+      // Do not promise unavailable topic pages in the suggested-question list; keep only searchable alternatives.
+      'How does a contract account relate to a business partner?',
       'How are incoming payments analyzed and cleared?',
     ],
   },
@@ -192,12 +193,26 @@ export function isHttpUrl(url: string | null | undefined): url is string {
   return typeof url === 'string' && /^https?:\/\//i.test(url)
 }
 
+/**
+ * Display-safe whitespace normalization for extracted documentation text. Source/evidence stays canonical and
+ * backend citation validation operates on canonical spans; this only fixes clear extraction artifacts in display:
+ * missing space after a comma, stray spaces before punctuation, and a word fused to a closing parenthesis.
+ * Citation markers are not modified.
+ */
+export function normalizeDisplayText(text: string): string {
+  return (text ?? '')
+    .replace(/,([A-Za-z])/g, ', $1')
+    .replace(/\s+([,.!?:;])/g, '$1')
+    .replace(/\)([A-Z])/g, ') $1')
+}
+
 /** Plain-text version of an answer for the clipboard: the answer as written, followed by its sources. */
 export function answerForClipboard(answer: string, sources: Source[]): string {
+  const displayAnswer = normalizeDisplayText(answer)
   const groups = groupSources(sources)
-  if (!groups.length) return answer
+  if (!groups.length) return displayAnswer
   const lines = groups.map((g) => `${g.markers.map((m) => `[${m}]`).join('')} ${g.title}${g.section && g.section !== g.title ? ` > ${g.section}` : ''}${g.url ? ` - ${g.url}` : ''}`)
-  return `${answer}\n\nSources:\n${lines.join('\n')}`
+  return `${displayAnswer}\n\nSources:\n${lines.join('\n')}`
 }
 
 export function relativeTime(ts: number, now = Date.now()): string {

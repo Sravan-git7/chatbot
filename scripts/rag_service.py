@@ -39,7 +39,12 @@ MAX_MESSAGE_CHARS = 500
 CONVERSATION_ID_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
 ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE = "answered", "documentation_unavailable", "unable_to_verify", "out_of_scope"
-API_STATUSES = (ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE)
+# A scoped elaboration that cannot add any further verified evidence is its own deterministic state: the topic WAS
+# answered and grounded, the source page exists in the corpus, and only the unused verified evidence is exhausted.
+# It is deliberately NOT unable_to_verify (nothing failed to verify) and NOT documentation_unavailable (the page is
+# not missing), so the response never claims that a used page is absent from the knowledge base.
+NO_ADDITIONAL_VERIFIED_EVIDENCE = "no_additional_verified_evidence"
+API_STATUSES = (ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE, NO_ADDITIONAL_VERIFIED_EVIDENCE)
 # pipeline status (rag_pipeline.STATUSES) -> API status
 STATUS_MAP = {"answered": ANSWERED, "page_not_ingested": DOC_UNAVAILABLE, "unresolved_identity": UNABLE_TO_VERIFY, "insufficient_context": UNABLE_TO_VERIFY,
               "out_of_domain": OUT_OF_SCOPE, "no_relevant_page": OUT_OF_SCOPE}
@@ -47,6 +52,7 @@ USER_TEXT = {
     DOC_UNAVAILABLE: "I found the relevant topic, but the underlying SAP Help page is not currently available in the local knowledge base.",
     UNABLE_TO_VERIFY: "I couldn't find enough verified information in the available SAP Utilities documentation to answer that specific detail.",
     OUT_OF_SCOPE: "This question doesn't appear to match the SAP Utilities documentation available to me.",
+    NO_ADDITIONAL_VERIFIED_EVIDENCE: "That's all the additional detail I could verify from the available documentation.",
 }
 UNRESOLVED_TEXT = "I couldn't verify the relevant documentation."
 REFERENCE_NOTE = "Topic reference only - not used as evidence for any answer."
@@ -230,13 +236,16 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     """Translate one ``RagPipeline.answer`` dict (produced with ``debug=True``) into the public chat result."""
     pstatus = raw["status"]
     status = STATUS_MAP[pstatus]
+    if raw.get("reason_code") == "NO_ADDITIONAL_SUPPORTED_DETAILS":
+        # Scoped elaboration with no additional verified evidence: a distinct state, not an abstention failure.
+        status = NO_ADDITIONAL_VERIFIED_EVIDENCE
     topic = raw.get("topic") or {}
     dbg = raw.get("debug") or {}
     if status == ANSWERED:
         answer = raw["answer"]
         sources = [_source(s) for s in raw["citations"]["answer_sources"]]
-    elif raw.get("reason_code") == "NO_ADDITIONAL_SUPPORTED_DETAILS":
-        answer = "I can expand this, but the available documentation does not provide additional verified detail."
+    elif status == NO_ADDITIONAL_VERIFIED_EVIDENCE:
+        answer = USER_TEXT[NO_ADDITIONAL_VERIFIED_EVIDENCE]
         sources = []
     else:
         answer = UNRESOLVED_TEXT if pstatus == "unresolved_identity" else USER_TEXT[status]
@@ -257,9 +266,11 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     if status in (DOC_UNAVAILABLE, UNABLE_TO_VERIFY) and pstatus != "unresolved_identity" and topic.get("title") and _safe_url(topic.get("card_url")) and is_relevant_topic:
         reference = {"type": "topic_reference", "title": topic["title"], "url": _safe_url(topic["card_url"]), "note": REFERENCE_NOTE}
     routed = status != OUT_OF_SCOPE
+    grounding_view = _grounding(dbg, pstatus)
+    grounded_ok = status == ANSWERED and grounding_view["ok"] is True
     meta = {"card_id": topic.get("source_id") if routed else None, "card_title": topic.get("title") if routed else None,
-            "identity_status": topic.get("identity_status") if routed else None, "page_available": (topic.get("corpus_status") == "ingested") if routed else None, "generator": generator, "grounded": status == ANSWERED and _grounding(dbg, pstatus)["ok"] is True,
-            "grounding": _grounding(dbg, pstatus), "pipeline_status": pstatus, "reason_code": raw.get("reason_code"), "latency_ms": round(latency_ms, 1)}
+            "identity_status": topic.get("identity_status") if routed else None, "page_available": (topic.get("corpus_status") == "ingested") if routed else None, "generator": generator, "grounded": grounded_ok,
+            "can_elaborate": grounded_ok, "grounding": grounding_view, "pipeline_status": pstatus, "reason_code": raw.get("reason_code"), "latency_ms": round(latency_ms, 1)}
     if (status == ANSWERED and topic.get("source_id") and topic.get("effective_guide_id") and topic.get("effective_page_id")):
         meta["topic_identity"] = {
             "source_id": topic["source_id"], "title": topic.get("title"),
@@ -447,6 +458,22 @@ class RagService:
                             "seen_answers": prev.get("seen_answers", []),
                         } if prev.get("topic_identity") else None,
                     }
+                elif (prev and prev.get("status") == NO_ADDITIONAL_VERIFIED_EVIDENCE and prev.get("topic_identity")
+                        and prev.get("answer") and prev.get("query")):
+                    # The active topic survives an exhausted elaboration: the topic stays anchored, only the unused
+                    # verified evidence is spent. Follow-ups keep resolving against it instead of falling through to
+                    # out-of-scope routing.
+                    effective_context = {
+                        "questions": [prev["query"]],
+                        "answer": prev["answer"],
+                        "active_topic": {
+                            "query": prev["query"],
+                            "answer": prev["answer"],
+                            "identity": prev.get("topic_identity"),
+                            "seen_answers": prev.get("seen_answers", []),
+                        },
+                        "elaboration_exhausted": bool(prev.get("elaboration_exhausted")),
+                    }
 
         follow_up = FU.resolve(q, effective_context) if effective_context else None
         category = follow_up["category"] if follow_up else None
@@ -455,8 +482,51 @@ class RagService:
         expected_topic: Optional[Dict[str, Any]] = None
         anchor_query = q
         previous_answer = ""
+        short_circuited = False
+        with self._lock:
+            stored_state = self._conversations.get(cid)
 
-        if follow_up and EL.is_elaboration_intent(category):
+        if (
+            follow_up is not None
+            and category == "elaborate"
+            and isinstance(stored_state, dict)
+            and stored_state.get("status") == NO_ADDITIONAL_VERIFIED_EVIDENCE
+            and stored_state.get("elaboration_exhausted") is True
+            and stored_state.get("topic_identity")
+            and stored_state.get("answer")
+            and follow_up.get("anchor") == stored_state.get("query")
+        ):
+            # Repeated elaboration intent ("elaborate", "explain more", "tell me more", ... - all the same category)
+            # after the verified evidence of the active topic is exhausted: return the same safe
+            # no-additional-evidence state. The follow-up is never re-routed, so it can never fall through to
+            # out_of_scope. The backend owns this state; the response mirrors it with can_elaborate=false.
+            short_circuited = True
+            identity = dict(stored_state["topic_identity"])
+            card = self.pipeline.cards.get(str(identity.get("source_id") or "")) or {}
+            raw: Dict[str, Any] = {
+                "status": "insufficient_context",
+                "reason_code": "NO_ADDITIONAL_SUPPORTED_DETAILS",
+                "answer": None,
+                "topic": {
+                    "source_id": identity.get("source_id"),
+                    "title": identity.get("title"),
+                    "card_url": card.get("source_url"),
+                    "identity_status": "resolved_local_page",
+                    "effective_guide_id": identity.get("guide_id"),
+                    "effective_page_id": identity.get("page_id"),
+                    "corpus_status": "ingested",
+                },
+                "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
+                "routing": {"selected_source_id": identity.get("source_id"), "candidates": [], "mode": "elaboration_exhausted"},
+                "debug": {},
+                "timings_ms": {},
+            }
+            evidence: Optional[Dict[str, Any]] = {
+                "checked": True, "supported": False, "reason": "NO_ADDITIONAL_EVIDENCE", "intent": category,
+                "selected": [], "elaborated": None, "final_novelty_check": {"ok": False},
+                "reason_added": "NO_ADDITIONAL_EVIDENCE", "elaboration_exhausted": True,
+            }
+        elif follow_up and EL.is_elaboration_intent(category):
             active_topic = self._canonical_active_topic(effective_context)
             if active_topic:
                 expected_topic = {"identity": active_topic["identity"]}
@@ -480,37 +550,40 @@ class RagService:
             pipeline_query = anchor_query if follow_up.get("form") == "clause" else follow_up["query"]
 
         t0 = time.perf_counter()
-        try:
-            if self.coarse_lock:
-                if self._lock.acquire(blocking=False):
-                    q_wait = 0.0
+        if short_circuited:
+            pass                                                # raw/evidence already built: no retrieval, no generation, no gates
+        else:
+            try:
+                if self.coarse_lock:
+                    if self._lock.acquire(blocking=False):
+                        q_wait = 0.0
+                    else:
+                        t_w0 = time.perf_counter()
+                        self._lock.acquire()
+                        q_wait = (time.perf_counter() - t_w0) * 1000.0
+                    try:
+                        raw, evidence = self._run_pipeline_request(
+                            pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
+                        )
+                    finally:
+                        self._lock.release()
                 else:
-                    t_w0 = time.perf_counter()
-                    self._lock.acquire()
-                    q_wait = (time.perf_counter() - t_w0) * 1000.0
-                try:
-                    raw, evidence = self._run_pipeline_request(
-                        pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
-                    )
-                finally:
-                    self._lock.release()
-            else:
-                if self._request_sem.acquire(blocking=False):
-                    q_wait = 0.0
-                else:
-                    t_w0 = time.perf_counter()
-                    self._request_sem.acquire()
-                    q_wait = (time.perf_counter() - t_w0) * 1000.0
-                try:
-                    raw, evidence = self._run_pipeline_request(
-                        pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
-                    )
-                finally:
-                    self._request_sem.release()
-        except ServiceError:
-            raise
-        except Exception as e:                                       # noqa: BLE001
-            raise PipelineFailure(f"The retrieval pipeline failed ({type(e).__name__}). No answer was produced.") from e
+                    if self._request_sem.acquire(blocking=False):
+                        q_wait = 0.0
+                    else:
+                        t_w0 = time.perf_counter()
+                        self._request_sem.acquire()
+                        q_wait = (time.perf_counter() - t_w0) * 1000.0
+                    try:
+                        raw, evidence = self._run_pipeline_request(
+                            pipeline_query, queue_wait_ms=q_wait, pipeline=scoped, expected_topic=expected_topic
+                        )
+                    finally:
+                        self._request_sem.release()
+            except ServiceError:
+                raise
+            except Exception as e:                               # noqa: BLE001
+                raise PipelineFailure(f"The retrieval pipeline failed ({type(e).__name__}). No answer was produced.") from e
 
         # Scoped elaboration validation & novelty check
         if scoped is not None:
@@ -550,6 +623,9 @@ class RagService:
                 view["pass"] = "elaboration"
                 view["retrieval_query"] = pipeline_query
                 view["selected"] = [u.get("sentence") for u in (evidence or {}).get("selected") or []]
+            elif short_circuited:
+                view["pass"] = "elaboration_exhausted"
+                view["retrieval_query"] = stored_state.get("query") if isinstance(stored_state, dict) else None
             raw["debug"]["follow_up"] = view
 
         presentation_sections = None
@@ -558,7 +634,7 @@ class RagService:
 
         result = to_chat_result(
             raw,
-            "extractive" if scoped is not None else self.generator_name,
+            "extractive" if (scoped is not None or short_circuited) else self.generator_name,
             cid,
             (time.perf_counter() - t0) * 1000,
             debug=debug,
@@ -587,6 +663,36 @@ class RagService:
                     "seen_answers": seen,
                     "updated_at": now,
                 }
+            elif (result["status"] == NO_ADDITIONAL_VERIFIED_EVIDENCE and follow_up is not None
+                    and EL.is_elaboration_intent(category)):
+                # An exhausted elaboration never replaces the active topic (the same rule the client-side state
+                # machine applies to every failed follow-up): the anchor, identity and evidence history survive, so
+                # the next follow-up still resolves against this topic instead of falling through to out_of_scope.
+                # Only the "elaborate" intent itself spends the elaboration availability.
+                prev_now = self._conversations.get(cid)
+                if isinstance(prev_now, dict) and prev_now.get("topic_identity") and prev_now.get("answer") and prev_now.get("query"):
+                    self._conversations[cid] = {
+                        "query": prev_now["query"],
+                        "answer": prev_now["answer"],
+                        "status": result["status"],
+                        "grounded": False,
+                        "topic_identity": prev_now["topic_identity"],
+                        "sources": prev_now.get("sources", []),
+                        "seen_answers": list(prev_now.get("seen_answers", [])),
+                        "elaboration_exhausted": category == "elaborate",
+                        "updated_at": now,
+                    }
+                else:
+                    self._conversations[cid] = {
+                        "query": q,
+                        "answer": result.get("answer", ""),
+                        "status": result["status"],
+                        "grounded": False,
+                        "topic_identity": None,
+                        "sources": [],
+                        "seen_answers": [],
+                        "updated_at": now,
+                    }
             else:
                 self._conversations[cid] = {
                     "query": q,

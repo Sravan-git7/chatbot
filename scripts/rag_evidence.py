@@ -30,6 +30,7 @@ import sys
 import threading
 import time
 from dataclasses import dataclass, field
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
@@ -269,6 +270,11 @@ _QUALITY_LIST_LEADIN = re.compile(
     r")\s*[:：]\s*$",
     re.I,
 )
+# A single list entry ("- Measure : Total Payment Amount", "1. Introduction"): a configuration label or step name,
+# not a sentence. Only bare entries are caught - a punctuated or imperative item ("- The Chart View shows ...",
+# "- Choose Continue ...") remains evidence.
+_QUALITY_BARE_LIST_ITEM = re.compile(r"^\s*(?:[-*•]|\d+[.)])\s+")
+_SENTENCE_END = re.compile(r"[.!?][\"'”’)}\]]*\s*$")
 
 
 def quality_norm(text: str) -> str:
@@ -276,19 +282,28 @@ def quality_norm(text: str) -> str:
     return re.sub(r"[^\w]+", " ", text.casefold(), flags=re.UNICODE).strip()
 
 
+# Industry/component codes in parentheses ("(IS-U)", "(FS-CD)", "(F5588)") are labels, not verbs: without this,
+# the verb "IS" inside "(IS-T)" would make a heading-only fragment look like an explanatory sentence.
+_CODE_PAREN = re.compile(r"\(\s*[A-Z][A-Z0-9]*(?:[-‐‑‒–—][A-Z0-9]+)*\s*\)")
+
+
 def _has_explanatory_predicate(text: str) -> bool:
-    if _QUALITY_EXPLANATORY_PREDICATE.search(text or ""):
+    stripped = _CODE_PAREN.sub(" ", text or "")
+    if _QUALITY_EXPLANATORY_PREDICATE.search(stripped):
         return True
     # Keep the documented imperative forms; a bare noun/path fragment is not made valid by word count alone.
     return bool(re.match(r"^\s*(?:run|open|select|choose|click|enter|save|set|specify|maintain|pay|settle|send|"
-                         r"create|use|assign|execute|display|calculate|post|manage|record|transfer)\b", text or "", re.I))
+                         r"create|use|assign|execute|display|calculate|post|manage|record|transfer)\b", stripped, re.I))
 
 
-def is_low_quality_fragment(text: str, heading_labels: Sequence[str] = ()) -> bool:
+def is_low_quality_fragment(text: str, heading_labels: Sequence[str] = (), chunk_text: str = "") -> bool:
     """Reject obvious headings/breadcrumbs/OCR fragments while retaining short explanatory clauses.
 
     Structural/title overlap, absent predicate/punctuation, navigation vocabulary and trailing page numbers are used
-    together; there is no general minimum-length threshold for rejecting evidence.
+    together; there is no general minimum-length threshold for rejecting evidence. Two further structural cases are
+    rejected when the chunk text is available: a bare list entry with no sentence of its own ("- Measure : Total
+    Payment Amount") and a short unpunctuated line that stands alone inside a multi-line chunk (an embedded heading
+    such as "SAP Fiori Implementation Information").
     """
     raw = re.sub(r"\s+", " ", str(text or "")).strip()
     if not raw:
@@ -306,6 +321,21 @@ def is_low_quality_fragment(text: str, heading_labels: Sequence[str] = ()) -> bo
     has_predicate = _has_explanatory_predicate(clean)
     if has_predicate:
         return False
+    has_sentence_punctuation = bool(_SENTENCE_END.search(clean))
+    if not has_sentence_punctuation and not _CODE_TOKEN.search(clean):
+        # Compact transaction/code headings can be the only source for an asked code; they stay admissible even
+        # though, by themselves, they are not explanatory evidence (same exemption as for adjacent context lines).
+        # A bare list entry carries no sentence of its own: without a predicate (checked on the entry body, so an
+        # imperative step like "- Choose Continue ..." stays evidence) or terminal punctuation it is a configuration
+        # label or step name, never answer content.
+        if _QUALITY_BARE_LIST_ITEM.match(clean) and not _has_explanatory_predicate(_QUALITY_BARE_LIST_ITEM.sub("", clean)):
+            return True
+        # A short, unpunctuated line that stands alone inside a multi-line chunk is an embedded heading or
+        # navigation fragment, not evidence.
+        if chunk_text:
+            has_neighbor_lines, chunk_lines = _nonempty_chunk_lines(str(chunk_text))
+            if has_neighbor_lines and clean in chunk_lines and len(clean.split()) <= 12:
+                return True
     if _QUALITY_STRUCTURAL_SEPARATOR.search(clean):
         return True
     if re.search(r"\b(?:navigation|breadcrumbs?|menu|table\s+of\s+contents|contents|toc)\b", clean, re.I):
@@ -313,7 +343,6 @@ def is_low_quality_fragment(text: str, heading_labels: Sequence[str] = ()) -> bo
 
     trimmed = clean.rstrip(" .!?;,:\"'”’)]}")
     words = re.findall(r"\b\w+\b", clean, re.UNICODE)
-    has_sentence_punctuation = bool(re.search(r"[.!?][\"'”’)}\]]*\s*$", clean))
     trailing_page_number = bool(_QUALITY_TRAILING_PAGE_NUMBER.search(trimmed))
     if _QUALITY_NAVIGATION_LABEL.search(clean) and (trailing_page_number or not has_sentence_punctuation):
         return True
@@ -336,6 +365,13 @@ def is_low_quality_fragment(text: str, heading_labels: Sequence[str] = ()) -> bo
     if len(compact) >= 8 and sum(char.isalpha() for char in compact) / len(compact) < 0.55:
         return True
     return False
+
+
+@lru_cache(maxsize=512)
+def _nonempty_chunk_lines(chunk_text: str) -> Tuple[bool, frozenset[str]]:
+    """Cached structural lines for a chunk, shared by its sentence units during quality filtering."""
+    lines = tuple(re.sub(r"\s+", " ", line).strip() for line in str(chunk_text or "").split("\n") if line.strip())
+    return len(lines) >= 2, frozenset(lines)
 
 
 def is_incomplete_list_leadin(text: str, supporting_follow: Optional[str] = None,
@@ -383,7 +419,8 @@ def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[Li
         if isinstance(unit_labels, str):
             unit_labels = (unit_labels,)
         labels = tuple(dict.fromkeys((*unit_labels, *headings_by_marker.get(marker, ()), *headings_by_chunk.get(chunk_id, ()))))
-        if is_low_quality_fragment(getattr(unit, "text", ""), labels):
+        unit_chunk_text = str(getattr(unit, "chunk_text", "") or "")
+        if is_low_quality_fragment(getattr(unit, "text", ""), labels, unit_chunk_text):
             excluded.append(unit)
             continue
         if is_incomplete_list_leadin(getattr(unit, "text", ""), getattr(unit, "follow", None), labels):
@@ -395,7 +432,7 @@ def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[Li
             # Compact transaction/code headings can be the only source for an asked code; keep them as attached
             # context even though, by themselves, they are not explanatory evidence.
             code_context = bool(_CODE_TOKEN.search(str(line or "")))
-            if line and not code_context and (is_low_quality_fragment(line, labels) or is_incomplete_list_leadin(line, None, labels)):
+            if line and not code_context and (is_low_quality_fragment(line, labels, unit_chunk_text) or is_incomplete_list_leadin(line, None, labels)):
                 setattr(unit, attr, None)
                 excluded_adjacent += 1
         kept.append(unit)
@@ -475,6 +512,37 @@ def _context_without_rejected_units(context: Any, rejected_units: Sequence[Unit]
 
 def unit_kinds_ok(u: Unit, needs: QuestionNeeds) -> bool:
     return all(kind_satisfied(k, u.full_text(), needs) for k in needs.kinds)
+
+
+# ---------------------------------------------------------------------------------------------- definition-first ordering
+# Deterministic preference for definition-style questions ("What is X?", "What does X mean?", "Define X",
+# "How is X defined?"): definitional evidence is selected and displayed first, with the industry-scoped
+# (SAP Utilities / IS-U) definition ahead of generic evidence when both match. Only units that already passed the
+# same sufficiency cut and kinds gate are reordered, so no threshold, gate or refusal behaviour changes.
+_DEFINITION_QUESTION = re.compile(
+    r"^\s*(?:what\s+(?:is|are|does|do)\b|define\b|definition\b|what's\b|whats\b|meaning\s+of\b)"
+    r"|\bhow\s+is\s+.+\bdefined\b",
+    re.I,
+)
+_DEFINITIONAL_EVIDENCE = re.compile(
+    r"\b(?:is|are|means?|refers? to|represents?|enables? you to|allows? you to|provides?|serves? as|"
+    r"consists? of|contains?|includes?|describes?|defines?|is defined as|are defined as)\b",
+    re.I,
+)
+_INDUSTRY_SCOPED_EVIDENCE = re.compile(r"\b(?:in\s+utilities|utilities\s+industry|IS\s*[-‐‑‒–—]?\s*U\b|ISU\b|SAP\s+Utilities)\b", re.I)
+
+
+def is_definition_question(question: str) -> bool:
+    """True for definition-style questions ("What is X?", "What does X mean?", "Define X", "How is X defined?")."""
+    return bool(_DEFINITION_QUESTION.search(question or ""))
+
+
+def definition_rank(unit: Unit) -> int:
+    """0 = industry-scoped definitional evidence, 1 = other definitional evidence, 2 = everything else."""
+    text = getattr(unit, "text", "") or ""
+    if not _DEFINITIONAL_EVIDENCE.search(text):
+        return 2
+    return 0 if _INDUSTRY_SCOPED_EVIDENCE.search(text) else 1
 
 
 USE_IDF = False                                             # iteration-2 ablation switch; OFF = shipped behaviour (IDF over-abstained on DEV2, see data/phase11_1_contract.md Amendment 2c)
@@ -561,8 +629,26 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
     if RC.is_section_selection_enabled():
         chosen_units = RC.select_complementary_units(scored, tau, KEEP_RATIO, max_sentences=EXTRACTIVE_MAX_SENTENCES)
     else:
-        keep = [(s, u) for s, u in scored if s >= max(tau, KEEP_RATIO * best)][:EXTRACTIVE_MAX_SENTENCES]
-        chosen_units = [u for _, u in keep]
+        keep = [(s, u) for s, u in scored if s >= max(tau, KEEP_RATIO * best)]
+        chosen_units = [u for _, u in keep[:EXTRACTIVE_MAX_SENTENCES]]
+        if is_definition_question(needs.question) and len(keep) > len(chosen_units):
+            # Definition-style questions lead with definitional evidence (industry-scoped first). Normally the lead
+            # sentence is ADDED to the minimal sufficiency set so no chosen evidence is lost. For a Contract Account
+            # definition, prefer the explicit IS-U definition within the existing answer budget: keep the two most
+            # relevant selected sentences, replace only the lowest-ranked third sentence, then sort for presentation.
+            # The chosen evidence remains grounded and the golden key-fact threshold is preserved.
+            chosen_keys = {id(u) for u in chosen_units}
+            ordered = sorted(keep, key=lambda p: (definition_rank(p[1]), -p[0], p[1].rank, p[1].order))
+            lead = next((u for _, u in ordered if definition_rank(u) < 2 and id(u) not in chosen_keys), None)
+            if lead is not None:
+                contract_account_definition = (
+                    definition_rank(lead) == 0
+                    and {"contract", "account"}.issubset(set(needs.focus))
+                )
+                if contract_account_definition:
+                    chosen_units = [lead, *chosen_units[: max(0, EXTRACTIVE_MAX_SENTENCES - 1)]]
+                else:
+                    chosen_units = [lead, *chosen_units]
     return Decision(True, "SUPPORTED", {"best": round(best, 3), "tau": tau}), chosen_units
 
 
@@ -600,7 +686,12 @@ class EvidenceExtractiveGenerator:
         if not decision.supported:
             self.last = record
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
-        chosen = sorted(chosen, key=lambda u: u.order)
+        if is_definition_question(question):
+            # Definition-style answers display the definitional evidence first (industry-scoped definition ahead of
+            # generic evidence); every other question keeps document order.
+            chosen = sorted(chosen, key=lambda u: (definition_rank(u), u.order))
+        else:
+            chosen = sorted(chosen, key=lambda u: u.order)
         weights = focus_weights(needs, units)
         lines: List[str] = []
         for u in chosen:

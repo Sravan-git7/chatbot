@@ -1,7 +1,7 @@
 import { memo, useState, type ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { copyText } from '../util'
+import { copyText, normalizeDisplayText } from '../util'
 
 interface Props {
   text: string
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const CITE = /\[(S\d+)\]/g
+const TRAILING_CITE = /\s*\[(S\d+)\]\s*$/
 
 /**
  * Safe Markdown rendering:
@@ -25,24 +26,34 @@ const BLOCK = /^\s*(?:[-*+]\s|\d+[.)]\s|\||#{1,6}\s|>)/
 export function prepare(text: string): string {
   // Collapse consecutive duplicate citation markers like [S1] [S1] or [S1][S1] into [S1]
   const collapsed = text.replace(/(\[(S\d+)\])(?:\s*\1)+/g, '$1')
-  // Clean presentation-only whitespace before punctuation without altering underlying spans
-  const normalized = collapsed.replace(/\s+,/g, ',')
+  // Display-safe whitespace normalization (extraction artifacts only; citation spans are untouched)
+  const normalized = normalizeDisplayText(collapsed)
   const lines = normalized.replace(/\r\n/g, '\n').split('\n')
   const out: string[] = []
   let fenced = false
+  let prevTrailing: string | null = null
   lines.forEach((line, i) => {
     if (FENCE.test(line)) {
       fenced = !fenced
       out.push(line)
+      prevTrailing = null
       return
     }
     if (fenced) {
       out.push(line)
       return
     }
-    out.push(line.replace(CITE, '[$1](#cite-$1)'))
+    let content = line
+    // A line whose only citation is the same marker as the immediately preceding line does not repeat the chip;
+    // the underlying citation mapping (markerMap, sources) is unchanged.
+    const trailing = TRAILING_CITE.exec(content)
+    if (trailing && trailing[1] === prevTrailing && !new RegExp(`\\[${trailing[1]}\\]`).test(content.slice(0, trailing.index))) {
+      content = content.slice(0, trailing.index)
+    }
+    prevTrailing = trailing ? trailing[1] : null
+    out.push(content.replace(CITE, '[$1](#cite-$1)'))
     const next = lines[i + 1]
-    if (line.trim() && next !== undefined && next.trim() && !FENCE.test(next) && !BLOCK.test(line) && !BLOCK.test(next)) out.push('')
+    if (content.trim() && next !== undefined && next.trim() && !FENCE.test(next) && !BLOCK.test(content) && !BLOCK.test(next)) out.push('')
   })
   return out.join('\n')
 }

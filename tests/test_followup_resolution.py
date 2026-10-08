@@ -38,7 +38,8 @@ except Exception:                                                       # noqa: 
 NEED_API = unittest.skipUnless(HAVE_API and HAVE_BS4 and HAVE_CHROMA, "fastapi / httpx / bs4 / chromadb not installed")
 
 ANSWERED, OUT_OF_SCOPE, UNABLE_TO_VERIFY, DOC_UNAVAILABLE = "answered", "out_of_scope", "unable_to_verify", "documentation_unavailable"
-HONEST_NON_ANSWERS = (OUT_OF_SCOPE, UNABLE_TO_VERIFY, DOC_UNAVAILABLE)
+NO_ADDITIONAL_VERIFIED_EVIDENCE = "no_additional_verified_evidence"
+HONEST_NON_ANSWERS = (OUT_OF_SCOPE, UNABLE_TO_VERIFY, DOC_UNAVAILABLE, NO_ADDITIONAL_VERIFIED_EVIDENCE)
 
 CONTRACT = "What is a contract account?"
 BILLING = "How does billing work?"

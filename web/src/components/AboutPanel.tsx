@@ -56,7 +56,7 @@ export default function AboutPanel({ health, settings, onSettings, onClearAll, o
             <dd className="text-stone-700">{health?.pages_available != null && health.topics != null ? `${health.pages_available} of ${health.topics} topic pages available` : '-'}</dd>
           </dl>
           <p className="text-stone-500">
-            Questions about the other topics are answered with "documentation unavailable". Each question is answered on its own. Your conversations are stored in this browser (local storage) only.
+            Questions about pages that are not loaded or whose identity is not verified are not answered from neighboring topics. SURA reports when documentation is unavailable or the page identity cannot be verified. Each question is answered on its own. Your conversations are stored in this browser (local storage) only.
           </p>
         </div>
         <div className="mt-5 border-t border-stone-100 pt-4">

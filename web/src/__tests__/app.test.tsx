@@ -16,7 +16,7 @@ describe('initial state', () => {
     expect(screen.getByRole('heading', { name: 'Ask SAP Utilities anything.' })).toBeInTheDocument()
     expect(screen.getByText('Answers are generated from the available SAP Utilities documentation.')).toBeInTheDocument()
     EXAMPLE_PROMPTS.forEach((p) => expect(screen.getByRole('button', { name: p })).toBeInTheDocument())
-    expect(await screen.findByTestId('coverage')).toHaveTextContent('7 of 29')
+    expect(await screen.findByTestId('coverage')).toHaveTextContent('25 of 29')
     expect(sendBtn()).toBeDisabled()
   })
 
@@ -137,6 +137,109 @@ describe('answers', () => {
     expect(ref).toHaveTextContent('Reference only')
     expect(within(ref).getByRole('link')).toHaveAttribute('href', 'https://help.sap.com/docs/d.html')
     expect(screen.queryByRole('region', { name: 'Sources' })).not.toBeInTheDocument()
+  })
+
+  it('renders exhausted elaboration as a safe state and hides the unavailable Elaborate action', async () => {
+    const safeText = "That's all the additional detail I could verify from the available documentation."
+    const exhausted = result({
+      status: 'no_additional_verified_evidence',
+      answer: safeText,
+      sources: [],
+      topic_reference: null,
+      metadata: {
+        ...result().metadata,
+        grounded: false,
+        can_elaborate: false,
+        page_available: true,
+        reason_code: 'NO_ADDITIONAL_SUPPORTED_DETAILS',
+        follow_up_category: 'elaborate',
+      },
+    })
+    stubBackend(() => json(exhausted))
+    render(<App />)
+    await userEvent.type(composer(), 'elaborate{Enter}')
+    const note = await screen.findByTestId('status-note')
+    expect(note).toHaveAttribute('data-status', 'no_additional_verified_evidence')
+    expect(note).toHaveTextContent('No more verified detail')
+    expect(note).toHaveTextContent(safeText)
+    expect(screen.queryByTestId('elaborate-button')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('Related SAP Help topic')).not.toBeInTheDocument()
+    expect(note.textContent).not.toMatch(/not in the local knowledge base|not currently available/i)
+  })
+
+  it('works through Billing → Elaborate → exhausted → repeated typed Elaborate without showing OOS', async () => {
+    const safeText = "That's all the additional detail I could verify from the available documentation."
+    const billing = result({
+      answer: 'Automatic billing calculates charges for a service period. [S1]',
+      metadata: { ...result().metadata, card_id: 'M2C-12', card_title: 'Automatic Billing', can_elaborate: true,
+        topic_identity: { source_id: 'M2C-12', title: 'Automatic Billing', guide_id: 'billing-guide', page_id: 'billing-page', industry: 'SAP Utilities/IS-U' } },
+      sources: [{ ...SOURCE, title: 'Automatic Billing', source_id: 'M2C-12' }],
+    })
+    const expanded = result({
+      answer: 'The billing run uses intervals defined in scheduling. [S1]',
+      metadata: { ...billing.metadata, follow_up_category: 'elaborate', can_elaborate: true },
+      sources: billing.sources,
+    })
+    const exhausted = result({
+      status: 'no_additional_verified_evidence', answer: safeText, sources: [], topic_reference: null,
+      metadata: { ...billing.metadata, grounded: false, can_elaborate: false, reason_code: 'NO_ADDITIONAL_SUPPORTED_DETAILS', follow_up_category: 'elaborate' },
+    })
+    const replies = [billing, expanded, exhausted, exhausted]
+    let call = 0
+    const { calls } = stubBackend(() => json(replies[Math.min(call++, replies.length - 1)]))
+    render(<App />)
+
+    await userEvent.type(composer(), 'How does billing work?{Enter}')
+    await waitFor(() => expect(screen.getAllByTestId('assistant-message')).toHaveLength(1))
+    await userEvent.click(screen.getByTestId('elaborate-button'))
+    await waitFor(() => expect(screen.getAllByTestId('assistant-message')).toHaveLength(2))
+    expect(screen.getAllByTestId('elaborate-button')).toHaveLength(2)
+
+    await userEvent.click(screen.getAllByTestId('elaborate-button').at(-1)!)
+    await waitFor(() => expect(screen.getAllByTestId('status-note')).toHaveLength(1))
+    expect(screen.getByTestId('status-note')).toHaveAttribute('data-status', 'no_additional_verified_evidence')
+    expect(screen.getByTestId('status-note')).toHaveTextContent(safeText)
+    expect(screen.queryByTestId('elaborate-button')).not.toBeInTheDocument()
+    // The backend's exhausted state also removes stale Elaborate actions from earlier answers on the same topic.
+    expect(screen.queryAllByTestId('elaborate-button')).toHaveLength(0)
+
+    // Even when typed manually after the button disappears, it stays in the safe exhausted state, never OOS.
+    await userEvent.type(composer(), 'elaborate{Enter}')
+    await waitFor(() => expect(screen.getAllByTestId('status-note')).toHaveLength(2))
+    expect(screen.getAllByTestId('status-note')[1]).toHaveAttribute('data-status', 'no_additional_verified_evidence')
+    expect(screen.getAllByTestId('status-note')[1]).not.toHaveAttribute('data-status', 'out_of_scope')
+    expect(calls.map((request) => request.message)).toEqual([
+      'How does billing work?', 'elaborate', 'elaborate', 'elaborate',
+    ])
+    expect(new Set(calls.map((request) => request.conversation_id)).size).toBe(1)
+  })
+
+  it('hides Elaborate when the backend explicitly reports can_elaborate=false', async () => {
+    const noMore = result({ metadata: { ...result().metadata, can_elaborate: false } })
+    stubBackend(() => json(noMore))
+    render(<App />)
+    await userEvent.type(composer(), 'How is billing handled?{Enter}')
+    await screen.findByTestId('assistant-message')
+    expect(screen.queryByTestId('elaborate-button')).not.toBeInTheDocument()
+  })
+
+  it('only claims a topic page is missing when the backend says it is unavailable', async () => {
+    const ref = { type: 'topic_reference' as const, title: 'FI-CA Dunning', url: 'https://help.sap.com/docs/d.html', note: 'n' }
+    let n = 0
+    stubBackend(() => json(n++ === 0
+      ? result({ status: 'unable_to_verify', answer: 'Cannot verify this detail.', sources: [], topic_reference: ref,
+          metadata: { ...result().metadata, grounded: false, page_available: true } })
+      : result({ status: 'documentation_unavailable', answer: 'The page is unavailable.', sources: [], topic_reference: ref,
+          metadata: { ...result().metadata, grounded: false, page_available: false } })))
+    render(<App />)
+    await userEvent.type(composer(), 'unsupported detail{Enter}')
+    const firstRef = await screen.findByLabelText('Related SAP Help topic')
+    expect(firstRef).toHaveTextContent('Reference only')
+    expect(firstRef).not.toHaveTextContent('not in the local knowledge base')
+
+    await userEvent.type(composer(), 'missing topic{Enter}')
+    await waitFor(() => expect(screen.getAllByLabelText('Related SAP Help topic')).toHaveLength(2))
+    expect(screen.getAllByLabelText('Related SAP Help topic')[1]).toHaveTextContent('not in the local knowledge base')
   })
 
   it('copies the answer together with its sources', async () => {
@@ -296,7 +399,7 @@ describe('layout and settings', () => {
     expect(calls[0].debug).toBe(false)
     expect(screen.queryByTestId('debug-panel')).not.toBeInTheDocument()
     await userEvent.click(screen.getByRole('button', { name: 'Settings & about' }))
-    expect(await screen.findByTestId('service-info')).toHaveTextContent('7 of 29')
+    expect(await screen.findByTestId('service-info')).toHaveTextContent('25 of 29')
     await userEvent.click(screen.getByRole('checkbox', { name: /Developer details/ }))
     await userEvent.click(screen.getByRole('button', { name: 'Close' }))
     await userEvent.type(composer(), 'two{Enter}')

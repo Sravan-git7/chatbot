@@ -21,6 +21,7 @@ thresholds, and the card router is given no threshold at all (Phase 7F). Their m
 from __future__ import annotations
 
 import copy
+import re
 import sys
 import threading
 import time
@@ -230,6 +231,38 @@ class PageCorpusIndex:
 
 def _identity_value(value: Any) -> str:
     return " ".join(str(value or "").split()).casefold()
+
+
+# A pure topic-navigation request ("Tell me about <card title>.") names exactly one card. When that card's page is
+# not admitted to the corpus, the honest result is the unavailable state for the NAMED topic - never an answer
+# assembled from a different, ingested page. The match is exact (frame + full card title, articles stripped), so
+# content questions that merely mention a topic ("How does a budget billing plan work?") keep their normal routing.
+_NAVIGATION_FRAME = re.compile(r"^\s*(?:tell me about|show me|describe|explain)\s+(.+?)\s*[?.!]*\s*$", re.I)
+_NAVIGATION_ARTICLES = re.compile(r"^(?:the|a|an|about)\s+")
+
+
+def _norm_phrase(text: str) -> str:
+    return " ".join(re.sub(r"[^a-z0-9\s]", " ", (text or "").lower()).split())
+
+
+def named_navigation_card(query: str, cards: Mapping[str, Mapping[str, Any]], corpus: "PageCorpusIndex") -> Optional[Mapping[str, Any]]:
+    """The card a pure navigation query names exactly, but only when its page is not admitted (item: missing-page
+    honesty). Returns ``None`` for every content question and for every named topic that is answerable."""
+    match = _NAVIGATION_FRAME.match(query or "")
+    if not match:
+        return None
+    subject = _NAVIGATION_ARTICLES.sub("", _norm_phrase(match.group(1)))
+    if len(subject.split()) < 3:
+        return None
+    for card in cards.values():
+        title = _norm_phrase(str(card.get("title") or ""))
+        if len(title.split()) < 3 or title != subject:
+            continue
+        entry = corpus.entry(str(card.get("source_id") or "")) or {}
+        if entry.get("corpus_status") == PC.S_INGESTED:
+            return None                                  # the named topic is answerable: the router decides
+        return card
+    return None
 
 
 def _active_topic_consistency(expected_topic: Optional[Mapping[str, Any]], source_id: str, identity: Any) -> Optional[Dict[str, Any]]:
@@ -451,6 +484,28 @@ class RagPipeline:
         if card is None:
             return self._finish(out, NO_PAGE, "EMPTY_OR_UNROUTABLE_QUERY", MESSAGES[NO_PAGE], dbg, debug, timings, t0)
         sid = card["source_id"] if isinstance(card, Mapping) else card.source_id
+        if oracle_source_id is None:
+            named = named_navigation_card(query, self.cards, self.corpus)
+            if named is not None:
+                # A navigation request that names a topic whose page is not admitted gets the honest unavailable
+                # state for THAT topic (with its reference link) - never an answer assembled from a different,
+                # ingested page, and never a bare unresolved-identity note without the topic reference.
+                named_sid = str(named.get("source_id") or "")
+                named_identity = pid.resolve_identity(named, self.ctx)
+                named_entry = self.corpus.entry(named_sid) or {}
+                dbg["named_topic"] = {"named_source_id": named_sid, "routed_source_id": sid}
+                dbg["identity"] = named_identity.to_dict()
+                dbg["corpus_entry"] = {k: named_entry.get(k) for k in ("corpus_status", "reason", "doc_id", "text_sha256")}
+                out["topic"] = self._topic(named_identity, named_entry)
+                out["citations"] = PCIT.build_citations(named, named_identity, self.ctx, corpus_entry=named_entry)
+                out["routing"]["selected_source_id"] = named_sid
+                out["routing"]["mode"] = f"{out['routing'].get('mode', 'router')}+named_topic"
+                return self._finish(
+                    out, NOT_INGESTED, "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+                    f"The topic was identified as \"{named_identity.card_title}\" ({named_sid}) and its SAP Help page is known, "
+                    "but the page text is not available in this system, so no answer is generated. Use the reference link.",
+                    dbg, debug, timings, t0,
+                )
         out["routing"]["selected_source_id"] = sid
 
         # ---- 2. identity ----------------------------------------------------------------------------------

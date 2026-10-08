@@ -1,5 +1,10 @@
 // Mirrors the backend contract in scripts/rag_service.py / scripts/rag_api.py (schema 11.1). The UI never builds its own answers, sources or URLs.
-export type ApiStatus = 'answered' | 'documentation_unavailable' | 'unable_to_verify' | 'out_of_scope'
+export type ApiStatus =
+  | 'answered'
+  | 'documentation_unavailable'
+  | 'unable_to_verify'
+  | 'out_of_scope'
+  | 'no_additional_verified_evidence'
 
 export interface Source {
   type: 'page'
@@ -82,6 +87,8 @@ export interface Metadata {
   page_available: boolean | null
   generator: string
   grounded: boolean
+  /** Backend-authoritative: false once the verified evidence of the active topic is exhausted. */
+  can_elaborate?: boolean | null
   grounding: Grounding
   pipeline_status: string
   reason_code: string | null

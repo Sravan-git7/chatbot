@@ -16,6 +16,15 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence
 
 CITATION_MARKER_RE = re.compile(r"\[(S\d+)\]")
 
+# A purpose/definition statement in the first clause of a line ("This component enables you to create and manage
+# contract account master data.") describes what the topic IS; it is not a procedure even though it mentions creating
+# or managing something. Checked before the procedure cues so such lines land in Overview.
+_PURPOSE_LINE = re.compile(
+    r"^(?:this|the|a|an|in|it)\b[^.!?\n]*\b(?:enables? you to|allows? you to|lets? you|is used to|are used to|"
+    r"refers? to|represents?|is defined as|are defined as|consists? of|describes?|means)\b",
+    re.I,
+)
+
 
 def extract_citations(text: str) -> List[str]:
     """Extract ordered unique citation markers like ['S1', 'S2'] from text."""
@@ -33,6 +42,9 @@ def extract_citations(text: str) -> List[str]:
 def categorize_line(line: str) -> str:
     """Deterministically categorize an answer line into a section key."""
     lower = line.lower()
+    # Purpose/definition statements are overview content, never procedures ("enables you to create and manage ...").
+    if _PURPOSE_LINE.match(line):
+        return "overview"
     # Prerequisites & requirements: explicit dependency or requirement phrases
     if any(k in lower for k in ("prerequisite", "prerequisites", "must first", "before you can", "required before")):
         return "conditions_and_prerequisites"

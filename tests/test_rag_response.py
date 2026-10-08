@@ -97,6 +97,31 @@ class RagResponseTests(unittest.TestCase):
         self.assertEqual(len(sa["sections"]), 1)
         self.assertEqual(sa["sections"][0]["title"], "Overview")
 
+    def test_purpose_statements_are_overview_never_procedures(self):
+        # "This component enables you to create and manage contract account master data." mentions creating and
+        # managing, but it states what the topic IS: it belongs under Overview, not Procedure & Usage.
+        purpose = "This component enables you to create and manage contract account master data. [S1]"
+        self.assertEqual(RR.categorize_line(purpose), "overview")
+        self.assertEqual(RR.categorize_line("The purpose of the app is to monitor incoming payments. [S1]"), "overview")
+        self.assertEqual(RR.categorize_line("In Utilities, one contract account contains all those contracts. [S1]"), "overview")
+        # real procedures and prerequisites keep their sections
+        self.assertEqual(RR.categorize_line("To configure an installment plan, use transaction code FPR1 [S2]."), "procedure_and_usage")
+        self.assertEqual(RR.categorize_line("To create a contract account, choose Account > Contract Account. [S1]"), "procedure_and_usage")
+        self.assertEqual(RR.categorize_line("A prerequisite is that the items must be open. [S1]"), "conditions_and_prerequisites")
+        self.assertEqual(RR.categorize_line("In Contract Accounts Receivable and Payable, each posting is assigned to one contract account. [S1]"), "overview")
+
+    def test_a_purpose_answer_is_grouped_under_overview(self):
+        answer = (
+            "This component enables you to create and manage contract account master data. [S1]\n"
+            "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one contract account. [S1]\n"
+            "In the contract account master record, you can define the procedures that apply. [S1]"
+        )
+        result = RR.compose_response(answer, self.sample_sources, "answered", self.sample_meta)
+        sa = result["structured_answer"]
+        self.assertIsNotNone(sa)
+        self.assertEqual([sec["key"] for sec in sa["sections"]], ["overview"])
+        self.assertEqual(sa["sections"][0]["lines"], answer.split("\n"))
+
 
 if __name__ == "__main__":
     unittest.main()
