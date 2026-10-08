@@ -1,0 +1,27 @@
+{
+  "condition": "FLAGS_ON",
+  "env_vars": {
+    "SURA_INTENT_AWARE": "1",
+    "SURA_SECTION_SELECTION": "1",
+    "SURA_ADDITIONAL_EVIDENCE": "1"
+  },
+  "total_cases": 157,
+  "route_accuracy": 0.9745,
+  "oos_precision": 0.9375,
+  "oos_recall": 1.0,
+  "unable_to_verify_precision": 0.9,
+  "unable_to_verify_recall": 0.9,
+  "top1_document_hit_rate": 0.9453,
+  "any_document_hit_rate": 0.9453,
+  "citation_validity": 1.0,
+  "key_fact_coverage": 0.7183,
+  "paraphrase_document_overlap": 0.8667,
+  "latency_p50_ms": 79.1,
+  "latency_p95_ms": 153.68,
+  "single_source_answer_count": 44,
+  "less_than_3_sentence_answers": 45,
+  "topic_reference_precision": 1.0,
+  "answered_count": 131,
+  "hard_gate_failures_count": 0,
+  "hard_gate_failures": []
+}

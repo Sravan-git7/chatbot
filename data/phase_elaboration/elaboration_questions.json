@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "name": "Follow-up elaboration measurement set (NOT the frozen Phase-12 benchmark)",
+  "purpose": "Measures three arms per topic: (A) the normal production answer, (B) the shipped extractive elaboration, (C) the prototype generative elaboration (elaboration prompt over the widened evidence + EvidenceGuard + grounding + citation checks + same-page scope gate + novelty gate, with the shipped extractive elaboration as fallback).",
+  "corpus": "the ingested SAP Help pages of this repository (25 pages) - nothing is modified by a run",
+  "topics": [
+    {"id": "EL-001", "group": "ux_acceptance", "question": "How does billing work?", "message": "Elaborate."},
+    {"id": "EL-002", "group": "ux_acceptance", "question": "What is a contract account?", "message": "Explain in detail."},
+    {"id": "EL-003", "group": "ux_acceptance", "question": "What is invoicing?", "message": "Tell me more."},
+    {"id": "EL-004", "group": "ux_acceptance", "question": "How are devices managed?", "message": "Can you explain that?"},
+    {"id": "EL-005", "group": "critical_grounding", "question": "What is a contract account?", "message": "Explain why companies use it.",
+     "expect": "the documentation does not state why companies use a contract account; SURA must not invent a reason and must say the documentation does not provide enough information"},
+    {"id": "EL-006", "group": "intent_coverage", "question": "How does billing work?", "message": "Give me an example."},
+    {"id": "EL-007", "group": "intent_coverage", "question": "How are devices managed?", "message": "Simplify that."},
+    {"id": "EL-008", "group": "intent_coverage", "question": "What is invoicing?", "message": "What happens next?"},
+    {"id": "EL-009", "group": "intent_coverage", "question": "What is a contract account?", "message": "How does that relate to a business partner?"},
+    {"id": "EL-010", "group": "honest_abstention", "question": "What is clearing control?", "message": "Tell me more.",
+     "expect": "the page holds no material beyond the first answer; the honest 'the documentation provides no more detail' answer is acceptable, an invented explanation is not"}
+  ]
+}

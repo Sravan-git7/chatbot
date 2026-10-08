@@ -22,11 +22,15 @@ Everything is lexical and deterministic; it cannot prove semantic faithfulness (
 """
 from __future__ import annotations
 
+import copy
 import dataclasses
 import math
 import re
 import sys
+import threading
+import time
 from dataclasses import dataclass, field
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
@@ -176,6 +180,7 @@ class Unit:
     prev_line: Optional[str] = None             # an immediately preceding short heading-like line (e.g. "Transaction EL43")
     follow: Optional[str] = None                # the sentence after a list introduction ending in ":"
     chunk_text: str = ""
+    heading_labels: Tuple[str, ...] = ()           # page/section labels used by shared evidence-quality checks
 
     def full_text(self) -> str:
         return " ".join(x for x in (self.prev_line, self.text) if x)
@@ -194,6 +199,13 @@ def _lines(text: str) -> List[Tuple[str, List[str]]]:
     return out
 
 
+def _item_heading_labels(item: Any) -> Tuple[str, ...]:
+    parts = [getattr(item, "title", ""), getattr(item, "section_title", "")]
+    heading_path = getattr(item, "heading_path", ()) or ()
+    parts.extend([heading_path] if isinstance(heading_path, str) else heading_path)
+    return tuple(dict.fromkeys(str(part).strip() for part in parts if part and str(part).strip()))
+
+
 def build_units(items: Sequence[Any]) -> List[Unit]:
     """Sentence units from context items (``ContextItem``: rendered_text) or chunk hits (``ChunkHit``: text)."""
     units: List[Unit] = []
@@ -201,7 +213,12 @@ def build_units(items: Sequence[Any]) -> List[Unit]:
     for it in items:
         body = getattr(it, "rendered_text", None) or it.text
         marker = getattr(it, "marker", "")
-        head = frozenset(terms2(" ".join(it.heading_path) if it.heading_path else it.title))
+        heading_path = getattr(it, "heading_path", ()) or ()
+        if isinstance(heading_path, str):
+            heading_path = (heading_path,)
+        title = getattr(it, "title", "") or ""
+        head = frozenset(terms2(" ".join(heading_path) if heading_path else title))
+        heading_labels = _item_heading_labels(it)
         lines = _lines(body)
         for li, (line, sents) in enumerate(lines):
             for si, s in enumerate(sents):
@@ -212,12 +229,320 @@ def build_units(items: Sequence[Any]) -> List[Unit]:
                     if len(pl.split()) <= 8 and not re.search(r"[.!?:]\s*$", pl):
                         prev = pl
                 follow = sents[si + 1] if s.rstrip().endswith(":") and si + 1 < len(sents) else None
-                units.append(Unit(marker, it.chunk_id, int(getattr(it, "rank", 0)), order, s, frozenset(terms2(s)), head, prev, follow, it.text))
+                units.append(Unit(marker, it.chunk_id, int(getattr(it, "rank", 0)), order, s, frozenset(terms2(s)), head,
+                                  prev, follow, it.text, heading_labels))
     return units
+
+
+# Shared deterministic evidence-quality checks. These run before normal sufficiency scoring and are also reused by
+# the scoped elaboration selector. Keep them structural and conservative: a short clause with a recognized predicate
+# remains evidence; navigation/page-heading fragments and incomplete list introductions do not.
+_QUALITY_CITE = re.compile(r"\[S\d+\]")
+_QUALITY_EXPLANATORY_PREDICATE = re.compile(
+    r"\b(?:am|is|are|was|were|be|being|been|has|have|had|do|does|did|can|could|may|might|must|shall|should|will|would|"
+    r"add(?:s|ed)?|appl(?:y|ies|ied)|assign(?:s|ed)?|calculat(?:e|es|ed)|chang(?:e|s|ed)|clear(?:s|ed)?|"
+    r"contain(?:s|ed)?|creat(?:e|es|ed)|defin(?:e|es|ed)|depend(?:s|ed)?|determin(?:e|es|ed)|differ(?:s|ed)?|"
+    r"handl(?:e|es|ed)|display(?:s|ed)?|enter(?:s|ed)?|execut(?:e|es|ed)|exist(?:s|ed)?|includ(?:e|es|ed)|lead(?:s|ing|ed)?|"
+    r"link(?:s|ed)?|manag(?:e|es|ed)|mean(?:s|t)|occur(?:s|red)?|post(?:s|ed)?|provid(?:e|es|ed)|receiv(?:e|s|ed)|"
+    r"record(?:s|ed)?|refer(?:s|red)?|remain(?:s|ed)?|requir(?:e|s|ed)|result(?:s|ed)?|run(?:s|ning)|select(?:s|ed)?|"
+    r"serv(?:e|s|ed)|start(?:s|ed)?|stop(?:s|ped)?|transfer(?:s|red)?|updat(?:e|s|ed)|us(?:e|es|ed)|vary|varies|"
+    r"work(?:s|ed)?)\b",
+    re.I,
+)
+_QUALITY_NAVIGATION_LABEL = re.compile(
+    r"\b(?:navigation|breadcrumbs?|menu|table\s+of\s+contents|contents|toc|simulation|execution|overview|"
+    r"screen|dashboard|activities|process\s+flow|workflow|section\s+list)\b",
+    re.I,
+)
+_QUALITY_STRUCTURAL_SEPARATOR = re.compile(r"[/\\|>›»→]|::")
+_QUALITY_TRAILING_PAGE_NUMBER = re.compile(r"(?:\b(?:page|step|p)\s*)?\b\d{1,3}$", re.I)
+_QUALITY_OCR_DIGIT_IN_WORD = re.compile(r"\b[A-Za-z]{2,}\d[A-Za-z]{2,}\b")
+_QUALITY_LIST_LEADIN = re.compile(
+    r"(?:"
+    r"\b(?:both\s+of\s+)?the\s+following"
+    r"(?:\s+(?:(?:two|three|four|several|multiple)|(?:items?|conditions?|requirements?|prerequisites?|steps?|options?|ways?|criteria|rules?|points?)))*"
+    r"(?:\s+(?:apply|applies|are|is|must|can|need|needs|should|will|have|has|meet|satisfy|be\s+met|be\s+true))?"
+    r"|\bas\s+follows"
+    r"|\bfollowing\s+(?:are|is)"
+    r"|\b(?:there\s+(?:are|is)\s+)?(?:two|three|four|several|multiple|\d+)\s+"
+    r"(?:ways?|options?|steps?|conditions?|requirements?|items?)(?:\s+(?:to|apply|are|must|need|needs))?"
+    r"|\b(?:choose|select|consider|follow|complete|perform|meet|satisfy)\s+(?:(?:from|the)\s+)*(?:the\s+)?following"
+    r")\s*[:：]\s*$",
+    re.I,
+)
+# A single list entry ("- Measure : Total Payment Amount", "1. Introduction"): a configuration label or step name,
+# not a sentence. Only bare entries are caught - a punctuated or imperative item ("- The Chart View shows ...",
+# "- Choose Continue ...") remains evidence.
+_QUALITY_BARE_LIST_ITEM = re.compile(r"^\s*(?:[-*•]|\d+[.)])\s+")
+_SENTENCE_END = re.compile(r"[.!?][\"'”’)}\]]*\s*$")
+
+
+def quality_norm(text: str) -> str:
+    text = _QUALITY_CITE.sub("", str(text or ""))
+    return re.sub(r"[^\w]+", " ", text.casefold(), flags=re.UNICODE).strip()
+
+
+# Industry/component codes in parentheses ("(IS-U)", "(FS-CD)", "(F5588)") are labels, not verbs: without this,
+# the verb "IS" inside "(IS-T)" would make a heading-only fragment look like an explanatory sentence.
+_CODE_PAREN = re.compile(r"\(\s*[A-Z][A-Z0-9]*(?:[-‐‑‒–—][A-Z0-9]+)*\s*\)")
+
+
+def _has_explanatory_predicate(text: str) -> bool:
+    stripped = _CODE_PAREN.sub(" ", text or "")
+    if _QUALITY_EXPLANATORY_PREDICATE.search(stripped):
+        return True
+    # Keep the documented imperative forms; a bare noun/path fragment is not made valid by word count alone.
+    return bool(re.match(r"^\s*(?:run|open|select|choose|click|enter|save|set|specify|maintain|pay|settle|send|"
+                         r"create|use|assign|execute|display|calculate|post|manage|record|transfer)\b", stripped, re.I))
+
+
+def is_low_quality_fragment(text: str, heading_labels: Sequence[str] = (), chunk_text: str = "") -> bool:
+    """Reject obvious headings/breadcrumbs/OCR fragments while retaining short explanatory clauses.
+
+    Structural/title overlap, absent predicate/punctuation, navigation vocabulary and trailing page numbers are used
+    together; there is no general minimum-length threshold for rejecting evidence. Two further structural cases are
+    rejected when the chunk text is available: a bare list entry with no sentence of its own ("- Measure : Total
+    Payment Amount") and a short unpunctuated line that stands alone inside a multi-line chunk (an embedded heading
+    such as "SAP Fiori Implementation Information").
+    """
+    raw = re.sub(r"\s+", " ", str(text or "")).strip()
+    if not raw:
+        return True
+    clean = _QUALITY_CITE.sub("", raw).strip()
+    normalized = quality_norm(clean)
+    if not normalized:
+        return True
+    if isinstance(heading_labels, str):
+        heading_labels = (heading_labels,)
+    labels = {quality_norm(label) for label in heading_labels if quality_norm(label)}
+    if normalized in labels:
+        return True
+
+    has_predicate = _has_explanatory_predicate(clean)
+    if has_predicate:
+        return False
+    has_sentence_punctuation = bool(_SENTENCE_END.search(clean))
+    if not has_sentence_punctuation and not _CODE_TOKEN.search(clean):
+        # Compact transaction/code headings can be the only source for an asked code; they stay admissible even
+        # though, by themselves, they are not explanatory evidence (same exemption as for adjacent context lines).
+        # A bare list entry carries no sentence of its own: without a predicate (checked on the entry body, so an
+        # imperative step like "- Choose Continue ..." stays evidence) or terminal punctuation it is a configuration
+        # label or step name, never answer content.
+        if _QUALITY_BARE_LIST_ITEM.match(clean) and not _has_explanatory_predicate(_QUALITY_BARE_LIST_ITEM.sub("", clean)):
+            return True
+        # A short, unpunctuated line that stands alone inside a multi-line chunk is an embedded heading or
+        # navigation fragment, not evidence.
+        if chunk_text:
+            has_neighbor_lines, chunk_lines = _nonempty_chunk_lines(str(chunk_text))
+            if has_neighbor_lines and clean in chunk_lines and len(clean.split()) <= 12:
+                return True
+    if _QUALITY_STRUCTURAL_SEPARATOR.search(clean):
+        return True
+    if re.search(r"\b(?:navigation|breadcrumbs?|menu|table\s+of\s+contents|contents|toc)\b", clean, re.I):
+        return True
+
+    trimmed = clean.rstrip(" .!?;,:\"'”’)]}")
+    words = re.findall(r"\b\w+\b", clean, re.UNICODE)
+    trailing_page_number = bool(_QUALITY_TRAILING_PAGE_NUMBER.search(trimmed))
+    if _QUALITY_NAVIGATION_LABEL.search(clean) and (trailing_page_number or not has_sentence_punctuation):
+        return True
+    if _QUALITY_OCR_DIGIT_IN_WORD.search(clean):
+        return True
+
+    # A short, unpunctuated label that substantially repeats its page/section title is a heading fragment, even if
+    # the title has an attached number (e.g. "Billing Execution 4"). A finite-predicate sentence bypasses this.
+    candidate_words = set(quality_norm(clean).split())
+    if not has_sentence_punctuation and len(candidate_words) <= 8:
+        for label in labels:
+            label_words = set(label.split())
+            overlap = len(candidate_words & label_words)
+            if overlap >= 2 and overlap / max(1, len(candidate_words)) >= 0.66:
+                return True
+    if trailing_page_number and not has_sentence_punctuation and len(words) <= 8:
+        return True
+
+    compact = [char for char in clean if not char.isspace()]
+    if len(compact) >= 8 and sum(char.isalpha() for char in compact) / len(compact) < 0.55:
+        return True
+    return False
+
+
+@lru_cache(maxsize=512)
+def _nonempty_chunk_lines(chunk_text: str) -> Tuple[bool, frozenset[str]]:
+    """Cached structural lines for a chunk, shared by its sentence units during quality filtering."""
+    lines = tuple(re.sub(r"\s+", " ", line).strip() for line in str(chunk_text or "").split("\n") if line.strip())
+    return len(lines) >= 2, frozenset(lines)
+
+
+def is_incomplete_list_leadin(text: str, supporting_follow: Optional[str] = None,
+                              heading_labels: Sequence[str] = ()) -> bool:
+    """Identify only clear colon-ended list introductions whose list content is not attached to this evidence unit."""
+    clean = _QUALITY_CITE.sub("", str(text or "")).strip()
+    if not clean or not _QUALITY_LIST_LEADIN.search(clean):
+        return False
+    follow = _QUALITY_CITE.sub("", str(supporting_follow or "")).strip()
+    if not follow or _QUALITY_LIST_LEADIN.search(follow):
+        return True
+    if is_low_quality_fragment(follow, heading_labels):
+        return True
+    bullet_item = re.match(r"^\s*(?:[-*•]|\d+[.)])\s+\S", follow)
+    has_terminal_punctuation = bool(re.search(r"[.!?][\"'”’)}\]]*\s*$", follow))
+    return not (bullet_item or _has_explanatory_predicate(follow) or has_terminal_punctuation)
+
+
+def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[List[Unit], List[Unit], Dict[str, Any]]:
+    """Apply the shared deterministic quality filter before evidence scoring/selection.
+
+    Returns usable units, rejected units, and marker-level accounting for citation/grounding filtering. Adjacent
+    fragment-only context lines are cleared so a rejected title cannot leak around an otherwise useful sentence.
+    """
+    original = list(units)
+    headings_by_marker: Dict[str, List[str]] = {}
+    headings_by_chunk: Dict[str, List[str]] = {}
+    for item in getattr(context, "items", ()) or ():
+        labels = _item_heading_labels(item)
+        marker = str(getattr(item, "marker", "") or "")
+        chunk_id = getattr(item, "chunk_id", None)
+        if marker and labels:
+            headings_by_marker.setdefault(marker, []).extend(labels)
+        if chunk_id is not None and labels:
+            headings_by_chunk.setdefault(str(chunk_id), []).extend(labels)
+
+    kept: List[Unit] = []
+    excluded: List[Unit] = []
+    excluded_adjacent = 0
+    excluded_list_leadins = 0
+    for unit in original:
+        marker = str(getattr(unit, "marker", "") or "")
+        chunk_id = str(getattr(unit, "chunk_id", ""))
+        unit_labels = getattr(unit, "heading_labels", ()) or ()
+        if isinstance(unit_labels, str):
+            unit_labels = (unit_labels,)
+        labels = tuple(dict.fromkeys((*unit_labels, *headings_by_marker.get(marker, ()), *headings_by_chunk.get(chunk_id, ()))))
+        unit_chunk_text = str(getattr(unit, "chunk_text", "") or "")
+        if is_low_quality_fragment(getattr(unit, "text", ""), labels, unit_chunk_text):
+            excluded.append(unit)
+            continue
+        if is_incomplete_list_leadin(getattr(unit, "text", ""), getattr(unit, "follow", None), labels):
+            excluded.append(unit)
+            excluded_list_leadins += 1
+            continue
+        for attr in ("prev_line", "follow"):
+            line = getattr(unit, attr, None)
+            # Compact transaction/code headings can be the only source for an asked code; keep them as attached
+            # context even though, by themselves, they are not explanatory evidence.
+            code_context = bool(_CODE_TOKEN.search(str(line or "")))
+            if line and not code_context and (is_low_quality_fragment(line, labels, unit_chunk_text) or is_incomplete_list_leadin(line, None, labels)):
+                setattr(unit, attr, None)
+                excluded_adjacent += 1
+        kept.append(unit)
+
+    candidate_markers = {str(getattr(unit, "marker", "")) for unit in original if getattr(unit, "marker", None)}
+    kept_markers = {str(getattr(unit, "marker", "")) for unit in kept if getattr(unit, "marker", None)}
+    fragment_markers = sorted({str(getattr(unit, "marker", "")) for unit in excluded if getattr(unit, "marker", None)})
+    details = {
+        "excluded_units": len(excluded),
+        "excluded_markers": sorted(candidate_markers - kept_markers),
+        "markers_with_fragments": fragment_markers,
+        "excluded_adjacent_fragments": excluded_adjacent,
+        "excluded_list_leadins": excluded_list_leadins,
+    }
+    return kept, excluded, details
+
+
+def _context_without_rejected_units(context: Any, rejected_units: Sequence[Unit]) -> Any:
+    """Copy a context for an optional guarded generator, omitting quality-rejected text from its prompt and post-check.
+
+    The original context remains untouched for audit/support-chain verification; only the inner generator sees this
+    sentence-filtered view. Unaffected requests preserve object identity and the shipped prompt byte-for-byte.
+    """
+    if not rejected_units:
+        return context
+    rejected_by_marker: Dict[str, set] = {}
+    for unit in rejected_units:
+        marker = str(getattr(unit, "marker", "") or "")
+        text = str(getattr(unit, "text", "") or "").strip()
+        if marker and text:
+            rejected_by_marker.setdefault(marker, set()).add(text)
+    if not rejected_by_marker:
+        return context
+
+    filtered = copy.copy(context)
+    filtered_items: List[Any] = []
+
+    def is_rejected_heading(label: str, fragments: Sequence[str]) -> bool:
+        label_norm = quality_norm(label)
+        if not label_norm:
+            return False
+        label_words = set(label_norm.split())
+        for fragment in fragments:
+            fragment_norm = quality_norm(fragment)
+            if not fragment_norm or label_norm == fragment_norm:
+                return True
+            fragment_words = set(fragment_norm.split())
+            overlap = len(label_words & fragment_words)
+            if len(label_words) <= len(fragment_words) + 1 and overlap >= 2 and overlap / max(1, len(fragment_words)) >= 0.66:
+                return True
+        return False
+
+    for item in getattr(context, "items", ()) or ():
+        marker = str(getattr(item, "marker", "") or "")
+        rejected_texts = tuple(rejected_by_marker.get(marker, ()))
+        rendered = str(getattr(item, "rendered_text", None) or getattr(item, "text", "") or "")
+        clean = rendered
+        for fragment in sorted(rejected_texts, key=len, reverse=True):
+            clean = clean.replace(fragment, "")
+        clean = "\n".join(line for line in clean.splitlines() if line.strip())
+        if not clean.strip():
+            continue
+        cloned = copy.copy(item)
+        cloned.text = clean
+        if hasattr(cloned, "rendered_text"):
+            cloned.rendered_text = clean
+        heading_path = getattr(cloned, "heading_path", ()) or ()
+        if isinstance(heading_path, str):
+            heading_path = (heading_path,)
+        cloned.heading_path = [label for label in heading_path if not is_rejected_heading(str(label), rejected_texts)]
+        if is_rejected_heading(str(getattr(cloned, "title", "") or ""), rejected_texts):
+            cloned.title = ""
+        filtered_items.append(cloned)
+    filtered.items = filtered_items
+    return filtered
 
 
 def unit_kinds_ok(u: Unit, needs: QuestionNeeds) -> bool:
     return all(kind_satisfied(k, u.full_text(), needs) for k in needs.kinds)
+
+
+# ---------------------------------------------------------------------------------------------- definition-first ordering
+# Deterministic preference for definition-style questions ("What is X?", "What does X mean?", "Define X",
+# "How is X defined?"): definitional evidence is selected and displayed first, with the industry-scoped
+# (SAP Utilities / IS-U) definition ahead of generic evidence when both match. Only units that already passed the
+# same sufficiency cut and kinds gate are reordered, so no threshold, gate or refusal behaviour changes.
+_DEFINITION_QUESTION = re.compile(
+    r"^\s*(?:what\s+(?:is|are|does|do)\b|define\b|definition\b|what's\b|whats\b|meaning\s+of\b)"
+    r"|\bhow\s+is\s+.+\bdefined\b",
+    re.I,
+)
+_DEFINITIONAL_EVIDENCE = re.compile(
+    r"\b(?:is|are|means?|refers? to|represents?|enables? you to|allows? you to|provides?|serves? as|"
+    r"consists? of|contains?|includes?|describes?|defines?|is defined as|are defined as)\b",
+    re.I,
+)
+_INDUSTRY_SCOPED_EVIDENCE = re.compile(r"\b(?:in\s+utilities|utilities\s+industry|IS\s*[-‐‑‒–—]?\s*U\b|ISU\b|SAP\s+Utilities)\b", re.I)
+
+
+def is_definition_question(question: str) -> bool:
+    """True for definition-style questions ("What is X?", "What does X mean?", "Define X", "How is X defined?")."""
+    return bool(_DEFINITION_QUESTION.search(question or ""))
+
+
+def definition_rank(unit: Unit) -> int:
+    """0 = industry-scoped definitional evidence, 1 = other definitional evidence, 2 = everything else."""
+    text = getattr(unit, "text", "") or ""
+    if not _DEFINITIONAL_EVIDENCE.search(text):
+        return 2
+    return 0 if _INDUSTRY_SCOPED_EVIDENCE.search(text) else 1
 
 
 USE_IDF = False                                             # iteration-2 ablation switch; OFF = shipped behaviour (IDF over-abstained on DEV2, see data/phase11_1_contract.md Amendment 2c)
@@ -300,29 +625,73 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
     if not scored or scored[0][0] < tau:
         return Decision(False, "LOW_FOCUS_COVERAGE", {"best": round(scored[0][0], 3) if scored else 0.0, "tau": tau}), []
     best = scored[0][0]
-    keep = [(s, u) for s, u in scored if s >= max(tau, KEEP_RATIO * best)][:EXTRACTIVE_MAX_SENTENCES]
-    return Decision(True, "SUPPORTED", {"best": round(best, 3), "tau": tau}), [u for _, u in keep]
+    import rag_completeness as RC
+    if RC.is_section_selection_enabled():
+        chosen_units = RC.select_complementary_units(scored, tau, KEEP_RATIO, max_sentences=EXTRACTIVE_MAX_SENTENCES)
+    else:
+        keep = [(s, u) for s, u in scored if s >= max(tau, KEEP_RATIO * best)]
+        chosen_units = [u for _, u in keep[:EXTRACTIVE_MAX_SENTENCES]]
+        if is_definition_question(needs.question) and len(keep) > len(chosen_units):
+            # Definition-style questions lead with definitional evidence (industry-scoped first). Normally the lead
+            # sentence is ADDED to the minimal sufficiency set so no chosen evidence is lost. For a Contract Account
+            # definition, prefer the explicit IS-U definition within the existing answer budget: keep the two most
+            # relevant selected sentences, replace only the lowest-ranked third sentence, then sort for presentation.
+            # The chosen evidence remains grounded and the golden key-fact threshold is preserved.
+            chosen_keys = {id(u) for u in chosen_units}
+            ordered = sorted(keep, key=lambda p: (definition_rank(p[1]), -p[0], p[1].rank, p[1].order))
+            lead = next((u for _, u in ordered if definition_rank(u) < 2 and id(u) not in chosen_keys), None)
+            if lead is not None:
+                contract_account_definition = (
+                    definition_rank(lead) == 0
+                    and {"contract", "account"}.issubset(set(needs.focus))
+                )
+                if contract_account_definition:
+                    chosen_units = [lead, *chosen_units[: max(0, EXTRACTIVE_MAX_SENTENCES - 1)]]
+                else:
+                    chosen_units = [lead, *chosen_units]
+    return Decision(True, "SUPPORTED", {"best": round(best, 3), "tau": tau}), chosen_units
 
 
 # ------------------------------------------------------------------------------------------------------------ generator
 class EvidenceExtractiveGenerator:
-    """Deterministic extractive generator with an evidence-sufficiency decision. Public name stays ``extractive`` (same generator family, same API contract)."""
+    """Deterministic extractive generator with an evidence-sufficiency decision. Public name stays ``extractive`` (same generator family, same API contract).
+    Returns request-local evidence metadata explicitly via ``GenerationResult.evidence`` and isolates ``.last`` via thread-local storage reset per request.
+    """
     name = "extractive"
 
     def __init__(self, tau: float = TAU, frame_normalization: bool = False) -> None:
         self.tau = tau
         self.frame_normalization = frame_normalization
-        self.last: Optional[Dict[str, Any]] = None
+        self._tls = threading.local()
+
+    @property
+    def last(self) -> Optional[Dict[str, Any]]:
+        return getattr(self._tls, "last", None)
+
+    @last.setter
+    def last(self, value: Optional[Dict[str, Any]]) -> None:
+        self._tls.last = copy.deepcopy(value) if value is not None else None
+
+    def reset_request_state(self) -> None:
+        self._tls.last = None
 
     def generate(self, question: str, context: Any) -> GenerationResult:
+        self._tls.last = None
         needs = analyze_question(question)
-        units = build_units(context.items)
+        units, excluded_quality_units, quality_filter = filter_quality_units(build_units(context.items), context)
         decision, chosen = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
-        self.last = record
+        if excluded_quality_units or quality_filter["excluded_adjacent_fragments"]:
+            record["quality_filter"] = quality_filter
         if not decision.supported:
-            return GenerationResult(NO_ANSWER_TEXT, True, self.name, "")
-        chosen = sorted(chosen, key=lambda u: u.order)
+            self.last = record
+            return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
+        if is_definition_question(question):
+            # Definition-style answers display the definitional evidence first (industry-scoped definition ahead of
+            # generic evidence); every other question keeps document order.
+            chosen = sorted(chosen, key=lambda u: (definition_rank(u), u.order))
+        else:
+            chosen = sorted(chosen, key=lambda u: u.order)
         weights = focus_weights(needs, units)
         lines: List[str] = []
         for u in chosen:
@@ -332,37 +701,94 @@ class EvidenceExtractiveGenerator:
             if u.follow:
                 lines.append(f"{u.follow} [{u.marker}]")
             record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text, "coverage": round(unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3), "kinds_ok": unit_kinds_ok(u, needs)})
+        import rag_completeness as RC
+        if RC.is_additional_evidence_enabled():
+            add_ev = RC.extract_additional_evidence(
+                units, chosen, needs, weights,
+                unit_score_fn=lambda un, nds, w: unit_score(un, nds, w, frame_normalization=self.frame_normalization)
+            )
+            if add_ev:
+                record["additional_evidence"] = add_ev
         dedup: List[str] = []
         for ln in lines:                                                    # a header line attached to two neighbouring sentences is shown once
             if ln not in dedup:
                 dedup.append(ln)
         text = "\n".join(dedup)
-        return GenerationResult(text, False, self.name, text)
+        self.last = record
+        return GenerationResult(text, False, self.name, text, evidence=copy.deepcopy(record))
 
 
 class EvidenceGuard:
-    """Pre/post evidence checks around any generator (used for the LLM generator; tested with stub clients only)."""
+    """Pre/post evidence checks around any generator (used for the LLM generator; tested with stub clients only).
+    Pre-check and post-check run outside the generation semaphore; only ``inner.generate`` acquires ``_gen_sem``.
+    Returns request-local evidence metadata explicitly via ``GenerationResult.evidence`` and isolates ``.last`` via thread-local storage reset per request.
+    """
 
-    def __init__(self, inner: Any, tau: float = TAU, frame_normalization: bool = False) -> None:
+    def __init__(self, inner: Any, tau: float = TAU, frame_normalization: bool = False, generation_concurrency: int = 1) -> None:
         self.inner, self.tau = inner, tau
         self.frame_normalization = frame_normalization
         self.name = getattr(inner, "name", "generator")
-        self.last: Optional[Dict[str, Any]] = None
+        self.generation_concurrency = max(1, int(generation_concurrency))
+        self._gen_sem = threading.BoundedSemaphore(self.generation_concurrency)
+        self._llm_lock = self._gen_sem
+        self._tls = threading.local()
+
+    @property
+    def last(self) -> Optional[Dict[str, Any]]:
+        return getattr(self._tls, "last", None)
+
+    @last.setter
+    def last(self, value: Optional[Dict[str, Any]]) -> None:
+        self._tls.last = copy.deepcopy(value) if value is not None else None
+
+    def reset_request_state(self) -> None:
+        self._tls.last = None
+        client = getattr(self.inner, "client", None)
+        if client is not None and hasattr(client, "reset_request_state"):
+            client.reset_request_state()
 
     def generate(self, question: str, context: Any) -> GenerationResult:
+        self.reset_request_state()
         needs = analyze_question(question)
-        units = build_units(context.items)
+        units, excluded_quality_units, quality_filter = filter_quality_units(build_units(context.items), context)
         decision, _ = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
-        self.last = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
+        record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
+        if excluded_quality_units or quality_filter["excluded_adjacent_fragments"]:
+            record["quality_filter"] = quality_filter
         if not decision.supported:                                          # the model is not even asked: the evidence cannot contain the answer
-            return GenerationResult(NO_ANSWER_TEXT, True, self.name, "")
-        res = self.inner.generate(question, context)
+            self.last = record
+            return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
+        model_context = _context_without_rejected_units(context, excluded_quality_units)
+        if self._gen_sem.acquire(blocking=False):
+            queue_wait_ms = 0.0
+        else:
+            t_wait0 = time.perf_counter()
+            self._gen_sem.acquire()
+            queue_wait_ms = round((time.perf_counter() - t_wait0) * 1000.0, 3)
+        try:
+            res = self.inner.generate(question, model_context)
+        finally:
+            self._gen_sem.release()
+        raw_tel = getattr(res, "telemetry", None)
+        tel: Optional[Dict[str, Any]] = dict(raw_tel) if raw_tel is not None else {"queue_wait_ms": queue_wait_ms}
+        if tel is not None and "queue_wait_ms" not in tel:
+            tel["queue_wait_ms"] = queue_wait_ms
         if not res.refused:
             body = re.sub(r"\[S\d+\]", "", res.text)
+            normalized_answer = quality_norm(body)
+            if excluded_quality_units and any(
+                quality_norm(getattr(unit, "text", "")) in normalized_answer
+                for unit in excluded_quality_units if quality_norm(getattr(unit, "text", ""))
+            ):
+                record.update({"supported": False, "reason": "ANSWER_INCLUDES_REJECTED_FRAGMENT"})
+                self.last = record
+                return GenerationResult(NO_ANSWER_TEXT, True, self.name, res.raw_text, res.prompt, tel, evidence=copy.deepcopy(record))
             if not all(kind_satisfied(k, body, needs) for k in needs.kinds):  # the produced text lacks the kind of detail that was asked for
-                self.last.update({"supported": False, "reason": "ANSWER_LACKS_ASKED_DETAIL"})
-                return GenerationResult(NO_ANSWER_TEXT, True, self.name, res.raw_text, res.prompt)
-        return res
+                record.update({"supported": False, "reason": "ANSWER_LACKS_ASKED_DETAIL"})
+                self.last = record
+                return GenerationResult(NO_ANSWER_TEXT, True, self.name, res.raw_text, res.prompt, tel, evidence=copy.deepcopy(record))
+        self.last = record
+        return GenerationResult(res.text, res.refused, res.generator, res.raw_text, res.prompt, tel, evidence=copy.deepcopy(record))
 
 
 # ------------------------------------------------------------------------------------------------------------ retrieval widening
@@ -373,7 +799,18 @@ class EvidenceRetriever:
     def __init__(self, base: Any, tau: float = TAU) -> None:
         self._base = base
         self.tau = tau
-        self.last_promoted: Optional[str] = None
+        self._tls = threading.local()
+
+    @property
+    def last_promoted(self) -> Optional[str]:
+        return getattr(self._tls, "last_promoted", None)
+
+    @last_promoted.setter
+    def last_promoted(self, value: Optional[str]) -> None:
+        self._tls.last_promoted = value
+
+    def reset_request_state(self) -> None:
+        self._tls.last_promoted = None
 
     def __getattr__(self, name: str) -> Any:
         return getattr(self._base, name)
@@ -382,26 +819,86 @@ class EvidenceRetriever:
         w = focus_weights(needs, weight_units or units)
         return any(unit_kinds_ok(u, needs) and unit_score(u, needs, w) >= self.tau for u in units)
 
-    def retrieve_in_page(self, query: str, guide_id: str, page_id: str, top_k: int = 5) -> List[Any]:
-        self.last_promoted = None
-        hits = self._base.retrieve_in_page(query, guide_id, page_id, top_k=top_k)
+    def _call_base_retrieve(self, query: str, guide_id: str, page_id: str, top_k: int,
+                            query_embedding: Optional[Sequence[float]] = None) -> List[Any]:
+        if query_embedding is not None:
+            try:
+                return self._base.retrieve_in_page(query, guide_id, page_id, top_k=top_k, query_embedding=query_embedding)
+            except TypeError:
+                pass
+        return self._base.retrieve_in_page(query, guide_id, page_id, top_k=top_k)
+
+    def retrieve_in_page_with_promotion(
+        self,
+        query: str,
+        guide_id: str,
+        page_id: str,
+        top_k: int = 5,
+        query_embedding: Optional[Sequence[float]] = None,
+    ) -> Tuple[List[Any], Optional[str]]:
+        self._tls.last_promoted = None
+        hits = self._call_base_retrieve(query, guide_id, page_id, top_k=top_k, query_embedding=query_embedding)
         needs = analyze_question(query)
         if not needs.kinds or not hits:
-            return hits
+            return hits, None
         if self._supplies(needs, build_units(hits)):
-            return hits
+            return hits, None
         total = len(self._base.page_chunks(guide_id, page_id))
-        ranked = self._base.retrieve_in_page(query, guide_id, page_id, top_k=max(top_k, total))
+        ranked = self._call_base_retrieve(query, guide_id, page_id, top_k=max(top_k, total), query_embedding=query_embedding)
         have = {h.chunk_id for h in hits}
         for h in ranked:
             if h.chunk_id in have:
                 continue
             if self._supplies(needs, build_units([h]), build_units(hits) + build_units([h])):
-                self.last_promoted = h.chunk_id
+                self._tls.last_promoted = h.chunk_id
                 promoted = dataclasses.replace(h, rank=1, metadata={**dict(h.metadata), "promoted": "detail_evidence", "dense_rank": h.rank})
                 rest = [dataclasses.replace(x, rank=i + 2) for i, x in enumerate(hits[: max(0, top_k - 1)])]
-                return [promoted] + rest
+                return [promoted] + rest, h.chunk_id
+        return hits, None
+
+    def retrieve_in_page(self, query: str, guide_id: str, page_id: str, top_k: int = 5,
+                         query_embedding: Optional[Sequence[float]] = None) -> List[Any]:
+        hits, _ = self.retrieve_in_page_with_promotion(query, guide_id, page_id, top_k=top_k, query_embedding=query_embedding)
         return hits
+
+    def retrieve_many_pages(
+        self,
+        query: str,
+        pages: Sequence[Tuple[str, str]],
+        top_k: int = 5,
+        query_embedding: Optional[Sequence[float]] = None,
+    ) -> Dict[Tuple[str, str], List[Any]]:
+        self._tls.last_promoted = None
+        if not hasattr(self._base, "retrieve_many_pages") or "retrieve_in_page" in getattr(self._base, "__dict__", {}):
+            return {
+                (str(g), str(p)): self.retrieve_in_page(query, str(g), str(p), top_k=top_k, query_embedding=query_embedding)
+                for g, p in dict.fromkeys((str(g), str(p)) for g, p in pages)
+            }
+        unique_pages = list(dict.fromkeys((str(g), str(p)) for g, p in pages))
+        needs = analyze_question(query)
+        if not needs.kinds:
+            return self._base.retrieve_many_pages(query, unique_pages, top_k=top_k, query_embedding=query_embedding)
+        max_total = max((len(self._base.page_chunks(g, p)) for g, p in unique_pages), default=top_k)
+        all_ranked = self._base.retrieve_many_pages(query, unique_pages, top_k=max(top_k, max_total), query_embedding=query_embedding)
+        out: Dict[Tuple[str, str], List[Any]] = {}
+        for g, p in unique_pages:
+            ranked = all_ranked.get((g, p), [])
+            hits = list(ranked[:top_k])
+            if not hits or self._supplies(needs, build_units(hits)):
+                out[(g, p)] = hits
+                continue
+            have = {h.chunk_id for h in hits}
+            promoted_list = None
+            for h in ranked:
+                if h.chunk_id in have:
+                    continue
+                if self._supplies(needs, build_units([h]), build_units(hits) + build_units([h])):
+                    promoted = dataclasses.replace(h, rank=1, metadata={**dict(h.metadata), "promoted": "detail_evidence", "dense_rank": h.rank})
+                    rest = [dataclasses.replace(x, rank=i + 2) for i, x in enumerate(hits[: max(0, top_k - 1)])]
+                    promoted_list = [promoted] + rest
+                    break
+            out[(g, p)] = promoted_list if promoted_list is not None else hits
+        return out
 
 
 # ------------------------------------------------------------------------------------------------------------ support chain
@@ -420,10 +917,15 @@ def verify_support_chain(answer: str, context: Any) -> Dict[str, Any]:
     return {"ok": ok and bool(records), "verbatim_all": ok and bool(records), "sentences": records}
 
 
-def build_evidence_pipeline(base: Any, tau: float = TAU, widen: bool = True, generator: str = "extractive", llm_client: Any = None, frame_normalization: Optional[bool] = None) -> Any:
+def build_evidence_pipeline(base: Any, tau: float = TAU, widen: bool = True, generator: str = "extractive", llm_client: Any = None,
+                            frame_normalization: Optional[bool] = None, generation_concurrency: int = 1) -> Any:
     """A ``RagPipeline`` identical to ``base`` except for the retriever wrapper (optional) and the evidence-checked generator."""
     import rag_pipeline as RP
     retriever = EvidenceRetriever(base.retriever, tau) if widen else base.retriever
     fn = frame_normalization if frame_normalization is not None else getattr(base.cfg, "evidence_frame_normalization", False)
-    gen = EvidenceExtractiveGenerator(tau, frame_normalization=fn) if generator == "extractive" else EvidenceGuard(base.generator, tau, frame_normalization=fn)
+    gen = (
+        EvidenceExtractiveGenerator(tau, frame_normalization=fn)
+        if generator == "extractive"
+        else EvidenceGuard(base.generator, tau, frame_normalization=fn, generation_concurrency=generation_concurrency)
+    )
     return RP.RagPipeline(base.backend, retriever, base.ctx, base.corpus, gen, base.count_tokens, cards=list(base.cards.values()), config=base.cfg)

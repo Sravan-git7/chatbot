@@ -1,0 +1,508 @@
+{
+  "schema_version": "19B.1",
+  "git_head": "25ced60",
+  "branch": "arena/01a0fc57-chatbot",
+  "part1_baseline_reproducibility": {
+    "production_config": {
+      "top_k_cards": 10,
+      "k_chunks": 5,
+      "context_budget_tokens": 700,
+      "max_context_chunks": 4,
+      "ood_min_coverage": 0.25,
+      "context_min_coverage": 0.5,
+      "rerank_router": true,
+      "code_aware_router": true,
+      "in_page_grounding": true,
+      "citation_normalization": true,
+      "relaxed_context_gate": true,
+      "evidence_frame_normalization": false,
+      "phase16_context_experiment": false,
+      "phrase_reranker": true,
+      "phrase_min_corroboration": 2,
+      "full_page_coverage": false,
+      "citation_repair": false,
+      "ollama_num_predict": null,
+      "ollama_keep_alive": null
+    },
+    "file_sha256": {
+      "eval_queries_113": "3c5a9ddd2d62e9cb1919a4fbb7c81cd5239994ff230abbbe6440fb6fa5c132ac",
+      "page_corpus_manifest": "49a314dbdce364ff33e007013dc92f136144c4f2b523d22a1a1abc64e3f8c1fe",
+      "card_collection_manifest": "61383afdbcad361e747ad34654f14dedb6b20a573a30404681625bf61bbf94ea",
+      "page_collection_manifest": "c6d0f4797eb2809d360ceb3402eecb27441e16af2ccd6f9dcd417bb1059d8a37",
+      "m2c_card_units": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21"
+    },
+    "phase19a_verified_metrics": {
+      "router_r1_answerable": "62/65",
+      "router_r1_all_gold": "91/105",
+      "gold_in_pool": "105/105",
+      "extractive_answerable": "52/65",
+      "guarded_ollama_answerable": "43/65",
+      "oracle_ollama_answerable": "44/65",
+      "wrong_page_extractive": 3,
+      "wrong_page_guarded": 1,
+      "grounding_failures": 0,
+      "phantom_citations": 0,
+      "url_changes": 0,
+      "generator_errors": 0
+    }
+  },
+  "part2_3_reranker_consolidation": {
+    "collection_structure": {
+      "collection_name": "sap_pages_v1",
+      "total_chunks": 106,
+      "unique_pages": 25,
+      "distance_metric": "cosine",
+      "embedding_dim": 384,
+      "preindex_memory_kb": 571.6
+    },
+    "experiment_matrix": {
+      "Phase18_HEAD_25ced60": {
+        "embed_calls": 241,
+        "card_chroma_queries": 128,
+        "page_chroma_queries_reranker": 981,
+        "step5_winning_page_queries": 107,
+        "total_chroma_queries": 1216,
+        "hot_path_collection_get_calls": 108
+      },
+      "Phase19A_Baseline": {
+        "counts": {
+          "embed": 113,
+          "card_chroma_query": 128,
+          "page_chroma_query": 981,
+          "page_chroma_get": 113,
+          "total_chroma_queries": 1109
+        },
+        "timings_ms": {
+          "route_ms": {
+            "min": 49.2,
+            "p50": 66.49,
+            "p90": 88.13,
+            "p95": 93.43,
+            "p99": 104.89,
+            "max": 106.97,
+            "mean": 68.89
+          },
+          "retrieve_ms": {
+            "min": 0.0,
+            "p50": 0.0,
+            "p90": 0.01,
+            "p95": 0.01,
+            "p99": 0.02,
+            "max": 0.03,
+            "mean": 0.0
+          },
+          "context_ms": {
+            "min": 0.56,
+            "p50": 5.31,
+            "p90": 7.52,
+            "p95": 8.9,
+            "p99": 12.12,
+            "max": 14.79,
+            "mean": 5.34
+          },
+          "generate_ms": {
+            "min": 0.3,
+            "p50": 0.9,
+            "p90": 1.46,
+            "p95": 1.86,
+            "p99": 2.99,
+            "max": 7.32,
+            "mean": 1.05
+          },
+          "total_ms": {
+            "min": 53.25,
+            "p50": 76.07,
+            "p90": 101.76,
+            "p95": 108.22,
+            "p99": 120.76,
+            "max": 124.34,
+            "mean": 79.17
+          }
+        },
+        "decision": "BASELINE"
+      },
+      "R1_batched_where_full_include": {
+        "counts": {
+          "embed": 113,
+          "card_chroma_query": 128,
+          "page_chroma_query": 113,
+          "page_chroma_get": 113,
+          "total_chroma_queries": 241
+        },
+        "timings_ms": {
+          "route_ms": {
+            "min": 32.87,
+            "p50": 43.96,
+            "p90": 60.42,
+            "p95": 66.05,
+            "p99": 85.41,
+            "max": 98.01,
+            "mean": 47.02
+          },
+          "retrieve_ms": {
+            "min": 0.0,
+            "p50": 0.0,
+            "p90": 0.01,
+            "p95": 0.01,
+            "p99": 0.01,
+            "max": 0.01,
+            "mean": 0.0
+          },
+          "context_ms": {
+            "min": 0.52,
+            "p50": 5.68,
+            "p90": 7.99,
+            "p95": 9.24,
+            "p99": 12.82,
+            "max": 14.32,
+            "mean": 5.76
+          },
+          "generate_ms": {
+            "min": 0.23,
+            "p50": 0.96,
+            "p90": 1.64,
+            "p95": 2.06,
+            "p99": 2.49,
+            "max": 3.77,
+            "mean": 1.09
+          },
+          "total_ms": {
+            "min": 36.31,
+            "p50": 56.49,
+            "p90": 73.89,
+            "p95": 79.79,
+            "p99": 97.99,
+            "max": 120.29,
+            "mean": 58.2
+          }
+        },
+        "exact_equivalence_113": true,
+        "decision": "PASS (superseded by R4 which also eliminates SQLite metadata deserialization)"
+      },
+      "R2_bulk_unfiltered_full_include": {
+        "pair_checks_2825_mismatches": 0,
+        "exact_equivalence_113": true,
+        "decision": "REJECT / SUPERSEDED (deserializes all 106 rows from SQLite on every query; ~19 ms vs 2.5 ms for R4)"
+      },
+      "R3_in_memory_numpy_cosine": {
+        "pair_checks_2825_order_mismatches": 0,
+        "pair_checks_2825_to_dict_distance_mismatches": 343,
+        "max_float_distance_diff": 3.58e-07,
+        "exact_equivalence_113": false,
+        "decision": "REJECT (343/2825 6-decimal float distance diffs vs Chroma HNSW C++ SIMD inner product)"
+      },
+      "R4_batched_where_distances_with_preindexed_chunks": {
+        "counts": {
+          "embed": 113,
+          "card_chroma_query": 128,
+          "page_chroma_query": 113,
+          "page_chroma_get": 0,
+          "total_chroma_queries": 241
+        },
+        "timings_ms": {
+          "route_ms": {
+            "min": 27.88,
+            "p50": 38.08,
+            "p90": 61.06,
+            "p95": 67.01,
+            "p99": 83.83,
+            "max": 91.41,
+            "mean": 42.87
+          },
+          "retrieve_ms": {
+            "min": 0.0,
+            "p50": 0.0,
+            "p90": 0.01,
+            "p95": 0.01,
+            "p99": 0.02,
+            "max": 0.02,
+            "mean": 0.0
+          },
+          "context_ms": {
+            "min": 0.5,
+            "p50": 5.38,
+            "p90": 9.73,
+            "p95": 10.95,
+            "p99": 14.79,
+            "max": 17.17,
+            "mean": 6.06
+          },
+          "generate_ms": {
+            "min": 0.23,
+            "p50": 0.97,
+            "p90": 1.82,
+            "p95": 2.36,
+            "p99": 2.71,
+            "max": 4.25,
+            "mean": 1.12
+          },
+          "total_ms": {
+            "min": 32.26,
+            "p50": 48.14,
+            "p90": 75.87,
+            "p95": 82.88,
+            "p99": 101.44,
+            "max": 102.14,
+            "mean": 52.56
+          }
+        },
+        "pair_checks_2825_mismatches": 0,
+        "part3_equivalence_113": {
+          "status": 113,
+          "answer": 113,
+          "reason_code": 113,
+          "message": 113,
+          "topic": 113,
+          "citations": 113,
+          "routing": 113,
+          "ui": 113,
+          "debug": 113,
+          "candidate_ordering": 113,
+          "selected_page": 113,
+          "selected_chunk_ids": 113,
+          "chunk_indexes": 113,
+          "distances": 113,
+          "context_block": 113,
+          "extractive_answer": 113,
+          "grounding_result": 113,
+          "full_dict_without_timings": 113
+        },
+        "memory_impact_kb": 571.6,
+        "decision": "PASS (Adopted: 113/113 exact equivalence, -88.5% page Chroma queries, -78.3% total Chroma queries)"
+      }
+    }
+  },
+  "part4_5_ollama_generation_experiments": {
+    "ollama_daemon_reachable_in_sandbox": false,
+    "validation_status": "NOT_VERIFIED (live Ollama daemon unreachable in Linux sandbox; deterministic checkpoint replay completed)",
+    "committed_windows_baseline_e1a_v2": {
+      "model": "extractive only (Ollama BLOCKED)",
+      "temperature": 0.0,
+      "seed": 42,
+      "guarded": {
+        "answerable_correct": 43,
+        "oracle_correct": 44,
+        "wrong_page_answers": 1,
+        "unsupported_answered": 6,
+        "absent_detail_answered": 0,
+        "grounding_failures": 0,
+        "phantom_citations": 0,
+        "generator_errors": 0
+      },
+      "router": {
+        "all_gold_r1": 0.8667,
+        "all_gold_r1_count": 91,
+        "all_gold_mrr": 0.9064,
+        "all_gold_in_pool_count": 105,
+        "all_gold_in_pool_total": 105,
+        "answerable_r1": 0.9538,
+        "answerable_r1_count": 62,
+        "answerable_in_pool_rate": 1.0
+      },
+      "extractive": {
+        "answerable_correct": 52,
+        "wrong_page_answers": 3,
+        "absent_detail_answered": 12,
+        "grounding_failures": 0,
+        "phantom_citations": 0,
+        "citation_evidence_failures": 6,
+        "generator_errors": 0
+      }
+    },
+    "token_distributions_n75_llm_queries": {
+      "system_prompt_tokens": 140,
+      "context_tokens": {
+        "min": 32,
+        "p50": 461.0,
+        "p90": 606.0,
+        "p95": 611.0,
+        "p99": 628.08,
+        "max": 634,
+        "mean": 438.75
+      },
+      "total_input_tokens": {
+        "min": 199,
+        "p50": 653.0,
+        "p90": 810.6,
+        "p95": 818.0,
+        "p99": 824.04,
+        "max": 827,
+        "mean": 633.72
+      },
+      "output_tokens_answered_n58": {
+        "min": 15,
+        "p50": 29.0,
+        "p90": 56.6,
+        "p95": 113.05,
+        "p99": 135.17,
+        "max": 146,
+        "mean": 35.83
+      },
+      "output_tokens_correct_n43": {
+        "min": 15,
+        "p50": 27.0,
+        "p90": 43.6,
+        "p95": 54.9,
+        "p99": 60.9,
+        "max": 63,
+        "mean": 30.14
+      },
+      "output_tokens_withheld_n17": {
+        "min": 0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0,
+        "mean": 0
+      }
+    },
+    "experiments": {
+      "num_predict_sweep": {
+        "A_default": {
+          "num_predict": null,
+          "keep_alive": null,
+          "prompt_tokens_p50": 653.0,
+          "context_tokens_p50": 461.0,
+          "queries_exceeding_cap_all_75": [],
+          "queries_exceeding_cap_answered_58": [],
+          "checkpoint_replay_guarded_answerable": "43/65",
+          "checkpoint_replay_oracle": "44/65",
+          "wrong_page": 1,
+          "grounding_failures": 0,
+          "phantom_citations": 0,
+          "absent_detail": "0/16",
+          "generator_errors": 0,
+          "live_generation_latency_ms": "NOT_VERIFIED (local Ollama daemon unreachable at 127.0.0.1:11434)",
+          "decision": "BASELINE"
+        },
+        "B_256": {
+          "num_predict": 256,
+          "keep_alive": null,
+          "prompt_tokens_p50": 653.0,
+          "context_tokens_p50": 461.0,
+          "queries_exceeding_cap_all_75": [],
+          "queries_exceeding_cap_answered_58": [],
+          "checkpoint_replay_guarded_answerable": "43/65",
+          "checkpoint_replay_oracle": "44/65",
+          "wrong_page": 1,
+          "grounding_failures": 0,
+          "phantom_citations": 0,
+          "absent_detail": "0/16",
+          "generator_errors": 0,
+          "live_generation_latency_ms": "NOT_VERIFIED (local Ollama daemon unreachable at 127.0.0.1:11434)",
+          "decision": "INCONCLUSIVE / NOT_VERIFIED (safe on checkpoint token lengths; requires live Windows Ollama timing run)"
+        },
+        "C_192": {
+          "num_predict": 192,
+          "keep_alive": null,
+          "prompt_tokens_p50": 653.0,
+          "context_tokens_p50": 461.0,
+          "queries_exceeding_cap_all_75": [],
+          "queries_exceeding_cap_answered_58": [],
+          "checkpoint_replay_guarded_answerable": "43/65",
+          "checkpoint_replay_oracle": "44/65",
+          "wrong_page": 1,
+          "grounding_failures": 0,
+          "phantom_citations": 0,
+          "absent_detail": "0/16",
+          "generator_errors": 0,
+          "live_generation_latency_ms": "NOT_VERIFIED (local Ollama daemon unreachable at 127.0.0.1:11434)",
+          "decision": "INCONCLUSIVE / NOT_VERIFIED (safe on checkpoint token lengths; requires live Windows Ollama timing run)"
+        },
+        "D_160": {
+          "num_predict": 160,
+          "keep_alive": null,
+          "prompt_tokens_p50": 653.0,
+          "context_tokens_p50": 461.0,
+          "queries_exceeding_cap_all_75": [],
+          "queries_exceeding_cap_answered_58": [],
+          "checkpoint_replay_guarded_answerable": "43/65",
+          "checkpoint_replay_oracle": "44/65",
+          "wrong_page": 1,
+          "grounding_failures": 0,
+          "phantom_citations": 0,
+          "absent_detail": "0/16",
+          "generator_errors": 0,
+          "live_generation_latency_ms": "NOT_VERIFIED (local Ollama daemon unreachable at 127.0.0.1:11434)",
+          "decision": "INCONCLUSIVE / NOT_VERIFIED (safe on checkpoint token lengths; requires live Windows Ollama timing run)"
+        },
+        "E_128": {
+          "num_predict": 128,
+          "keep_alive": null,
+          "prompt_tokens_p50": 653.0,
+          "context_tokens_p50": 461.0,
+          "queries_exceeding_cap_all_75": [
+            "P12-105"
+          ],
+          "queries_exceeding_cap_answered_58": [
+            "P12-105"
+          ],
+          "checkpoint_replay_guarded_answerable": "43/65 (with mid-sentence truncation on P12-105)",
+          "checkpoint_replay_oracle": "44/65",
+          "wrong_page": 1,
+          "grounding_failures": 0,
+          "phantom_citations": 0,
+          "absent_detail": "0/16",
+          "generator_errors": 0,
+          "live_generation_latency_ms": "NOT_VERIFIED (local Ollama daemon unreachable at 127.0.0.1:11434)",
+          "decision": "REJECT (truncates answered query P12-105 at 146 tokens; backward citation inheritance masks truncation)"
+        }
+      },
+      "keep_alive": {
+        "keep_alive_tested": [
+          -1,
+          "default (5m)"
+        ],
+        "live_latency_status": "NOT_VERIFIED (requires Windows Ollama daemon)",
+        "decision": "INCONCLUSIVE / NOT_VERIFIED (keep production default None)"
+      },
+      "context_budget_sweep": {
+        "700": {
+          "context_budget_tokens": 700,
+          "llm_queries_with_dropped_chunks": 45,
+          "llm_queries_with_changed_context_hash": 0,
+          "answered_queries_losing_cited_S4": [],
+          "decision": "PASS (Baseline)"
+        },
+        "600": {
+          "context_budget_tokens": 600,
+          "llm_queries_with_dropped_chunks": 45,
+          "llm_queries_with_changed_context_hash": 15,
+          "answered_queries_losing_cited_S4": [
+            "P12-002",
+            "P12-029",
+            "P12-036",
+            "P12-037",
+            "P12-038",
+            "P12-039"
+          ],
+          "decision": "REJECT (drops cited [S4] evidence chunks)"
+        },
+        "500": {
+          "context_budget_tokens": 500,
+          "llm_queries_with_dropped_chunks": 45,
+          "llm_queries_with_changed_context_hash": 21,
+          "answered_queries_losing_cited_S4": [
+            "P12-002",
+            "P12-029",
+            "P12-036",
+            "P12-037",
+            "P12-038",
+            "P12-039",
+            "P12-051"
+          ],
+          "decision": "REJECT (drops cited [S4] evidence chunks)"
+        }
+      },
+      "streaming_analysis": {
+        "total_llm_calls": 75,
+        "answered_after_grounding": 58,
+        "withheld_after_generation": 17,
+        "withheld_rate_pct": 22.67,
+        "decision": "REJECT (22.7% of LLM generations fail post-generation grounding and are withheld; unbuffered streaming would leak unverified text)"
+      }
+    },
+    "live_ollama_results": null
+  }
+}

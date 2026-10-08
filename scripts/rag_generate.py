@@ -21,9 +21,11 @@ from __future__ import annotations
 
 import re
 import sys
+import threading
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Protocol, Sequence
+from typing import Any, Dict, List, Mapping, Optional, Protocol, Sequence, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_text as T  # noqa: E402
@@ -67,22 +69,79 @@ class LLMClient(Protocol):
     def generate(self, prompt: str) -> str: ...
 
 
-class OllamaClient:
-    """Local Ollama client. Lazy import; no network beyond the local Ollama server; model and options exactly those of ``rag_core``."""
+def _extract_ollama_telemetry(resp: Mapping[str, Any]) -> Dict[str, Any]:
+    """Extract non-sensitive generation timing & token count metadata from an Ollama chat response."""
+    if not isinstance(resp, Mapping):
+        return {}
+    total_ns = int(resp.get("total_duration") or 0)
+    load_ns = int(resp.get("load_duration") or 0)
+    peval_ns = int(resp.get("prompt_eval_duration") or 0)
+    eval_ns = int(resp.get("eval_duration") or 0)
+    peval_cnt = int(resp.get("prompt_eval_count") or 0)
+    eval_cnt = int(resp.get("eval_count") or 0)
+    tps = round(eval_cnt / (eval_ns / 1e9), 2) if eval_ns > 0 and eval_cnt > 0 else 0.0
+    load_ms = round(load_ns / 1e6, 3)
+    return {
+        "prompt_eval_count": peval_cnt,
+        "eval_count": eval_cnt,
+        "total_duration_ms": round(total_ns / 1e6, 3),
+        "load_duration_ms": load_ms,
+        "prompt_eval_duration_ms": round(peval_ns / 1e6, 3),
+        "eval_duration_ms": round(eval_ns / 1e6, 3),
+        "tokens_per_sec": tps,
+        "cold_load": bool(load_ms > 100.0),
+    }
 
-    def __init__(self, model: Optional[str] = None, options: Optional[Dict[str, Any]] = None, chat: Any = None) -> None:
+
+class OllamaClient:
+    """Local Ollama client. Lazy import; no network beyond the local Ollama server; model and options default to ``rag_core``.
+    Thread-safe: ``last_telemetry`` is stored in thread-local storage and reset at the start of every call,
+    and ``generate_with_telemetry`` returns ``(text, telemetry)`` explicitly per invocation.
+    """
+
+    def __init__(self, model: Optional[str] = None, options: Optional[Dict[str, Any]] = None, chat: Any = None,
+                 num_predict: Optional[int] = None, keep_alive: Optional[Any] = None) -> None:
         import rag_core
         self.model = model or rag_core.LLM_MODEL_NAME
         self.options = dict(options or rag_core.LLM_OPTIONS)
+        if num_predict is not None:
+            self.options["num_predict"] = int(num_predict)
+        self.keep_alive = keep_alive
         self._chat = chat
+        self._tls = threading.local()
 
-    def generate(self, prompt: str) -> str:
+    @property
+    def last_telemetry(self) -> Dict[str, Any]:
+        return getattr(self._tls, "last_telemetry", {})
+
+    @last_telemetry.setter
+    def last_telemetry(self, value: Dict[str, Any]) -> None:
+        self._tls.last_telemetry = dict(value) if value else {}
+
+    def reset_request_state(self) -> None:
+        self._tls.last_telemetry = {}
+
+    def generate_with_telemetry(self, prompt: str) -> Tuple[str, Dict[str, Any]]:
+        self._tls.last_telemetry = {}
         chat = self._chat
         if chat is None:
             import ollama                                   # lazy: only when a real generation is requested
             chat = ollama.chat
-        resp = chat(model=self.model, messages=[{"role": "user", "content": prompt}], options=self.options)
-        return str(resp["message"]["content"])
+        kwargs: Dict[str, Any] = {
+            "model": self.model,
+            "messages": [{"role": "user", "content": prompt}],
+            "options": dict(self.options),
+        }
+        if self.keep_alive is not None:
+            kwargs["keep_alive"] = self.keep_alive
+        resp = chat(**kwargs)
+        tel = _extract_ollama_telemetry(resp)
+        self._tls.last_telemetry = dict(tel)
+        return str(resp["message"]["content"]), tel
+
+    def generate(self, prompt: str) -> str:
+        text, _ = self.generate_with_telemetry(prompt)
+        return text
 
 
 @dataclass
@@ -92,6 +151,8 @@ class GenerationResult:
     generator: str
     raw_text: str
     prompt: Optional[str] = None
+    telemetry: Optional[Dict[str, Any]] = None
+    evidence: Optional[Dict[str, Any]] = None
 
 
 class LLMGenerator:
@@ -102,11 +163,26 @@ class LLMGenerator:
         self.name = name
 
     def generate(self, question: str, context: ContextBlock) -> GenerationResult:
+        t_p0 = time.perf_counter()
         prompt = build_prompt(question, context)
-        raw = self.client.generate(prompt) or ""
+        prompt_build_ms = round((time.perf_counter() - t_p0) * 1000.0, 3)
+        t_g0 = time.perf_counter()
+        if hasattr(self.client, "generate_with_telemetry"):
+            raw, client_tel = self.client.generate_with_telemetry(prompt)
+            raw = raw or ""
+            tel: Dict[str, Any] = dict(client_tel or {})
+        else:
+            raw = self.client.generate(prompt) or ""
+            tel = {}
+        http_ms = round((time.perf_counter() - t_g0) * 1000.0, 3)
         text = raw.strip()
         refused = NO_ANSWER_TEXT.lower() in text.lower() or not text
-        return GenerationResult(NO_ANSWER_TEXT if refused else text, refused, self.name, raw, prompt)
+        tel["prompt_build_ms"] = prompt_build_ms
+        tel["ollama_http_ms"] = http_ms
+        tel["context_chars"] = len(context.render())
+        tel["prompt_chars"] = len(prompt)
+        tel["output_chars"] = len(text)
+        return GenerationResult(NO_ANSWER_TEXT if refused else text, refused, self.name, raw, prompt, telemetry=tel)
 
 
 class ExtractiveGenerator:

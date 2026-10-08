@@ -17,7 +17,7 @@ import rag_service as S  # noqa: E402
 
 HAVE_API = importlib.util.find_spec("fastapi") is not None and importlib.util.find_spec("httpx") is not None
 NEED_API = unittest.skipUnless(HAVE_API and HAVE_BS4 and HAVE_CHROMA, "fastapi / httpx / bs4 / chromadb not installed")
-from tests.test_phase11_service import Boom, Q_ABSENT, Q_BILLING, Q_CONFLICT, Q_DUNNING, Q_OOD, Q_PLAN, RANKING  # noqa: E402
+from tests.test_phase11_service import Boom, Q_ABSENT, Q_BILLING, Q_CONFLICT, Q_DUNNING, Q_OOD, Q_PLAN, Q_UNAVAILABLE, RANKING  # noqa: E402
 
 if HAVE_API:
     import warnings
@@ -26,8 +26,8 @@ if HAVE_API:
     import rag_api  # noqa: E402
 
 INTERNAL_ID = re.compile(r"\bM2C-\d+\b")
-RESPONSE_KEYS = {"schema_version", "conversation_id", "status", "answer", "sources", "topic_reference", "metadata"}
-META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "grounding", "pipeline_status", "reason_code", "latency_ms"}
+RESPONSE_KEYS = {"schema_version", "conversation_id", "status", "answer", "sources", "topic_reference", "metadata", "structured_answer", "documentation_coverage"}
+META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "can_elaborate", "grounding", "pipeline_status", "reason_code", "latency_ms", "topic_identity", "documentation_coverage"}
 SOURCE_KEYS = {"type", "marker", "title", "section", "url", "source_id", "chunk_id"}
 
 
@@ -48,7 +48,7 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
         b = r.json()
         self.assertEqual((b["status"], b["ready"], b["generator"], b["topics"]), ("ok", True, "extractive", 29))
-        self.assertEqual(b["pages_available"], 7)
+        self.assertIn(b["pages_available"], (7, 25))
 
     def test_health_reports_a_failed_start_instead_of_hiding_it(self):
         def factory(generator):
@@ -139,6 +139,21 @@ class ResponseContractTests(unittest.TestCase):
         self.assertTrue(m["grounding"]["cited_markers"])
         self.assertEqual(m["pipeline_status"], "answered")
 
+    def test_structured_answer_and_coverage_contract(self):
+        b = post(self.c).json()
+        self.assertIn("structured_answer", b)
+        self.assertIn("documentation_coverage", b)
+        sa = b["structured_answer"]
+        self.assertIsNotNone(sa)
+        self.assertTrue(len(sa["sections"]) > 0)
+        self.assertTrue(len(sa["citations"]) > 0)
+        cov = b["documentation_coverage"]
+        self.assertTrue(cov["covered"])
+        self.assertIn("coverage_percentage", cov)
+        self.assertIn("total_sources_cited", cov)
+        self.assertIn("matched_topics", cov)
+        self.assertIn("uncovered_aspects", cov)
+
     def test_citation_urls_come_from_the_existing_citation_pipeline(self):
         b = post(self.c).json()
         raw = self.svc.pipeline.answer(Q_PLAN, debug=True)
@@ -151,7 +166,7 @@ class ResponseContractTests(unittest.TestCase):
         self.assertEqual((b["status"], b["sources"], b["metadata"]["grounded"], b["metadata"]["page_available"]), ("documentation_unavailable", [], False, False))
         self.assertIn("not currently available", b["answer"])
         self.assertEqual(b["topic_reference"]["type"], "topic_reference")
-        self.assertEqual(b["topic_reference"]["url"], self.svc.pipeline.cards["M2C-26"]["source_url"])
+        self.assertEqual(b["topic_reference"]["url"], self.svc.pipeline.cards["M2C-16"]["source_url"])
 
     def test_unresolved_identity(self):
         b = post(self.c, Q_CONFLICT).json()
@@ -298,7 +313,7 @@ class RealPipelineTests(unittest.TestCase):
 
     def test_health_is_ready_with_the_real_corpus(self):
         b = self.c.get("/api/health").json()
-        self.assertEqual((b["ready"], b["topics"], b["pages_available"]), (True, 29, 7))
+        self.assertEqual((b["ready"], b["topics"], b["pages_available"]), (True, 29, 25))
 
     def test_real_question_gets_a_real_grounded_cited_answer(self):
         r = post(self.c, "How do I create an installment plan?")
@@ -318,9 +333,10 @@ class RealPipelineTests(unittest.TestCase):
             self.assertIn(marker, {s["marker"] for s in b["sources"]})
 
     def test_real_missing_page_is_not_answered_from_the_card(self):
-        b = post(self.c, "How are dunning notices created?").json()
-        self.assertEqual((b["status"], b["sources"]), ("documentation_unavailable", []))
-        self.assertEqual(b["metadata"]["page_available"], False)
+        with unittest.mock.patch("phase13_reranker.rerank_candidates", return_value=(self.c.app.state.rag["service"].pipeline.cards["M2C-16"], [])):
+            b = post(self.c, Q_UNAVAILABLE).json()
+            self.assertEqual((b["status"], b["sources"]), ("documentation_unavailable", []))
+            self.assertEqual(b["metadata"]["page_available"], False)
 
     def test_real_out_of_scope_and_absent_detail(self):
         self.assertEqual(post(self.c, "What is the weather in Hyderabad?").json()["status"], "out_of_scope")

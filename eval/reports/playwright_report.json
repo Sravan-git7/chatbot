@@ -1,0 +1,93 @@
+{
+  "timestamp": "2026-10-08T11:01:02.078Z",
+  "total_tests": 15,
+  "passed_tests": 15,
+  "failed_tests": 0,
+  "results": [
+    {
+      "name": "billing",
+      "passed": true,
+      "detail": "Length: 825, citations: true"
+    },
+    {
+      "name": "contract account",
+      "passed": true,
+      "detail": "Length: 866"
+    },
+    {
+      "name": "installment plan",
+      "passed": true,
+      "detail": "Length: 1139"
+    },
+    {
+      "name": "incoming payments",
+      "passed": true,
+      "detail": "Length: 1037"
+    },
+    {
+      "name": "billing paraphrase",
+      "passed": true,
+      "detail": "Length: 475"
+    },
+    {
+      "name": "today's news / OOS",
+      "passed": true,
+      "detail": "SU\nOUT OF SCOPE\n\nThis question doesn't appear to match the SAP Utilities documen"
+    },
+    {
+      "name": "gibberish",
+      "passed": true,
+      "detail": "SU\nOUT OF SCOPE\n\nThis question doesn't appear to match the SAP Utilities documen"
+    },
+    {
+      "name": "genuine Unable-to-Verify",
+      "passed": true,
+      "detail": "SU\nUNABLE TO VERIFY\n\nI couldn't find enough verified information in the availabl"
+    },
+    {
+      "name": "backend unavailable",
+      "passed": true,
+      "detail": "Offline indicator verified"
+    },
+    {
+      "name": "429 rate limiting",
+      "passed": true,
+      "detail": "429 message and Retry button verified"
+    },
+    {
+      "name": "retry action",
+      "passed": true,
+      "detail": "Retry triggered chat request: true"
+    },
+    {
+      "name": "conversation history",
+      "passed": true,
+      "detail": "Saved conversations: 1, messages: 16"
+    },
+    {
+      "name": "keyboard interaction",
+      "passed": true,
+      "detail": "Shift+Enter newline and Enter submit verified"
+    },
+    {
+      "name": "mobile viewport (320/375/393)",
+      "passed": true,
+      "detail": "No horizontal overflow across all 3 viewports"
+    },
+    {
+      "name": "topic switching",
+      "passed": true,
+      "detail": "Tab switched and topic questions rendered"
+    }
+  ],
+  "axe": [
+    {
+      "view": "Welcome View",
+      "violations": []
+    },
+    {
+      "view": "Answered View with Citations & Sources",
+      "violations": []
+    }
+  ]
+}

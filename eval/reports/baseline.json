@@ -1,0 +1,2571 @@
+{
+  "timestamp": "2026-10-08T08:23:36Z",
+  "schema_version": "1.0",
+  "system_state": {
+    "total_topic_inventory": 29,
+    "searchable_ingested_pages": 25,
+    "un_ingested_identity_topics": 4,
+    "un_ingested_topic_ids": [
+      "M2C-01",
+      "M2C-13",
+      "M2C-16",
+      "M2C-18"
+    ]
+  },
+  "summary": {
+    "total_test_cases": 157,
+    "route_accuracy": 0.9745,
+    "oos_precision": 0.9375,
+    "oos_recall": 1.0,
+    "unable_to_verify_precision": 0.9,
+    "unable_to_verify_recall": 0.9,
+    "top1_document_hit_rate": 0.9453,
+    "any_document_hit_rate": 0.9453,
+    "citation_validity": 1.0,
+    "key_fact_coverage": 0.7183,
+    "paraphrase_document_overlap": 0.8222,
+    "latency_p50_ms": 24.6,
+    "latency_p95_ms": 30.4,
+    "single_source_answer_count": 59,
+    "less_than_3_sentence_answers": 43,
+    "topic_reference_precision": 1.0,
+    "answered_count": 131
+  },
+  "hard_gates": {
+    "all_passed": true,
+    "citation_validity_100": true,
+    "no_answerable_abstained": true,
+    "no_oos_answered": true,
+    "no_near_miss_answered": true,
+    "failures": []
+  },
+  "results": [
+    {
+      "id": "ans-01",
+      "type": "answerable",
+      "question": "How is the Print Workbench component used in move-in?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 2108.08,
+      "sources": [
+        "M2C-02"
+      ],
+      "top_doc": "M2C-02",
+      "gold_docs": [
+        "M2C-02"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-02",
+      "type": "answerable",
+      "question": "What happens when a new customer moves into an installation during a move-out?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 82.33,
+      "sources": [
+        "M2C-02"
+      ],
+      "top_doc": "M2C-02",
+      "gold_docs": [
+        "M2C-02"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-03",
+      "type": "answerable",
+      "question": "What activities are carried out using the move-in function?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 95.83,
+      "sources": [
+        "M2C-03",
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-04",
+      "type": "answerable",
+      "question": "What installations are required to create a move-in?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 84.51,
+      "sources": [
+        "M2C-03",
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-05",
+      "type": "answerable",
+      "question": "What happens to the allocation of a contract on the move-out date?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 89.09,
+      "sources": [
+        "M2C-04",
+        "M2C-04",
+        "M2C-04"
+      ],
+      "top_doc": "M2C-04",
+      "gold_docs": [
+        "M2C-04"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-06",
+      "type": "answerable",
+      "question": "What happens to budget billing plans when a move-out is processed?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 92.58,
+      "sources": [
+        "M2C-04"
+      ],
+      "top_doc": "M2C-04",
+      "gold_docs": [
+        "M2C-04"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-07",
+      "type": "answerable",
+      "question": "What does the Device Management component manage?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 80.84,
+      "sources": [
+        "M2C-05",
+        "M2C-05"
+      ],
+      "top_doc": "M2C-05",
+      "gold_docs": [
+        "M2C-05"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-08",
+      "type": "answerable",
+      "question": "What standard component corresponds to a device in the Utilities Industry component?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 97.05,
+      "sources": [
+        "M2C-05"
+      ],
+      "top_doc": "M2C-05",
+      "gold_docs": [
+        "M2C-05"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-09",
+      "type": "answerable",
+      "question": "How are meter reading orders and results selected using BAPIs?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 79.43,
+      "sources": [
+        "M2C-06"
+      ],
+      "top_doc": "M2C-06",
+      "gold_docs": [
+        "M2C-06"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-10",
+      "type": "answerable",
+      "question": "When are devices read aperiodically?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 72.88,
+      "sources": [
+        "M2C-06"
+      ],
+      "top_doc": "M2C-06",
+      "gold_docs": [
+        "M2C-06"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-11",
+      "type": "answerable",
+      "question": "Where can you find the transactions to monitor meter reading results in the menu?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 86.82,
+      "sources": [
+        "M2C-07",
+        "M2C-07",
+        "M2C-07"
+      ],
+      "top_doc": "M2C-07",
+      "gold_docs": [
+        "M2C-07"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-12",
+      "type": "answerable",
+      "question": "When does the Meter Reading Estimation component estimate meter reading results automatically?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 75.8,
+      "sources": [
+        "M2C-08"
+      ],
+      "top_doc": "M2C-08",
+      "gold_docs": [
+        "M2C-08"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-13",
+      "type": "answerable",
+      "question": "What is the difference between extrapolation and interpolation in meter reading estimation?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 86.85,
+      "sources": [
+        "M2C-09",
+        "M2C-09"
+      ],
+      "top_doc": "M2C-09",
+      "gold_docs": [
+        "M2C-09"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-14",
+      "type": "answerable",
+      "question": "What is the base period in meter reading estimation?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 85.6,
+      "sources": [
+        "M2C-09",
+        "M2C-09"
+      ],
+      "top_doc": "M2C-09",
+      "gold_docs": [
+        "M2C-09"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-15",
+      "type": "answerable",
+      "question": "What happens if you adopt the meter reading result proposed during a move-in?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 89.41,
+      "sources": [
+        "M2C-10"
+      ],
+      "top_doc": "M2C-10",
+      "gold_docs": [
+        "M2C-10"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-16",
+      "type": "answerable",
+      "question": "What determines the evaluation basis for schema execution in billing?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 84.05,
+      "sources": [
+        "M2C-11"
+      ],
+      "top_doc": "M2C-11",
+      "gold_docs": [
+        "M2C-11"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-17",
+      "type": "answerable",
+      "question": "What happens in billing when a price change occurs during a billing period?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 83.19,
+      "sources": [
+        "M2C-11"
+      ],
+      "top_doc": "M2C-11",
+      "gold_docs": [
+        "M2C-11"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-18",
+      "type": "answerable",
+      "question": "What contracts are selected during automatic billing?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 91.91,
+      "sources": [
+        "M2C-12",
+        "M2C-12"
+      ],
+      "top_doc": "M2C-12",
+      "gold_docs": [
+        "M2C-12"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-19",
+      "type": "answerable",
+      "question": "How does scheduling determine billing runs in automatic billing?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 88.0,
+      "sources": [
+        "M2C-12",
+        "M2C-12"
+      ],
+      "top_doc": "M2C-12",
+      "gold_docs": [
+        "M2C-12"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-20",
+      "type": "answerable",
+      "question": "What documents are produced by invoicing with bill creation?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 84.1,
+      "sources": [
+        "M2C-14",
+        "M2C-14",
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-21",
+      "type": "answerable",
+      "question": "How does invoicing relate to contract accounting and bill creation?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 92.85,
+      "sources": [
+        "M2C-14",
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-22",
+      "type": "answerable",
+      "question": "When are new budget billing plans created automatically during invoicing?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 101.24,
+      "sources": [
+        "M2C-15",
+        "M2C-15"
+      ],
+      "top_doc": "M2C-15",
+      "gold_docs": [
+        "M2C-15"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-23",
+      "type": "answerable",
+      "question": "What does deactivation of a budget billing plan in invoicing mean?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 91.36,
+      "sources": [
+        "M2C-15",
+        "M2C-15"
+      ],
+      "top_doc": "M2C-15",
+      "gold_docs": [
+        "M2C-15"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-24",
+      "type": "answerable",
+      "question": "Can a single contract account be assigned to multiple business partners in Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 93.67,
+      "sources": [
+        "M2C-17",
+        "M2C-17"
+      ],
+      "top_doc": "M2C-17",
+      "gold_docs": [
+        "M2C-17"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-25",
+      "type": "answerable",
+      "question": "What does a contract account contain in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 111.94,
+      "sources": [
+        "M2C-17"
+      ],
+      "top_doc": "M2C-17",
+      "gold_docs": [
+        "M2C-17"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-26",
+      "type": "answerable",
+      "question": "What is the purpose of the Analyze Incoming Payments F5588 app?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 97.7,
+      "sources": [
+        "M2C-19",
+        "M2C-19",
+        "M2C-19"
+      ],
+      "top_doc": "M2C-19",
+      "gold_docs": [
+        "M2C-19"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-27",
+      "type": "answerable",
+      "question": "What does the Analyze Incoming Payments app monitor?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 79.1,
+      "sources": [
+        "M2C-19",
+        "M2C-19",
+        "M2C-19"
+      ],
+      "top_doc": "M2C-19",
+      "gold_docs": [
+        "M2C-19"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-28",
+      "type": "answerable",
+      "question": "In which event does the system attempt to assign incoming payment amounts to open items?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 79.1,
+      "sources": [
+        "M2C-20"
+      ],
+      "top_doc": "M2C-20",
+      "gold_docs": [
+        "M2C-20"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-29",
+      "type": "answerable",
+      "question": "What fields does clearing control take into account during incoming payment processing?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 76.82,
+      "sources": [
+        "M2C-20"
+      ],
+      "top_doc": "M2C-20",
+      "gold_docs": [
+        "M2C-20"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-30",
+      "type": "answerable",
+      "question": "Where are clearing types defined in Customizing?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 81.39,
+      "sources": [
+        "M2C-21",
+        "M2C-21"
+      ],
+      "top_doc": "M2C-21",
+      "gold_docs": [
+        "M2C-21"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-31",
+      "type": "answerable",
+      "question": "What does a clearing type represent in Contract Accounts Receivable and Payable?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 95.36,
+      "sources": [
+        "M2C-21",
+        "M2C-21"
+      ],
+      "top_doc": "M2C-21",
+      "gold_docs": [
+        "M2C-21"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-32",
+      "type": "answerable",
+      "question": "Where can detailed information about payments from external cash desks be displayed?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 96.36,
+      "sources": [
+        "M2C-22"
+      ],
+      "top_doc": "M2C-22",
+      "gold_docs": [
+        "M2C-22"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-33",
+      "type": "answerable",
+      "question": "What is an installment plan in Contract Accounts Receivable and Payable?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 79.67,
+      "sources": [
+        "M2C-23",
+        "M2C-23"
+      ],
+      "top_doc": "M2C-23",
+      "gold_docs": [
+        "M2C-23"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-34",
+      "type": "answerable",
+      "question": "When can you create an installment plan for a business partner?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 52.95,
+      "sources": [
+        "M2C-23"
+      ],
+      "top_doc": "M2C-23",
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-35",
+      "type": "answerable",
+      "question": "What transaction code is used to create an installment plan?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 52.2,
+      "sources": [
+        "M2C-24"
+      ],
+      "top_doc": "M2C-24",
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-36",
+      "type": "answerable",
+      "question": "Which transaction is used to display an installment plan?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 54.98,
+      "sources": [
+        "M2C-25"
+      ],
+      "top_doc": "M2C-25",
+      "gold_docs": [
+        "M2C-25"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-37",
+      "type": "answerable",
+      "question": "Why do you create payment reminders or dunning letters in FI-CA?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 56.67,
+      "sources": [
+        "M2C-26"
+      ],
+      "top_doc": "M2C-26",
+      "gold_docs": [
+        "M2C-26"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-38",
+      "type": "answerable",
+      "question": "What functions are available to submit receivables to a collection agency?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 49.33,
+      "sources": [
+        "M2C-27",
+        "M2C-27"
+      ],
+      "top_doc": "M2C-27",
+      "gold_docs": [
+        "M2C-27"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-39",
+      "type": "answerable",
+      "question": "How can you communicate with collection agencies in FI-CA?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 57.29,
+      "sources": [
+        "M2C-28",
+        "M2C-28"
+      ],
+      "top_doc": "M2C-28",
+      "gold_docs": [
+        "M2C-28"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "ans-40",
+      "type": "answerable",
+      "question": "Why is a utility installation disconnected?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 48.94,
+      "sources": [
+        "M2C-29",
+        "M2C-29"
+      ],
+      "top_doc": "M2C-29",
+      "gold_docs": [
+        "M2C-29"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-01-a",
+      "type": "paraphrase",
+      "question": "How do I create an installment plan?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 50.9,
+      "sources": [
+        "M2C-24",
+        "M2C-24",
+        "M2C-24"
+      ],
+      "top_doc": "M2C-24",
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-01-b",
+      "type": "paraphrase",
+      "question": "How can I create an installment plan for open items?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 52.48,
+      "sources": [
+        "M2C-24",
+        "M2C-24",
+        "M2C-24"
+      ],
+      "top_doc": "M2C-24",
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-01-c",
+      "type": "paraphrase",
+      "question": "How are installment plans created for a customer?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 77.99,
+      "sources": [
+        "M2C-24",
+        "M2C-24",
+        "M2C-24"
+      ],
+      "top_doc": "M2C-24",
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-02-a",
+      "type": "paraphrase",
+      "question": "How can I display an existing installment plan?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 91.59,
+      "sources": [
+        "M2C-25"
+      ],
+      "top_doc": "M2C-25",
+      "gold_docs": [
+        "M2C-25"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-02-b",
+      "type": "paraphrase",
+      "question": "Where do I view saved installment plans in transaction FPR3?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 98.53,
+      "sources": [
+        "M2C-25"
+      ],
+      "top_doc": "M2C-25",
+      "gold_docs": [
+        "M2C-25"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-02-c",
+      "type": "paraphrase",
+      "question": "What is the transaction to display an installment plan?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 89.57,
+      "sources": [
+        "M2C-25"
+      ],
+      "top_doc": "M2C-25",
+      "gold_docs": [
+        "M2C-25"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-03-a",
+      "type": "paraphrase",
+      "question": "What happens during a move-in?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 87.51,
+      "sources": [
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-03-b",
+      "type": "paraphrase",
+      "question": "How does move-in processing work in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 104.4,
+      "sources": [
+        "M2C-03",
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-03-c",
+      "type": "paraphrase",
+      "question": "What is the process to execute a customer move-in?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 90.72,
+      "sources": [
+        "M2C-03",
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-04-a",
+      "type": "paraphrase",
+      "question": "How does a move-out work?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 85.91,
+      "sources": [
+        "M2C-04"
+      ],
+      "top_doc": "M2C-04",
+      "gold_docs": [
+        "M2C-04"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-04-b",
+      "type": "paraphrase",
+      "question": "What happens when a customer moves out in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 95.25,
+      "sources": [
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-04"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-04-c",
+      "type": "paraphrase",
+      "question": "How is a move-out processed?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 86.57,
+      "sources": [
+        "M2C-04",
+        "M2C-04"
+      ],
+      "top_doc": "M2C-04",
+      "gold_docs": [
+        "M2C-04"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-05-a",
+      "type": "paraphrase",
+      "question": "How does meter reading estimation work?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 69.71,
+      "sources": [
+        "M2C-08"
+      ],
+      "top_doc": "M2C-08",
+      "gold_docs": [
+        "M2C-08"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-05-b",
+      "type": "paraphrase",
+      "question": "When does the system estimate meter readings?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 75.41,
+      "sources": [
+        "M2C-08"
+      ],
+      "top_doc": "M2C-08",
+      "gold_docs": [
+        "M2C-08"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-05-c",
+      "type": "paraphrase",
+      "question": "How are meter reading results estimated automatically?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 92.76,
+      "sources": [
+        "M2C-07",
+        "M2C-07"
+      ],
+      "top_doc": "M2C-07",
+      "gold_docs": [
+        "M2C-08"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-06-a",
+      "type": "paraphrase",
+      "question": "What estimation procedures are used in meter reading?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 91.51,
+      "sources": [
+        "M2C-09",
+        "M2C-09",
+        "M2C-09"
+      ],
+      "top_doc": "M2C-09",
+      "gold_docs": [
+        "M2C-09"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-06-b",
+      "type": "paraphrase",
+      "question": "How are extrapolation and interpolation applied in meter estimation?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 94.86,
+      "sources": [
+        "M2C-09",
+        "M2C-09"
+      ],
+      "top_doc": "M2C-09",
+      "gold_docs": [
+        "M2C-09"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-06-c",
+      "type": "paraphrase",
+      "question": "Which methods does SAP Utilities use to estimate meter values?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 87.88,
+      "sources": [
+        "M2C-09"
+      ],
+      "top_doc": "M2C-09",
+      "gold_docs": [
+        "M2C-09"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-07-a",
+      "type": "paraphrase",
+      "question": "How are devices managed in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 80.97,
+      "sources": [
+        "M2C-05",
+        "M2C-05"
+      ],
+      "top_doc": "M2C-05",
+      "gold_docs": [
+        "M2C-05"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-07-b",
+      "type": "paraphrase",
+      "question": "What does the device management component do?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 53.93,
+      "sources": [
+        "M2C-05",
+        "M2C-05"
+      ],
+      "top_doc": "M2C-05",
+      "gold_docs": [
+        "M2C-05"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-07-c",
+      "type": "paraphrase",
+      "question": "What technical data is managed under device management?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 48.85,
+      "sources": [
+        "M2C-05",
+        "M2C-05"
+      ],
+      "top_doc": "M2C-05",
+      "gold_docs": [
+        "M2C-05"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-08-a",
+      "type": "paraphrase",
+      "question": "How are meter readings organized?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 33.29,
+      "sources": [
+        "M2C-07"
+      ],
+      "top_doc": "M2C-07",
+      "gold_docs": [
+        "M2C-06"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-08-b",
+      "type": "paraphrase",
+      "question": "What is the process for reading meters in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 23.05,
+      "sources": [
+        "M2C-07"
+      ],
+      "top_doc": "M2C-07",
+      "gold_docs": [
+        "M2C-06"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-08-c",
+      "type": "paraphrase",
+      "question": "How are periodic and aperiodic meter readings carried out?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 70.76,
+      "sources": [
+        "M2C-06"
+      ],
+      "top_doc": "M2C-06",
+      "gold_docs": [
+        "M2C-06"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-09-a",
+      "type": "paraphrase",
+      "question": "How do you monitor meter reading results?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 82.51,
+      "sources": [
+        "M2C-07",
+        "M2C-07",
+        "M2C-07"
+      ],
+      "top_doc": "M2C-07",
+      "gold_docs": [
+        "M2C-07"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-09-b",
+      "type": "paraphrase",
+      "question": "What does monitoring of meter reading results do?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 84.66,
+      "sources": [
+        "M2C-07",
+        "M2C-07",
+        "M2C-07"
+      ],
+      "top_doc": "M2C-07",
+      "gold_docs": [
+        "M2C-07"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-09-c",
+      "type": "paraphrase",
+      "question": "Where can I monitor meter reading orders and results?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 94.32,
+      "sources": [
+        "M2C-07"
+      ],
+      "top_doc": "M2C-07",
+      "gold_docs": [
+        "M2C-07"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-10-a",
+      "type": "paraphrase",
+      "question": "How does billing work in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 96.2,
+      "sources": [
+        "M2C-11"
+      ],
+      "top_doc": "M2C-11",
+      "gold_docs": [
+        "M2C-11"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-10-b",
+      "type": "paraphrase",
+      "question": "What is the billing procedure in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 95.15,
+      "sources": [
+        "M2C-14",
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-11"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-10-c",
+      "type": "paraphrase",
+      "question": "How are rate calculations and schema execution handled in billing?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 99.57,
+      "sources": [
+        "M2C-11"
+      ],
+      "top_doc": "M2C-11",
+      "gold_docs": [
+        "M2C-11"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-11-a",
+      "type": "paraphrase",
+      "question": "How does automatic billing work?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 60.08,
+      "sources": [
+        "M2C-12",
+        "M2C-12",
+        "M2C-12"
+      ],
+      "top_doc": "M2C-12",
+      "gold_docs": [
+        "M2C-12"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-11-b",
+      "type": "paraphrase",
+      "question": "What is the automatic billing procedure in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 59.98,
+      "sources": [
+        "M2C-12",
+        "M2C-12",
+        "M2C-12"
+      ],
+      "top_doc": "M2C-12",
+      "gold_docs": [
+        "M2C-12"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-11-c",
+      "type": "paraphrase",
+      "question": "How are contracts billed automatically?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 47.84,
+      "sources": [
+        "M2C-12",
+        "M2C-12"
+      ],
+      "top_doc": "M2C-12",
+      "gold_docs": [
+        "M2C-12"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-12-a",
+      "type": "paraphrase",
+      "question": "What is the invoicing process in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 77.7,
+      "sources": [
+        "M2C-14",
+        "M2C-14",
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-12-b",
+      "type": "paraphrase",
+      "question": "How does invoicing create the link to contract accounting?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 89.72,
+      "sources": [
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-12-c",
+      "type": "paraphrase",
+      "question": "What steps are involved in invoicing and bill creation?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 82.1,
+      "sources": [
+        "M2C-14",
+        "M2C-14",
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-13-a",
+      "type": "paraphrase",
+      "question": "What is a contract account?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 68.29,
+      "sources": [
+        "M2C-17"
+      ],
+      "top_doc": "M2C-17",
+      "gold_docs": [
+        "M2C-17"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-13-b",
+      "type": "paraphrase",
+      "question": "How is a contract account defined in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 61.67,
+      "sources": [
+        "M2C-17",
+        "M2C-17"
+      ],
+      "top_doc": "M2C-17",
+      "gold_docs": [
+        "M2C-17"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-13-c",
+      "type": "paraphrase",
+      "question": "What does a contract account contain in Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 58.55,
+      "sources": [
+        "M2C-17"
+      ],
+      "top_doc": "M2C-17",
+      "gold_docs": [
+        "M2C-17"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-14-a",
+      "type": "paraphrase",
+      "question": "What is clearing control in incoming payments?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 44.72,
+      "sources": [
+        "M2C-20"
+      ],
+      "top_doc": "M2C-20",
+      "gold_docs": [
+        "M2C-20"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-14-b",
+      "type": "paraphrase",
+      "question": "How does clearing control assign payments to open items?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 46.44,
+      "sources": [
+        "M2C-20"
+      ],
+      "top_doc": "M2C-20",
+      "gold_docs": [
+        "M2C-20"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-14-c",
+      "type": "paraphrase",
+      "question": "What happens during clearing control for incoming payments?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 101.8,
+      "sources": [
+        "M2C-20"
+      ],
+      "top_doc": "M2C-20",
+      "gold_docs": [
+        "M2C-20"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-15-a",
+      "type": "paraphrase",
+      "question": "How does dunning work in FI-CA?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 90.15,
+      "sources": [
+        "M2C-26"
+      ],
+      "top_doc": "M2C-26",
+      "gold_docs": [
+        "M2C-26"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-15-b",
+      "type": "paraphrase",
+      "question": "How are dunning notices created in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 134.93,
+      "sources": [
+        "M2C-26",
+        "M2C-26"
+      ],
+      "top_doc": "M2C-26",
+      "gold_docs": [
+        "M2C-26"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "para-15-c",
+      "type": "paraphrase",
+      "question": "What is the FI-CA dunning procedure for overdue payments?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 94.78,
+      "sources": [
+        "M2C-26",
+        "M2C-26"
+      ],
+      "top_doc": "M2C-26",
+      "gold_docs": [
+        "M2C-26"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-01",
+      "type": "out_of_scope",
+      "question": "What is the capital of Australia?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 77.39,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-02",
+      "type": "out_of_scope",
+      "question": "Give me a Python script to sort an array using quicksort.",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 75.84,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-03",
+      "type": "out_of_scope",
+      "question": "Which football team won the 2018 World Cup?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 79.18,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-04",
+      "type": "out_of_scope",
+      "question": "How do I bake chocolate chip cookies at home?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 89.32,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-05",
+      "type": "out_of_scope",
+      "question": "What is the weather in Hyderabad today?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 75.99,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-06",
+      "type": "out_of_scope",
+      "question": "Explain how photosynthesis works in green plants.",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 73.95,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-07",
+      "type": "out_of_scope",
+      "question": "What is the capital of France?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 73.36,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-08",
+      "type": "out_of_scope",
+      "question": "What is the boiling point of liquid nitrogen?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 76.66,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-09",
+      "type": "out_of_scope",
+      "question": "Who is the CEO of Microsoft in 2024?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 85.49,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-10",
+      "type": "out_of_scope",
+      "question": "How do I reset network settings on an Apple iPhone?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 86.29,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-11",
+      "type": "out_of_scope",
+      "question": "Write a haiku about the rainy season.",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 79.8,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-12",
+      "type": "out_of_scope",
+      "question": "What are the health benefits of green tea?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 70.19,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-13",
+      "type": "out_of_scope",
+      "question": "Who wrote the play Romeo and Juliet?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 76.27,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-14",
+      "type": "out_of_scope",
+      "question": "What is the distance between the Earth and the Moon?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 86.16,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "oos-15",
+      "type": "out_of_scope",
+      "question": "Can you recommend a good hotel in Tokyo for tourists?",
+      "expected_route": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "latency_ms": 75.67,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [],
+      "topic_reference": null
+    },
+    {
+      "id": "near-01",
+      "type": "near_miss",
+      "question": "Which authorization object is needed to run the monitoring transaction?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 87.44,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-07"
+      ],
+      "topic_reference": "Monitoring Meter Reading Results"
+    },
+    {
+      "id": "near-02",
+      "type": "near_miss",
+      "question": "What is the exact database table for meter reading orders in IS-U?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 71.71,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-06"
+      ],
+      "topic_reference": "Reading Meters"
+    },
+    {
+      "id": "near-03",
+      "type": "near_miss",
+      "question": "What is the maximum number of installments allowed per installment plan?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 84.37,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": "Installment Plan Overview"
+    },
+    {
+      "id": "near-04",
+      "type": "near_miss",
+      "question": "Which ABAP user exit is called during billing schema execution?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 97.67,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-11"
+      ],
+      "topic_reference": "SAP Utilities Billing Procedure"
+    },
+    {
+      "id": "near-05",
+      "type": "near_miss",
+      "question": "What is the exact transaction code for mass move-in simulation?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "out_of_scope",
+      "latency_ms": 89.29,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "near-06",
+      "type": "near_miss",
+      "question": "Which background job program executes mass invoicing for multiple contract accounts?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 85.29,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": "Processing Budget Billing Plans"
+    },
+    {
+      "id": "near-07",
+      "type": "near_miss",
+      "question": "What is the specific event function module name for clearing rule priority 99?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 97.28,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-20"
+      ],
+      "topic_reference": "Clearing Types"
+    },
+    {
+      "id": "near-08",
+      "type": "near_miss",
+      "question": "Which spool recipient receives the dunning print log spool list?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 78.47,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-26"
+      ],
+      "topic_reference": "SAP Utilities Invoicing Procedure"
+    },
+    {
+      "id": "near-09",
+      "type": "near_miss",
+      "question": "What is the technical field length of the IS-U equipment serial number?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 93.46,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-05"
+      ],
+      "topic_reference": "Device Management Overview"
+    },
+    {
+      "id": "near-10",
+      "type": "near_miss",
+      "question": "What is the legal notice waiting period in business days before service disconnection?",
+      "expected_route": "unable_to_verify",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 89.55,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-29"
+      ],
+      "topic_reference": "Disconnection/Reconnection of a Utility Installation"
+    },
+    {
+      "id": "land-01",
+      "type": "landing_suggestion",
+      "question": "How does billing work?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 73.66,
+      "sources": [
+        "M2C-12",
+        "M2C-12"
+      ],
+      "top_doc": "M2C-12",
+      "gold_docs": [
+        "M2C-11"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "land-02",
+      "type": "landing_suggestion",
+      "question": "What is a contract account?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 71.47,
+      "sources": [
+        "M2C-17"
+      ],
+      "top_doc": "M2C-17",
+      "gold_docs": [
+        "M2C-17"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "land-03",
+      "type": "landing_suggestion",
+      "question": "What is the invoicing process?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 84.69,
+      "sources": [
+        "M2C-14",
+        "M2C-14",
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "land-04",
+      "type": "landing_suggestion",
+      "question": "How does a contract account relate to a business partner?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 104.31,
+      "sources": [
+        "M2C-17"
+      ],
+      "top_doc": "M2C-17",
+      "gold_docs": [
+        "M2C-17"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "land-05",
+      "type": "landing_suggestion",
+      "question": "How do I create an installment plan?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 93.89,
+      "sources": [
+        "M2C-24",
+        "M2C-24",
+        "M2C-24"
+      ],
+      "top_doc": "M2C-24",
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "land-06",
+      "type": "landing_suggestion",
+      "question": "How are devices managed?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 89.65,
+      "sources": [
+        "M2C-05",
+        "M2C-05"
+      ],
+      "top_doc": "M2C-05",
+      "gold_docs": [
+        "M2C-05"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-01",
+      "type": "explore_chip",
+      "question": "Tell me about Utilities Master Data.",
+      "expected_route": "documentation_unavailable",
+      "actual_status": "unable_to_verify",
+      "latency_ms": 90.33,
+      "sources": [],
+      "top_doc": null,
+      "gold_docs": [
+        "M2C-01"
+      ],
+      "topic_reference": "Device Management Overview"
+    },
+    {
+      "id": "chip-m2c-02",
+      "type": "explore_chip",
+      "question": "Tell me about Move-In/Out Overview.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 91.93,
+      "sources": [
+        "M2C-02"
+      ],
+      "top_doc": "M2C-02",
+      "gold_docs": [
+        "M2C-02"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-03",
+      "type": "explore_chip",
+      "question": "Tell me about Move-In Process.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 81.29,
+      "sources": [
+        "M2C-03",
+        "M2C-03",
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-04",
+      "type": "explore_chip",
+      "question": "Tell me about Move-Out Process.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 91.32,
+      "sources": [
+        "M2C-04",
+        "M2C-04"
+      ],
+      "top_doc": "M2C-04",
+      "gold_docs": [
+        "M2C-04"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-05",
+      "type": "explore_chip",
+      "question": "Tell me about Device Management Overview.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 87.79,
+      "sources": [
+        "M2C-05",
+        "M2C-05"
+      ],
+      "top_doc": "M2C-05",
+      "gold_docs": [
+        "M2C-05"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-06",
+      "type": "explore_chip",
+      "question": "Tell me about Reading Meters.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 75.32,
+      "sources": [
+        "M2C-06"
+      ],
+      "top_doc": "M2C-06",
+      "gold_docs": [
+        "M2C-06"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-07",
+      "type": "explore_chip",
+      "question": "Tell me about Monitoring Meter Reading Results.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 74.4,
+      "sources": [
+        "M2C-07",
+        "M2C-07",
+        "M2C-07"
+      ],
+      "top_doc": "M2C-07",
+      "gold_docs": [
+        "M2C-07"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-08",
+      "type": "explore_chip",
+      "question": "Tell me about Meter Reading Estimation.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 71.93,
+      "sources": [
+        "M2C-08"
+      ],
+      "top_doc": "M2C-08",
+      "gold_docs": [
+        "M2C-08"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-09",
+      "type": "explore_chip",
+      "question": "Tell me about Estimation Procedure Details.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 94.37,
+      "sources": [
+        "M2C-09"
+      ],
+      "top_doc": "M2C-09",
+      "gold_docs": [
+        "M2C-09"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-10",
+      "type": "explore_chip",
+      "question": "Tell me about Meter Reading Data During Move-In.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 89.84,
+      "sources": [
+        "M2C-10"
+      ],
+      "top_doc": "M2C-10",
+      "gold_docs": [
+        "M2C-10"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-11",
+      "type": "explore_chip",
+      "question": "Tell me about SAP Utilities Billing Procedure.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 79.0,
+      "sources": [
+        "M2C-11"
+      ],
+      "top_doc": "M2C-11",
+      "gold_docs": [
+        "M2C-11"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-12",
+      "type": "explore_chip",
+      "question": "Tell me about Automatic Billing.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 92.71,
+      "sources": [
+        "M2C-12",
+        "M2C-12"
+      ],
+      "top_doc": "M2C-12",
+      "gold_docs": [
+        "M2C-12"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-13",
+      "type": "explore_chip",
+      "question": "Tell me about Budget Billing Plan.",
+      "expected_route": "documentation_unavailable",
+      "actual_status": "answered",
+      "latency_ms": 90.01,
+      "sources": [
+        "M2C-15"
+      ],
+      "top_doc": "M2C-15",
+      "gold_docs": [
+        "M2C-13"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-14",
+      "type": "explore_chip",
+      "question": "Tell me about SAP Utilities Invoicing Procedure.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 91.98,
+      "sources": [
+        "M2C-14",
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-15",
+      "type": "explore_chip",
+      "question": "Tell me about Processing Budget Billing Plans.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 95.66,
+      "sources": [
+        "M2C-15",
+        "M2C-15",
+        "M2C-15"
+      ],
+      "top_doc": "M2C-15",
+      "gold_docs": [
+        "M2C-15"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-16",
+      "type": "explore_chip",
+      "question": "Tell me about Periodic Billing and Invoicing Analysis.",
+      "expected_route": "documentation_unavailable",
+      "actual_status": "answered",
+      "latency_ms": 93.91,
+      "sources": [
+        "M2C-15"
+      ],
+      "top_doc": "M2C-15",
+      "gold_docs": [
+        "M2C-16"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-17",
+      "type": "explore_chip",
+      "question": "Tell me about Contract Accounts Overview.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 101.16,
+      "sources": [
+        "M2C-17"
+      ],
+      "top_doc": "M2C-17",
+      "gold_docs": [
+        "M2C-17"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-18",
+      "type": "explore_chip",
+      "question": "Tell me about Contract Account Business Object.",
+      "expected_route": "documentation_unavailable",
+      "actual_status": "answered",
+      "latency_ms": 96.65,
+      "sources": [
+        "M2C-17",
+        "M2C-17"
+      ],
+      "top_doc": "M2C-17",
+      "gold_docs": [
+        "M2C-18"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-19",
+      "type": "explore_chip",
+      "question": "Tell me about Analyze Incoming Payments.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 75.59,
+      "sources": [
+        "M2C-19",
+        "M2C-19"
+      ],
+      "top_doc": "M2C-19",
+      "gold_docs": [
+        "M2C-19"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-20",
+      "type": "explore_chip",
+      "question": "Tell me about Clearing Control in Incoming Payments.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 73.62,
+      "sources": [
+        "M2C-20"
+      ],
+      "top_doc": "M2C-20",
+      "gold_docs": [
+        "M2C-20"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-21",
+      "type": "explore_chip",
+      "question": "Tell me about Clearing Types.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 84.97,
+      "sources": [
+        "M2C-21"
+      ],
+      "top_doc": "M2C-21",
+      "gold_docs": [
+        "M2C-21"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-22",
+      "type": "explore_chip",
+      "question": "Tell me about Processing Incoming Payments from External Cash Desks.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 97.47,
+      "sources": [
+        "M2C-22",
+        "M2C-22"
+      ],
+      "top_doc": "M2C-22",
+      "gold_docs": [
+        "M2C-22"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-23",
+      "type": "explore_chip",
+      "question": "Tell me about Installment Plan Overview.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 80.26,
+      "sources": [
+        "M2C-23"
+      ],
+      "top_doc": "M2C-23",
+      "gold_docs": [
+        "M2C-23"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-24",
+      "type": "explore_chip",
+      "question": "Tell me about Creating Installment Plans.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 83.72,
+      "sources": [
+        "M2C-24",
+        "M2C-24"
+      ],
+      "top_doc": "M2C-24",
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-25",
+      "type": "explore_chip",
+      "question": "Tell me about Displaying and Changing Installment Plans.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 94.11,
+      "sources": [
+        "M2C-25",
+        "M2C-25"
+      ],
+      "top_doc": "M2C-25",
+      "gold_docs": [
+        "M2C-25"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-26",
+      "type": "explore_chip",
+      "question": "Tell me about FI-CA Dunning.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 100.88,
+      "sources": [
+        "M2C-26"
+      ],
+      "top_doc": "M2C-26",
+      "gold_docs": [
+        "M2C-26"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-27",
+      "type": "explore_chip",
+      "question": "Tell me about Submission of Receivables to Collection Agency.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 81.18,
+      "sources": [
+        "M2C-27",
+        "M2C-27"
+      ],
+      "top_doc": "M2C-27",
+      "gold_docs": [
+        "M2C-27"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-28",
+      "type": "explore_chip",
+      "question": "Tell me about Collection Agency APIs and Enterprise Services.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 85.1,
+      "sources": [
+        "M2C-28",
+        "M2C-28"
+      ],
+      "top_doc": "M2C-28",
+      "gold_docs": [
+        "M2C-28"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "chip-m2c-29",
+      "type": "explore_chip",
+      "question": "Tell me about Disconnection/Reconnection of a Utility Installation.",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 91.85,
+      "sources": [
+        "M2C-29",
+        "M2C-29",
+        "M2C-29"
+      ],
+      "top_doc": "M2C-29",
+      "gold_docs": [
+        "M2C-29"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "rel-01",
+      "type": "related_question",
+      "question": "How are incoming payments analyzed and cleared?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 93.15,
+      "sources": [
+        "M2C-19",
+        "M2C-19",
+        "M2C-19"
+      ],
+      "top_doc": "M2C-19",
+      "gold_docs": [
+        "M2C-19"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "rel-02",
+      "type": "related_question",
+      "question": "How does invoicing create the link to contract accounting?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 93.67,
+      "sources": [
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "rel-03",
+      "type": "related_question",
+      "question": "How does move-in processing work?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 100.17,
+      "sources": [
+        "M2C-03",
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "rel-04",
+      "type": "related_question",
+      "question": "How does move-out processing work?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 86.49,
+      "sources": [
+        "M2C-04",
+        "M2C-04"
+      ],
+      "top_doc": "M2C-04",
+      "gold_docs": [
+        "M2C-04"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "rel-05",
+      "type": "related_question",
+      "question": "What does monitoring of meter reading results do?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 84.17,
+      "sources": [
+        "M2C-07",
+        "M2C-07",
+        "M2C-07"
+      ],
+      "top_doc": "M2C-07",
+      "gold_docs": [
+        "M2C-07"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "rel-06",
+      "type": "related_question",
+      "question": "How does automatic billing work?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 80.02,
+      "sources": [
+        "M2C-12",
+        "M2C-12",
+        "M2C-12"
+      ],
+      "top_doc": "M2C-12",
+      "gold_docs": [
+        "M2C-12"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "sw-01-a",
+      "type": "topic_switch",
+      "question": "How do I create an installment plan?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 99.03,
+      "sources": [
+        "M2C-24",
+        "M2C-24",
+        "M2C-24"
+      ],
+      "top_doc": "M2C-24",
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "sw-01-b",
+      "type": "topic_switch",
+      "question": "How does meter reading estimation work?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 70.1,
+      "sources": [
+        "M2C-08"
+      ],
+      "top_doc": "M2C-08",
+      "gold_docs": [
+        "M2C-08"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "sw-01-c",
+      "type": "topic_switch",
+      "question": "What transaction code creates an installment plan?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 83.44,
+      "sources": [
+        "M2C-24"
+      ],
+      "top_doc": "M2C-24",
+      "gold_docs": [
+        "M2C-24"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "sw-02-a",
+      "type": "topic_switch",
+      "question": "What happens during a move-in?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 85.58,
+      "sources": [
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "sw-02-b",
+      "type": "topic_switch",
+      "question": "What is the invoicing procedure in SAP Utilities?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 75.82,
+      "sources": [
+        "M2C-14",
+        "M2C-14"
+      ],
+      "top_doc": "M2C-14",
+      "gold_docs": [
+        "M2C-14"
+      ],
+      "topic_reference": null
+    },
+    {
+      "id": "sw-02-c",
+      "type": "topic_switch",
+      "question": "What activities are carried out using the move-in function?",
+      "expected_route": "answered",
+      "actual_status": "answered",
+      "latency_ms": 87.86,
+      "sources": [
+        "M2C-03",
+        "M2C-03"
+      ],
+      "top_doc": "M2C-03",
+      "gold_docs": [
+        "M2C-03"
+      ],
+      "topic_reference": null
+    }
+  ]
+}
