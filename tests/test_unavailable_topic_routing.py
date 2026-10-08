@@ -15,6 +15,7 @@ Q_PERIODIC_ANALYSIS = "What does periodic billing analysis show?"
 Q_UTILITIES_MASTER_DATA = "Tell me about Utilities Master Data."
 Q_GENERIC_CONTRACT_ACCOUNT = "What is a contract account?"
 Q_BILLING = "What does invoicing do in SAP Utilities?"
+Q_BUDGET_INVOICING = "How are budget billing plans treated in invoicing?"
 Q_MOVEOUT_BUDGET = "What happens to budget billing plans when a move-out is processed?"
 Q_BUDGET_DEACTIVATION = "What does deactivation of a budget billing plan in invoicing mean?"
 
@@ -27,6 +28,7 @@ RANKING = {
     Q_UTILITIES_MASTER_DATA: ["M2C-05"],
     Q_GENERIC_CONTRACT_ACCOUNT: ["M2C-17"],
     Q_BILLING: ["M2C-14"],
+    Q_BUDGET_INVOICING: ["M2C-15"],
     Q_MOVEOUT_BUDGET: ["M2C-04"],
     Q_BUDGET_DEACTIVATION: ["M2C-15"],
 }
@@ -89,6 +91,13 @@ class UnavailableTopicRoutingTests(unittest.TestCase):
         self.assertEqual(result["metadata"]["card_id"], "M2C-14")
         self.assertTrue(result["sources"])
         self.assertEqual({source["source_id"] for source in result["sources"]}, {"M2C-14"})
+
+    def test_budget_billing_invoicing_query_still_answers_from_searchable_m2c15(self):
+        result = self.ask(Q_BUDGET_INVOICING, "budget-invoicing-control")
+        self.assertEqual(result["status"], "answered")
+        self.assertEqual(result["metadata"]["card_id"], "M2C-15")
+        self.assertTrue(result["sources"])
+        self.assertEqual({source["source_id"] for source in result["sources"]}, {"M2C-15"})
 
     def test_budget_billing_mention_in_move_out_question_keeps_its_searchable_topic(self):
         result = self.ask(Q_MOVEOUT_BUDGET, "moveout-budget")
