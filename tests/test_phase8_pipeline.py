@@ -16,7 +16,8 @@ class _Stub:
     def __init__(self, text):
         self.text, self.prompts = text, []
 
-    def generate(self, prompt):
+    def generate(self, *args):
+        prompt = args[-1] if args else ""
         self.prompts.append(prompt)
         return self.text(prompt) if callable(self.text) else self.text
 
@@ -109,7 +110,7 @@ class PipelineStatusTests(unittest.TestCase):
         for k in ("schema_version", "query", "status", "answer", "reason_code", "message", "topic", "citations", "routing", "ui", "timings_ms", "debug"):
             self.assertIn(k, a)
         self.assertEqual(a["routing"]["selected_source_id"], "M2C-24")
-        self.assertEqual(a["routing"]["mode"], "router_rank1")
+        self.assertEqual(a["routing"]["mode"], "router_reranked_top10")
         self.assertTrue(a["citations"]["answer_sources"])
         self.assertTrue(all(s["verified_used"] for s in a["citations"]["answer_sources"]))
         self.assertFalse(a["citations"]["topic_pointer"]["used_as_answer_text"])
@@ -120,20 +121,24 @@ class PipelineStatusTests(unittest.TestCase):
         self.assertTrue({s["marker"] for s in a["citations"]["answer_sources"]} <= ctx_markers)
 
     def test_not_ingested_page_is_never_answered(self):
-        a = self.ans("How are dunning notices created for overdue receivables?", ["M2C-26"], generator=_Stub("should never be called"))
+        stub = _Stub("should never be called")
+        a = self.ans("How do I create a budget billing plan?", ["M2C-15"], generator=stub)
         self.assertEqual(a["status"], "page_not_ingested")
         self.assertEqual(a["reason_code"], "PAGE_IDENTIFIED_NO_LOCAL_CONTENT")
         self.assertIsNone(a["answer"])
+        self.assertEqual(a["topic"]["source_id"], "M2C-13")
         self.assertEqual(a["citations"]["answer_sources"], [])
-        self.assertEqual(a["citations"]["topic_pointer"]["identity"]["status"], pid.IDENTIFIED_NOT_LOCAL)
+        self.assertEqual(stub.prompts, [])
         self.assertNotIn("generation", a["debug"])
 
-    def test_m2c18_conflict_returns_unresolved_identity_without_generation(self):
+    def test_explicitly_named_m2c18_conflict_is_unavailable_without_generation(self):
         stub = _Stub("must not be used")
         a = self.ans("What is the contract account business object and what does it represent?", ["M2C-18", "M2C-17"], generator=stub)
-        self.assertEqual(a["status"], "unresolved_identity")
-        self.assertEqual(a["reason_code"], "CONFLICTING_IDENTITY")
-        self.assertIsNone(a["topic"]["effective_page_id"])
+        self.assertEqual(a["status"], "page_not_ingested")
+        self.assertEqual(a["reason_code"], "PAGE_IDENTIFIED_NO_LOCAL_CONTENT")
+        self.assertEqual(a["routing"]["selected_source_id"], "M2C-18")
+        self.assertIsNone(a["answer"])
+        self.assertEqual(a["citations"]["answer_sources"], [])
         self.assertEqual(stub.prompts, [])
         self.assertTrue(any("conflicting identity" in n for n in a["citations"]["notes"]))
 
@@ -186,8 +191,9 @@ class PipelineStatusTests(unittest.TestCase):
     def test_page_text_changes_nothing_in_card_route(self):
         p = make_pipeline(RG.ExtractiveGenerator(), ranking={"q installment plan": ["M2C-23", "M2C-24"]})
         a = p.answer("q installment plan")
-        self.assertEqual(a["routing"]["selected_source_id"], "M2C-23")        # rank-1 only; no page-level re-ranking across cards
-        self.assertEqual(a["status"], "page_not_ingested")
+        self.assertEqual(a["routing"]["selected_source_id"], "M2C-23")  # page evidence does not change the card route
+        self.assertEqual(a["status"], "answered")  # M2C-23 is currently ingested in the corpus
+        self.assertEqual({s["join"]["card_source_id"] for s in a["citations"]["answer_sources"]}, {"M2C-23"})
 
 
 @NEEDS

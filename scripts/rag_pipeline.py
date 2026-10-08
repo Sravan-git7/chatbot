@@ -233,36 +233,85 @@ def _identity_value(value: Any) -> str:
     return " ".join(str(value or "").split()).casefold()
 
 
-# A pure topic-navigation request ("Tell me about <card title>.") names exactly one card. When that card's page is
-# not admitted to the corpus, the honest result is the unavailable state for the NAMED topic - never an answer
-# assembled from a different, ingested page. The match is exact (frame + full card title, articles stripped), so
-# content questions that merely mention a topic ("How does a budget billing plan work?") keep their normal routing.
+# An explicit topic-focus request can identify a registered card even when semantic ranking prefers a
+# neighboring searchable card. Resolve only focused, title-specific phrases against registered topic metadata;
+# incidental mentions (for example, a move-out question that mentions a budget billing plan) keep normal routing.
 _NAVIGATION_FRAME = re.compile(r"^\s*(?:tell me about|show me|describe|explain)\s+(.+?)\s*[?.!]*\s*$", re.I)
-_NAVIGATION_ARTICLES = re.compile(r"^(?:the|a|an|about)\s+")
+_TOPIC_FOCUS_FRAMES = (
+    _NAVIGATION_FRAME,
+    re.compile(r"^\s*how\s+(?:do|can)\s+i\s+(?:create|set\s+up|configure|manage|use)\s+(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*what\s+does\s+(.+?)\s+(?:contain|show|cover|include|represent|mean|enable|do)\b.*$", re.I),
+    re.compile(r"^\s*what\s+(?:is|are)\s+(.+?)\s*[?.!]*\s*$", re.I),
+)
+_CARD_TOPIC_ID = re.compile(r"^M2C-(\d+)$", re.I)
 
 
 def _norm_phrase(text: str) -> str:
     return " ".join(re.sub(r"[^a-z0-9\s]", " ", (text or "").lower()).split())
 
 
-def named_navigation_card(query: str, cards: Mapping[str, Mapping[str, Any]], corpus: "PageCorpusIndex") -> Optional[Mapping[str, Any]]:
-    """The card a pure navigation query names exactly, but only when its page is not admitted (item: missing-page
-    honesty). Returns ``None`` for every content question and for every named topic that is answerable."""
-    match = _NAVIGATION_FRAME.match(query or "")
-    if not match:
+def _focused_topic_terms(query: str) -> List[str]:
+    """Return content terms only when a supported question frame puts a topic in focus."""
+    for frame in _TOPIC_FOCUS_FRAMES:
+        match = frame.match(query or "")
+        if match:
+            return T.terms(match.group(1))
+    return []
+
+
+def _ordered_term_overlap(left: Sequence[str], right: Sequence[str]) -> int:
+    """Longest common subsequence length, with order preserved and no fuzzy/stem changes beyond ``T.terms``."""
+    previous = [0] * (len(right) + 1)
+    for term in left:
+        current = [0] * (len(right) + 1)
+        for index, other in enumerate(right, 1):
+            current[index] = previous[index - 1] + 1 if term == other else max(previous[index], current[index - 1])
+        previous = current
+    return previous[-1]
+
+
+def unavailable_topic_from_query(
+    query: str,
+    cards: Mapping[str, Mapping[str, Any]],
+    topic_manifest: Mapping[int, Mapping[str, Any]],
+    corpus: "PageCorpusIndex",
+) -> Optional[Mapping[str, Any]]:
+    """Find one explicitly focused, registered topic that is not searchable in the local page corpus.
+
+    The topic ID/title are cross-checked against ``topic_manifest`` and the admission state comes from the page-corpus
+    manifest. A title match must start at the focus phrase's first content term, contain at least three ordered title
+    terms, and cover >=75% of the registered title. This lets a distinctive short form such as "periodic billing
+    analysis" identify its registered topic while leaving generic phrases like "contract account" and incidental title
+    mentions to the normal router. Ambiguous matches are not overridden.
+    """
+    focus_terms = _focused_topic_terms(query)
+    if len(focus_terms) < 3:
         return None
-    subject = _NAVIGATION_ARTICLES.sub("", _norm_phrase(match.group(1)))
-    if len(subject.split()) < 3:
-        return None
-    for card in cards.values():
-        title = _norm_phrase(str(card.get("title") or ""))
-        if len(title.split()) < 3 or title != subject:
+
+    matches: List[Mapping[str, Any]] = []
+    for source_id, card in cards.items():
+        id_match = _CARD_TOPIC_ID.fullmatch(str(source_id or ""))
+        if not id_match:
             continue
-        entry = corpus.entry(str(card.get("source_id") or "")) or {}
-        if entry.get("corpus_status") == PC.S_INGESTED:
-            return None                                  # the named topic is answerable: the router decides
-        return card
-    return None
+        registered = topic_manifest.get(int(id_match.group(1)))
+        if not isinstance(registered, Mapping):
+            continue
+        registered_title = str(registered.get("title") or "")
+        if not registered_title or _norm_phrase(registered_title) != _norm_phrase(str(card.get("title") or "")):
+            continue
+
+        entry = corpus.entry(str(source_id))
+        if not entry or entry.get("corpus_status") == PC.S_INGESTED:
+            continue
+
+        title_terms = T.terms(registered_title)
+        if len(title_terms) < 3 or title_terms[0] != focus_terms[0]:
+            continue
+        minimum_overlap = max(3, (3 * len(title_terms) + 3) // 4)  # ceil(75%), with at least three specific terms
+        if _ordered_term_overlap(title_terms, focus_terms) >= minimum_overlap:
+            matches.append(card)
+
+    return matches[0] if len(matches) == 1 else None
 
 
 def _active_topic_consistency(expected_topic: Optional[Mapping[str, Any]], source_id: str, identity: Any) -> Optional[Dict[str, Any]]:
@@ -481,19 +530,17 @@ class RagPipeline:
                 card = candidates[0] if candidates else None
             dbg["routing_outcome_state_7a"] = outcome.state
         timings["route_ms"] = (time.perf_counter() - t) * 1000
-        if card is None:
-            return self._finish(out, NO_PAGE, "EMPTY_OR_UNROUTABLE_QUERY", MESSAGES[NO_PAGE], dbg, debug, timings, t0)
-        sid = card["source_id"] if isinstance(card, Mapping) else card.source_id
+        routed_sid = (card.get("source_id") if isinstance(card, Mapping) else getattr(card, "source_id", None)) if card is not None else None
         if oracle_source_id is None:
-            named = named_navigation_card(query, self.cards, self.corpus)
+            named = unavailable_topic_from_query(query, self.cards, self.ctx.topic_manifest, self.corpus)
             if named is not None:
-                # A navigation request that names a topic whose page is not admitted gets the honest unavailable
-                # state for THAT topic (with its reference link) - never an answer assembled from a different,
-                # ingested page, and never a bare unresolved-identity note without the topic reference.
+                # An explicit registered-topic focus takes precedence over a semantically similar routed page when
+                # the named topic has no local searchable content. The card remains a reference only; this returns
+                # before page retrieval, context construction, or generation.
                 named_sid = str(named.get("source_id") or "")
                 named_identity = pid.resolve_identity(named, self.ctx)
                 named_entry = self.corpus.entry(named_sid) or {}
-                dbg["named_topic"] = {"named_source_id": named_sid, "routed_source_id": sid}
+                dbg["named_topic"] = {"named_source_id": named_sid, "routed_source_id": routed_sid}
                 dbg["identity"] = named_identity.to_dict()
                 dbg["corpus_entry"] = {k: named_entry.get(k) for k in ("corpus_status", "reason", "doc_id", "text_sha256")}
                 out["topic"] = self._topic(named_identity, named_entry)
@@ -502,10 +549,13 @@ class RagPipeline:
                 out["routing"]["mode"] = f"{out['routing'].get('mode', 'router')}+named_topic"
                 return self._finish(
                     out, NOT_INGESTED, "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-                    f"The topic was identified as \"{named_identity.card_title}\" ({named_sid}) and its SAP Help page is known, "
-                    "but the page text is not available in this system, so no answer is generated. Use the reference link.",
+                    f"The registered topic \"{named_identity.card_title}\" ({named_sid}) has no local searchable page text. "
+                    "No answer is generated from a neighboring topic; the topic reference, if available, is not answer evidence.",
                     dbg, debug, timings, t0,
                 )
+        if card is None:
+            return self._finish(out, NO_PAGE, "EMPTY_OR_UNROUTABLE_QUERY", MESSAGES[NO_PAGE], dbg, debug, timings, t0)
+        sid = str(routed_sid)
         out["routing"]["selected_source_id"] = sid
 
         # ---- 2. identity ----------------------------------------------------------------------------------
