@@ -3,7 +3,7 @@ import type { ChatError, ChatResult, Health } from './types'
 const BASE = (import.meta.env?.VITE_API_BASE as string | undefined) ?? ''
 export const REQUEST_TIMEOUT_MS = 60_000
 export const MAX_MESSAGE_CHARS = 2000
-const STATUSES = ['answered', 'documentation_unavailable', 'unable_to_verify', 'out_of_scope']
+const STATUSES = ['answered', 'documentation_unavailable', 'unable_to_verify', 'out_of_scope', 'no_additional_verified_evidence']
 
 export class ApiError extends Error {
   info: ChatError
@@ -47,7 +47,12 @@ async function readJson(res: Response): Promise<unknown> {
   }
 }
 
-export async function sendChat(message: string, conversationId: string, debug: boolean, opts: { signal?: AbortSignal; timeoutMs?: number } = {}): Promise<ChatResult> {
+export async function sendChat(
+  message: string,
+  conversationId: string,
+  debug: boolean,
+  opts: { signal?: AbortSignal; timeoutMs?: number } = {},
+): Promise<ChatResult> {
   const ctl = new AbortController()
   let timedOut = false
   const timer = setTimeout(() => { timedOut = true; ctl.abort() }, opts.timeoutMs ?? REQUEST_TIMEOUT_MS)

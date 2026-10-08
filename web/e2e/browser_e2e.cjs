@@ -62,8 +62,14 @@ const shot = (page, name) => page.screenshot({ path: path.join(OUT, 'screens', n
     const res = performance.getEntriesByType('resource').filter((r) => !r.name.includes('/api/'))
     return { domContentLoaded: Math.round(nav.domContentLoadedEventEnd), load: Math.round(nav.loadEventEnd), fcp: fcp ? Math.round(fcp.startTime) : null, transferBytes: res.reduce((a, r) => a + (r.transferSize || 0), 0) + (nav.transferSize || 0), requests: res.length + 1 }
   })
-  check('welcome heading renders', (await text(page, 'h1')) === 'Ask SAP Utilities anything.')
-  check('coverage line comes from /api/health', /7 of 29/.test(await text(page, '[data-testid="coverage"]')))
+  check('welcome heading renders', (await text(page, 'h1')) === 'Ask about SAP Utilities documentation.')
+  const liveHealth = await page.evaluate(async () => (await (await fetch('/api/health')).json()))
+  const coverageText = await text(page, '[data-testid="coverage"]')
+  check(
+    'coverage line reflects the live /api/health response',
+    liveHealth.ready && coverageText.includes(`Currently ${liveHealth.pages_available} of ${liveHealth.topics} documentation sources are available.`),
+    coverageText,
+  )
   await shot(page, '01_welcome_desktop.png')
 
   // ---- example prompt -> real answer -> real citation
@@ -121,7 +127,7 @@ const shot = (page, name) => page.screenshot({ path: path.join(OUT, 'screens', n
   // ---- conversations: switching, persistence across reload, delete
   const titlesBefore = await page.$$eval('nav[aria-label="Chat history"] li > button:first-child', (b) => b.length)
   await clickText(page, 'New chat')
-  check('New chat returns to the welcome state', (await text(page, 'h1')) === 'Ask SAP Utilities anything.')
+  check('New chat returns to the welcome state', (await text(page, 'h1')) === 'Ask about SAP Utilities documentation.')
   await ask(page, 'How are devices managed?', '.prose-chat')
   const titles = await page.$$eval('nav[aria-label="Chat history"] li > button:first-child', (b) => b.length)
   check('a second conversation appears in the history', titles === titlesBefore + 1, `${titlesBefore} -> ${titles}`)

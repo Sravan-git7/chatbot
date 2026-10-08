@@ -48,4 +48,14 @@ describe('markdown safety', () => {
   it('prepare() turns extractive one-sentence-per-line output into paragraphs and markers into cite links', () => {
     expect(prepare('A. [S1]\nB. [S2]')).toBe('A. [S1](#cite-S1)\n\nB. [S2](#cite-S2)')
   })
+
+  it('collapses duplicate markers within a sentence but preserves citations on separate sentences', () => {
+    const text = 'First fact. [S1] [S1] [S1]\nSecond fact. [S1]\nThird fact. [S2]'
+    const prepared = prepare(text)
+    expect(prepared.match(/\(#cite-S1\)/g)).toHaveLength(2)
+    expect(prepared).toContain('Third fact. [S2](#cite-S2)')
+    render(<Markdown text={text} markers={new Set(['S1', 'S2'])} />)
+    expect(screen.getAllByRole('button', { name: 'Source 1' })).toHaveLength(2)
+    expect(screen.getAllByRole('button', { name: 'Source 2' })).toHaveLength(1)
+  })
 })

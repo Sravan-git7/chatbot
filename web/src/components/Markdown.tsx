@@ -1,12 +1,13 @@
 import { memo, useState, type ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { copyText } from '../util'
+import { copyText, normalizeDisplayText } from '../util'
 
 interface Props {
   text: string
   /** markers that exist as sources of this message; only these become citation chips */
   markers: Set<string>
+  markerMap?: Record<string, number>
   onCite?: (marker: string) => void
 }
 
@@ -22,12 +23,14 @@ const FENCE = /^\s*(```|~~~)/
 const BLOCK = /^\s*(?:[-*+]\s|\d+[.)]\s|\||#{1,6}\s|>)/
 
 export function prepare(text: string): string {
-  // The extractive generator returns one cited sentence per line: such plain lines become separate paragraphs.
-  // Markdown structure (lists, tables, headings, quotes, fenced code) is left exactly as written.
-  const lines = text.replace(/\r\n/g, '\n').split('\n')
+  // Collapse duplicate markers within one contiguous citation cluster, but retain citations on separate sentences.
+  const collapsed = text.replace(/(\[(S\d+)\])(?:\s*\1)+/g, '$1')
+  // Display-safe whitespace normalization (extraction artifacts only; citation spans are untouched)
+  const normalized = normalizeDisplayText(collapsed)
+  const lines = normalized.replace(/\r\n/g, '\n').split('\n')
   const out: string[] = []
   let fenced = false
-  lines.forEach((line, i) => {
+  lines.forEach((line, index) => {
     if (FENCE.test(line)) {
       fenced = !fenced
       out.push(line)
@@ -38,7 +41,7 @@ export function prepare(text: string): string {
       return
     }
     out.push(line.replace(CITE, '[$1](#cite-$1)'))
-    const next = lines[i + 1]
+    const next = lines[index + 1]
     if (line.trim() && next !== undefined && next.trim() && !FENCE.test(next) && !BLOCK.test(line) && !BLOCK.test(next)) out.push('')
   })
   return out.join('\n')
@@ -65,7 +68,7 @@ function CodeBlock({ children }: { children: ReactNode }) {
   )
 }
 
-function MarkdownView({ text, markers, onCite }: Props) {
+function MarkdownView({ text, markers, markerMap, onCite }: Props) {
   return (
     <div className="prose-chat">
       <ReactMarkdown
@@ -76,9 +79,15 @@ function MarkdownView({ text, markers, onCite }: Props) {
           a: ({ href, children }) => {
             const m = href?.startsWith('#cite-') ? href.slice(6) : null
             if (m && markers.has(m)) {
+              const displayNum = markerMap && markerMap[m] !== undefined ? markerMap[m] : (m.startsWith('S') ? m.slice(1) : m)
               return (
-                <button type="button" className="cite-chip" aria-label={`Source ${m.slice(1)}`} onClick={() => onCite?.(m)}>
-                  {m.slice(1)}
+                <button
+                  type="button"
+                  className="cite-chip cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                  aria-label={`Source ${displayNum}`}
+                  onClick={() => onCite?.(m)}
+                >
+                  {displayNum}
                 </button>
               )
             }

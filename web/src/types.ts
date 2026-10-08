@@ -1,5 +1,10 @@
 // Mirrors the backend contract in scripts/rag_service.py / scripts/rag_api.py (schema 11.1). The UI never builds its own answers, sources or URLs.
-export type ApiStatus = 'answered' | 'documentation_unavailable' | 'unable_to_verify' | 'out_of_scope'
+export type ApiStatus =
+  | 'answered'
+  | 'documentation_unavailable'
+  | 'unable_to_verify'
+  | 'out_of_scope'
+  | 'no_additional_verified_evidence'
 
 export interface Source {
   type: 'page'
@@ -26,6 +31,55 @@ export interface Grounding {
   cited_markers: string[]
 }
 
+export interface StructuredSection {
+  title: string
+  key: string
+  lines?: string[]
+  content?: string
+  citations?: string[]
+}
+
+export interface StructuredAnswer {
+  summary?: string
+  sections: StructuredSection[]
+  citations?: string[]
+}
+
+export interface DocumentationCoverage {
+  covered: boolean
+  coverage_percentage?: number
+  total_sources_cited?: number
+  matched_topics?: string[]
+  uncovered_aspects?: string[]
+}
+
+export interface TopicIdentity {
+  source_id: string
+  title?: string
+  guide_id?: string
+  page_id?: string
+  industry?: string
+}
+
+export interface ActiveTopicContext {
+  query: string
+  answer: string
+  identity: TopicIdentity
+  seen_answers: string[]
+}
+
+export type ElaborationSectionKey =
+  | 'what_it_is_does'
+  | 'how_it_works_relationships'
+  | 'conditions_prerequisites'
+  | 'key_details'
+
+export interface ElaborationSection {
+  key: ElaborationSectionKey
+  lines: string[]
+  line_orders?: number[]
+}
+
 export interface Metadata {
   card_id: string | null
   card_title: string | null
@@ -33,10 +87,16 @@ export interface Metadata {
   page_available: boolean | null
   generator: string
   grounded: boolean
+  /** Backend-authoritative: false once the verified evidence of the active topic is exhausted. */
+  can_elaborate?: boolean | null
   grounding: Grounding
   pipeline_status: string
   reason_code: string | null
   latency_ms: number
+  topic_identity?: TopicIdentity | null
+  documentation_coverage?: DocumentationCoverage | null
+  follow_up_category?: string | null
+  elaboration_sections?: ElaborationSection[]
 }
 
 export interface ChatResult {
@@ -48,6 +108,15 @@ export interface ChatResult {
   topic_reference: TopicReference | null
   metadata: Metadata
   debug?: Record<string, unknown> | null
+  structured_answer?: StructuredAnswer | null
+  documentation_coverage?: DocumentationCoverage | null
+}
+
+/** Explicit active state sent only to resolve context-dependent follow-up wording. */
+export interface ChatContext {
+  questions: string[]
+  answer?: string
+  active_topic?: ActiveTopicContext
 }
 
 export interface Health {

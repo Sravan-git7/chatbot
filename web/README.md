@@ -14,5 +14,12 @@ cd web; npm install; npm run build
 cd web; npm run dev
 ```
 
-Checks: `npm run typecheck`, `npm test` (vitest, 48 tests). A real-browser run against the live backend is `e2e/browser_e2e.cjs`
+Typography: long-form copy (answers, user messages, status notes) uses the `text-answer` token and UI copy the `text-ui`
+token, both defined in `src/index.css`. Inter is **self-hosted** from `src/assets/fonts` (SIL OFL 1.1, license shipped
+alongside) because the API's Content-Security-Policy allows no external font host; the browser downloads the latin subset
+and only fetches latin-ext when the text needs it. `src/__tests__/typography.test.ts` fails if the font named in
+`--font-sans` is not actually shipped with the app, if any font URL leaves the bundle, or if the prose heading/table
+hierarchy is dropped.
+
+Checks: `npm run typecheck` and `npm test` (Vitest). A real-browser run against the live backend is `e2e/browser_e2e.cjs`
 (needs `puppeteer-core` and a Chromium, which are intentionally not project dependencies; see the header of that file).
