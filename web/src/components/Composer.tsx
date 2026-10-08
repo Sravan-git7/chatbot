@@ -42,10 +42,10 @@ export default function Composer({ disabled, onSend, focusKey }: Props) {
         e.preventDefault()
         submit()
       }}
-      className="mx-auto w-full max-w-3xl px-3 pb-3 sm:px-4 xl:max-w-[52rem]"
+      className="mx-auto w-full max-w-3xl px-3 pb-3 sm:px-4 sm:pb-4 xl:max-w-[54rem]"
       aria-label="Ask a question"
     >
-      <div className="flex items-end gap-2 rounded-3xl border border-stone-300 bg-white py-2 pl-4 pr-2 shadow-sm transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15 focus-within:shadow-md">
+      <div className="flex items-end gap-2.5 rounded-3xl border border-stone-300/80 bg-white py-2 pl-4 pr-2 shadow-xs transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15 focus-within:shadow-sm">
         <textarea
           ref={ref}
           value={text}
@@ -55,17 +55,17 @@ export default function Composer({ disabled, onSend, focusKey }: Props) {
           onKeyDown={onKey}
           placeholder="Ask SURA about SAP Utilities…"
           aria-label="Message"
-          className="max-h-44 min-h-[28px] flex-1 resize-none bg-transparent py-1.5 text-[16px] leading-6 text-stone-900 outline-none placeholder:text-stone-400"
+          className="max-h-44 min-h-[30px] flex-1 resize-none bg-transparent py-1.5 text-xs sm:text-sm leading-relaxed text-stone-900 outline-none placeholder:text-stone-400"
         />
         <button
           type="submit"
           disabled={!canSend}
           aria-label="Send message"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-white transition enabled:hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-stone-200 disabled:text-stone-400 cursor-pointer"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-white shadow-2xs transition enabled:hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-stone-200 disabled:text-stone-400 cursor-pointer"
         >
           <svg
-            width="16"
-            height="16"
+            width="15"
+            height="15"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -78,9 +78,9 @@ export default function Composer({ disabled, onSend, focusKey }: Props) {
           </svg>
         </button>
       </div>
-      <p className="mt-2 px-2 text-center text-xs text-stone-400">
+      <p className="mt-2 px-2 text-center text-[11px] text-stone-400">
         {text.length > MAX_MESSAGE_CHARS - 200 ? `${text.length}/${MAX_MESSAGE_CHARS} characters. ` : ''}
-        Answers are taken from the available documentation and may be incomplete. Each question is answered on its own.
+        Answers are grounded in available documentation and answered individually.
       </p>
     </form>
   )

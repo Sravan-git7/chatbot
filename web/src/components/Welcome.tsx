@@ -26,29 +26,32 @@ export default function Welcome({
   return (
     <div
       data-testid="welcome-screen"
-      className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-10 text-center sm:py-14 xl:max-w-[52rem] animate-answer-reveal"
+      className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-12 text-center sm:py-16 xl:max-w-[54rem] animate-answer-reveal"
     >
+      {/* Brand Hero Icon */}
       <div
-        className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-sm font-bold text-white shadow-xs"
+        className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-base font-bold text-white shadow-md shadow-accent/15"
         aria-hidden="true"
       >
         SU
       </div>
 
-      {/* SURA Assistant Introduction */}
+      {/* SURA Assistant Status Pill */}
       <div
         data-testid="sura-intro"
-        className="mb-4 inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-3.5 py-1 text-xs font-medium text-stone-700 shadow-2xs"
+        className="mb-4 inline-flex items-center gap-2 rounded-full border border-stone-200/90 bg-white px-3.5 py-1 text-xs font-medium text-stone-700 shadow-2xs"
       >
-        <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
-        <span>Hi, I'm SURA — your SAP Utilities documentation assistant</span>
+        <span className="h-2 w-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
+        <span>Documentation-grounded assistant · Hi, I'm SURA</span>
       </div>
 
-      <h1 className="text-balance text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+      {/* Main Heading */}
+      <h1 className="text-balance text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl md:text-[2.65rem] md:leading-[1.18]">
         Ask SAP Utilities anything.
       </h1>
 
-      <p className="mt-2.5 max-w-xl text-answer text-stone-600">
+      {/* Supporting Text */}
+      <p className="mt-3.5 max-w-xl text-answer leading-relaxed text-stone-600 sm:text-base">
         Hi, I'm SURA. I'm your SAP Utilities documentation assistant. Ask me about billing, invoicing,
         contract accounts, business partners, and other topics covered by the documentation.
       </p>
@@ -56,21 +59,26 @@ export default function Welcome({
         Answers are generated from the available SAP Utilities documentation.
       </p>
 
+      {/* Coverage Status */}
       {health?.ready && health.pages_available != null && health.topics != null && (
-        <p className="mt-1.5 text-xs text-stone-500" data-testid="coverage">
+        <div
+          className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-stone-100/90 px-2.5 py-1 text-[11px] font-medium text-stone-600"
+          data-testid="coverage"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-accent" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
           Currently {health.pages_available} of {health.topics} documentation pages are available.
-        </p>
+        </div>
       )}
       {health === null && (
-        <p className="mt-2 text-xs text-red-700" role="alert" data-testid="offline-note">
+        <p className="mt-3 rounded-lg border border-red-200 bg-red-50 px-3 py-1 text-xs text-red-700" role="alert" data-testid="offline-note">
           The RAG service is not reachable. Start the backend, then reload.
         </p>
       )}
 
-      {/* Suggested Questions */}
-      <div className="mt-7 w-full max-w-2xl text-left">
-        <div className="mb-2 flex items-center justify-between px-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-stone-500">
+      {/* Suggested Questions (Max 6) */}
+      <div className="mt-9 w-full max-w-2xl text-left">
+        <div className="mb-2.5 flex items-center justify-between px-1">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
             Suggested questions
           </span>
           <span className="text-[11px] text-stone-400">Click to ask</span>
@@ -82,9 +90,23 @@ export default function Welcome({
               type="button"
               disabled={disabled}
               onClick={() => onPick(p)}
-              className="rounded-2xl border border-stone-200 bg-white px-4 py-3.5 text-left text-ui leading-snug text-stone-800 shadow-2xs transition enabled:hover:border-accent enabled:hover:bg-accent-soft/35 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
+              className="group flex items-center justify-between rounded-xl border border-stone-200/90 bg-white p-3.5 text-left text-xs font-medium leading-snug text-stone-800 shadow-2xs transition-all enabled:hover:border-accent/60 enabled:hover:bg-accent-soft/40 enabled:hover:shadow-xs disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
             >
-              {p}
+              <span className="pr-2">{p}</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="shrink-0 text-stone-400 transition-transform group-hover:translate-x-0.5 group-hover:text-accent"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </button>
           ))}
         </div>
@@ -94,19 +116,20 @@ export default function Welcome({
       <section
         data-testid="explore-topics"
         aria-label="Explore SAP Utilities"
-        className="mt-7 w-full max-w-2xl rounded-2xl border border-stone-200 bg-white p-4 text-left shadow-2xs sm:p-5"
+        className="mt-8 w-full max-w-2xl rounded-2xl border border-stone-200/90 bg-white p-4 text-left shadow-2xs sm:p-5"
       >
-        <div className="mb-2.5 flex flex-wrap items-center justify-between gap-1">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-500">
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-1">
+          <h2 className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
             Explore SAP Utilities
           </h2>
           <span className="text-[11px] text-stone-400">Browse by topic area</span>
         </div>
 
+        {/* Polished Segmented Control */}
         <div
           role="tablist"
           aria-label="SAP Utilities topic categories"
-          className="mb-3 flex flex-wrap gap-1.5"
+          className="mb-3.5 flex flex-wrap gap-1 rounded-xl bg-stone-100 p-1 border border-stone-200/60"
         >
           {EXPLORE_TOPICS.map((topic) => {
             const isSelected = topic.id === activeTopic.id
@@ -120,8 +143,8 @@ export default function Welcome({
                 onClick={() => setActiveTopicId(topic.id)}
                 className={`rounded-lg px-3 py-1.5 text-xs font-medium transition cursor-pointer ${
                   isSelected
-                    ? 'bg-accent text-white shadow-2xs'
-                    : 'bg-stone-100 text-stone-700 hover:bg-stone-200/80 hover:text-stone-900'
+                    ? 'bg-white text-stone-900 shadow-2xs font-semibold'
+                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
                 }`}
               >
                 {topic.label}
@@ -130,12 +153,13 @@ export default function Welcome({
           })}
         </div>
 
+        {/* Topic Content Panel */}
         <div
           role="tabpanel"
           data-testid="topic-panel"
-          className="rounded-xl border border-stone-200/70 bg-stone-50/80 p-3"
+          className="rounded-xl border border-stone-200/70 bg-[#faf9f6] p-3.5"
         >
-          <p className="mb-2 text-xs text-stone-600">{activeTopic.description}</p>
+          <p className="mb-2.5 text-xs text-stone-600">{activeTopic.description}</p>
           <div className="flex flex-wrap gap-1.5">
             {activeTopic.questions.map((q) => (
               <button
@@ -143,7 +167,7 @@ export default function Welcome({
                 type="button"
                 disabled={disabled}
                 onClick={() => onPick(q)}
-                className="rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-left text-xs text-stone-800 transition enabled:hover:border-accent enabled:hover:bg-accent-soft/40 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
+                className="rounded-lg border border-stone-200/90 bg-white px-3 py-1.5 text-left text-xs font-medium text-stone-700 shadow-2xs transition enabled:hover:border-accent enabled:hover:bg-accent-soft/50 enabled:hover:text-accent-dark disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
               >
                 {q}
               </button>

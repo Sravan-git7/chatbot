@@ -24,7 +24,7 @@ export default function Citations({ citations, sources, onCite }: CitationsProps
             title={source ? `${source.title || ''} (${source.section || ''})` : `Source ${marker}`}
             className="cite-chip cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
             data-testid={`citation-${marker}`}
-            aria-label={`Jump to source ${marker}`}
+            aria-label={`Source ${label}`}
           >
             {label}
           </button>

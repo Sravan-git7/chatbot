@@ -32,31 +32,27 @@ export function Thinking() {
     <div
       role="status"
       aria-live="polite"
-      className="max-w-md rounded-2xl border border-stone-200 bg-white px-4 py-3 text-stone-600 shadow-2xs animate-answer-reveal"
+      className="max-w-md rounded-2xl border border-stone-200/90 bg-white p-4 text-stone-600 shadow-2xs animate-answer-reveal"
       data-testid="loading"
     >
-      <div className="flex items-center gap-3 text-sm">
+      <div className="flex items-center gap-2.5 text-xs">
         <span className="flex gap-1" aria-hidden="true">
           <span className="dot sura-dot" />
           <span className="dot sura-dot sura-dot-2" style={{ animationDelay: '.15s' }} />
           <span className="dot sura-dot sura-dot-3" style={{ animationDelay: '.3s' }} />
         </span>
-        {/*
-          The backend reports only one in-flight operation, so the headline states exactly that.
-          The line below is a decorative UI hint of the work in progress - it never claims a step finished.
-        */}
-        <span className="font-medium text-stone-700">
+        <span className="font-medium text-stone-800">
           Searching the SAP Utilities documentation and preparing an answer
         </span>
       </div>
-      <div className="mt-2.5 h-1 w-full rounded-full sura-shimmer-track" aria-hidden="true">
+      <div className="mt-3 h-1 w-full rounded-full sura-shimmer-track" aria-hidden="true">
         <div className="sura-shimmer-bar rounded-full" />
       </div>
-      <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-stone-400">
+      <div className="mt-2 flex items-center gap-1.5 text-[11px] text-stone-400">
         <span
           key={stageIdx}
           data-testid="thinking-stage"
-          className="animate-stage-fade"
+          className="animate-stage-fade font-medium text-stone-500"
           aria-hidden="true"
         >
           {THINKING_STAGES[stageIdx]}
@@ -75,9 +71,24 @@ function CopyButton({ text }: { text: string }) {
         setState((await copyText(text)) ? 'copied' : 'failed')
         setTimeout(() => setState('idle'), 1500)
       }}
-      className="rounded-lg px-2 py-1 text-xs text-stone-500 transition hover:bg-stone-100 hover:text-stone-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
+      className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-medium text-stone-600 shadow-2xs transition hover:border-stone-300 hover:bg-stone-50 hover:text-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
       aria-label="Copy answer"
     >
+      <svg
+        width="13"
+        height="13"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="text-stone-400"
+        aria-hidden="true"
+      >
+        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+      </svg>
       {state === 'copied' ? 'Copied' : state === 'failed' ? 'Copy failed' : 'Copy answer'}
     </button>
   )
@@ -102,7 +113,7 @@ export default function MessageView({
   if (message.role === 'user') {
     return (
       <div className="flex justify-end animate-answer-reveal" data-testid="user-message">
-        <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl bg-stone-200/70 px-4 py-2.5 text-answer text-stone-900 lg:max-w-[75%] xl:text-base">
+        <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl border border-stone-200/60 bg-stone-100 px-4 py-2.5 text-answer text-stone-900 shadow-2xs lg:max-w-[75%] xl:text-base">
           {message.content}
         </div>
       </div>
@@ -124,8 +135,9 @@ export default function MessageView({
 
   return (
     <div className="flex gap-3 sm:gap-4 lg:gap-5" data-testid="assistant-message">
+      {/* SURA Brand Avatar */}
       <div
-        className="mt-1 hidden h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent text-[11px] font-bold text-white sm:flex"
+        className="mt-1 hidden h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent text-[11px] font-bold text-white shadow-2xs sm:flex"
         aria-hidden="true"
         title="SURA"
       >
@@ -137,12 +149,12 @@ export default function MessageView({
         {message.error && (
           <div
             role="alert"
-            className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900 animate-answer-reveal"
+            className="rounded-xl border border-red-200 bg-red-50 p-4 text-xs text-red-900 animate-answer-reveal shadow-2xs"
             data-testid="error-message"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <div className="font-medium">
+                <div className="font-semibold text-red-950">
                   {message.error.kind === 'offline'
                     ? 'Service unreachable'
                     : message.error.kind === 'timeout'
@@ -151,7 +163,7 @@ export default function MessageView({
                         ? 'Unexpected response'
                         : 'The request failed'}
                 </div>
-                <div className="mt-0.5">{message.error.message}</div>
+                <div className="mt-1 leading-relaxed text-red-800">{message.error.message}</div>
               </div>
               {onRetry && (
                 <button
@@ -159,7 +171,7 @@ export default function MessageView({
                   data-testid="retry-button"
                   disabled={disabled}
                   onClick={onRetry}
-                  className="shrink-0 rounded-lg border border-red-300 bg-white px-2.5 py-1 text-xs font-medium text-red-900 transition hover:bg-red-100/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-700 disabled:opacity-50 cursor-pointer"
+                  className="shrink-0 rounded-lg border border-red-300 bg-white px-2.5 py-1 text-xs font-medium text-red-900 shadow-2xs transition hover:bg-red-100/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-700 disabled:opacity-50 cursor-pointer"
                 >
                   Retry
                 </button>
@@ -177,11 +189,13 @@ export default function MessageView({
               onCite={cite}
             />
             <Sources messageId={message.id} sources={r.sources} highlight={highlight} />
-            <div className="mt-3 flex flex-wrap items-center gap-2">
+
+            {/* Answer Footer Actions & Verification */}
+            <div className="mt-4 flex flex-wrap items-center gap-3 pt-1">
               <CopyButton text={answerForClipboard(r.answer, r.sources)} />
               {r.metadata.grounded && (
                 <span
-                  className="inline-flex items-center gap-1 text-xs text-stone-400"
+                  className="inline-flex items-center gap-1.5 text-xs text-stone-500"
                   title="Every sentence was checked against the cited documentation text"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
@@ -190,23 +204,24 @@ export default function MessageView({
               )}
             </div>
 
+            {/* Suggested Follow-ups */}
             {followUps.length > 0 && onAskFollowUp && (
               <div
                 data-testid="follow-up-questions"
                 aria-label="You might also want to know"
-                className="mt-5 rounded-xl border border-stone-200/80 bg-white/80 p-3.5 sura-followups-reveal"
+                className="mt-6 rounded-xl border border-stone-200/80 bg-white/70 p-4 shadow-2xs sura-followups-reveal"
               >
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+                <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-stone-500">
                   You might also want to know
                 </div>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                   {followUps.map((q) => (
                     <button
                       key={q}
                       type="button"
                       disabled={disabled}
                       onClick={() => onAskFollowUp(q)}
-                      className="rounded-lg border border-stone-200 bg-stone-50 px-2.5 py-1.5 text-left text-xs text-stone-700 transition enabled:hover:border-accent enabled:hover:bg-accent-soft/40 enabled:hover:text-stone-900 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
+                      className="inline-flex items-center rounded-lg border border-stone-200/90 bg-white px-3 py-1.5 text-left text-xs font-medium text-stone-700 shadow-2xs transition enabled:hover:border-accent enabled:hover:bg-accent-soft/40 enabled:hover:text-stone-900 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
                     >
                       {q}
                     </button>
@@ -217,17 +232,18 @@ export default function MessageView({
           </div>
         )}
 
-
+        {/* Soft, intentional out of scope / unable to verify treatment */}
         {r && r.status !== 'answered' && (
           <div
-            className="rounded-xl border border-amber-200 bg-amber-50/70 px-4 py-3 text-answer text-stone-800 xl:text-base animate-answer-reveal"
+            className="rounded-xl border border-stone-200/90 bg-[#faf9f6] p-4 text-answer text-stone-800 shadow-2xs xl:text-base animate-answer-reveal"
             data-testid="status-note"
             data-status={r.status}
           >
-            <div className="text-xs font-semibold uppercase tracking-wider text-amber-800">
+            <div className="inline-flex items-center gap-1.5 rounded-md bg-stone-200/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-stone-700">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-600" aria-hidden="true" />
               {STATUS_HEADLINE[r.status]}
             </div>
-            <p className="mt-1 leading-relaxed">{r.answer}</p>
+            <p className="mt-2.5 leading-relaxed text-stone-700">{r.answer}</p>
             {r.topic_reference && <TopicReferenceCard reference={r.topic_reference} />}
           </div>
         )}

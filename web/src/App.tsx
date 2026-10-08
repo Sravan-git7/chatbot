@@ -169,65 +169,70 @@ export default function App() {
         onToggle={() => setSidebarOpen((o) => !o)}
         onAbout={() => setAboutOpen(true)}
       />
-      <main className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-12 shrink-0 items-center gap-1 px-2 sm:px-3">
-          {!sidebarOpen && (
-            <>
-              <button
-                type="button"
-                onClick={() => setSidebarOpen(true)}
-                aria-label="Open sidebar"
-                aria-controls="sidebar"
-                aria-expanded={false}
-                className="rounded-lg p-2 text-stone-500 hover:bg-stone-200/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  aria-hidden="true"
+      <main className="flex min-w-0 flex-1 flex-col bg-surface">
+        <header className="flex h-12 shrink-0 items-center justify-between border-b border-stone-200/60 bg-surface/80 px-2 sm:px-3.5 backdrop-blur-xs">
+          <div className="flex min-w-0 flex-1 items-center gap-1.5">
+            {!sidebarOpen && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setSidebarOpen(true)}
+                  aria-label="Open sidebar"
+                  aria-controls="sidebar"
+                  aria-expanded={false}
+                  className="rounded-lg p-1.5 text-stone-500 hover:bg-stone-200/60 hover:text-stone-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer transition"
                 >
-                  <path d="M4 7h16M4 12h16M4 17h16" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={startNew}
-                aria-label="New chat"
-                className="rounded-lg p-2 text-stone-500 hover:bg-stone-200/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  aria-hidden="true"
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M4 7h16M4 12h16M4 17h16" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={startNew}
+                  aria-label="New chat"
+                  className="rounded-lg p-1.5 text-stone-500 hover:bg-stone-200/60 hover:text-stone-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer transition"
                 >
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-              </button>
-            </>
-          )}
-          <span className="min-w-0 flex-1 truncate px-2 text-sm font-medium text-stone-600">
-            {current?.title ?? ''}
-          </span>
-          {health === null && (
-            <span className="rounded-full bg-red-50 px-2.5 py-1 text-xs text-red-800" data-testid="offline-badge">
-              Backend offline
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </button>
+              </>
+            )}
+            <span className="min-w-0 flex-1 truncate px-2 text-xs font-semibold text-stone-700">
+              {current?.title ?? ''}
             </span>
-          )}
-          {health && !health.ready && (
-            <span className="rounded-full bg-amber-50 px-2.5 py-1 text-xs text-amber-900" data-testid="notready-badge">
-              Backend not ready
-            </span>
-          )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            {health === null && (
+              <span className="rounded-full border border-red-200 bg-red-50 px-2.5 py-0.5 text-[11px] font-medium text-red-700" data-testid="offline-badge">
+                Backend offline
+              </span>
+            )}
+            {health && !health.ready && (
+              <span className="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-[11px] font-medium text-amber-800" data-testid="notready-badge">
+                Backend not ready
+              </span>
+            )}
+          </div>
         </header>
         {storageWarning && (
           <div role="status" className="mx-4 mb-1 rounded-lg bg-amber-50 px-3 py-1.5 text-xs text-amber-900">

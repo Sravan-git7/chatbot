@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import App from '../App'
 import { EXAMPLE_PROMPTS } from '../components/Welcome'
+import * as storage from '../storage'
 import { HEALTH, SOURCE, json, mockMatchMedia, result, stubBackend } from './helpers'
 
 const composer = () => screen.getByRole('textbox', { name: 'Message' })
@@ -304,5 +305,45 @@ describe('layout and settings', () => {
     const panel = await screen.findByTestId('debug-panel')
     expect(panel).toHaveTextContent('M2C-24')
     expect(HEALTH.generator).toBe('extractive')
+  })
+})
+
+describe('App', () => {
+  it('includes active topic and answer context in follow-up chat requests', async () => {
+    let idCounter = 0
+    const spy = vi.spyOn(storage, 'newId').mockImplementation(() => {
+      idCounter += 1
+      return idCounter === 1 ? 'c1' : `id-${idCounter}`
+    })
+    try {
+      const { fetch, calls } = stubBackend(() => json(result({ conversation_id: 'c1' })))
+      render(<App />)
+      await userEvent.type(composer(), 'How does billing work?{Enter}')
+      await screen.findByText(/Choose Account/)
+
+      await userEvent.type(composer(), 'tell me more{Enter}')
+      await waitFor(() => expect(calls).toHaveLength(2))
+
+      expect(calls[1]).toEqual({
+        message: 'tell me more',
+        conversation_id: 'c1',
+        debug: false,
+      })
+      expect(calls[1].context).toBeUndefined()
+      expect(fetch).toHaveBeenCalledWith(
+        '/api/chat',
+        expect.objectContaining({
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: 'tell me more',
+            conversation_id: 'c1',
+            debug: false,
+          }),
+        }),
+      )
+    } finally {
+      spy.mockRestore()
+    }
   })
 })
