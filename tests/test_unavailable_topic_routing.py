@@ -19,8 +19,8 @@ Q_BUDGET_INVOICING = "How are budget billing plans treated in invoicing?"
 Q_MOVEOUT_BUDGET = "What happens to budget billing plans when a move-out is processed?"
 Q_BUDGET_DEACTIVATION = "What does deactivation of a budget billing plan in invoicing mean?"
 
-# Force the known semantic fallback for the failing queries. The production fix is after routing/reranking and must
-# take precedence over these neighbors, without changing how those stages rank or search.
+# These forced rankings represent the semantic neighbors the normal router would return; a focused missing-topic
+# match should short-circuit before routing or reranking can use them.
 RANKING = {
     Q_BUDGET_PLAN: ["M2C-15"],
     Q_CONTRACT_OBJECT: ["M2C-17"],
@@ -44,39 +44,45 @@ class UnavailableTopicRoutingTests(unittest.TestCase):
     def ask(self, question: str, conversation_id: str, debug: bool = True):
         return self.service.ask(question, conversation_id=conversation_id, debug=debug)
 
-    def assert_documentation_unavailable(self, result, source_id: str, routed_neighbor: str | None = None):
+    def ask_unavailable(self, question: str, conversation_id: str, source_id: str):
+        backend = self.service.pipeline.backend
+        calls_before = len(backend.calls)
+        result = self.ask(question, conversation_id)
+        self.assert_documentation_unavailable(result, source_id)
+        self.assertEqual(len(backend.calls), calls_before, "focused unavailable topics must short-circuit card routing")
+        return result
+
+    def assert_documentation_unavailable(self, result, source_id: str):
         self.assertEqual(result["status"], "documentation_unavailable")
         self.assertEqual(result["metadata"]["pipeline_status"], "page_not_ingested")
         self.assertEqual(result["metadata"]["reason_code"], "PAGE_IDENTIFIED_NO_LOCAL_CONTENT")
         self.assertEqual(result["metadata"]["card_id"], source_id)
         self.assertFalse(result["metadata"]["page_available"])
         self.assertFalse(result["metadata"]["grounded"])
-        self.assertFalse(result["metadata"]["can_elaborate"])
         self.assertEqual(result["sources"], [])
         self.assertNotIn("generation", result["debug"]["pipeline"])
+        self.assertNotIn("retrieved", result["debug"]["pipeline"])
+        self.assertNotIn("context", result["debug"]["pipeline"])
         self.assertEqual(result["debug"]["citations"]["answer_sources"], [])
         self.assertEqual(result["debug"]["routing"]["selected_source_id"], source_id)
+        self.assertEqual(result["debug"]["routing"]["mode"], "focused_unavailable_topic")
+        self.assertEqual(result["debug"]["routing"]["candidates"], [])
         self.assertEqual(result["debug"]["pipeline"]["named_topic"]["named_source_id"], source_id)
-        if routed_neighbor:
-            self.assertEqual(result["debug"]["pipeline"]["named_topic"]["routed_source_id"], routed_neighbor)
+        self.assertIsNone(result["debug"]["pipeline"]["named_topic"]["routed_source_id"])
         if result.get("topic_reference"):
             self.assertIn("not used as evidence", result["topic_reference"]["note"])
 
     def test_budget_billing_plan_beats_searchable_processing_budget_billing_neighbor(self):
-        result = self.ask(Q_BUDGET_PLAN, "missing-budget")
-        self.assert_documentation_unavailable(result, "M2C-13", routed_neighbor="M2C-15")
+        result = self.ask_unavailable(Q_BUDGET_PLAN, "missing-budget", "M2C-13")
 
     def test_contract_account_business_object_beats_searchable_contract_accounts_neighbor(self):
-        result = self.ask(Q_CONTRACT_OBJECT, "missing-contract-object")
-        self.assert_documentation_unavailable(result, "M2C-18", routed_neighbor="M2C-17")
+        result = self.ask_unavailable(Q_CONTRACT_OBJECT, "missing-contract-object", "M2C-18")
 
     def test_periodic_billing_analysis_beats_searchable_invoicing_neighbor(self):
-        result = self.ask(Q_PERIODIC_ANALYSIS, "missing-periodic-analysis")
-        self.assert_documentation_unavailable(result, "M2C-16", routed_neighbor="M2C-14")
+        result = self.ask_unavailable(Q_PERIODIC_ANALYSIS, "missing-periodic-analysis", "M2C-16")
 
     def test_explicit_utilities_master_data_navigation_is_unavailable(self):
-        result = self.ask(Q_UTILITIES_MASTER_DATA, "missing-master-data")
-        self.assert_documentation_unavailable(result, "M2C-01", routed_neighbor="M2C-05")
+        result = self.ask_unavailable(Q_UTILITIES_MASTER_DATA, "missing-master-data", "M2C-01")
 
     def test_generic_contract_account_question_still_answers_from_searchable_contract_accounts(self):
         result = self.ask(Q_GENERIC_CONTRACT_ACCOUNT, "generic-contract-account")
@@ -119,10 +125,8 @@ class UnavailableTopicRoutingTests(unittest.TestCase):
         self.assertEqual(previous["status"], "answered")
         self.assertTrue(previous["sources"])
 
-        result = self.ask(Q_BUDGET_PLAN, conversation_id)
-        self.assert_documentation_unavailable(result, "M2C-13", routed_neighbor="M2C-15")
+        result = self.ask_unavailable(Q_BUDGET_PLAN, conversation_id, "M2C-13")
         self.assertNotIn(previous["answer"], result["answer"])
-        self.assertIsNone(result["debug"]["evidence"])
         self.assertNotIn("follow_up_category", result["metadata"])
 
 

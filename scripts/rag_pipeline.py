@@ -468,6 +468,30 @@ class RagPipeline:
                                "topic": None, "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": PCIT.LABEL_NONE, "notes": []},
                                "routing": {"selected_source_id": None, "candidates": [], "mode": "oracle" if oracle_source_id else "router_rank1"}}
 
+        # A uniquely focused registered topic with no local searchable content must win before the router can
+        # select a semantic neighbor or the reranker can fetch page evidence from one.
+        t = time.perf_counter()
+        if oracle_source_id is None:
+            named = unavailable_topic_from_query(query, self.cards, self.ctx.topic_manifest, self.corpus)
+            if named is not None:
+                named_sid = str(named.get("source_id") or "")
+                named_identity = pid.resolve_identity(named, self.ctx)
+                named_entry = self.corpus.entry(named_sid) or {}
+                dbg["named_topic"] = {"named_source_id": named_sid, "routed_source_id": None}
+                dbg["identity"] = named_identity.to_dict()
+                dbg["corpus_entry"] = {k: named_entry.get(k) for k in ("corpus_status", "reason", "doc_id", "text_sha256")}
+                out["topic"] = self._topic(named_identity, named_entry)
+                out["citations"] = PCIT.build_citations(named, named_identity, self.ctx, corpus_entry=named_entry)
+                out["routing"]["selected_source_id"] = named_sid
+                out["routing"]["mode"] = "focused_unavailable_topic"
+                timings["route_ms"] = (time.perf_counter() - t) * 1000
+                return self._finish(
+                    out, NOT_INGESTED, "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+                    f"The registered topic \"{named_identity.card_title}\" ({named_sid}) has no local searchable page text. "
+                    "No answer is generated from a neighboring topic; the topic reference, if available, is not answer evidence.",
+                    dbg, debug, timings, t0,
+                )
+
         # ---- 1. card routing -------------------------------------------------------------------------------
         t = time.perf_counter()
         card: Any = None
@@ -530,32 +554,9 @@ class RagPipeline:
                 card = candidates[0] if candidates else None
             dbg["routing_outcome_state_7a"] = outcome.state
         timings["route_ms"] = (time.perf_counter() - t) * 1000
-        routed_sid = (card.get("source_id") if isinstance(card, Mapping) else getattr(card, "source_id", None)) if card is not None else None
-        if oracle_source_id is None:
-            named = unavailable_topic_from_query(query, self.cards, self.ctx.topic_manifest, self.corpus)
-            if named is not None:
-                # An explicit registered-topic focus takes precedence over a semantically similar routed page when
-                # the named topic has no local searchable content. The card remains a reference only; this returns
-                # before page retrieval, context construction, or generation.
-                named_sid = str(named.get("source_id") or "")
-                named_identity = pid.resolve_identity(named, self.ctx)
-                named_entry = self.corpus.entry(named_sid) or {}
-                dbg["named_topic"] = {"named_source_id": named_sid, "routed_source_id": routed_sid}
-                dbg["identity"] = named_identity.to_dict()
-                dbg["corpus_entry"] = {k: named_entry.get(k) for k in ("corpus_status", "reason", "doc_id", "text_sha256")}
-                out["topic"] = self._topic(named_identity, named_entry)
-                out["citations"] = PCIT.build_citations(named, named_identity, self.ctx, corpus_entry=named_entry)
-                out["routing"]["selected_source_id"] = named_sid
-                out["routing"]["mode"] = f"{out['routing'].get('mode', 'router')}+named_topic"
-                return self._finish(
-                    out, NOT_INGESTED, "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-                    f"The registered topic \"{named_identity.card_title}\" ({named_sid}) has no local searchable page text. "
-                    "No answer is generated from a neighboring topic; the topic reference, if available, is not answer evidence.",
-                    dbg, debug, timings, t0,
-                )
         if card is None:
             return self._finish(out, NO_PAGE, "EMPTY_OR_UNROUTABLE_QUERY", MESSAGES[NO_PAGE], dbg, debug, timings, t0)
-        sid = str(routed_sid)
+        sid = card.get("source_id") if isinstance(card, Mapping) else card.source_id
         out["routing"]["selected_source_id"] = sid
 
         # ---- 2. identity ----------------------------------------------------------------------------------
