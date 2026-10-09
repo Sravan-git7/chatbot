@@ -1,8 +1,7 @@
 """Context-aware follow-up resolution (``scripts/rag_followup.py`` + the optional ``context`` of ``POST /api/chat``).
 
-The bug this pins down: "What is a contract account?" is answered, then "elaborate" is asked - on its own that message
-routes nowhere, the lexical topic gate rejects it and the user sees "out of scope", even though the conversation
-plainly has a subject.
+These tests pin down the follow-up contract: the UI must send only eligible context from the selected conversation,
+while a bare elaboration alias without that context must clarify safely instead of reaching ordinary topic routing.
 
 Three layers, matching how the feature is built:
 * ``Detector`` / ``Resolution`` - pure functions, no stores: what counts as a context-dependent follow-up, what the
@@ -275,7 +274,9 @@ class ApiContextTests(unittest.TestCase):
 
     def test_a_follow_up_is_rewritten_before_the_pipeline_runs(self):
         without = self.post("elaborate", conversation_id="conv-followup-1")
-        self.assertEqual(without.json()["status"], OUT_OF_SCOPE)          # the reported behaviour on its own
+        self.assertEqual(without.json()["status"], UNABLE_TO_VERIFY)
+        self.assertEqual(without.json()["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
+        self.assertEqual(without.json()["sources"], [])
         with_ctx = self.post("elaborate", conversation_id="conv-followup-1", debug=True,
                              context={"questions": [Q_PLAN], "answer": "Choose Account > Installment Plan."})
         body = with_ctx.json()
@@ -329,10 +330,14 @@ class ApiContextTests(unittest.TestCase):
                 self.assertEqual(r.status_code, 422, r.text)
                 self.assertEqual(r.json()["error"]["code"], "invalid_request")
 
-    def test_context_without_a_usable_anchor_falls_back_to_normal_handling(self):
+    def test_context_without_a_usable_anchor_returns_a_safe_clarification(self):
         r = self.post("elaborate", debug=True, context={"questions": [], "answer": None})
-        self.assertEqual(r.json()["status"], OUT_OF_SCOPE)
-        self.assertNotIn("follow_up", r.json()["debug"]["pipeline"])
+        body = r.json()
+        self.assertEqual(body["status"], UNABLE_TO_VERIFY)
+        self.assertEqual(body["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
+        self.assertEqual(body["sources"], [])
+        self.assertIsNone(body["topic_reference"])
+        self.assertNotIn("follow_up", body["debug"]["pipeline"])
 
     def test_unsupported_standalone_question_stays_out_of_scope_with_context(self):
         body = self.post("What is the capital of France?", debug=True,
@@ -361,7 +366,10 @@ class RealFollowUpTests(unittest.TestCase):
         self.assertEqual(first["status"], ANSWERED)
         self.assertTrue(first["sources"])
         # the reported failure, without prior context ...
-        self.assertEqual(self.turn("elaborate", cid="conv-fresh")["status"], OUT_OF_SCOPE)
+        fresh = self.turn("elaborate", cid="conv-fresh")
+        self.assertEqual(fresh["status"], UNABLE_TO_VERIFY)
+        self.assertEqual(fresh["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
+        self.assertEqual(fresh["sources"], [])
         # ... and the fix
         second = self.turn("elaborate", self.context_of((CONTRACT, first["answer"])), cid=first["conversation_id"])
         self.assertEqual(second["status"], ANSWERED, second["answer"])

@@ -14,6 +14,26 @@ describe('api client', () => {
     expect(JSON.parse(String(init.body))).toEqual({ message: 'hello', conversation_id: 'abc', debug: true })
   })
 
+  it('includes the explicit per-conversation context when supplied', async () => {
+    const f = vi.fn(async () => json(result()))
+    vi.stubGlobal('fetch', f)
+    const context = {
+      questions: ['How does billing work?'],
+      answer: 'Billing is calculated for each service period. [S1]',
+      active_topic: {
+        query: 'How does billing work?',
+        answer: 'Billing is calculated for each service period. [S1]',
+        identity: { source_id: 'M2C-12', title: 'Automatic Billing', guide_id: 'billing-guide', page_id: 'billing-page' },
+        seen_answers: [],
+      },
+    }
+    await sendChat('elaborate', 'same-chat', false, { context })
+    const [, init] = f.mock.calls[0] as unknown as [string, RequestInit]
+    expect(JSON.parse(String(init.body))).toEqual({
+      message: 'elaborate', conversation_id: 'same-chat', debug: false, context,
+    })
+  })
+
   it('network failure -> offline error with the actionable message', async () => {
     vi.stubGlobal('fetch', vi.fn(async () => { throw new TypeError('Failed to fetch') }))
     const e = await catchErr(sendChat('q', 'c', false))

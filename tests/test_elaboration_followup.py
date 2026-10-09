@@ -6,9 +6,9 @@ B. "explain more" after Billing -> expanded grounded answer
 C. "tell me more" after Contract Account -> Contract Account expansion
 D. "elaborate" after Installment Plan -> Installment Plan expansion
 E. topic switch followed by elaborate -> elaborates latest topic only
-F. elaborate with no previous answer -> existing safe OOS behavior
-G. elaborate after OOS -> remains safe, no fabricated answer
-H. elaborate after Unable-to-Verify -> remains safe
+F. elaborate with no eligible previous answer -> safe clarification, no topic routing
+G. elaborate after OOS -> safe clarification, no fabricated answer
+H. elaborate after Unable-to-Verify -> safe clarification
 I. normal new query after an answer still routes normally
 J. no citation validity regression (100% valid citations)
 K. no stale evidence leakage across conversations or topic switches
@@ -145,8 +145,10 @@ class ElaborationFollowUpTests(unittest.TestCase):
     def test_F_elaborate_with_no_previous_answer(self):
         cid = "test-no-previous-answer"
         resp = self.svc.ask("elaborate", conversation_id=cid)
-        self.assertEqual(resp["status"], OUT_OF_SCOPE)
+        self.assertEqual(resp["status"], UNABLE_TO_VERIFY)
+        self.assertEqual(resp["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
         self.assertEqual(resp["sources"], [])
+        self.assertIsNone(resp["topic_reference"])
 
     def test_G_elaborate_after_oos(self):
         cid = "test-elab-after-oos"
@@ -155,7 +157,8 @@ class ElaborationFollowUpTests(unittest.TestCase):
         self.assertEqual(first["sources"], [])
 
         second = self.svc.ask("elaborate", conversation_id=cid)
-        self.assertEqual(second["status"], OUT_OF_SCOPE)
+        self.assertEqual(second["status"], UNABLE_TO_VERIFY)
+        self.assertEqual(second["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
         self.assertEqual(second["sources"], [])
 
     def test_H_elaborate_after_unable_to_verify(self):
@@ -164,7 +167,8 @@ class ElaborationFollowUpTests(unittest.TestCase):
         self.assertIn(first["status"], HONEST_NON_ANSWERS)
 
         second = self.svc.ask("elaborate", conversation_id=cid)
-        self.assertIn(second["status"], HONEST_NON_ANSWERS)
+        self.assertEqual(second["status"], UNABLE_TO_VERIFY)
+        self.assertEqual(second["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
         self.assertFalse(second["sources"])
 
     def test_I_normal_new_query_after_answer_routes_normally(self):

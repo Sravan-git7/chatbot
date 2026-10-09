@@ -103,7 +103,146 @@ class APIActiveTopicContract(unittest.TestCase):
         self.assertEqual(response.json()["metadata"]["follow_up_category"], "elaborate")
 
 
+@unittest.skipIf(API is None, "fastapi / httpx not installed")
+class APIElaborationRequestContract(unittest.TestCase):
+    def test_api_requires_context_for_bare_alias_and_uses_grounded_same_conversation_context(self):
+        service = _service("extractive")
+        base = _FakeRequestPipeline(BASE_ANSWER)
+        scoped = _FakeRequestPipeline(NOVEL_ANSWER)
+        service.pipeline.answer = base.answer
+        app = API.create_app(service=service, static_dir=ROOT / "missing-static")
+
+        with patch.object(EL, "scoped_pipeline", return_value=scoped), \
+             patch.object(S, "support_chain", return_value={"ok": True, "verbatim_all": True}):
+            with TestClient(app) as client:
+                stale = client.post("/api/chat", json={
+                    "message": BILLING, "conversation_id": "api-empty-context",
+                })
+                self.assertEqual(stale.status_code, 200, stale.text)
+                self.assertEqual(stale.json()["status"], S.ANSWERED)
+                missing = client.post("/api/chat", json={
+                    "message": "Elaborate.", "conversation_id": "api-empty-context",
+                    "context": {"questions": []},
+                })
+                self.assertEqual(missing.status_code, 200, missing.text)
+                missing_body = missing.json()
+                self.assertEqual(missing_body["status"], S.UNABLE_TO_VERIFY)
+                self.assertEqual(missing_body["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
+                self.assertEqual(missing_body["sources"], [])
+                self.assertIsNone(missing_body["topic_reference"])
+
+                first = client.post("/api/chat", json={
+                    "message": BILLING, "conversation_id": "api-grounded-conversation",
+                })
+                self.assertEqual(first.status_code, 200, first.text)
+                first_body = first.json()
+                identity = first_body["metadata"]["topic_identity"]
+                context = {
+                    "questions": [BILLING],
+                    "answer": first_body["answer"],
+                    "active_topic": {
+                        "query": BILLING, "answer": first_body["answer"], "identity": identity,
+                        "seen_answers": [],
+                    },
+                }
+                detail = client.post("/api/chat", json={
+                    "message": "Elaborate.", "conversation_id": first_body["conversation_id"],
+                    "context": context,
+                })
+
+        self.assertEqual(detail.status_code, 200, detail.text)
+        detail_body = detail.json()
+        self.assertEqual(detail_body["conversation_id"], first_body["conversation_id"])
+        self.assertEqual(detail_body["status"], S.ANSWERED)
+        self.assertEqual(detail_body["metadata"]["follow_up_category"], "elaborate")
+        self.assertTrue(detail_body["metadata"]["grounded"])
+        self.assertEqual(detail_body["answer"], NOVEL_ANSWER)
+        self.assertTrue(detail_body["sources"])
+        self.assertIn(f"[{detail_body['sources'][0]['marker']}]", detail_body["answer"])
+
+
 class DispatchAndNovelty(unittest.TestCase):
+    def test_bare_elaboration_aliases_without_eligible_context_clarify_without_routing(self):
+        service = _service("ollama")
+        with patch.object(service, "_run_pipeline_request", side_effect=AssertionError("bare alias must not route")) as run:
+            for index, alias in enumerate(("elaborate", "Elaborate.", "elaborat", "elaboratee", "elabroate")):
+                with self.subTest(alias=alias):
+                    result = service.ask(alias, conversation_id=f"fresh-elaboration-{index}", debug=True)
+                    self.assertEqual(result["status"], S.UNABLE_TO_VERIFY)
+                    self.assertEqual(result["answer"], S.ELABORATION_CONTEXT_MISSING_TEXT)
+                    self.assertEqual(result["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
+                    self.assertFalse(result["metadata"]["grounded"])
+                    self.assertFalse(result["metadata"]["can_elaborate"])
+                    self.assertIsNone(result["metadata"]["page_available"])
+                    self.assertEqual(result["sources"], [])
+                    self.assertIsNone(result["topic_reference"])
+                    self.assertNotIn("follow_up", result["debug"]["pipeline"])
+        run.assert_not_called()
+
+    def test_same_conversation_bare_alias_uses_only_the_prior_grounded_answer(self):
+        service = _service("extractive")
+        base = _FakeRequestPipeline(BASE_ANSWER)
+        scoped = _FakeRequestPipeline(NOVEL_ANSWER)
+        service.pipeline.answer = base.answer
+        with patch.object(EL, "scoped_pipeline", return_value=scoped), \
+             patch.object(S, "support_chain", return_value={"ok": True, "verbatim_all": True}):
+            first = service.ask(BILLING, conversation_id="same-grounded-topic")
+            follow_up = service.ask("elaborate", conversation_id="same-grounded-topic", debug=True)
+
+        self.assertEqual(first["status"], S.ANSWERED)
+        self.assertTrue(first["metadata"]["grounded"])
+        self.assertEqual(follow_up["conversation_id"], first["conversation_id"])
+        self.assertEqual(follow_up["status"], S.ANSWERED)
+        self.assertEqual(follow_up["metadata"]["follow_up_category"], "elaborate")
+        self.assertTrue(follow_up["metadata"]["grounded"])
+        self.assertEqual(follow_up["answer"], NOVEL_ANSWER)
+        self.assertTrue(follow_up["sources"])
+        self.assertIn(f"[{follow_up['sources'][0]['marker']}]", follow_up["answer"])
+        self.assertEqual(scoped.calls[0][0], BILLING)
+
+    def test_new_topic_wording_that_starts_with_elaborate_uses_normal_routing(self):
+        service = _service("extractive")
+        normal = _FakeRequestPipeline("Installment-plan information. [S2]")
+        service.pipeline.answer = normal.answer
+        with patch.object(S, "support_chain", return_value={"ok": True, "verbatim_all": True}):
+            result = service.ask("elaborate on installment plans", conversation_id="new-topic", debug=True,
+                                 context={"questions": [BILLING], "answer": BASE_ANSWER})
+
+        self.assertEqual(result["status"], S.ANSWERED)
+        self.assertEqual(normal.calls[0][0], "elaborate on installment plans")
+        self.assertNotIn("follow_up", result["debug"]["pipeline"])
+        self.assertIsNone(result["metadata"].get("follow_up_category"))
+
+    def test_an_unavailable_topic_cannot_anchor_elaboration(self):
+        service = _service("extractive")
+        raw_unavailable = {
+            "message": "Tell me about Contract Account Business Object.",
+            "status": "page_not_ingested",
+            "reason_code": "PAGE_NOT_INGESTED",
+            "answer": None,
+            "topic": {
+                "source_id": "M2C-18", "title": "Contract Account Business Object",
+                "card_url": "https://help.sap.com/contract-account-business-object",
+                "identity_status": "resolved_local_page", "effective_guide_id": "guide-contract",
+                "effective_page_id": "page-contract", "corpus_status": "not_ingested",
+            },
+            "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
+            "routing": {"candidates": [{"coverage": 1.0}], "mode": "normal"},
+            "debug": {}, "timings_ms": {},
+        }
+        with patch.object(service, "_run_pipeline_request", return_value=(raw_unavailable, None)) as run:
+            unavailable = service.ask("Tell me about Contract Account Business Object.", conversation_id="unavailable-topic")
+            follow_up = service.ask("elaborate", conversation_id="unavailable-topic")
+
+        self.assertEqual(unavailable["status"], S.DOC_UNAVAILABLE)
+        self.assertFalse(unavailable["metadata"]["grounded"])
+        self.assertEqual(follow_up["status"], S.UNABLE_TO_VERIFY)
+        self.assertEqual(follow_up["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
+        self.assertEqual(follow_up["sources"], [])
+        self.assertIsNone(follow_up["topic_reference"])
+        self.assertIsNone(follow_up["metadata"].get("follow_up_category"))
+        self.assertEqual(run.call_count, 1)
+
     def test_first_elaborate_uses_deterministic_scoped_pipeline_even_when_normal_generator_is_ollama(self):
         service = _service("ollama")
         scoped = _FakeRequestPipeline(NOVEL_ANSWER)
@@ -323,10 +462,13 @@ class ExhaustedElaborationState(unittest.TestCase):
             oos = service.ask("What is the capital of France?", conversation_id="conv-oos")
             self.assertEqual(oos["status"], "out_of_scope")
 
-            # no active topic is left, so "elaborate" keeps the pinned fresh-chat behaviour (safe OOS)
+            # No eligible topic remains: return a clarification without routing the bare alias.
+            calls_before = len(base.calls)
             after = service.ask("elaborate", conversation_id="conv-oos")
-            self.assertEqual(after["status"], "out_of_scope")
-            self.assertIn("elaborate", base.calls)                            # the raw message reached the pipeline
+            self.assertEqual(after["status"], S.UNABLE_TO_VERIFY)
+            self.assertEqual(after["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
+            self.assertEqual(after["sources"], [])
+            self.assertEqual(len(base.calls), calls_before)                    # the raw alias never reaches topic routing
 
     def test_a_non_elaborate_follow_up_after_exhaustion_keeps_the_anchor_without_spending_it(self):
         service, base = self._service_with_script({BILLING: _raw_answer(BASE_ANSWER)})

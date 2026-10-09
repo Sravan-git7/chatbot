@@ -44,6 +44,8 @@ ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE = "answered", "documen
 # It is deliberately NOT unable_to_verify (nothing failed to verify) and NOT documentation_unavailable (the page is
 # not missing), so the response never claims that a used page is absent from the knowledge base.
 NO_ADDITIONAL_VERIFIED_EVIDENCE = "no_additional_verified_evidence"
+ELABORATION_CONTEXT_MISSING = "ELABORATION_CONTEXT_MISSING"
+ELABORATION_CONTEXT_MISSING_TEXT = "Please share the SAP Utilities topic or original question you'd like me to elaborate on."
 API_STATUSES = (ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE, NO_ADDITIONAL_VERIFIED_EVIDENCE)
 # pipeline status (rag_pipeline.STATUSES) -> API status
 STATUS_MAP = {"answered": ANSWERED, "page_not_ingested": DOC_UNAVAILABLE, "unresolved_identity": UNABLE_TO_VERIFY, "insufficient_context": UNABLE_TO_VERIFY,
@@ -247,6 +249,9 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     elif status == NO_ADDITIONAL_VERIFIED_EVIDENCE:
         answer = USER_TEXT[NO_ADDITIONAL_VERIFIED_EVIDENCE]
         sources = []
+    elif raw.get("reason_code") == ELABORATION_CONTEXT_MISSING:
+        answer = ELABORATION_CONTEXT_MISSING_TEXT
+        sources = []
     else:
         answer = UNRESOLVED_TEXT if pstatus == "unresolved_identity" else USER_TEXT[status]
         sources = []
@@ -268,8 +273,12 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     routed = status != OUT_OF_SCOPE
     grounding_view = _grounding(dbg, pstatus)
     grounded_ok = status == ANSWERED and grounding_view["ok"] is True
+    if raw.get("reason_code") == ELABORATION_CONTEXT_MISSING:
+        page_available = None  # no topic was resolved, so do not imply a page is missing
+    else:
+        page_available = (topic.get("corpus_status") == "ingested") if routed else None
     meta = {"card_id": topic.get("source_id") if routed else None, "card_title": topic.get("title") if routed else None,
-            "identity_status": topic.get("identity_status") if routed else None, "page_available": (topic.get("corpus_status") == "ingested") if routed else None, "generator": generator, "grounded": grounded_ok,
+            "identity_status": topic.get("identity_status") if routed else None, "page_available": page_available, "generator": generator, "grounded": grounded_ok,
             "can_elaborate": grounded_ok, "grounding": grounding_view, "pipeline_status": pstatus, "reason_code": raw.get("reason_code"), "latency_ms": round(latency_ms, 1)}
     if (status == ANSWERED and topic.get("source_id") and topic.get("effective_guide_id") and topic.get("effective_page_id")):
         meta["topic_identity"] = {
@@ -526,6 +535,22 @@ class RagService:
                 "selected": [], "elaborated": None, "final_novelty_check": {"ok": False},
                 "reason_added": "NO_ADDITIONAL_EVIDENCE", "elaboration_exhausted": True,
             }
+        elif FU.classify(q) == "elaborate" and follow_up is None:
+            # A bare elaboration alias has no standalone subject. Do not send it through ordinary topic routing, where
+            # it can be mislabeled out-of-scope (or accidentally attach to unrelated evidence). Ask for the topic instead.
+            short_circuited = True
+            raw = {
+                "message": q,
+                "status": "insufficient_context",
+                "reason_code": ELABORATION_CONTEXT_MISSING,
+                "answer": None,
+                "topic": {},
+                "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
+                "routing": {"candidates": [], "mode": "follow_up_clarification"},
+                "debug": {},
+                "timings_ms": {},
+            }
+            evidence = None
         elif follow_up and EL.is_elaboration_intent(category):
             active_topic = self._canonical_active_topic(effective_context)
             if active_topic:

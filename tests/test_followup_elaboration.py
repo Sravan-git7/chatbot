@@ -974,9 +974,12 @@ class ApiElaborationTests(unittest.TestCase):
         self.assertNotIn("follow_up", body["debug"]["pipeline"])
         self.assertNotIn("elaboration_sections", body["metadata"])
 
-    def test_the_context_is_still_only_used_to_resolve_the_query(self):
+    def test_bare_alias_without_usable_context_clarifies_and_standalone_query_ignores_context(self):
         without = self.post("Elaborate.", conversation_id="conv-nocontext").json()
-        self.assertEqual(without["status"], OUT_OF_SCOPE)                   # unchanged baseline behaviour
+        self.assertEqual(without["status"], UNABLE_TO_VERIFY)
+        self.assertEqual(without["metadata"]["reason_code"], S.ELABORATION_CONTEXT_MISSING)
+        self.assertEqual(without["sources"], [])
+        self.assertIsNone(without["topic_reference"])
         ignored = self.post(BILLING, conversation_id="conv-ignored", debug=True,
                             context={"questions": [Q_PLAN], "answer": "Choose Account > Installment Plan."}).json()
         self.assertIsNone(ignored["debug"]["pipeline"].get("follow_up"))

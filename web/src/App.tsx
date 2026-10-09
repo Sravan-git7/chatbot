@@ -6,6 +6,7 @@ import MessageView from './components/MessageView'
 import Sidebar from './components/Sidebar'
 import Welcome from './components/Welcome'
 import { loadConversations, loadSettings, newId, saveConversations, saveSettings, titleFrom } from './storage'
+import { turnContext } from './followup'
 import type { ChatError, Conversation, Health, Message, Settings, Source } from './types'
 import { isHttpUrl } from './util'
 
@@ -157,6 +158,7 @@ export default function App() {
       const convId = currentId ?? newId()
       const user: Message = { id: newId(), role: 'user', content: text, createdAt: now }
       const reply: Message = { id: newId(), role: 'assistant', content: '', createdAt: now, pending: true }
+      const context = turnContext(conversations.find((conversation) => conversation.id === convId) ?? null) ?? { questions: [] }
       setConversations((list) => {
         const existing = list.find((c) => c.id === convId)
         if (existing) {
@@ -172,7 +174,7 @@ export default function App() {
       setCurrentId(convId)
       const startedAt = Date.now()
       try {
-        const result = await sendChat(text, convId, settingsRef.current.developerMode)
+        const result = await sendChat(text, convId, settingsRef.current.developerMode, { context })
         const elapsed = Date.now() - startedAt
         if (MIN_THINKING_MS > 0 && elapsed < MIN_THINKING_MS) {
           await new Promise((r) => setTimeout(r, MIN_THINKING_MS - elapsed))
@@ -193,12 +195,14 @@ export default function App() {
   )
 
   const retryMessage = useCallback(
-    async (convId: string, replyId: string, _userMessageId: string, questionText: string) => {
+    async (convId: string, replyId: string, userMessageId: string, questionText: string) => {
       if (!questionText.trim() || pending) return
+      const conversation = conversations.find((item) => item.id === convId) ?? null
+      const context = turnContext(conversation, userMessageId) ?? { questions: [] }
       patchMessage(convId, replyId, { pending: true, error: undefined })
       const startedAt = Date.now()
       try {
-        const result = await sendChat(questionText, convId, settingsRef.current.developerMode)
+        const result = await sendChat(questionText, convId, settingsRef.current.developerMode, { context })
         const elapsed = Date.now() - startedAt
         if (MIN_THINKING_MS > 0 && elapsed < MIN_THINKING_MS) {
           await new Promise((r) => setTimeout(r, MIN_THINKING_MS - elapsed))

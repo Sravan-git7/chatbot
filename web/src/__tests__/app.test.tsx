@@ -545,14 +545,52 @@ describe('conversations', () => {
     expect(screen.getByTestId('source-item')).toBeInTheDocument()
   })
 
-  it('the backend call carries the conversation id of the active conversation', async () => {
-    const { calls } = stubBackend(() => json(result()))
+  it('sends only the selected conversation topic when elaborating after switching chats', async () => {
+    const billingIdentity = {
+      source_id: 'M2C-12', title: 'Automatic Billing', guide_id: 'billing-guide',
+      page_id: 'billing-page', industry: 'SAP Utilities/IS-U',
+    }
+    const contractIdentity = {
+      source_id: 'M2C-17', title: 'Contract Accounts Overview', guide_id: 'contract-guide',
+      page_id: 'contract-page', industry: 'SAP Utilities/IS-U',
+    }
+    const billingSource = { ...SOURCE, title: 'Automatic Billing', source_id: 'M2C-12' }
+    const contractSource = { ...SOURCE, title: 'Contract Accounts Overview', source_id: 'M2C-17' }
+    const { calls } = stubBackend((body) => {
+      if (body.message === 'How does billing work?') {
+        return json(result({ answer: 'Billing answer. [S1]', sources: [billingSource],
+          metadata: { ...result().metadata, card_id: 'M2C-12', card_title: billingIdentity.title, topic_identity: billingIdentity } }))
+      }
+      if (body.message === 'What is a contract account?') {
+        return json(result({ answer: 'Contract Account answer. [S1]', sources: [contractSource],
+          metadata: { ...result().metadata, card_id: 'M2C-17', card_title: contractIdentity.title, topic_identity: contractIdentity } }))
+      }
+      return json(result({ answer: 'Billing detail. [S2]', sources: [{ ...billingSource, marker: 'S2' }],
+        metadata: { ...result().metadata, card_id: 'M2C-12', card_title: billingIdentity.title,
+          topic_identity: billingIdentity, follow_up_category: 'elaborate' } }))
+    })
     render(<App />)
-    await userEvent.type(composer(), 'one{Enter}')
-    await screen.findByText(/Choose Account/)
-    await userEvent.type(composer(), 'two{Enter}')
-    await waitFor(() => expect(calls).toHaveLength(2))
-    expect(calls[0].conversation_id).toBe(calls[1].conversation_id)
+
+    await userEvent.type(composer(), 'How does billing work?{Enter}')
+    await screen.findByText(/Billing answer/)
+    await userEvent.click(screen.getByRole('button', { name: 'New chat' }))
+    await userEvent.type(composer(), 'What is a contract account?{Enter}')
+    await screen.findByText(/Contract Account answer/)
+
+    const firstConversationId = calls[0].conversation_id
+    const secondConversationId = calls[1].conversation_id
+    expect(secondConversationId).not.toBe(firstConversationId)
+    const history = screen.getByRole('navigation', { name: 'Chat history' })
+    await userEvent.click(within(history).getByRole('button', { name: /^How does billing work/ }))
+    const baseMessage = screen.getByTestId('assistant-message')
+    await userEvent.click(within(baseMessage).getByTestId('elaborate-button'))
+    await waitFor(() => expect(calls).toHaveLength(3))
+
+    expect(calls[2].conversation_id).toBe(firstConversationId)
+    expect(calls[2].conversation_id).not.toBe(secondConversationId)
+    expect(calls[2].context?.active_topic?.query).toBe('How does billing work?')
+    expect(calls[2].context?.active_topic?.identity.source_id).toBe('M2C-12')
+    expect(calls[2].context?.active_topic?.identity.source_id).not.toBe('M2C-17')
   })
 })
 
@@ -653,39 +691,49 @@ describe('layout and settings', () => {
 })
 
 describe('App', () => {
-  it('includes active topic and answer context in follow-up chat requests', async () => {
+  it('clicking Elaborate sends the eligible grounded answer context with the same conversation id', async () => {
     let idCounter = 0
     const spy = vi.spyOn(storage, 'newId').mockImplementation(() => {
       idCounter += 1
       return idCounter === 1 ? 'c1' : `id-${idCounter}`
     })
+    const answer = 'Billing is calculated for each service period. [S1]'
+    const identity = {
+      source_id: 'M2C-12', title: 'Automatic Billing', guide_id: 'billing-guide',
+      page_id: 'billing-page', industry: 'SAP Utilities/IS-U',
+    }
+    const billing = result({
+      conversation_id: 'c1', answer,
+      sources: [{ ...SOURCE, title: 'Automatic Billing', source_id: 'M2C-12' }],
+      metadata: { ...result().metadata, card_id: 'M2C-12', card_title: 'Automatic Billing', topic_identity: identity },
+    })
+    const detail = result({
+      conversation_id: 'c1', answer: 'The billing run follows the configured service-period schedule. [S2]',
+      sources: [{ ...SOURCE, marker: 'S2', title: 'Automatic Billing', source_id: 'M2C-12' }],
+      metadata: { ...billing.metadata, follow_up_category: 'elaborate' },
+    })
+    let responseIndex = 0
     try {
-      const { fetch, calls } = stubBackend(() => json(result({ conversation_id: 'c1' })))
+      const { calls } = stubBackend(() => json([billing, detail][responseIndex++]))
       render(<App />)
       await userEvent.type(composer(), 'How does billing work?{Enter}')
-      await screen.findByText(/Choose Account/)
+      await screen.findByText(/Billing is calculated for each service period/)
+      const baseMessage = screen.getByTestId('assistant-message')
 
-      await userEvent.type(composer(), 'tell me more{Enter}')
+      expect(calls[0].context).toEqual({ questions: [] })
+      await userEvent.click(within(baseMessage).getByTestId('elaborate-button'))
       await waitFor(() => expect(calls).toHaveLength(2))
 
       expect(calls[1]).toEqual({
-        message: 'tell me more',
+        message: 'elaborate',
         conversation_id: 'c1',
         debug: false,
+        context: {
+          questions: ['How does billing work?'],
+          answer,
+          active_topic: { query: 'How does billing work?', answer, identity, seen_answers: [] },
+        },
       })
-      expect(calls[1].context).toBeUndefined()
-      expect(fetch).toHaveBeenCalledWith(
-        '/api/chat',
-        expect.objectContaining({
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            message: 'tell me more',
-            conversation_id: 'c1',
-            debug: false,
-          }),
-        }),
-      )
     } finally {
       spy.mockRestore()
     }
