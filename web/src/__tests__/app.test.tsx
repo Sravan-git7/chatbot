@@ -302,6 +302,8 @@ describe('answers', () => {
 
     const elaboration = screen.getAllByTestId('assistant-message')[1]
     expect(within(elaboration).getByTestId('elaboration-section-title')).toHaveTextContent('Additional detail')
+    expect(within(elaboration).getAllByRole('heading', { name: 'Additional detail' })).toHaveLength(1)
+    expect(within(elaboration).getByRole('heading', { name: 'Answer', level: 2 })).toBeInTheDocument()
     expect(within(elaboration).queryByRole('heading', { name: 'Overview' })).not.toBeInTheDocument()
     expect(within(elaboration).queryByTestId('follow-up-questions')).not.toBeInTheDocument()
     expect(screen.getAllByTestId('follow-up-questions')).toHaveLength(1)

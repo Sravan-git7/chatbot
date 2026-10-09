@@ -126,6 +126,43 @@ class EvaluationSetTests(unittest.TestCase):
                 self.assertEqual(c["fabricated_answer_shown"], 0, name)
 
 
+@unittest.skipUnless(HAVE_CHROMA, "chromadb not installed")
+class PageStoreValidationTests(unittest.TestCase):
+    def test_from_store_rejects_wrong_metric_empty_and_count_mismatch(self):
+        import chromadb
+        from chromadb.config import Settings
+        import page_retriever as PR
+
+        embed = lambda texts: [[1.0, 0.0, 0.0] for _ in texts]
+        with tempfile.TemporaryDirectory() as td:
+            client = chromadb.PersistentClient(path=td, settings=Settings(anonymized_telemetry=False))
+            wrong_metric = client.create_collection("wrong_metric")
+            with self.assertRaises(PR.PageStoreUnavailable):
+                PR.PageRetriever.from_store(Path(td), "wrong_metric", embed=embed)
+
+            empty = client.create_collection("empty_pages", metadata={"hnsw:space": "cosine", "vector_count": 1})
+            with self.assertRaises(PR.PageStoreUnavailable):
+                PR.PageRetriever.from_store(Path(td), "empty_pages", embed=embed)
+
+            mismatched = client.create_collection("mismatched_count", metadata={"hnsw:space": "cosine", "vector_count": 2})
+            mismatched.add(ids=["chunk-1"], embeddings=[[1.0, 0.0, 0.0]], documents=["text"], metadatas=[{"chunk_id": "chunk-1"}])
+            with self.assertRaises(PR.PageStoreUnavailable):
+                PR.PageRetriever.from_store(Path(td), "mismatched_count", embed=embed)
+
+    def test_from_store_accepts_nonempty_cosine_collection(self):
+        import chromadb
+        from chromadb.config import Settings
+        import page_retriever as PR
+
+        embed = lambda texts: [[1.0, 0.0, 0.0] for _ in texts]
+        with tempfile.TemporaryDirectory() as td:
+            client = chromadb.PersistentClient(path=td, settings=Settings(anonymized_telemetry=False))
+            collection = client.create_collection("good_pages", metadata={"hnsw:space": "cosine", "vector_count": 1})
+            collection.add(ids=["chunk-1"], embeddings=[[1.0, 0.0, 0.0]], documents=["text"], metadatas=[{"chunk_id": "chunk-1"}])
+            retriever = PR.PageRetriever.from_store(Path(td), "good_pages", embed=embed)
+            self.assertEqual(retriever.count(), 1)
+
+
 @NEED_STORES
 class RealStoreTests(unittest.TestCase):
     @classmethod

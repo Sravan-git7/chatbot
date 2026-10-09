@@ -33,6 +33,10 @@ class LeakageError(RuntimeError):
     """A chunk outside the identity-constrained page was returned. Never swallowed."""
 
 
+class PageStoreUnavailable(RuntimeError):
+    """The configured page collection is missing, empty, or incompatible with cosine retrieval."""
+
+
 @dataclass(frozen=True)
 class ChunkHit:
     rank: int
@@ -152,7 +156,23 @@ class PageRetriever:
         if not Path(vector_dir).is_dir():
             raise FileNotFoundError(f"page vector store {vector_dir} not found: run scripts/build_page_collection.py")
         client = chromadb.PersistentClient(path=str(vector_dir), settings=Settings(anonymized_telemetry=False))
-        col = client.get_collection(collection)
+        try:
+            col = client.get_collection(collection)
+        except Exception as e:
+            raise PageStoreUnavailable(f"page collection {collection!r} not found in {vector_dir}: {e}") from e
+        metadata = getattr(col, "metadata", None) or {}
+        space = metadata.get("hnsw:space")
+        if space != BP.DISTANCE_SPACE:
+            raise PageStoreUnavailable(f"page collection {collection!r} reports distance space {space!r}; expected {BP.DISTANCE_SPACE!r}")
+        try:
+            count = int(col.count())
+        except Exception as e:
+            raise PageStoreUnavailable(f"page collection {collection!r} could not be counted: {e}") from e
+        if count < 1:
+            raise PageStoreUnavailable(f"page collection {collection!r} is empty")
+        recorded_count = metadata.get("vector_count")
+        if recorded_count is not None and int(recorded_count) != count:
+            raise PageStoreUnavailable(f"page collection {collection!r} has {count} vectors, but metadata records {recorded_count}")
         return cls(col, embed or BP.load_embedder()[0])
 
     def count(self) -> int:

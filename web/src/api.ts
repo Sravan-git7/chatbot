@@ -39,10 +39,16 @@ export function isChatResult(x: unknown): x is ChatResult {
   )
 }
 
+function isAbortError(error: unknown): boolean {
+  return !!error && typeof error === 'object' && 'name' in error && (error as { name?: unknown }).name === 'AbortError'
+}
+
 async function readJson(res: Response): Promise<unknown> {
   try {
     return await res.json()
-  } catch {
+  } catch (error) {
+    // Preserve cancellation so sendChat can distinguish its timeout from an invalid/empty JSON body.
+    if (isAbortError(error)) throw error
     return undefined
   }
 }
@@ -54,10 +60,14 @@ export async function sendChat(
   opts: { signal?: AbortSignal; timeoutMs?: number; context?: ChatContext } = {},
 ): Promise<ChatResult> {
   const ctl = new AbortController()
+  const timeoutMs = opts.timeoutMs ?? REQUEST_TIMEOUT_MS
   let timedOut = false
-  const timer = setTimeout(() => { timedOut = true; ctl.abort() }, opts.timeoutMs ?? REQUEST_TIMEOUT_MS)
-  opts.signal?.addEventListener('abort', () => ctl.abort())
+  const timer = setTimeout(() => { timedOut = true; ctl.abort() }, timeoutMs)
+  const abortFromCaller = () => ctl.abort()
+  if (opts.signal?.aborted) abortFromCaller()
+  else opts.signal?.addEventListener('abort', abortFromCaller, { once: true })
   let res: Response
+  let body: unknown
   try {
     res = await fetch(`${BASE}/api/chat`, {
       method: 'POST',
@@ -65,15 +75,17 @@ export async function sendChat(
       body: JSON.stringify({ message, conversation_id: conversationId, debug, ...(opts.context !== undefined ? { context: opts.context } : {}) }),
       signal: ctl.signal,
     })
+    // Keep the deadline active through response-body consumption, not only until headers arrive.
+    body = await readJson(res)
   } catch {
     if (timedOut) {
-      throw new ApiError({ kind: 'timeout', code: 'timeout', message: `The RAG service did not answer within ${Math.round((opts.timeoutMs ?? REQUEST_TIMEOUT_MS) / 1000)} seconds. It may be busy or stuck; try again.` })
+      throw new ApiError({ kind: 'timeout', code: 'timeout', message: `The RAG service did not answer within ${Math.round(timeoutMs / 1000)} seconds. It may be busy or stuck; try again.` })
     }
     throw new ApiError({ kind: 'offline', code: 'unreachable', message: OFFLINE_MESSAGE })
   } finally {
     clearTimeout(timer)
+    opts.signal?.removeEventListener('abort', abortFromCaller)
   }
-  const body = await readJson(res)
   if (!res.ok) {
     const err = (body as { error?: { code?: string; message?: string } } | undefined)?.error
     if (!err) {

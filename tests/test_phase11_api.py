@@ -42,6 +42,30 @@ def post(c, message=Q_PLAN, **kw):
 
 @NEED_API
 class HealthTests(unittest.TestCase):
+    def test_cli_uses_host_and_port_environment_defaults(self):
+        with unittest.mock.patch.dict("os.environ", {"HOST": "0.0.0.0", "PORT": "8123"}), \
+             unittest.mock.patch("uvicorn.run") as run:
+            self.assertEqual(rag_api.main([]), 0)
+        self.assertEqual(run.call_args.kwargs["host"], "0.0.0.0")
+        self.assertEqual(run.call_args.kwargs["port"], 8123)
+
+    def test_configuration_reports_the_actual_card_and_page_store_paths(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            card_store = root / "data" / "vector_store"
+            page_store = card_store / "page_collection"
+            corpus = root / "data" / "page_corpus"
+            for directory in (card_store, page_store, corpus):
+                directory.mkdir(parents=True, exist_ok=True)
+            for database in (card_store / "chroma.sqlite3", page_store / "chroma.sqlite3"):
+                database.write_bytes(b"test-only sentinel")
+            (corpus / "manifest.json").write_text("{}", encoding="utf-8")
+            with unittest.mock.patch.object(rag_api, "ROOT", root):
+                cfg = rag_api.validate_configuration()
+        self.assertTrue(cfg["card_collection_exists"])
+        self.assertTrue(cfg["page_collection_exists"])
+        self.assertTrue(cfg["page_corpus_exists"])
+
     def test_health_ready(self):
         c, svc = client()
         r = c.get("/api/health")

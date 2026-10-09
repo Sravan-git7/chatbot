@@ -90,15 +90,17 @@ def validate_configuration() -> Dict[str, Any]:
     if log_queries_raw not in ("0", "1", "true", "false", "yes", "no", ""):
         raise ValueError(f"Invalid SURA_LOG_QUERIES='{log_queries_raw}'")
 
-    card_collection_dir = ROOT / "data" / "card_collection"
+    card_store_dir = ROOT / "data" / "vector_store"
+    page_store_dir = card_store_dir / "page_collection"
     page_corpus_dir = ROOT / "data" / "page_corpus"
     return {
         "generator": gen,
         "feature_flags": flags,
         "rate_limit_per_minute": rate_limit,
         "log_queries_raw": log_queries_raw in ("1", "true", "yes"),
-        "card_collection_exists": card_collection_dir.exists(),
-        "page_corpus_exists": page_corpus_dir.exists(),
+        "card_collection_exists": (card_store_dir / "chroma.sqlite3").is_file(),
+        "page_collection_exists": (page_store_dir / "chroma.sqlite3").is_file(),
+        "page_corpus_exists": (page_corpus_dir / "manifest.json").is_file(),
     }
 
 
@@ -331,8 +333,14 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         try:
             if not hasattr(svc.pipeline, "retriever") or svc.pipeline.retriever is None:
                 return JSONResponse(error_body("retriever_unavailable", "Retriever is not configured.", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
+            retriever_count = getattr(svc.pipeline.retriever, "count", None)
+            if callable(retriever_count) and int(retriever_count()) < 1:
+                return JSONResponse(error_body("index_unavailable", "Page vector collection is empty or unavailable.", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
             if not hasattr(svc.pipeline, "corpus") or not svc.pipeline.corpus.entries:
                 return JSONResponse(error_body("index_unavailable", "Corpus index is empty or unavailable.", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
+            card_health_check = getattr(svc.pipeline.backend, "health_check", None)
+            if callable(card_health_check):
+                card_health_check()
             if svc.generator_name == "ollama":
                 gen = getattr(svc.pipeline, "generator", None)
                 client = getattr(gen, "client", None) or getattr(getattr(gen, "inner", None), "client", None)
@@ -476,8 +484,8 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     ap = argparse.ArgumentParser(description="Serve the grounded RAG chat API (and the built UI from web/dist when present).")
     ap.add_argument("--generator", choices=("extractive", "ollama"), default=os.environ.get("RAG_GENERATOR", "extractive"))
-    ap.add_argument("--host", default="127.0.0.1")
-    ap.add_argument("--port", type=int, default=8000)
+    ap.add_argument("--host", default=os.environ.get("HOST", "127.0.0.1"))
+    ap.add_argument("--port", type=int, default=os.environ.get("PORT", "8000"))
     a = ap.parse_args(argv)
     import uvicorn
     uvicorn.run(create_app(generator=a.generator), host=a.host, port=a.port, log_level="info")

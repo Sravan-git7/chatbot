@@ -231,6 +231,42 @@ def support_chain(answer: str, dbg: Mapping[str, Any]) -> Dict[str, Any]:
     return EV.verify_support_chain(answer, SimpleNamespace(items=items))
 
 
+def _validated_presentation_sections(answer: str, sections: Any) -> Optional[List[Dict[str, Any]]]:
+    """Expose elaboration sections only when they reconstruct the canonical answer exactly and unambiguously."""
+    if not answer or not isinstance(sections, (list, tuple)) or not sections:
+        return None
+    answer_lines = answer.split("\n")
+    line_by_order: Dict[int, str] = {}
+    seen_keys = set()
+    validated: List[Dict[str, Any]] = []
+    for section in sections:
+        if not isinstance(section, Mapping):
+            return None
+        key = section.get("key")
+        if key not in EL.PRESENTATION_SECTION_KEYS or key in seen_keys:
+            return None
+        seen_keys.add(key)
+        lines, orders = section.get("lines"), section.get("line_orders")
+        if not isinstance(lines, (list, tuple)) or not isinstance(orders, (list, tuple)) or not lines or len(lines) != len(orders):
+            return None
+        copied_lines: List[str] = []
+        copied_orders: List[int] = []
+        for line, order in zip(lines, orders):
+            if not isinstance(line, str) or type(order) is not int or order < 0 or order >= len(answer_lines):
+                return None
+            if order in line_by_order or answer_lines[order] != line:
+                return None
+            line_by_order[order] = line
+            copied_lines.append(line)
+            copied_orders.append(order)
+        validated.append({"key": key, "lines": copied_lines, "line_orders": copied_orders})
+    if set(line_by_order) != set(range(len(answer_lines))):
+        return None
+    if [line_by_order[index] for index in range(len(answer_lines))] != answer_lines:
+        return None
+    return validated
+
+
 def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str, latency_ms: float, debug: bool = False,
                    evidence: Optional[Mapping[str, Any]] = None,
                    presentation_sections: Optional[List[Mapping[str, Any]]] = None,
@@ -288,8 +324,9 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
         }
     if follow_up_category:
         meta["follow_up_category"] = follow_up_category
-    if presentation_sections:
-        meta["elaboration_sections"] = list(presentation_sections)
+    validated_sections = _validated_presentation_sections(answer, presentation_sections)
+    if validated_sections is not None:
+        meta["elaboration_sections"] = validated_sections
     if evidence and "additional_evidence" in evidence:
         meta["additional_evidence"] = evidence["additional_evidence"]
 
@@ -770,7 +807,17 @@ def build_service(generator: str = "extractive") -> RagService:
     import rag_pipeline as RP
     # Phase 11.1: the shipped configuration is "C1" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.
     # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).
-    return RagService(EV.build_evidence_pipeline(RP.build_pipeline(generator=generator, config=production_pipeline_config()), tau=EV.SHIPPED_TAU, widen=False, generator=generator), generator)
+    pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())
+    # The card backend is lazy by design; validate its required collection here so an absent/empty card index cannot
+    # appear ready and fail only on the first user question. PageRetriever.from_store opens the page collection, but
+    # check that it contains searchable chunks as well.
+    card_health_check = getattr(pipeline.backend, "health_check", None)
+    if callable(card_health_check):
+        card_health_check()
+    page_count = getattr(pipeline.retriever, "count", None)
+    if callable(page_count) and int(page_count()) < 1:
+        raise FileNotFoundError("page vector collection is empty; rebuild it with scripts/build_page_collection.py")
+    return RagService(EV.build_evidence_pipeline(pipeline, tau=EV.SHIPPED_TAU, widen=False, generator=generator), generator)
 
 
 def answer_question(question: str, service: Optional[RagService] = None, generator: str = "extractive", conversation_id: Optional[str] = None,

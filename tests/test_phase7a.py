@@ -274,6 +274,18 @@ class ChromaRoundTripTests(unittest.TestCase):
         self.assertAlmostEqual(r.candidates[2].distance, 1.0, places=5)
         self.assertEqual(r.candidates[0].source_url, url())
 
+    def test_health_check_requires_a_nonempty_card_collection(self):
+        self.assertEqual(self.backend().health_check(), 3)
+        from chromadb.config import Settings
+        client = chromadb.PersistentClient(path=str(self.dir), settings=Settings(anonymized_telemetry=False))
+        client.create_collection("empty_cards", metadata={"hnsw:space": "cosine"})
+        with self.assertRaises(rt.CardStoreUnavailable):
+            self.backend("empty_cards").health_check()
+        mismatched = client.create_collection("mismatched_cards", metadata={"hnsw:space": "cosine", "unit_count": 2})
+        mismatched.add(ids=["M2C-01"], embeddings=[[1.0, 0.0, 0.0]], documents=["d"], metadatas=[meta(1)])
+        with self.assertRaises(rt.CardStoreUnavailable):
+            self.backend("mismatched_cards").health_check()
+
     def test_top_k_larger_than_collection_is_clamped(self):
         self.assertEqual(len(rt.route("q", self.backend(), top_k=50).candidates), 3)
 
@@ -287,7 +299,8 @@ class ChromaRoundTripTests(unittest.TestCase):
 
     def test_router_does_not_modify_collection_contents(self):
         b = self.backend()
-        client = chromadb.PersistentClient(path=str(self.dir))
+        from chromadb.config import Settings
+        client = chromadb.PersistentClient(path=str(self.dir), settings=Settings(anonymized_telemetry=False))
         before = client.get_collection("test_cards").get(include=["metadatas", "documents", "embeddings"])
         rt.route("q", b, top_k=3)
         after = client.get_collection("test_cards").get(include=["metadatas", "documents", "embeddings"])

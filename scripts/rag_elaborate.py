@@ -64,6 +64,7 @@ ELABORATION_CANDIDATE_POOL_SIZE = 12
 ELABORATION_MAX_CONTEXT_CHUNKS = 12
 ELABORATION_CONTEXT_BUDGET_TOKENS = 2000
 ELABORATION_MAX_SELECTED_UNITS = 6
+WORKFLOW_ELABORATION_MAX_UNITS = 12  # soft cap; keep a documented step/bullet intact rather than cutting its sequence
 RICH_RATIO = 0.30                    # keep sentences scoring >= 30% of the best (minimal path: 0.6)
 MAX_RICH_SENTENCES = 8
 MAX_SIMPLE_SENTENCES = 2
@@ -426,6 +427,23 @@ def _novelty_filter_units(units: Sequence[Any], previous_answer: str) -> Tuple[L
     }
 
 
+def _source_sequence_group(unit: Any) -> Optional[Tuple[str, str, int]]:
+    """Identify one numbered step or bullet by its original source line and document chunk."""
+    sequence = EV._source_sequence_info(unit)
+    if sequence is None or not EV._has_workflow_heading(unit):
+        return None
+    kind, position = sequence
+    chunk_id = str(getattr(unit, "chunk_id", "") or "")
+    if kind == "numbered":
+        return chunk_id, kind, position
+    if kind == "bullet":
+        sentence = _quality_norm(str(getattr(unit, "text", "") or ""))
+        for line_index, line in enumerate(str(getattr(unit, "chunk_text", "") or "").splitlines()):
+            if sentence and sentence in _quality_norm(line):
+                return chunk_id, kind, line_index
+    return None
+
+
 class IntentExtractiveGenerator:
     """A wider, intent-aware sibling of ``EvidenceExtractiveGenerator`` (same ``generate`` contract, same name).
 
@@ -586,9 +604,46 @@ class IntentExtractiveGenerator:
         return RG.GenerationResult(text, False, self.name, text, evidence=copy.deepcopy(record))
 
     # ------------------------------------------------------------------------------------------------------------ pick
+    def _choose_workflow_groups(self, units: Sequence[Any]) -> List[Any]:
+        """Continue with unused, complete source steps/bullets before falling back to looser lexical selection."""
+        groups: Dict[Tuple[str, str, int], List[Any]] = {}
+        for unit in units:
+            group_key = _source_sequence_group(unit)
+            if group_key is None or EV._is_answer_boilerplate(unit.text, process_question=True):
+                continue
+            if _is_redundant_evidence(unit.text, self.previous)[0]:
+                continue
+            groups.setdefault(group_key, []).append(unit)
+
+        ordered_groups = sorted(groups.values(), key=lambda group: min(unit.order for unit in group))
+        chosen: List[Any] = []
+        for group in ordered_groups:
+            pending: List[Any] = []
+            for unit in sorted(group, key=lambda candidate: candidate.order):
+                references = list(self.previous) + [candidate.text for candidate in chosen]
+                references.extend(candidate.text for candidate in pending)
+                if _is_redundant_evidence(unit.text, references)[0]:
+                    continue
+                pending.append(unit)
+            if not pending:
+                continue
+            # The cap is soft: stop only at a source-step boundary, never midway through a reversal or other list item.
+            if chosen and len(chosen) + len(pending) > WORKFLOW_ELABORATION_MAX_UNITS:
+                break
+            chosen.extend(pending)
+            if len(chosen) >= WORKFLOW_ELABORATION_MAX_UNITS:
+                break
+        return sorted(chosen, key=lambda unit: unit.order)
+
     def _choose(self, needs: Any, units: Sequence[Any], baseline: Sequence[Any], context: Any) -> List[Any]:
         """The sentences this intent wants, in document reading order (empty = nothing to add)."""
         weights = EV.focus_weights(needs, units)
+        process_question = EV.is_process_question(self.anchor or getattr(needs, "question", ""))
+        if self.intent == "elaborate" and process_question:
+            workflow_units = self._choose_workflow_groups(units)
+            if workflow_units:
+                return workflow_units
+
         scored: List[Tuple[float, Any]] = []
         for u in units:
             if not EV.unit_kinds_ok(u, needs):
@@ -596,6 +651,12 @@ class IntentExtractiveGenerator:
             score = EV.unit_score(u, needs, weights, frame_normalization=self.frame_normalization)
             if score > 0:
                 scored.append((score, u))
+        if self.intent == "elaborate":
+            # References and incomplete workflow framing must not set the relevance cutoff or fill the answer budget.
+            scored = [
+                (score, unit) for score, unit in scored
+                if not EV._is_answer_boilerplate(unit.text, process_question=process_question)
+            ]
         if not scored:
             return []
         best = max(s for s, _ in scored)

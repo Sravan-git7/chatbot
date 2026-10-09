@@ -514,7 +514,7 @@ class TopicConsistency(unittest.TestCase):
         generator = SimpleNamespace(name="extractive", generate=lambda *_: self.fail("mismatched topic must stop before generation"))
         retriever = SimpleNamespace()
         pipeline = RP.RagPipeline(
-            object(), retriever, SimpleNamespace(page_index=object()), corpus, generator, lambda _text: 1, cards=[card],
+            object(), retriever, SimpleNamespace(page_index=object(), topic_manifest={}), corpus, generator, lambda _text: 1, cards=[card],
             config=RP.PipelineConfig(rerank_router=False, code_aware_router=False),
         )
         with patch.object(RP, "route_to_page", return_value=route), \

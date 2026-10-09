@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from fastapi.testclient import TestClient
@@ -55,6 +56,29 @@ class HealthReadyTests(unittest.TestCase):
         self.assertEqual(data["generator"], "extractive")
         self.assertEqual(data["topics"], 29)
 
+    def test_build_service_fails_closed_for_missing_card_and_empty_page_stores(self):
+        class MissingCardStore:
+            @staticmethod
+            def health_check():
+                raise FileNotFoundError("card collection missing")
+
+        with patch("rag_pipeline.build_pipeline", return_value=SimpleNamespace(
+            backend=MissingCardStore(), retriever=SimpleNamespace(count=lambda: 1),
+        )):
+            with self.assertRaisesRegex(FileNotFoundError, "card collection missing"):
+                S.build_service()
+
+        class HealthyCardStore:
+            @staticmethod
+            def health_check():
+                return 29
+
+        with patch("rag_pipeline.build_pipeline", return_value=SimpleNamespace(
+            backend=HealthyCardStore(), retriever=SimpleNamespace(count=lambda: 0),
+        )):
+            with self.assertRaisesRegex(FileNotFoundError, "page vector collection is empty"):
+                S.build_service()
+
     def test_readiness_fails_when_service_not_initialized(self):
         app = rag_api.create_app(service_factory=lambda g: None, static_dir=Path("/nonexistent"))
         app.state.rag["service"] = None
@@ -83,6 +107,24 @@ class HealthReadyTests(unittest.TestCase):
             r = self.c.get("/ready")
             self.assertEqual(r.status_code, 503)
             self.assertEqual(r.json()["error"]["code"], "index_unavailable")
+
+    def test_readiness_fails_when_page_vector_collection_is_empty(self):
+        with patch.object(self.svc.pipeline.retriever, "count", return_value=0):
+            r = self.c.get("/ready")
+            self.assertEqual(r.status_code, 503)
+            self.assertEqual(r.json()["error"]["code"], "index_unavailable")
+
+    def test_readiness_fails_when_card_collection_is_missing(self):
+        class MissingCardStore:
+            @staticmethod
+            def health_check():
+                raise FileNotFoundError("card collection is missing")
+
+        with patch.object(self.svc.pipeline, "backend", MissingCardStore()):
+            r = self.c.get("/ready")
+            self.assertEqual(r.status_code, 503)
+            self.assertEqual(r.json()["error"]["code"], "service_not_ready")
+            self.assertIn("card collection is missing", r.json()["error"]["message"])
 
     def test_readiness_verifies_ollama_model_when_configured(self):
         class StubOllamaClient:

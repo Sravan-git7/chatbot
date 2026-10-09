@@ -469,6 +469,99 @@ class EvidenceQuality(unittest.TestCase):
         self.assertEqual(_reconstruct_sections(generator.last["presentation_sections"]), result.text)
 
 
+@unittest.skipUnless(HAVE_BS4 and HAVE_CHROMA, "bs4 / chromadb not installed")
+class LocalCorpusProcessElaborationTests(unittest.TestCase):
+    """Exercise production evidence generation on the saved corpus with deterministic fake stores/embeddings."""
+
+    QUESTION = "What is the invoicing process?"
+
+    @classmethod
+    def setUpClass(cls):
+        routed = make_pipeline(
+            RG.ExtractiveGenerator(),
+            ranking={cls.QUESTION: ["M2C-14"]},
+            config=S.production_pipeline_config(),
+        )
+        evidence_pipeline = EV.build_evidence_pipeline(
+            routed, tau=EV.SHIPPED_TAU, widen=False, generator="extractive",
+        )
+        cls.service = S.RagService(evidence_pipeline, "extractive")
+
+    def _assert_answer_is_grounded_and_cited(self, result):
+        self.assertEqual(result["metadata"]["card_id"], "M2C-14")
+        self.assertTrue(result["metadata"]["grounded"])
+        answer_markers = set(re.findall(r"\[(S\d+)\]", result["answer"]))
+        source_markers = {source.get("marker") for source in result["sources"]}
+        self.assertTrue(answer_markers)
+        self.assertEqual(answer_markers, source_markers)
+        self.assertEqual({source.get("source_id") for source in result["sources"]}, {"M2C-14"})
+        items = result["debug"]["pipeline"]["context"]["items"]
+        self.assertEqual(_verbatim_violations(result["answer"], items), [])
+        self.assertTrue((result["debug"]["evidence"] or {}).get("support_chain", {}).get("ok"))
+        if result["metadata"].get("follow_up_category") == "elaborate":
+            self.assertEqual(_reconstruct_sections(result["metadata"]["elaboration_sections"]), result["answer"])
+
+    def test_process_elaboration_keeps_unused_steps_and_reversal_sequence_then_exhausts(self):
+        conversation_id = "m2c14-process-elaboration"
+        base = self.service.ask(self.QUESTION, conversation_id=conversation_id, debug=True)
+        self.assertEqual(base["status"], ANSWERED)
+        self.assertEqual(base["metadata"]["card_id"], "M2C-14")
+        self._assert_answer_is_grounded_and_cited(base)
+
+        answers = [base]
+        seen_sentences = set(EL.sentences_of(base["answer"]))
+        exhausted = None
+        for _ in range(8):
+            result = self.service.ask("elaborate", conversation_id=conversation_id, debug=True)
+            if result["status"] != ANSWERED:
+                exhausted = result
+                break
+            self.assertEqual(result["metadata"]["follow_up_category"], "elaborate")
+            self._assert_answer_is_grounded_and_cited(result)
+            current_sentences = set(EL.sentences_of(result["answer"]))
+            self.assertFalse(seen_sentences & current_sentences, "elaboration repeated evidence already shown")
+            seen_sentences.update(current_sentences)
+            answers.append(result)
+        self.assertIsNotNone(exhausted, "the finite page corpus must reach its safe exhausted state")
+        self.assertEqual(exhausted["status"], NO_ADDITIONAL_VERIFIED_EVIDENCE)
+        self.assertFalse(exhausted["metadata"]["can_elaborate"])
+        self.assertEqual(exhausted["sources"], [])
+
+        all_elaboration_text = "\n".join(result["answer"] for result in answers[1:])
+        for unwanted in (
+            "Budget billing plans are processed.",
+            "In addition to these general activities, the following individual processing steps are useful:",
+            "The following diagram illustrates the process flow from billing through invoicing and invoice printout.",
+        ):
+            self.assertNotIn(unwanted, all_elaboration_text)
+        for useful in (
+            "To print the bill, you require the print document.",
+            "either the Partial Bill Creation function or the Budget Billing Request function",
+            "no postings occur in contract accounts receivable and payable",
+            "Postings do not take place until the bill is released using the Outsorting function.",
+            "In this way you create a reverse document in FI-CA.",
+            "This document clears the bill items in FI-CA, carries out offsetting entries, and creates a reverse print document.",
+            "To reverse billing documents that have been invoiced, you can use the Full Reversal function.",
+            "Invoicing reversal, therefore, is integrated with the Contract Billing (IS-U-BI) component.",
+        ):
+            self.assertIn(useful, all_elaboration_text)
+
+        reversal_sequence = (
+            "If bills are found to be incorrect",
+            "In this way you create a reverse document in FI-CA.",
+            "This document clears the bill items in FI-CA, carries out offsetting entries, and creates a reverse print document.",
+            "To reverse billing documents that have been invoiced, you can use the Full Reversal function.",
+            "Invoicing reversal, therefore, is integrated with the Contract Billing (IS-U-BI) component.",
+        )
+        positions = [all_elaboration_text.index(fact) for fact in reversal_sequence]
+        self.assertEqual(positions, sorted(positions))
+
+        repeated = self.service.ask("elaborate", conversation_id=conversation_id, debug=True)
+        self.assertEqual(repeated["status"], NO_ADDITIONAL_VERIFIED_EVIDENCE)
+        self.assertEqual(repeated["sources"], [])
+        self.assertEqual(repeated["debug"]["routing"]["mode"], "elaboration_exhausted")
+
+
 class PresentationSections(unittest.TestCase):
     def test_section_classification_is_deterministic_and_conservative(self):
         cases = (

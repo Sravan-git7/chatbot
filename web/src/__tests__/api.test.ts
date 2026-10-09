@@ -47,6 +47,17 @@ describe('api client', () => {
     expect(e.info.message).toContain('did not answer')
   })
 
+  it('timeout remains active while the response body is being read', async () => {
+    vi.stubGlobal('fetch', vi.fn((_u: string, init: RequestInit) => Promise.resolve({
+      json: () => new Promise((_resolve, reject) => {
+        init.signal!.addEventListener('abort', () => reject(new DOMException('aborted', 'AbortError')))
+      }),
+    } as unknown as Response)))
+    const e = await catchErr(sendChat('q', 'c', false, { timeoutMs: 20 }))
+    expect(e.info.kind).toBe('timeout')
+    expect(e.info.message).toContain('did not answer')
+  })
+
   it('API error envelope -> http error with a hint for the code', async () => {
     vi.stubGlobal('fetch', vi.fn(async () => json({ error: { code: 'service_not_ready', message: 'raw' } }, 503)))
     const e = await catchErr(sendChat('q', 'c', false))

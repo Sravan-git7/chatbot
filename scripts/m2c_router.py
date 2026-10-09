@@ -243,6 +243,28 @@ class ChromaCardBackend:
         self._collection = collection
         return collection
 
+    def health_check(self) -> int:
+        """Open and validate the read-only card collection without running a query or loading another model."""
+        try:
+            collection = self._open()
+            count = int(collection.count())
+        except CardStoreUnavailable:
+            raise
+        except Exception as e:
+            raise CardStoreUnavailable(f"card collection {self.collection_name!r} could not be counted: {e}") from e
+        if count < 1:
+            raise CardStoreUnavailable(f"collection {self.collection_name!r} is empty")
+        metadata = getattr(collection, "metadata", None) or {}
+        declared_count = metadata.get("unit_count", metadata.get("vector_count"))
+        if declared_count is not None:
+            try:
+                declared_count = int(declared_count)
+            except (TypeError, ValueError) as e:
+                raise CardStoreUnavailable(f"card collection {self.collection_name!r} has invalid declared unit_count {declared_count!r}") from e
+            if count != declared_count:
+                raise CardStoreUnavailable(f"card collection {self.collection_name!r} has {count} vectors, but metadata records {declared_count}")
+        return count
+
     def _embed(self, text: str) -> List[float]:
         if self._embedder is None:
             try:

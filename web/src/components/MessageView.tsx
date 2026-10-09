@@ -225,7 +225,7 @@ export default function MessageView({
           const markerMap = buildMarkerMap(visibleText, r.sources)
           return (
             <div className="animate-answer-reveal">
-              <h2 className="sr-only">{isElaboration ? 'Additional detail' : 'Answer'}</h2>
+              <h2 className="sr-only">Answer</h2>
               <StructuredAnswer
                 structuredAnswer={r.structured_answer}
                 fallbackAnswer={r.answer}
