@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Source, TopicReference } from '../types'
-import { citationDisplayMap, copyText, displayBreadcrumb, displayUrl, groupSources, isHttpUrl, orderSourceGroups } from '../util'
+import { citationDisplayMap, copyText, displayBreadcrumb, displayUrl, groupSources, isHttpUrl, normalizeDisplayText, orderSourceGroups } from '../util'
 
 export function sourceDomId(messageId: string, marker: string): string {
   return `src-${messageId}-${marker}`
@@ -45,6 +45,7 @@ export function Sources({
           const active = !!highlight && g.markers.includes(highlight)
           const hasValidUrl = isHttpUrl(g.url)
           const isCopied = hasValidUrl && copiedUrl === g.url
+          const displayTitle = normalizeDisplayText(g.title)
           const breadcrumb = displayBreadcrumb(g.section, g.title)
           return (
             <li
@@ -78,7 +79,7 @@ export function Sources({
                     })}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <div className="break-words font-semibold leading-snug text-stone-900 [overflow-wrap:anywhere]">{g.title}</div>
+                    <div className="break-words font-semibold leading-snug text-stone-900 [overflow-wrap:anywhere]">{displayTitle}</div>
                     {breadcrumb && (
                       <div className="mt-0.5 break-words text-[11px] leading-relaxed text-stone-500 [overflow-wrap:anywhere]">
                         {breadcrumb}

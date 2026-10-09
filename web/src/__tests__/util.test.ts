@@ -26,12 +26,14 @@ describe('safe source URLs', () => {
 })
 
 describe('conservative display normalization', () => {
-  it('fixes the known fused and stray whitespace artifacts without touching citations', () => {
+  it('separates fused metadata labels and fixes stray whitespace without touching citations', () => {
     expect(normalizeDisplayText('In Utilities,one contract account contains all contracts. [S1]'))
       .toBe('In Utilities, one contract account contains all contracts. [S1]')
     expect(normalizeDisplayText('Payments Posted Using Cash App . [S2]'))
       .toBe('Payments Posted Using Cash App. [S2]')
     expect(normalizeDisplayText('Utilities Industry (IS-U)Component [S3]'))
+      .toBe('Utilities Industry (IS-U) · Component [S3]')
+    expect(normalizeDisplayText('Utilities Industry (IS-U) Component [S3]'))
       .toBe('Utilities Industry (IS-U) Component [S3]')
     expect(normalizeDisplayText('A comma, followed by a space, remains unchanged. [S1]'))
       .toBe('A comma, followed by a space, remains unchanged. [S1]')
@@ -108,8 +110,16 @@ describe('citation labels and source identity', () => {
     expect(groupSources(sameLocation)).toHaveLength(2)
   })
 
-  it('cleans repeated breadcrumb artifacts and copies human-facing contiguous citation numbers', () => {
+  it('cleans repeated breadcrumb artifacts, separates fused labels, and handles empty paths', () => {
     expect(displayBreadcrumb('Billing Guide > Billing Guide > Overview > Overview', 'Billing Guide')).toBe('Overview')
+    expect(displayBreadcrumb('Contract Accounts > Utilities Industry (IS-U)Component > Overview > Overview', 'Contract Accounts'))
+      .toBe('Utilities Industry (IS-U) · Component > Overview')
+    expect(displayBreadcrumb('Contract Accounts > Contract Accounts', 'Contract Accounts')).toBeNull()
+    expect(displayBreadcrumb('  >   ', 'Contract Accounts')).toBeNull()
+    expect(displayBreadcrumb(null, 'Contract Accounts')).toBeNull()
+  })
+
+  it('copies human-facing contiguous citation numbers without changing source identities or links', () => {
     const copied = answerForClipboard('First fact [S8]. Second fact [S3].', [first, second])
     expect(copied).toContain('First fact [1]. Second fact [2].')
     expect(copied).toContain('[1] Billing Guide > Overview - https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/x/y.html')

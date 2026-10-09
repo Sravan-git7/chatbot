@@ -214,7 +214,7 @@ export function displayBreadcrumb(section: string | null | undefined, title: str
   const parts = section.split(/\s*>\s*/).map((part) => part.trim().replace(/\s+/g, ' ')).filter(Boolean)
   while (parts.length > 0 && parts[0].toLowerCase() === normalizedTitle) parts.shift()
   const cleaned = parts.filter((part, index) => index === 0 || part.toLowerCase() !== parts[index - 1].toLowerCase())
-  return cleaned.length ? cleaned.join(' > ') : null
+  return cleaned.length ? normalizeDisplayText(cleaned.join(' > ')) : null
 }
 
 /** Display-only contiguous citation labels; backend markers and source identities are never changed. */
@@ -255,16 +255,15 @@ export function isHttpUrl(url: string | null | undefined): url is string {
 }
 
 /**
- * Display-safe whitespace normalization for extracted documentation text. Source/evidence stays canonical and
- * backend citation validation operates on canonical spans; this only fixes clear extraction artifacts in display:
- * missing space after a comma, stray spaces before punctuation, and a word fused to a closing parenthesis.
- * Citation markers are not modified.
+ * Display-safe normalization for extracted documentation text. Source/evidence stays canonical and backend citation
+ * validation operates on canonical spans; this only fixes clear extraction artifacts in display: missing space after a
+ * comma, stray spaces before punctuation, and fused labels after a parenthetical code. Citation markers are untouched.
  */
 export function normalizeDisplayText(text: string): string {
   return (text ?? '')
     .replace(/,([A-Za-z])/g, ', $1')
     .replace(/\s+([,.!?:;])/g, '$1')
-    .replace(/\)([A-Z])/g, ') $1')
+    .replace(/\)([A-Z])/g, ') · $1')
 }
 
 /** Plain-text version of the displayed answer and its matching sources for the clipboard. */
@@ -280,7 +279,7 @@ export function answerForClipboard(answer: string, sources: Source[], displayMap
       .map((marker) => markerMap[marker] === undefined ? `[${marker}]` : `[${markerMap[marker]}]`)
       .join(' ')
     const breadcrumb = displayBreadcrumb(group.section, group.title)
-    return `${markers ? `${markers} ` : ''}${group.title}${breadcrumb ? ` > ${breadcrumb}` : ''}${group.url ? ` - ${group.url}` : ''}`
+    return `${markers ? `${markers} ` : ''}${normalizeDisplayText(group.title)}${breadcrumb ? ` > ${breadcrumb}` : ''}${group.url ? ` - ${group.url}` : ''}`
   })
   return `${displayAnswer}\n\nSources:\n${lines.join('\n')}`
 }

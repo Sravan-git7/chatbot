@@ -286,19 +286,20 @@ export default function MessageView({
                   <h3 className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-stone-500">
                     You might also want to know
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                     {followUps.map((q) => (
-                      <button
-                        key={q}
-                        type="button"
-                        disabled={disabled}
-                        onClick={() => onAskFollowUp(q)}
-                        className="inline-flex items-center rounded-lg border border-stone-200/90 bg-white px-3 py-1.5 text-left text-xs font-medium text-stone-700 shadow-2xs transition enabled:hover:border-accent enabled:hover:bg-accent-soft/40 enabled:hover:text-stone-900 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
-                      >
-                        {q}
-                      </button>
+                      <li key={q} className="min-w-0">
+                        <button
+                          type="button"
+                          disabled={disabled}
+                          onClick={() => onAskFollowUp(q)}
+                          className="flex w-full min-w-0 items-start rounded-lg border border-stone-200/90 bg-white px-3 py-2 text-left text-xs font-medium text-stone-700 shadow-2xs transition enabled:hover:border-accent enabled:hover:bg-accent-soft/40 enabled:hover:text-stone-900 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer whitespace-normal break-words [overflow-wrap:anywhere]"
+                        >
+                          {q}
+                        </button>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </section>
               )}
             </div>
