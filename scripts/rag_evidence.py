@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 11.1 - evidence sufficiency for the card-first RAG pipeline (opt-in building blocks; the default ``rag_pipeline`` is not modified).
+"""Phase 11.1 - deterministic evidence sufficiency and answer selection for the card-first RAG pipeline.
 
 Problem (Phase 11 E2E, see ``data/phase11_1_contract.md``): the extractive generator answers whenever *some* sentence shares >= 34 % of the question's terms. A page that
 discusses the topic but does not contain the asked detail therefore produced a related, misleading answer; and a sentence that merely overlaps was preferred to the sentence
@@ -32,7 +32,7 @@ import time
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_text as T  # noqa: E402
@@ -530,11 +530,42 @@ _DEFINITIONAL_EVIDENCE = re.compile(
     re.I,
 )
 _INDUSTRY_SCOPED_EVIDENCE = re.compile(r"\b(?:in\s+utilities|utilities\s+industry|IS\s*[-‐‑‒–—]?\s*U\b|ISU\b|SAP\s+Utilities)\b", re.I)
+_PROCESS_QUESTION = re.compile(r"\b(?:process(?:es)?|workflow|workflows|procedure|procedures|steps?|sequence)\b", re.I)
+_HOW_PROCEDURAL_QUESTION = re.compile(
+    r"^\s*how\b.*\b(?:work(?:s|ed|ing)?|handle(?:s|d|ing)?|creat(?:e|es|ed|ing)|perform(?:s|ed|ing)?|"
+    r"execut(?:e|es|ed|ing)|generat(?:e|es|ed|ing)|process(?:es|ed|ing)?|proceed(?:s|ed|ing)?|flow|done|"
+    r"carried\s+out|manag(?:e|es|ed|ing))\b",
+    re.I,
+)
+_WORKFLOW_HEADING = re.compile(r"\b(?:process(?:\s+flow)?|workflow|procedure|steps?|sequence)\b", re.I)
+_DIAGRAM_REFERENCE = re.compile(
+    r"\b(?:the\s+)?following\s+(?:diagram|figure|illustration|chart|image)\b|"
+    r"\b(?:diagram|figure|illustration|chart|image)\s+(?:below|above)?\s*(?:shows?|illustrates?|depicts?|presents?|describes?)\b|"
+    r"\bsee\s+(?:the\s+)?(?:diagram|figure|illustration|chart|image)\b",
+    re.I,
+)
+_WORKFLOW_LIST_LEADIN = re.compile(
+    r"\bthe\s+following\b.*\b(?:steps?|activities|tasks?)\b.*"
+    r"\b(?:are|is)\s+(?:useful|listed|described|given|provided|as\s+follows)\s*[:：.]?\s*$|"
+    r"\bthe\s+following\b.*\b(?:steps?|activities|tasks?)\s*[:：]\s*$",
+    re.I,
+)
+_VAGUE_PROCESSED_STATEMENT = re.compile(r"^\s*(?:[\w'-]+\s+){1,5}(?:is|are|was|were)\s+processed\s*[.!?]?\s*$", re.I)
+_BARE_SEQUENCE_MARKER = re.compile(r"^\s*\d{1,3}[.)]\s*$")
+_NUMBERED_SOURCE_LINE = re.compile(r"^\s*(?P<number>\d{1,3})[.)]\s+\S")
+_BULLET_SOURCE_LINE = re.compile(r"^\s*[-*•]\s+\S")
+
+
+def is_process_question(question: str) -> bool:
+    """Recognize explicit workflow questions and common ``How ... work/handled`` phrasings."""
+    text = str(question or "")
+    return bool(_PROCESS_QUESTION.search(text) or _HOW_PROCEDURAL_QUESTION.search(text))
 
 
 def is_definition_question(question: str) -> bool:
-    """True for definition-style questions ("What is X?", "What does X mean?", "Define X", "How is X defined?")."""
-    return bool(_DEFINITION_QUESTION.search(question or ""))
+    """True for concept definitions, not questions explicitly asking for a procedure or workflow."""
+    text = str(question or "")
+    return not is_process_question(text) and bool(_DEFINITION_QUESTION.search(text))
 
 
 def definition_rank(unit: Unit) -> int:
@@ -543,6 +574,230 @@ def definition_rank(unit: Unit) -> int:
     if not _DEFINITIONAL_EVIDENCE.search(text):
         return 2
     return 0 if _INDUSTRY_SCOPED_EVIDENCE.search(text) else 1
+
+
+def _is_answer_boilerplate(text: str, process_question: bool = False) -> bool:
+    """Generator-only suppression for cross-references and empty workflow framing.
+
+    This intentionally stays outside ``filter_quality_units`` because that shared filter also protects scoped
+    elaboration, whose behavior must remain unchanged.
+    """
+    clean = _QUALITY_CITE.sub("", str(text or "")).strip()
+    return bool(
+        _DIAGRAM_REFERENCE.search(clean)
+        or _WORKFLOW_LIST_LEADIN.search(clean)
+        or _BARE_SEQUENCE_MARKER.fullmatch(clean)
+        or (process_question and _VAGUE_PROCESSED_STATEMENT.fullmatch(clean))
+    )
+
+
+def _source_sequence_info(unit: Unit) -> Optional[Tuple[str, int]]:
+    """Return explicit numbered/bullet position for a sentence found in its original source line."""
+    sentence = quality_norm(getattr(unit, "text", ""))
+    if not sentence:
+        return None
+    for line in str(getattr(unit, "chunk_text", "") or "").splitlines():
+        if sentence not in quality_norm(line):
+            continue
+        numbered = _NUMBERED_SOURCE_LINE.match(line)
+        if numbered:
+            return "numbered", int(numbered.group("number"))
+        if _BULLET_SOURCE_LINE.match(line):
+            return "bullet", 0
+    return None
+
+
+def _has_workflow_heading(unit: Unit) -> bool:
+    labels = getattr(unit, "heading_labels", ()) or ()
+    if isinstance(labels, str):
+        labels = (labels,)
+    return bool(_WORKFLOW_HEADING.search(" ".join(str(label) for label in labels)))
+
+
+def _workflow_sequence_has_heading_support(unit: Unit, needs: QuestionNeeds) -> bool:
+    """A numbered sentence may be relevant through its explicit workflow section, not repeated query wording."""
+    if not _source_sequence_info(unit) or not _has_workflow_heading(unit):
+        return False
+    intent_terms = {stem2(term) for term in ("process", "workflow", "procedure", "step", "sequence", "flow")}
+    subject_terms = set(needs.focus) - intent_terms
+    labels = getattr(unit, "heading_labels", ()) or ()
+    if isinstance(labels, str):
+        labels = (labels,)
+    heading_terms = set(unit.head) | set(terms2(" ".join(str(label) for label in labels)))
+    return bool(subject_terms & heading_terms)
+
+
+def workflow_context_selection_key(question: str, hits: Sequence[Any]) -> Optional[Callable[[Any], Tuple[int, int]]]:
+    """Prioritize substantive ordered evidence for a workflow query before the fixed context cap.
+
+    Retrieval and reranking stay untouched. The normal rank order remains the tie-breaker, original ranks remain in
+    provenance, and presentation still follows document order. If no concrete numbered/bulleted evidence was retrieved,
+    return ``None`` so context assembly uses its exact default selection behavior.
+    """
+    if not is_process_question(question) or not hits:
+        return None
+
+    profiles: Dict[str, Dict[str, Any]] = {}
+    for hit in hits:
+        hit_id = str(getattr(hit, "chunk_id", ""))
+        raw_units = build_units([hit])
+        usable, _, _ = filter_quality_units(raw_units)
+        substantive = [
+            unit for unit in usable
+            if not _is_answer_boilerplate(unit.text, process_question=True)
+            and _has_explanatory_predicate(unit.text)
+        ]
+        sequence_kinds = [_source_sequence_info(unit) for unit in substantive]
+        labels = [getattr(hit, "title", ""), getattr(hit, "section_title", "")]
+        heading_path = getattr(hit, "heading_path", ()) or ()
+        labels.extend((heading_path,) if isinstance(heading_path, str) else heading_path)
+        label_text = " ".join(str(label) for label in labels if label)
+        profiles[hit_id] = {
+            "numbered": any(info and info[0] == "numbered" for info in sequence_kinds),
+            "bulleted": any(info and info[0] == "bullet" for info in sequence_kinds),
+            "workflow": bool(_WORKFLOW_HEADING.search(label_text)),
+            "overview": bool(re.search(r"\b(?:use|purpose|overview|introduction)\b", label_text, re.I)),
+            "result": bool(re.search(r"\b(?:result|outcome)\b", label_text, re.I)),
+            "substantive": bool(substantive),
+            "diagram": any(_DIAGRAM_REFERENCE.search(unit.text) for unit in raw_units),
+        }
+
+    numbered_present = any(profile["numbered"] for profile in profiles.values())
+    ordered_present = numbered_present or any(profile["bulleted"] for profile in profiles.values())
+    if not ordered_present:
+        return None
+
+    def priority(hit: Any) -> Tuple[int, int]:
+        profile = profiles.get(str(getattr(hit, "chunk_id", "")), {})
+        rank = int(getattr(hit, "rank", 0) or 0)
+        if profile.get("numbered"):
+            tier = 0
+        elif not numbered_present and profile.get("bulleted"):
+            tier = 0
+        elif profile.get("overview") and profile.get("substantive"):
+            tier = 1
+        elif profile.get("result") and profile.get("substantive"):
+            tier = 2
+        elif profile.get("bulleted"):
+            tier = 3
+        elif profile.get("workflow") and profile.get("substantive"):
+            tier = 4
+        elif profile.get("diagram") and not profile.get("substantive"):
+            tier = 9
+        else:
+            tier = 5
+        return tier, rank
+
+    return priority
+
+
+def _dedupe_answer_units(units: Sequence[Unit]) -> List[Unit]:
+    """Drop exact sentence repeats without merging distinct facts that happen to share topic vocabulary."""
+    seen = set()
+    out: List[Unit] = []
+    for unit in units:
+        key = quality_norm(unit.text)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        out.append(unit)
+    return out
+
+
+def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Unit], baseline: Sequence[Unit],
+                        tau: float = SHIPPED_TAU, frame_normalization: bool = False,
+                        max_sentences: int = EXTRACTIVE_MAX_SENTENCES) -> Tuple[List[Unit], Dict[str, Any]]:
+    """Select complete, useful evidence without altering the evidence-sufficiency decision.
+
+    The sufficiency and kind gates run first in ``assess``. This selector only chooses/reorders already grounded sentence
+    candidates; definition priority stays intact, process questions prefer documented steps in source order, and clearly
+    boilerplate is removed only when a stronger alternative exists. A scored fallback sentence is retained if pruning
+    would otherwise erase an otherwise-supported answer.
+    """
+    fallback = list(baseline[:1])
+    intent = "workflow" if is_process_question(question) else "definition" if is_definition_question(question) else "general"
+    if intent == "definition":
+        deduped = _dedupe_answer_units(baseline)
+        return deduped[:max_sentences] or fallback, {
+            "intent": intent, "candidate_count": len(baseline), "deduplicated_count": len(baseline) - len(deduped), "fallback": not bool(deduped),
+        }
+
+    weights = focus_weights(needs, units)
+    all_scored = [
+        (unit_score(unit, needs, weights, frame_normalization=frame_normalization), unit)
+        for unit in units if unit_kinds_ok(unit, needs)
+    ]
+    scored = [(score, unit) for score, unit in all_scored if score >= tau]
+    if not scored:
+        deduped = _dedupe_answer_units(baseline)
+        return deduped[:max_sentences] or fallback, {
+            "intent": intent, "candidate_count": 0, "deduplicated_count": len(baseline) - len(deduped), "fallback": True,
+        }
+
+    best = max(score for score, _ in scored)
+    cutoff = tau if intent == "workflow" else max(tau, KEEP_RATIO * best)
+    if intent == "workflow":
+        # A directly supported Process Flow heading can tie a numbered sentence to the query's subject even when the
+        # individual step does not repeat that noun (for example, “Once the contract is billed…” under Invoicing).
+        # This only affects sentence choice after the full-context sufficiency check has passed in ``assess``.
+        eligible = [
+            (score, unit) for score, unit in all_scored
+            if score >= cutoff or _workflow_sequence_has_heading_support(unit, needs)
+        ]
+    else:
+        eligible = [(score, unit) for score, unit in scored if score >= cutoff]
+    numbered_present = any(
+        (info := _source_sequence_info(unit)) is not None and info[0] == "numbered"
+        for _, unit in eligible
+    )
+    candidates: List[Tuple[int, float, Unit]] = []
+    for score, unit in eligible:
+        if _is_answer_boilerplate(unit.text, process_question=intent == "workflow"):
+            continue
+        if intent == "workflow":
+            sequence = _source_sequence_info(unit)
+            if sequence and sequence[0] == "numbered":
+                tier = 0
+            elif sequence and sequence[0] == "bullet":
+                tier = 3 if numbered_present else 0
+            elif _has_workflow_heading(unit) and _has_explanatory_predicate(unit.text):
+                tier = 2
+            else:
+                tier = 4
+            if not (_has_explanatory_predicate(unit.text) or sequence):
+                continue
+            candidates.append((tier, score, unit))
+        else:
+            candidates.append((0, score, unit))
+
+    if intent == "workflow":
+        candidates.sort(key=lambda entry: (entry[0], entry[2].order))
+    else:
+        candidates.sort(key=lambda entry: (-entry[1], entry[2].order))
+
+    selected: List[Unit] = []
+    seen = set()
+    for _tier, _score, unit in candidates:
+        key = quality_norm(unit.text)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        selected.append(unit)
+        if len(selected) >= max_sentences:
+            break
+
+    if not selected:
+        # Do not turn conservative suppression into a new abstention. Keep the highest-ranked sentence that already
+        # passed ``assess``; when the supported set is unexpectedly empty, retain the best scored candidate instead.
+        best_available = list(baseline[:1]) or [max(scored, key=lambda item: (item[0], -item[1].order))[1]]
+        selected = _dedupe_answer_units(best_available)[:1]
+        return selected, {
+            "intent": intent, "candidate_count": len(eligible), "deduplicated_count": 0, "fallback": True,
+        }
+
+    return sorted(selected, key=lambda unit: unit.order), {
+        "intent": intent, "candidate_count": len(eligible), "deduplicated_count": len(eligible) - len(selected), "fallback": False,
+    }
 
 
 USE_IDF = False                                             # iteration-2 ablation switch; OFF = shipped behaviour (IDF over-abstained on DEV2, see data/phase11_1_contract.md Amendment 2c)
@@ -686,9 +941,13 @@ class EvidenceExtractiveGenerator:
         if not decision.supported:
             self.last = record
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
+        chosen, answer_selection = select_answer_units(
+            question, needs, units, chosen, self.tau, frame_normalization=self.frame_normalization,
+        )
+        record["answer_selection"] = answer_selection
         if is_definition_question(question):
             # Definition-style answers display the definitional evidence first (industry-scoped definition ahead of
-            # generic evidence); every other question keeps document order.
+            # generic evidence); every other question keeps the source's document order.
             chosen = sorted(chosen, key=lambda u: (definition_rank(u), u.order))
         else:
             chosen = sorted(chosen, key=lambda u: u.order)
@@ -700,7 +959,9 @@ class EvidenceExtractiveGenerator:
             lines.append(f"{u.text} [{u.marker}]")
             if u.follow:
                 lines.append(f"{u.follow} [{u.marker}]")
-            record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text, "coverage": round(unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3), "kinds_ok": unit_kinds_ok(u, needs)})
+            record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text,
+                                        "coverage": round(unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3),
+                                        "kinds_ok": unit_kinds_ok(u, needs)})
         import rag_completeness as RC
         if RC.is_additional_evidence_enabled():
             add_ev = RC.extract_additional_evidence(

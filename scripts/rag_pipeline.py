@@ -667,7 +667,21 @@ class RagPipeline:
 
         # ---- 6. context -------------------------------------------------------------------------------------------
         t = time.perf_counter()
-        context = build_context(hits, self.count_tokens, self.cfg.context_budget_tokens, self.cfg.max_context_chunks)
+        selection_key = None
+        if expected_topic is None and getattr(self.generator, "name", "") == "extractive":
+            # Keep the fixed chunk/token caps and retrieval ranks, but let deterministic extractive workflow answers
+            # retain substantive ordered evidence that otherwise falls just beyond the ordinary rank-based cap.
+            import rag_evidence as EV
+            selection_key = EV.workflow_context_selection_key(query, hits)
+            if selection_key is not None:
+                dbg["context_selection"] = {"strategy": "ordered_workflow_evidence", "max_chunks": self.cfg.max_context_chunks}
+        if selection_key is None:
+            context = build_context(hits, self.count_tokens, self.cfg.context_budget_tokens, self.cfg.max_context_chunks)
+        else:
+            context = build_context(
+                hits, self.count_tokens, self.cfg.context_budget_tokens, self.cfg.max_context_chunks,
+                selection_key=selection_key,
+            )
         timings["context_ms"] = (time.perf_counter() - t) * 1000
         dbg["context"] = context.to_dict(with_text=True)
         ctx_text = "\n".join(f"{' '.join(i.heading_path)} {i.rendered_text}" for i in context.items)

@@ -4,10 +4,12 @@ from __future__ import annotations
 import sys
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import rag_context as RC  # noqa: E402
 import rag_elaborate as EL  # noqa: E402
 import rag_evidence as EV  # noqa: E402
 import rag_generate as RG  # noqa: E402
@@ -208,13 +210,22 @@ class DefinitionFirstOrdering(unittest.TestCase):
     def test_definition_questions_are_detected_and_others_are_not(self):
         for question in ("What is a contract account?", "What are clearing types?", "What does a clearing type represent?",
                          "Define the contract account.", "How is a contract account defined in SAP Utilities?",
-                         "What's the invoicing process?", "What is the meaning of dunning?"):
+                         "What is the meaning of dunning?"):
             with self.subTest(question=question):
                 self.assertTrue(EV.is_definition_question(question), question)
         for question in ("How does billing work?", "Can a single contract account be assigned to multiple business partners in Utilities?",
-                         "What happens when a new customer moves in?", "Why is billing important?"):
+                         "What happens when a new customer moves in?", "Why is billing important?",
+                         "What's the invoicing process?", "What is the invoicing process?"):
             with self.subTest(question=question):
                 self.assertFalse(EV.is_definition_question(question), question)
+
+    def test_process_questions_are_distinguished_from_concept_definitions(self):
+        for question in ("What is the invoicing process?", "What's the invoicing process?", "How does billing work?",
+                         "How are bills processed?"):
+            with self.subTest(question=question):
+                self.assertTrue(EV.is_process_question(question), question)
+                self.assertFalse(EV.is_definition_question(question), question)
+        self.assertFalse(EV.is_process_question("What is a contract account?"))
 
     def test_definition_rank_prefers_industry_scoped_definitions(self):
         isu = self._unit(1, "S1", "In Utilities, one contract account contains all those contracts belonging to one business partner.")
@@ -262,6 +273,122 @@ class DefinitionFirstOrdering(unittest.TestCase):
         for line in result.text.split("\n"):
             self.assertRegex(line, r"\[S1\]$")
         self.assertTrue(EV.verify_support_chain(result.text, _Context([item]))["ok"])
+
+
+class WorkflowContextSelection(unittest.TestCase):
+    @staticmethod
+    def _hit(rank, chunk_id, chunk_index, heading_path, section_title, text):
+        return SimpleNamespace(
+            rank=rank, chunk_id=chunk_id, guide_id="guide", page_id="page", source_url="https://example.test/page",
+            title="Invoicing Procedure", heading_path=tuple(heading_path), section_title=section_title,
+            chunk_index=chunk_index, chunk_count=8, content_hash=chunk_id, distance=0.2, similarity=0.8, text=text,
+        )
+
+    def test_workflow_evidence_can_survive_the_rank_cap_without_changing_default_selection(self):
+        hits = [
+            self._hit(1, "overview", 0, ("Invoicing Procedure", "Use"), "Use",
+                      "Invoicing creates the link to contract accounting and provides the basis for bill creation."),
+            self._hit(2, "diagram", 4, ("Invoicing Procedure", "Process Flow"), "Process Flow",
+                      "The following diagram illustrates the process flow from billing through invoicing and invoice printout."),
+            self._hit(3, "result", 5, ("Invoicing Procedure", "Result"), "Result",
+                      "The contract accounting document records invoice postings for the billed contracts."),
+            self._hit(4, "exceptions", 3, ("Invoicing Procedure", "Process Flow"), "Process Flow",
+                      "- If bills are found to be incorrect, you must process them using the Bill Reversal function."),
+            self._hit(5, "workflow-steps", 2, ("Invoicing Procedure", "Process Flow"), "Process Flow",
+                      "1. Once the contract is billed, you start bill creation.\n"
+                      "2. Invoicing with Bill Creation results in a print document and a contract accounting document."),
+        ]
+
+        key = EV.workflow_context_selection_key("What is the invoicing process?", hits)
+        self.assertIsNotNone(key)
+        context = RC.build_context(hits, lambda text: len(text.split()), budget_tokens=1000, max_chunks=4, selection_key=key)
+        selected_ids = [item.chunk_id for item in context.items]
+        self.assertIn("workflow-steps", selected_ids)
+        self.assertNotIn("diagram", selected_ids)
+        self.assertEqual([item.chunk_index for item in context.items], sorted(item.chunk_index for item in context.items))
+        self.assertIn({"chunk_id": "diagram", "reason": "max_chunks"}, context.dropped)
+
+        # Non-workflow questions keep the existing rank-first context behavior.
+        self.assertIsNone(EV.workflow_context_selection_key("What is invoicing?", hits))
+        baseline_context = RC.build_context(hits, lambda text: len(text.split()), budget_tokens=1000, max_chunks=4)
+        self.assertNotIn("workflow-steps", {item.chunk_id for item in baseline_context.items})
+
+
+class AnswerSelectionQuality(unittest.TestCase):
+    def test_workflow_selection_suppresses_boilerplate_and_preserves_supported_source_order(self):
+        workflow = (
+            "1. Once the contract is billed, you start bill creation. "
+            "You must release the documents previously outsorted during billing checks.\n"
+            "2. Invoicing with Bill Creation results in a print document and a contract accounting document.\n"
+            "3. To print the bill, you require the print document. When you execute the function, you specify the output type as a print parameter."
+        )
+        diagram = "The following diagram illustrates the process flow from billing through invoicing and invoice printout."
+        leadin = "In addition to these general activities, the following individual processing steps are useful:"
+        generic = "Budget billing plans are processed."
+        context = _Context([
+            _Item("S1", "overview", 1, "Invoicing creates the link to contract accounting and provides the basis for bill creation. " + generic,
+                  "Invoicing Procedure > Use"),
+            _Item("S2", "diagram", 2, diagram, "Invoicing Procedure > Process Flow"),
+            _Item("S3", "workflow", 3, workflow, "Invoicing Procedure > Process Flow"),
+            _Item("S4", "exceptions", 4, leadin + "\n- If bills are found to be incorrect, you must process them using the Bill Reversal function.",
+                  "Invoicing Procedure > Process Flow"),
+        ])
+        result = EV.EvidenceExtractiveGenerator(tau=EV.SHIPPED_TAU).generate("What is the invoicing process?", context)
+
+        self.assertFalse(result.refused)
+        self.assertIn("Once the contract is billed, you start bill creation.", result.text)
+        self.assertIn("You must release the documents previously outsorted during billing checks.", result.text)
+        self.assertIn("Invoicing with Bill Creation results in a print document and a contract accounting document.", result.text)
+        self.assertNotIn(diagram, result.text)
+        self.assertNotIn(leadin, result.text)
+        self.assertNotIn(generic, result.text)
+        ordered_facts = [
+            "Once the contract is billed, you start bill creation.",
+            "You must release the documents previously outsorted during billing checks.",
+            "Invoicing with Bill Creation results in a print document and a contract accounting document.",
+        ]
+        positions = [result.text.index(fact) for fact in ordered_facts]
+        self.assertEqual(positions, sorted(positions))
+        self.assertEqual(result.evidence["answer_selection"]["intent"], "workflow")
+
+        # The re-ordered answer stays verbatim, and every selected marker still names its source chunk.
+        self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
+        report = RG.verify_grounding(result.text, context, in_page_grounding=True, citation_normalization=True)
+        self.assertTrue(report.ok, report.to_dict())
+        by_text = {unit.text: unit for unit in EV.build_units(context.items)}
+        selected_units = [by_text[row["sentence"]] for row in result.evidence["selected"]]
+        source_steps = [EV._source_sequence_info(unit) for unit in selected_units]
+        self.assertEqual([step[1] for step in source_steps if step], [1, 1, 2])
+        self.assertEqual({row["marker"] for row in result.evidence["selected"]}, {"S3"})
+
+    def test_exact_overlap_is_deduplicated_without_losing_distinct_facts_across_chunks(self):
+        repeated = "A cashier can assign a payment lot to a contract account."
+        first = "Incoming payment lots group payments awaiting clarification."
+        third = "The lot records when the payments were processed."
+        context = _Context([
+            _Item("S1", "lot-a", 1, first + " " + repeated, "Payment Lot"),
+            _Item("S2", "lot-b", 2, repeated + " " + third, "Payment Lot"),
+        ])
+        result = EV.EvidenceExtractiveGenerator(tau=EV.SHIPPED_TAU).generate("Explain payment lot handling.", context)
+
+        self.assertFalse(result.refused)
+        self.assertIn(first, result.text)
+        self.assertIn(repeated, result.text)
+        self.assertIn(third, result.text)
+        self.assertEqual(result.text.count(repeated), 1)
+        self.assertEqual({row["marker"] for row in result.evidence["selected"]}, {"S1", "S2"})
+        self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
+        self.assertTrue(RG.verify_grounding(result.text, context).ok)
+
+    def test_best_supported_sentence_is_retained_when_quality_suppression_has_no_alternative(self):
+        only_evidence = "The following diagram illustrates the process flow from billing through invoicing and invoice printout."
+        context = _Context([_Item("S1", "diagram-only", 1, only_evidence, "Invoicing Procedure > Process Flow")])
+        result = EV.EvidenceExtractiveGenerator(tau=EV.SHIPPED_TAU).generate("What is the invoicing process?", context)
+
+        self.assertFalse(result.refused)
+        self.assertIn(only_evidence, result.text)
+        self.assertTrue(result.evidence["answer_selection"]["fallback"])
+        self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
 
 
 if __name__ == "__main__":

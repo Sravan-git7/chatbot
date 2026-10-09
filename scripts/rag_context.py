@@ -6,9 +6,10 @@ fit the token budget, labelled ``S1..Sn`` in reading order, with full provenance
 * dedup: identical ``content_hash`` or a chunk whose text is contained in an already selected chunk is dropped (``duplicate``);
 * overlap: if a selected chunk repeats the first line(s) of the previous chunk of the same page (the chunker's sentence overlap), the
   repeated prefix is removed from the RENDERED text only (``text`` keeps the original, ``rendered_text`` is what the model sees);
-* budget: chunks are taken in retrieval-rank order until adding the next would exceed ``budget_tokens`` (``budget``); at most
-  ``max_chunks`` are taken. The top-ranked chunk is always kept if it alone fits the budget; if it does not, it is kept anyway and
-  flagged ``truncated_by_budget=False``/``over_budget=True`` - nothing is cut silently;
+* budget: chunks are taken in retrieval-rank order by default until adding the next would exceed ``budget_tokens`` (``budget``); at most
+  ``max_chunks`` are taken. An optional deterministic ``selection_key`` may prioritize query-appropriate evidence without changing
+  the source rank recorded on each chunk. The first selected chunk is always kept if it alone exceeds the budget and is flagged
+  ``over_budget=True`` - nothing is cut silently;
 * order: selected chunks are shown in document order (``chunk_index``), because the pages are procedures and descriptions that read
   top to bottom; the retrieval rank stays in the provenance;
 * the prompt never contains a URL, a card, or an identifier other than the markers.
@@ -98,12 +99,18 @@ def _strip_overlap(text: str, prev_text: Optional[str]) -> str:
 
 
 def build_context(hits: Sequence[Any], count_tokens: Callable[[str], int], budget_tokens: int = DEFAULT_BUDGET_TOKENS,
-                  max_chunks: int = DEFAULT_MAX_CHUNKS) -> ContextBlock:
+                  max_chunks: int = DEFAULT_MAX_CHUNKS,
+                  selection_key: Optional[Callable[[Any], Any]] = None) -> ContextBlock:
+    """Select chunks under the usual limits; ``selection_key`` optionally changes only selection priority.
+
+    Presentation remains in document order, and every item's original retrieval rank is retained for provenance. With no
+    key supplied, the shipped retrieval-rank selection order is unchanged.
+    """
     block = ContextBlock(budget_tokens=budget_tokens)
     selected: List[Any] = []
     seen_hash = set()
     used = 0
-    for h in sorted(hits, key=lambda x: x.rank):
+    for h in sorted(hits, key=selection_key or (lambda x: x.rank)):
         if h.content_hash in seen_hash or any(_norm(h.text) in _norm(s.text) for s in selected):
             block.dropped.append({"chunk_id": h.chunk_id, "reason": "duplicate"})
             continue
