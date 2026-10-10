@@ -44,6 +44,7 @@ ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE = "answered", "documen
 # It is deliberately NOT unable_to_verify (nothing failed to verify) and NOT documentation_unavailable (the page is
 # not missing), so the response never claims that a used page is absent from the knowledge base.
 NO_ADDITIONAL_VERIFIED_EVIDENCE = "no_additional_verified_evidence"
+ELABORATION_EXHAUSTED_MODE = "elaboration_exhausted"       # routing.mode for an exhausted scoped elaboration
 ELABORATION_CONTEXT_MISSING = "ELABORATION_CONTEXT_MISSING"
 ELABORATION_CONTEXT_MISSING_TEXT = "Please share the SAP Utilities topic or original question you'd like me to elaborate on."
 API_STATUSES = (ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE, NO_ADDITIONAL_VERIFIED_EVIDENCE)
@@ -208,6 +209,16 @@ class GeneratorGuard:
 
 def _safe_url(url: Any) -> Optional[str]:
     return url if isinstance(url, str) and re.match(r"^https?://", url) else None
+
+
+def _exhausted_routing(routing: Any) -> Dict[str, Any]:
+    """Routing metadata for a scoped elaboration with no additional verified evidence.
+
+    The routed source is kept (the topic is still the one that was answered); only the mode records the exhaustion.
+    """
+    out = dict(routing) if isinstance(routing, Mapping) else {}
+    out["mode"] = ELABORATION_EXHAUSTED_MODE
+    return out
 
 
 def _source(s: Mapping[str, Any]) -> Dict[str, Any]:
@@ -563,7 +574,7 @@ class RagService:
                     "corpus_status": "ingested",
                 },
                 "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
-                "routing": {"selected_source_id": identity.get("source_id"), "candidates": [], "mode": "elaboration_exhausted"},
+                "routing": {"selected_source_id": identity.get("source_id"), "candidates": [], "mode": ELABORATION_EXHAUSTED_MODE},
                 "debug": {},
                 "timings_ms": {},
             }
@@ -660,6 +671,7 @@ class RagService:
                         answer=None,
                         reason_code="NO_ADDITIONAL_SUPPORTED_DETAILS",
                         citations={"answer_sources": []},
+                        routing=_exhausted_routing(raw.get("routing")),
                     )
                     if evidence is not None:
                         evidence["final_novelty_check"] = {"ok": False}
@@ -672,6 +684,7 @@ class RagService:
                     answer=None,
                     reason_code="NO_ADDITIONAL_SUPPORTED_DETAILS",
                     citations={"answer_sources": []},
+                    routing=_exhausted_routing(raw.get("routing")),
                 )
                 if evidence is not None:
                     evidence.setdefault("final_novelty_check", {"ok": False})
