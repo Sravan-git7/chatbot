@@ -37,6 +37,8 @@ export interface StructuredSection {
   lines?: string[]
   content?: string
   citations?: string[]
+  /** UI-only hint for semantically grouped elaboration lines that recur later in source order. */
+  showTitle?: boolean
 }
 
 export interface StructuredAnswer {

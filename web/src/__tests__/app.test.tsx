@@ -435,6 +435,66 @@ describe('answers', () => {
     expect(copied.indexOf('[1] Source Four')).toBeLessThan(copied.indexOf('[2] Source Two'))
   })
 
+  it('keeps answer controls separated and aligns citation numbers, source counts, and copied evidence', async () => {
+    const sharedSource = {
+      ...SOURCE,
+      marker: 'S2',
+      title: 'Invoicing Procedure',
+      section: 'Process Flow',
+      source_id: 'M2C-14',
+      url: 'https://help.sap.com/invoicing',
+    }
+    const secondCitation = { ...sharedSource, marker: 'S4', chunk_id: 'process-flow-2' }
+    const unusedSource = {
+      ...SOURCE,
+      marker: 'S8',
+      title: 'Budget Billing Plan',
+      source_id: 'M2C-15',
+      url: 'https://help.sap.com/budget-billing',
+    }
+    const textOne = '1. The bill is released after checks. [S4]'
+    const textTwo = 'Invoicing creates a print document and a contract accounting document. [S2]'
+    stubBackend(() => json(result({
+      answer: `${textTwo}\n${textOne}`,
+      sources: [sharedSource, secondCitation, unusedSource],
+      structured_answer: {
+        summary: textOne,
+        sections: [
+          { title: 'First', key: 'first', content: textOne, lines: [textOne], citations: ['S4'] },
+          { title: 'Second', key: 'second', content: textTwo, lines: [textTwo], citations: ['S2'] },
+        ],
+        citations: ['S4', 'S2'],
+      },
+    })))
+    const writeText = vi.fn(async () => {})
+    vi.stubGlobal('navigator', { ...navigator, clipboard: { writeText } })
+    render(<App />)
+    await userEvent.type(composer(), 'What is the invoicing process?{Enter}')
+
+    const message = await screen.findByTestId('assistant-message')
+    const actions = within(message).getByRole('group', { name: 'Answer actions' })
+    expect(within(actions).getByRole('button', { name: 'Copy answer' })).toBeInTheDocument()
+    expect(within(actions).getByRole('button', { name: 'Elaborate' })).toBeInTheDocument()
+    expect(actions).toHaveClass('flex-wrap', 'gap-x-3', 'gap-y-2')
+    expect(within(actions).getByTestId('answer-action-separator')).toHaveClass('h-4', 'w-px', 'shrink-0')
+
+    const sourcesRegion = within(message).getByRole('region', { name: 'Sources' })
+    expect(sourcesRegion).toHaveTextContent('Sources · 1 document · 2 citations')
+    const sourceCard = within(sourcesRegion).getByTestId('source-item')
+    expect(within(sourceCard).getByText('1')).toBeInTheDocument()
+    expect(within(sourceCard).getByText('2')).toBeInTheDocument()
+    expect(within(sourcesRegion).queryByText('Budget Billing Plan')).not.toBeInTheDocument()
+
+    await userEvent.click(within(actions).getByRole('button', { name: 'Copy answer' }))
+    await waitFor(() => expect(writeText).toHaveBeenCalled())
+    const copied = (writeText.mock.calls[0] as unknown as [string])[0]
+    expect(copied).toContain(`${textOne.replace('[S4]', '[1]')}\n${textTwo.replace('[S2]', '[2]')}`)
+    expect(copied).toContain('Sources:')
+    expect(copied).not.toMatch(/Copy answer|Elaborate|Budget Billing Plan|budget-billing/)
+    await screen.findByText('Copied')
+    await waitFor(() => expect(within(actions).getByText('Copy answer')).toBeInTheDocument(), { timeout: 2500 })
+  })
+
   it('copies the answer together with its sources', async () => {
     stubBackend(() => json(result()))
     const writeText = vi.fn(async () => {})

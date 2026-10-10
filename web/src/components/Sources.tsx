@@ -17,8 +17,13 @@ export function Sources({
   markerMap?: Record<string, number>
   highlight?: string | null
 }) {
-  const displayMap = markerMap ?? citationDisplayMap('', sources)
+  const sourceMarkers = sources.map((source) => source.marker ? `[${source.marker}]` : '').join(' ')
+  const displayMap = markerMap ?? citationDisplayMap(sourceMarkers, sources)
   const groups = orderSourceGroups(groupSources(sources), displayMap)
+  const documentCount = new Set(sources.map((source, index) =>
+    source.source_id?.trim() || source.url || `source-${index}`,
+  )).size
+  const citationCount = new Set(sources.map((source) => source.marker).filter((marker): marker is string => !!marker)).size
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null)
 
   if (!groups.length) return null
@@ -34,7 +39,8 @@ export function Sources({
     <section aria-label="Sources" className="mt-6 sm:mt-7 sura-sources-reveal">
       <div className="mb-2.5 flex items-center justify-between">
         <h3 className="text-[11px] font-semibold uppercase tracking-wider text-stone-700">
-          Sources · {groups.length}
+          Sources · {documentCount} {documentCount === 1 ? 'document' : 'documents'} · {citationCount}{' '}
+          {citationCount === 1 ? 'citation' : 'citations'}
         </h3>
         <span className="text-[11px] font-medium text-stone-600">
           SAP Help Portal

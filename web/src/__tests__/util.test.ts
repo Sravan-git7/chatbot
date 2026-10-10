@@ -9,6 +9,7 @@ import {
   isHttpUrl,
   normalizeDisplayText,
   orderSourceGroups,
+  sourcesCitedInAnswer,
 } from '../util'
 import { EXAMPLE_PROMPTS } from '../components/Welcome'
 import type { Source } from '../types'
@@ -93,6 +94,15 @@ describe('citation labels and source identity', () => {
     const sources = [first, second]
     expect(citationDisplayMap('First fact [S8]. Second fact [S3].', sources)).toEqual({ S8: 1, S3: 2 })
     expect(sources.map((source) => source.marker)).toEqual(['S8', 'S3'])
+  })
+
+  it('does not number or copy a backend source that the displayed answer did not cite', () => {
+    expect(citationDisplayMap('Only this fact [S8].', [first, second])).toEqual({ S8: 1 })
+    expect(sourcesCitedInAnswer('Only this fact [S8].', [first, second])).toEqual([first])
+    const copied = answerForClipboard('Only this fact [S8].', [first, second])
+    expect(copied).toContain('Only this fact [1].')
+    expect(copied).toContain('Billing Guide')
+    expect(copied).not.toContain('Automatic Billing')
   })
 
   it('orders source cards and markers by the visible answer citation order', () => {

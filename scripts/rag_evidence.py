@@ -181,6 +181,8 @@ class Unit:
     follow: Optional[str] = None                # the sentence after a list introduction ending in ":"
     chunk_text: str = ""
     heading_labels: Tuple[str, ...] = ()           # page/section labels used by shared evidence-quality checks
+    source_line: str = ""                         # exact line in this chunk (sequence detection must not search unrelated lines)
+    source_line_index: int = -1
 
     def full_text(self) -> str:
         return " ".join(x for x in (self.prev_line, self.text) if x)
@@ -230,7 +232,7 @@ def build_units(items: Sequence[Any]) -> List[Unit]:
                         prev = pl
                 follow = sents[si + 1] if s.rstrip().endswith(":") and si + 1 < len(sents) else None
                 units.append(Unit(marker, it.chunk_id, int(getattr(it, "rank", 0)), order, s, frozenset(terms2(s)), head,
-                                  prev, follow, it.text, heading_labels))
+                                  prev, follow, it.text, heading_labels, line, li))
     return units
 
 
@@ -553,7 +555,9 @@ _WORKFLOW_LIST_LEADIN = re.compile(
 _VAGUE_PROCESSED_STATEMENT = re.compile(r"^\s*(?:[\w'-]+\s+){1,5}(?:is|are|was|were)\s+processed\s*[.!?]?\s*$", re.I)
 _BARE_SEQUENCE_MARKER = re.compile(r"^\s*\d{1,3}[.)]\s*$")
 _NUMBERED_SOURCE_LINE = re.compile(r"^\s*(?P<number>\d{1,3})[.)]\s+\S")
+_NUMBERED_SOURCE_PREFIX = re.compile(r"^\s*(?P<number>\d{1,3})[.)]\s+")
 _BULLET_SOURCE_LINE = re.compile(r"^\s*[-*•]\s+\S")
+_BULLET_SOURCE_PREFIX = re.compile(r"^\s*[-*•]\s+")
 
 
 def is_process_question(question: str) -> bool:
@@ -592,17 +596,38 @@ def _is_answer_boilerplate(text: str, process_question: bool = False) -> bool:
 
 
 def _source_sequence_info(unit: Unit) -> Optional[Tuple[str, int]]:
-    """Return explicit numbered/bullet position for a sentence found in its original source line."""
+    """Return sequence position only when this unit belongs to that exact numbered/bulleted source line.
+
+    Searching for a sentence as an arbitrary substring of the whole chunk is unsafe: a short heading such as ``Use``
+    can otherwise match the word "use" in a later step, and ``Result`` can match "results" in an earlier one. The
+    ``source_line`` recorded by ``build_units`` disambiguates repeated words; the chunk scan is only a compatibility
+    fallback for hand-built units in tests and older callers.
+    """
     sentence = quality_norm(getattr(unit, "text", ""))
     if not sentence:
         return None
-    for line in str(getattr(unit, "chunk_text", "") or "").splitlines():
-        if sentence not in quality_norm(line):
-            continue
+    source_line = str(getattr(unit, "source_line", "") or "")
+    lines = [source_line] if source_line else str(getattr(unit, "chunk_text", "") or "").splitlines()
+    for line in lines:
         numbered = _NUMBERED_SOURCE_LINE.match(line)
+        bullet = _BULLET_SOURCE_LINE.match(line)
         if numbered:
+            prefix = _NUMBERED_SOURCE_PREFIX.match(line)
+            if not prefix:
+                continue
+            body = line[prefix.end():]
+            sentence_parts = {quality_norm(part) for part in T.split_sentences(body)}
+            if sentence not in sentence_parts:
+                continue
             return "numbered", int(numbered.group("number"))
-        if _BULLET_SOURCE_LINE.match(line):
+        if bullet:
+            prefix = _BULLET_SOURCE_PREFIX.match(line)
+            if not prefix:
+                continue
+            body = line[prefix.end():]
+            sentence_parts = {quality_norm(part) for part in T.split_sentences(body)}
+            if sentence not in sentence_parts:
+                continue
             return "bullet", 0
     return None
 

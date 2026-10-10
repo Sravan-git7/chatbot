@@ -218,20 +218,22 @@ export function displayBreadcrumb(section: string | null | undefined, title: str
 }
 
 /** Display-only contiguous citation labels; backend markers and source identities are never changed. */
+export function sourcesCitedInAnswer(answer: string, sources: Source[]): Source[] {
+  const cited = new Set(Array.from((answer ?? '').matchAll(/\[(S\d+)\]/g), (match) => match[1]))
+  return sources.filter((source) => !!source.marker && cited.has(source.marker))
+}
+
 export function citationDisplayMap(text: string, sources?: Source[]): Record<string, number> {
   const map: Record<string, number> = {}
   const allowed = sources ? new Set(sources.map((source) => source.marker).filter((marker): marker is string => !!marker)) : null
   let count = 1
-  const add = (marker: string) => {
-    if ((allowed && !allowed.has(marker)) || map[marker] !== undefined) return
-    map[marker] = count++
-  }
   const regex = /\[(S\d+)\]/g
   let match: RegExpExecArray | null
-  while ((match = regex.exec(text)) !== null) add(match[1])
-  // A backend source can be valid even if a structured display block omits its marker. Keep it discoverable and
-  // contiguous after the markers that are visible in the answer.
-  sources?.forEach((source) => { if (source.marker) add(source.marker) })
+  while ((match = regex.exec(text)) !== null) {
+    const marker = match[1]
+    if ((allowed && !allowed.has(marker)) || map[marker] !== undefined) continue
+    map[marker] = count++
+  }
   return map
 }
 
@@ -268,11 +270,12 @@ export function normalizeDisplayText(text: string): string {
 
 /** Plain-text version of the displayed answer and its matching sources for the clipboard. */
 export function answerForClipboard(answer: string, sources: Source[], displayMap?: Record<string, number>): string {
-  const markerMap = displayMap ?? citationDisplayMap(answer, sources)
+  const citedSources = sourcesCitedInAnswer(answer, sources)
+  const markerMap = displayMap ?? citationDisplayMap(answer, citedSources)
   const displayAnswer = normalizeDisplayText(answer).replace(/\[(S\d+)\]/g, (marker, id: string) =>
     markerMap[id] === undefined ? marker : `[${markerMap[id]}]`,
   )
-  const groups = orderSourceGroups(groupSources(sources), markerMap)
+  const groups = orderSourceGroups(groupSources(citedSources), markerMap)
   if (!groups.length) return displayAnswer
   const lines = groups.map((group) => {
     const markers = group.markers

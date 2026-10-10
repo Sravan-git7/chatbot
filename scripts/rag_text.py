@@ -53,13 +53,25 @@ def split_sentences(text: str) -> List[str]:
 
 
 _CITED_SENT = re.compile(r'.+?[.!?](?:\s*\[S\d+\])*(?=\s+[A-Z0-9("“‘\-]|\s*$)|.+$')
+_CITED_LIST_PREFIX = re.compile(r"^(?P<prefix>\s*\d{1,3}[.)]\s+)")
 
 
 def split_cited_sentences(text: str) -> List[str]:
-    """Like ``split_sentences`` but a trailing ``[S#]`` marker stays with the sentence it follows (the verifier needs that pairing)."""
+    """Split cited prose while keeping list numbering and each sentence's trailing citation attached.
+
+    A numbered-list prefix such as ``1.`` is formatting, not a sentence. Strip it while splitting and reattach it to
+    the first fact so grounding checks still see the source's exact list item instead of a phantom uncited ``1.``.
+    """
     out: List[str] = []
-    for line in (text or "").split("\n"):
-        line = line.strip()
-        if line:
-            out += [m.group(0).strip() for m in _CITED_SENT.finditer(line) if m.group(0).strip()]
+    for raw_line in (text or "").split("\n"):
+        line = raw_line.strip()
+        if not line:
+            continue
+        prefix_match = _CITED_LIST_PREFIX.match(line)
+        prefix = prefix_match.group("prefix") if prefix_match else ""
+        body = line[prefix_match.end():] if prefix_match else line
+        parts = [match.group(0).strip() for match in _CITED_SENT.finditer(body) if match.group(0).strip()]
+        if prefix and parts:
+            parts[0] = prefix + parts[0]
+        out.extend(parts)
     return out

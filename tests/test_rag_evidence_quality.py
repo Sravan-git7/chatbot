@@ -391,5 +391,93 @@ class AnswerSelectionQuality(unittest.TestCase):
         self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
 
 
+class SourceSequenceMapping(unittest.TestCase):
+    def test_headings_cannot_match_words_in_other_steps_and_workflow_answers_drop_them(self):
+        text = (
+            "Invoicing Procedure\n"
+            "Use\n"
+            "Invoicing creates the link to contract accounting and provides the basis for bill creation.\n"
+            "Process Flow\n"
+            "1. Once the contract is billed, you start bill creation. You must release the documents previously outsorted during billing checks.\n"
+            "2. Invoicing with Bill Creation results in a print document and a contract accounting document.\n"
+            "4. To inform the customer, you use either the Partial Bill Creation function or the Budget Billing Request function.\n"
+            "Result\n"
+            "After the bill has been created, it is sent to the bill recipient.\n"
+        )
+        item = SimpleNamespace(
+            marker="S1", chunk_id="invoicing", rank=1, title="Invoicing Procedure",
+            section_title="Process Flow", heading_path=("Invoicing Procedure", "Process Flow"),
+            text=text, rendered_text=text,
+        )
+        context = _Context([item])
+        units = EV.build_units([item])
+
+        for heading in ("Use", "Result"):
+            unit = next(unit for unit in units if unit.text == heading)
+            self.assertIsNone(EV._source_sequence_info(unit))
+            self.assertIsNone(EL._source_sequence_group(unit))
+
+        step_one = next(unit for unit in units if unit.text.startswith("Once the contract is billed"))
+        step_two = next(unit for unit in units if unit.text.startswith("Invoicing with Bill Creation"))
+        self.assertEqual(EV._source_sequence_info(step_one), ("numbered", 1))
+        self.assertEqual(EV._source_sequence_info(step_two), ("numbered", 2))
+        self.assertEqual(EL._source_sequence_group(step_one), ("invoicing", "numbered", step_one.source_line_index))
+        self.assertEqual(EL._source_sequence_group(step_two), ("invoicing", "numbered", step_two.source_line_index))
+        self.assertNotEqual(EL._source_sequence_group(step_one), EL._source_sequence_group(step_two))
+        self.assertEqual(EL._source_sequence_prefix(step_one), "1. ")
+        step_one_continuation = next(unit for unit in units if unit.text.startswith("You must release the documents"))
+        self.assertEqual(EL._source_sequence_prefix(step_one_continuation), "")
+
+        separate_list_item = _Item(
+            "S2", "invoicing", 1,
+            "Process Flow\n1. A separate invoicing sequence contains another checked document.",
+            "Process Flow",
+        )
+        separate_list_item.title = "Invoicing Procedure"
+        separate_list_item.heading_path = ("Invoicing Procedure", "Process Flow")
+        separate_unit = next(unit for unit in EV.build_units([separate_list_item]) if unit.text.startswith("A separate invoicing"))
+        self.assertEqual(EV._source_sequence_info(separate_unit), ("numbered", 1))
+        self.assertNotEqual(EL._source_sequence_group(step_one), EL._source_sequence_group(separate_unit))
+
+        initial = EV.EvidenceExtractiveGenerator().generate("What is the invoicing process?", context)
+        self.assertFalse(initial.refused)
+        self.assertNotIn("Use [S1]", initial.text)
+        self.assertNotIn("Result [S1]", initial.text)
+        self.assertTrue(EV.verify_support_chain(initial.text, context)["ok"])
+
+    def test_continuation_sentence_does_not_inherit_a_list_prefix_after_deduplication(self):
+        step_text = (
+            "Invoicing Procedure\nProcess Flow\n"
+            "1. Once the contract is billed, you start bill creation. "
+            "You must release the documents previously outsorted during billing checks."
+        )
+        step_item = _Item("S1", "invoice-step", 1, step_text, "Process Flow")
+        step_item.title = "Invoicing Procedure"
+        step_item.heading_path = ("Invoicing Procedure", "Process Flow")
+        step_item.section_title = "Process Flow"
+        overview_text = (
+            "Invoicing Procedure\nUse\n"
+            "Invoicing creates the link to contract accounting and provides the basis for bill creation."
+        )
+        overview_item = _Item("S2", "invoice-overview", 2, overview_text, "Use")
+        overview_item.title = "Invoicing Procedure"
+        overview_item.heading_path = ("Invoicing Procedure", "Use")
+        overview_item.section_title = "Use"
+        context = _Context([step_item, overview_item])
+        first_sentence = next(
+            unit for unit in EV.build_units([step_item]) if unit.text.startswith("Once the contract is billed")
+        )
+        previous_answer = f"1. {first_sentence.text} [S1]"
+
+        result = EL.IntentExtractiveGenerator(
+            "elaborate", anchor="What is the invoicing process?", previous_answer=previous_answer,
+        ).generate("elaborate", context)
+
+        self.assertFalse(result.refused, result.evidence)
+        self.assertIn("You must release the documents previously outsorted during billing checks.", result.text)
+        self.assertNotRegex(result.text, r"(?m)^1\.")
+        self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
+
+
 if __name__ == "__main__":
     unittest.main()

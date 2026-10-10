@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import Citations from '../components/Citations'
-import StructuredAnswer, { buildMarkerMap, visibleAnswerText } from '../components/StructuredAnswer'
+import StructuredAnswer, { buildMarkerMap, structuredElaborationAnswer, visibleAnswerText } from '../components/StructuredAnswer'
 import type { Source, StructuredAnswer as StructuredAnswerType } from '../types'
 
 describe('StructuredAnswer and Citations components', () => {
@@ -138,6 +138,55 @@ describe('StructuredAnswer and Citations components', () => {
     const chips = container.querySelectorAll('.cite-chip')
     expect(chips[0]).toHaveTextContent('1')
     expect(chips[1]).toHaveTextContent('2')
+  })
+
+  it('uses validated elaboration groups once, without adding a duplicate generic heading', () => {
+    const canonical = '1. Release checked bills. [S1]\nThe posting document is recorded. [S2]'
+    const sections = [
+      { key: 'how_it_works_relationships' as const, lines: ['1. Release checked bills. [S1]'], line_orders: [0] },
+      { key: 'key_details' as const, lines: ['The posting document is recorded. [S2]'], line_orders: [1] },
+    ]
+    const structured = structuredElaborationAnswer(sections, canonical)
+    expect(structured?.sections.map((section) => section.title)).toEqual(['How it works', 'Key details'])
+    expect(structuredElaborationAnswer([{ ...sections[0], line_orders: [1] }, sections[1]], canonical)).toBeNull()
+
+    const interleavedCanonical = 'A source fact [S1]\nA related fact [S2]\nAnother source fact [S3]'
+    const interleaved = structuredElaborationAnswer([
+      { key: 'what_it_is_does', lines: ['A source fact [S1]', 'Another source fact [S3]'], line_orders: [0, 2] },
+      { key: 'how_it_works_relationships', lines: ['A related fact [S2]'], line_orders: [1] },
+    ], interleavedCanonical)
+    expect(interleaved && visibleAnswerText(interleaved, interleavedCanonical)).toBe(interleavedCanonical)
+    expect(interleaved?.sections.map((section) => section.title)).toEqual(['What it is / does', 'How it works', ''])
+    expect(interleaved?.sections[2].showTitle).toBe(false)
+
+    const { container, rerender } = render(
+      <StructuredAnswer
+        structuredAnswer={structured}
+        fallbackAnswer={canonical}
+        sources={sources}
+        isElaboration
+      />,
+    )
+    expect(screen.getByTestId('elaboration-section-title')).toHaveTextContent('How it works')
+    expect(screen.getByRole('heading', { name: 'Key details' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Additional detail' })).not.toBeInTheDocument()
+
+    rerender(
+      <StructuredAnswer
+        structuredAnswer={interleaved}
+        fallbackAnswer={interleavedCanonical}
+        sources={sources}
+        isElaboration
+      />,
+    )
+    const renderedLines = Array.from(container.querySelectorAll('.text-answer')).map((node) => node.textContent ?? '')
+    expect(renderedLines).toHaveLength(3)
+    expect(renderedLines[0]).toContain('A source fact')
+    expect(renderedLines[1]).toContain('A related fact')
+    expect(renderedLines[2]).toContain('Another source fact')
+    expect(visibleAnswerText(interleaved, interleavedCanonical)).toBe(interleavedCanonical)
+    expect(screen.getAllByRole('heading', { name: 'What it is / does' })).toHaveLength(1)
+    expect(screen.queryByRole('heading', { name: 'Additional detail' })).not.toBeInTheDocument()
   })
 
   it('renders contiguous mapped display numbers and does not render redundant section-header citation clusters', () => {

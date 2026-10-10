@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import type { ApiStatus, Message, Source } from '../types'
-import { answerForClipboard, copyText, getFollowUpQuestions, isHttpUrl } from '../util'
+import { answerForClipboard, copyText, getFollowUpQuestions, isHttpUrl, sourcesCitedInAnswer } from '../util'
 import DebugPanel from './DebugPanel'
 import { Sources, TopicReferenceCard, sourceDomId } from './Sources'
-import StructuredAnswer, { buildMarkerMap, visibleAnswerText } from './StructuredAnswer'
+import StructuredAnswer, { buildMarkerMap, structuredElaborationAnswer, visibleAnswerText } from './StructuredAnswer'
 
 const STATUS_HEADLINE: Record<Exclude<ApiStatus, 'answered'>, string> = {
   documentation_unavailable: 'Documentation unavailable',
@@ -221,50 +221,69 @@ export default function MessageView({
         )}
 
         {r && r.status === 'answered' && (() => {
-          const visibleText = visibleAnswerText(r.structured_answer, r.answer)
-          const markerMap = buildMarkerMap(visibleText, r.sources)
+          const elaborationAnswer = isElaboration
+            ? structuredElaborationAnswer(r.metadata.elaboration_sections, r.answer)
+            : null
+          const structuredAnswer = elaborationAnswer ?? r.structured_answer
+          const visibleText = visibleAnswerText(structuredAnswer, r.answer)
+          const answerSources = sourcesCitedInAnswer(visibleText, r.sources)
+          const markerMap = buildMarkerMap(visibleText, answerSources)
           return (
             <div className="animate-answer-reveal">
               <h2 className="sr-only">Answer</h2>
               <StructuredAnswer
-                structuredAnswer={r.structured_answer}
+                structuredAnswer={structuredAnswer}
                 fallbackAnswer={r.answer}
-                sources={r.sources}
+                sources={answerSources}
                 markerMap={markerMap}
                 onCite={cite}
                 isElaboration={isElaboration}
               />
-              <Sources messageId={message.id} sources={r.sources} markerMap={markerMap} highlight={highlight} />
+              <Sources messageId={message.id} sources={answerSources} markerMap={markerMap} highlight={highlight} />
 
               {/* Answer Footer Actions & Verification */}
-              <div className="mt-4 flex flex-wrap items-center gap-3 pt-1">
-                <CopyButton text={answerForClipboard(visibleText, r.sources, markerMap)} />
-                {onAskFollowUp && showElaborate && r.metadata.can_elaborate === true && (
-                  <button
-                    type="button"
-                    disabled={disabled}
-                    onClick={() => onAskFollowUp('elaborate')}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-medium text-stone-600 shadow-2xs transition hover:border-stone-300 hover:bg-stone-50 hover:text-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50 cursor-pointer"
-                    aria-label="Elaborate"
-                    data-testid="elaborate-button"
-                  >
-                    <svg
-                      width="13"
-                      height="13"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-stone-400"
-                      aria-hidden="true"
-                    >
-                      <path d="M12 5v14M5 12h14" />
-                    </svg>
-                    Elaborate
-                  </button>
-                )}
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 pt-1">
+                <div
+                  role="group"
+                  aria-label="Answer actions"
+                  data-testid="answer-actions"
+                  className="flex flex-wrap items-center gap-x-3 gap-y-2"
+                >
+                  <CopyButton text={answerForClipboard(visibleText, answerSources, markerMap)} />
+                  {onAskFollowUp && showElaborate && r.metadata.can_elaborate === true && (
+                    <div className="flex shrink-0 items-center gap-3 pl-3">
+                      <span
+                        aria-hidden="true"
+                        data-testid="answer-action-separator"
+                        className="h-4 w-px shrink-0 bg-stone-300"
+                      />
+                      <button
+                        type="button"
+                        disabled={disabled}
+                        onClick={() => onAskFollowUp('elaborate')}
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-medium text-stone-600 shadow-2xs transition hover:border-stone-300 hover:bg-stone-50 hover:text-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50 cursor-pointer"
+                        aria-label="Elaborate"
+                        data-testid="elaborate-button"
+                      >
+                        <svg
+                          width="13"
+                          height="13"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="text-stone-400"
+                          aria-hidden="true"
+                        >
+                          <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        Elaborate
+                      </button>
+                    </div>
+                  )}
+                </div>
                 {r.metadata.grounded && (
                   <span
                     className="inline-flex items-center gap-1.5 text-xs text-stone-500"

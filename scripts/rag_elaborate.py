@@ -81,6 +81,24 @@ _DEFINING = re.compile(r"\b(is|are|enables?|means?|refers?|represents?|contains?
 _REASON = re.compile(r"\b(because|since|due to|therefore|thus|so that|in order to|reason|reasons|result[s]? in|hence)\b", re.I)
 _CONTINUE = re.compile(r"\b(next|after|then|subsequent|following|once|finally|step)\b", re.I)
 _CITE = re.compile(r"\[S\d+\]")
+_INVOICING_ANCHOR = re.compile(r"\binvoic\w*\b", re.I)
+_BUDGET_BILLING = re.compile(r"\bbudget[\s-]+bill(?:ing|ings|s)?\b", re.I)
+_INVOICING_EVIDENCE = re.compile(
+    r"\binvoic\w*\b|\bbill[\s-]+creation\b|\bbill[\s-]+checks?\b|\boutsort\w*\b|"
+    r"\bprint[\s-]+documents?\b|\bsimulat\w*\b|\bcontract[\s-]+accounting\s+documents?\b|"
+    r"\bposting\s+documents?\b|\bpostings?\b|\breleas(?:e|es|ed|ing)\b",
+    re.I,
+)
+_INVOICING_POSTING_DETAIL = re.compile(
+    r"\bposting\s+documents?\b|\bposted\s+in\s+subledger\s+accounting\b",
+    re.I,
+)
+_INVOICING_PRINT_CONFIGURATION = re.compile(r"\b(?:reprint\w*|output\s+type|print\s+parameter)\b", re.I)
+_INVOICING_REVERSAL_DETAIL = re.compile(
+    r"\b(?:bill\s+reversal|full\s+reversal|invoic\w*\s+reversal|reverse\s+document|"
+    r"reverse\s+print\s+document|offsetting\s+entries)\b",
+    re.I,
+)
 
 # Shared evidence-quality predicates live in rag_evidence and run before normal or scoped-follow-up scoring.
 # Presentation-only categories. These keys are stable API values; labels are rendered by the UI.
@@ -427,21 +445,129 @@ def _novelty_filter_units(units: Sequence[Any], previous_answer: str) -> Tuple[L
     }
 
 
+def _invoicing_scope_filter(
+    units: Sequence[Any], anchor: str, new_terms: Iterable[str] = (),
+) -> Tuple[List[Any], Optional[Dict[str, Any]]]:
+    """Keep invoice elaborations on invoice evidence instead of treating the page title as sentence-level support.
+
+    The SAP Invoicing Procedure page also contains a separate Budget Billing branch and a general bill-recipient result.
+    Those are not evidence for an invoicing elaboration merely because they share the same page/chunk or heading. A
+    complete source list item is filtered as one unit so its trailing sentence cannot leak after its budget-billing
+    introduction is removed. If the original question or the follow-up explicitly asks about budget billing, that branch
+    remains eligible.
+    """
+    if not _INVOICING_ANCHOR.search(anchor or ""):
+        return list(units), None
+
+    new_term_list = [str(term) for term in new_terms]
+    requested_terms = set(EV.terms2(anchor or "")) | {term.casefold() for term in new_term_list}
+    requested_text = " ".join((anchor or "", *new_term_list))
+    requested_budget = bool(_BUDGET_BILLING.search(requested_text)) or {"budget", "bill"}.issubset(requested_terms)
+    requested_print_detail = bool(re.search(r"\b(?:print|reprint|parameter|output)\w*\b", requested_text, re.I))
+    requested_reversal = bool(_INVOICING_REVERSAL_DETAIL.search(requested_text)) or bool(
+        requested_terms & {"revers", "reversal"}
+    )
+    relevant_evidence = _INVOICING_EVIDENCE
+
+    groups: Dict[Tuple[str, str, int], List[Any]] = {}
+    group_for_unit: Dict[int, Tuple[str, str, int]] = {}
+    for unit in units:
+        group_key = _source_sequence_group(unit)
+        if group_key is not None:
+            groups.setdefault(group_key, []).append(unit)
+            group_for_unit[id(unit)] = group_key
+
+    allowed_groups: Dict[Tuple[str, str, int], bool] = {}
+    for group_key, group in groups.items():
+        group_text = " ".join(str(getattr(unit, "text", "") or "") for unit in group)
+        if _BUDGET_BILLING.search(group_text) and not requested_budget:
+            allowed_groups[group_key] = False
+            continue
+        if _INVOICING_PRINT_CONFIGURATION.search(group_text) and not requested_print_detail:
+            allowed_groups[group_key] = False
+            continue
+        if _INVOICING_REVERSAL_DETAIL.search(group_text) and not requested_reversal:
+            allowed_groups[group_key] = False
+            continue
+        allowed_groups[group_key] = bool(
+            relevant_evidence.search(group_text)
+            or (requested_budget and _BUDGET_BILLING.search(group_text))
+        )
+
+    kept: List[Any] = []
+    excluded: List[Any] = []
+    for unit in units:
+        group_key = group_for_unit.get(id(unit))
+        if group_key is not None:
+            keep = allowed_groups[group_key]
+        else:
+            text = str(getattr(unit, "text", "") or "")
+            keep = (
+                (requested_budget or not _BUDGET_BILLING.search(text))
+                and (requested_print_detail or not _INVOICING_PRINT_CONFIGURATION.search(text))
+                and (requested_reversal or not _INVOICING_REVERSAL_DETAIL.search(text))
+                and bool(relevant_evidence.search(text) or (requested_budget and _BUDGET_BILLING.search(text)))
+            )
+        (kept if keep else excluded).append(unit)
+
+    details = {
+        "enabled": True,
+        "topic": "invoicing",
+        "explicit_budget_billing": requested_budget,
+        "explicit_print_detail": requested_print_detail,
+        "explicit_reversal_detail": requested_reversal,
+        "excluded_units": len(excluded),
+        "excluded_markers": sorted(
+            {str(getattr(unit, "marker", "")) for unit in excluded if getattr(unit, "marker", None)}
+        ),
+    }
+    return kept, details
+
+
 def _source_sequence_group(unit: Any) -> Optional[Tuple[str, str, int]]:
     """Identify one numbered step or bullet by its original source line and document chunk."""
     sequence = EV._source_sequence_info(unit)
     if sequence is None or not EV._has_workflow_heading(unit):
         return None
-    kind, position = sequence
+    kind, _position = sequence
     chunk_id = str(getattr(unit, "chunk_id", "") or "")
-    if kind == "numbered":
-        return chunk_id, kind, position
-    if kind == "bullet":
-        sentence = _quality_norm(str(getattr(unit, "text", "") or ""))
-        for line_index, line in enumerate(str(getattr(unit, "chunk_text", "") or "").splitlines()):
-            if sentence and sentence in _quality_norm(line):
-                return chunk_id, kind, line_index
+    line_index = getattr(unit, "source_line_index", -1)
+    if type(line_index) is int and line_index >= 0:
+        return chunk_id, kind, line_index
+
+    source_line = _quality_norm(str(getattr(unit, "source_line", "") or ""))
+    lines = str(getattr(unit, "chunk_text", "") or "").splitlines()
+    if source_line:
+        for index, line in enumerate(lines):
+            if _quality_norm(line) == source_line:
+                return chunk_id, kind, index
+
+    sentence = _quality_norm(str(getattr(unit, "text", "") or ""))
+    marker_pattern = r"^\s*\d{1,3}[.)]\s+" if kind == "numbered" else r"^\s*[-*•]\s+"
+    for index, line in enumerate(lines):
+        prefix = re.match(marker_pattern, line)
+        if not prefix:
+            continue
+        candidates = {_quality_norm(part) for part in T.split_sentences(line[prefix.end():])}
+        if sentence and sentence in candidates:
+            return chunk_id, kind, index
     return None
+
+
+def _source_sequence_prefix(unit: Any) -> str:
+    """Return a list marker only for the first factual sentence of its original source line."""
+    line = str(getattr(unit, "source_line", "") or "")
+    sentence = _quality_norm(str(getattr(unit, "text", "") or ""))
+    for pattern in (r"^\s*\d{1,3}[.)]\s+", r"^\s*[-*•]\s+"):
+        match = re.match(pattern, line)
+        if not match:
+            continue
+        source_sentences = [
+            _quality_norm(part) for part in T.split_sentences(line[match.end():]) if _quality_norm(part)
+        ]
+        if sentence and source_sentences and sentence == source_sentences[0]:
+            return match.group(0).lstrip()
+    return ""
 
 
 class IntentExtractiveGenerator:
@@ -501,6 +627,10 @@ class IntentExtractiveGenerator:
         )
         units, excluded_quality_units, quality_filter_details = EV.filter_quality_units(units, context)
         excluded_adjacent_fragments = quality_filter_details["excluded_adjacent_fragments"]
+        if self.intent == "elaborate":
+            units, topic_scope_filter = _invoicing_scope_filter(units, self.anchor or question, self.new_terms)
+        else:
+            topic_scope_filter = None
         novelty_filter: Optional[Dict[str, Any]] = None
         if self.intent == "elaborate":
             units, novelty_filter = _novelty_filter_units(units, self.previous_answer)
@@ -520,6 +650,8 @@ class IntentExtractiveGenerator:
                                   "detail": decision.detail, **needs.to_dict(), "intent": self.intent, "selected": []}
         if topic_consistency is not None:
             record["topic_consistency"] = topic_consistency
+        if topic_scope_filter is not None:
+            record["topic_scope_filter"] = topic_scope_filter
         if excluded_quality_units or excluded_adjacent_fragments:
             record["quality_filter"] = {
                 "excluded_units": len(excluded_quality_units),
@@ -556,8 +688,7 @@ class IntentExtractiveGenerator:
             return RG.GenerationResult(RG.NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
 
         weights = EV.focus_weights(needs, units)
-        lines: List[str] = []
-        line_sections: Dict[str, str] = {}
+        line_records: List[Dict[str, Any]] = []
         chosen_texts = [unit.text for unit in chosen]
         emitted_context_lines: List[str] = []
 
@@ -567,28 +698,48 @@ class IntentExtractiveGenerator:
                 if _is_redundant_evidence(sentence, references)[0]:
                     return
             line = f"{sentence} [{marker}]"
-            if line not in lines:
-                lines.append(line)
-                line_sections.setdefault(line, section_key)
+            if not any(entry["text"] == line for entry in line_records):
+                line_records.append({"text": line, "section_key": section_key, "sequence_group": None})
                 emitted_context_lines.append(sentence)
 
         for u in chosen:
-            section_key = presentation_section_key(u.text)
+            sequence_group = _source_sequence_group(u) if self.intent == "elaborate" else None
+            section_key = (
+                SECTION_HOW_IT_WORKS_RELATIONSHIPS
+                if sequence_group is not None
+                else presentation_section_key(u.text)
+            )
             if u.prev_line and needs.kinds and not EV.kind_satisfied(needs.kinds[0], u.text, needs):
                 append_context_line(u.prev_line, u.marker, section_key)
-            line = f"{u.text} [{u.marker}]"
-            if line not in lines:
-                lines.append(line)
-                line_sections.setdefault(line, section_key)
+
+            fact = u.text
+            prefix = _source_sequence_prefix(u) if sequence_group is not None else ""
+            if prefix:
+                source_prefix = prefix.strip()
+                if fact.lstrip().startswith(source_prefix):
+                    fact = fact.lstrip()[len(source_prefix):].lstrip()
+            cited_fact = f"{fact} [{u.marker}]"
+            if sequence_group is not None and line_records and line_records[-1]["sequence_group"] == sequence_group:
+                # Multiple cited sentences from one numbered step/bullet stay in the same Markdown list item; every
+                # sentence retains its own marker, while the original source prefix appears only once.
+                line_records[-1]["text"] += f" {cited_fact}"
+            else:
+                line = f"{prefix}{cited_fact}"
+                if not any(entry["text"] == line for entry in line_records):
+                    line_records.append({"text": line, "section_key": section_key, "sequence_group": sequence_group})
             if u.follow:
                 append_context_line(u.follow, u.marker, section_key)
             record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text,
                                        "coverage": round(EV.unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3),
                                        "kinds_ok": EV.unit_kinds_ok(u, needs)})
-        dedup: List[str] = []
-        for ln in lines:                                             # a heading attached to two sentences is shown once
-            if ln not in dedup:
-                dedup.append(ln)
+        dedup_records: List[Dict[str, Any]] = []
+        seen_lines = set()
+        for entry in line_records:                                    # a heading attached to two sentences is shown once
+            if entry["text"] not in seen_lines:
+                seen_lines.add(entry["text"])
+                dedup_records.append(entry)
+        dedup = [entry["text"] for entry in dedup_records]
+        line_sections = {entry["text"]: entry["section_key"] for entry in dedup_records}
         text = "\n".join(dedup)
         # Keep the exact answer lines and citations. Categories are grouped globally for display; line_orders on each
         # section reconstruct the unchanged document order. Context lines inherit the category of their evidence sentence.
@@ -638,10 +789,25 @@ class IntentExtractiveGenerator:
     def _choose(self, needs: Any, units: Sequence[Any], baseline: Sequence[Any], context: Any) -> List[Any]:
         """The sentences this intent wants, in document reading order (empty = nothing to add)."""
         weights = EV.focus_weights(needs, units)
-        process_question = EV.is_process_question(self.anchor or getattr(needs, "question", ""))
-        if self.intent == "elaborate" and process_question:
+        anchor = self.anchor or getattr(needs, "question", "")
+        process_question = EV.is_process_question(anchor)
+        invoicing_question = bool(_INVOICING_ANCHOR.search(anchor))
+        if self.intent == "elaborate" and (process_question or invoicing_question):
             workflow_units = self._choose_workflow_groups(units)
             if workflow_units:
+                if invoicing_question:
+                    # The page's overview also records where posting documents are posted. Keep that verified key detail
+                    # with the focused workflow, in document order, when it adds something not already shown.
+                    picked = list(workflow_units)
+                    references: List[str] = [*self.previous, *(unit.text for unit in picked)]
+                    for unit in units:
+                        if _source_sequence_group(unit) is not None or not _INVOICING_POSTING_DETAIL.search(unit.text):
+                            continue
+                        if _is_redundant_evidence(unit.text, references)[0]:
+                            continue
+                        picked.append(unit)
+                        references.append(unit.text)
+                    return sorted(picked, key=lambda unit: unit.order)
                 return workflow_units
 
         scored: List[Tuple[float, Any]] = []
