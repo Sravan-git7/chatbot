@@ -1216,5 +1216,83 @@ class ApiElaborationTests(unittest.TestCase):
         self.assertIsNone(ignored["debug"]["pipeline"].get("follow_up"))
 
 
+class SuraFollowUpRegressions(unittest.TestCase):
+    """Focused regressions for the SURA follow-up fixes (synthetic evidence, no stores).
+
+    * sentence-level novelty: a repeated sentence is removed, a novel supported sentence from a chunk the user has
+      already been shown is offered (and keeps its citation), an unseen chunk keeps the two-sentence minimum, and a
+      dangling sentence never stands alone;
+    * causal follow-ups: a "why" question abstains when no documented reason is retrieved and never receives topical
+      facts in its place;
+    """
+
+    def test_a_single_novel_sentence_from_a_previously_cited_chunk_is_offered_and_cited(self):
+        context = _Ctx([_Item("S1", "c0", 0, FIRST), _Item("S1", "c0", 0, ASSIGNED), _Item("S2", "c1", 1, UNRELATED)])
+        generator = EL.IntentExtractiveGenerator("elaborate", previous_answer=f"{FIRST} [S1]", tau=EV.SHIPPED_TAU, anchor=CONTRACT)
+        result = generator.generate(CONTRACT, context)
+
+        self.assertFalse(result.refused)
+        self.assertIn(ASSIGNED, result.text)                        # the novel sentence of the cited chunk
+        self.assertNotIn(FIRST, result.text)                        # the repeated sentence is not shown again
+        self.assertNotIn(UNRELATED, result.text)
+        self.assertEqual(generator.last["novelty_filter"]["shown_chunk_ids"], ["c0"])
+        self.assertEqual(generator.last["novelty_filter"]["excluded_markers"], [])   # the chunk stays eligible
+        self.assertEqual(generator.last["added"], 1)
+        self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
+        import rag_pipeline as RP
+        citation_context = RP._citation_context_after_scope(context, generator.last)
+        self.assertIn("S1", {item.marker for item in citation_context.items})
+        report = RG.verify_grounding(result.text, citation_context, in_page_grounding=True, citation_normalization=True)
+        self.assertTrue(report.ok, report.to_dict())
+        self.assertEqual(set(report.cited_markers), {"S1"})
+
+    def test_a_single_novel_sentence_from_an_unseen_chunk_still_needs_the_minimum(self):
+        context = _Ctx([_Item("S1", "c0", 0, FIRST), _Item("S2", "c1", 1, ASSIGNED), _Item("S3", "c2", 2, UNRELATED)])
+        generator = EL.IntentExtractiveGenerator("elaborate", previous_answer=f"{FIRST} [S1]", tau=EV.SHIPPED_TAU, anchor=CONTRACT)
+        result = generator.generate(CONTRACT, context)
+
+        self.assertTrue(result.refused)
+        self.assertEqual(result.text, RG.NO_ANSWER_TEXT)
+        self.assertEqual(generator.last["reason_added"], "NO_ADDITIONAL_EVIDENCE")
+
+    def test_a_dangling_sentence_is_never_offered_on_its_own(self):
+        self.assertFalse(EL._stands_alone(DANGLING))              # "This does not apply ..." needs its neighbour
+        self.assertTrue(EL._stands_alone(ASSIGNED))
+        context = _Ctx([_Item("S1", "c0", 0, FIRST), _Item("S1", "c0", 0, DANGLING), _Item("S2", "c1", 1, UNRELATED)])
+        generator = EL.IntentExtractiveGenerator("elaborate", previous_answer=f"{FIRST} [S1]", tau=EV.SHIPPED_TAU, anchor=CONTRACT)
+        result = generator.generate(CONTRACT, context)
+
+        self.assertTrue(result.refused)
+        self.assertNotIn(DANGLING, result.text)
+
+    def test_a_causal_follow_up_without_a_documented_reason_abstains_and_adds_no_topical_facts(self):
+        question = "Why is a contract account needed?"
+        topical = (FIRST, ASSIGNED, MASTER, INCLUDE, MANY, PARTNER)
+        for previous in ("", f"{FIRST} [S1]"):
+            with self.subTest(has_previous_answer=bool(previous)):
+                generator = EL.IntentExtractiveGenerator("reason", previous_answer=previous, tau=EV.SHIPPED_TAU, anchor=question)
+                result = generator.generate(question, _Ctx(_context(topical)))
+
+                self.assertTrue(result.refused)
+                self.assertEqual(result.text, RG.NO_ANSWER_TEXT)
+                self.assertEqual(generator.last["selected"], [])
+                self.assertEqual(generator.last["reason_added"], "NO_ADDITIONAL_EVIDENCE")
+
+    def test_a_causal_follow_up_is_answered_only_from_a_documented_reason(self):
+        question = "Why is a contract account needed?"
+        reason = "A contract account is needed because it groups the line items that are billed to one business partner."
+        context = _Ctx([_Item("S1", "c0", 0, FIRST), _Item("S2", "c1", 1, reason), _Item("S3", "c2", 2, MANY)])
+        generator = EL.IntentExtractiveGenerator("reason", previous_answer="", tau=EV.SHIPPED_TAU, anchor=question)
+        result = generator.generate(question, context)
+
+        self.assertFalse(result.refused)
+        self.assertIn(reason, result.text)
+        for line in result.text.split("\n"):
+            self.assertRegex(line, EL._REASON)                      # every emitted sentence carries the reason
+        self.assertNotIn(FIRST, result.text)
+        self.assertNotIn(MANY, result.text)
+        self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])
+
+
 if __name__ == "__main__":
     unittest.main()
