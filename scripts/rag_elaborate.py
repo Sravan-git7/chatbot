@@ -19,9 +19,12 @@ with a narrow, explicitly scoped difference:
   the two ranked lists are interleaved and deduplicated, while other intents keep their shipped scoped settings;
 * **novel selection** - for "elaborate", exact and high-overlap evidence already present in the previous answer is removed
   before sufficiency checks and selection, and near-duplicate selected facts are collapsed; up to six supported units
-  are emitted, with no repeated opener. Other intent-specific selection rules remain as before;
+  are emitted, with no repeated opener. Only the repeated sentence is removed, never its whole chunk: a single novel,
+  standalone sentence from a chunk already shown is offered, while two novel sentences are required otherwise. Other
+  intent-specific selection rules remain as before;
 * **intent handling** - an example requires a sentence that actually introduces an example; a reason requires a
-  reason-bearing sentence; continuation prefers evidence from later in the document; simplification picks the shortest
+  reason-bearing sentence and otherwise abstains (no topical substitute); continuation prefers evidence from later in
+  the document; simplification picks the shortest
   sentences that still carry the topic;
 * **fragment quality** - the shared evidence-layer pre-selection filter drops standalone headings, breadcrumbs,
   menu/TOC labels, numbered navigation fragments, malformed OCR-like text, and incomplete list lead-ins; short clauses
@@ -417,12 +420,18 @@ def _novelty_filter_units(units: Sequence[Any], previous_answer: str) -> Tuple[L
     removed_adjacent = 0
     candidate_markers = {str(getattr(unit, "marker", "") or "") for unit in units if getattr(unit, "marker", None)}
     kept_markers: set = set()
+    # Chunks whose content the previous answer already showed. A chunk stays eligible for its *novel* sentences: only
+    # the repeated sentence itself is removed, never the whole chunk.
+    shown_chunk_ids: set = set()
     for unit in units:
         duplicate, score = _is_redundant_evidence(getattr(unit, "text", ""), previous)
         if duplicate:
             marker = str(getattr(unit, "marker", "") or "")
             repeated.append({"marker": marker or None, "overlap": int(score["overlap"]),
                              "jaccard": round(float(score["jaccard"]), 3), "exact": bool(score["exact"])})
+            chunk_id = str(getattr(unit, "chunk_id", "") or "")
+            if chunk_id:
+                shown_chunk_ids.add(chunk_id)
             continue
         for attr in ("prev_line", "follow"):
             line = getattr(unit, attr, None)
@@ -441,6 +450,7 @@ def _novelty_filter_units(units: Sequence[Any], previous_answer: str) -> Tuple[L
         "excluded_adjacent_lines": removed_adjacent,
         "excluded_markers": excluded_markers,
         "markers_with_repeated_evidence": sorted({item["marker"] for item in repeated if item["marker"]}),
+        "shown_chunk_ids": sorted(shown_chunk_ids),
         "repeats": repeated,
     }
 
@@ -522,6 +532,12 @@ def _invoicing_scope_filter(
         ),
     }
     return kept, details
+
+
+def _stands_alone(text: str) -> bool:
+    """A sentence that can be read without its neighbours (not a dangling pronoun or a cross-reference)."""
+    stripped = (text or "").strip()
+    return bool(stripped) and not (_DANGLING.match(stripped) or _DANGLING_REF.match(stripped))
 
 
 def _source_sequence_group(unit: Any) -> Optional[Tuple[str, str, int]]:
@@ -665,6 +681,7 @@ class IntentExtractiveGenerator:
                                         "excluded_markers": excluded_industry_markers}
         if novelty_filter is not None:
             record["novelty_filter"] = novelty_filter
+        self._tls.shown_chunk_ids = frozenset((novelty_filter or {}).get("shown_chunk_ids", ()))
         if not decision.supported:
             # the topic itself is not supported by the retrieved evidence: unchanged behaviour (abstain -> no answer)
             record["elaborated"] = None
@@ -841,7 +858,12 @@ class IntentExtractiveGenerator:
                 if len(novel) >= ELABORATION_MAX_SELECTED_UNITS:
                     break
             if self.previous and len(novel) < REQUIRED_NEW_ELABORATE:
-                return []
+                # One novel, supported sentence from a chunk the user has already been shown is new information about
+                # that same source, provided it reads on its own. A single sentence from an unseen chunk, or a dangling
+                # sentence such as "This does not apply ...", still needs the usual minimum and is not offered.
+                shown = {str(chunk_id) for chunk_id in getattr(self._tls, "shown_chunk_ids", ())}
+                if not (len(novel) == 1 and str(novel[0].chunk_id) in shown and _stands_alone(novel[0].text)):
+                    return []
             return sorted(novel, key=lambda unit: unit.order)
 
         if self.intent == "continuation":
@@ -871,8 +893,12 @@ class IntentExtractiveGenerator:
                 picked.append(u)
             return sorted(picked, key=lambda u: u.order)
         elif self.intent == "reason":
+            # A causal follow-up is answered only from a documented reason. With none in the retrieved evidence the
+            # pass abstains; generic topical sentences are never substituted for the missing "because".
             reasons = [u for u in keep if _REASON.search(u.full_text()) or (u.follow and _REASON.search(u.follow))]
-            keep = reasons or keep
+            if not reasons:
+                return []
+            keep = reasons
         elif self.intent == "simplify":
             # "same content, expressed more simply": the shortest sentences that still state the topic on their own.
             # Dropped are sentences that only make sense next to the previous sentence ("This does not apply ...") and

@@ -566,5 +566,61 @@ class TopicConsistency(unittest.TestCase):
         self.assertEqual([item.marker for item in filtered.items], ["S1"])
 
 
+class ExhaustedRoutingMetadata(unittest.TestCase):
+    """An exhausted scoped follow-up reports routing.mode = elaboration_exhausted; the routed source is kept."""
+
+    ROUTING = {
+        "selected_source_id": "M2C-12",
+        "candidates": [{"rank": 1, "source_id": "M2C-12", "title": "Automatic Billing", "similarity": 0.91}],
+        "mode": "router_reranked_top10_code_aware",
+    }
+
+    def _ask_after_answer(self, follow_up, scoped_raw, conversation_id):
+        service = _service("extractive")
+        base = _ScriptedPipeline({BILLING: dict(_raw_answer(BASE_ANSWER), routing=dict(self.ROUTING))})
+        service.pipeline.answer = base.answer
+        scoped = _FakeRequestPipeline.__new__(_FakeRequestPipeline)
+        scoped.generator = SimpleNamespace(name="extractive")
+        scoped.retriever = SimpleNamespace()
+        scoped.calls = []
+        scoped.answer = lambda query, debug=False, **kwargs: scoped_raw
+        with patch.object(EL, "scoped_pipeline", return_value=scoped), \
+             patch.object(S, "support_chain", return_value={"ok": True, "verbatim_all": True}):
+            first = service.ask(BILLING, conversation_id=conversation_id)
+            self.assertEqual(first["status"], "answered")
+            return service, service.ask(follow_up, conversation_id=conversation_id, debug=True)
+
+    def test_exhausted_elaboration_keeps_the_routed_source_and_reports_the_exhausted_mode(self):
+        _, result = self._ask_after_answer("elaborate", dict(_raw_refusal(), routing=dict(self.ROUTING)), "conv-routing-elaborate")
+
+        self.assertEqual(result["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
+        routing = result["debug"]["routing"]
+        self.assertEqual(routing["mode"], "elaboration_exhausted")
+        self.assertEqual(S.ELABORATION_EXHAUSTED_MODE, "elaboration_exhausted")
+        self.assertEqual(routing["selected_source_id"], "M2C-12")
+        self.assertEqual(routing["candidates"], self.ROUTING["candidates"])
+
+    def test_a_causal_follow_up_that_abstains_reports_the_exhausted_mode(self):
+        _, result = self._ask_after_answer("Why?", dict(_raw_refusal(), routing=dict(self.ROUTING)), "conv-routing-why")
+
+        self.assertEqual(result["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
+        self.assertEqual(result["metadata"]["follow_up_category"], "reason")
+        self.assertEqual(result["debug"]["routing"]["mode"], "elaboration_exhausted")
+
+    def test_repeated_elaboration_after_exhaustion_keeps_the_exhausted_mode(self):
+        service, _ = self._ask_after_answer("elaborate", dict(_raw_refusal(), routing=dict(self.ROUTING)), "conv-routing-repeat")
+        again = service.ask("explain more", conversation_id="conv-routing-repeat", debug=True)
+
+        self.assertEqual(again["status"], S.NO_ADDITIONAL_VERIFIED_EVIDENCE)
+        self.assertEqual(again["debug"]["routing"]["mode"], "elaboration_exhausted")
+
+    def test_an_answered_elaboration_keeps_its_own_routing_mode(self):
+        answered = dict(_raw_answer(NOVEL_ANSWER), routing=dict(self.ROUTING))
+        _, result = self._ask_after_answer("elaborate", answered, "conv-routing-answered")
+
+        self.assertEqual(result["status"], "answered")
+        self.assertEqual(result["debug"]["routing"]["mode"], "router_reranked_top10_code_aware")
+
+
 if __name__ == "__main__":
     unittest.main()
