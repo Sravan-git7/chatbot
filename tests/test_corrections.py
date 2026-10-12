@@ -81,10 +81,10 @@ class ApplyTests(unittest.TestCase):
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 
-    def test_repo_corrections_file_is_valid_and_only_topic_5(self):
+    def test_repo_corrections_file_is_valid(self):
         cs = load_corrections(ROOT / "data" / "topic_corrections.json")
-        self.assertEqual([c["topic_id"] for c in cs], [5])
-        c = cs[0]
+        self.assertEqual([c["topic_id"] for c in cs], [1, 5])
+        c = next(x for x in cs if x["topic_id"] == 5)
         self.assertEqual((c["card_guide_id"][:8], c["resolved_guide_id"][:8]), ("021b182b", "2ac7fe29"))
         self.assertTrue(any(e["kind"] == "user_reported_browser" and e["machine_verified"] is False for e in c["evidence"]))
 
@@ -110,12 +110,12 @@ class RealCorrectionTests(unittest.TestCase):
         t5 = next(t for t in m["topics"] if t["topic_id"] == 5)
         self.assertEqual((t5["resolution_status"], t5["guide_id"][:8], t5["card_guide_id"][:8]), ("RESOLVED", "2ac7fe29", "021b182b"))
         self.assertTrue(t5["correction"]["evidence"])
-        self.assertEqual([c["topic_id"] for c in m["topic_corrections"]], [5])
-        for tid in (1, 13, 16):                                          # nothing inferred for the other Guide A topics
+        self.assertEqual([c["topic_id"] for c in m["topic_corrections"]], [1, 5])
+        for tid in (13, 16):
             t = next(x for x in m["topics"] if x["topic_id"] == tid)
-            self.assertEqual((t["resolution_status"], t["guide_id"][:8]), ("UNRESOLVED_GUIDE", "021b182b"))
+            self.assertEqual((t["resolution_status"], t["guide_id"][:8]), ("RESOLVED", "021b182b"))
         a = next(g for g in m["guides"] if g["guide_id"].startswith("021b182b"))
-        self.assertEqual((a["status"], a["topic_ids"]), ("unresolved", [1, 13, 16]))
+        self.assertEqual((a["status"], a["topic_ids"]), ("resolved", [13, 16]))
 
     def test_a_correction_cannot_force_resolution_when_page_not_in_target_toc(self):
         tmp = Path(tempfile.mkdtemp()); self.addCleanup(shutil.rmtree, tmp, True)

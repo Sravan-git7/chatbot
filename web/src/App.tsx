@@ -11,7 +11,7 @@ import type { ChatError, Conversation, Health, Message, Settings, Source } from 
 import { isHttpUrl } from './util'
 
 const DESKTOP_QUERY = '(min-width: 768px)'
-const MIN_THINKING_MS = import.meta.env.MODE === 'test' ? 0 : 840
+const MIN_THINKING_MS = import.meta.env.MODE === 'test' ? 0 : 200
 
 function isElaborationMessage(messages: Message[], index: number, message: Message): boolean {
   const category = message.result?.metadata.follow_up_category

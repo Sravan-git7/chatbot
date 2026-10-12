@@ -10,10 +10,10 @@ describe('SURA UX enhancements', () => {
     const { calls } = stubBackend(() => json(result()))
     render(<App />)
 
-    expect(screen.getByTestId('sura-intro')).toHaveTextContent(/Hi, I'm SURA/i)
+    expect(screen.getByTestId('sura-intro')).toHaveTextContent('Documentation-grounded assistant')
     expect(
       screen.getByText(
-        /I'm your SAP Utilities documentation assistant\. Ask me about billing, invoicing, contract accounts, business partners/i,
+        /Find grounded answers about billing, invoicing, contract accounts, business partners/i,
       ),
     ).toBeInTheDocument()
 
@@ -167,7 +167,7 @@ describe('SURA UX enhancements', () => {
       render(<App />)
 
       // 1. Verify welcome state + live coverage from /api/health
-      expect(screen.getByTestId('sura-intro')).toHaveTextContent(/Hi, I'm SURA/i)
+      expect(screen.getByTestId('sura-intro')).toHaveTextContent('Documentation-grounded assistant')
       const coverage = await screen.findByTestId('coverage')
       expect(coverage).toHaveTextContent('Currently 25 of 29 documentation pages are available.')
 

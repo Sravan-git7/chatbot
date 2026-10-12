@@ -1,0 +1,126 @@
+{
+  "acquisition": {
+    "body_sha256": "ac568b1d9c313e7d53d423fef97ef8caf9ac8a1e1c69c0ba25683ef22240362b",
+    "build_no": null,
+    "deliverable_title": "Utilities",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/2_0_549661e6541f403ea56196782e040bcc.json",
+    "file_sha256": "0ddcd13c75a9b2892558eec34349c37c620ae120a47608e77d7d841853ccf808",
+    "html_chars": 4989,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "0",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.002"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Periodic Billing and Invoicing Analysis (F3424)"
+      ],
+      "kind": "paragraph",
+      "text": "You can use this app to analyze the billing and invoicing process for all billing and invoicing statuses and KPIs. You can drill down to a lower level (such as involved contract IDs) and see all relevant analytical information for the respective data at a highly detailed level. Aggregated information (such as the number of contracts that are ready for invoicing) is also available."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Periodic Billing and Invoicing Analysis (F3424)"
+      ],
+      "kind": "paragraph",
+      "text": "This app is available for the role Billing Specialist (Utilities) ( SAP_BR_BILLING_SPECIALIST_ISU )."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Periodic Billing and Invoicing Analysis (F3424)",
+        "Key Features"
+      ],
+      "kind": "paragraph",
+      "text": "The app presents the most relevant KPIs for a portion-centered analysis of the billing and invoicing process. You can use different charts to perform a step-by-step analysis of data from different perspectives. You can use a table-based approach to access transactional content. The chart and table visualizations can also be used to perform a comprehensive analysis and to drill down through either the chart or table entries to obtain detailed object information."
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Periodic Billing and Invoicing Analysis (F3424)",
+        "Key Features"
+      ],
+      "kind": "list",
+      "text": "- Filter the result set using criteria such as:\n  - Portion (mandatory)\n  - Scheduled Billing Date (mandatory)\n  - Contract Account\n  - Business Partner (a navigation to the business partner overview is available here. In the graphic, select the icon ‘Chart & Table View’, expand the table details, and choose ‘Business Partner’ in the settings)\n- Use visual filters to directly see the impact of your filter settings in a chart. The visual filter offers a unique way of filtering large data sets using visualizations. This helps to recognize facts and situations, whilst reducing the number of interaction steps needed to gain insights. Visual filters are available for the following KPIs:\n  - Invoicing Progress\n  - Invoicing Status\n  - Billing Progress\n  - Billing Status\n- You can make settings to apply specific user configurations to your visualizations, such as sorting, grouping and selecting columns in your table view. Examples of available fields are:\n  - Scheduled Billing Date\n  - Invoicing Progress\n  - Billing Progress\n  - Contract\n  - Rate Category"
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Periodic Billing and Invoicing Analysis (F3424)",
+        "Supported Device Types"
+      ],
+      "kind": "list",
+      "text": "- Desktop\n- Tablet"
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Periodic Billing and Invoicing Analysis (F3424)",
+        "Relevant Business Catalog"
+      ],
+      "kind": "paragraph",
+      "text": "The relevant business catalog for this app is Utilities Billing ( SAP_ISU_BC_BIL_SPECIALIST )."
+    }
+  ],
+  "breadcrumb": [
+    "Fiori for SAP Utilities",
+    "Fiori Apps for SAP Utilities",
+    "Periodic Billing and Invoicing Analysis (F3424)"
+  ],
+  "card": {
+    "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+    "card_page_id": "549661e6541f403ea56196782e040bcc",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Periodic Billing and Invoicing Analysis",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
+    "review_flag": false
+  },
+  "doc_id": "021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc",
+  "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+  "headings": [
+    "Periodic Billing and Invoicing Analysis (F3424)",
+    "Key Features",
+    "Supported Device Types",
+    "Relevant Business Catalog"
+  ],
+  "html_title": "Periodic Billing and Invoicing Analysis (F3424)",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "549661e6541f403ea56196782e040bcc",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-16"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
+  "structure": {
+    "blocks": 6,
+    "chrome_elements_removed": 0,
+    "headings": 4,
+    "kinds": {
+      "list": 2,
+      "paragraph": 4
+    }
+  },
+  "text": "Periodic Billing and Invoicing Analysis (F3424)\nYou can use this app to analyze the billing and invoicing process for all billing and invoicing statuses and KPIs. You can drill down to a lower level (such as involved contract IDs) and see all relevant analytical information for the respective data at a highly detailed level. Aggregated information (such as the number of contracts that are ready for invoicing) is also available.\nThis app is available for the role Billing Specialist (Utilities) ( SAP_BR_BILLING_SPECIALIST_ISU ).\nKey Features\nThe app presents the most relevant KPIs for a portion-centered analysis of the billing and invoicing process. You can use different charts to perform a step-by-step analysis of data from different perspectives. You can use a table-based approach to access transactional content. The chart and table visualizations can also be used to perform a comprehensive analysis and to drill down through either the chart or table entries to obtain detailed object information.\n- Filter the result set using criteria such as:\n  - Portion (mandatory)\n  - Scheduled Billing Date (mandatory)\n  - Contract Account\n  - Business Partner (a navigation to the business partner overview is available here. In the graphic, select the icon ‘Chart & Table View’, expand the table details, and choose ‘Business Partner’ in the settings)\n- Use visual filters to directly see the impact of your filter settings in a chart. The visual filter offers a unique way of filtering large data sets using visualizations. This helps to recognize facts and situations, whilst reducing the number of interaction steps needed to gain insights. Visual filters are available for the following KPIs:\n  - Invoicing Progress\n  - Invoicing Status\n  - Billing Progress\n  - Billing Status\n- You can make settings to apply specific user configurations to your visualizations, such as sorting, grouping and selecting columns in your table view. Examples of available fields are:\n  - Scheduled Billing Date\n  - Invoicing Progress\n  - Billing Progress\n  - Contract\n  - Rate Category\nSupported Device Types\n- Desktop\n- Tablet\nRelevant Business Catalog\nThe relevant business catalog for this app is Utilities Billing ( SAP_ISU_BC_BIL_SPECIALIST ).",
+  "text_sha256": "38786e5a11cc0f17863c34b7ec97767114828a5bf4179aae7d9bc74045f54c99",
+  "title": "Periodic Billing and Invoicing Analysis (F3424)",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 2239
+  }
+}

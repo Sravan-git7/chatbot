@@ -1,0 +1,1470 @@
+{
+  "schema_version": 1,
+  "total_cases": 70,
+  "cases": [
+    {
+      "case_id": "CASE-001",
+      "question": "What is a contract account?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-17",
+      "gold_evidence_spans": [
+        "In Utilities, one contract account contains all contracts of a business partner for which the same payment and billing terms apply."
+      ],
+      "key_facts": [
+        "contract account",
+        "business partner",
+        "contracts",
+        "billing terms"
+      ],
+      "prohibited_claims": [
+        "creates technical installations",
+        "deletes GL accounts"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-002",
+      "question": "What is a premise in SAP Utilities?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Premise",
+        "Technical master data includes:"
+      ],
+      "key_facts": [
+        "premise",
+        "technical master data"
+      ],
+      "prohibited_claims": [
+        "business partner subledger",
+        "pricing condition table"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-003",
+      "question": "What is a connection object in SAP Utilities?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Connection object",
+        "Technical master data includes:"
+      ],
+      "key_facts": [
+        "connection object",
+        "technical master data"
+      ],
+      "prohibited_claims": [
+        "billable service contract",
+        "cash desk lot"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-004",
+      "question": "What is an installation in SAP Utilities?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Installation",
+        "Technical master data includes:"
+      ],
+      "key_facts": [
+        "installation",
+        "technical master data"
+      ],
+      "prohibited_claims": [
+        "bank routing number",
+        "customer credit rating score"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-005",
+      "question": "What is a point of delivery in SAP Utilities?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Point of delivery",
+        "Technical master data includes:"
+      ],
+      "key_facts": [
+        "point of delivery",
+        "technical master data"
+      ],
+      "prohibited_claims": [
+        "payment lot status",
+        "clearing category"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-006",
+      "question": "What is a budget billing plan?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-13",
+      "gold_evidence_spans": [
+        "The budget billing plan is the basis for charging budget billing amounts.",
+        "Utility companies normally bill for their services at the end of a supply period"
+      ],
+      "key_facts": [
+        "budget billing amounts",
+        "supply period",
+        "due dates",
+        "basis"
+      ],
+      "prohibited_claims": [
+        "final settlement document without periodic amounts"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-007",
+      "question": "What is meter reading estimation?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-08",
+      "gold_evidence_spans": [
+        "Meter Reading Estimation",
+        "extrapolation"
+      ],
+      "key_facts": [
+        "meter reading",
+        "estimation"
+      ],
+      "prohibited_claims": [
+        "dunning charge fee calculation"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-008",
+      "question": "What is clearing control in incoming payments?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-20",
+      "gold_evidence_spans": [
+        "Clearing Control in Incoming Payments"
+      ],
+      "key_facts": [
+        "clearing control",
+        "incoming payments"
+      ],
+      "prohibited_claims": [
+        "meter hardware replacement"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-009",
+      "question": "What is an installment plan in FI-CA?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-23",
+      "gold_evidence_spans": [
+        "Installment Plan Overview"
+      ],
+      "key_facts": [
+        "installment plan",
+        "receivables"
+      ],
+      "prohibited_claims": [
+        "rate category determination algorithm"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-010",
+      "question": "What is dunning in FI-CA?",
+      "category": "factual_definition",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-26",
+      "gold_evidence_spans": [
+        "FI-CA Dunning"
+      ],
+      "key_facts": [
+        "dunning",
+        "receivables"
+      ],
+      "prohibited_claims": [
+        "meter register calibration"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-011",
+      "question": "What are the main master data objects in SAP Utilities?",
+      "category": "enumeration",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Business master data includes:",
+        "Technical master data includes:"
+      ],
+      "key_facts": [
+        "Business master data",
+        "Technical master data"
+      ],
+      "prohibited_claims": [
+        "Sales order",
+        "Material document"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-012",
+      "question": "What objects belong to business master data in SAP Utilities?",
+      "category": "enumeration",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Business master data includes:",
+        "Business partner",
+        "Contract account",
+        "Contract (billable service)",
+        "Service provider",
+        "Non-billable service"
+      ],
+      "key_facts": [
+        "business partner",
+        "contract account",
+        "contract"
+      ],
+      "prohibited_claims": [
+        "Premise",
+        "Grid"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-013",
+      "question": "What objects belong to technical master data in SAP Utilities?",
+      "category": "enumeration",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Technical master data includes:",
+        "Grid",
+        "Point of delivery",
+        "Connection",
+        "Connection object",
+        "Technical installation",
+        "Premise",
+        "Device location",
+        "Installation",
+        "Device"
+      ],
+      "key_facts": [
+        "connection object",
+        "premise",
+        "installation",
+        "device"
+      ],
+      "prohibited_claims": [
+        "Business partner",
+        "Contract account"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-014",
+      "question": "What clearing types are available in incoming payments?",
+      "category": "enumeration",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-21",
+      "gold_evidence_spans": [
+        "Clearing Types"
+      ],
+      "key_facts": [
+        "clearing types",
+        "payment"
+      ],
+      "prohibited_claims": [
+        "meter calibration certificate"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-015",
+      "question": "What statuses can a meter reading result have during monitoring?",
+      "category": "enumeration",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-07",
+      "gold_evidence_spans": [
+        "Monitoring Meter Reading Results"
+      ],
+      "key_facts": [
+        "meter reading results",
+        "status"
+      ],
+      "prohibited_claims": [
+        "reversed dunning lot"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-016",
+      "question": "What estimation procedures are available in meter reading?",
+      "category": "enumeration",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-09",
+      "gold_evidence_spans": [
+        "Estimation Procedure Details"
+      ],
+      "key_facts": [
+        "estimation procedure"
+      ],
+      "prohibited_claims": [
+        "blockchain consensus protocol"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-017",
+      "question": "How do I create an installment plan?",
+      "category": "procedural_documented",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-24",
+      "gold_evidence_spans": [
+        "Creating Installment Plans"
+      ],
+      "key_facts": [
+        "installment plan",
+        "receivables"
+      ],
+      "prohibited_claims": [
+        "The available SAP Help page explains the purpose and parameters of a budget billing plan"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-018",
+      "question": "How do I change an installment plan?",
+      "category": "procedural_documented",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-25",
+      "gold_evidence_spans": [
+        "Displaying and Changing Installment Plans"
+      ],
+      "key_facts": [
+        "installment plan",
+        "change",
+        "deactivate"
+      ],
+      "prohibited_claims": [
+        "does not document the steps to complete this procedure"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-019",
+      "question": "How do I submit receivables to a collection agency?",
+      "category": "procedural_documented",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-27",
+      "gold_evidence_spans": [
+        "Submission of Receivables to Collection Agency"
+      ],
+      "key_facts": [
+        "submission",
+        "collection agency",
+        "receivables"
+      ],
+      "prohibited_claims": [
+        "does not document the steps to complete this procedure"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-020",
+      "question": "How do I process meter reading data during move-in?",
+      "category": "procedural_documented",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-10",
+      "gold_evidence_spans": [
+        "Meter Reading Data During Move-In"
+      ],
+      "key_facts": [
+        "move-in",
+        "meter reading"
+      ],
+      "prohibited_claims": [
+        "does not document the steps to complete this procedure"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-021",
+      "question": "How do I trigger disconnection of a utility installation?",
+      "category": "procedural_documented",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-29",
+      "gold_evidence_spans": [
+        "Disconnection/Reconnection of a Utility Installation"
+      ],
+      "key_facts": [
+        "disconnection",
+        "installation"
+      ],
+      "prohibited_claims": [
+        "does not document the steps to complete this procedure"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-022",
+      "question": "How do I display an installment plan in SAP Utilities?",
+      "category": "procedural_documented",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-25",
+      "gold_evidence_spans": [
+        "Displaying and Changing Installment Plans"
+      ],
+      "key_facts": [
+        "display",
+        "installment plan"
+      ],
+      "prohibited_claims": [
+        "does not document the steps to complete this procedure"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-023",
+      "question": "How do I process incoming payments from external cash desks?",
+      "category": "procedural_documented",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-22",
+      "gold_evidence_spans": [
+        "Processing Incoming Payments from External Cash Desks"
+      ],
+      "key_facts": [
+        "external cash desks",
+        "payment"
+      ],
+      "prohibited_claims": [
+        "does not document the steps to complete this procedure"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-024",
+      "question": "How do I execute automatic billing in SAP Utilities?",
+      "category": "procedural_documented",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-12",
+      "gold_evidence_spans": [
+        "Automatic Billing"
+      ],
+      "key_facts": [
+        "automatic billing",
+        "billing"
+      ],
+      "prohibited_claims": [
+        "does not document the steps to complete this procedure"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-025",
+      "question": "How do I create a budget billing plan?",
+      "category": "procedural_lacks_steps",
+      "conversation_context": null,
+      "expected_behavior": "partial_answer",
+      "expected_source_id": "M2C-13",
+      "gold_evidence_spans": [
+        "The available SAP Help page explains the purpose and parameters of a budget billing plan, but it does not document the steps to create one."
+      ],
+      "key_facts": [
+        "budget billing amounts",
+        "supply period",
+        "does not document the steps to create one"
+      ],
+      "prohibited_claims": [
+        "Click Create Budget Billing Plan button",
+        "Execute transaction EA61 to finalize plan creation steps"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-026",
+      "question": "How do I analyse periodic billing and invoicing?",
+      "category": "procedural_lacks_steps",
+      "conversation_context": null,
+      "expected_behavior": "partial_answer",
+      "expected_source_id": "M2C-16",
+      "gold_evidence_spans": [
+        "The available SAP Help page describes the features and KPIs of the Periodic Billing and Invoicing Analysis app, but it does not document the steps to perform the analysis."
+      ],
+      "key_facts": [
+        "KPIs",
+        "F3424",
+        "does not document the steps to perform the analysis"
+      ],
+      "prohibited_claims": [
+        "Step 1: Open Fiori launchpad and enter test data",
+        "Step 2: Press F8 to execute analysis"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-027",
+      "question": "How do I configure device management overview settings?",
+      "category": "procedural_lacks_steps",
+      "conversation_context": null,
+      "expected_behavior": "partial_answer",
+      "expected_source_id": "M2C-05",
+      "gold_evidence_spans": [
+        "Device Management Overview"
+      ],
+      "key_facts": [
+        "device management",
+        "does not document the steps"
+      ],
+      "prohibited_claims": [
+        "Execute SPRO path Utilities > Device Management > Overview Settings"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-028",
+      "question": "How do I configure contract accounts overview parameters?",
+      "category": "procedural_lacks_steps",
+      "conversation_context": null,
+      "expected_behavior": "partial_answer",
+      "expected_source_id": "M2C-17",
+      "gold_evidence_spans": [
+        "Contract Accounts Overview"
+      ],
+      "key_facts": [
+        "contract account",
+        "does not document the steps"
+      ],
+      "prohibited_claims": [
+        "Step 1: Go to transaction CAA1",
+        "Step 2: Enter customizing parameters"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-029",
+      "question": "How do I execute move-in and move-out overview?",
+      "category": "procedural_lacks_steps",
+      "conversation_context": null,
+      "expected_behavior": "partial_answer",
+      "expected_source_id": "M2C-02",
+      "gold_evidence_spans": [
+        "Move-In/Out Overview"
+      ],
+      "key_facts": [
+        "move-in",
+        "move-out",
+        "does not document the steps"
+      ],
+      "prohibited_claims": [
+        "Click overview button on screen 100"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-030",
+      "question": "How do I configure clearing control rules in incoming payments?",
+      "category": "procedural_lacks_steps",
+      "conversation_context": null,
+      "expected_behavior": "partial_answer",
+      "expected_source_id": "M2C-20",
+      "gold_evidence_spans": [
+        "Clearing Control in Incoming Payments"
+      ],
+      "key_facts": [
+        "clearing control",
+        "incoming payments",
+        "does not document the steps"
+      ],
+      "prohibited_claims": [
+        "Open maintenance view V_TFK041A to define configuration rules"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-031",
+      "question": "What happens during the move-in process and how does it relate to meter readings?",
+      "category": "multi_step_or_multi_doc",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-03",
+      "gold_evidence_spans": [
+        "Move-In Process"
+      ],
+      "key_facts": [
+        "move-in",
+        "contract"
+      ],
+      "prohibited_claims": [
+        "automatic write-off of prior tenant debt"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-032",
+      "question": "What is the relationship between billing and invoicing in SAP Utilities?",
+      "category": "multi_step_or_multi_doc",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-11",
+      "gold_evidence_spans": [
+        "SAP Utilities Billing Procedure"
+      ],
+      "key_facts": [
+        "billing",
+        "billing document"
+      ],
+      "prohibited_claims": [
+        "billing and invoicing are identical transactions with no difference"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-033",
+      "question": "How are budget billing amounts processed during end-of-year billing?",
+      "category": "multi_step_or_multi_doc",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-13",
+      "gold_evidence_spans": [
+        "annual consumption billing",
+        "budget billing amounts"
+      ],
+      "key_facts": [
+        "budget billing amounts",
+        "supply period",
+        "actual amount owed"
+      ],
+      "prohibited_claims": [
+        "budget billing amounts are discarded without reconciliation"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-034",
+      "question": "How does a utility installation disconnection lead to reconnection?",
+      "category": "multi_step_or_multi_doc",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-29",
+      "gold_evidence_spans": [
+        "Disconnection/Reconnection of a Utility Installation"
+      ],
+      "key_facts": [
+        "disconnection",
+        "installation"
+      ],
+      "prohibited_claims": [
+        "reconnection is forbidden under all circumstances"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-035",
+      "question": "How do collection agency enterprise services interact with submitted receivables?",
+      "category": "multi_step_or_multi_doc",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-28",
+      "gold_evidence_spans": [
+        "Collection Agency APIs and Enterprise Services"
+      ],
+      "key_facts": [
+        "collection agency",
+        "enterprise services"
+      ],
+      "prohibited_claims": [
+        "manual paper courier delivery required"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-036",
+      "question": "How do meter reading estimation and monitoring work together?",
+      "category": "multi_step_or_multi_doc",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-08",
+      "gold_evidence_spans": [
+        "Meter Reading Estimation"
+      ],
+      "key_facts": [
+        "estimation",
+        "meter reading"
+      ],
+      "prohibited_claims": [
+        "estimation bypasses plausibility checks unconditionally"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-037",
+      "question": "How do incoming payments interact with installment plans?",
+      "category": "multi_step_or_multi_doc",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-20",
+      "gold_evidence_spans": [
+        "Clearing Control in Incoming Payments"
+      ],
+      "key_facts": [
+        "clearing",
+        "incoming payments"
+      ],
+      "prohibited_claims": [
+        "payments cannot be applied to installment plans"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-038",
+      "question": "What are the structural differences between business master data and technical master data?",
+      "category": "multi_step_or_multi_doc",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Business master data includes:",
+        "Technical master data includes:"
+      ],
+      "key_facts": [
+        "business master data",
+        "technical master data"
+      ],
+      "prohibited_claims": [
+        "they are identical concepts with no distinction"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-039",
+      "question": "Can multiple contracts belong to one contract account?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What is a contract account?"
+        },
+        {
+          "role": "assistant",
+          "content": "In Utilities, one contract account contains all contracts of a business partner for which the same payment and billing terms apply. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-17",
+      "gold_evidence_spans": [
+        "You can assign more than one contract to a single contract account."
+      ],
+      "key_facts": [
+        "more than one contract",
+        "single contract account"
+      ],
+      "prohibited_claims": [
+        "only one contract per account is permitted"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-040",
+      "question": "Can you explain the business master data objects in more detail?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What are the main master data objects in SAP Utilities?"
+        },
+        {
+          "role": "assistant",
+          "content": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Business master data includes:",
+        "Business partner",
+        "Contract account",
+        "Contract (billable service)"
+      ],
+      "key_facts": [
+        "business partner",
+        "contract account",
+        "contract"
+      ],
+      "prohibited_claims": [
+        "Device location is a business object"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-041",
+      "question": "Why do utility companies charge budget billing amounts?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What is a budget billing plan?"
+        },
+        {
+          "role": "assistant",
+          "content": "The budget billing plan is the basis for charging budget billing amounts. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-13",
+      "gold_evidence_spans": [
+        "Therefore, they charge budget billing amounts during the supply period instead of the actual amount owed, in order to remain solvent."
+      ],
+      "key_facts": [
+        "supply period",
+        "remain solvent",
+        "actual amount owed"
+      ],
+      "prohibited_claims": [
+        "to penalize customers with late fees"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-042",
+      "question": "When is meter reading estimation triggered?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What is meter reading estimation?"
+        },
+        {
+          "role": "assistant",
+          "content": "Meter reading estimation calculates consumption when actual readings are missing. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-08",
+      "gold_evidence_spans": [
+        "Meter Reading Estimation"
+      ],
+      "key_facts": [
+        "meter reading",
+        "estimation"
+      ],
+      "prohibited_claims": [
+        "triggered randomly every midnight"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-043",
+      "question": "How can I deactivate an installment plan?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What is an installment plan in FI-CA?"
+        },
+        {
+          "role": "assistant",
+          "content": "An installment plan divides receivables into installment amounts. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-25",
+      "gold_evidence_spans": [
+        "Displaying and Changing Installment Plans",
+        "deactivate"
+      ],
+      "key_facts": [
+        "installment plan",
+        "deactivate"
+      ],
+      "prohibited_claims": [
+        "deactivation requires deleting the database schema"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-044",
+      "question": "What happens if dunning fails to collect receivables?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What is dunning in FI-CA?"
+        },
+        {
+          "role": "assistant",
+          "content": "Dunning processes overdue receivables. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-27",
+      "gold_evidence_spans": [
+        "Submission of Receivables to Collection Agency"
+      ],
+      "key_facts": [
+        "collection agency",
+        "receivables",
+        "submission"
+      ],
+      "prohibited_claims": [
+        "all debt is forgiven with zero collection action"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-045",
+      "question": "Now tell me about budget billing plans.",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What is meter reading estimation?"
+        },
+        {
+          "role": "assistant",
+          "content": "Meter reading estimation calculates estimated consumption. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-13",
+      "gold_evidence_spans": [
+        "Budget Billing Plan",
+        "The budget billing plan is the basis for charging budget billing amounts."
+      ],
+      "key_facts": [
+        "budget billing plan",
+        "budget billing amounts"
+      ],
+      "prohibited_claims": [
+        "meter reading registers"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-046",
+      "question": "What is disconnection of an installation?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "How do I create an installment plan?"
+        },
+        {
+          "role": "assistant",
+          "content": "You create an installment plan by selecting open items. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-29",
+      "gold_evidence_spans": [
+        "Disconnection/Reconnection of a Utility Installation"
+      ],
+      "key_facts": [
+        "disconnection",
+        "installation"
+      ],
+      "prohibited_claims": [
+        "installment amount due dates"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-047",
+      "question": "What are clearing types in incoming payments?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What is the move-in process?"
+        },
+        {
+          "role": "assistant",
+          "content": "Move-in handles customer occupancy. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-21",
+      "gold_evidence_spans": [
+        "Clearing Types"
+      ],
+      "key_facts": [
+        "clearing types",
+        "incoming payments"
+      ],
+      "prohibited_claims": [
+        "move-in contract creation"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-048",
+      "question": "What is the role of a service provider in Utilities?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What is automatic billing?"
+        },
+        {
+          "role": "assistant",
+          "content": "Automatic billing processes billing orders. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Service provider",
+        "Business master data includes:"
+      ],
+      "key_facts": [
+        "service provider",
+        "business master data"
+      ],
+      "prohibited_claims": [
+        "billing order batch scheduling"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-049",
+      "question": "What is device management in SAP Utilities?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "Explain collection agency APIs."
+        },
+        {
+          "role": "assistant",
+          "content": "APIs provide web service integration with agencies. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-05",
+      "gold_evidence_spans": [
+        "Device Management Overview"
+      ],
+      "key_facts": [
+        "device management",
+        "devices"
+      ],
+      "prohibited_claims": [
+        "collection agency fees"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-050",
+      "question": "Which business role has access to app F3424?",
+      "category": "followup_and_transition",
+      "conversation_context": [
+        {
+          "role": "user",
+          "content": "What is periodic billing and invoicing analysis?"
+        },
+        {
+          "role": "assistant",
+          "content": "Periodic Billing and Invoicing Analysis (F3424) analyzes billing status. [S1]"
+        }
+      ],
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-16",
+      "gold_evidence_spans": [
+        "Billing Specialist (Utilities)",
+        "SAP_BR_BILLING_SPECIALIST_ISU"
+      ],
+      "key_facts": [
+        "Billing Specialist",
+        "SAP_BR_BILLING_SPECIALIST_ISU"
+      ],
+      "prohibited_claims": [
+        "Cashier Specialist",
+        "Plant Maintenance Specialist"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-051",
+      "question": "How do I reverse a document?",
+      "category": "ambiguous",
+      "conversation_context": null,
+      "expected_behavior": "clarify",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "billing document",
+        "invoicing document",
+        "payment document"
+      ],
+      "prohibited_claims": [
+        "assuming billing document without clarification"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-052",
+      "question": "How do I process payments?",
+      "category": "ambiguous",
+      "conversation_context": null,
+      "expected_behavior": "clarify",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "incoming payments",
+        "external cash desk",
+        "clearing"
+      ],
+      "prohibited_claims": [
+        "assuming external cash desk without clarification"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-053",
+      "question": "What is an installation?",
+      "category": "ambiguous",
+      "conversation_context": null,
+      "expected_behavior": "clarify",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Installation",
+        "Technical master data includes:"
+      ],
+      "key_facts": [
+        "utility installation",
+        "technical master data"
+      ],
+      "prohibited_claims": [
+        "software operating system setup"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-054",
+      "question": "How do I create a plan in Utilities?",
+      "category": "ambiguous",
+      "conversation_context": null,
+      "expected_behavior": "clarify",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "budget billing plan",
+        "installment plan"
+      ],
+      "prohibited_claims": [
+        "assuming maintenance plan"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-055",
+      "question": "Where can I view analysis reports?",
+      "category": "ambiguous",
+      "conversation_context": null,
+      "expected_behavior": "clarify",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "periodic billing analysis",
+        "payment analysis"
+      ],
+      "prohibited_claims": [
+        "assuming Google Analytics dashboard"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-056",
+      "question": "How do I monitor results?",
+      "category": "ambiguous",
+      "conversation_context": null,
+      "expected_behavior": "clarify",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "meter reading results",
+        "billing results"
+      ],
+      "prohibited_claims": [
+        "assuming sports event scores"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-057",
+      "question": "How do I configure sales order pricing procedures in SAP SD?",
+      "category": "unsupported_or_out_of_scope",
+      "conversation_context": null,
+      "expected_behavior": "abstain",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "doesn't appear to match the SAP Utilities documentation"
+      ],
+      "prohibited_claims": [
+        "Execute transaction V/08 to maintain condition types"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-058",
+      "question": "How do I set up depreciation keys in SAP Asset Accounting?",
+      "category": "unsupported_or_out_of_scope",
+      "conversation_context": null,
+      "expected_behavior": "abstain",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "doesn't appear to match the SAP Utilities documentation"
+      ],
+      "prohibited_claims": [
+        "Define depreciation keys in AFAMA transaction"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-059",
+      "question": "What is the capital adequacy ratio requirement under Basel III?",
+      "category": "unsupported_or_out_of_scope",
+      "conversation_context": null,
+      "expected_behavior": "abstain",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "doesn't appear to match the SAP Utilities documentation"
+      ],
+      "prohibited_claims": [
+        "Tier 1 capital minimum is 6%"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-060",
+      "question": "What is the weather forecast for Walldorf tomorrow?",
+      "category": "unsupported_or_out_of_scope",
+      "conversation_context": null,
+      "expected_behavior": "abstain",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "doesn't appear to match the SAP Utilities documentation"
+      ],
+      "prohibited_claims": [
+        "Sunny with light clouds and 22 degrees Celsius"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-061",
+      "question": "How do I write a Python script for TensorFlow neural networks?",
+      "category": "unsupported_or_out_of_scope",
+      "conversation_context": null,
+      "expected_behavior": "abstain",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "doesn't appear to match the SAP Utilities documentation"
+      ],
+      "prohibited_claims": [
+        "import tensorflow as tf; model = tf.keras.Sequential()"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-062",
+      "question": "What are the ingredients in an espresso martini?",
+      "category": "unsupported_or_out_of_scope",
+      "conversation_context": null,
+      "expected_behavior": "abstain",
+      "expected_source_id": null,
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "doesn't appear to match the SAP Utilities documentation"
+      ],
+      "prohibited_claims": [
+        "Combine vodka, coffee liqueur and fresh espresso"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-063",
+      "question": "What is the contract account business object?",
+      "category": "unavailable_documentation",
+      "conversation_context": null,
+      "expected_behavior": "unavailable",
+      "expected_source_id": "M2C-18",
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "underlying SAP Help page is not currently available in the local knowledge base"
+      ],
+      "prohibited_claims": [
+        "Contract account business object methods and attributes derived from outside knowledge"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-064",
+      "question": "What attributes are maintained in the contract account business object?",
+      "category": "unavailable_documentation",
+      "conversation_context": null,
+      "expected_behavior": "unavailable",
+      "expected_source_id": "M2C-18",
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "underlying SAP Help page is not currently available in the local knowledge base"
+      ],
+      "prohibited_claims": [
+        "Attributes table generated from outside knowledge"
+      ],
+      "call_llm_proposed_policy": false
+    },
+    {
+      "case_id": "CASE-065",
+      "question": "Why does transaction VA01 create SAP Utilities meter reading documents?",
+      "category": "adversarial_false_premise",
+      "conversation_context": null,
+      "expected_behavior": "abstain",
+      "expected_source_id": "M2C-06",
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "VA01 does not create meter reading documents"
+      ],
+      "prohibited_claims": [
+        "VA01 creates meter reading documents"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-066",
+      "question": "How do I use transaction F3424 to delete a customer's bank account?",
+      "category": "adversarial_false_premise",
+      "conversation_context": null,
+      "expected_behavior": "partial_answer",
+      "expected_source_id": "M2C-16",
+      "gold_evidence_spans": [
+        "Periodic Billing and Invoicing Analysis (F3424)"
+      ],
+      "key_facts": [
+        "Periodic Billing and Invoicing Analysis",
+        "F3424",
+        "does not delete bank accounts"
+      ],
+      "prohibited_claims": [
+        "Click Delete Bank Account in F3424 transaction screen"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-067",
+      "question": "What are the 15 types of master data in SAP Utilities?",
+      "category": "adversarial_false_premise",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "There are two different types of master data:",
+        "Business master data includes:",
+        "Technical master data includes:"
+      ],
+      "key_facts": [
+        "two different types of master data",
+        "Business master data",
+        "Technical master data"
+      ],
+      "prohibited_claims": [
+        "There are 15 distinct types of master data in SAP IS-U"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-068",
+      "question": "How does SAP Utilities automatically forgive all customer utility debt after 30 days?",
+      "category": "adversarial_false_premise",
+      "conversation_context": null,
+      "expected_behavior": "abstain",
+      "expected_source_id": "M2C-26",
+      "gold_evidence_spans": [
+        "FI-CA Dunning"
+      ],
+      "key_facts": [
+        "debt is not automatically forgiven",
+        "dunning"
+      ],
+      "prohibited_claims": [
+        "SAP Utilities automatically forgives utility debt after 30 days"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-069",
+      "question": "Why is the premise object considered a business master data object?",
+      "category": "adversarial_false_premise",
+      "conversation_context": null,
+      "expected_behavior": "answer",
+      "expected_source_id": "M2C-01",
+      "gold_evidence_spans": [
+        "Technical master data includes:",
+        "Premise"
+      ],
+      "key_facts": [
+        "Technical master data includes",
+        "Premise"
+      ],
+      "prohibited_claims": [
+        "Premise is categorized as a business master data object"
+      ],
+      "call_llm_proposed_policy": true
+    },
+    {
+      "case_id": "CASE-070",
+      "question": "How do I configure blockchain smart contracts in SAP Utilities IS-U billing?",
+      "category": "adversarial_false_premise",
+      "conversation_context": null,
+      "expected_behavior": "abstain",
+      "expected_source_id": "M2C-11",
+      "gold_evidence_spans": [],
+      "key_facts": [
+        "doesn't appear to match the SAP Utilities documentation"
+      ],
+      "prohibited_claims": [
+        "Deploy Ethereum solidity contract into IS-U billing pipeline"
+      ],
+      "call_llm_proposed_policy": false
+    }
+  ]
+}

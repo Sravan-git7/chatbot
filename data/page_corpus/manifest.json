@@ -1,14 +1,25 @@
 {
   "cards": [
     {
+      "acquisition_type": "saved_sap_help_pagecontent_response",
       "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
-      "corpus_status": "excluded_card_identity_only",
-      "effective_guide_id": null,
-      "effective_page_id": null,
-      "identity_status_7c": "card_identity_only",
-      "reason": "the card's guide is not verified by any saved response or TOC; nothing may be admitted for it",
+      "corpus_status": "ingested",
+      "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4",
+      "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "effective_page_id": "e369ce53118d4308e10000000a174cb4",
+      "identity_status_7c": "corrected_identity",
+      "record": "pages/e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4.json",
       "review_flag": false,
+      "source_checks": [
+        {
+          "file": "data/page_corpus/fetched/1_40374631_e369ce53118d4308e10000000a174cb4.json",
+          "outcome": "admitted",
+          "reasons": []
+        }
+      ],
       "source_id": "M2C-01",
+      "text_chars": 499,
+      "text_sha256": "ff2a8f20a903743658b057efa4974625b25204bf14a6461034a16317204d51eb",
       "title": "Utilities Master Data"
     },
     {
@@ -254,14 +265,25 @@
       "title": "Automatic Billing"
     },
     {
+      "acquisition_type": "saved_sap_help_pagecontent_response",
       "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
-      "corpus_status": "excluded_card_identity_only",
-      "effective_guide_id": null,
-      "effective_page_id": null,
-      "identity_status_7c": "card_identity_only",
-      "reason": "the card's guide is not verified by any saved response or TOC; nothing may be admitted for it",
+      "corpus_status": "ingested",
+      "doc_id": "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b",
+      "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "effective_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
+      "identity_status_7c": "identified_not_local",
+      "record": "pages/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.json",
       "review_flag": false,
+      "source_checks": [
+        {
+          "file": "data/page_corpus/fetched/1_0_c1a5e8aee73440ee971a768af5b9ea1b.json",
+          "outcome": "admitted",
+          "reasons": []
+        }
+      ],
       "source_id": "M2C-13",
+      "text_chars": 1123,
+      "text_sha256": "941617b81c2fede1ad38d16c278054154695a9d7ebfc4a9c8d953b370464afe5",
       "title": "Budget Billing Plan"
     },
     {
@@ -309,14 +331,25 @@
       "title": "Processing Budget Billing Plans"
     },
     {
+      "acquisition_type": "saved_sap_help_pagecontent_response",
       "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
-      "corpus_status": "excluded_card_identity_only",
-      "effective_guide_id": null,
-      "effective_page_id": null,
-      "identity_status_7c": "card_identity_only",
-      "reason": "the card's guide is not verified by any saved response or TOC; nothing may be admitted for it",
+      "corpus_status": "ingested",
+      "doc_id": "021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc",
+      "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "effective_page_id": "549661e6541f403ea56196782e040bcc",
+      "identity_status_7c": "identified_not_local",
+      "record": "pages/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.json",
       "review_flag": false,
+      "source_checks": [
+        {
+          "file": "data/page_corpus/fetched/2_0_549661e6541f403ea56196782e040bcc.json",
+          "outcome": "admitted",
+          "reasons": []
+        }
+      ],
       "source_id": "M2C-16",
+      "text_chars": 2239,
+      "text_sha256": "38786e5a11cc0f17863c34b7ec97767114828a5bf4179aae7d9bc74045f54c99",
       "title": "Periodic Billing and Invoicing Analysis"
     },
     {
@@ -595,7 +628,7 @@
       "title": "Disconnection/Reconnection of a Utility Installation"
     }
   ],
-  "corpus_sha256": "a447f7b63390831f85811ee12a2f316b8d44437679b4e3d28f0293c3e23a624b",
+  "corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
   "inputs": {
     "captures": {
       "captured_responses/1_40374490_b1a202c9bb3011da2b24000f20dac9ef.json": "02347ba7114d855d038aceac7d509071aa48f438729584fb3ef43c65b70fa8ce",
@@ -614,7 +647,10 @@
       "data/page_corpus/fetched/16_40374790_10e7c5536a51204be10000000a174cb4.json": "0bf71aadc3e47e4e34203235f0b333f98923748047c9369ebe4948fd41ef25d5",
       "data/page_corpus/fetched/17_40374790_9c9c2344851f412f823d5f8a9dc7c694.json": "5abc431322a464a3604505ab138dda5aa3273678a577f729d9c4e83accdf1ecc",
       "data/page_corpus/fetched/18_40374682_8682ce53118d4308e10000000a174cb4.json": "1d9d38aaa89747a1ad3b34f7539f6fb373b2c1be4dc7ca1eadc161062c3aa44b",
+      "data/page_corpus/fetched/1_0_c1a5e8aee73440ee971a768af5b9ea1b.json": "925a7b4643225b13d083f90cbb954174eadb493d460e9610d0ad8a620ce17dae",
+      "data/page_corpus/fetched/1_40374631_e369ce53118d4308e10000000a174cb4.json": "8714e6c513a3e803e28339ebbe3f6dc61406c7193b538db23d170632e9cbd2a0",
       "data/page_corpus/fetched/1_40374682_0981ce53118d4308e10000000a174cb4.json": "32ab23844d005d76dee8b1680da384b788dda10b4b866c6f32528fd685a15cb5",
+      "data/page_corpus/fetched/2_0_549661e6541f403ea56196782e040bcc.json": "0ddcd13c75a9b2892558eec34349c37c620ae120a47608e77d7d841853ccf808",
       "data/page_corpus/fetched/2_40374682_0f81ce53118d4308e10000000a174cb4.json": "fd47255b40196fac1f2ded7db3875c6ed314288284ea3b9d5774baf0f52028a3",
       "data/page_corpus/fetched/3_40374657_bc90d0533f8e4308e10000000a174cb4.json": "d590913dde0c8b633d7ce2e7eeccb75aec12311992f7393a04382dccd4b3450f",
       "data/page_corpus/fetched/4_40374657_d090d0533f8e4308e10000000a174cb4.json": "03cff44915398e08cfeac918897d1e282de5f53e21ebed29df10fffbb1dde934",
@@ -624,7 +660,7 @@
       "data/page_corpus/fetched/8_40374633_147cce53118d4308e10000000a174cb4.json": "158dc738bcd2fb8ee6fbad66c6773d3f649034d31331cb40d51c6568b4eddc81",
       "data/page_corpus/fetched/9_40374790_063bf3eb68e347efa5c0fc1d389f70f7.json": "9d349bf709c3d82e84b485dd40b51503c6d7b0a80524ffe55839674affea1797"
     },
-    "card_identity_cards_sha256": "bc6740907d99d465d8835051309ee4602f47905fd586b76c77105abbcf62cdff"
+    "card_identity_cards_sha256": "9e4baf32c0017c1361659a2b27e46ae6557ffefed4acb921357f64e095ee13c3"
   },
   "kind": "m2c_page_corpus_manifest",
   "schema_version": "8.1",
@@ -639,16 +675,15 @@
     "note": "page records are written under data/page_corpus/, not data/sap_help/: the Phase 7A join reads data/sap_help/pages and its results are pinned"
   },
   "totals": {
-    "captures_found": 25,
+    "captures_found": 28,
     "captures_unused": 1,
     "cards": 29,
-    "cards_not_ingested": 4,
-    "guides": 6,
-    "pages_ingested": 25,
+    "cards_not_ingested": 1,
+    "guides": 7,
+    "pages_ingested": 28,
     "status_counts": {
-      "excluded_card_identity_only": 3,
       "excluded_conflicting_identity": 1,
-      "ingested": 25
+      "ingested": 28
     }
   },
   "unused_captures": [

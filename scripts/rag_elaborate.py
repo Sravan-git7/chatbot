@@ -81,7 +81,11 @@ _DANGLING = re.compile(r"^(this|these|those|that|it|they|such|the latter|the for
 _DANGLING_REF = re.compile(r"^(see\b|for more information\b|note\b|for additional information\b)", re.I)
 _VERBISH = re.compile(r"\b(is|are|was|were|can|may|must|should|will|has|have|had|enables?|contains?|includes?|assigns?|manages?|uses?|create[sd]?|tend|mean[s]?|refer[s]?|applie[sd]?|applies|provide[sd]?|require[sd]?|allow[s]?|define[sd]?|posts?|posted|processe[sd]?|execute[sd]?|billed?|determines?|represents?)\b", re.I)
 _DEFINING = re.compile(r"\b(is|are|enables?|means?|refers?|represents?|contains?|includes?|describes?|defines?|consists?)\b", re.I)
-_REASON = re.compile(r"\b(because|since|due to|therefore|thus|so that|in order to|reason|reasons|result[s]? in|hence)\b", re.I)
+_REASON = re.compile(
+    r"\b(because|since|due to|therefore|thus|so that|in order to|reason|reasons|result[s]? in|hence|"
+    r"until|unless|only (?:when|if|after))\b",
+    re.I,
+)
 _CONTINUE = re.compile(r"\b(next|after|then|subsequent|following|once|finally|step)\b", re.I)
 _CITE = re.compile(r"\[S\d+\]")
 _INVOICING_ANCHOR = re.compile(r"\binvoic\w*\b", re.I)
@@ -744,6 +748,11 @@ class IntentExtractiveGenerator:
                 line = f"{prefix}{cited_fact}"
                 if not any(entry["text"] == line for entry in line_records):
                     line_records.append({"text": line, "section_key": section_key, "sequence_group": sequence_group})
+            if getattr(u, "list_items", None):
+                for item in u.list_items:
+                    item_line = f"{item} [{u.marker}]"
+                    if not any(entry["text"] == item_line for entry in line_records):
+                        line_records.append({"text": item_line, "section_key": section_key, "sequence_group": None})
             if u.follow:
                 append_context_line(u.follow, u.marker, section_key)
             record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text,

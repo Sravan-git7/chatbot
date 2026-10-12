@@ -3,6 +3,28 @@
   "note": "Per-topic card->guide corrections. The card records (PDF links, data/topic_manifest.json) are NOT edited. A correction never registers a guide and never confirms a page by itself: the topic resolves only if the card's page id is a node of the verified TOC of resolved_guide_id.",
   "corrections": [
     {
+      "topic_id": 1,
+      "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "card_page_id": "0a6ace53118d4308e10000000a174cb4",
+      "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+      "resolved_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "resolved_page_id": "e369ce53118d4308e10000000a174cb4",
+      "reason": "SAP resolves the original card #1 map-root URL (under 021b182b.../0a6ace53...) to guide e52c8ee6197147ec97dfc2eb8c46a3ad ('Master Data'); 0a6ace53... is that guide's DITA buildableMapLoio and e369ce53... is its declared landing page and first TOC root.",
+      "evidence": [
+        {
+          "kind": "saved_response",
+          "file": "D:/sap-captures/M2C-01.json",
+          "note": "deliverable.loio=e52c8ee6..., buildableMapLoio=0a6ace53..., currentPage.loio=e369ce53..."
+        },
+        {
+          "kind": "user_reported_browser",
+          "date": "2026-10-11",
+          "machine_verified": false,
+          "observation": "Opening original card URL .../021b182b.../0a6ace53....html in browser resolves to Master Data guide .../e52c8ee6.../e369ce53....html"
+        }
+      ]
+    },
+    {
       "topic_id": 5,
       "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
       "card_page_id": "8990d0533f8e4308e10000000a174cb4",

@@ -211,6 +211,12 @@ def build_corpus(root: Path = ROOT, out_dir: Path = CORPUS_DIR, write: bool = Tr
     records: Dict[str, Dict[str, Any]] = {}
     plan: List[Dict[str, Any]] = []
     pairs = {c["guide_id"]: (c["numeric_deliverable_id"], c["build_no"]) for c in caps if c["ok"] and c.get("guide_id")}
+    for gid, reg in ctx.registrations.items():
+        if reg.get("numeric_id") and reg.get("build_no") and gid not in pairs:
+            pairs[gid] = (str(reg["numeric_id"]), str(reg["build_no"]))
+    for gid, rinfo in ctx.registry.items():
+        if rinfo.get("numeric_deliverable_id") and rinfo.get("build_no") and gid not in pairs:
+            pairs[gid] = (str(rinfo["numeric_deliverable_id"]), str(rinfo["build_no"]))
     used_files = set()
     for ident in sorted(identities, key=lambda i: pid._num(i.source_id)):
         e: Dict[str, Any] = {"source_id": ident.source_id, "title": ident.card_title, "identity_status_7c": ident.resolution_status,

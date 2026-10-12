@@ -57,13 +57,15 @@ _CLAUSES: Dict[str, str] = {
 # ---------------------------------------------------------------------------------------------------------------- patterns
 # Conservative by construction: every pattern must match the *whole* normalised message. A question that names its own
 # subject ("How is billing handled?", "What is the capital of France?") matches nothing and is left alone.
+_STEP_REF = r"(?:that|this|it|those|these|(?:the\s+)?(?:\w+\s+)?(?:step|part|point|item|stage|option)|step\s+\w+)"
+
 _PATTERNS: Tuple[Tuple[str, str], ...] = (
     # ELABORATION / REFERENCE - "say more about the previous turn", no topic of its own
-    (r"(?:please\s+)?(?:can|could|would)\s+you\s+(?:elaborate|expand|explain|continue)(?:\s+(?:on\s+)?(?:that|this|it))?(?:\s+(?:in\s+)?(?:more\s+)?detail)?(?:\s+(?:further|more))?(?:\s+please)?", "elaborate"),
-    (r"(?:please\s+)?elaborate(?:\s+(?:on\s+(?:that|this|it)))?(?:\s+(?:in\s+)?(?:more\s+)?detail)?(?:\s+(?:further|more))?(?:\s+please)?", "elaborate"),
-    (r"(?:please\s+)?(?:expand|elaborate)(?:\s+on\s+(?:that|this|it))?(?:\s+please)?", "elaborate"),
-    (r"(?:please\s+)?explain(?:\s+(?:that|this|it|those|these))?(?:\s+(?:in\s+)?(?:more\s+)?detail)?(?:\s+(?:further|more|again))?(?:\s+please)?", "elaborate"),
-    (r"(?:please\s+)?(?:tell|show)\s+me\s+more(?:\s+about\s+(?:that|this|it))?(?:\s+please)?", "elaborate"),
+    (r"(?:please\s+)?(?:can|could|would)\s+you\s+(?:elaborate|expand|explain|continue)(?:\s+(?:on\s+)?(?:" + _STEP_REF + r"))?(?:\s+(?:in\s+)?(?:more\s+)?detail)?(?:\s+(?:further|more))?(?:\s+please)?", "elaborate"),
+    (r"(?:please\s+)?elaborate(?:\s+(?:on\s+(?:" + _STEP_REF + r")))?(?:\s+(?:in\s+)?(?:more\s+)?detail)?(?:\s+(?:further|more))?(?:\s+please)?", "elaborate"),
+    (r"(?:please\s+)?(?:expand|elaborate)(?:\s+on\s+(?:" + _STEP_REF + r"))?(?:\s+please)?", "elaborate"),
+    (r"(?:please\s+)?explain(?:\s+(?:" + _STEP_REF + r"))?(?:\s+(?:in\s+)?(?:more\s+)?detail)?(?:\s+(?:further|more|again))?(?:\s+please)?", "elaborate"),
+    (r"(?:please\s+)?(?:tell|show)\s+me\s+more(?:\s+about\s+(?:" + _STEP_REF + r"))?(?:\s+please)?", "elaborate"),
     (r"(?:please\s+)?go\s+(?:in|into)?\s*(?:to\s+)?(?:more\s+)?detail(?:s)?(?:\s+please)?", "elaborate"),
     (r"(?:some\s+|a\s+bit\s+|much\s+)?more\s+detail(?:s)?(?:\s+please)?", "elaborate"),
     (r"(?:in\s+)?more\s+detail(?:\s+please)?", "elaborate"),
@@ -91,6 +93,8 @@ _PATTERNS: Tuple[Tuple[str, str], ...] = (
     (r"what\s+comes\s+next(?:\s+please)?", "continuation"),
     (r"what\s+about\s+(?:the\s+)?(?:next|following|last|previous|other|second|third|first)\s+(?:step|point|part|stage|item|option)(?:\s+please)?", "continuation"),
     (r"(?:the\s+)?next\s+(?:step|point|part|stage)(?:\s+please)?", "continuation"),
+    (r"(?:the\s+)?(?:second|third|first|fourth|fifth|sixth|2nd|3rd|1st|4th|5th|6th)\s+(?:step|point|part|stage|item|option)(?:\s+please)?", "continuation"),
+    (r"step\s+\d+(?:\s+please)?", "continuation"),
     # SIMPLIFY
     (r"(?:please\s+)?simplify(?:\s+(?:that|this|it))?(?:\s+please)?", "simplify"),
     (r"(?:in\s+)?simple(?:r)?\s+terms(?:\s+please)?", "simplify"),
@@ -122,6 +126,8 @@ _FOLLOWUP_VOCAB = (
     "term", "next", "happen", "mean", "reason", "relate", "related", "connect", "connected", "connection", "link",
     "linked", "relationship", "difference", "work", "workflow", "step", "point", "part",
     "stage", "item", "option", "else", "then", "more", "other", "deep", "deeper",
+    "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth",
+    "1st", "2nd", "3rd", "4th", "5th", "6th", "one", "two", "three", "four", "five", "six",
 )
 _FOLLOWUP_TERMS = frozenset(T.stem(w) for w in _FOLLOWUP_VOCAB)
 
@@ -251,6 +257,62 @@ def _anchor(context: Optional[Mapping[str, Any]]) -> Tuple[Optional[str], str, i
     return None, "", -1
 
 
+_ORDINAL_MAP = {
+    "first": 1, "1st": 1, "one": 1, "1": 1,
+    "second": 2, "2nd": 2, "two": 2, "2": 2,
+    "third": 3, "3rd": 3, "three": 3, "3": 3,
+    "fourth": 4, "4th": 4, "four": 4, "4": 4,
+    "fifth": 5, "5th": 5, "five": 5, "5": 5,
+    "sixth": 6, "6th": 6, "six": 6, "6": 6,
+    "seventh": 7, "7th": 7, "seven": 7, "7": 7,
+    "eighth": 8, "8th": 8, "eight": 8, "8": 8,
+    "ninth": 9, "9th": 9, "nine": 9, "9": 9,
+    "tenth": 10, "10th": 10, "ten": 10, "10": 10,
+}
+_ORDINAL_RE = re.compile(
+    r"\b(?:the\s+)?(first|1st|second|2nd|third|3rd|fourth|4th|fifth|5th|sixth|6th|seventh|7th|eighth|8th|ninth|9th|tenth|10th)\s+(?:step|part|point|item|stage|option)\b"
+    r"|\bstep\s+([1-9]|10|one|two|three|four|five|six|seven|eight|nine|ten)\b",
+    re.IGNORECASE,
+)
+
+
+def _extract_ordinal_target(message: str) -> Optional[int]:
+    match = _ORDINAL_RE.search(message)
+    if not match:
+        return None
+    val = (match.group(1) or match.group(2) or "").lower()
+    return _ORDINAL_MAP.get(val)
+
+
+def _extract_numbered_units(answer: str) -> Dict[int, str]:
+    """Extract numbered steps or resolvable units from the prior answer."""
+    units: Dict[int, str] = {}
+    if not answer or not isinstance(answer, str):
+        return units
+    lines = answer.splitlines()
+    for line in lines:
+        line = line.strip()
+        m = re.match(r"^(?:step\s+)?(\d{1,2})[.):]\s+(.*)", line, flags=re.IGNORECASE)
+        if m:
+            num = int(m.group(1))
+            content = re.sub(r"\[S\d+\]", "", m.group(2)).strip()
+            if content and num not in units:
+                units[num] = content
+    if units:
+        return units
+    matches = re.finditer(
+        r"(?:^|\s)(?:step\s+)?(\d{1,2})[.):]\s+([^0-9]+?)(?=(?:\s+(?:step\s+)?\d{1,2}[.):])|$)",
+        answer,
+        flags=re.IGNORECASE,
+    )
+    for m in matches:
+        num = int(m.group(1))
+        content = re.sub(r"\[S\d+\]", "", m.group(2)).strip()
+        if content and num not in units:
+            units[num] = content
+    return units
+
+
 def resolve(message: Any, context: Optional[Mapping[str, Any]] = None) -> Optional[Dict[str, Any]]:
     """Resolve ``message`` against ``context`` into a standalone retrieval query.
 
@@ -266,6 +328,45 @@ def resolve(message: Any, context: Optional[Mapping[str, Any]] = None) -> Option
         return None
 
     text = re.sub(r"\s+", " ", str(message or "")).strip()
+
+    # Ordinal references must be resolved only when the prior answer actually has corresponding numbered steps
+    ordinal_target = _extract_ordinal_target(text)
+    prior_answer = ""
+    if isinstance(context, Mapping):
+        active = context.get("active_topic")
+        if isinstance(active, Mapping) and isinstance(active.get("answer"), str):
+            prior_answer = active.get("answer", "")
+        elif isinstance(context.get("answer"), str):
+            prior_answer = context.get("answer", "")
+
+    numbered_units = _extract_numbered_units(prior_answer) if ordinal_target is not None else {}
+
+    if ordinal_target is not None:
+        if ordinal_target in numbered_units:
+            step_text = numbered_units[ordinal_target]
+            query = f"{anchor} {step_text}"[:MAX_RESOLVED_CHARS]
+            return {
+                "category": category,
+                "anchor": anchor,
+                "anchor_source": source,
+                "anchor_index": index,
+                "form": "ordinal_step",
+                "ordinal_step": ordinal_target,
+                "query": re.sub(r"\s+", " ", query).strip(),
+            }
+        else:
+            # Ordinal cannot be resolved to numbered steps: safe scoped lookup on anchor
+            query = f"{anchor} {_CLAUSES[category]}"[:MAX_RESOLVED_CHARS]
+            return {
+                "category": category,
+                "anchor": anchor,
+                "anchor_source": source,
+                "anchor_index": index,
+                "form": "clause",
+                "unresolved_ordinal": ordinal_target,
+                "query": re.sub(r"\s+", " ", query).strip(),
+            }
+
     if _carries_own_topic(text, anchor):
         # the follow-up names its own topic ("... how does it relate to a business partner?"): keep the user's words
         query = f"{anchor} {text}"[:MAX_RESOLVED_CHARS]

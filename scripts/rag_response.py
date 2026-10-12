@@ -39,8 +39,16 @@ def extract_citations(text: str) -> List[str]:
     return markers
 
 
+_PROCEDURAL_LIMITATION_RE = re.compile(
+    r"^The available SAP Help page\b.*?\bdoes not document\b",
+    re.I,
+)
+
+
 def categorize_line(line: str) -> str:
     """Deterministically categorize an answer line into a section key."""
+    if _PROCEDURAL_LIMITATION_RE.match(line.strip()):
+        return "overview"
     lower = line.lower()
     # Purpose/definition statements are overview content, never procedures ("enables you to create and manage ...").
     if _PURPOSE_LINE.match(line):

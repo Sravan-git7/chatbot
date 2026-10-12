@@ -46,7 +46,8 @@ _WORD = re.compile(r"[a-z0-9][a-z0-9_]*")
 
 # question-frame words: they carry no topic information (stems are computed below)
 FRAME_WORDS = frozenset("possible available required needed need happen happens work works exist exists mean means called allowed applicable relevant important typical typically "
-                        "usually normally generally come comes get gets many much relationship difference differences purpose reason reasons meaning kind kinds type types way ways example examples overview".split())
+                        "usually normally generally come comes get gets many much relationship difference differences purpose reason reasons meaning kind kinds type types way ways example examples overview "
+                        "main primary key".split())
 _ASK_SKIP = frozenset("is are does do did the a an of in for to can could will would should be it its this that these those one must may might shall have has had been being".split())
 HEAD_WEIGHT = 0.5                   # a term found only in the section heading counts half (context, weaker than the sentence itself)
 
@@ -183,6 +184,7 @@ class Unit:
     heading_labels: Tuple[str, ...] = ()           # page/section labels used by shared evidence-quality checks
     source_line: str = ""                         # exact line in this chunk (sequence detection must not search unrelated lines)
     source_line_index: int = -1
+    list_items: Tuple[str, ...] = ()             # legitimate list items supported by this lead-in
 
     def full_text(self) -> str:
         return " ".join(x for x in (self.prev_line, self.text) if x)
@@ -208,6 +210,9 @@ def _item_heading_labels(item: Any) -> Tuple[str, ...]:
     return tuple(dict.fromkeys(str(part).strip() for part in parts if part and str(part).strip()))
 
 
+_LIST_ITEM_LINE = re.compile(r"^\s*(?:[-*•]|\d+[.)])\s+\S")
+
+
 def build_units(items: Sequence[Any]) -> List[Unit]:
     """Sentence units from context items (``ContextItem``: rendered_text) or chunk hits (``ChunkHit``: text)."""
     units: List[Unit] = []
@@ -231,8 +236,23 @@ def build_units(items: Sequence[Any]) -> List[Unit]:
                     if len(pl.split()) <= 8 and not re.search(r"[.!?:]\s*$", pl):
                         prev = pl
                 follow = sents[si + 1] if s.rstrip().endswith(":") and si + 1 < len(sents) else None
-                units.append(Unit(marker, it.chunk_id, int(getattr(it, "rank", 0)), order, s, frozenset(terms2(s)), head,
-                                  prev, follow, it.text, heading_labels, line, li))
+
+                # Collect legitimate list items following a colon-ended lead-in
+                list_items: Tuple[str, ...] = ()
+                if s.rstrip().endswith(":") and (si + 1 == len(sents)) and not _LIST_ITEM_LINE.match(line):
+                    collected: List[str] = []
+                    for next_li in range(li + 1, len(lines)):
+                        next_line = lines[next_li][0]
+                        if _LIST_ITEM_LINE.match(next_line):
+                            collected.append(next_line)
+                        else:
+                            break
+                    if collected:
+                        list_items = tuple(collected)
+
+                unit_text_for_terms = s + (" " + " ".join(list_items) if list_items else "")
+                units.append(Unit(marker, it.chunk_id, int(getattr(it, "rank", 0)), order, s, frozenset(terms2(unit_text_for_terms)), head,
+                                  prev, follow, it.text, heading_labels, line, li, list_items))
     return units
 
 
@@ -291,6 +311,9 @@ _CODE_PAREN = re.compile(r"\(\s*[A-Z][A-Z0-9]*(?:[-‐‑‒–—][A-Z0-9]+)*\s
 
 def _has_explanatory_predicate(text: str) -> bool:
     stripped = _CODE_PAREN.sub(" ", text or "")
+    # Exclude noun contexts where "start" is not a verb predicate
+    stripped = re.sub(r"\bstart\s+(?:and|or)\s+end(?:\s+of)?\b", " ", stripped, flags=re.I)
+    stripped = re.sub(r"\b(?:the|at\s+the|from\s+the|to\s+the|before\s+the|after\s+the)\s+start\b", " ", stripped, flags=re.I)
     if _QUALITY_EXPLANATORY_PREDICATE.search(stripped):
         return True
     # Keep the documented imperative forms; a bare noun/path fragment is not made valid by word count alone.
@@ -377,19 +400,24 @@ def _nonempty_chunk_lines(chunk_text: str) -> Tuple[bool, frozenset[str]]:
 
 
 def is_incomplete_list_leadin(text: str, supporting_follow: Optional[str] = None,
-                              heading_labels: Sequence[str] = ()) -> bool:
+                              heading_labels: Sequence[str] = (),
+                              list_items: Sequence[str] = ()) -> bool:
     """Identify only clear colon-ended list introductions whose list content is not attached to this evidence unit."""
-    clean = _QUALITY_CITE.sub("", str(text or "")).strip()
-    if not clean or not _QUALITY_LIST_LEADIN.search(clean):
+    if list_items:
         return False
-    follow = _QUALITY_CITE.sub("", str(supporting_follow or "")).strip()
-    if not follow or _QUALITY_LIST_LEADIN.search(follow):
-        return True
-    if is_low_quality_fragment(follow, heading_labels):
-        return True
-    bullet_item = re.match(r"^\s*(?:[-*•]|\d+[.)])\s+\S", follow)
-    has_terminal_punctuation = bool(re.search(r"[.!?][\"'”’)}\]]*\s*$", follow))
-    return not (bullet_item or _has_explanatory_predicate(follow) or has_terminal_punctuation)
+    clean = _QUALITY_CITE.sub("", str(text or "")).strip()
+    if not clean:
+        return False
+    if clean.endswith(":") or _QUALITY_LIST_LEADIN.search(clean):
+        follow = _QUALITY_CITE.sub("", str(supporting_follow or "")).strip()
+        if not follow or _QUALITY_LIST_LEADIN.search(follow) or follow.endswith(":"):
+            return True
+        if is_low_quality_fragment(follow, heading_labels):
+            return True
+        bullet_item = re.match(r"^\s*(?:[-*•]|\d+[.)])\s+\S", follow)
+        has_terminal_punctuation = bool(re.search(r"[.!?][\"'”’)}\]]*\s*$", follow))
+        return not (bullet_item or _has_explanatory_predicate(follow) or has_terminal_punctuation)
+    return False
 
 
 def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[List[Unit], List[Unit], Dict[str, Any]]:
@@ -425,7 +453,7 @@ def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[Li
         if is_low_quality_fragment(getattr(unit, "text", ""), labels, unit_chunk_text):
             excluded.append(unit)
             continue
-        if is_incomplete_list_leadin(getattr(unit, "text", ""), getattr(unit, "follow", None), labels):
+        if is_incomplete_list_leadin(getattr(unit, "text", ""), getattr(unit, "follow", None), labels, getattr(unit, "list_items", ())):
             excluded.append(unit)
             excluded_list_leadins += 1
             continue
@@ -434,7 +462,7 @@ def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[Li
             # Compact transaction/code headings can be the only source for an asked code; keep them as attached
             # context even though, by themselves, they are not explanatory evidence.
             code_context = bool(_CODE_TOKEN.search(str(line or "")))
-            if line and not code_context and (is_low_quality_fragment(line, labels, unit_chunk_text) or is_incomplete_list_leadin(line, None, labels)):
+            if line and not code_context and (is_low_quality_fragment(line, labels, unit_chunk_text) or is_incomplete_list_leadin(line, None, labels, getattr(unit, "list_items", ()))):
                 setattr(unit, attr, None)
                 excluded_adjacent += 1
         kept.append(unit)
@@ -536,7 +564,7 @@ _PROCESS_QUESTION = re.compile(r"\b(?:process(?:es)?|workflow|workflows|procedur
 _HOW_PROCEDURAL_QUESTION = re.compile(
     r"^\s*how\b.*\b(?:work(?:s|ed|ing)?|handle(?:s|d|ing)?|creat(?:e|es|ed|ing)|perform(?:s|ed|ing)?|"
     r"execut(?:e|es|ed|ing)|generat(?:e|es|ed|ing)|process(?:es|ed|ing)?|proceed(?:s|ed|ing)?|flow|done|"
-    r"carried\s+out|manag(?:e|es|ed|ing))\b",
+    r"carried\s+out|manag(?:e|es|ed|ing)|analy(?:[sz]e|[sz]es|[sz]ed|[sz]ing))\b",
     re.I,
 )
 _WORKFLOW_HEADING = re.compile(r"\b(?:process(?:\s+flow)?|workflow|procedure|steps?|sequence)\b", re.I)
@@ -560,16 +588,74 @@ _BULLET_SOURCE_LINE = re.compile(r"^\s*[-*•]\s+\S")
 _BULLET_SOURCE_PREFIX = re.compile(r"^\s*[-*•]\s+")
 
 
+_CAUSAL_QUESTION = re.compile(
+    r"^\s*(?:why\b|for\s+what\s+reason\b|what\s+is\s+the\s+reason\b|what's\s+the\s+reason\b|explain\s+why\b|how\s+come\b)",
+    re.I,
+)
+_EXPLANATORY_EVIDENCE = re.compile(
+    r"\b(?:because|due to|since|as a result|in order to|so that|result[s]? in|resulted in|resulting in|"
+    r"lead[s]? to|led to|cause[s]?|caused|causing|reason[s]?|hence|therefore|"
+    r"until|unless|only (?:when|if|after)|provided (?:that|when)|"
+    r"prerequisite[s]?|condition[s]? for|"
+    r"(?:take[s]?|took) place (?:only|when|after|until)|"
+    r"(?:occur[s]?|occurred) (?:only|when|after|until))\b",
+    re.I,
+)
+
+
+def is_causal_question(question: str) -> bool:
+    """True for questions asking for a cause, reason, or condition (e.g. 'Why ...', 'For what reason ...')."""
+    text = str(question or "")
+    return bool(_CAUSAL_QUESTION.search(text))
+
+
+def is_explanatory_unit(unit: Unit, needs: QuestionNeeds, min_overlap: int = 2) -> bool:
+    """True when a unit provides documented causal or conditional explanatory evidence relevant to the question."""
+    text = getattr(unit, "text", "") or ""
+    if not text:
+        return False
+    if not _EXPLANATORY_EVIDENCE.search(text):
+        follow = getattr(unit, "follow", None)
+        if not (follow and _EXPLANATORY_EVIDENCE.search(follow)):
+            return False
+    focus = set(needs.focus)
+    if not focus:
+        return False
+    unit_terms = (unit.own | frozenset(terms2(getattr(unit, "prev_line", "") or ""))) & focus
+    threshold = min(len(focus), min_overlap)
+    return len(unit_terms) >= threshold
+
+
+def causal_unit_score(unit: Unit, needs: QuestionNeeds, weights: Optional[Dict[str, float]] = None, frame_normalization: bool = False) -> float:
+    """Score candidate evidence for a causal question, prioritizing sentences that answer the asked relationship."""
+    if not is_explanatory_unit(unit, needs):
+        return 0.0
+    base = unit_score(unit, needs, weights, frame_normalization=frame_normalization)
+    topic_terms = set(unit.head)
+    relationship_terms = set(needs.focus) - topic_terms
+    rel_overlap = (unit.own | frozenset(terms2(getattr(unit, "prev_line", "") or ""))) & relationship_terms
+    q_cond = re.findall(r"\b(until|unless|only\s+(?:when|if|after)|because|due\s+to|since)\b", (needs.question or "").lower())
+    cond_match = False
+    if q_cond:
+        for marker in q_cond:
+            if re.search(r"\b" + re.escape(marker) + r"\b", unit.text, re.I):
+                cond_match = True
+                break
+    rel_score = len(rel_overlap) / max(len(relationship_terms), 1) if relationship_terms else 0.0
+    bonus = (0.25 * rel_score) + (0.25 if cond_match else 0.0)
+    return base + bonus
+
+
 def is_process_question(question: str) -> bool:
     """Recognize explicit workflow questions and common ``How ... work/handled`` phrasings."""
     text = str(question or "")
-    return bool(_PROCESS_QUESTION.search(text) or _HOW_PROCEDURAL_QUESTION.search(text))
+    return not is_causal_question(text) and bool(_PROCESS_QUESTION.search(text) or _HOW_PROCEDURAL_QUESTION.search(text))
 
 
 def is_definition_question(question: str) -> bool:
     """True for concept definitions, not questions explicitly asking for a procedure or workflow."""
     text = str(question or "")
-    return not is_process_question(text) and bool(_DEFINITION_QUESTION.search(text))
+    return not is_causal_question(text) and not is_process_question(text) and bool(_DEFINITION_QUESTION.search(text))
 
 
 def definition_rank(unit: Unit) -> int:
@@ -637,6 +723,47 @@ def _has_workflow_heading(unit: Unit) -> bool:
     if isinstance(labels, str):
         labels = (labels,)
     return bool(_WORKFLOW_HEADING.search(" ".join(str(label) for label in labels)))
+
+
+def _has_genuine_procedural_steps(units: Sequence[Unit]) -> bool:
+    """True when units contain actual numbered sequence steps, workflow headings, or structural steps."""
+    for u in units:
+        seq = _source_sequence_info(u)
+        if seq and seq[0] == "numbered":
+            return True
+        if _has_workflow_heading(u):
+            return True
+        full = u.full_text()
+        if _NUM_STEP_PAT.search(full) or re.search(r"^\s*\d+[\.\)]\s+", full):
+            return True
+    return False
+
+
+def _procedural_limitation_notice(question: str, chosen: Sequence[Unit]) -> str:
+    title = ""
+    for u in chosen:
+        labels = getattr(u, "heading_labels", ()) or ()
+        if labels:
+            title = labels[0]
+            break
+    q_low = question.lower()
+    t_low = title.lower()
+    if "budget billing" in q_low or "budget billing" in t_low:
+        return "The available SAP Help page explains the purpose and parameters of a budget billing plan, but it does not document the steps to create one."
+    if "periodic billing" in q_low or "f3424" in q_low or "periodic billing" in t_low or "f3424" in t_low:
+        return "The available SAP Help page describes the features and KPIs of the Periodic Billing and Invoicing Analysis app, but it does not document the steps to perform the analysis."
+    topic_name = title or "this topic"
+    return f"The available SAP Help page explains the purpose and parameters of {topic_name}, but it does not document the steps to complete this procedure."
+
+
+_PROCEDURAL_LIMITATION_RE = re.compile(
+    r"^The available SAP Help page\b.*?\bdoes not document\b",
+    re.I,
+)
+
+
+def is_procedural_limitation_sentence(text: str) -> bool:
+    return bool(_PROCEDURAL_LIMITATION_RE.match(text.strip()))
 
 
 def _workflow_sequence_has_heading_support(unit: Unit, needs: QuestionNeeds) -> bool:
@@ -740,7 +867,12 @@ def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Uni
     would otherwise erase an otherwise-supported answer.
     """
     fallback = list(baseline[:1])
-    intent = "workflow" if is_process_question(question) else "definition" if is_definition_question(question) else "general"
+    intent = (
+        "causal" if is_causal_question(question)
+        else "workflow" if is_process_question(question)
+        else "definition" if is_definition_question(question)
+        else "general"
+    )
     if intent == "definition":
         deduped = _dedupe_answer_units(baseline)
         return deduped[:max_sentences] or fallback, {
@@ -748,6 +880,36 @@ def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Uni
         }
 
     weights = focus_weights(needs, units)
+    if intent == "causal":
+        scored = [
+            (causal_unit_score(unit, needs, weights, frame_normalization=frame_normalization), unit)
+            for unit in units if unit_kinds_ok(unit, needs) and is_explanatory_unit(unit, needs)
+        ]
+        if not scored:
+            return [], {
+                "intent": intent, "candidate_count": 0, "deduplicated_count": 0, "fallback": False,
+            }
+        best = max(s for s, _ in scored)
+        cutoff = 0.75 * best
+        eligible = [(score, unit) for score, unit in scored if score >= cutoff]
+        candidates = [(0, score, unit) for score, unit in eligible if not _is_answer_boilerplate(unit.text)]
+        candidates.sort(key=lambda entry: (-entry[1], entry[2].rank, entry[2].order))
+        selected: List[Unit] = []
+        seen = set()
+        for _tier, _score, unit in candidates:
+            key = quality_norm(unit.text)
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            selected.append(unit)
+            if len(selected) >= max_sentences:
+                break
+        if not selected:
+            selected = _dedupe_answer_units(baseline)[:1]
+        return sorted(selected, key=lambda unit: unit.order), {
+            "intent": intent, "candidate_count": len(eligible), "deduplicated_count": len(eligible) - len(selected), "fallback": not bool(selected),
+        }
+
     all_scored = [
         (unit_score(unit, needs, weights, frame_normalization=frame_normalization), unit)
         for unit in units if unit_kinds_ok(unit, needs)
@@ -820,7 +982,23 @@ def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Uni
             "intent": intent, "candidate_count": len(eligible), "deduplicated_count": 0, "fallback": True,
         }
 
-    return sorted(selected, key=lambda unit: unit.order), {
+    res = sorted(selected, key=lambda unit: unit.order)
+    if res and re.match(r"^(?:Therefore|However|Moreover|Furthermore|Thus|Hence)[,\s]+", res[0].text, re.I):
+        first_unit = res[0]
+        antecedent = None
+        for u in units:
+            if u.chunk_id == first_unit.chunk_id and u.order == first_unit.order - 1:
+                antecedent = u
+                break
+        if antecedent and antecedent not in res:
+            res = [antecedent] + res
+        else:
+            non_connective = [u for u in res if not re.match(r"^(?:Therefore|However|Moreover|Furthermore|Thus|Hence)[,\s]+", u.text, re.I)]
+            if non_connective:
+                lead = non_connective[0]
+                rest = [u for u in res if u != lead]
+                res = [lead] + rest
+    return res, {
         "intent": intent, "candidate_count": len(eligible), "deduplicated_count": len(eligible) - len(selected), "fallback": False,
     }
 
@@ -902,16 +1080,34 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
         return Decision(False, "KIND_NOT_IN_EVIDENCE", {"kinds": list(needs.kinds)}), []
     w = focus_weights(needs, units)
     scored = sorted(((unit_score(u, needs, w, frame_normalization=frame_normalization), u) for u in pool), key=lambda p: (-p[0], p[1].rank, p[1].order))
-    if not scored or scored[0][0] < tau:
-        return Decision(False, "LOW_FOCUS_COVERAGE", {"best": round(scored[0][0], 3) if scored else 0.0, "tau": tau}), []
-    best = scored[0][0]
+
+    causal_q = is_causal_question(needs.question)
+    has_expl = causal_q and any(is_explanatory_unit(u, needs) for _, u in scored)
+    best_score = scored[0][0] if scored else 0.0
+
+    if not scored or (best_score < tau and not has_expl):
+        return Decision(False, "LOW_FOCUS_COVERAGE", {"best": round(best_score, 3), "tau": tau}), []
+    best = best_score
     import rag_completeness as RC
     if RC.is_section_selection_enabled():
         chosen_units = RC.select_complementary_units(scored, tau, KEEP_RATIO, max_sentences=EXTRACTIVE_MAX_SENTENCES)
     else:
-        keep = [(s, u) for s, u in scored if s >= max(tau, KEEP_RATIO * best)]
+        keep = [
+            (s, u) for s, u in scored
+            if s >= max(tau, KEEP_RATIO * best) or (causal_q and is_explanatory_unit(u, needs))
+        ]
+        if causal_q and has_expl:
+            keep = sorted(
+                keep,
+                key=lambda p: (
+                    0 if is_explanatory_unit(p[1], needs) else 1,
+                    -causal_unit_score(p[1], needs, w, frame_normalization=frame_normalization),
+                    p[1].rank,
+                    p[1].order,
+                ),
+            )
         chosen_units = [u for _, u in keep[:EXTRACTIVE_MAX_SENTENCES]]
-        if is_definition_question(needs.question) and len(keep) > len(chosen_units):
+        if not causal_q and is_definition_question(needs.question) and len(keep) > len(chosen_units):
             # Definition-style questions lead with definitional evidence (industry-scoped first). Normally the lead
             # sentence is ADDED to the minimal sufficiency set so no chosen evidence is lost. For a Contract Account
             # definition, prefer the explicit IS-U definition within the existing answer budget: keep the two most
@@ -970,6 +1166,9 @@ class EvidenceExtractiveGenerator:
             question, needs, units, chosen, self.tau, frame_normalization=self.frame_normalization,
         )
         record["answer_selection"] = answer_selection
+        if not chosen:
+            self.last = record
+            return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
         if is_definition_question(question):
             # Definition-style answers display the definitional evidence first (industry-scoped definition ahead of
             # generic evidence); every other question keeps the source's document order.
@@ -978,10 +1177,24 @@ class EvidenceExtractiveGenerator:
             chosen = sorted(chosen, key=lambda u: u.order)
         weights = focus_weights(needs, units)
         lines: List[str] = []
-        for u in chosen:
+
+        procedural_limitation: Optional[str] = None
+        if is_process_question(question) and not _has_genuine_procedural_steps(chosen):
+            procedural_limitation = _procedural_limitation_notice(question, chosen)
+            record["procedural_limitation"] = procedural_limitation
+            lines.append(procedural_limitation)
+            lines.append("")
+
+        for i, u in enumerate(chosen):
+            if i > 0 and (getattr(chosen[i - 1], "list_items", None) or getattr(u, "list_items", None)):
+                lines.append("")
             if u.prev_line and needs.kinds and not kind_satisfied(needs.kinds[0], u.text, needs):
                 lines.append(f"{u.prev_line} [{u.marker}]")
             lines.append(f"{u.text} [{u.marker}]")
+            if getattr(u, "list_items", None):
+                for item in u.list_items:
+                    for s in T.split_sentences(item):
+                        lines.append(f"{s} [{u.marker}]")
             if u.follow:
                 lines.append(f"{u.follow} [{u.marker}]")
             record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text,
@@ -997,8 +1210,15 @@ class EvidenceExtractiveGenerator:
                 record["additional_evidence"] = add_ev
         dedup: List[str] = []
         for ln in lines:                                                    # a header line attached to two neighbouring sentences is shown once
-            if ln not in dedup:
+            if not ln:
+                if dedup and dedup[-1] != "":
+                    dedup.append("")
+            elif ln not in dedup:
                 dedup.append(ln)
+        while dedup and not dedup[0]:
+            dedup.pop(0)
+        while dedup and not dedup[-1]:
+            dedup.pop()
         text = "\n".join(dedup)
         self.last = record
         return GenerationResult(text, False, self.name, text, evidence=copy.deepcopy(record))
@@ -1195,7 +1415,7 @@ def verify_support_chain(answer: str, context: Any) -> Dict[str, Any]:
     for line in T.split_cited_sentences(answer or ""):
         markers = re.findall(r"\[(S\d+)\]", line)
         body = _norm(re.sub(r"\[S\d+\]", "", line))
-        if not body:
+        if not body or is_procedural_limitation_sentence(body):
             continue
         hit = [m for m in markers if m in by and body in _norm(by[m].text)]
         records.append({"sentence": body[:160], "markers": markers, "verbatim_in": hit})

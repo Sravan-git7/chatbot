@@ -7,3 +7,19 @@ chroma_db/
 
 # Phase 4 vector store (rebuild with scripts/build_card_collection.py --rebuild)
 data/vector_store/
+
+# Virtual environments
+av/
+
+# Private backups and temporary diagnostics
+local_backup2/
+scratch/
+routing-diff.txt
+slim_for_replay.py
+
+# Evaluation checkpoints and local experiment runs
+*.jsonl
+data/phase_elaboration/*_run.json
+data/phase_elaboration/*_report.md
+data/phase_elaboration/*_environment.json
+data/phase_elaboration/replay_input.json

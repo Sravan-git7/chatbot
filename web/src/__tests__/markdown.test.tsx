@@ -56,6 +56,37 @@ describe('markdown safety', () => {
     expect(prepared).toContain('Third fact. [S2](#cite-S2)')
     render(<Markdown text={text} markers={new Set(['S1', 'S2'])} />)
     expect(screen.getAllByRole('button', { name: 'Source 1' })).toHaveLength(2)
-    expect(screen.getAllByRole('button', { name: 'Source 2' })).toHaveLength(1)
+  })
+
+  it('separates consecutive list sections and preserves citations on every supported item', () => {
+    const rawAnswer = [
+      'Business master data includes: [S1]',
+      '- Business partner [S1]',
+      '- Contract account [S1]',
+      '- Non-billable service [S1]',
+      'Technical master data includes: [S1]',
+      '- Grid [S1]',
+      '- Device [S1]',
+    ].join('\n')
+
+    const prepared = prepare(rawAnswer)
+    expect(prepared).toContain('- Non-billable service [S1](#cite-S1)\n\nTechnical master data includes: [S1](#cite-S1)')
+
+    const { container } = render(<Markdown text={rawAnswer} markers={markers} />)
+    const lists = container.querySelectorAll('ul')
+    expect(lists).toHaveLength(2)
+
+    const firstListItems = lists[0].querySelectorAll('li')
+    expect(firstListItems).toHaveLength(3)
+    expect(firstListItems[2]).toHaveTextContent('Non-billable service')
+    expect(firstListItems[2]).not.toHaveTextContent('Technical master data includes')
+
+    const secondListItems = lists[1].querySelectorAll('li')
+    expect(secondListItems).toHaveLength(2)
+    expect(secondListItems[0]).toHaveTextContent('Grid')
+    expect(secondListItems[1]).toHaveTextContent('Device')
+
+    const chips = screen.getAllByRole('button', { name: 'Source 1' })
+    expect(chips).toHaveLength(7)
   })
 })

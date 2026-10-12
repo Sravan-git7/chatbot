@@ -64,8 +64,9 @@ def _check_evidence(c: Dict[str, Any], root: Path) -> List[str]:
                 continue
             if loio != c["resolved_guide_id"]:
                 problems.append(f"evidence[{i}]: response loio {loio[:8]} != resolved_guide_id {c['resolved_guide_id'][:8]}")
-            if cur != c["card_page_id"]:
-                problems.append(f"evidence[{i}]: response currentPage {cur[:8]} != card_page_id {c['card_page_id'][:8]}")
+            target_p = str(c.get("resolved_page_id") or c["card_page_id"]).lower()
+            if cur != target_p:
+                problems.append(f"evidence[{i}]: response currentPage {cur[:8]} != expected page {target_p[:8]}")
             e["_file_present"] = True
     return problems
 
@@ -82,6 +83,8 @@ def apply_corrections(topics: List[Dict[str, Any]], corrections: List[Dict[str, 
         for k in ("card_guide_id", "card_page_id", "resolved_guide_id"):
             if not _HEX32.match(str(c.get(k, ""))):
                 errs.append(f"{k} is not 32 lower-case hex")
+        if c.get("resolved_page_id") and not _HEX32.match(str(c.get("resolved_page_id", ""))):
+            errs.append("resolved_page_id is not 32 lower-case hex")
         if t is None:
             errs.append(f"unknown topic {tid}")
         if tid in seen:
@@ -98,10 +101,12 @@ def apply_corrections(topics: List[Dict[str, Any]], corrections: List[Dict[str, 
             continue
         rec = {k: v for k, v in c.items()}
         new = out[tid]
+        eff_p = str(c.get("resolved_page_id") or t["page_id"]).lower()
         new["card_guide_id"], new["card_url"] = t["guide_id"], t.get("url_as_given") or t["canonical_url"]
         new["card_canonical_url"] = t["canonical_url"]
         new["guide_id"] = c["resolved_guide_id"]
-        new["canonical_url"] = canonical_help_url(t["product"], c["resolved_guide_id"], t["page_id"])
+        new["page_id"] = eff_p
+        new["canonical_url"] = canonical_help_url(t["product"], c["resolved_guide_id"], eff_p)
         new["correction"] = rec
         applied.append(rec)
     return [out[t["topic_id"]] for t in topics], applied, rejected

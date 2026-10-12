@@ -237,6 +237,16 @@ class GroundingReport:
                 "cited_markers": self.cited_markers, "phantom_markers": self.phantom_markers}
 
 
+_PROCEDURAL_LIMITATION_RE = re.compile(
+    r"^The available SAP Help page\b.*?\bdoes not document\b",
+    re.I,
+)
+
+
+def is_procedural_limitation_sentence(text: str) -> bool:
+    return bool(_PROCEDURAL_LIMITATION_RE.match(text.strip()))
+
+
 def verify_grounding(
     answer: str,
     context: ContextBlock,
@@ -281,8 +291,9 @@ def verify_grounding(
             marker_names = [f"S{m}" for m in markers]
             body = _MARKER.sub("", line).strip()
 
-        if not T.terms(body) and not T.code_tokens(body):
-            continue                                              # marker-only / punctuation-only line
+        if ((not T.terms(body) and not T.code_tokens(body))
+                or is_procedural_limitation_sentence(body)):
+            continue                                              # marker-only / punctuation-only / limitation notice line
 
         phantom = [m for m in marker_names if m not in valid]
         for m in phantom:

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import re
 import tempfile
 import unittest
@@ -264,19 +265,61 @@ class FailureTests(unittest.TestCase):
 
 @NEED_API
 class DebugAndSecurityTests(unittest.TestCase):
-    def test_debug_is_off_by_default_and_optional(self):
-        c, _ = client()
-        self.assertNotIn("debug", post(c).json())
-        d = post(c, debug=True).json()
+    def test_debug_disabled_by_default_when_unset(self):
+        env = {k: v for k, v in os.environ.items() if k != "RAG_ENABLE_DEBUG"}
+        with unittest.mock.patch.dict("os.environ", env, clear=True):
+            c, _ = client()
+            self.assertFalse(c.get("/api/health").json()["debug_enabled"])
+            r_normal = post(c)
+            self.assertEqual(r_normal.status_code, 200)
+            self.assertNotIn("debug", r_normal.json())
+            self.assertEqual(r_normal.json()["status"], "answered")
+            r_false = post(c, debug=False)
+            self.assertEqual(r_false.status_code, 200)
+            self.assertNotIn("debug", r_false.json())
+            r_true = post(c, debug=True)
+            self.assertEqual((r_true.status_code, r_true.json()["error"]["code"]), (403, "debug_disabled"))
+            self.assertNotIn("debug", r_true.json())
+
+    def test_debug_disabled_explicit_via_env(self):
+        with unittest.mock.patch.dict("os.environ", {"RAG_ENABLE_DEBUG": "0"}):
+            c, _ = client()
+            self.assertFalse(c.get("/api/health").json()["debug_enabled"])
+            r_true = post(c, debug=True)
+            self.assertEqual((r_true.status_code, r_true.json()["error"]["code"]), (403, "debug_disabled"))
+            self.assertNotIn("debug", r_true.json())
+            r_false = post(c, debug=False)
+            self.assertEqual(r_false.status_code, 200)
+            self.assertNotIn("debug", r_false.json())
+
+    def test_debug_enabled_explicit_via_env(self):
+        with unittest.mock.patch.dict("os.environ", {"RAG_ENABLE_DEBUG": "1"}):
+            c, _ = client()
+            self.assertTrue(c.get("/api/health").json()["debug_enabled"])
+            r_true = post(c, debug=True)
+            self.assertEqual(r_true.status_code, 200)
+            d = r_true.json()
+            self.assertIn("debug", d)
+            self.assertIn("pipeline", d["debug"])
+            self.assertEqual(d["status"], "answered")
+            r_normal = post(c)
+            self.assertEqual(r_normal.status_code, 200)
+            self.assertNotIn("debug", r_normal.json())
+
+    def test_debug_can_be_enabled_or_disabled_via_app_argument(self):
+        c_on, _ = client(enable_debug=True)
+        self.assertTrue(c_on.get("/api/health").json()["debug_enabled"])
+        d = post(c_on, debug=True).json()
+        self.assertIn("debug", d)
         self.assertIn("pipeline", d["debug"])
         self.assertEqual(d["status"], "answered")
+        self.assertNotIn("debug", post(c_on).json())
 
-    def test_debug_can_be_disabled_on_the_server(self):
-        c, _ = client(enable_debug=False)
-        r = post(c, debug=True)
+        c_off, _ = client(enable_debug=False)
+        self.assertFalse(c_off.get("/api/health").json()["debug_enabled"])
+        r = post(c_off, debug=True)
         self.assertEqual((r.status_code, r.json()["error"]["code"]), (403, "debug_disabled"))
-        self.assertEqual(post(c).status_code, 200)
-        self.assertFalse(c.get("/api/health").json()["debug_enabled"])
+        self.assertEqual(post(c_off).status_code, 200)
 
     def test_cors_allows_only_configured_origins(self):
         c, _ = client()

@@ -171,30 +171,37 @@ class CaptureInfo:
 def load_captures(root: Path) -> List[CaptureInfo]:
     out: List[CaptureInfo] = []
     cdir = root / "captured_responses"
-    if not cdir.is_dir():
-        return out
-    for p in sorted(cdir.glob("[0-9]_*.json")):
-        data = _read_json(p)
-        try:
-            d = data["data"]["deliverable"]
-            cp = data["data"]["currentPage"]
-            loio, page = str(d["loio"]).lower(), str(cp["loio"]).lower()
-        except (KeyError, TypeError):
-            continue
-        m = re.match(r"^\d+_(\d+)_", p.name)
-        n = 0
+    toc_dir = root / "data" / "toc"
+    dirs = []
+    if cdir.is_dir():
+        dirs.append(cdir)
+    if toc_dir.is_dir():
+        dirs.append(toc_dir)
+    for d in dirs:
+        for p in sorted(d.glob("*.json")):
+            if d == cdir and not re.match(r"^[0-9]_", p.name):
+                continue
+            data = _read_json(p)
+            try:
+                dl = data["data"]["deliverable"]
+                cp = data["data"]["currentPage"]
+                loio, page = str(dl["loio"]).lower(), str(cp["loio"]).lower()
+            except (KeyError, TypeError):
+                continue
+            m = re.match(r"^\d+_(\d+)_", p.name)
+            n = 0
 
-        def walk(items: Sequence[Mapping[str, Any]]) -> None:
-            nonlocal n
-            for it in items:
-                if _PAGE_FILE.match(it.get("u") or ""):
-                    n += 1
-                walk(it.get("c") or [])
+            def walk(items: Sequence[Mapping[str, Any]]) -> None:
+                nonlocal n
+                for it in items:
+                    if _PAGE_FILE.match(it.get("u") or ""):
+                        n += 1
+                    walk(it.get("c") or [])
 
-        walk(d.get("fullToc") or [])
-        out.append(CaptureInfo(file=_rel(p, root), numeric_deliverable_id=m.group(1) if m else "", response_loio=loio,
-                               current_page_id=page, current_page_title=str(cp.get("t") or ""),
-                               deliverable_title=str(d.get("title") or ""), toc_nodes_in_response=n))
+            walk(dl.get("fullToc") or [])
+            out.append(CaptureInfo(file=_rel(p, root), numeric_deliverable_id=m.group(1) if m else "", response_loio=loio,
+                                   current_page_id=page, current_page_title=str(cp.get("t") or ""),
+                                   deliverable_title=str(dl.get("title") or ""), toc_nodes_in_response=n))
     return out
 
 
@@ -376,16 +383,41 @@ def _toc_membership(ctx: IdentityContext, guide_id: str, page_id: str) -> Dict[s
 def _correction_check(ctx: IdentityContext, corr: Mapping[str, Any]) -> Dict[str, Any]:
     """Re-read the correction's saved_response evidence; the user-reported browser observation is never machine evidence."""
     checks: List[Dict[str, Any]] = []
+    target_page = str(corr.get("resolved_page_id") or corr.get("card_page_id")).lower()
     for ev in corr.get("evidence", []):
         if ev.get("kind") == "saved_response":
             cap = next((c for c in ctx.captures if c.file == ev.get("file")), None)
-            ok = bool(cap and cap.response_loio == str(corr.get("resolved_guide_id")).lower()
-                      and cap.current_page_id == str(corr.get("card_page_id")).lower())
-            checks.append({"kind": "saved_response", "file": ev.get("file"), "machine_checked": True, "passed": ok,
-                           "response_loio": cap.response_loio if cap else None,
-                           "current_page_id": cap.current_page_id if cap else None,
-                           "numeric_deliverable_id": cap.numeric_deliverable_id if cap else None,
-                           "note": ev.get("note")})
+            if cap:
+                ok = bool(cap.response_loio == str(corr.get("resolved_guide_id")).lower()
+                          and cap.current_page_id == target_page)
+                checks.append({"kind": "saved_response", "file": ev.get("file"), "machine_checked": True, "passed": ok,
+                               "response_loio": cap.response_loio,
+                               "current_page_id": cap.current_page_id,
+                               "numeric_deliverable_id": cap.numeric_deliverable_id,
+                               "note": ev.get("note")})
+            else:
+                raw_path = Path(str(ev.get("file", "")))
+                cand_paths = [raw_path, ctx.root / raw_path, Path("D:/sap-captures") / raw_path.name]
+                found_path = next((p for p in cand_paths if p.is_file()), None)
+                if found_path:
+                    try:
+                        raw = json.loads(found_path.read_text(encoding="utf-8-sig"))
+                        d = (raw.get("data") or {}).get("deliverable") or {}
+                        cp = (raw.get("data") or {}).get("currentPage") or {}
+                        loio = str(d.get("loio") or "").lower()
+                        cur = str(cp.get("loio") or "").lower().removesuffix(".html")
+                        ok = bool(loio == str(corr.get("resolved_guide_id")).lower() and cur == target_page)
+                        checks.append({"kind": "saved_response", "file": ev.get("file"), "machine_checked": True, "passed": ok,
+                                       "response_loio": loio, "current_page_id": cur,
+                                       "numeric_deliverable_id": str(d.get("numeric_deliverable_id") or ""),
+                                       "note": ev.get("note")})
+                    except Exception as ex:
+                        checks.append({"kind": "saved_response", "file": ev.get("file"), "machine_checked": True, "passed": False,
+                                       "note": f"unreadable: {ex}"})
+                else:
+                    checks.append({"kind": "saved_response", "file": ev.get("file"), "machine_checked": True, "passed": False,
+                                   "response_loio": None, "current_page_id": None, "numeric_deliverable_id": None,
+                                   "note": ev.get("note")})
         else:
             checks.append({"kind": ev.get("kind"), "machine_checked": False, "passed": None,
                            "machine_verified_declared": ev.get("machine_verified"), "date": ev.get("date"),
@@ -448,7 +480,10 @@ def resolve_identity(card: Any, ctx: IdentityContext) -> PageIdentity:
     # 3. evidence that is never authoritative: captures placing the page under another loio, other TOCs, map roots
     corr = ctx.corrections.get(number) if number is not None else None
     corr_guide = str(corr.get("resolved_guide_id")).lower() if corr else None
-    foreign_caps = [c for c in ctx.captures if c.current_page_id == p and c.response_loio != g]
+    target_pages = {p}
+    if corr and corr.get("resolved_page_id"):
+        target_pages.add(str(corr["resolved_page_id"]).lower())
+    foreign_caps = [c for c in ctx.captures if c.current_page_id in target_pages and c.response_loio != g]
     for c in foreign_caps:
         supports = corr is not None and c.response_loio == corr_guide
         evidence.append({
@@ -480,29 +515,55 @@ def resolve_identity(card: Any, ctx: IdentityContext) -> PageIdentity:
     if corr is not None:
         chk = _correction_check(ctx, corr)
         rgs = ctx.guide_status(corr_guide)
-        rmem = _toc_membership(ctx, corr_guide, p)
+        resolved_p = str(corr.get("resolved_page_id", "")).lower() if corr.get("resolved_page_id") else None
+        target_p = resolved_p if resolved_p else p
+        rmem = _toc_membership(ctx, corr_guide, target_p)
         match = (str(corr.get("card_guide_id", "")).lower() == g and str(corr.get("card_page_id", "")).lower() == p)
-        evidence.append({"kind": "correction", "authority": A_CORRECTION, "topic_id": corr.get("topic_id"),
-                         "card_guide_id": corr.get("card_guide_id"), "card_page_id": corr.get("card_page_id"),
-                         "resolved_guide_id": corr_guide, "reason": corr.get("reason"),
-                         "correction_matches_card_ids": match, "machine_checked_saved_response_passed": chk["machine_checked_passed"],
-                         "evidence_items": chk["evidence_items"],
-                         "registers_a_guide": False, "card_record_modified": False})
+
+        toc = ctx.tocs.get(corr_guide)
+        is_map_root = bool(toc and toc.map_root == p)
+        landing_ok = bool(not resolved_p or (toc and (toc.landing_page == resolved_p or not toc.landing_page)))
+
+        corr_ev: Dict[str, Any] = {
+            "kind": "correction", "authority": A_CORRECTION, "topic_id": corr.get("topic_id"),
+            "card_guide_id": corr.get("card_guide_id"), "card_page_id": corr.get("card_page_id"),
+            "resolved_guide_id": corr_guide, "reason": corr.get("reason"),
+            "correction_matches_card_ids": match, "machine_checked_saved_response_passed": chk["machine_checked_passed"],
+            "evidence_items": chk["evidence_items"],
+            "registers_a_guide": False, "card_record_modified": False
+        }
+        if resolved_p:
+            corr_ev["resolved_page_id"] = resolved_p
+            corr_ev["card_page_is_map_root"] = is_map_root
+            corr_ev["resolved_page_is_landing_page"] = rmem["page_is_landing_page"]
+        evidence.append(corr_ev)
         evidence.append({"kind": "guide_registration", "authority": "guide_registrations.json", "role": "corrected_guide", **rgs})
         evidence.append({**rmem, "role": "corrected_guide"})
         if sm is not None and corr.get("card_url") != sm.get("authoritative_source"):
             disagreements.append({"field": "card_url", "a": "data/topic_corrections.json card_url", "a_value": corr.get("card_url"),
                                   "b": "data/source_manifest.json authoritative_source", "b_value": sm.get("authoritative_source")})
-        if match and rgs["verified"] and rmem["page_is_toc_node"] and chk["machine_checked_passed"]:
-            status, basis, eff_g, eff_p = CORRECTED_IDENTITY, B_CORRECTION, corr_guide, p
+
+        map_root_ok = True
+        if resolved_p:
+            if not is_map_root:
+                map_root_ok = False
+            if not landing_ok:
+                map_root_ok = False
+
+        if match and rgs["verified"] and rmem["page_is_toc_node"] and chk["machine_checked_passed"] and map_root_ok:
+            status, basis, eff_g, eff_p = CORRECTED_IDENTITY, B_CORRECTION, corr_guide, target_p
         else:
             why = []
             if not match:
                 why.append("CORRECTION_DOES_NOT_MATCH_CARD")
             if not rgs["verified"]:
                 why.append("CORRECTED_GUIDE_NOT_VERIFIED")
+            if resolved_p and not is_map_root:
+                why.append("CARD_PAGE_NOT_MAP_ROOT_OF_CORRECTED_GUIDE")
             if not rmem["page_is_toc_node"]:
                 why.append("PAGE_NOT_IN_CORRECTED_GUIDE_TOC")
+            elif resolved_p and not landing_ok:
+                why.append("RESOLVED_PAGE_NOT_LANDING_PAGE_OF_CORRECTED_GUIDE")
             if not chk["machine_checked_passed"]:
                 why.append("CORRECTION_SAVED_RESPONSE_NOT_CONFIRMED")
             status, basis = CONFLICTING_IDENTITY, B_CORRECTION_REJECTED

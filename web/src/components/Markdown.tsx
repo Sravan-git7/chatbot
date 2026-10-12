@@ -42,7 +42,7 @@ export function prepare(text: string): string {
     }
     out.push(line.replace(CITE, '[$1](#cite-$1)'))
     const next = lines[index + 1]
-    if (line.trim() && next !== undefined && next.trim() && !FENCE.test(next) && !BLOCK.test(line) && !BLOCK.test(next)) out.push('')
+    if (line.trim() && next !== undefined && next.trim() && !FENCE.test(next) && !BLOCK.test(next)) out.push('')
   })
   return out.join('\n')
 }

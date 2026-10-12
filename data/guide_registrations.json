@@ -3,11 +3,16 @@
   "registrations": [
     {
       "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
-      "verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
-      "evidence": "captured URL #1 (deliverable_id=40374657, buildNo=1779, file_path=8990d053…): the saved response has deliverable.loio=2ac7fe29a0c94cdd88fb80c2cb9f7758 (title 'Device Management', fullToc identical to response #3), currentPage.loio=8990d0533f8e4308e10000000a174cb4. That is Guide C, not 021b182b0c47416c8fafed67ebfd78a9, although card #5 names 021b182b for this page id. deliverable_id 40374657 was therefore NOT accepted for Guide A; Guide A needs its own response (loio 021b182b…). | USER-REPORTED browser evidence (2026-09-30, not machine-verified; no HAR in the worktree): opening card #5's original URL under 021b182b…/8990d053… resolves in the browser to 2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d053…; its pagecontent?deliverableInfo=1 request uses deliverable_id=40374657 and the response loio is 2ac7fe29…. So #5 currently resolves to Guide C; this URL is NOT evidence for Guide A (021b182b).",
+      "numeric_id": "0",
+      "build_no": "0",
+      "verification": "response_loio_verified",
+      "evidence": "verified through official SAP Help pagecontent response in data/toc/021b182b0c47416c8fafed67ebfd78a9.json: deliverable.loio == 021b182b0c47416c8fafed67ebfd78a9 (title 'Utilities', version 2025.002, 731 TOC nodes), currentPage.loio == c1a5e8aee73440ee971a768af5b9ea1b ('Budget Billing Plan') and 549661e6541f403ea56196782e040bcc ('Periodic Billing and Invoicing Analysis (F3424)'); card(s) [13, 16] agree",
+      "captured_page_ids": [
+        "c1a5e8aee73440ee971a768af5b9ea1b",
+        "549661e6541f403ea56196782e040bcc"
+      ],
+      "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
       "_topics": [
-        1,
-        5,
         13,
         16
       ]

@@ -1,0 +1,125 @@
+{
+  "acquisition": {
+    "body_sha256": "f30b16814dfe61d97fecb4fb11befbb4b68c59e327b9f65d4d73839040af4a48",
+    "build_no": null,
+    "deliverable_title": "Master Data",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/1_40374631_e369ce53118d4308e10000000a174cb4.json",
+    "file_sha256": "8714e6c513a3e803e28339ebbe3f6dc61406c7193b538db23d170632e9cbd2a0",
+    "html_chars": 2212,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "40374631",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.002"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Master Data"
+      ],
+      "kind": "paragraph",
+      "text": "Purpose"
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Master Data"
+      ],
+      "kind": "paragraph",
+      "text": "This component contains data for the Utilities Industry (IS-U) component that remains unchanged over a long period of time."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Master Data"
+      ],
+      "kind": "paragraph",
+      "text": "There are two different types of master data:"
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Master Data"
+      ],
+      "kind": "paragraph",
+      "text": "Business master data includes:"
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Master Data"
+      ],
+      "kind": "list",
+      "text": "- Business partner\n- Contract account\n- Contract (billable service)\n- Service provider\n- Non-billable service"
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Master Data"
+      ],
+      "kind": "paragraph",
+      "text": "Technical master data includes:"
+    },
+    {
+      "block_index": 6,
+      "heading_path": [
+        "Master Data"
+      ],
+      "kind": "list",
+      "text": "- Grid\n- Point of delivery\n- Connection\n- Connection object\n- Technical installation\n- Premise\n- Device location\n- Installation\n- Device"
+    }
+  ],
+  "breadcrumb": [
+    "Master Data"
+  ],
+  "card": {
+    "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+    "card_page_id": "0a6ace53118d4308e10000000a174cb4",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Utilities Master Data",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+    "review_flag": false
+  },
+  "doc_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4",
+  "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+  "headings": [
+    "Master Data"
+  ],
+  "html_title": "Master Data",
+  "identity": {
+    "basis": "CORRECTION_APPLIED_PAGE_IN_CORRECTED_GUIDE_TOC",
+    "effective_guide_id_differs_from_card": true,
+    "status": "corrected_identity"
+  },
+  "page_id": "e369ce53118d4308e10000000a174cb4",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-01"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+  "structure": {
+    "blocks": 7,
+    "chrome_elements_removed": 0,
+    "headings": 1,
+    "kinds": {
+      "list": 2,
+      "paragraph": 5
+    }
+  },
+  "text": "Master Data\nPurpose\nThis component contains data for the Utilities Industry (IS-U) component that remains unchanged over a long period of time.\nThere are two different types of master data:\nBusiness master data includes:\n- Business partner\n- Contract account\n- Contract (billable service)\n- Service provider\n- Non-billable service\nTechnical master data includes:\n- Grid\n- Point of delivery\n- Connection\n- Connection object\n- Technical installation\n- Premise\n- Device location\n- Installation\n- Device",
+  "text_sha256": "ff2a8f20a903743658b057efa4974625b25204bf14a6461034a16317204d51eb",
+  "title": "Master Data",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 499
+  }
+}

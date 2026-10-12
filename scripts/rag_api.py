@@ -237,7 +237,7 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
                static_dir: Optional[Path] = None, service_factory: Optional[Callable[[str], S.RagService]] = None) -> FastAPI:
     gen = generator or os.environ.get("RAG_GENERATOR", "extractive")
     origins = list(cors_origins) if cors_origins is not None else ([o.strip() for o in os.environ["RAG_CORS_ORIGINS"].split(",") if o.strip()] if os.environ.get("RAG_CORS_ORIGINS") else list(DEFAULT_CORS))
-    debug_on = enable_debug if enable_debug is not None else os.environ.get("RAG_ENABLE_DEBUG", "1") != "0"
+    debug_on = bool(enable_debug) if enable_debug is not None else (os.environ.get("RAG_ENABLE_DEBUG", "0").strip().lower() in ("1", "true", "yes"))
     csp = build_csp()
     sdir = Path(static_dir) if static_dir is not None else Path(os.environ.get("RAG_STATIC_DIR", DEFAULT_STATIC_DIR))
 
@@ -403,7 +403,7 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         svc = current()
         try:
             context = req.context.model_dump(exclude_none=True) if req.context else None
-            result = svc.ask(req.message, conversation_id=req.conversation_id, debug=req.debug, context=context)
+            result = svc.ask(req.message, conversation_id=req.conversation_id, debug=(req.debug and debug_on), context=context)
         except S.ServiceError:
             raise
         except Exception as exc:

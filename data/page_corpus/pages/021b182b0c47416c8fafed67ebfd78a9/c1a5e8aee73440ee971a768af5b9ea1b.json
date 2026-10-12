@@ -1,0 +1,128 @@
+{
+  "acquisition": {
+    "body_sha256": "4031be3cf29c83bcf66c979bbd35b7138ac2ca84a3cdadd6981d3ce9b4656924",
+    "build_no": null,
+    "deliverable_title": "Utilities",
+    "envelope_status": "OK",
+    "fallback_page": false,
+    "file": "data/page_corpus/fetched/1_0_c1a5e8aee73440ee971a768af5b9ea1b.json",
+    "file_sha256": "925a7b4643225b13d083f90cbb954174eadb493d460e9610d0ad8a620ce17dae",
+    "html_chars": 2598,
+    "http_status": null,
+    "http_status_note": "the saved response records the API envelope status only; the HTTP status was not saved",
+    "language": "en-US",
+    "numeric_deliverable_id": "0",
+    "response_state": "PRODUCTION",
+    "retrieved_at": null,
+    "retrieved_at_note": "the capture file carries no timestamp; none is invented",
+    "type": "saved_sap_help_pagecontent_response",
+    "version": "2025.002"
+  },
+  "blocks": [
+    {
+      "block_index": 0,
+      "heading_path": [
+        "Budget Billing Plan",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "Utility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. Therefore, they charge budget billing amounts during the supply period instead of the actual amount owed, in order to remain solvent. You specify the budget billing amounts and the dates that are due in the budget billing plan. The budget billing plan is the basis for charging budget billing amounts."
+    },
+    {
+      "block_index": 1,
+      "heading_path": [
+        "Budget Billing Plan",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "With budget billing plans, you manage the budget billing requests in a billing period in between two periodic bills."
+    },
+    {
+      "block_index": 2,
+      "heading_path": [
+        "Budget Billing Plan",
+        "Use"
+      ],
+      "kind": "paragraph",
+      "text": "You can use several budget billing procedures. Each of these have different ways of determining budget billing dates and amounts, managing budget billing data, and posting procedures:"
+    },
+    {
+      "block_index": 3,
+      "heading_path": [
+        "Budget Billing Plan",
+        "Use"
+      ],
+      "kind": "list",
+      "text": "- Statistical budget billing procedure\n- Partial bill procedure\n- Payment plan procedure\n- Payment scheme"
+    },
+    {
+      "block_index": 4,
+      "heading_path": [
+        "Budget Billing Plan",
+        "Features"
+      ],
+      "kind": "paragraph",
+      "text": "You can display and change active and inactive budget billing plans for a contract account. You can also display the following information:"
+    },
+    {
+      "block_index": 5,
+      "heading_path": [
+        "Budget Billing Plan",
+        "Features"
+      ],
+      "kind": "list",
+      "text": "- Start and end of budget billing plan\n- Division\n- Budget billing amount\n- Billing period\n- Premise\n- Contract"
+    }
+  ],
+  "breadcrumb": [
+    "Customer Engagement",
+    "Service in the Interaction Center",
+    "Managing Budget Billing Plans",
+    "Budget Billing Plan"
+  ],
+  "card": {
+    "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+    "card_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
+    "card_source_status": "verified",
+    "card_source_url_status": "ok",
+    "card_title": "Budget Billing Plan",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
+    "review_flag": false
+  },
+  "doc_id": "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b",
+  "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+  "headings": [
+    "Budget Billing Plan",
+    "Use",
+    "Features"
+  ],
+  "html_title": "Budget Billing Plan",
+  "identity": {
+    "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+    "effective_guide_id_differs_from_card": false,
+    "status": "identified_not_local"
+  },
+  "page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
+  "schema_version": "8.1",
+  "source_ids": [
+    "M2C-13"
+  ],
+  "source_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
+  "structure": {
+    "blocks": 6,
+    "chrome_elements_removed": 0,
+    "headings": 3,
+    "kinds": {
+      "list": 2,
+      "paragraph": 4
+    }
+  },
+  "text": "Budget Billing Plan\nUse\nUtility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. Therefore, they charge budget billing amounts during the supply period instead of the actual amount owed, in order to remain solvent. You specify the budget billing amounts and the dates that are due in the budget billing plan. The budget billing plan is the basis for charging budget billing amounts.\nWith budget billing plans, you manage the budget billing requests in a billing period in between two periodic bills.\nYou can use several budget billing procedures. Each of these have different ways of determining budget billing dates and amounts, managing budget billing data, and posting procedures:\n- Statistical budget billing procedure\n- Partial bill procedure\n- Payment plan procedure\n- Payment scheme\nFeatures\nYou can display and change active and inactive budget billing plans for a contract account. You can also display the following information:\n- Start and end of budget billing plan\n- Division\n- Budget billing amount\n- Billing period\n- Premise\n- Contract",
+  "text_sha256": "941617b81c2fede1ad38d16c278054154695a9d7ebfc4a9c8d953b370464afe5",
+  "title": "Budget Billing Plan",
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "text_chars": 1123
+  }
+}
