@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "Phase 8 page-level and end-to-end evaluation queries for the 7 ingested SAP Help pages",
+  "description": "Phase 8 page-level and end-to-end evaluation queries; answerable/absent_detail authored for the seven originally ingested SAP Help pages (all still ingested); not_ingested and unresolved_identity derived from the current identity state and corpus",
   "authorship": {
     "authored_by": "AI coding assistant, after reading the ingested pages; not a human domain expert; no LLM generation at runtime",
     "caveat": "answerable queries are paraphrases of page facts written with the page text in view; they are not blind. The set is small (per-page n of 6-10) and every metric derived from it is a point estimate with wide uncertainty.",
@@ -33,11 +33,11 @@
   "counts": {
     "answerable": 59,
     "absent_detail": 11,
-    "not_ingested": 6,
-    "unresolved_identity": 4,
+    "not_ingested": 0,
+    "unresolved_identity": 2,
     "out_of_domain": 8
   },
-  "corpus_sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d",
+  "corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
   "queries": [
     {
       "id": "P8-001",
@@ -827,60 +827,6 @@
     },
     {
       "id": "P8-071",
-      "query": "How are dunning notices created for overdue receivables?",
-      "type": "not_ingested",
-      "gold_source_id": "M2C-26",
-      "gold_doc_id": null,
-      "evidence": [],
-      "expected_status": "page_not_ingested"
-    },
-    {
-      "id": "P8-072",
-      "query": "How do I disconnect a utility installation for non-payment?",
-      "type": "not_ingested",
-      "gold_source_id": "M2C-29",
-      "gold_doc_id": null,
-      "evidence": [],
-      "expected_status": "page_not_ingested"
-    },
-    {
-      "id": "P8-073",
-      "query": "How do I submit open receivables to a collection agency?",
-      "type": "not_ingested",
-      "gold_source_id": "M2C-27",
-      "gold_doc_id": null,
-      "evidence": [],
-      "expected_status": "page_not_ingested"
-    },
-    {
-      "id": "P8-074",
-      "query": "What clearing types exist for incoming payments?",
-      "type": "not_ingested",
-      "gold_source_id": "M2C-21",
-      "gold_doc_id": null,
-      "evidence": [],
-      "expected_status": "page_not_ingested"
-    },
-    {
-      "id": "P8-075",
-      "query": "How can I display or change an existing installment plan afterwards?",
-      "type": "not_ingested",
-      "gold_source_id": "M2C-25",
-      "gold_doc_id": null,
-      "evidence": [],
-      "expected_status": "page_not_ingested"
-    },
-    {
-      "id": "P8-076",
-      "query": "How do I analyse incoming payments that have not been assigned?",
-      "type": "not_ingested",
-      "gold_source_id": "M2C-19",
-      "gold_doc_id": null,
-      "evidence": [],
-      "expected_status": "page_not_ingested"
-    },
-    {
-      "id": "P8-077",
       "query": "What is the contract account business object and what does it represent?",
       "type": "unresolved_identity",
       "gold_source_id": "M2C-18",
@@ -889,7 +835,7 @@
       "expected_status": "unresolved_identity"
     },
     {
-      "id": "P8-078",
+      "id": "P8-072",
       "query": "Which attributes does the contract account business object expose?",
       "type": "unresolved_identity",
       "gold_source_id": "M2C-18",
@@ -898,25 +844,7 @@
       "expected_status": "unresolved_identity"
     },
     {
-      "id": "P8-079",
-      "query": "How is a budget billing plan set up for a customer?",
-      "type": "unresolved_identity",
-      "gold_source_id": "M2C-13",
-      "gold_doc_id": null,
-      "evidence": [],
-      "expected_status": "unresolved_identity"
-    },
-    {
-      "id": "P8-080",
-      "query": "How are business partner, premise and installation related in the utilities master data?",
-      "type": "unresolved_identity",
-      "gold_source_id": "M2C-01",
-      "gold_doc_id": null,
-      "evidence": [],
-      "expected_status": "unresolved_identity"
-    },
-    {
-      "id": "P8-081",
+      "id": "P8-073",
       "query": "What is a good recipe for vegetable biryani?",
       "type": "out_of_domain",
       "gold_source_id": null,
@@ -926,7 +854,7 @@
       "origin_id": "7F-O01"
     },
     {
-      "id": "P8-082",
+      "id": "P8-074",
       "query": "How do you say good morning in Spanish?",
       "type": "out_of_domain",
       "gold_source_id": null,
@@ -936,7 +864,7 @@
       "origin_id": "7F-O08"
     },
     {
-      "id": "P8-083",
+      "id": "P8-075",
       "query": "How do I set up two-factor authentication on Gmail?",
       "type": "out_of_domain",
       "gold_source_id": null,
@@ -946,7 +874,7 @@
       "origin_id": "7F-O15"
     },
     {
-      "id": "P8-084",
+      "id": "P8-076",
       "query": "How do I post a vendor invoice in accounts payable?",
       "type": "out_of_domain",
       "gold_source_id": null,
@@ -956,7 +884,7 @@
       "origin_id": "7F-O22"
     },
     {
-      "id": "P8-085",
+      "id": "P8-077",
       "query": "How do I schedule a background job in SM36?",
       "type": "out_of_domain",
       "gold_source_id": null,
@@ -966,7 +894,7 @@
       "origin_id": "7F-O29"
     },
     {
-      "id": "P8-086",
+      "id": "P8-078",
       "query": "How do smart meters transmit consumption data to a head-end system over a mesh network?",
       "type": "out_of_domain",
       "gold_source_id": null,
@@ -976,7 +904,7 @@
       "origin_id": "7F-O36"
     },
     {
-      "id": "P8-087",
+      "id": "P8-079",
       "query": "How does a demand response programme shed load during peak hours?",
       "type": "out_of_domain",
       "gold_source_id": null,
@@ -986,7 +914,7 @@
       "origin_id": "7F-O43"
     },
     {
-      "id": "P8-088",
+      "id": "P8-080",
       "query": "How should I move out of a rented flat and get my deposit back?",
       "type": "out_of_domain",
       "gold_source_id": null,

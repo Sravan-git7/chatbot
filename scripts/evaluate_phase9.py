@@ -53,7 +53,7 @@ ROUTER_DEPTH = 29                                           # rank the gold card
 
 PHASE4_RECORDED = {"recall@1": 0.92, "recall@3": 0.96, "recall@5": 1.0, "mrr": 0.95}
 PHASE5_RECORDED = {"recall@1": 0.7222, "recall@3": 0.7963, "recall@5": 0.8704, "mrr": 0.7873}
-PHASE8_RESULTS_SHA256_PREFIX = "735f706188d8154e"          # recorded at the end of Phase 8 (full hash is recomputed live)
+PHASE8_RESULTS_SHA256_PREFIX = "22571efb91a1667f"          # re-recorded 2026-10-12 after the Phase 8 re-evaluation on the 28-page corpus (full hash is recomputed live)
 
 
 def check_frozen(payload_bytes: bytes) -> Dict[str, Any]:

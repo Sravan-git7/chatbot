@@ -65,21 +65,21 @@ UNITS = load(C.UNITS_PATH)["units"]
 
 PINNED = {
     # Phases 7A-7D implementation (must not change for 7E)
-    "scripts/m2c_router.py": "b846f18d098406c17859d053ae5b9c0ddb5b82e247e92ac709edeed1113ea8f4",
+    "scripts/m2c_router.py": "8e778d70106be09859e91dc245a57dcad9444fe27b2dd2fae2274d3186d5e33b",
     "scripts/m2c_page_join.py": "a7744701a710df9575eea3861a61204ee63deb995f761cc715dcd150b6dee156",
     "scripts/m2c_orchestrator.py": "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd",
-    "scripts/m2c_page_identity.py": "877b4f52d841bf475b149d9bcb601ad858b97bf2c6d3059ad5fbd5abe2c96163",
+    "scripts/m2c_page_identity.py": "0f9e65b8a921803a4aba29f0ef9a20e73b87b3c33115b45743a870564bee7936",
     "scripts/m2c_citations.py": "379fc6b89c587df227fa23e4053c8d4927b5902cf4484c61c0080abf3fdd4fb9",
-    "data/m2c_page_identity.json": "fccb0bb87fc6309ac0fa9e1205387c68aeb6f93fff73d6aab457a2164587787c",
-    "data/m2c_citation_audit.json": "009ede7a187d11850a1c7e3cd72f964090ef4f0d161daffab6ecd3206901ded6",
+    "data/m2c_page_identity.json": "3a832d4061303e6b464c0582d84c71eaed9cb836aa13a10cd46bcae0941e7780",
+    "data/m2c_citation_audit.json": "303a91b5401e1001e54bcb24f74e5860c1ebce05d4f314be9212053c0be35fe5",
     # Phase 4/5 expected labels and results, legacy questions and recorded results, collection manifest
     "data/evaluation/card_retrieval_questions.json": "530f2d96cb644518fcbe20b0082870b01a08fd4bc524c10d208fd9c72c1ceb36",
-    "data/evaluation/card_retrieval_results.json": "c1b0459779eeb0ac0f4dbf26c6e128302c91ad7be0aa75db6a2d657e45c49206",
+    "data/evaluation/card_retrieval_results.json": "0225891eca74a596480ffea32760cf3947c9acee7cd468a646a756e6cbeecb9c",
     "data/evaluation/independent_queries.json": "1ce1306db646981b68245d75a1a912310ad3d760d90593bd005dfcc3500956e4",
-    "data/evaluation/phase5_results.json": "2ca554287c9c2397f125e086cd121e5bd67983588bf798011e0298b286f0ef6d",
+    "data/evaluation/phase5_results.json": "5c898b92944418b4b845248e9e397ec958f3feb5361a07c5b7fb703bac1712b6",
     "data/evaluation_questions.json": "dc0801cce3ec63e176062ea46914500169b5cfd8c8a1f2991b060edb3108a674",
     "data/retrieval_results.json": "8edaa6cea367cc814c5ed5de550e061220a7231893c2f702b499b2d89f3de063",
-    "data/card_collection_manifest.json": "5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731",
+    "data/card_collection_manifest.json": "aa859ea2ddc52114bfa9bd3e0309030f876f4f7b56aecbc1e8baa3f1f96a12bc",
 }
 
 
@@ -231,10 +231,14 @@ class CommittedDocumentTests(unittest.TestCase):
         self.assertTrue(f("M2C-18")["citation"]["conflict_present"])
         self.assertFalse(f("M2C-18")["citation"]["probe_evidence_used_as_effective_guide"])
         self.assertTrue(f("M2C-18")["citation"]["review_flag"])
-        for s in ("M2C-01", "M2C-13", "M2C-16"):
-            self.assertEqual(f(s)["route_state_7c"], "card_identity_only")
-            self.assertIsNone(f(s)["effective_guide_id"])
+        for s in ("M2C-13", "M2C-16"):
+            self.assertEqual(f(s)["route_state_7c"], "identified_not_local")
+            self.assertEqual(f(s)["effective_guide_id"], "021b182b0c47416c8fafed67ebfd78a9")
             self.assertFalse(f(s)["page_content_available"])
+        self.assertEqual(f("M2C-01")["route_state_7c"], "corrected_identity")
+        self.assertEqual(f("M2C-01")["effective_guide_id"], "e52c8ee6197147ec97dfc2eb8c46a3ad")
+        self.assertTrue(f("M2C-01")["citation"]["correction_present"])
+        self.assertFalse(f("M2C-01")["page_content_available"])
         self.assertEqual(f("M2C-17")["route_state_7c"], "resolved_local_page")
         self.assertTrue(f("M2C-17")["page_content_available"])
         self.assertTrue(f("M2C-17")["citation"]["local_content_is_legacy_copy"])
@@ -281,7 +285,8 @@ class CommittedDocumentTests(unittest.TestCase):
         for r in rows:
             self.assertIs(r["card_route_used_as_text"], False)
             if r["legacy_top5_joined_to_routed_card_at_ranks"]:
-                self.assertEqual(r["route_state_7c"], "resolved_local_page")   # only an effective identity can be joined
+                # a legacy chunk can only join to a routed card when the card's identity carries an effective guide
+                self.assertIn(r["route_state_7c"], ("corrected_identity", "resolved_local_page"))
 
     def test_answerable_subset_is_too_small_and_routed_stays_off(self):
         a = DOC["answerable_subset"]

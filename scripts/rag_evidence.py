@@ -296,6 +296,10 @@ _QUALITY_LIST_LEADIN = re.compile(
 # not a sentence. Only bare entries are caught - a punctuated or imperative item ("- The Chart View shows ...",
 # "- Choose Continue ...") remains evidence.
 _QUALITY_BARE_LIST_ITEM = re.compile(r"^\s*(?:[-*•]|\d+[.)])\s+")
+# A bare configuration-field list item ("Chart : Combined Stacked Line Chart", "Dimension : Lot"): a short label, a
+# spaced colon, and a value. A colon-ended lead-in whose attached list consists solely of these carries no usable
+# evidence and is rejected together with the list; noun-phrase items (master-data object lists, ...) are unaffected.
+_QUALITY_CONFIG_LIST_ITEM = re.compile(r"^\s*(?:[-*•]|\d+[.)])?\s*[^:;.!?]{1,40}\s+:\s+\S")
 _SENTENCE_END = re.compile(r"[.!?][\"'”’)}\]]*\s*$")
 
 
@@ -402,12 +406,15 @@ def _nonempty_chunk_lines(chunk_text: str) -> Tuple[bool, frozenset[str]]:
 def is_incomplete_list_leadin(text: str, supporting_follow: Optional[str] = None,
                               heading_labels: Sequence[str] = (),
                               list_items: Sequence[str] = ()) -> bool:
-    """Identify only clear colon-ended list introductions whose list content is not attached to this evidence unit."""
-    if list_items:
-        return False
+    """Identify clear colon-ended list introductions whose list content is not attached to this evidence unit - or
+    whose attached list consists solely of bare configuration-field fragments ("Label : Value"), in which case the
+    lead-in carries no usable evidence either and is rejected together with the list."""
     clean = _QUALITY_CITE.sub("", str(text or "")).strip()
     if not clean:
         return False
+    if list_items:
+        leadin_shape = clean.endswith(":") or bool(_QUALITY_LIST_LEADIN.search(clean))
+        return leadin_shape and all(_QUALITY_CONFIG_LIST_ITEM.match(str(item or "")) for item in list_items)
     if clean.endswith(":") or _QUALITY_LIST_LEADIN.search(clean):
         follow = _QUALITY_CITE.sub("", str(supporting_follow or "")).strip()
         if not follow or _QUALITY_LIST_LEADIN.search(follow) or follow.endswith(":"):

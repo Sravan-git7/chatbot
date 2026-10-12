@@ -94,13 +94,21 @@ def load(name: str) -> List[Dict[str, Any]]:
 
 
 def chain_ok(answer: str, items: Sequence[Dict[str, Any]]) -> bool:
-    """Independent support-chain check on the debug context: every answer line is a verbatim span of the chunk its marker names."""
+    """Independent support-chain check on the debug context: every answer line is a verbatim span of the chunk its marker names.
+
+    Mirrors the shipped verifier ``rag_evidence.verify_support_chain``: the deterministic procedural-limitation
+    notice ("The available SAP Help page explains ... does not document ...") is a labelled meta statement, not a
+    factual claim, and is exempt exactly as in the product path. Every content sentence still must be verbatim.
+    """
     by = {i["marker"]: i for i in items}
     import rag_text as T
+    import rag_evidence as RE
     seen = False
     for line in T.split_cited_sentences(answer or ""):
         body = norm(re.sub(r"\[S\d+\]", "", line))
         if not body:
+            continue
+        if RE.is_procedural_limitation_sentence(body):
             continue
         seen = True
         if not any(m in by and body in norm(by[m]["text"]) for m in re.findall(r"\[(S\d+)\]", line)):

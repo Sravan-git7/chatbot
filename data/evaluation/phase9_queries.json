@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "description": "Phase 9 fresh retrieval and end-to-end evaluation queries (frozen before any retrieval was run)",
+  "description": "Phase 9 fresh retrieval and end-to-end evaluation queries (frozen before any retrieval was run; re-frozen 2026-10-12 after the corpus grew from 7 to 28 ingested pages - not_ingested/unresolved_identity categories re-derived from the current state)",
   "authorship": {
-    "authored_by": "AI coding assistant, after reading the 7 ingested pages; not a human domain expert; no LLM generation at runtime",
+    "authored_by": "AI coding assistant, after reading the seven originally ingested pages; not a human domain expert; no LLM generation at runtime",
     "caveat": "answerable queries were written with the page text in view (not blind); a human domain review has not been done; per-page n is 5-14, so every rate has a wide interval",
     "fresh_check": "no exact/near duplicate (Jaccard<0.8) of any Phase 4/5/7F/8 query; no query shares more than 3 contiguous words with any card text",
     "written_before_evaluation": true,
@@ -36,22 +36,22 @@
   "counts": {
     "answerable": 69,
     "absent_detail": 14,
-    "not_ingested": 20,
-    "unresolved_identity": 8,
+    "not_ingested": 0,
+    "unresolved_identity": 2,
     "out_of_domain": 16
   },
   "facet_counts": {
     "entity": 8,
     "keyword": 9,
     "multi_concept": 7,
-    "natural": 68,
+    "natural": 42,
     "paraphrase": 7,
     "rare_term": 6,
     "section_specific": 8,
     "sibling_ambiguous": 6,
     "terminology_mismatch": 8
   },
-  "corpus_sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d",
+  "corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
   "queries": [
     {
       "id": "P9-001",
@@ -1665,475 +1665,6 @@
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
-      "query": "What are the steps to register a new tenant in a utility installation?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-03",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 3
-    },
-    {
-      "id": "P9-085",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I terminate a customer's supply contract when they leave?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-04",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-02"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 1
-    },
-    {
-      "id": "P9-086",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I enter a meter reading result manually?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-06",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-087",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How does the system estimate a reading when no actual value is available?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-08",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-09"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 1
-    },
-    {
-      "id": "P9-088",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "What are the individual estimation procedures for meter readings and how do they differ?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-09",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-08"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-089",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I record the starting meter reading when a customer moves in?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-10",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-03"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-090",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I schedule billing to run automatically in the background?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-12",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-11"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-091",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How are budget billing amounts collected and processed after plan creation?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-15",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-092",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How can I check payments that arrived on the bank statement?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-19",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-20"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 1
-    },
-    {
-      "id": "P9-093",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How does the system decide which open items an incoming payment clears?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-20",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-21"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-094",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "What kinds of clearing exist for posted payments?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-21",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-20"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 1
-    },
-    {
-      "id": "P9-095",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How are payments collected at an external cash desk posted?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-22",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-19"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-096",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "What is an installment plan and why would a utility offer one?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-23",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-24"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-097",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I look at an installment plan I created earlier and change its terms?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-25",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-24"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-098",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How does the system send reminders for unpaid invoices?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-26",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 1
-    },
-    {
-      "id": "P9-099",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I hand over overdue accounts to an external collections agency?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-27",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 1
-    },
-    {
-      "id": "P9-100",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "Which enterprise services are available for communicating with a collection agency?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-28",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-27"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-101",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I reconnect a customer after payment is received?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-29",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 1
-    },
-    {
-      "id": "P9-102",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "Which steps are needed to issue a final bill after a customer moves out?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-04",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [
-        "M2C-02",
-        "M2C-14"
-      ],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 1
-    },
-    {
-      "id": "P9-103",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I deactivate supply for a customer who has not paid?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "answerability": "not_answerable_page_not_in_local_corpus",
-      "gold_source_id": "M2C-29",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "page_not_ingested",
-      "notes": "page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-104",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do premises, connection objects and device locations fit together in utilities master data?",
-      "type": "unresolved_identity",
-      "facet": "natural",
-      "answerability": "not_answerable_identity_unresolved",
-      "gold_source_id": "M2C-01",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "unresolved_identity",
-      "notes": "card has conflicting or identity-only status (7C)",
-      "max_card_phrase_run_words": 3
-    },
-    {
-      "id": "P9-105",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "What master data objects must exist before I can install a meter?",
-      "type": "unresolved_identity",
-      "facet": "natural",
-      "answerability": "not_answerable_identity_unresolved",
-      "gold_source_id": "M2C-01",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "unresolved_identity",
-      "notes": "card has conflicting or identity-only status (7C)",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-106",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I give a customer fixed monthly payments for consumption?",
-      "type": "unresolved_identity",
-      "facet": "natural",
-      "answerability": "not_answerable_identity_unresolved",
-      "gold_source_id": "M2C-13",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "unresolved_identity",
-      "notes": "card has conflicting or identity-only status (7C)",
-      "max_card_phrase_run_words": 1
-    },
-    {
-      "id": "P9-107",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "What is a budget billing plan and how is it structured?",
-      "type": "unresolved_identity",
-      "facet": "natural",
-      "answerability": "not_answerable_identity_unresolved",
-      "gold_source_id": "M2C-13",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "unresolved_identity",
-      "notes": "card has conflicting or identity-only status (7C)",
-      "max_card_phrase_run_words": 3
-    },
-    {
-      "id": "P9-108",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "How do I analyse billing and invoicing results over a period?",
-      "type": "unresolved_identity",
-      "facet": "natural",
-      "answerability": "not_answerable_identity_unresolved",
-      "gold_source_id": "M2C-16",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "unresolved_identity",
-      "notes": "card has conflicting or identity-only status (7C)",
-      "max_card_phrase_run_words": 3
-    },
-    {
-      "id": "P9-109",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
-      "query": "What analysis tools exist for periodic billing?",
-      "type": "unresolved_identity",
-      "facet": "natural",
-      "answerability": "not_answerable_identity_unresolved",
-      "gold_source_id": "M2C-16",
-      "gold_doc_id": null,
-      "acceptable_source_ids": [],
-      "evidence": [],
-      "expected_status": "unresolved_identity",
-      "notes": "card has conflicting or identity-only status (7C)",
-      "max_card_phrase_run_words": 2
-    },
-    {
-      "id": "P9-110",
-      "authorship": "AI coding assistant (not blind; not a domain expert)",
-      "authored_phase": 9,
-      "authored_on": "2026-10-01",
       "query": "What is the structure of a contract account as a business object?",
       "type": "unresolved_identity",
       "facet": "natural",
@@ -2143,11 +1674,11 @@
       "acceptable_source_ids": [],
       "evidence": [],
       "expected_status": "unresolved_identity",
-      "notes": "card has conflicting or identity-only status (7C)",
+      "notes": "card has conflicting or unresolved status (7C)",
       "max_card_phrase_run_words": 2
     },
     {
-      "id": "P9-111",
+      "id": "P9-085",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2160,11 +1691,11 @@
       "acceptable_source_ids": [],
       "evidence": [],
       "expected_status": "unresolved_identity",
-      "notes": "card has conflicting or identity-only status (7C)",
+      "notes": "card has conflicting or unresolved status (7C)",
       "max_card_phrase_run_words": 2
     },
     {
-      "id": "P9-112",
+      "id": "P9-086",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2180,7 +1711,7 @@
       "notes": ""
     },
     {
-      "id": "P9-113",
+      "id": "P9-087",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2196,7 +1727,7 @@
       "notes": ""
     },
     {
-      "id": "P9-114",
+      "id": "P9-088",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2212,7 +1743,7 @@
       "notes": ""
     },
     {
-      "id": "P9-115",
+      "id": "P9-089",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2228,7 +1759,7 @@
       "notes": ""
     },
     {
-      "id": "P9-116",
+      "id": "P9-090",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2244,7 +1775,7 @@
       "notes": ""
     },
     {
-      "id": "P9-117",
+      "id": "P9-091",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2260,7 +1791,7 @@
       "notes": ""
     },
     {
-      "id": "P9-118",
+      "id": "P9-092",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2276,7 +1807,7 @@
       "notes": ""
     },
     {
-      "id": "P9-119",
+      "id": "P9-093",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2292,7 +1823,7 @@
       "notes": ""
     },
     {
-      "id": "P9-120",
+      "id": "P9-094",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2308,7 +1839,7 @@
       "notes": ""
     },
     {
-      "id": "P9-121",
+      "id": "P9-095",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2324,7 +1855,7 @@
       "notes": ""
     },
     {
-      "id": "P9-122",
+      "id": "P9-096",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2340,7 +1871,7 @@
       "notes": ""
     },
     {
-      "id": "P9-123",
+      "id": "P9-097",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2356,7 +1887,7 @@
       "notes": ""
     },
     {
-      "id": "P9-124",
+      "id": "P9-098",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2372,7 +1903,7 @@
       "notes": ""
     },
     {
-      "id": "P9-125",
+      "id": "P9-099",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2388,7 +1919,7 @@
       "notes": ""
     },
     {
-      "id": "P9-126",
+      "id": "P9-100",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",
@@ -2404,7 +1935,7 @@
       "notes": ""
     },
     {
-      "id": "P9-127",
+      "id": "P9-101",
       "authorship": "AI coding assistant (not blind; not a domain expert)",
       "authored_phase": 9,
       "authored_on": "2026-10-01",

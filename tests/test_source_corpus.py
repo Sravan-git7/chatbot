@@ -172,7 +172,12 @@ class RealCorpusTests(unittest.TestCase):
         self.assertEqual((c["type"], c["card_guide_id"][:8], c["resolved_guide_id"][:8], c["applied_to_content"]),
                          ("card_guide_correction", "021b182b", "2ac7fe29", False))
         self.assertIn("021b182b0c47416c8fafed67ebfd78a9", by[5]["authoritative_source"])   # source of record unchanged
-        self.assertEqual([n for n, d in by.items() if d["source_correction"]], [5])        # no other correction is invented
+        # 2026-10-12: the Topic 1 map-root correction was machine-checked and recorded alongside the Topic 5 one.
+        c1 = by[1]["source_correction"]
+        self.assertEqual((c1["type"], c1["card_guide_id"][:8], c1["resolved_guide_id"][:8], c1["applied_to_content"]),
+                         ("card_guide_correction", "021b182b", "e52c8ee6", False))
+        self.assertIn("021b182b0c47416c8fafed67ebfd78a9", by[1]["authoritative_source"])   # source of record unchanged
+        self.assertEqual([n for n, d in by.items() if d["source_correction"]], [1, 5])      # exactly the two recorded corrections, none invented
         self.assertFalse(by[18]["external_finding"]["is_correction"])
         self.assertIsNone(by[18]["source_correction"])
 

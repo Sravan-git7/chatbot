@@ -28,8 +28,11 @@ P17 = "0bfcc5536a51204be10000000a174cb4"
 E437 = "e4375c1cad104b2eb7d027369bd76638"
 
 PINNED = {
-    "data/topic_corrections.json": "68adee37c1bf8dcaf044a070458e27b5548d72e43520406c8042e4bda5950b06",
-    "data/guide_registrations.json": "fe83f7d69ab6f5ee3511d5aa4b933293e1b9ece6c92d75f45aa71c1782b92a53",
+    # Re-baselined 2026-10-12: guide 021b182b is now registered and machine-verified (topics 13/16), and the
+    # Topic 1 map-root correction now points at the repo-local saved official response, so these three inputs
+    # legitimately changed; every other protected input is untouched.
+    "data/topic_corrections.json": "dec2dbe4a38d531fc7f6c5837e6030daf388bbcc0c2911d17bbaadc480101119",
+    "data/guide_registrations.json": "d5d00fbf2d3fde0f2ac24cf66731c8532c4e353491d5a7e4d66f51969727a613",
     "data/guide_registry.json": "3ce74f9747c73f0a2cb24b0cb6c1073d71c4d2b22ff8fee00203ffd99151d01b",
     "data/topic_manifest.json": "936500096311853a69c9100aca155f5fed4c352f3b2a74ec4d2fe54f78ee08f6",
     "data/source_manifest.json": "08ad208c0187e935377c828faef36ec9fe077704cd580bb38004356f51b740b1",
@@ -37,7 +40,7 @@ PINNED = {
     "data/final_corpus_manifest.json": "77ad52cce25deb7aa5b4e44169d2efd087bb864fd1ffa9185bfd92138e979dbc",
     "scripts/m2c_page_join.py": "a7744701a710df9575eea3861a61204ee63deb995f761cc715dcd150b6dee156",
     "scripts/m2c_orchestrator.py": "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd",
-    "scripts/m2c_router.py": "b846f18d098406c17859d053ae5b9c0ddb5b82e247e92ac709edeed1113ea8f4",
+    "scripts/m2c_router.py": "8e778d70106be09859e91dc245a57dcad9444fe27b2dd2fae2274d3186d5e33b",
     "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json": "ff0f6c77cf09496a51cb566776633aa1c5f9aa17baf06edfbde6aaec1b6d755d",
     "data/toc/9442486404b54071b4ebeab6a16628e7.json": "6c3da0345b96cd246ac779d7b1d6f1cbb70698d829bc63496b8d2c5453ad4112",
     "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json": "77d48416c1bae5ff7fe804e0805e8e42bbccba2cbd27e7b8daa2dfd78f681294",
@@ -151,11 +154,19 @@ class IdentityTests(unittest.TestCase):
             self.assertTrue(i.evidence)
 
     def test_status_counts_are_the_verified_baseline(self):
+        # Verified 2026-10-12 baseline: guide 021b182b is machine-verified (saved TOC response carries its loio and
+        # the captured pages of M2C-13/M2C-16), so those two cards moved card_identity_only -> identified_not_local;
+        # the Topic 1 map-root correction is machine-checked against the repo-local official response, so M2C-01 is
+        # corrected_identity. M2C-18 stays the single fail-closed conflict.
         c = {}
         for i in real_ids().values():
             c[i.resolution_status] = c.get(i.resolution_status, 0) + 1
-        self.assertEqual(c, {"resolved_local_page": 1, "identified_not_local": 23, "corrected_identity": 1,
-                             "card_identity_only": 3, "conflicting_identity": 1})
+        self.assertEqual(c, {"resolved_local_page": 1, "identified_not_local": 25, "corrected_identity": 2,
+                             "conflicting_identity": 1})
+        # card_identity_only and unresolved must stay absent: every card's guide is now machine-verified, and the
+        # only exception (M2C-18) fails closed as a visible conflict, never as a silent URL-only identity.
+        self.assertNotIn("card_identity_only", c)
+        self.assertNotIn("unresolved", c)
 
     def test_card_url_guide_and_page_are_preserved_exactly(self):
         units = json.loads((ROOT / "data" / "retrieval_units.json").read_text(encoding="utf-8"))["units"]
@@ -177,8 +188,9 @@ class IdentityTests(unittest.TestCase):
     def test_no_guide_is_inferred_from_a_numeric_id_title_probe_or_other_deliverable(self):
         ctx = real_ctx()
         verified = {g["guide_id"] for g in pid.build_audit(ctx)["guides"] if g["verified"]}
+        corrected = {"M2C-05": G_C, "M2C-01": G_17}      # the only two machine-checked topic corrections
         for i in real_ids().values():
-            self.assertIn(i.effective_guide_id, {None, i.card_guide_id, G_C if i.source_id == "M2C-05" else None}, i.source_id)
+            self.assertIn(i.effective_guide_id, {None, i.card_guide_id, corrected.get(i.source_id)}, i.source_id)
             if i.effective_guide_id is not None:
                 self.assertIn(i.effective_guide_id, verified, i.source_id)
             for v in (i.effective_guide_id, i.effective_page_id):
@@ -216,12 +228,16 @@ class IdentityTests(unittest.TestCase):
     def test_guide_verification_history_is_represented(self):
         a = pid.build_audit(real_ctx())
         s = a["guide_verification_summary"]
+        # 2026-10-12: guide 021b182b became the sixth registration-verified guide (its saved TOC response carries the
+        # guide loio and the captured pages of topics 13/16); the registry-local entry for the Master Data guide stays
+        # the single registry-only verification.
         self.assertEqual((s["guides_known"], s["guides_verified"], s["verified_by_registration"],
-                          s["verified_by_registry_local_evidence_only"]), (7, 6, 5, 1))
-        self.assertEqual((s["saved_tocs_in_data_toc"], s["saved_tocs_readable"]), (5, 6))
+                          s["verified_by_registry_local_evidence_only"]), (7, 7, 6, 1))
+        self.assertEqual((s["saved_tocs_in_data_toc"], s["saved_tocs_readable"]), (6, 7))
         g = {x["guide_id"]: x for x in a["guides"]}
-        self.assertFalse(g[G_A]["verified"])
-        self.assertEqual(g[G_A]["registry_json_status"], "unresolved")
+        self.assertTrue(g[G_A]["verified"])
+        self.assertEqual(g[G_A]["verification_basis"], "registration_response_loio_verified_and_machine_checked")
+        self.assertEqual(g[G_A]["registry_json_status"], "unresolved")            # stale older registry preserved
         self.assertEqual(g[G_C]["registry_json_status"], "unresolved")            # stale older registry preserved
         self.assertEqual(g[G_C]["declared_verification"], "response_loio_verified")
         self.assertEqual(g[G_17]["verification_basis"], "registry_local_evidence_only")
@@ -230,18 +246,30 @@ class IdentityTests(unittest.TestCase):
         for gid in (G_A, G_F):
             self.assertNotIn(E437, g)
 
-    def test_unverified_guide_cards_are_card_identity_only_without_an_effective_identity(self):
+    def test_the_formerly_unverified_guide_cards_now_resolve_under_machine_checked_evidence(self):
+        # Guide 021b182b was unverified until its official TOC response was saved; the fail-closed behaviour for
+        # genuinely unverified guides stays covered by the fixture tests below. With the guide verified, its two
+        # captured topic pages resolve under the card's own guide, and topic 1 resolves through the machine-checked
+        # map-root correction to the Master Data guide - never to an unverified or unrelated guide.
         ids = real_ids()
-        for sid in ("M2C-01", "M2C-13", "M2C-16"):
+        for sid, page in (("M2C-13", "c1a5e8aee73440ee971a768af5b9ea1b"), ("M2C-16", "549661e6541f403ea56196782e040bcc")):
             i = ids[sid]
-            self.assertEqual(i.resolution_status, "card_identity_only")
+            self.assertEqual(i.resolution_status, "identified_not_local")
             self.assertEqual(i.card_guide_id, G_A)
-            self.assertIsNone(i.effective_guide_id)
-            self.assertIsNone(i.effective_page_id)
+            self.assertEqual((i.effective_guide_id, i.effective_page_id), (G_A, page))
             self.assertFalse(i.local_page_available)
-        hint = [e for e in ids["M2C-01"].evidence if e["kind"] == "page_is_map_root_of_saved_toc"]
+            mem = [e for e in i.evidence if e["kind"] == "toc_membership" and e["role"] == "card_guide"][0]
+            self.assertTrue(mem["page_is_toc_node"])
+        i = ids["M2C-01"]
+        self.assertEqual(i.resolution_status, "corrected_identity")
+        self.assertEqual((i.effective_guide_id, i.effective_page_id), (G_17, "e369ce53118d4308e10000000a174cb4"))
+        self.assertFalse(i.local_page_available)
+        hint = [e for e in i.evidence if e["kind"] == "page_is_map_root_of_saved_toc"]
         self.assertEqual(hint[0]["guide_ids"], [G_17])
         self.assertEqual(hint[0]["authority"], "non_authoritative_hint")
+        corr = [e for e in i.evidence if e["kind"] == "correction"][0]
+        self.assertTrue(corr["machine_checked_saved_response_passed"])
+        self.assertTrue(corr["correction_matches_card_ids"])
 
 
 # ---------------------------------------------------------------------------------------------- #05
@@ -255,16 +283,26 @@ class Card05Tests(unittest.TestCase):
         self.assertFalse(i.local_page_available)
         self.assertIsNone(i.local_page_path)
 
-    def test_original_card_and_correction_are_unchanged_and_no_guide_registered(self):
+    def test_original_card_is_unchanged_and_the_correction_registers_no_guide(self):
         for f in ("data/topic_corrections.json", "data/topic_manifest.json", "data/source_manifest.json",
                   "data/retrieval_units.json", "data/guide_registrations.json"):
             self.assertEqual(sha(ROOT / f), PINNED[f], f)
         i = real_ids()["M2C-05"]
         self.assertIn(G_A, i.card_url)
-        self.assertFalse(real_ctx().guide_status(G_A)["verified"])
+        corr = [e for e in i.evidence if e["kind"] == "correction"][0]
+        self.assertFalse(corr["registers_a_guide"])                       # a correction never registers a guide
+        self.assertFalse(corr["card_record_modified"])                    # and never edits the card record
         regs = json.loads((ROOT / "data/guide_registrations.json").read_text(encoding="utf-8"))["registrations"]
         self.assertEqual(len(regs), 6)
-        self.assertEqual(sum(1 for r in regs if r["verification"] == "response_loio_verified"), 5)
+        self.assertEqual(sum(1 for r in regs if r["verification"] == "response_loio_verified"), 6)
+        # Guide 021b182b is verified only through its OWN machine-checked evidence (the saved TOC response for
+        # topics 13/16), never because of the #05 correction, which explicitly registers nothing for it.
+        g_a = real_ctx().guide_status(G_A)
+        self.assertTrue(g_a["verified"])
+        self.assertEqual(g_a["verification_basis"], "registration_response_loio_verified_and_machine_checked")
+        reg_a = next(r for r in regs if r["guide_id"] == G_A)
+        self.assertEqual(sorted(reg_a.get("_topics") or []), [13, 16])
+        self.assertNotIn(5, reg_a.get("_topics") or [])
 
     def test_correction_evidence_is_preserved_and_machine_vs_user_reported_is_distinguished(self):
         i = real_ids()["M2C-05"]
@@ -597,8 +635,13 @@ class OrchestrationTests(unittest.TestCase):
         self.assertEqual(r.join_state_7a, "url_only")
         self.assertEqual(r.fallback_reason, pid.B_TOC_ONLY)
         r = self.route("M2C-01")
-        self.assertEqual((r.route_state, r.page_content_available), ("card_identity_only", False))
+        # 2026-10-12: the Topic 1 map-root correction is machine-checked, so the card resolves through the correction
+        # to the Master Data guide; the legacy local index still has no record for that page.
+        self.assertEqual((r.route_state, r.page_content_available), ("corrected_identity", False))
         self.assertEqual(r.identity.card_guide_id, G_A)
+        self.assertEqual((r.identity.effective_guide_id, r.identity.effective_page_id),
+                         (G_17, "e369ce53118d4308e10000000a174cb4"))
+        self.assertEqual(r.fallback_reason, pid.B_CORRECTION)
         r = self.route("M2C-05")
         self.assertEqual((r.route_state, r.page_content_available), ("corrected_identity", False))
         self.assertEqual(r.identity.effective_guide_id, G_C)
@@ -711,7 +754,7 @@ class DeterminismTests(unittest.TestCase):
             self.assertIn(f"| M2C-{n:02d} |", t)
         for sec in ("## 3. Corrected identities", "## 4. Conflicting identities", "## 5. Unresolved", "## 6. URL-only", "## 7. Locally resolved"):
             self.assertIn(sec, t)
-        for sid in ("M2C-05", "M2C-18", "M2C-01", "M2C-13", "M2C-16", "M2C-17"):
+        for sid in ("M2C-05", "M2C-18", "M2C-01", "M2C-17"):
             self.assertGreaterEqual(t.count(f"**{sid}**"), 1, sid)
 
     def test_protected_inputs_are_unchanged(self):

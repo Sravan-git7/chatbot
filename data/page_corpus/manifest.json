@@ -647,10 +647,10 @@
       "data/page_corpus/fetched/16_40374790_10e7c5536a51204be10000000a174cb4.json": "0bf71aadc3e47e4e34203235f0b333f98923748047c9369ebe4948fd41ef25d5",
       "data/page_corpus/fetched/17_40374790_9c9c2344851f412f823d5f8a9dc7c694.json": "5abc431322a464a3604505ab138dda5aa3273678a577f729d9c4e83accdf1ecc",
       "data/page_corpus/fetched/18_40374682_8682ce53118d4308e10000000a174cb4.json": "1d9d38aaa89747a1ad3b34f7539f6fb373b2c1be4dc7ca1eadc161062c3aa44b",
-      "data/page_corpus/fetched/1_0_c1a5e8aee73440ee971a768af5b9ea1b.json": "925a7b4643225b13d083f90cbb954174eadb493d460e9610d0ad8a620ce17dae",
-      "data/page_corpus/fetched/1_40374631_e369ce53118d4308e10000000a174cb4.json": "8714e6c513a3e803e28339ebbe3f6dc61406c7193b538db23d170632e9cbd2a0",
+      "data/page_corpus/fetched/1_0_c1a5e8aee73440ee971a768af5b9ea1b.json": "cbf9c1e89eb8fc82e2edda1fd34b5f0ced1cbc286888c38505ff544a79bb4333",
+      "data/page_corpus/fetched/1_40374631_e369ce53118d4308e10000000a174cb4.json": "086313fe9ec17096baca322f13b847c6db55fec576c41c69b202974f1bd855da",
       "data/page_corpus/fetched/1_40374682_0981ce53118d4308e10000000a174cb4.json": "32ab23844d005d76dee8b1680da384b788dda10b4b866c6f32528fd685a15cb5",
-      "data/page_corpus/fetched/2_0_549661e6541f403ea56196782e040bcc.json": "0ddcd13c75a9b2892558eec34349c37c620ae120a47608e77d7d841853ccf808",
+      "data/page_corpus/fetched/2_0_549661e6541f403ea56196782e040bcc.json": "31dfb434112bac2aa550a672cd9871cdfe94a5f6647c4d9a829d6db99998d2de",
       "data/page_corpus/fetched/2_40374682_0f81ce53118d4308e10000000a174cb4.json": "fd47255b40196fac1f2ded7db3875c6ed314288284ea3b9d5774baf0f52028a3",
       "data/page_corpus/fetched/3_40374657_bc90d0533f8e4308e10000000a174cb4.json": "d590913dde0c8b633d7ce2e7eeccb75aec12311992f7393a04382dccd4b3450f",
       "data/page_corpus/fetched/4_40374657_d090d0533f8e4308e10000000a174cb4.json": "03cff44915398e08cfeac918897d1e282de5f53e21ebed29df10fffbb1dde934",
@@ -660,7 +660,7 @@
       "data/page_corpus/fetched/8_40374633_147cce53118d4308e10000000a174cb4.json": "158dc738bcd2fb8ee6fbad66c6773d3f649034d31331cb40d51c6568b4eddc81",
       "data/page_corpus/fetched/9_40374790_063bf3eb68e347efa5c0fc1d389f70f7.json": "9d349bf709c3d82e84b485dd40b51503c6d7b0a80524ffe55839674affea1797"
     },
-    "card_identity_cards_sha256": "9e4baf32c0017c1361659a2b27e46ae6557ffefed4acb921357f64e095ee13c3"
+    "card_identity_cards_sha256": "8bd761926fd7228e27bf5b34c5b3f1af16abc0fee9482fc65e7e5ba3f8cb8791"
   },
   "kind": "m2c_page_corpus_manifest",
   "schema_version": "8.1",

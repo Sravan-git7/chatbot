@@ -32,9 +32,9 @@ def sha(p):
 class ProtectionTests(unittest.TestCase):
     PINS = {"scripts/rag_chat.py": "e862ce38d06e2ef74f39e366a5a8b65948ba03f00dfab5baa0c61bc281673a15",
             "scripts/rag_core.py": "881316e4f9f2c164b2109f416b2a309f8ab829f185d231b09990274f56567b2c",
-            "data/card_collection_manifest.json": "5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731",
+            "data/card_collection_manifest.json": "aa859ea2ddc52114bfa9bd3e0309030f876f4f7b56aecbc1e8baa3f1f96a12bc",
             "data/sap_help/CORPUS.json": "19ca34a6222a65c148293202cc40a52890fcc677852de22851bf2af2772d7c52",
-            "data/m2c_page_identity.json": "fccb0bb87fc6309ac0fa9e1205387c68aeb6f93fff73d6aab457a2164587787c"}
+            "data/m2c_page_identity.json": "3a832d4061303e6b464c0582d84c71eaed9cb836aa13a10cd46bcae0941e7780"}
 
     def test_phase4_to_7_artefacts_unchanged(self):
         for p, h in self.PINS.items():
@@ -236,11 +236,21 @@ class RealPipelineTests(unittest.TestCase):
         self.assertIn("EL31", " ".join(i["text"] for i in a["debug"]["context"]["items"]))
 
     def test_unresolved_and_not_ingested_and_ood_paths(self):
+        # 2026-10-12: M2C-29's page is now ingested, so its question goes through the real chain and is refused by the
+        # extractive generator (no supported sentence), not by the not-ingested gate.
         a = self.pipe.answer("How do I disconnect a utility installation for non-payment?")
-        self.assertEqual(a["status"], "page_not_ingested")
+        self.assertEqual(a["status"], "insufficient_context")
+        self.assertEqual(a["routing"]["selected_source_id"], "M2C-29")
         self.assertEqual(a["citations"]["answer_sources"], [])
+        # M2C-18 stays fail-closed: a query focused on its registered topic is answered with no page text, the
+        # conflicting identity and its review flag are surfaced, and nothing is cited as answer evidence.
         b = self.pipe.answer("What is the contract account business object and what does it represent?")
-        self.assertEqual(b["status"], "unresolved_identity")
+        self.assertEqual(b["status"], "page_not_ingested")
+        self.assertEqual(b["routing"]["selected_source_id"], "M2C-18")
+        self.assertEqual(b["topic"]["source_id"], "M2C-18")
+        self.assertEqual(b["topic"]["identity_status"], "conflicting_identity")
+        self.assertTrue(b["topic"]["review_flag"])
+        self.assertEqual(b["citations"]["answer_sources"], [])
         c = self.pipe.answer("What is the capital of France?")
         self.assertEqual(c["status"], "out_of_domain")
 

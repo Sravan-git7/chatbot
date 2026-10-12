@@ -469,10 +469,20 @@ class RagPipeline:
                                "routing": {"selected_source_id": None, "candidates": [], "mode": "oracle" if oracle_source_id else "router_rank1"}}
 
         # A uniquely focused registered topic with no local searchable content must win before the router can
-        # select a semantic neighbor or the reranker can fetch page evidence from one.
+        # select a semantic neighbor or the reranker can fetch page evidence from one. Exception: a follow-up that
+        # belongs to an already-answered active topic must not be hijacked by a *different* unavailable topic whose
+        # title merely overlaps the rewritten query (e.g. "business partner" vs. "business object").
+        expected_sid: Optional[str] = None
+        if isinstance(expected_topic, Mapping):
+            exp_ident = expected_topic.get("identity") if isinstance(expected_topic.get("identity"), Mapping) else expected_topic
+            expected_sid = str(exp_ident.get("source_id") or "") or None
         t = time.perf_counter()
         if oracle_source_id is None:
             named = unavailable_topic_from_query(query, self.cards, self.ctx.topic_manifest, self.corpus)
+            if named is not None and expected_sid is not None and str(named.get("source_id") or "") != expected_sid:
+                dbg["focused_gate_skipped"] = {"reason": "follow_up_bound_to_active_topic", "active_source_id": expected_sid,
+                                               "focused_source_id": str(named.get("source_id") or "")}
+                named = None
             if named is not None:
                 named_sid = str(named.get("source_id") or "")
                 named_identity = pid.resolve_identity(named, self.ctx)

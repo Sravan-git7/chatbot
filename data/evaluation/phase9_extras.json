@@ -24,25 +24,25 @@
     "chunk_stats": {
      "chars": {
       "max": 998,
-      "mean": 805.5,
-      "median": 929.0,
+      "mean": 778.7,
+      "median": 898.5,
       "min": 67
      },
-     "chunks": 23,
-     "chunks_per_page_mean": 3.29,
+     "chunks": 90,
+     "chunks_per_page_mean": 3.21,
      "chunks_with_overlap": 0,
      "over_model_limit": 0,
-     "pages": 7,
+     "pages": 28,
      "split_chunks": 0,
      "tiny_chunks_under_24_tokens": 1,
      "tokens": {
-      "max": 231,
-      "mean": 158.9,
-      "median": 185.0,
+      "max": 253,
+      "mean": 154.7,
+      "median": 173.5,
       "min": 17,
-      "p90": 196.4
+      "p90": 203.1
      },
-     "total_chunk_chars": 18526
+     "total_chunk_chars": 70087
     },
     "config": {
      "embed_prefix": false,
@@ -75,41 +75,41 @@
       "redundancy_mean": 0.5558
      },
      "corpus_wide_no_card_stage": {
-      "mrr": 0.7473,
+      "mrr": 0.5843,
       "page_hit@1": {
-       "k": 54,
+       "k": 39,
        "n": 69,
-       "rate": 0.7826,
+       "rate": 0.5652,
        "wilson95": [
-        0.672,
-        0.864
+        0.448,
+        0.676
        ]
       },
       "recall@1": {
-       "k": 40,
+       "k": 31,
        "n": 69,
-       "rate": 0.5797,
+       "rate": 0.4493,
        "wilson95": [
-        0.462,
-        0.689
+        0.338,
+        0.566
        ]
       },
       "recall@3": {
-       "k": 61,
+       "k": 48,
        "n": 69,
-       "rate": 0.8841,
+       "rate": 0.6957,
        "wilson95": [
-        0.788,
-        0.94
+        0.579,
+        0.792
        ]
       },
       "recall@5": {
-       "k": 67,
+       "k": 55,
        "n": 69,
-       "rate": 0.971,
+       "rate": 0.7971,
        "wilson95": [
-        0.9,
-        0.992
+        0.688,
+        0.875
        ]
       }
      },
@@ -150,26 +150,26 @@
    "B_heading_200": {
     "chunk_stats": {
      "chars": {
-      "max": 1092,
-      "mean": 566.5,
-      "median": 521.5,
-      "min": 116
+      "max": 1106,
+      "mean": 614.5,
+      "median": 594.0,
+      "min": 70
      },
-     "chunks": 32,
-     "chunks_per_page_mean": 4.57,
-     "chunks_with_overlap": 0,
+     "chunks": 113,
+     "chunks_per_page_mean": 4.04,
+     "chunks_with_overlap": 6,
      "over_model_limit": 0,
-     "pages": 7,
-     "split_chunks": 16,
-     "tiny_chunks_under_24_tokens": 0,
+     "pages": 28,
+     "split_chunks": 64,
+     "tiny_chunks_under_24_tokens": 1,
      "tokens": {
-      "max": 226,
-      "mean": 118.8,
-      "median": 109.5,
-      "min": 31,
-      "p90": 190.0
+      "max": 240,
+      "mean": 129.4,
+      "median": 128.0,
+      "min": 21,
+      "p90": 199.8
      },
-     "total_chunk_chars": 18128
+     "total_chunk_chars": 69444
     },
     "config": {
      "embed_prefix": true,
@@ -202,41 +202,41 @@
       "redundancy_mean": 0.542
      },
      "corpus_wide_no_card_stage": {
-      "mrr": 0.7529,
+      "mrr": 0.6287,
       "page_hit@1": {
-       "k": 55,
+       "k": 45,
        "n": 69,
-       "rate": 0.7971,
+       "rate": 0.6522,
        "wilson95": [
-        0.688,
-        0.875
+        0.534,
+        0.754
        ]
       },
       "recall@1": {
-       "k": 42,
+       "k": 35,
        "n": 69,
-       "rate": 0.6087,
+       "rate": 0.5072,
        "wilson95": [
-        0.491,
-        0.715
+        0.392,
+        0.622
        ]
       },
       "recall@3": {
-       "k": 60,
+       "k": 48,
        "n": 69,
-       "rate": 0.8696,
+       "rate": 0.6957,
        "wilson95": [
-        0.77,
-        0.93
+        0.579,
+        0.792
        ]
       },
       "recall@5": {
-       "k": 68,
+       "k": 59,
        "n": 69,
-       "rate": 0.9855,
+       "rate": 0.8551,
        "wilson95": [
-        0.922,
-        0.997
+        0.753,
+        0.919
        ]
       }
      },
@@ -277,26 +277,26 @@
    "C_heading_128": {
     "chunk_stats": {
      "chars": {
-      "max": 1063,
-      "mean": 476.9,
-      "median": 456.5,
-      "min": 116
+      "max": 1106,
+      "mean": 486.8,
+      "median": 485.0,
+      "min": 70
      },
-     "chunks": 38,
-     "chunks_per_page_mean": 5.43,
-     "chunks_with_overlap": 0,
+     "chunks": 145,
+     "chunks_per_page_mean": 5.18,
+     "chunks_with_overlap": 12,
      "over_model_limit": 0,
-     "pages": 7,
-     "split_chunks": 24,
-     "tiny_chunks_under_24_tokens": 0,
+     "pages": 28,
+     "split_chunks": 104,
+     "tiny_chunks_under_24_tokens": 1,
      "tokens": {
       "max": 226,
-      "mean": 101.4,
-      "median": 97.5,
-      "min": 31,
-      "p90": 170.6
+      "mean": 104.3,
+      "median": 105.0,
+      "min": 21,
+      "p90": 149.0
      },
-     "total_chunk_chars": 18122
+     "total_chunk_chars": 70589
     },
     "config": {
      "embed_prefix": true,
@@ -329,41 +329,41 @@
       "redundancy_mean": 0.5245
      },
      "corpus_wide_no_card_stage": {
-      "mrr": 0.756,
+      "mrr": 0.6377,
       "page_hit@1": {
-       "k": 58,
+       "k": 49,
        "n": 69,
-       "rate": 0.8406,
+       "rate": 0.7101,
        "wilson95": [
-        0.737,
-        0.909
+        0.594,
+        0.804
        ]
       },
       "recall@1": {
-       "k": 45,
+       "k": 38,
        "n": 69,
-       "rate": 0.6522,
+       "rate": 0.5507,
        "wilson95": [
-        0.534,
-        0.754
+        0.434,
+        0.662
        ]
       },
       "recall@3": {
-       "k": 57,
+       "k": 47,
        "n": 69,
-       "rate": 0.8261,
+       "rate": 0.6812,
        "wilson95": [
-        0.72,
-        0.898
+        0.564,
+        0.779
        ]
       },
       "recall@5": {
-       "k": 66,
+       "k": 56,
        "n": 69,
-       "rate": 0.9565,
+       "rate": 0.8116,
        "wilson95": [
-        0.88,
-        0.985
+        0.704,
+        0.886
        ]
       }
      },
@@ -451,7 +451,7 @@
     "EL31 monitoring selection criteria"
    ],
    "exit_code": 3,
-   "stderr_last_line": "generation failed: ModuleNotFoundError: No module named 'ollama'",
+   "stderr_last_line": "generation failed: ConnectionError: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download",
    "stdout_empty": true
   }
  },
@@ -488,22 +488,16 @@
    "distributions_overlap": null,
    "false_refusal_query_ids": [
     "P9-030",
-    "P9-064",
-    "P9-085",
-    "P9-087",
-    "P9-090",
-    "P9-092",
-    "P9-098",
-    "P9-101"
+    "P9-064"
    ],
-   "in_domain_queries": 111,
+   "in_domain_queries": 85,
    "in_domain_refused_by_topic_gate_false_refusals": {
-    "k": 8,
-    "n": 111,
-    "rate": 0.0721,
+    "k": 2,
+    "n": 85,
+    "rate": 0.0235,
     "wilson95": [
-     0.037,
-     0.136
+     0.006,
+     0.082
     ]
    },
    "out_of_domain_accepted_past_topic_gate_false_accepts": {
@@ -519,10 +513,10 @@
    "out_of_domain_queries": 0,
    "topic_gate_coverage_in_domain": {
     "max": 1.0,
-    "mean": 0.694,
-    "median": 0.714,
+    "mean": 0.763,
+    "median": 0.8,
     "min": 0.0,
-    "n": 111
+    "n": 85
    },
    "topic_gate_coverage_out_of_domain": {
     "n": 0
@@ -530,94 +524,72 @@
   },
   "router_rank1": {
    "answerable_refused_by_context_gate": {
-    "k": 4,
+    "k": 10,
     "n": 69,
-    "rate": 0.058,
+    "rate": 0.1449,
     "wilson95": [
-     0.023,
-     0.14
+     0.081,
+     0.247
     ]
    },
    "answerable_refused_by_topic_gate": {
-    "k": 20,
+    "k": 7,
     "n": 69,
-    "rate": 0.2899,
+    "rate": 0.1014,
     "wilson95": [
-     0.196,
-     0.406
+     0.05,
+     0.195
     ]
    },
    "context_gate_coverage_in_domain": {
     "max": 1.0,
-    "mean": 0.706,
-    "median": 0.667,
+    "mean": 0.709,
+    "median": 0.714,
     "min": 0.25,
-    "n": 30
+    "n": 78
    },
    "distributions_overlap": true,
    "false_refusal_query_ids": [
     "P9-002",
-    "P9-008",
-    "P9-009",
-    "P9-010",
-    "P9-011",
-    "P9-014",
-    "P9-018",
-    "P9-021",
     "P9-025",
-    "P9-027",
     "P9-030",
-    "P9-031",
-    "P9-035",
     "P9-043",
-    "P9-046",
-    "P9-054",
-    "P9-056",
     "P9-060",
     "P9-064",
-    "P9-066",
-    "P9-070",
-    "P9-072",
-    "P9-073",
-    "P9-077",
-    "P9-085",
-    "P9-087",
-    "P9-090",
-    "P9-092",
-    "P9-101"
+    "P9-066"
    ],
-   "in_domain_queries": 111,
+   "in_domain_queries": 85,
    "in_domain_refused_by_topic_gate_false_refusals": {
-    "k": 29,
-    "n": 111,
-    "rate": 0.2613,
+    "k": 7,
+    "n": 85,
+    "rate": 0.0824,
     "wilson95": [
-     0.189,
-     0.35
+     0.04,
+     0.16
     ]
    },
    "out_of_domain_accepted_past_topic_gate_false_accepts": {
-    "k": 2,
+    "k": 6,
     "n": 16,
-    "rate": 0.125,
+    "rate": 0.375,
     "wilson95": [
-     0.035,
-     0.36
+     0.185,
+     0.614
     ]
    },
    "out_of_domain_answered": 0,
    "out_of_domain_queries": 16,
    "topic_gate_coverage_in_domain": {
     "max": 1.0,
-    "mean": 0.456,
-    "median": 0.429,
+    "mean": 0.667,
+    "median": 0.667,
     "min": 0.0,
-    "n": 111
+    "n": 85
    },
    "topic_gate_coverage_out_of_domain": {
     "max": 0.4,
-    "mean": 0.041,
-    "median": 0.0,
+    "mean": 0.144,
+    "median": 0.2,
     "min": 0.0,
     "n": 16
    }
@@ -641,7 +613,7 @@
    "requires_non_overlapping_distributions": true
   }
  },
- "queries_sha256": "28f03e5701095b9917522ce1518bcef308bceb8834da2aafed0d749908875309",
+ "queries_sha256": "101a5edbb2cee47d5c040309d1d8ca83eb245921ab122391b4ad47bc4aba81dd",
  "router_change_experiment": {
   "reason": "no router change was proposed or needed to complete Phase 9; no held-out set exists; the card router is unchanged",
   "run": false
@@ -649,30 +621,30 @@
  "schema_version": 1,
  "source_chain_summary": {
   "answer_urls_equal_card_source_url": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
-  "answered": 88,
+  "answered": 125,
   "card_not_used_as_answer_text": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
-  "chains": 238,
+  "chains": 186,
   "cited_chunks_belong_to_the_effective_identity_page": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
   "cited_chunks_were_in_the_generator_context": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
   "no_sources_unless_answered": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
   "topic_pointer_url_equals_card_source_url": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   }
  },
  "source_chains_file": "data/evaluation/phase9_source_chains.json"

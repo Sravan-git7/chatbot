@@ -74,17 +74,45 @@ class UnavailableTopicRoutingTests(unittest.TestCase):
         if result.get("topic_reference"):
             self.assertIn("not used as evidence", result["topic_reference"]["note"])
 
-    def test_budget_billing_plan_beats_searchable_processing_budget_billing_neighbor(self):
-        result = self.ask_unavailable(Q_BUDGET_PLAN, "missing-budget", "M2C-13")
+    def test_budget_billing_plan_is_now_answered_instead_of_unavailable(self):
+        # 2026-10-12: the budget billing plan page (guide 021b182b) is machine-verified and ingested, so this
+        # formerly missing topic now goes through the real chain. Regression guard: generation must actually run
+        # (no leftover short-circuit), and the answer must cite only the budget-plan family page.
+        backend = self.service.pipeline.backend
+        calls_before = len(backend.calls)
+        result = self.ask(Q_BUDGET_PLAN, "formerly-missing-budget")
+        self.assertEqual(result["status"], "answered", result["metadata"])
+        self.assertEqual({source["source_id"] for source in result["sources"]}, {"M2C-15"})
+        self.assertIn("generation", result["debug"]["pipeline"])
+        self.assertGreater(len(backend.calls), calls_before)
+        self.assertNotEqual(result["debug"]["routing"]["mode"], "focused_unavailable_topic")
 
     def test_contract_account_business_object_beats_searchable_contract_accounts_neighbor(self):
         result = self.ask_unavailable(Q_CONTRACT_OBJECT, "missing-contract-object", "M2C-18")
 
-    def test_periodic_billing_analysis_beats_searchable_invoicing_neighbor(self):
-        result = self.ask_unavailable(Q_PERIODIC_ANALYSIS, "missing-periodic-analysis", "M2C-16")
+    def test_periodic_billing_analysis_is_now_answered_from_ingested_m2c16(self):
+        # 2026-10-12: M2C-16's page is ingested under machine-verified guide 021b182b; the oracle-ranked query
+        # answers from it instead of the not-ingested gate.
+        pipeline = make_pipeline(RG.ExtractiveGenerator(), ranking={Q_PERIODIC_ANALYSIS: ["M2C-16"]})
+        service = S.RagService(pipeline, "extractive")
+        result = service.ask(Q_PERIODIC_ANALYSIS, conversation_id="formerly-missing-periodic", debug=True)
+        self.assertEqual(result["status"], "answered", result["metadata"])
+        self.assertEqual(result["metadata"]["card_id"], "M2C-16")
+        self.assertEqual({source["source_id"] for source in result["sources"]}, {"M2C-16"})
+        self.assertNotEqual(result["debug"]["routing"]["mode"], "focused_unavailable_topic")
 
-    def test_explicit_utilities_master_data_navigation_is_unavailable(self):
-        result = self.ask_unavailable(Q_UTILITIES_MASTER_DATA, "missing-master-data", "M2C-01")
+    def test_explicit_utilities_master_data_navigation_is_now_answered_from_corrected_identity(self):
+        # 2026-10-12: the Topic 1 map-root correction is machine-checked, so M2C-01 answers from its effective
+        # identity page (guide e52c8ee6, page e369ce53) — not from the original card URL's guide 021b182b.
+        pipeline = make_pipeline(RG.ExtractiveGenerator(), ranking={Q_UTILITIES_MASTER_DATA: ["M2C-01"]})
+        service = S.RagService(pipeline, "extractive")
+        result = service.ask(Q_UTILITIES_MASTER_DATA, conversation_id="formerly-missing-master-data", debug=True)
+        self.assertEqual(result["status"], "answered", result["metadata"])
+        self.assertEqual(result["metadata"]["card_id"], "M2C-01")
+        self.assertEqual({source["source_id"] for source in result["sources"]}, {"M2C-01"})
+        for source in result["sources"]:
+            self.assertTrue(source["chunk_id"].startswith("e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4"))
+        self.assertEqual(result["debug"]["pipeline"]["identity"]["effective_guide_id"], "e52c8ee6197147ec97dfc2eb8c46a3ad")
 
     def test_generic_contract_account_question_still_answers_from_searchable_contract_accounts(self):
         result = self.ask(Q_GENERIC_CONTRACT_ACCOUNT, "generic-contract-account")
@@ -129,12 +157,14 @@ class UnavailableTopicRoutingTests(unittest.TestCase):
         self.assertEqual({source["source_id"] for source in result["sources"]}, {"M2C-15"})
 
     def test_unavailable_topic_does_not_inherit_previous_conversation_evidence(self):
+        # 2026-10-12: re-anchored on M2C-18, the only topic that remains unavailable (conflicting identity,
+        # fail-closed). The budget-plan predecessor was ingested on this date.
         conversation_id = "unavailable-topic-context-isolation"
         previous = self.ask(Q_BILLING, conversation_id)
         self.assertEqual(previous["status"], "answered")
         self.assertTrue(previous["sources"])
 
-        result = self.ask_unavailable(Q_BUDGET_PLAN, conversation_id, "M2C-13")
+        result = self.ask_unavailable(Q_CONTRACT_OBJECT, conversation_id, "M2C-18")
         self.assertNotIn(previous["answer"], result["answer"])
         self.assertNotIn("follow_up_category", result["metadata"])
 

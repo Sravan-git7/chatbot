@@ -1,6 +1,6 @@
 {
   "authorship": {
-    "authored_by": "AI coding assistant, after reading the 7 ingested pages; not a human domain expert; no LLM generation at runtime",
+    "authored_by": "AI coding assistant, after reading the seven originally ingested pages; not a human domain expert; no LLM generation at runtime",
     "authored_on": "2026-10-01",
     "caveat": "answerable queries were written with the page text in view (not blind); a human domain review has not been done; per-page n is 5-14, so every rate has a wide interval",
     "fresh_check": "no exact/near duplicate (Jaccard<0.8) of any Phase 4/5/7F/8 query; no query shares more than 3 contiguous words with any card text",
@@ -24,33 +24,33 @@
   },
   "card_router": {
     "all_gold_card_queries": {
-      "mrr": 0.6133,
-      "n": 111,
+      "mrr": 0.5238,
+      "n": 85,
       "recall@1": {
-        "k": 51,
-        "n": 111,
-        "rate": 0.4595,
+        "k": 29,
+        "n": 85,
+        "rate": 0.3412,
         "wilson95": [
-          0.37,
-          0.552
+          0.249,
+          0.447
         ]
       },
       "recall@3": {
-        "k": 78,
-        "n": 111,
-        "rate": 0.7027,
+        "k": 53,
+        "n": 85,
+        "rate": 0.6235,
         "wilson95": [
-          0.612,
-          0.78
+          0.517,
+          0.719
         ]
       },
       "recall@5": {
-        "k": 89,
-        "n": 111,
-        "rate": 0.8018,
+        "k": 64,
+        "n": 85,
+        "rate": 0.7529,
         "wilson95": [
-          0.718,
-          0.865
+          0.652,
+          0.832
         ]
       }
     },
@@ -429,64 +429,33 @@
           ]
         }
       },
-      "not_ingested": {
-        "mrr": 0.8776,
-        "n": 20,
-        "recall@1": {
-          "k": 16,
-          "n": 20,
-          "rate": 0.8,
-          "wilson95": [
-            0.584,
-            0.919
-          ]
-        },
-        "recall@3": {
-          "k": 19,
-          "n": 20,
-          "rate": 0.95,
-          "wilson95": [
-            0.764,
-            0.991
-          ]
-        },
-        "recall@5": {
-          "k": 19,
-          "n": 20,
-          "rate": 0.95,
-          "wilson95": [
-            0.764,
-            0.991
-          ]
-        }
-      },
       "unresolved_identity": {
         "mrr": 1.0,
-        "n": 8,
+        "n": 2,
         "recall@1": {
-          "k": 8,
-          "n": 8,
+          "k": 2,
+          "n": 2,
           "rate": 1.0,
           "wilson95": [
-            0.676,
+            0.342,
             1.0
           ]
         },
         "recall@3": {
-          "k": 8,
-          "n": 8,
+          "k": 2,
+          "n": 2,
           "rate": 1.0,
           "wilson95": [
-            0.676,
+            0.342,
             1.0
           ]
         },
         "recall@5": {
-          "k": 8,
-          "n": 8,
+          "k": 2,
+          "n": 2,
           "rate": 1.0,
           "wilson95": [
-            0.676,
+            0.342,
             1.0
           ]
         }
@@ -494,25 +463,25 @@
     },
     "depth_ranked": 29,
     "diagnostic_answerable_rank_among_the_7_ingested_cards_only": {
-      "mrr": 0.7582,
+      "mrr": 0.5361,
       "n": 69,
       "note": "diagnostic only; not a deployable routing mode",
       "recall@1": {
-        "k": 45,
+        "k": 27,
         "n": 69,
-        "rate": 0.6522,
+        "rate": 0.3913,
         "wilson95": [
-          0.534,
-          0.754
+          0.285,
+          0.509
         ]
       },
       "recall@3": {
-        "k": 56,
+        "k": 41,
         "n": 69,
-        "rate": 0.8116,
+        "rate": 0.5942,
         "wilson95": [
-          0.704,
-          0.886
+          0.476,
+          0.702
         ]
       }
     },
@@ -520,96 +489,51 @@
       "other_unexplained": 11,
       "query_ambiguity": 1,
       "rare_terminology": 8,
-      "sibling_card_ambiguity": 30,
-      "vocabulary_mismatch": 10
+      "sibling_card_ambiguity": 27,
+      "vocabulary_mismatch": 9
     },
     "failure_classification_note": "rule-based and ordered (acceptable sibling > ambiguous query > terminology facet > same category > entity/rare facet > zero term overlap > unresolved identity > other); a cause label is a hypothesis from the query/card text, NOT a proven root cause and NOT evidence about the tokenizer",
-    "failure_count": 60,
+    "failure_count": 56,
     "failure_destination_card_counts": {
       "M2C-01": 4,
       "M2C-03": 6,
       "M2C-04": 2,
       "M2C-05": 2,
       "M2C-06": 3,
-      "M2C-08": 2,
+      "M2C-08": 1,
       "M2C-09": 2,
       "M2C-10": 2,
       "M2C-12": 3,
       "M2C-13": 3,
       "M2C-14": 1,
-      "M2C-16": 3,
+      "M2C-16": 2,
       "M2C-18": 10,
-      "M2C-20": 5,
+      "M2C-20": 4,
       "M2C-23": 3,
-      "M2C-24": 1,
       "M2C-25": 3,
       "M2C-27": 3,
       "M2C-29": 2
     },
     "per_gold_card_top1": {
-      "M2C-01": {
-        "n": 2,
-        "top1": 2
-      },
       "M2C-02": {
         "n": 8,
         "top1": 0
-      },
-      "M2C-03": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-04": {
-        "n": 2,
-        "top1": 2
       },
       "M2C-05": {
         "n": 12,
         "top1": 5
       },
-      "M2C-06": {
-        "n": 1,
-        "top1": 1
-      },
       "M2C-07": {
         "n": 16,
         "top1": 5
-      },
-      "M2C-08": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-09": {
-        "n": 1,
-        "top1": 0
-      },
-      "M2C-10": {
-        "n": 1,
-        "top1": 1
       },
       "M2C-11": {
         "n": 7,
         "top1": 3
       },
-      "M2C-12": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-13": {
-        "n": 2,
-        "top1": 2
-      },
       "M2C-14": {
         "n": 12,
         "top1": 6
-      },
-      "M2C-15": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-16": {
-        "n": 2,
-        "top1": 2
       },
       "M2C-17": {
         "n": 12,
@@ -619,82 +543,41 @@
         "n": 2,
         "top1": 2
       },
-      "M2C-19": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-20": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-21": {
-        "n": 1,
-        "top1": 0
-      },
-      "M2C-22": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-23": {
-        "n": 1,
-        "top1": 0
-      },
       "M2C-24": {
         "n": 16,
         "top1": 6
-      },
-      "M2C-25": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-26": {
-        "n": 1,
-        "top1": 0
-      },
-      "M2C-27": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-28": {
-        "n": 1,
-        "top1": 1
-      },
-      "M2C-29": {
-        "n": 2,
-        "top1": 2
       }
     },
     "rank1_in_gold_or_acceptable_sibling": {
-      "k": 55,
-      "n": 111,
-      "rate": 0.4955,
+      "k": 30,
+      "n": 85,
+      "rate": 0.3529,
       "wilson95": [
-        0.404,
-        0.587
+        0.26,
+        0.459
       ]
     },
     "rank1_rank2_similarity_gap": {
-      "auroc_gap_separates_correct_from_wrong": 0.6297,
-      "correct_mean": 0.0466,
+      "auroc_gap_separates_correct_from_wrong": 0.5373,
+      "correct_mean": 0.0332,
       "note": "descriptive only; no threshold is derived or applied (Phase 7F: min_cosine stays None)",
-      "wrong_mean": 0.0288
+      "wrong_mean": 0.0297
     },
     "rank1_similarity": {
-      "correct_mean": 0.448,
-      "correct_median": 0.4465,
-      "wrong_mean": 0.3678,
-      "wrong_median": 0.3432
+      "correct_mean": 0.4379,
+      "correct_median": 0.44,
+      "wrong_mean": 0.3558,
+      "wrong_median": 0.3284
     },
     "rank_distribution_of_gold_card": {
-      "1": 51,
+      "1": 29,
       "10": 2,
       "13": 1,
       "14": 1,
       "16": 3,
       "17": 1,
       "18": 1,
-      "19": 1,
-      "2": 22,
+      "2": 19,
       "20": 2,
       "23": 2,
       "25": 1,
@@ -711,74 +594,49 @@
   "chunking": {
     "stats": {
       "chars": {
-        "max": 1092,
-        "mean": 566.5,
-        "median": 521.5,
-        "min": 116
+        "max": 1106,
+        "mean": 614.5,
+        "median": 594.0,
+        "min": 70
       },
-      "chunks": 32,
-      "chunks_per_page_mean": 4.57,
-      "chunks_with_overlap": 0,
+      "chunks": 113,
+      "chunks_per_page_mean": 4.04,
+      "chunks_with_overlap": 6,
       "over_model_limit": 0,
-      "pages": 7,
-      "split_chunks": 16,
-      "tiny_chunks_under_24_tokens": 0,
+      "pages": 28,
+      "split_chunks": 64,
+      "tiny_chunks_under_24_tokens": 1,
       "tokens": {
-        "max": 226,
-        "mean": 118.8,
-        "median": 109.5,
-        "min": 31,
-        "p90": 190.0
+        "max": 240,
+        "mean": 129.4,
+        "median": 128.0,
+        "min": 21,
+        "p90": 199.8
       },
-      "total_chunk_chars": 18128
+      "total_chunk_chars": 69444
     },
     "strategy": "B_heading_200"
   },
   "corpus": {
     "by_corpus_status": {
-      "excluded_card_identity_only": 3,
       "excluded_conflicting_identity": 1,
-      "ingested": 7,
-      "not_ingested_no_local_content": 18
+      "ingested": 28
     },
     "by_identity_status_7c": {
-      "card_identity_only": 3,
       "conflicting_identity": 1,
-      "corrected_identity": 1,
-      "identified_not_local": 23,
+      "corrected_identity": 2,
+      "identified_not_local": 25,
       "resolved_local_page": 1
     },
     "cards": 29,
     "fetched_in_phase9": [],
-    "pages_available": 7,
-    "pages_missing": 22,
-    "pending_external_retrieval": [
-      "M2C-03",
-      "M2C-04",
-      "M2C-06",
-      "M2C-08",
-      "M2C-09",
-      "M2C-10",
-      "M2C-12",
-      "M2C-15",
-      "M2C-19",
-      "M2C-20",
-      "M2C-21",
-      "M2C-22",
-      "M2C-23",
-      "M2C-25",
-      "M2C-26",
-      "M2C-27",
-      "M2C-28",
-      "M2C-29"
-    ],
+    "pages_available": 28,
+    "pages_missing": 1,
+    "pending_external_retrieval": [],
     "protected_unresolved": [
-      "M2C-01",
-      "M2C-13",
-      "M2C-16",
       "M2C-18"
     ],
-    "sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d"
+    "sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008"
   },
   "end_to_end_oracle_routing_extractive": {
     "abstention_on_absent_detail": {
@@ -979,60 +837,6 @@
         "query": "How many different billing period categories are there?",
         "reason": null,
         "routed": "M2C-11"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-04",
-        "id": "P9-085",
-        "query": "How do I terminate a customer's supply contract when they leave?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-04"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-08",
-        "id": "P9-087",
-        "query": "How does the system estimate a reading when no actual value is available?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-08"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-12",
-        "id": "P9-090",
-        "query": "How do I schedule billing to run automatically in the background?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-12"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-19",
-        "id": "P9-092",
-        "query": "How can I check payments that arrived on the bank statement?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-19"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-26",
-        "id": "P9-098",
-        "query": "How does the system send reminders for unpaid invoices?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-26"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-29",
-        "id": "P9-101",
-        "query": "How do I reconnect a customer after payment is received?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-29"
       }
     ],
     "generation": {
@@ -1070,12 +874,12 @@
     },
     "ood_gate": {
       "in_domain_wrongly_flagged_out_of_domain": {
-        "k": 8,
-        "n": 111,
-        "rate": 0.0721,
+        "k": 2,
+        "n": 85,
+        "rate": 0.0235,
         "wilson95": [
-          0.037,
-          0.136
+          0.006,
+          0.082
         ]
       },
       "note": "lexical heuristic; not calibrated; small n; not a reliable OOD detector",
@@ -1136,7 +940,7 @@
         "n": 14
       }
     },
-    "queries": 111,
+    "queries": 85,
     "retrieval": {
       "evidence_in_assembled_context_given_gold_page": {
         "k": 67,
@@ -1158,12 +962,8 @@
         "answered": 7,
         "insufficient_context": 7
       },
-      "page_not_ingested": {
-        "out_of_domain": 6,
-        "page_not_ingested": 14
-      },
       "unresolved_identity": {
-        "unresolved_identity": 8
+        "unresolved_identity": 2
       }
     },
     "status_match_by_type": {
@@ -1185,21 +985,12 @@
           0.909
         ]
       },
-      "not_ingested": {
-        "k": 14,
-        "n": 20,
-        "rate": 0.7,
-        "wilson95": [
-          0.481,
-          0.855
-        ]
-      },
       "unresolved_identity": {
-        "k": 8,
-        "n": 8,
+        "k": 2,
+        "n": 2,
         "rate": 1.0,
         "wilson95": [
-          0.676,
+          0.342,
           1.0
         ]
       }
@@ -1208,37 +999,37 @@
   "end_to_end_router_rank1_extractive": {
     "abstention_on_absent_detail": {
       "answered_anyway": {
-        "k": 2,
+        "k": 10,
         "n": 14,
-        "rate": 0.1429,
+        "rate": 0.7143,
         "wilson95": [
-          0.04,
-          0.399
+          0.454,
+          0.883
         ]
       },
       "insufficient_context": {
-        "k": 2,
+        "k": 4,
         "n": 14,
-        "rate": 0.1429,
+        "rate": 0.2857,
         "wilson95": [
-          0.04,
-          0.399
+          0.117,
+          0.546
         ]
       }
     },
     "citation": {
       "answer_source_url_differs_from_card_url": 0,
       "answer_sources_containing_gold_evidence_among_answerable": {
-        "k": 19,
-        "n": 31,
-        "rate": 0.6129,
+        "k": 40,
+        "n": 76,
+        "rate": 0.5263,
         "wilson95": [
-          0.438,
-          0.763
+          0.416,
+          0.635
         ]
       },
-      "answer_sources_total": 35,
-      "answered_total": 23,
+      "answer_sources_total": 95,
+      "answered_total": 60,
       "phantom_citations": 0,
       "topic_pointer_counted_as_evidence": 0
     },
@@ -1253,58 +1044,22 @@
         "routed": "M2C-01"
       },
       {
-        "actual": "page_not_ingested",
-        "expected": "answered",
-        "gold": "M2C-07",
-        "id": "P9-004",
-        "query": "Can I ask a smart meter for a reading right now from the result list?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-06"
-      },
-      {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-07",
-        "id": "P9-007",
-        "query": "What can I display when I enter contracts, installations or business partners?",
-        "reason": "CONFLICTING_IDENTITY",
-        "routed": "M2C-18"
-      },
-      {
-        "actual": "out_of_domain",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-07",
         "id": "P9-008",
         "query": "Where is the setting that drives automatic follow-up of readings maintained?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-08"
+        "reason": "GENERATOR_REFUSED",
+        "routed": "M2C-10"
       },
       {
-        "actual": "out_of_domain",
-        "expected": "answered",
-        "gold": "M2C-07",
-        "id": "P9-009",
-        "query": "Which function shows how many IDocs from the discrete upload failed to post?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-16"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "answered",
-        "gold": "M2C-07",
-        "id": "P9-010",
-        "query": "quantity determination trigger",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-27"
-      },
-      {
-        "actual": "out_of_domain",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-07",
         "id": "P9-011",
         "query": "Which objects are shown when I enter portions?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-20"
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-24"
       },
       {
         "actual": "insufficient_context",
@@ -1316,58 +1071,13 @@
         "routed": "M2C-05"
       },
       {
-        "actual": "out_of_domain",
-        "expected": "answered",
-        "gold": "M2C-07",
-        "id": "P9-014",
-        "query": "How can I get the system to run follow-up actions automatically after readings come in?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-10"
-      },
-      {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-05",
-        "id": "P9-017",
-        "query": "LO-MD material master device category",
-        "reason": "CARD_IDENTITY_ONLY",
-        "routed": "M2C-01"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "answered",
-        "gold": "M2C-05",
-        "id": "P9-018",
-        "query": "goods issue and return delivery",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-27"
-      },
-      {
-        "actual": "out_of_domain",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-05",
         "id": "P9-021",
         "query": "When I receive meters into stock, what record does SAP create?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-10"
-      },
-      {
-        "actual": "insufficient_context",
-        "expected": "answered",
-        "gold": "M2C-05",
-        "id": "P9-022",
-        "query": "Which related documentation is listed for planning and posting goods receipts?",
         "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
-        "routed": "M2C-14"
-      },
-      {
-        "actual": "page_not_ingested",
-        "expected": "answered",
-        "gold": "M2C-05",
-        "id": "P9-024",
-        "query": "ISU_AMI_1 advanced metering",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-06"
+        "routed": "M2C-07"
       },
       {
         "actual": "out_of_domain",
@@ -1376,34 +1086,25 @@
         "id": "P9-025",
         "query": "FPR1",
         "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-18"
+        "routed": "M2C-17"
       },
       {
-        "actual": "page_not_ingested",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-24",
         "id": "P9-026",
         "query": "What do I do when a customer cannot pay open items under normal terms?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
         "routed": "M2C-20"
       },
       {
-        "actual": "out_of_domain",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-24",
         "id": "P9-027",
         "query": "sample function module FKK_SAMPLE_3000",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-18"
-      },
-      {
-        "actual": "page_not_ingested",
-        "expected": "answered",
-        "gold": "M2C-24",
-        "id": "P9-028",
-        "query": "Can the opening installment be a fixed share of the whole plan amount?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-23"
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-11"
       },
       {
         "actual": "out_of_domain",
@@ -1415,15 +1116,6 @@
         "routed": "M2C-24"
       },
       {
-        "actual": "out_of_domain",
-        "expected": "answered",
-        "gold": "M2C-24",
-        "id": "P9-031",
-        "query": "Distribute indicator",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-25"
-      },
-      {
         "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-24",
@@ -1433,49 +1125,40 @@
         "routed": "M2C-24"
       },
       {
-        "actual": "page_not_ingested",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-24",
         "id": "P9-034",
         "query": "What changes can I make on the proposal screen?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "reason": "GENERATOR_REFUSED",
         "routed": "M2C-25"
       },
       {
-        "actual": "out_of_domain",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-24",
         "id": "P9-035",
         "query": "Where in Customizing do I switch on the priority-clearing enhancement?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-20"
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-21"
       },
       {
-        "actual": "page_not_ingested",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-24",
         "id": "P9-036",
         "query": "How do I influence which original items are cleared first by incoming money?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
         "routed": "M2C-20"
       },
       {
-        "actual": "page_not_ingested",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-24",
         "id": "P9-038",
         "query": "Which formula links the plan amount, the count of installments and the leftover?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-23"
-      },
-      {
-        "actual": "page_not_ingested",
-        "expected": "answered",
-        "gold": "M2C-14",
-        "id": "P9-042",
-        "query": "IS-U-BI contract billing prerequisite",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-12"
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-24"
       },
       {
         "actual": "out_of_domain",
@@ -1487,15 +1170,6 @@
         "routed": "M2C-04"
       },
       {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-14",
-        "id": "P9-044",
-        "query": "How are budget billing amounts communicated to customers?",
-        "reason": "CARD_IDENTITY_ONLY",
-        "routed": "M2C-13"
-      },
-      {
         "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-14",
@@ -1505,94 +1179,13 @@
         "routed": "M2C-14"
       },
       {
-        "actual": "out_of_domain",
-        "expected": "answered",
-        "gold": "M2C-14",
-        "id": "P9-046",
-        "query": "What happens after the bill has been sent to the recipient?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-27"
-      },
-      {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-14",
-        "id": "P9-048",
-        "query": "What comes after billing in the end-to-end utilities revenue cycle?",
-        "reason": "CARD_IDENTITY_ONLY",
-        "routed": "M2C-13"
-      },
-      {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-17",
-        "id": "P9-049",
-        "query": "contract account master data",
-        "reason": "CARD_IDENTITY_ONLY",
-        "routed": "M2C-01"
-      },
-      {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-17",
-        "id": "P9-050",
-        "query": "Can one business partner have several contract accounts?",
-        "reason": "CONFLICTING_IDENTITY",
-        "routed": "M2C-18"
-      },
-      {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-17",
-        "id": "P9-051",
-        "query": "IS-T contract account one business partner",
-        "reason": "CONFLICTING_IDENTITY",
-        "routed": "M2C-18"
-      },
-      {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-17",
-        "id": "P9-053",
-        "query": "one-time accounts",
-        "reason": "CONFLICTING_IDENTITY",
-        "routed": "M2C-18"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "answered",
-        "gold": "M2C-17",
-        "id": "P9-054",
-        "query": "Which processes can be defined per business partner in the account master record?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-03"
-      },
-      {
-        "actual": "out_of_domain",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-17",
         "id": "P9-056",
         "query": "What triggers a block being set automatically on a customer's account after a return?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-29"
-      },
-      {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-17",
-        "id": "P9-057",
-        "query": "Does the system record changes to the master data?",
-        "reason": "CARD_IDENTITY_ONLY",
-        "routed": "M2C-01"
-      },
-      {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-17",
-        "id": "P9-058",
-        "query": "Explain the purpose of a contract account.",
-        "reason": "CONFLICTING_IDENTITY",
-        "routed": "M2C-18"
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-20"
       },
       {
         "actual": "out_of_domain",
@@ -1604,49 +1197,13 @@
         "routed": "M2C-25"
       },
       {
-        "actual": "page_not_ingested",
-        "expected": "answered",
-        "gold": "M2C-11",
-        "id": "P9-061",
-        "query": "rate creation calculations",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-12"
-      },
-      {
-        "actual": "page_not_ingested",
-        "expected": "answered",
-        "gold": "M2C-11",
-        "id": "P9-062",
-        "query": "Can master data change while a billing period is running?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-12"
-      },
-      {
-        "actual": "insufficient_context",
-        "expected": "answered",
-        "gold": "M2C-11",
-        "id": "P9-063",
-        "query": "How does billing work for utilities?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
-        "routed": "M2C-11"
-      },
-      {
         "actual": "out_of_domain",
         "expected": "answered",
         "gold": "M2C-02",
         "id": "P9-064",
         "query": "What can I automate when a tenant leaves?",
         "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-29"
-      },
-      {
-        "actual": "page_not_ingested",
-        "expected": "answered",
-        "gold": "M2C-02",
-        "id": "P9-065",
-        "query": "welcome letter move-in",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-03"
+        "routed": "M2C-02"
       },
       {
         "actual": "out_of_domain",
@@ -1658,58 +1215,22 @@
         "routed": "M2C-06"
       },
       {
-        "actual": "page_not_ingested",
-        "expected": "answered",
-        "gold": "M2C-02",
-        "id": "P9-067",
-        "query": "Which component produces confirmation letters for customers who move out?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-04"
-      },
-      {
-        "actual": "page_not_ingested",
+        "actual": "insufficient_context",
         "expected": "answered",
         "gold": "M2C-02",
         "id": "P9-068",
         "query": "What happens to the installation when a new customer replaces the old one?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "reason": "GENERATOR_REFUSED",
         "routed": "M2C-03"
       },
       {
-        "actual": "unresolved_identity",
-        "expected": "answered",
-        "gold": "M2C-02",
-        "id": "P9-069",
-        "query": "At move-in, can I reuse an existing business partner and contract account?",
-        "reason": "CONFLICTING_IDENTITY",
-        "routed": "M2C-18"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "insufficient_context",
-        "gold": "M2C-07",
-        "id": "P9-070",
-        "query": "What is the maximum number of rows the EL31 result list can display?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-09"
-      },
-      {
-        "actual": "out_of_domain",
+        "actual": "answered",
         "expected": "insufficient_context",
         "gold": "M2C-05",
         "id": "P9-072",
         "query": "What is the maximum length of a device serial number?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-09"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "insufficient_context",
-        "gold": "M2C-05",
-        "id": "P9-073",
-        "query": "Which transaction creates a brand-new device in IS-U?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-03"
+        "reason": null,
+        "routed": "M2C-05"
       },
       {
         "actual": "answered",
@@ -1721,13 +1242,13 @@
         "routed": "M2C-24"
       },
       {
-        "actual": "page_not_ingested",
+        "actual": "answered",
         "expected": "insufficient_context",
         "gold": "M2C-24",
         "id": "P9-075",
         "query": "Which transaction displays an existing installment plan?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-23"
+        "reason": null,
+        "routed": "M2C-25"
       },
       {
         "actual": "answered",
@@ -1739,431 +1260,392 @@
         "routed": "M2C-14"
       },
       {
-        "actual": "out_of_domain",
-        "expected": "insufficient_context",
-        "gold": "M2C-14",
-        "id": "P9-077",
-        "query": "How many hours does bill creation take for large volumes?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-16"
-      },
-      {
-        "actual": "unresolved_identity",
+        "actual": "answered",
         "expected": "insufficient_context",
         "gold": "M2C-17",
         "id": "P9-078",
         "query": "What is the maximum number of contracts one contract account can hold?",
-        "reason": "CONFLICTING_IDENTITY",
-        "routed": "M2C-18"
+        "reason": null,
+        "routed": "M2C-17"
       },
       {
-        "actual": "unresolved_identity",
+        "actual": "answered",
         "expected": "insufficient_context",
         "gold": "M2C-17",
         "id": "P9-079",
         "query": "Which transaction code opens a new contract account record?",
-        "reason": "CONFLICTING_IDENTITY",
-        "routed": "M2C-18"
+        "reason": null,
+        "routed": "M2C-17"
       },
       {
-        "actual": "unresolved_identity",
+        "actual": "answered",
+        "expected": "insufficient_context",
+        "gold": "M2C-11",
+        "id": "P9-080",
+        "query": "Which transaction runs a billing simulation?",
+        "reason": null,
+        "routed": "M2C-12"
+      },
+      {
+        "actual": "answered",
         "expected": "insufficient_context",
         "gold": "M2C-11",
         "id": "P9-081",
         "query": "How many different billing period categories are there?",
-        "reason": "CARD_IDENTITY_ONLY",
-        "routed": "M2C-13"
+        "reason": null,
+        "routed": "M2C-11"
       },
       {
-        "actual": "page_not_ingested",
+        "actual": "answered",
         "expected": "insufficient_context",
         "gold": "M2C-02",
         "id": "P9-082",
         "query": "Which transaction processes a move-in?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-03"
+        "reason": null,
+        "routed": "M2C-04"
       },
       {
-        "actual": "page_not_ingested",
+        "actual": "answered",
         "expected": "insufficient_context",
         "gold": "M2C-02",
         "id": "P9-083",
         "query": "Which fields are mandatory on the move-in screen?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+        "reason": null,
         "routed": "M2C-03"
       },
       {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-04",
-        "id": "P9-085",
-        "query": "How do I terminate a customer's supply contract when they leave?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-04"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-08",
-        "id": "P9-087",
-        "query": "How does the system estimate a reading when no actual value is available?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-08"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-12",
-        "id": "P9-090",
-        "query": "How do I schedule billing to run automatically in the background?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-12"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-19",
-        "id": "P9-092",
-        "query": "How can I check payments that arrived on the bank statement?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-19"
+        "actual": "answered",
+        "expected": "unresolved_identity",
+        "gold": "M2C-18",
+        "id": "P9-084",
+        "query": "What is the structure of a contract account as a business object?",
+        "reason": null,
+        "routed": "M2C-17"
       },
       {
         "actual": "answered",
-        "expected": "page_not_ingested",
-        "gold": "M2C-23",
-        "id": "P9-096",
-        "query": "What is an installment plan and why would a utility offer one?",
+        "expected": "unresolved_identity",
+        "gold": "M2C-18",
+        "id": "P9-085",
+        "query": "Which object model classes represent a contract account in SAP?",
         "reason": null,
+        "routed": "M2C-17"
+      },
+      {
+        "actual": "insufficient_context",
+        "expected": "out_of_domain",
+        "gold": null,
+        "id": "P9-089",
+        "query": "How do I add a new app tile to the Fiori launchpad?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
         "routed": "M2C-24"
       },
       {
-        "actual": "unresolved_identity",
-        "expected": "page_not_ingested",
-        "gold": "M2C-26",
-        "id": "P9-098",
-        "query": "How does the system send reminders for unpaid invoices?",
-        "reason": "CARD_IDENTITY_ONLY",
-        "routed": "M2C-16"
-      },
-      {
-        "actual": "out_of_domain",
-        "expected": "page_not_ingested",
-        "gold": "M2C-29",
-        "id": "P9-101",
-        "query": "How do I reconnect a customer after payment is received?",
-        "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-        "routed": "M2C-29"
-      },
-      {
-        "actual": "page_not_ingested",
+        "actual": "insufficient_context",
         "expected": "out_of_domain",
         "gold": null,
-        "id": "P9-126",
+        "id": "P9-090",
+        "query": "How do I set up a SAP SuccessFactors performance review?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-24"
+      },
+      {
+        "actual": "insufficient_context",
+        "expected": "out_of_domain",
+        "gold": null,
+        "id": "P9-097",
+        "query": "What is the current price of gold?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-12"
+      },
+      {
+        "actual": "insufficient_context",
+        "expected": "out_of_domain",
+        "gold": null,
+        "id": "P9-099",
+        "query": "How do I create a workflow in Salesforce?",
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-24"
+      },
+      {
+        "actual": "insufficient_context",
+        "expected": "out_of_domain",
+        "gold": null,
+        "id": "P9-100",
         "query": "How do I read the dial of my home electricity meter?",
-        "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-        "routed": "M2C-06"
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+        "routed": "M2C-07"
       },
       {
-        "actual": "unresolved_identity",
+        "actual": "insufficient_context",
         "expected": "out_of_domain",
         "gold": null,
-        "id": "P9-127",
+        "id": "P9-101",
         "query": "How can I reduce my household electricity bill?",
-        "reason": "CARD_IDENTITY_ONLY",
+        "reason": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
         "routed": "M2C-13"
       }
     ],
     "generation": {
       "answered_and_cites_evidence_chunk_on_gold_page": {
-        "k": 19,
+        "k": 40,
         "n": 69,
-        "rate": 0.2754,
+        "rate": 0.5797,
         "wilson95": [
-          0.184,
-          0.39
+          0.462,
+          0.689
         ]
       },
       "answered_given_answerable": {
-        "k": 20,
+        "k": 48,
         "n": 69,
-        "rate": 0.2899,
+        "rate": 0.6957,
         "wilson95": [
-          0.196,
-          0.406
+          0.579,
+          0.792
         ]
       },
       "generator": "extractive (non-LLM baseline); LLM path not validated here",
       "grounding_verifier_passed_among_answered": {
-        "k": 20,
-        "n": 20,
+        "k": 48,
+        "n": 48,
         "rate": 1.0,
         "wilson95": [
-          0.839,
+          0.926,
           1.0
         ]
       },
-      "refused_by_generator": 1,
-      "refused_low_context_coverage": 4,
+      "refused_by_generator": 4,
+      "refused_low_context_coverage": 10,
       "withheld_by_grounding_check": 0
     },
     "identity": {
       "effective_page_equals_gold_doc_when_routed": {
-        "k": 23,
-        "n": 23,
+        "k": 45,
+        "n": 45,
         "rate": 1.0,
         "wilson95": [
-          0.857,
+          0.921,
           1.0
         ]
       },
       "gold_ingested_pages_routed_top1": {
-        "k": 23,
+        "k": 45,
         "n": 69,
-        "rate": 0.3333,
+        "rate": 0.6522,
         "wilson95": [
-          0.234,
-          0.451
+          0.534,
+          0.754
         ]
       },
       "m2c05_correction_preserved": {
-        "k": 7,
-        "n": 7,
+        "k": 12,
+        "n": 12,
         "rate": 1.0,
         "wilson95": [
-          0.646,
+          0.757,
           1.0
         ]
       },
       "m2c18_never_answered": true,
       "unresolved_card_routed_but_never_answered": {
         "of_those_answered": 0,
-        "routed_to_conflict_or_identity_only": 30
+        "routed_to_conflict_or_identity_only": 0
       }
     },
     "ood_gate": {
       "in_domain_wrongly_flagged_out_of_domain": {
-        "k": 29,
-        "n": 111,
-        "rate": 0.2613,
+        "k": 7,
+        "n": 85,
+        "rate": 0.0824,
         "wilson95": [
-          0.189,
-          0.35
+          0.04,
+          0.16
         ]
       },
       "note": "lexical heuristic; not calibrated; small n; not a reliable OOD detector",
       "ood_answered": 0,
       "ood_flagged_out_of_domain": {
-        "k": 14,
+        "k": 10,
         "n": 16,
-        "rate": 0.875,
+        "rate": 0.625,
         "wilson95": [
-          0.64,
-          0.965
+          0.386,
+          0.815
         ]
       }
     },
     "pages_matching_gold": {
-      "k": 23,
+      "k": 45,
       "n": 69,
-      "rate": 0.3333,
+      "rate": 0.6522,
       "wilson95": [
-        0.234,
-        0.451
+        0.534,
+        0.754
       ]
     },
     "per_page_answerable": {
       "M2C-02": {
-        "answered": 0,
-        "answered_correct": 0,
+        "answered": 3,
+        "answered_correct": 1,
         "n": 6
       },
       "M2C-05": {
-        "answered": 5,
-        "answered_correct": 5,
+        "answered": 9,
+        "answered_correct": 9,
         "n": 10
       },
       "M2C-07": {
-        "answered": 5,
-        "answered_correct": 4,
+        "answered": 10,
+        "answered_correct": 9,
         "n": 14
       },
       "M2C-11": {
-        "answered": 1,
-        "answered_correct": 1,
+        "answered": 4,
+        "answered_correct": 3,
         "n": 5
       },
       "M2C-14": {
-        "answered": 4,
-        "answered_correct": 4,
+        "answered": 8,
+        "answered_correct": 6,
         "n": 10
       },
       "M2C-17": {
-        "answered": 2,
-        "answered_correct": 2,
+        "answered": 9,
+        "answered_correct": 7,
         "n": 10
       },
       "M2C-24": {
-        "answered": 3,
-        "answered_correct": 3,
+        "answered": 5,
+        "answered_correct": 5,
         "n": 14
       }
     },
-    "queries": 127,
+    "queries": 101,
     "retrieval": {
       "evidence_in_assembled_context_given_gold_page": {
-        "k": 22,
-        "n": 23,
-        "rate": 0.9565,
+        "k": 43,
+        "n": 45,
+        "rate": 0.9556,
         "wilson95": [
-          0.79,
-          0.992
+          0.852,
+          0.988
         ]
       }
     },
     "routing": {
-      "mrr": 0.597,
-      "queries_with_gold_card": 111,
+      "mrr": 0.7161,
+      "queries_with_gold_card": 85,
       "top1": {
-        "k": 51,
-        "n": 111,
-        "rate": 0.4595,
+        "k": 55,
+        "n": 85,
+        "rate": 0.6471,
         "wilson95": [
-          0.37,
-          0.552
+          0.541,
+          0.74
         ]
       },
       "top1_by_type": {
         "absent_detail": {
-          "k": 4,
+          "k": 10,
           "n": 14,
-          "rate": 0.2857,
+          "rate": 0.7143,
           "wilson95": [
-            0.117,
-            0.546
+            0.454,
+            0.883
           ]
         },
         "answerable": {
-          "k": 23,
+          "k": 45,
           "n": 69,
-          "rate": 0.3333,
+          "rate": 0.6522,
           "wilson95": [
-            0.234,
-            0.451
-          ]
-        },
-        "not_ingested": {
-          "k": 16,
-          "n": 20,
-          "rate": 0.8,
-          "wilson95": [
-            0.584,
-            0.919
+            0.534,
+            0.754
           ]
         },
         "unresolved_identity": {
-          "k": 8,
-          "n": 8,
-          "rate": 1.0,
+          "k": 0,
+          "n": 2,
+          "rate": 0.0,
           "wilson95": [
-            0.676,
-            1.0
+            0.0,
+            0.658
           ]
         }
       },
       "top3": {
-        "k": 78,
-        "n": 111,
-        "rate": 0.7027,
+        "k": 68,
+        "n": 85,
+        "rate": 0.8,
         "wilson95": [
-          0.612,
-          0.78
+          0.703,
+          0.871
         ]
       },
       "top5": {
-        "k": 89,
-        "n": 111,
-        "rate": 0.8018,
+        "k": 70,
+        "n": 85,
+        "rate": 0.8235,
         "wilson95": [
-          0.718,
-          0.865
+          0.729,
+          0.89
         ]
       }
     },
     "status_confusion_expected_to_actual": {
       "answered": {
-        "answered": 20,
-        "insufficient_context": 5,
-        "out_of_domain": 20,
-        "page_not_ingested": 13,
-        "unresolved_identity": 11
+        "answered": 48,
+        "insufficient_context": 14,
+        "out_of_domain": 7
       },
       "insufficient_context": {
-        "answered": 2,
-        "insufficient_context": 2,
-        "out_of_domain": 4,
-        "page_not_ingested": 3,
-        "unresolved_identity": 3
+        "answered": 10,
+        "insufficient_context": 4
       },
       "out_of_domain": {
-        "out_of_domain": 14,
-        "page_not_ingested": 1,
-        "unresolved_identity": 1
-      },
-      "page_not_ingested": {
-        "answered": 1,
-        "out_of_domain": 5,
-        "page_not_ingested": 13,
-        "unresolved_identity": 1
+        "insufficient_context": 6,
+        "out_of_domain": 10
       },
       "unresolved_identity": {
-        "unresolved_identity": 8
+        "answered": 2
       }
     },
     "status_match_by_type": {
       "absent_detail": {
-        "k": 2,
+        "k": 4,
         "n": 14,
-        "rate": 0.1429,
+        "rate": 0.2857,
         "wilson95": [
-          0.04,
-          0.399
+          0.117,
+          0.546
         ]
       },
       "answerable": {
-        "k": 20,
+        "k": 48,
         "n": 69,
-        "rate": 0.2899,
+        "rate": 0.6957,
         "wilson95": [
-          0.196,
-          0.406
-        ]
-      },
-      "not_ingested": {
-        "k": 13,
-        "n": 20,
-        "rate": 0.65,
-        "wilson95": [
-          0.433,
-          0.819
+          0.579,
+          0.792
         ]
       },
       "out_of_domain": {
-        "k": 14,
+        "k": 10,
         "n": 16,
-        "rate": 0.875,
+        "rate": 0.625,
         "wilson95": [
-          0.64,
-          0.965
+          0.386,
+          0.815
         ]
       },
       "unresolved_identity": {
-        "k": 8,
-        "n": 8,
-        "rate": 1.0,
+        "k": 0,
+        "n": 2,
+        "rate": 0.0,
         "wilson95": [
-          0.676,
-          1.0
+          0.0,
+          0.658
         ]
       }
     }
@@ -2172,7 +1654,7 @@
     "entity": 8,
     "keyword": 9,
     "multi_concept": 7,
-    "natural": 68,
+    "natural": 42,
     "paraphrase": 7,
     "rare_term": 6,
     "section_specific": 8,
@@ -2183,23 +1665,21 @@
     "oracle": {
       "correct_retrieval_incorrect_synthesis": 3,
       "failure_to_abstain": 7,
-      "ood_gate_false_positive": 6,
       "ood_or_context_gate_false_refusal": 8
     },
     "router_rank1": {
       "correct_retrieval_incorrect_synthesis": 1,
-      "failure_to_abstain": 3,
-      "ood_gate_false_positive": 5,
-      "ood_or_context_gate_false_refusal": 3,
-      "other_status_mismatch": 2,
-      "wrong_route": 57
+      "failure_to_abstain": 8,
+      "ood_or_context_gate_false_refusal": 4,
+      "other_status_mismatch": 6,
+      "wrong_route": 28
     }
   },
   "failure_audit_file": "data/evaluation/phase9_failure_audit.json",
   "freeze": {
     "frozen_on": "2026-10-01",
-    "queries": 127,
-    "sha256": "28f03e5701095b9917522ce1518bcef308bceb8834da2aafed0d749908875309"
+    "queries": 101,
+    "sha256": "101a5edbb2cee47d5c040309d1d8ca83eb245921ab122391b4ad47bc4aba81dd"
   },
   "hallucination_guard_stub_generators": {
     "cases": {
@@ -2270,7 +1750,7 @@
       "configured_model": "llama3.2:3b",
       "configured_model_listed": null,
       "executable_on_path": null,
-      "python_package_importable": false,
+      "python_package_importable": true,
       "server_reachable_127_0_0_1_11434": false,
       "status": "BLOCKED: local model unavailable (no Ollama executable/server/model reachable; nothing was downloaded or substituted)"
     },
@@ -2288,47 +1768,47 @@
     "status": "BLOCKED: local model unavailable (no Ollama executable/server/model reachable; nothing was downloaded or substituted)"
   },
   "ood_observations": {
-    "auroc_rank1_similarity_in_domain_vs_ood": 0.8784,
+    "auroc_rank1_similarity_in_domain_vs_ood": 0.861,
     "gate_answered_ood": [],
     "gate_flagged_out_of_domain": {
-      "k": 14,
+      "k": 10,
       "n": 16,
-      "rate": 0.875,
+      "rate": 0.625,
       "wilson95": [
-        0.64,
-        0.965
+        0.386,
+        0.815
       ]
     },
     "in_domain_wrongly_flagged_out_of_domain": {
-      "k": 29,
-      "n": 111,
-      "rate": 0.2613,
+      "k": 7,
+      "n": 85,
+      "rate": 0.0824,
       "wilson95": [
-        0.189,
-        0.35
+        0.04,
+        0.16
       ]
     },
     "note": "descriptive only. The OOD gate is an uncalibrated lexical heuristic and n is small; no OOD threshold is proposed (7F verdict stands)",
     "ood_queries_flagged_by": {
-      "P9-112": "out_of_domain",
-      "P9-113": "out_of_domain",
-      "P9-114": "out_of_domain",
-      "P9-115": "out_of_domain",
-      "P9-116": "out_of_domain",
-      "P9-117": "out_of_domain",
-      "P9-118": "out_of_domain",
-      "P9-119": "out_of_domain",
-      "P9-120": "out_of_domain",
-      "P9-121": "out_of_domain",
-      "P9-122": "out_of_domain",
-      "P9-123": "out_of_domain",
-      "P9-124": "out_of_domain",
-      "P9-125": "out_of_domain",
-      "P9-126": "page_not_ingested",
-      "P9-127": "unresolved_identity"
+      "P9-086": "out_of_domain",
+      "P9-087": "out_of_domain",
+      "P9-088": "out_of_domain",
+      "P9-089": "insufficient_context",
+      "P9-090": "insufficient_context",
+      "P9-091": "out_of_domain",
+      "P9-092": "out_of_domain",
+      "P9-093": "out_of_domain",
+      "P9-094": "out_of_domain",
+      "P9-095": "out_of_domain",
+      "P9-096": "out_of_domain",
+      "P9-097": "insufficient_context",
+      "P9-098": "out_of_domain",
+      "P9-099": "insufficient_context",
+      "P9-100": "insufficient_context",
+      "P9-101": "insufficient_context"
     },
     "rank1_similarity_mean": {
-      "in_domain": 0.4046,
+      "in_domain": 0.3838,
       "out_of_domain": 0.1511
     }
   },
@@ -2540,41 +2020,41 @@
       "redundancy_mean": 0.542
     },
     "corpus_wide_no_card_stage": {
-      "mrr": 0.7529,
+      "mrr": 0.6287,
       "page_hit@1": {
-        "k": 55,
+        "k": 45,
         "n": 69,
-        "rate": 0.7971,
+        "rate": 0.6522,
         "wilson95": [
-          0.688,
-          0.875
+          0.534,
+          0.754
         ]
       },
       "recall@1": {
-        "k": 42,
+        "k": 35,
         "n": 69,
-        "rate": 0.6087,
+        "rate": 0.5072,
         "wilson95": [
-          0.491,
-          0.715
+          0.392,
+          0.622
         ]
       },
       "recall@3": {
-        "k": 60,
+        "k": 48,
         "n": 69,
-        "rate": 0.8696,
+        "rate": 0.6957,
         "wilson95": [
-          0.77,
-          0.93
+          0.579,
+          0.792
         ]
       },
       "recall@5": {
-        "k": 68,
+        "k": 59,
         "n": 69,
-        "rate": 0.9855,
+        "rate": 0.8551,
         "wilson95": [
-          0.922,
-          0.997
+          0.753,
+          0.919
         ]
       }
     },
@@ -2743,9 +2223,9 @@
   "query_counts": {
     "absent_detail": 14,
     "answerable": 69,
-    "not_ingested": 20,
+    "not_ingested": 0,
     "out_of_domain": 16,
-    "unresolved_identity": 8
+    "unresolved_identity": 2
   },
   "regression": {
     "phase4": {
@@ -2782,10 +2262,10 @@
         "recall@5": 0.8704
       }
     },
-    "phase8_results_file_sha256": "735f706188d8154e71b00e19c2d745d71718891b04ce9d28e91b7ab08eee3997",
+    "phase8_results_file_sha256": "22571efb91a1667f96aa0c542a54b7d764377721eff84a31d70a65782a450803",
     "phase8_results_unchanged_since_phase8": true
   },
-  "retrieval_fingerprint_sha256": "6dd2cf248567f9b711a5af78d820f2a3856a50336ed99c899cc62fdb5808c443",
+  "retrieval_fingerprint_sha256": "c2233bb1d507cca93708450237cda1a9ee8258c486f1735bbf059ef1ba889c22",
   "router_failures": [
     {
       "acceptable_sibling": false,
@@ -3514,64 +2994,12 @@
       "rank1_similarity": 0.297,
       "routed": "M2C-03",
       "type": "absent_detail"
-    },
-    {
-      "acceptable_sibling": true,
-      "cause_heuristic": "sibling_card_ambiguity",
-      "facet": "natural",
-      "gold": "M2C-09",
-      "gold_rank": 2,
-      "gold_similarity": 0.557,
-      "id": "P9-088",
-      "query": "What are the individual estimation procedures for meter readings and how do they differ?",
-      "rank1_similarity": 0.5749,
-      "routed": "M2C-08",
-      "type": "not_ingested"
-    },
-    {
-      "acceptable_sibling": true,
-      "cause_heuristic": "sibling_card_ambiguity",
-      "facet": "natural",
-      "gold": "M2C-21",
-      "gold_rank": 2,
-      "gold_similarity": 0.5318,
-      "id": "P9-094",
-      "query": "What kinds of clearing exist for posted payments?",
-      "rank1_similarity": 0.5634,
-      "routed": "M2C-20",
-      "type": "not_ingested"
-    },
-    {
-      "acceptable_sibling": true,
-      "cause_heuristic": "sibling_card_ambiguity",
-      "facet": "natural",
-      "gold": "M2C-23",
-      "gold_rank": 2,
-      "gold_similarity": 0.5663,
-      "id": "P9-096",
-      "query": "What is an installment plan and why would a utility offer one?",
-      "rank1_similarity": 0.5782,
-      "routed": "M2C-24",
-      "type": "not_ingested"
-    },
-    {
-      "acceptable_sibling": false,
-      "cause_heuristic": "vocabulary_mismatch",
-      "facet": "natural",
-      "gold": "M2C-26",
-      "gold_rank": 19,
-      "gold_similarity": 0.2625,
-      "id": "P9-098",
-      "query": "How does the system send reminders for unpaid invoices?",
-      "rank1_similarity": 0.4261,
-      "routed": "M2C-16",
-      "type": "not_ingested"
     }
   ],
   "schema_version": 1,
   "token_counter": {
     "exact": true,
-    "model_dir": "/tmp/av/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
+    "model_dir": "/home/user/chatbot/.venv/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
     "tokenizer": "all-MiniLM-L6-v2 WordPiece (tokenizers)"
   }
 }

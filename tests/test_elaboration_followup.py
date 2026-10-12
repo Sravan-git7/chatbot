@@ -352,13 +352,11 @@ class ExhaustedElaborationAndHardeningTests(unittest.TestCase):
         self.assertTrue(check_citations_valid(result["answer"], result["sources"]))
 
     def test_N_missing_pages_get_an_honest_unavailable_state(self):
-        # The four topics without an admitted page (data/page_corpus/manifest.json: 25 of 29 ingested).
-        # A navigation request that names such a topic must produce the honest unavailable/unresolved state for
-        # THAT topic - never an answer assembled from a different, ingested page.
+        # The one topic still without an admitted page (data/page_corpus/manifest.json: 28 of 29 ingested).
+        # M2C-18 keeps a conflicting identity (two different guides claim the card page) and stays fail-closed:
+        # no guide is invented for it. A navigation request that names the topic must produce the honest
+        # unavailable state for THAT topic - never an answer assembled from a different, ingested page.
         missing = {
-            "Tell me about Utilities Master Data.": "M2C-01",
-            "Tell me about Budget Billing Plan.": "M2C-13",
-            "Tell me about Periodic Billing and Invoicing Analysis.": "M2C-16",
             "Tell me about Contract Account Business Object.": "M2C-18",
         }
         for question, card_id in missing.items():
@@ -374,6 +372,26 @@ class ExhaustedElaborationAndHardeningTests(unittest.TestCase):
                     self.assertFalse(result["metadata"]["page_available"])
                     self.assertIsNotNone(result["topic_reference"])
                     self.assertIn("not currently available in the local knowledge base", result["answer"])
+        # 2026-10-12: the other three formerly-missing topics were machine-verified during release preparation
+        # (Topic 1 map-root correction -> guide e52c8ee6; M2C-13/M2C-16 verified under guide 021b182b) and their
+        # pages were admitted to the corpus. They must now be answered - and strictly from their OWN page.
+        now_verified = {
+            "Tell me about Utilities Master Data.": "M2C-01",
+            "Tell me about Budget Billing Plan.": "M2C-13",
+            "Tell me about Periodic Billing and Invoicing Analysis.": "M2C-16",
+        }
+        for question, card_id in now_verified.items():
+            with self.subTest(question=question):
+                result = self.svc.ask(question, conversation_id=f"test-n-verified-{card_id}")
+                self.assertEqual(result["status"], ANSWERED)
+                self.assertEqual(result["metadata"]["card_id"], card_id,
+                                 "the answer must come from the requested topic's own verified page")
+                self.assertTrue(result["metadata"]["page_available"])
+                self.assertTrue(result["metadata"]["grounded"])
+                self.assertTrue(result["sources"])
+                for source in result["sources"]:
+                    self.assertEqual(source["source_id"], card_id,
+                                     "every cited source must belong to the requested topic, not a neighbouring one")
         # content questions that merely mention a topic keep their normal, grounded routing
         content = self.svc.ask("How does a budget billing plan work?", conversation_id="test-n-content-bbp")
         self.assertEqual(content["status"], ANSWERED)
@@ -408,12 +426,24 @@ class ExhaustedElaborationAndHardeningTests(unittest.TestCase):
             "- Chart :",
             "- Dimension :",
         )
+        # Noun-phrase list items are legitimate answer content ONLY together with the introduction that opens their
+        # list (same contract as the master-data lists in tests/test_phase2_fixes.py); appearing without it means
+        # the item leaked isolated from its context.
+        needs_introduction = {
+            "- Payment usage within a payment lot": "shows various statistics, such as the following:",
+            "- Level of automation within one payment lot": "shows various statistics, such as the following:",
+        }
         for question in queries:
             with self.subTest(question=question):
                 result = self.svc.ask(question, conversation_id=f"test-q-fragments-{abs(hash(question))}")
                 self.assertIn(result["status"], (ANSWERED, UNABLE_TO_VERIFY, NO_ADDITIONAL_VERIFIED_EVIDENCE))
                 for fragment in forbidden:
-                    self.assertNotIn(fragment, result["answer"], f"{fragment!r} leaked into the answer")
+                    if fragment in needs_introduction:
+                        if fragment in result["answer"]:
+                            self.assertIn(needs_introduction[fragment], result["answer"],
+                                          f"{fragment!r} leaked isolated, without its list introduction")
+                    else:
+                        self.assertNotIn(fragment, result["answer"], f"{fragment!r} leaked into the answer")
                 if result["status"] == ANSWERED:
                     self.assertTrue(result["metadata"]["grounded"])
                     self.assertTrue(check_citations_valid(result["answer"], result["sources"]))

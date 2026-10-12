@@ -1,28 +1,28 @@
 {
  "schema_version": 1,
- "note": "latency in ms on a 2-vCPU sandbox, warm process, extractive/evidence only unless an ollama config ran",
+ "note": "latency in ms of the process/host that ran the evaluation (see results.run / ollama_environment.host)",
  "configs": {
   "baseline": {
    "status": "RUN",
    "latency_ms_real_routing": {
     "route_ms": {
-     "median": 26.1,
-     "p95": 33.1,
+     "median": 16.4,
+     "p95": 19.6,
      "n": 113
     },
     "retrieve_ms": {
-     "median": 25.2,
-     "p95": 30.2,
-     "n": 41
+     "median": 0.0,
+     "p95": 0.0,
+     "n": 107
     },
     "generate_ms": {
-     "median": 0.5,
-     "p95": 0.8,
-     "n": 37
+     "median": 0.3,
+     "p95": 0.4,
+     "n": 91
     },
     "total_ms": {
-     "median": 29.4,
-     "p95": 68.2,
+     "median": 20.5,
+     "p95": 24.0,
      "n": 113
     }
    },
@@ -33,18 +33,18 @@
      "n": 81
     },
     "retrieve_ms": {
-     "median": 25.8,
-     "p95": 31.7,
+     "median": 11.6,
+     "p95": 13.9,
      "n": 80
     },
     "generate_ms": {
-     "median": 0.5,
-     "p95": 0.9,
+     "median": 0.3,
+     "p95": 0.4,
      "n": 71
     },
     "total_ms": {
-     "median": 36.3,
-     "p95": 44.2,
+     "median": 16.0,
+     "p95": 19.6,
      "n": 81
     }
    }
@@ -53,23 +53,23 @@
    "status": "RUN",
    "latency_ms_real_routing": {
     "route_ms": {
-     "median": 26.5,
-     "p95": 31.4,
+     "median": 15.5,
+     "p95": 19.4,
      "n": 113
     },
     "retrieve_ms": {
-     "median": 25.5,
-     "p95": 29.4,
-     "n": 41
+     "median": 0.0,
+     "p95": 0.0,
+     "n": 107
     },
     "generate_ms": {
-     "median": 1.2,
-     "p95": 2.0,
-     "n": 37
+     "median": 1.7,
+     "p95": 2.7,
+     "n": 91
     },
     "total_ms": {
-     "median": 29.4,
-     "p95": 69.2,
+     "median": 20.6,
+     "p95": 26.2,
      "n": 113
     }
    },
@@ -80,18 +80,18 @@
      "n": 81
     },
     "retrieve_ms": {
-     "median": 25.0,
-     "p95": 31.3,
+     "median": 10.9,
+     "p95": 14.3,
      "n": 80
     },
     "generate_ms": {
-     "median": 1.2,
-     "p95": 2.1,
+     "median": 1.6,
+     "p95": 2.2,
      "n": 71
     },
     "total_ms": {
-     "median": 36.3,
-     "p95": 42.8,
+     "median": 16.1,
+     "p95": 19.5,
      "n": 81
     }
    }

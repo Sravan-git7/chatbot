@@ -1,15 +1,15 @@
 {
   "collection_name": "sap_pages_v1",
-  "vector_store_dir": "data\\vector_store\\page_collection",
-  "created_utc": "2026-10-01T17:28:04+00:00",
-  "vector_count": 106,
+  "vector_store_dir": "data/vector_store/page_collection",
+  "created_utc": "2026-10-12T13:31:01+00:00",
+  "vector_count": 113,
   "embedding_dimensions": 384,
   "distance_space": "cosine",
   "embedding_model": "all-MiniLM-L6-v2",
   "embedding_model_provenance": {
     "model_name": "all-MiniLM-L6-v2",
     "origin": "pip package gt-all-minilm-l6-v2 (third-party re-packaging of sentence-transformers/all-MiniLM-L6-v2)",
-    "directory": "C:\\Users\\srava\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\gt_all_minilm_l6_v2\\model",
+    "directory": "/home/user/chatbot/.venv/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
     "files_sha256": {
       "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
       "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
@@ -34,12 +34,14 @@
   },
   "token_counter": {
     "tokenizer": "all-MiniLM-L6-v2 WordPiece (tokenizers)",
-    "model_dir": "C:\\Users\\srava\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\gt_all_minilm_l6_v2\\model",
+    "model_dir": "/home/user/chatbot/.venv/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
     "exact": true
   },
-  "corpus_sha256": "a447f7b63390831f85811ee12a2f316b8d44437679b4e3d28f0293c3e23a624b",
-  "pages": 25,
+  "corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
+  "pages": 28,
   "page_doc_ids": [
+    "021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc",
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b",
     "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
     "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
     "2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4",
@@ -58,6 +60,7 @@
     "a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4",
     "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
     "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4",
     "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
     "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4",
     "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4",
@@ -66,31 +69,31 @@
     "f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4",
     "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4"
   ],
-  "chunks_fingerprint": "09c34fa7c6dfd17b7404bd8eead137ec39e1a46eed069aaa84e0fa364ad41776",
+  "chunks_fingerprint": "bc6aa3a580c5427f4c566e012c2d5390ee8025ef214d33f2c22ec2da0347281d",
   "chunk_stats": {
-    "chunks": 106,
-    "pages": 25,
-    "chunks_per_page_mean": 4.24,
+    "chunks": 113,
+    "pages": 28,
+    "chunks_per_page_mean": 4.04,
     "tokens": {
       "min": 21,
-      "median": 133.5,
-      "mean": 130.5,
-      "p90": 199.5,
+      "median": 128.0,
+      "mean": 129.4,
+      "p90": 199.8,
       "max": 240
     },
     "chars": {
       "min": 70,
-      "median": 616.0,
-      "mean": 620.0,
-      "max": 1100
+      "median": 594.0,
+      "mean": 614.5,
+      "max": 1106
     },
     "over_model_limit": 0,
     "tiny_chunks_under_24_tokens": 1,
-    "split_chunks": 62,
+    "split_chunks": 64,
     "chunks_with_overlap": 6,
-    "total_chunk_chars": 65719
+    "total_chunk_chars": 69444
   },
-  "embeddings_float32_sha256": "4251aa9e331ff76e22165e3dcf9a1034ca28dd1be2c50daeb166c6adf3c17f83",
+  "embeddings_float32_sha256": "e5d148fc3e00b1e8a1f07ea3c9b649c24530c1b4f2a159c2f071d36bdce6e390",
   "embeddings_sha256_note": "hash of the float32 matrix as computed on this machine; may differ on other hardware/library builds",
   "card_collection_untouched": {
     "name": "sap_m2c_card_v1",

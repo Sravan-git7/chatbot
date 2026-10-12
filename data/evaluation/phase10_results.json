@@ -17,7 +17,7 @@
   },
   "selected": {
    "detail_cue_check": true,
-   "lam": 0.0,
+   "lam": 2.0,
    "theta": 0.34
   }
  },
@@ -57,54 +57,54 @@
     "oracle_grounding_failures": 0,
     "oracle_phantom_citations": 0,
     "router_all_gold_card_queries": {
-     "n": 80,
+     "n": 72,
      "recall@1": {
-      "k": 70,
-      "n": 80,
-      "rate": 0.875,
+      "k": 51,
+      "n": 72,
+      "rate": 0.7083,
       "wilson95": [
-       0.785,
-       0.931
+       0.595,
+       0.801
       ]
      }
     },
     "router_answerable": {
-     "mrr": 0.9689,
+     "mrr": 0.8678,
      "recall@1": {
-      "k": 56,
+      "k": 46,
       "n": 59,
-      "rate": 0.9492,
+      "rate": 0.7797,
       "wilson95": [
-       0.861,
-       0.983
+       0.659,
+       0.866
       ]
      },
      "recall@3": {
-      "k": 59,
+      "k": 57,
       "n": 59,
-      "rate": 1.0,
+      "rate": 0.9661,
       "wilson95": [
-       0.939,
-       1.0
+       0.885,
+       0.991
       ]
      },
      "recall@5": {
-      "k": 59,
+      "k": 58,
       "n": 59,
-      "rate": 1.0,
+      "rate": 0.9831,
       "wilson95": [
-       0.939,
-       1.0
+       0.91,
+       0.997
       ]
      }
     },
     "router_mode_correct_answers": {
-     "k": 45,
+     "k": 41,
      "n": 59,
-     "rate": 0.7627,
+     "rate": 0.6949,
      "wilson95": [
-      0.64,
-      0.853
+      0.569,
+      0.797
      ]
     },
     "router_mode_grounding_failures": 0,
@@ -120,58 +120,41 @@
       ]
      },
      "answerable": {
-      "k": 50,
+      "k": 52,
       "n": 59,
-      "rate": 0.8475,
+      "rate": 0.8814,
       "wilson95": [
-       0.735,
-       0.918
-      ]
-     },
-     "not_ingested": {
-      "k": 5,
-      "n": 6,
-      "rate": 0.8333,
-      "wilson95": [
-       0.436,
-       0.97
+       0.775,
+       0.941
       ]
      },
      "out_of_domain": {
-      "k": 7,
+      "k": 6,
       "n": 8,
-      "rate": 0.875,
+      "rate": 0.75,
       "wilson95": [
-       0.529,
-       0.978
+       0.409,
+       0.929
       ]
      },
      "unresolved_identity": {
-      "k": 2,
-      "n": 4,
-      "rate": 0.5,
+      "k": 0,
+      "n": 2,
+      "rate": 0.0,
       "wilson95": [
-       0.15,
-       0.85
+       0.0,
+       0.658
       ]
      }
     },
-    "router_top1_not_ingested": {
-     "k": 3,
-     "n": 6,
-     "rate": 0.5,
-     "wilson95": [
-      0.188,
-      0.812
-     ]
-    },
+    "router_top1_not_ingested": null,
     "router_top1_unresolved_identity": {
-     "k": 2,
-     "n": 4,
+     "k": 1,
+     "n": 2,
      "rate": 0.5,
      "wilson95": [
-      0.15,
-      0.85
+      0.095,
+      0.905
      ]
     },
     "wrong_topic_answered": {
@@ -181,8 +164,8 @@
       "P8-064",
       "P8-065",
       "P8-069",
-      "P8-077",
-      "P8-084"
+      "P8-072",
+      "P8-076"
      ]
     }
    },
@@ -214,14 +197,14 @@
     "oracle_grounding_failures": 0,
     "oracle_phantom_citations": 0,
     "router_all_gold_card_queries": {
-     "n": 80,
+     "n": 72,
      "recall@1": {
-      "k": 37,
-      "n": 80,
-      "rate": 0.4625,
+      "k": 31,
+      "n": 72,
+      "rate": 0.4306,
       "wilson95": [
-       0.357,
-       0.571
+       0.323,
+       0.546
       ]
      }
     },
@@ -256,12 +239,12 @@
      }
     },
     "router_mode_correct_answers": {
-     "k": 19,
+     "k": 43,
      "n": 59,
-     "rate": 0.322,
+     "rate": 0.7288,
      "wilson95": [
-      0.217,
-      0.449
+      0.604,
+      0.826
      ]
     },
     "router_mode_grounding_failures": 0,
@@ -277,75 +260,64 @@
       ]
      },
      "answerable": {
-      "k": 22,
+      "k": 55,
       "n": 59,
-      "rate": 0.3729,
+      "rate": 0.9322,
       "wilson95": [
-       0.261,
-       0.5
-      ]
-     },
-     "not_ingested": {
-      "k": 6,
-      "n": 6,
-      "rate": 1.0,
-      "wilson95": [
-       0.61,
-       1.0
+       0.838,
+       0.973
       ]
      },
      "out_of_domain": {
-      "k": 7,
+      "k": 6,
       "n": 8,
-      "rate": 0.875,
+      "rate": 0.75,
       "wilson95": [
-       0.529,
-       0.978
+       0.409,
+       0.929
       ]
      },
      "unresolved_identity": {
-      "k": 4,
-      "n": 4,
-      "rate": 1.0,
+      "k": 0,
+      "n": 2,
+      "rate": 0.0,
       "wilson95": [
-       0.51,
-       1.0
+       0.0,
+       0.658
       ]
      }
     },
-    "router_top1_not_ingested": {
-     "k": 4,
-     "n": 6,
-     "rate": 0.6667,
-     "wilson95": [
-      0.3,
-      0.903
-     ]
-    },
+    "router_top1_not_ingested": null,
     "router_top1_unresolved_identity": {
-     "k": 4,
-     "n": 4,
+     "k": 2,
+     "n": 2,
      "rate": 1.0,
      "wilson95": [
-      0.51,
+      0.342,
       1.0
      ]
     },
     "wrong_topic_answered": {
-     "count": 2,
+     "count": 8,
      "ids": [
+      "P8-060",
+      "P8-061",
       "P8-064",
-      "P8-084"
+      "P8-065",
+      "P8-068",
+      "P8-069",
+      "P8-072",
+      "P8-076"
      ]
     }
    },
-   "file_sha256": "a7677ff694702b4ca5f05509c9187e9d2e26e55953060f54a5f4c0cad2d22f0a",
-   "lam0_routing_identical_to_baseline": true,
-   "n_queries": 88,
+   "file_sha256": "150cba1434540256c4dce385b62a3c65d208acc08e8ca667cbc46f33a9fdfe7d",
+   "lam0_routing_identical_to_baseline": null,
+   "n_queries": 80,
    "selected": {
     "config": {
      "detail_cue_check": true,
-     "lam": 0.0,
+     "lam": 2.0,
      "theta": 0.34
     },
     "n_answerable": 59,
@@ -370,128 +342,115 @@
     "oracle_grounding_failures": 0,
     "oracle_phantom_citations": 0,
     "router_all_gold_card_queries": {
-     "n": 80,
+     "n": 72,
      "recall@1": {
-      "k": 37,
-      "n": 80,
-      "rate": 0.4625,
+      "k": 51,
+      "n": 72,
+      "rate": 0.7083,
       "wilson95": [
-       0.357,
-       0.571
+       0.595,
+       0.801
       ]
      }
     },
     "router_answerable": {
-     "mrr": 0.5813,
+     "mrr": 0.8678,
      "recall@1": {
-      "k": 23,
+      "k": 46,
       "n": 59,
-      "rate": 0.3898,
+      "rate": 0.7797,
       "wilson95": [
-       0.276,
-       0.517
+       0.659,
+       0.866
       ]
      },
      "recall@3": {
-      "k": 42,
+      "k": 57,
       "n": 59,
-      "rate": 0.7119,
+      "rate": 0.9661,
       "wilson95": [
-       0.586,
-       0.812
+       0.885,
+       0.991
       ]
      },
      "recall@5": {
-      "k": 49,
+      "k": 58,
       "n": 59,
-      "rate": 0.8305,
+      "rate": 0.9831,
       "wilson95": [
-       0.715,
-       0.905
+       0.91,
+       0.997
       ]
      }
     },
     "router_mode_correct_answers": {
-     "k": 18,
+     "k": 41,
      "n": 59,
-     "rate": 0.3051,
+     "rate": 0.6949,
      "wilson95": [
-      0.203,
-      0.431
+      0.569,
+      0.797
      ]
     },
     "router_mode_grounding_failures": 0,
     "router_mode_phantom_citations": 0,
     "router_mode_status_match_by_type": {
      "absent_detail": {
-      "k": 5,
+      "k": 7,
       "n": 11,
-      "rate": 0.4545,
+      "rate": 0.6364,
       "wilson95": [
-       0.213,
-       0.72
+       0.354,
+       0.848
       ]
      },
      "answerable": {
-      "k": 21,
+      "k": 52,
       "n": 59,
-      "rate": 0.3559,
+      "rate": 0.8814,
       "wilson95": [
-       0.246,
-       0.483
-      ]
-     },
-     "not_ingested": {
-      "k": 6,
-      "n": 6,
-      "rate": 1.0,
-      "wilson95": [
-       0.61,
-       1.0
+       0.775,
+       0.941
       ]
      },
      "out_of_domain": {
-      "k": 7,
+      "k": 6,
       "n": 8,
-      "rate": 0.875,
+      "rate": 0.75,
       "wilson95": [
-       0.529,
-       0.978
+       0.409,
+       0.929
       ]
      },
      "unresolved_identity": {
-      "k": 4,
-      "n": 4,
-      "rate": 1.0,
+      "k": 0,
+      "n": 2,
+      "rate": 0.0,
       "wilson95": [
-       0.51,
-       1.0
+       0.0,
+       0.658
       ]
      }
     },
-    "router_top1_not_ingested": {
-     "k": 4,
-     "n": 6,
-     "rate": 0.6667,
-     "wilson95": [
-      0.3,
-      0.903
-     ]
-    },
+    "router_top1_not_ingested": null,
     "router_top1_unresolved_identity": {
-     "k": 4,
-     "n": 4,
-     "rate": 1.0,
+     "k": 1,
+     "n": 2,
+     "rate": 0.5,
      "wilson95": [
-      0.51,
-      1.0
+      0.095,
+      0.905
      ]
     },
     "wrong_topic_answered": {
-     "count": 2,
+     "count": 6,
      "ids": [
+      "P8-060",
       "P8-064",
-      "P8-084"
+      "P8-065",
+      "P8-069",
+      "P8-072",
+      "P8-076"
      ]
     }
    }
@@ -525,35 +484,35 @@
     "oracle_grounding_failures": 0,
     "oracle_phantom_citations": 0,
     "router_all_gold_card_queries": {
-     "n": 111,
+     "n": 85,
      "recall@1": {
-      "k": 76,
-      "n": 111,
-      "rate": 0.6847,
+      "k": 52,
+      "n": 85,
+      "rate": 0.6118,
       "wilson95": [
-       0.593,
-       0.764
+       0.505,
+       0.708
       ]
      }
     },
     "router_answerable": {
-     "mrr": 0.8301,
+     "mrr": 0.7324,
      "recall@1": {
-      "k": 51,
+      "k": 41,
       "n": 69,
-      "rate": 0.7391,
+      "rate": 0.5942,
       "wilson95": [
-       0.625,
-       0.828
+       0.476,
+       0.702
       ]
      },
      "recall@3": {
-      "k": 62,
+      "k": 57,
       "n": 69,
-      "rate": 0.8986,
+      "rate": 0.8261,
       "wilson95": [
-       0.805,
-       0.95
+       0.72,
+       0.898
       ]
      },
      "recall@5": {
@@ -567,90 +526,71 @@
      }
     },
     "router_mode_correct_answers": {
-     "k": 44,
+     "k": 43,
      "n": 69,
-     "rate": 0.6377,
+     "rate": 0.6232,
      "wilson95": [
-      0.52,
-      0.741
+      0.505,
+      0.728
      ]
     },
     "router_mode_grounding_failures": 0,
     "router_mode_phantom_citations": 0,
     "router_mode_status_match_by_type": {
      "absent_detail": {
-      "k": 13,
+      "k": 12,
       "n": 14,
-      "rate": 0.9286,
+      "rate": 0.8571,
       "wilson95": [
-       0.685,
-       0.987
+       0.601,
+       0.96
       ]
      },
      "answerable": {
-      "k": 47,
+      "k": 51,
       "n": 69,
-      "rate": 0.6812,
+      "rate": 0.7391,
       "wilson95": [
-       0.564,
-       0.779
-      ]
-     },
-     "not_ingested": {
-      "k": 7,
-      "n": 20,
-      "rate": 0.35,
-      "wilson95": [
-       0.181,
-       0.567
+       0.625,
+       0.828
       ]
      },
      "out_of_domain": {
-      "k": 12,
+      "k": 10,
       "n": 16,
-      "rate": 0.75,
+      "rate": 0.625,
       "wilson95": [
-       0.505,
-       0.898
+       0.386,
+       0.815
       ]
      },
      "unresolved_identity": {
-      "k": 6,
-      "n": 8,
-      "rate": 0.75,
+      "k": 0,
+      "n": 2,
+      "rate": 0.0,
       "wilson95": [
-       0.409,
-       0.929
+       0.0,
+       0.658
       ]
      }
     },
-    "router_top1_not_ingested": {
-     "k": 13,
-     "n": 20,
-     "rate": 0.65,
-     "wilson95": [
-      0.433,
-      0.819
-     ]
-    },
+    "router_top1_not_ingested": null,
     "router_top1_unresolved_identity": {
-     "k": 6,
-     "n": 8,
-     "rate": 0.75,
+     "k": 1,
+     "n": 2,
+     "rate": 0.5,
      "wilson95": [
-      0.409,
-      0.929
+      0.095,
+      0.905
      ]
     },
     "wrong_topic_answered": {
-     "count": 6,
+     "count": 4,
      "ids": [
-      "P9-085",
-      "P9-086",
-      "P9-089",
-      "P9-096",
-      "P9-102",
-      "P9-110"
+      "P9-075",
+      "P9-083",
+      "P9-084",
+      "P9-085"
      ]
     }
    },
@@ -682,14 +622,14 @@
     "oracle_grounding_failures": 0,
     "oracle_phantom_citations": 0,
     "router_all_gold_card_queries": {
-     "n": 111,
+     "n": 85,
      "recall@1": {
-      "k": 51,
-      "n": 111,
-      "rate": 0.4595,
+      "k": 29,
+      "n": 85,
+      "rate": 0.3412,
       "wilson95": [
-       0.37,
-       0.552
+       0.249,
+       0.447
       ]
      }
     },
@@ -724,97 +664,89 @@
      }
     },
     "router_mode_correct_answers": {
-     "k": 19,
+     "k": 40,
      "n": 69,
-     "rate": 0.2754,
+     "rate": 0.5797,
      "wilson95": [
-      0.184,
-      0.39
+      0.462,
+      0.689
      ]
     },
     "router_mode_grounding_failures": 0,
     "router_mode_phantom_citations": 0,
     "router_mode_status_match_by_type": {
      "absent_detail": {
-      "k": 2,
+      "k": 4,
       "n": 14,
-      "rate": 0.1429,
+      "rate": 0.2857,
       "wilson95": [
-       0.04,
-       0.399
+       0.117,
+       0.546
       ]
      },
      "answerable": {
-      "k": 20,
+      "k": 48,
       "n": 69,
-      "rate": 0.2899,
+      "rate": 0.6957,
       "wilson95": [
-       0.196,
-       0.406
-      ]
-     },
-     "not_ingested": {
-      "k": 13,
-      "n": 20,
-      "rate": 0.65,
-      "wilson95": [
-       0.433,
-       0.819
+       0.579,
+       0.792
       ]
      },
      "out_of_domain": {
-      "k": 14,
+      "k": 10,
       "n": 16,
-      "rate": 0.875,
+      "rate": 0.625,
       "wilson95": [
-       0.64,
-       0.965
+       0.386,
+       0.815
       ]
      },
      "unresolved_identity": {
-      "k": 8,
-      "n": 8,
-      "rate": 1.0,
+      "k": 0,
+      "n": 2,
+      "rate": 0.0,
       "wilson95": [
-       0.676,
-       1.0
+       0.0,
+       0.658
       ]
      }
     },
-    "router_top1_not_ingested": {
-     "k": 19,
-     "n": 20,
-     "rate": 0.95,
-     "wilson95": [
-      0.764,
-      0.991
-     ]
-    },
+    "router_top1_not_ingested": null,
     "router_top1_unresolved_identity": {
-     "k": 8,
-     "n": 8,
+     "k": 2,
+     "n": 2,
      "rate": 1.0,
      "wilson95": [
-      0.676,
+      0.342,
       1.0
      ]
     },
     "wrong_topic_answered": {
-     "count": 3,
+     "count": 12,
      "ids": [
+      "P9-072",
       "P9-074",
+      "P9-075",
       "P9-076",
-      "P9-096"
+      "P9-078",
+      "P9-079",
+      "P9-080",
+      "P9-081",
+      "P9-082",
+      "P9-083",
+      "P9-084",
+      "P9-085"
      ]
     }
    },
-   "file_sha256": "28f03e5701095b9917522ce1518bcef308bceb8834da2aafed0d749908875309",
-   "lam0_routing_identical_to_baseline": true,
-   "n_queries": 127,
+   "file_sha256": "101a5edbb2cee47d5c040309d1d8ca83eb245921ab122391b4ad47bc4aba81dd",
+   "lam0_routing_identical_to_baseline": null,
+   "n_queries": 101,
    "selected": {
     "config": {
      "detail_cue_check": true,
-     "lam": 0.0,
+     "lam": 2.0,
      "theta": 0.34
     },
     "n_answerable": 69,
@@ -839,29 +771,20 @@
     "oracle_grounding_failures": 0,
     "oracle_phantom_citations": 0,
     "router_all_gold_card_queries": {
-     "n": 111,
+     "n": 85,
      "recall@1": {
-      "k": 51,
-      "n": 111,
-      "rate": 0.4595,
+      "k": 52,
+      "n": 85,
+      "rate": 0.6118,
       "wilson95": [
-       0.37,
-       0.552
+       0.505,
+       0.708
       ]
      }
     },
     "router_answerable": {
-     "mrr": 0.5051,
+     "mrr": 0.7324,
      "recall@1": {
-      "k": 23,
-      "n": 69,
-      "rate": 0.3333,
-      "wilson95": [
-       0.234,
-       0.451
-      ]
-     },
-     "recall@3": {
       "k": 41,
       "n": 69,
       "rate": 0.5942,
@@ -870,103 +793,98 @@
        0.702
       ]
      },
-     "recall@5": {
-      "k": 48,
+     "recall@3": {
+      "k": 57,
       "n": 69,
-      "rate": 0.6957,
+      "rate": 0.8261,
       "wilson95": [
-       0.579,
-       0.792
+       0.72,
+       0.898
+      ]
+     },
+     "recall@5": {
+      "k": 65,
+      "n": 69,
+      "rate": 0.942,
+      "wilson95": [
+       0.86,
+       0.977
       ]
      }
     },
     "router_mode_correct_answers": {
-     "k": 19,
+     "k": 43,
      "n": 69,
-     "rate": 0.2754,
+     "rate": 0.6232,
      "wilson95": [
-      0.184,
-      0.39
+      0.505,
+      0.728
      ]
     },
     "router_mode_grounding_failures": 0,
     "router_mode_phantom_citations": 0,
     "router_mode_status_match_by_type": {
      "absent_detail": {
-      "k": 4,
+      "k": 12,
       "n": 14,
-      "rate": 0.2857,
+      "rate": 0.8571,
       "wilson95": [
-       0.117,
-       0.546
+       0.601,
+       0.96
       ]
      },
      "answerable": {
-      "k": 20,
+      "k": 51,
       "n": 69,
-      "rate": 0.2899,
+      "rate": 0.7391,
       "wilson95": [
-       0.196,
-       0.406
-      ]
-     },
-     "not_ingested": {
-      "k": 13,
-      "n": 20,
-      "rate": 0.65,
-      "wilson95": [
-       0.433,
-       0.819
+       0.625,
+       0.828
       ]
      },
      "out_of_domain": {
-      "k": 14,
+      "k": 10,
       "n": 16,
-      "rate": 0.875,
+      "rate": 0.625,
       "wilson95": [
-       0.64,
-       0.965
+       0.386,
+       0.815
       ]
      },
      "unresolved_identity": {
-      "k": 8,
-      "n": 8,
-      "rate": 1.0,
+      "k": 0,
+      "n": 2,
+      "rate": 0.0,
       "wilson95": [
-       0.676,
-       1.0
+       0.0,
+       0.658
       ]
      }
     },
-    "router_top1_not_ingested": {
-     "k": 19,
-     "n": 20,
-     "rate": 0.95,
-     "wilson95": [
-      0.764,
-      0.991
-     ]
-    },
+    "router_top1_not_ingested": null,
     "router_top1_unresolved_identity": {
-     "k": 8,
-     "n": 8,
-     "rate": 1.0,
+     "k": 1,
+     "n": 2,
+     "rate": 0.5,
      "wilson95": [
-      0.676,
-      1.0
+      0.095,
+      0.905
      ]
     },
     "wrong_topic_answered": {
-     "count": 1,
+     "count": 4,
      "ids": [
-      "P9-096"
+      "P9-075",
+      "P9-083",
+      "P9-084",
+      "P9-085"
      ]
     }
    }
   }
  },
  "schema_version": 1,
- "selection_sha256": "e1975d00da3474eaa7982db12a145e2acd3e7852652b8eec4c4af20afb07192d",
+ "selection_sha256": "08d259e628b48e5a0a9ad86d67044474c6e8c37ff8ac1b72b6e6846f8921d563",
  "test": {
   "R_exploratory": {
    "metrics": {
@@ -999,100 +917,100 @@
     "router_all_gold_card_queries": {
      "n": 65,
      "recall@1": {
-      "k": 43,
+      "k": 39,
       "n": 65,
-      "rate": 0.6615,
+      "rate": 0.6,
       "wilson95": [
-       0.54,
-       0.765
+       0.479,
+       0.71
       ]
      }
     },
     "router_answerable": {
-     "mrr": 0.8006,
+     "mrr": 0.7318,
      "recall@1": {
-      "k": 28,
+      "k": 25,
       "n": 41,
-      "rate": 0.6829,
+      "rate": 0.6098,
       "wilson95": [
-       0.53,
-       0.804
+       0.457,
+       0.743
       ]
      },
      "recall@3": {
-      "k": 37,
+      "k": 33,
       "n": 41,
-      "rate": 0.9024,
+      "rate": 0.8049,
       "wilson95": [
-       0.775,
-       0.961
+       0.66,
+       0.898
       ]
      },
      "recall@5": {
-      "k": 40,
+      "k": 36,
       "n": 41,
-      "rate": 0.9756,
+      "rate": 0.878,
       "wilson95": [
-       0.874,
-       0.996
+       0.745,
+       0.947
       ]
      }
     },
     "router_mode_correct_answers": {
-     "k": 21,
+     "k": 23,
      "n": 41,
-     "rate": 0.5122,
+     "rate": 0.561,
      "wilson95": [
-      0.365,
-      0.657
+      0.41,
+      0.701
      ]
     },
     "router_mode_grounding_failures": 0,
     "router_mode_phantom_citations": 0,
     "router_mode_status_match_by_type": {
      "absent_detail": {
-      "k": 3,
+      "k": 6,
       "n": 12,
-      "rate": 0.25,
+      "rate": 0.5,
       "wilson95": [
-       0.089,
-       0.532
+       0.254,
+       0.746
       ]
      },
      "answerable": {
-      "k": 27,
+      "k": 34,
       "n": 41,
-      "rate": 0.6585,
+      "rate": 0.8293,
       "wilson95": [
-       0.505,
-       0.784
+       0.687,
+       0.915
       ]
      },
      "not_ingested": {
-      "k": 6,
+      "k": 0,
       "n": 8,
-      "rate": 0.75,
+      "rate": 0.0,
       "wilson95": [
-       0.409,
-       0.929
+       0.0,
+       0.324
       ]
      },
      "out_of_domain": {
-      "k": 6,
+      "k": 5,
       "n": 8,
-      "rate": 0.75,
+      "rate": 0.625,
       "wilson95": [
-       0.409,
-       0.929
+       0.306,
+       0.863
       ]
      },
      "unresolved_identity": {
-      "k": 2,
+      "k": 0,
       "n": 4,
-      "rate": 0.5,
+      "rate": 0.0,
       "wilson95": [
-       0.15,
-       0.85
+       0.0,
+       0.49
       ]
      }
     },
@@ -1115,15 +1033,22 @@
      ]
     },
     "wrong_topic_answered": {
-     "count": 7,
+     "count": 14,
      "ids": [
       "P10T-043",
       "P10T-044",
       "P10T-045",
       "P10T-047",
       "P10T-048",
-      "P10T-049",
-      "P10T-062"
+      "P10T-053",
+      "P10T-055",
+      "P10T-056",
+      "P10T-058",
+      "P10T-059",
+      "P10T-060",
+      "P10T-062",
+      "P10T-063",
+      "P10T-065"
      ]
     }
    },
@@ -1140,10 +1065,10 @@
     "P10T-002": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 3,
+     "gold_rank": 9,
      "oracle_status": "answered",
-     "selected": "M2C-14",
-     "status": "insufficient_context",
+     "selected": "M2C-13",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-003": {
@@ -1158,7 +1083,7 @@
     "P10T-004": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 3,
+     "gold_rank": 4,
      "oracle_status": "answered",
      "selected": "M2C-05",
      "status": "insufficient_context",
@@ -1166,20 +1091,20 @@
     },
     "P10T-005": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-10",
-     "status": "out_of_domain",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-006": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-24",
-     "status": "insufficient_context",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-007": {
@@ -1256,19 +1181,19 @@
     },
     "P10T-015": {
      "correct_answer_oracle": true,
-     "correct_answer_router": true,
-     "gold_rank": 1,
+     "correct_answer_router": false,
+     "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-24",
+     "selected": "M2C-23",
      "status": "answered",
      "type": "answerable"
     },
     "P10T-016": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 8,
+     "gold_rank": 15,
      "oracle_status": "answered",
-     "selected": "M2C-05",
+     "selected": "M2C-10",
      "status": "out_of_domain",
      "type": "answerable"
     },
@@ -1292,11 +1217,11 @@
     },
     "P10T-019": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 6,
      "oracle_status": "answered",
-     "selected": "M2C-14",
-     "status": "out_of_domain",
+     "selected": "M2C-24",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-020": {
@@ -1313,7 +1238,7 @@
      "correct_answer_router": false,
      "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-17",
+     "selected": "M2C-15",
      "status": "answered",
      "type": "answerable"
     },
@@ -1395,7 +1320,7 @@
      "gold_rank": 2,
      "oracle_status": "answered",
      "selected": "M2C-20",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-031": {
@@ -1410,7 +1335,7 @@
     "P10T-032": {
      "correct_answer_oracle": true,
      "correct_answer_router": true,
-     "gold_rank": 1,
+     "gold_rank": 3,
      "oracle_status": "answered",
      "selected": "M2C-11",
      "status": "answered",
@@ -1427,28 +1352,28 @@
     },
     "P10T-034": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 4,
+     "correct_answer_router": true,
+     "gold_rank": 10,
      "oracle_status": "answered",
-     "selected": "M2C-17",
-     "status": "out_of_domain",
+     "selected": "M2C-11",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-035": {
      "correct_answer_oracle": true,
-     "correct_answer_router": true,
+     "correct_answer_router": false,
      "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-02",
+     "selected": "M2C-04",
      "status": "answered",
      "type": "answerable"
     },
     "P10T-036": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-02",
+     "selected": "M2C-03",
      "status": "insufficient_context",
      "type": "answerable"
     },
@@ -1457,14 +1382,14 @@
      "correct_answer_router": false,
      "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-10",
-     "status": "out_of_domain",
+     "selected": "M2C-03",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-038": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 5,
+     "gold_rank": 7,
      "oracle_status": "answered",
      "selected": "M2C-17",
      "status": "answered",
@@ -1500,10 +1425,10 @@
     "P10T-042": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 6,
+     "gold_rank": 3,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-09",
-     "status": "out_of_domain",
+     "selected": "M2C-24",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-043": {
@@ -1539,7 +1464,7 @@
      "gold_rank": 4,
      "oracle_status": "insufficient_context",
      "selected": "M2C-06",
-     "status": "page_not_ingested",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-047": {
@@ -1554,19 +1479,19 @@
     "P10T-048": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-24",
+     "selected": "M2C-23",
      "status": "answered",
      "type": "absent_detail"
     },
     "P10T-049": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-14",
-     "status": "answered",
+     "selected": "M2C-04",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-050": {
@@ -1583,14 +1508,14 @@
      "correct_answer_router": false,
      "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-052": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 2,
+     "gold_rank": 3,
      "oracle_status": "out_of_domain",
      "selected": "M2C-14",
      "status": "insufficient_context",
@@ -1599,65 +1524,65 @@
     "P10T-053": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 5,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-02",
-     "status": "insufficient_context",
+     "selected": "M2C-04",
+     "status": "answered",
      "type": "absent_detail"
     },
     "P10T-054": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-26",
-     "status": "page_not_ingested",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-055": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-27",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-056": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-29",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-057": {
      "correct_answer_router": false,
-     "gold_rank": 2,
-     "selected": "M2C-24",
-     "status": "out_of_domain",
+     "gold_rank": 1,
+     "selected": "M2C-25",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-058": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-20",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-059": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-22",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-060": {
      "correct_answer_router": false,
      "gold_rank": 2,
      "selected": "M2C-08",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-061": {
      "correct_answer_router": false,
-     "gold_rank": 2,
-     "selected": "M2C-02",
+     "gold_rank": 1,
+     "selected": "M2C-03",
      "status": "insufficient_context",
      "type": "not_ingested"
     },
@@ -1670,40 +1595,40 @@
     },
     "P10T-063": {
      "correct_answer_router": false,
-     "gold_rank": 2,
-     "selected": "M2C-11",
-     "status": "out_of_domain",
+     "gold_rank": 1,
+     "selected": "M2C-13",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-064": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-16",
-     "status": "unresolved_identity",
+     "status": "insufficient_context",
      "type": "unresolved_identity"
     },
     "P10T-065": {
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 3,
      "selected": "M2C-01",
-     "status": "unresolved_identity",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-066": {
      "correct_answer_router": false,
      "selected": "M2C-09",
-     "status": "out_of_domain",
+     "status": "insufficient_context",
      "type": "out_of_domain"
     },
     "P10T-067": {
      "correct_answer_router": false,
-     "selected": "M2C-24",
+     "selected": "M2C-16",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-068": {
      "correct_answer_router": false,
-     "selected": "M2C-24",
+     "selected": "M2C-19",
      "status": "insufficient_context",
      "type": "out_of_domain"
     },
@@ -1721,19 +1646,19 @@
     },
     "P10T-071": {
      "correct_answer_router": false,
-     "selected": "M2C-14",
+     "selected": "M2C-25",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-072": {
      "correct_answer_router": false,
-     "selected": "M2C-07",
+     "selected": "M2C-06",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-073": {
      "correct_answer_router": false,
-     "selected": "M2C-02",
+     "selected": "M2C-09",
      "status": "out_of_domain",
      "type": "out_of_domain"
     }
@@ -1770,100 +1695,100 @@
     "router_all_gold_card_queries": {
      "n": 65,
      "recall@1": {
-      "k": 43,
+      "k": 39,
       "n": 65,
-      "rate": 0.6615,
+      "rate": 0.6,
       "wilson95": [
-       0.54,
-       0.765
+       0.479,
+       0.71
       ]
      }
     },
     "router_answerable": {
-     "mrr": 0.8006,
+     "mrr": 0.7318,
      "recall@1": {
-      "k": 28,
+      "k": 25,
       "n": 41,
-      "rate": 0.6829,
+      "rate": 0.6098,
       "wilson95": [
-       0.53,
-       0.804
+       0.457,
+       0.743
       ]
      },
      "recall@3": {
-      "k": 37,
+      "k": 33,
       "n": 41,
-      "rate": 0.9024,
+      "rate": 0.8049,
       "wilson95": [
-       0.775,
-       0.961
+       0.66,
+       0.898
       ]
      },
      "recall@5": {
-      "k": 40,
+      "k": 36,
       "n": 41,
-      "rate": 0.9756,
+      "rate": 0.878,
       "wilson95": [
-       0.874,
-       0.996
+       0.745,
+       0.947
       ]
      }
     },
     "router_mode_correct_answers": {
-     "k": 21,
+     "k": 23,
      "n": 41,
-     "rate": 0.5122,
+     "rate": 0.561,
      "wilson95": [
-      0.365,
-      0.657
+      0.41,
+      0.701
      ]
     },
     "router_mode_grounding_failures": 0,
     "router_mode_phantom_citations": 0,
     "router_mode_status_match_by_type": {
      "absent_detail": {
-      "k": 6,
+      "k": 8,
       "n": 12,
-      "rate": 0.5,
+      "rate": 0.6667,
       "wilson95": [
-       0.254,
-       0.746
+       0.391,
+       0.862
       ]
      },
      "answerable": {
-      "k": 27,
+      "k": 34,
       "n": 41,
-      "rate": 0.6585,
+      "rate": 0.8293,
       "wilson95": [
-       0.505,
-       0.784
+       0.687,
+       0.915
       ]
      },
      "not_ingested": {
-      "k": 6,
+      "k": 0,
       "n": 8,
-      "rate": 0.75,
+      "rate": 0.0,
       "wilson95": [
-       0.409,
-       0.929
+       0.0,
+       0.324
       ]
      },
      "out_of_domain": {
-      "k": 6,
+      "k": 5,
       "n": 8,
-      "rate": 0.75,
+      "rate": 0.625,
       "wilson95": [
-       0.409,
-       0.929
+       0.306,
+       0.863
       ]
      },
      "unresolved_identity": {
-      "k": 2,
+      "k": 0,
       "n": 4,
-      "rate": 0.5,
+      "rate": 0.0,
       "wilson95": [
-       0.15,
-       0.85
+       0.0,
+       0.49
       ]
      }
     },
@@ -1886,12 +1811,20 @@
      ]
     },
     "wrong_topic_answered": {
-     "count": 4,
+     "count": 12,
      "ids": [
       "P10T-044",
       "P10T-047",
       "P10T-048",
-      "P10T-062"
+      "P10T-053",
+      "P10T-055",
+      "P10T-056",
+      "P10T-058",
+      "P10T-059",
+      "P10T-060",
+      "P10T-062",
+      "P10T-063",
+      "P10T-065"
      ]
     }
    },
@@ -1908,10 +1841,10 @@
     "P10T-002": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 3,
+     "gold_rank": 9,
      "oracle_status": "answered",
-     "selected": "M2C-14",
-     "status": "insufficient_context",
+     "selected": "M2C-13",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-003": {
@@ -1926,7 +1859,7 @@
     "P10T-004": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 3,
+     "gold_rank": 4,
      "oracle_status": "answered",
      "selected": "M2C-05",
      "status": "insufficient_context",
@@ -1934,20 +1867,20 @@
     },
     "P10T-005": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-10",
-     "status": "out_of_domain",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-006": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-24",
-     "status": "insufficient_context",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-007": {
@@ -2024,19 +1957,19 @@
     },
     "P10T-015": {
      "correct_answer_oracle": true,
-     "correct_answer_router": true,
-     "gold_rank": 1,
+     "correct_answer_router": false,
+     "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-24",
+     "selected": "M2C-23",
      "status": "answered",
      "type": "answerable"
     },
     "P10T-016": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 8,
+     "gold_rank": 15,
      "oracle_status": "answered",
-     "selected": "M2C-05",
+     "selected": "M2C-10",
      "status": "out_of_domain",
      "type": "answerable"
     },
@@ -2060,11 +1993,11 @@
     },
     "P10T-019": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 6,
      "oracle_status": "answered",
-     "selected": "M2C-14",
-     "status": "out_of_domain",
+     "selected": "M2C-24",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-020": {
@@ -2081,7 +2014,7 @@
      "correct_answer_router": false,
      "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-17",
+     "selected": "M2C-15",
      "status": "answered",
      "type": "answerable"
     },
@@ -2163,7 +2096,7 @@
      "gold_rank": 2,
      "oracle_status": "answered",
      "selected": "M2C-20",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-031": {
@@ -2178,7 +2111,7 @@
     "P10T-032": {
      "correct_answer_oracle": true,
      "correct_answer_router": true,
-     "gold_rank": 1,
+     "gold_rank": 3,
      "oracle_status": "answered",
      "selected": "M2C-11",
      "status": "answered",
@@ -2195,28 +2128,28 @@
     },
     "P10T-034": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 4,
+     "correct_answer_router": true,
+     "gold_rank": 10,
      "oracle_status": "answered",
-     "selected": "M2C-17",
-     "status": "out_of_domain",
+     "selected": "M2C-11",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-035": {
      "correct_answer_oracle": true,
-     "correct_answer_router": true,
+     "correct_answer_router": false,
      "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-02",
+     "selected": "M2C-04",
      "status": "answered",
      "type": "answerable"
     },
     "P10T-036": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-02",
+     "selected": "M2C-03",
      "status": "insufficient_context",
      "type": "answerable"
     },
@@ -2225,14 +2158,14 @@
      "correct_answer_router": false,
      "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-10",
-     "status": "out_of_domain",
+     "selected": "M2C-03",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-038": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 5,
+     "gold_rank": 7,
      "oracle_status": "answered",
      "selected": "M2C-17",
      "status": "answered",
@@ -2268,10 +2201,10 @@
     "P10T-042": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 6,
+     "gold_rank": 3,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-09",
-     "status": "out_of_domain",
+     "selected": "M2C-24",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-043": {
@@ -2307,7 +2240,7 @@
      "gold_rank": 4,
      "oracle_status": "insufficient_context",
      "selected": "M2C-06",
-     "status": "page_not_ingested",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-047": {
@@ -2322,18 +2255,18 @@
     "P10T-048": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-24",
+     "selected": "M2C-23",
      "status": "answered",
      "type": "absent_detail"
     },
     "P10T-049": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-14",
+     "selected": "M2C-04",
      "status": "insufficient_context",
      "type": "absent_detail"
     },
@@ -2351,14 +2284,14 @@
      "correct_answer_router": false,
      "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-052": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 2,
+     "gold_rank": 3,
      "oracle_status": "out_of_domain",
      "selected": "M2C-14",
      "status": "insufficient_context",
@@ -2367,65 +2300,65 @@
     "P10T-053": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 5,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-02",
-     "status": "insufficient_context",
+     "selected": "M2C-04",
+     "status": "answered",
      "type": "absent_detail"
     },
     "P10T-054": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-26",
-     "status": "page_not_ingested",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-055": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-27",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-056": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-29",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-057": {
      "correct_answer_router": false,
-     "gold_rank": 2,
-     "selected": "M2C-24",
-     "status": "out_of_domain",
+     "gold_rank": 1,
+     "selected": "M2C-25",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-058": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-20",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-059": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-22",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-060": {
      "correct_answer_router": false,
      "gold_rank": 2,
      "selected": "M2C-08",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-061": {
      "correct_answer_router": false,
-     "gold_rank": 2,
-     "selected": "M2C-02",
+     "gold_rank": 1,
+     "selected": "M2C-03",
      "status": "insufficient_context",
      "type": "not_ingested"
     },
@@ -2438,40 +2371,40 @@
     },
     "P10T-063": {
      "correct_answer_router": false,
-     "gold_rank": 2,
-     "selected": "M2C-11",
-     "status": "out_of_domain",
+     "gold_rank": 1,
+     "selected": "M2C-13",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-064": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-16",
-     "status": "unresolved_identity",
+     "status": "insufficient_context",
      "type": "unresolved_identity"
     },
     "P10T-065": {
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 3,
      "selected": "M2C-01",
-     "status": "unresolved_identity",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-066": {
      "correct_answer_router": false,
      "selected": "M2C-09",
-     "status": "out_of_domain",
+     "status": "insufficient_context",
      "type": "out_of_domain"
     },
     "P10T-067": {
      "correct_answer_router": false,
-     "selected": "M2C-24",
+     "selected": "M2C-16",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-068": {
      "correct_answer_router": false,
-     "selected": "M2C-24",
+     "selected": "M2C-19",
      "status": "insufficient_context",
      "type": "out_of_domain"
     },
@@ -2489,19 +2422,19 @@
     },
     "P10T-071": {
      "correct_answer_router": false,
-     "selected": "M2C-14",
+     "selected": "M2C-25",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-072": {
      "correct_answer_router": false,
-     "selected": "M2C-07",
+     "selected": "M2C-06",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-073": {
      "correct_answer_router": false,
-     "selected": "M2C-02",
+     "selected": "M2C-09",
      "status": "out_of_domain",
      "type": "out_of_domain"
     }
@@ -2578,60 +2511,60 @@
      }
     },
     "router_mode_correct_answers": {
-     "k": 10,
+     "k": 20,
      "n": 41,
-     "rate": 0.2439,
+     "rate": 0.4878,
      "wilson95": [
-      0.138,
-      0.393
+      0.343,
+      0.635
      ]
     },
     "router_mode_grounding_failures": 0,
     "router_mode_phantom_citations": 0,
     "router_mode_status_match_by_type": {
      "absent_detail": {
-      "k": 2,
+      "k": 6,
       "n": 12,
-      "rate": 0.1667,
+      "rate": 0.5,
       "wilson95": [
-       0.047,
-       0.448
+       0.254,
+       0.746
       ]
      },
      "answerable": {
-      "k": 11,
+      "k": 30,
       "n": 41,
-      "rate": 0.2683,
+      "rate": 0.7317,
       "wilson95": [
-       0.157,
-       0.419
+       0.581,
+       0.843
       ]
      },
      "not_ingested": {
-      "k": 6,
+      "k": 0,
       "n": 8,
-      "rate": 0.75,
+      "rate": 0.0,
       "wilson95": [
-       0.409,
-       0.929
+       0.0,
+       0.324
       ]
      },
      "out_of_domain": {
-      "k": 7,
+      "k": 5,
       "n": 8,
-      "rate": 0.875,
+      "rate": 0.625,
       "wilson95": [
-       0.529,
-       0.978
+       0.306,
+       0.863
       ]
      },
      "unresolved_identity": {
-      "k": 4,
+      "k": 0,
       "n": 4,
-      "rate": 1.0,
+      "rate": 0.0,
       "wilson95": [
-       0.51,
-       1.0
+       0.0,
+       0.49
       ]
      }
     },
@@ -2654,22 +2587,33 @@
      ]
     },
     "wrong_topic_answered": {
-     "count": 3,
+     "count": 14,
      "ids": [
+      "P10T-043",
       "P10T-044",
       "P10T-045",
-      "P10T-047"
+      "P10T-047",
+      "P10T-048",
+      "P10T-053",
+      "P10T-055",
+      "P10T-056",
+      "P10T-058",
+      "P10T-059",
+      "P10T-060",
+      "P10T-062",
+      "P10T-063",
+      "P10T-065"
      ]
     }
    },
    "per_query": {
     "P10T-001": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-08",
-     "status": "out_of_domain",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-002": {
@@ -2677,8 +2621,8 @@
      "correct_answer_router": false,
      "gold_rank": 23,
      "oracle_status": "answered",
-     "selected": "M2C-14",
-     "status": "insufficient_context",
+     "selected": "M2C-13",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-003": {
@@ -2701,11 +2645,11 @@
     },
     "P10T-005": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-10",
-     "status": "out_of_domain",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-006": {
@@ -2714,7 +2658,7 @@
      "gold_rank": 18,
      "oracle_status": "answered",
      "selected": "M2C-23",
-     "status": "out_of_domain",
+     "status": "insufficient_context",
      "type": "answerable"
     },
     "P10T-007": {
@@ -2755,11 +2699,11 @@
     },
     "P10T-011": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-06",
-     "status": "page_not_ingested",
+     "selected": "M2C-05",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-012": {
@@ -2782,19 +2726,19 @@
     },
     "P10T-014": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-23",
-     "status": "page_not_ingested",
+     "selected": "M2C-24",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-015": {
      "correct_answer_oracle": true,
-     "correct_answer_router": true,
+     "correct_answer_router": false,
      "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-24",
+     "selected": "M2C-23",
      "status": "answered",
      "type": "answerable"
     },
@@ -2818,11 +2762,11 @@
     },
     "P10T-018": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-13",
-     "status": "out_of_domain",
+     "selected": "M2C-24",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-019": {
@@ -2848,17 +2792,17 @@
      "correct_answer_router": false,
      "gold_rank": 4,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-24",
-     "status": "insufficient_context",
+     "selected": "M2C-15",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-022": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-15",
-     "status": "out_of_domain",
+     "selected": "M2C-14",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-023": {
@@ -2890,11 +2834,11 @@
     },
     "P10T-026": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-027": {
@@ -2902,8 +2846,8 @@
      "correct_answer_router": false,
      "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-01",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-028": {
@@ -2911,17 +2855,17 @@
      "correct_answer_router": false,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-029": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-030": {
@@ -2930,25 +2874,25 @@
      "gold_rank": 8,
      "oracle_status": "answered",
      "selected": "M2C-20",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-031": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-032": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-01",
-     "status": "unresolved_identity",
+     "selected": "M2C-11",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-033": {
@@ -2975,7 +2919,7 @@
      "gold_rank": 3,
      "oracle_status": "answered",
      "selected": "M2C-04",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-036": {
@@ -2984,7 +2928,7 @@
      "gold_rank": 4,
      "oracle_status": "insufficient_context",
      "selected": "M2C-03",
-     "status": "page_not_ingested",
+     "status": "insufficient_context",
      "type": "answerable"
     },
     "P10T-037": {
@@ -2992,8 +2936,8 @@
      "correct_answer_router": false,
      "gold_rank": 7,
      "oracle_status": "answered",
-     "selected": "M2C-10",
-     "status": "out_of_domain",
+     "selected": "M2C-03",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-038": {
@@ -3001,8 +2945,8 @@
      "correct_answer_router": false,
      "gold_rank": 11,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-039": {
@@ -3010,7 +2954,7 @@
      "correct_answer_router": false,
      "gold_rank": 1,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-11",
+     "selected": "M2C-14",
      "status": "insufficient_context",
      "type": "answerable"
     },
@@ -3025,11 +2969,11 @@
     },
     "P10T-041": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-042": {
@@ -3037,8 +2981,8 @@
      "correct_answer_router": false,
      "gold_rank": 14,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-09",
-     "status": "out_of_domain",
+     "selected": "M2C-24",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-043": {
@@ -3046,8 +2990,8 @@
      "correct_answer_router": false,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-06",
-     "status": "page_not_ingested",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "absent_detail"
     },
     "P10T-044": {
@@ -3073,7 +3017,7 @@
      "correct_answer_router": false,
      "gold_rank": 4,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-07",
+     "selected": "M2C-06",
      "status": "insufficient_context",
      "type": "absent_detail"
     },
@@ -3092,7 +3036,7 @@
      "gold_rank": 2,
      "oracle_status": "answered",
      "selected": "M2C-23",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "absent_detail"
     },
     "P10T-049": {
@@ -3100,8 +3044,8 @@
      "correct_answer_router": false,
      "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-27",
-     "status": "out_of_domain",
+     "selected": "M2C-04",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-050": {
@@ -3118,8 +3062,8 @@
      "correct_answer_router": false,
      "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-052": {
@@ -3127,8 +3071,8 @@
      "correct_answer_router": false,
      "gold_rank": 1,
      "oracle_status": "out_of_domain",
-     "selected": "M2C-11",
-     "status": "out_of_domain",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-053": {
@@ -3137,109 +3081,109 @@
      "gold_rank": 8,
      "oracle_status": "insufficient_context",
      "selected": "M2C-04",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "absent_detail"
     },
     "P10T-054": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-26",
-     "status": "page_not_ingested",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-055": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-27",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-056": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-29",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-057": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-25",
-     "status": "out_of_domain",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-058": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-20",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-059": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-22",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-060": {
      "correct_answer_router": false,
      "gold_rank": 2,
      "selected": "M2C-08",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-061": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-03",
-     "status": "out_of_domain",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-062": {
      "correct_answer_router": false,
      "gold_rank": 1,
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-063": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-13",
-     "status": "unresolved_identity",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-064": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-16",
-     "status": "unresolved_identity",
+     "status": "insufficient_context",
      "type": "unresolved_identity"
     },
     "P10T-065": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-01",
-     "status": "unresolved_identity",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-066": {
      "correct_answer_router": false,
      "selected": "M2C-09",
-     "status": "out_of_domain",
+     "status": "insufficient_context",
      "type": "out_of_domain"
     },
     "P10T-067": {
      "correct_answer_router": false,
-     "selected": "M2C-01",
+     "selected": "M2C-16",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-068": {
      "correct_answer_router": false,
-     "selected": "M2C-25",
-     "status": "out_of_domain",
+     "selected": "M2C-19",
+     "status": "insufficient_context",
      "type": "out_of_domain"
     },
     "P10T-069": {
@@ -3256,13 +3200,13 @@
     },
     "P10T-071": {
      "correct_answer_router": false,
-     "selected": "M2C-17",
+     "selected": "M2C-25",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-072": {
      "correct_answer_router": false,
-     "selected": "M2C-01",
+     "selected": "M2C-06",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
@@ -3278,7 +3222,7 @@
    "metrics": {
     "config": {
      "detail_cue_check": true,
-     "lam": 0.0,
+     "lam": 2.0,
      "theta": 0.34
     },
     "n_answerable": 41,
@@ -3305,100 +3249,100 @@
     "router_all_gold_card_queries": {
      "n": 65,
      "recall@1": {
-      "k": 31,
+      "k": 39,
       "n": 65,
-      "rate": 0.4769,
+      "rate": 0.6,
       "wilson95": [
-       0.36,
-       0.596
+       0.479,
+       0.71
       ]
      }
     },
     "router_answerable": {
-     "mrr": 0.5441,
+     "mrr": 0.7318,
      "recall@1": {
-      "k": 15,
+      "k": 25,
       "n": 41,
-      "rate": 0.3659,
+      "rate": 0.6098,
       "wilson95": [
-       0.236,
-       0.519
+       0.457,
+       0.743
       ]
      },
      "recall@3": {
-      "k": 26,
+      "k": 33,
       "n": 41,
-      "rate": 0.6341,
+      "rate": 0.8049,
       "wilson95": [
-       0.481,
-       0.764
+       0.66,
+       0.898
       ]
      },
      "recall@5": {
-      "k": 31,
+      "k": 36,
       "n": 41,
-      "rate": 0.7561,
+      "rate": 0.878,
       "wilson95": [
-       0.607,
-       0.862
+       0.745,
+       0.947
       ]
      }
     },
     "router_mode_correct_answers": {
-     "k": 10,
+     "k": 23,
      "n": 41,
-     "rate": 0.2439,
+     "rate": 0.561,
      "wilson95": [
-      0.138,
-      0.393
+      0.41,
+      0.701
      ]
     },
     "router_mode_grounding_failures": 0,
     "router_mode_phantom_citations": 0,
     "router_mode_status_match_by_type": {
      "absent_detail": {
-      "k": 3,
+      "k": 8,
       "n": 12,
-      "rate": 0.25,
+      "rate": 0.6667,
       "wilson95": [
-       0.089,
-       0.532
+       0.391,
+       0.862
       ]
      },
      "answerable": {
-      "k": 11,
+      "k": 34,
       "n": 41,
-      "rate": 0.2683,
+      "rate": 0.8293,
       "wilson95": [
-       0.157,
-       0.419
+       0.687,
+       0.915
       ]
      },
      "not_ingested": {
-      "k": 6,
+      "k": 0,
       "n": 8,
-      "rate": 0.75,
+      "rate": 0.0,
       "wilson95": [
-       0.409,
-       0.929
+       0.0,
+       0.324
       ]
      },
      "out_of_domain": {
-      "k": 7,
+      "k": 5,
       "n": 8,
-      "rate": 0.875,
+      "rate": 0.625,
       "wilson95": [
-       0.529,
-       0.978
+       0.306,
+       0.863
       ]
      },
      "unresolved_identity": {
-      "k": 4,
+      "k": 0,
       "n": 4,
-      "rate": 1.0,
+      "rate": 0.0,
       "wilson95": [
-       0.51,
-       1.0
+       0.0,
+       0.49
       ]
      }
     },
@@ -3412,54 +3356,64 @@
      ]
     },
     "router_top1_unresolved_identity": {
-     "k": 4,
+     "k": 2,
      "n": 4,
-     "rate": 1.0,
+     "rate": 0.5,
      "wilson95": [
-      0.51,
-      1.0
+      0.15,
+      0.85
      ]
     },
     "wrong_topic_answered": {
-     "count": 2,
+     "count": 12,
      "ids": [
       "P10T-044",
-      "P10T-047"
+      "P10T-047",
+      "P10T-048",
+      "P10T-053",
+      "P10T-055",
+      "P10T-056",
+      "P10T-058",
+      "P10T-059",
+      "P10T-060",
+      "P10T-062",
+      "P10T-063",
+      "P10T-065"
      ]
     }
    },
    "per_query": {
     "P10T-001": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-08",
-     "status": "out_of_domain",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-002": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 23,
+     "gold_rank": 9,
      "oracle_status": "answered",
-     "selected": "M2C-14",
-     "status": "insufficient_context",
+     "selected": "M2C-13",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-003": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 27,
+     "gold_rank": 3,
      "oracle_status": "answered",
-     "selected": "M2C-01",
-     "status": "out_of_domain",
+     "selected": "M2C-05",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-004": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 18,
+     "gold_rank": 4,
      "oracle_status": "answered",
      "selected": "M2C-05",
      "status": "insufficient_context",
@@ -3467,20 +3421,20 @@
     },
     "P10T-005": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
+     "correct_answer_router": true,
      "gold_rank": 2,
      "oracle_status": "answered",
-     "selected": "M2C-10",
-     "status": "out_of_domain",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-006": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 18,
+     "correct_answer_router": true,
+     "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-23",
-     "status": "out_of_domain",
+     "selected": "M2C-07",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-007": {
@@ -3521,11 +3475,11 @@
     },
     "P10T-011": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-06",
-     "status": "page_not_ingested",
+     "selected": "M2C-05",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-012": {
@@ -3548,14 +3502,32 @@
     },
     "P10T-014": {
      "correct_answer_oracle": true,
+     "correct_answer_router": true,
+     "gold_rank": 1,
+     "oracle_status": "answered",
+     "selected": "M2C-24",
+     "status": "answered",
+     "type": "answerable"
+    },
+    "P10T-015": {
+     "correct_answer_oracle": true,
      "correct_answer_router": false,
      "gold_rank": 2,
      "oracle_status": "answered",
      "selected": "M2C-23",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "answerable"
     },
-    "P10T-015": {
+    "P10T-016": {
+     "correct_answer_oracle": true,
+     "correct_answer_router": false,
+     "gold_rank": 15,
+     "oracle_status": "answered",
+     "selected": "M2C-10",
+     "status": "out_of_domain",
+     "type": "answerable"
+    },
+    "P10T-017": {
      "correct_answer_oracle": true,
      "correct_answer_router": true,
      "gold_rank": 1,
@@ -3564,40 +3536,22 @@
      "status": "answered",
      "type": "answerable"
     },
-    "P10T-016": {
-     "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 26,
-     "oracle_status": "answered",
-     "selected": "M2C-10",
-     "status": "out_of_domain",
-     "type": "answerable"
-    },
-    "P10T-017": {
-     "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 16,
-     "oracle_status": "answered",
-     "selected": "M2C-27",
-     "status": "out_of_domain",
-     "type": "answerable"
-    },
     "P10T-018": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 4,
+     "correct_answer_router": true,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-13",
-     "status": "out_of_domain",
+     "selected": "M2C-24",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-019": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 14,
+     "correct_answer_router": true,
+     "gold_rank": 6,
      "oracle_status": "answered",
-     "selected": "M2C-13",
-     "status": "out_of_domain",
+     "selected": "M2C-24",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-020": {
@@ -3612,19 +3566,19 @@
     "P10T-021": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 4,
+     "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-24",
-     "status": "insufficient_context",
+     "selected": "M2C-15",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-022": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-15",
-     "status": "out_of_domain",
+     "selected": "M2C-14",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-023": {
@@ -3656,65 +3610,65 @@
     },
     "P10T-026": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-027": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 4,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-01",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-028": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 2,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-029": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-030": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 8,
+     "gold_rank": 2,
      "oracle_status": "answered",
      "selected": "M2C-20",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-031": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-032": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 4,
+     "correct_answer_router": true,
+     "gold_rank": 3,
      "oracle_status": "answered",
-     "selected": "M2C-01",
-     "status": "unresolved_identity",
+     "selected": "M2C-11",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-033": {
@@ -3729,7 +3683,7 @@
     "P10T-034": {
      "correct_answer_oracle": true,
      "correct_answer_router": true,
-     "gold_rank": 1,
+     "gold_rank": 10,
      "oracle_status": "answered",
      "selected": "M2C-11",
      "status": "answered",
@@ -3738,45 +3692,45 @@
     "P10T-035": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 3,
+     "gold_rank": 1,
      "oracle_status": "answered",
      "selected": "M2C-04",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-036": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 4,
+     "gold_rank": 2,
      "oracle_status": "insufficient_context",
      "selected": "M2C-03",
-     "status": "page_not_ingested",
+     "status": "insufficient_context",
      "type": "answerable"
     },
     "P10T-037": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 7,
+     "gold_rank": 4,
      "oracle_status": "answered",
-     "selected": "M2C-10",
-     "status": "out_of_domain",
+     "selected": "M2C-03",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-038": {
      "correct_answer_oracle": true,
      "correct_answer_router": false,
-     "gold_rank": 11,
+     "gold_rank": 7,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-039": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-11",
+     "selected": "M2C-14",
      "status": "insufficient_context",
      "type": "answerable"
     },
@@ -3791,29 +3745,29 @@
     },
     "P10T-041": {
      "correct_answer_oracle": true,
-     "correct_answer_router": false,
-     "gold_rank": 2,
+     "correct_answer_router": true,
+     "gold_rank": 1,
      "oracle_status": "answered",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "answerable"
     },
     "P10T-042": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 14,
+     "gold_rank": 3,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-09",
-     "status": "out_of_domain",
+     "selected": "M2C-24",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-043": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 2,
+     "gold_rank": 1,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-06",
-     "status": "page_not_ingested",
+     "selected": "M2C-07",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-044": {
@@ -3839,7 +3793,7 @@
      "correct_answer_router": false,
      "gold_rank": 4,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-07",
+     "selected": "M2C-06",
      "status": "insufficient_context",
      "type": "absent_detail"
     },
@@ -3858,16 +3812,16 @@
      "gold_rank": 2,
      "oracle_status": "answered",
      "selected": "M2C-23",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "absent_detail"
     },
     "P10T-049": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 4,
+     "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-27",
-     "status": "out_of_domain",
+     "selected": "M2C-04",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-050": {
@@ -3884,128 +3838,128 @@
      "correct_answer_router": false,
      "gold_rank": 2,
      "oracle_status": "insufficient_context",
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "selected": "M2C-17",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-052": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 3,
      "oracle_status": "out_of_domain",
-     "selected": "M2C-11",
-     "status": "out_of_domain",
+     "selected": "M2C-14",
+     "status": "insufficient_context",
      "type": "absent_detail"
     },
     "P10T-053": {
      "correct_answer_oracle": false,
      "correct_answer_router": false,
-     "gold_rank": 8,
+     "gold_rank": 5,
      "oracle_status": "insufficient_context",
      "selected": "M2C-04",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "absent_detail"
     },
     "P10T-054": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-26",
-     "status": "page_not_ingested",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-055": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-27",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-056": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-29",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-057": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-25",
-     "status": "out_of_domain",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-058": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-20",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-059": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-22",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-060": {
      "correct_answer_router": false,
      "gold_rank": 2,
      "selected": "M2C-08",
-     "status": "page_not_ingested",
+     "status": "answered",
      "type": "not_ingested"
     },
     "P10T-061": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-03",
-     "status": "out_of_domain",
+     "status": "insufficient_context",
      "type": "not_ingested"
     },
     "P10T-062": {
      "correct_answer_router": false,
-     "gold_rank": 1,
-     "selected": "M2C-18",
-     "status": "unresolved_identity",
+     "gold_rank": 2,
+     "selected": "M2C-17",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-063": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-13",
-     "status": "unresolved_identity",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-064": {
      "correct_answer_router": false,
      "gold_rank": 1,
      "selected": "M2C-16",
-     "status": "unresolved_identity",
+     "status": "insufficient_context",
      "type": "unresolved_identity"
     },
     "P10T-065": {
      "correct_answer_router": false,
-     "gold_rank": 1,
+     "gold_rank": 3,
      "selected": "M2C-01",
-     "status": "unresolved_identity",
+     "status": "answered",
      "type": "unresolved_identity"
     },
     "P10T-066": {
      "correct_answer_router": false,
      "selected": "M2C-09",
-     "status": "out_of_domain",
+     "status": "insufficient_context",
      "type": "out_of_domain"
     },
     "P10T-067": {
      "correct_answer_router": false,
-     "selected": "M2C-01",
+     "selected": "M2C-16",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-068": {
      "correct_answer_router": false,
-     "selected": "M2C-25",
-     "status": "out_of_domain",
+     "selected": "M2C-19",
+     "status": "insufficient_context",
      "type": "out_of_domain"
     },
     "P10T-069": {
@@ -4022,13 +3976,13 @@
     },
     "P10T-071": {
      "correct_answer_router": false,
-     "selected": "M2C-17",
+     "selected": "M2C-25",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
     "P10T-072": {
      "correct_answer_router": false,
-     "selected": "M2C-01",
+     "selected": "M2C-06",
      "status": "out_of_domain",
      "type": "out_of_domain"
     },
@@ -4070,46 +4024,61 @@
    "adopted": false,
    "lam": 2.0,
    "paired_r1": {
-    "only_baseline": 2,
-    "only_candidate": 15,
-    "sign_test_p_two_sided": 0.0023
+    "only_baseline": 3,
+    "only_candidate": 13,
+    "sign_test_p_two_sided": 0.0213
    },
-   "r1_gain_absolute": 0.3171,
+   "r1_gain_absolute": 0.2439,
    "reason_not_adopted": "fusion failed the pre-declared DEV guard (wrong-topic answers increased), so it was not selected; TEST figures are informational",
    "routing_top1_not_worse_on_not_ingested_and_unresolved": false,
    "would_pass_all_declared_R_criteria": false,
-   "wrong_topic_answered": 7,
+   "wrong_topic_answered": 14,
    "wrong_topic_answered_ids": [
     "P10T-043",
     "P10T-044",
     "P10T-045",
     "P10T-047",
     "P10T-048",
-    "P10T-049",
-    "P10T-062"
+    "P10T-053",
+    "P10T-055",
+    "P10T-056",
+    "P10T-058",
+    "P10T-059",
+    "P10T-060",
+    "P10T-062",
+    "P10T-063",
+    "P10T-065"
    ],
-   "wrong_topic_answered_reference": 3
+   "wrong_topic_answered_reference": 14
   },
   "R_exploratory+G": {
    "adopted": false,
    "lam": 2.0,
    "paired_r1": {
-    "only_baseline": 2,
-    "only_candidate": 15,
-    "sign_test_p_two_sided": 0.0023
+    "only_baseline": 3,
+    "only_candidate": 13,
+    "sign_test_p_two_sided": 0.0213
    },
-   "r1_gain_absolute": 0.3171,
+   "r1_gain_absolute": 0.2439,
    "reason_not_adopted": "fusion failed the pre-declared DEV guard (wrong-topic answers increased), so it was not selected; TEST figures are informational",
    "routing_top1_not_worse_on_not_ingested_and_unresolved": false,
    "would_pass_all_declared_R_criteria": false,
-   "wrong_topic_answered": 4,
+   "wrong_topic_answered": 12,
    "wrong_topic_answered_ids": [
     "P10T-044",
     "P10T-047",
     "P10T-048",
-    "P10T-062"
+    "P10T-053",
+    "P10T-055",
+    "P10T-056",
+    "P10T-058",
+    "P10T-059",
+    "P10T-060",
+    "P10T-062",
+    "P10T-063",
+    "P10T-065"
    ],
-   "wrong_topic_answered_reference": 2
+   "wrong_topic_answered_reference": 12
   },
   "R_rule": {
    "min_r1_gain": 0.05,

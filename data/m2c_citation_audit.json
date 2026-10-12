@@ -4,17 +4,26 @@
     {
       "citation": "[01] Utilities Master Data (01_Utilities_Master_Data.pdf, sha256:c4aecd08f56a)",
       "flags": [
-        "PAGE_CARD_IDENTITY_ONLY"
+        "PAGE_CORRECTED_IDENTITY"
       ],
       "identity": {
-        "basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+        "basis": "CORRECTION_APPLIED_PAGE_IN_CORRECTED_GUIDE_TOC",
         "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
         "card_page_id": "0a6ace53118d4308e10000000a174cb4",
         "conflict": null,
-        "correction": null,
+        "correction": {
+          "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "card_page_id": "0a6ace53118d4308e10000000a174cb4",
+          "card_record_modified": false,
+          "machine_checked_saved_response_passed": true,
+          "matches_card_ids": true,
+          "registers_a_guide": false,
+          "resolved_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "user_reported_browser_observation_machine_verified": false
+        },
         "disagreements": [],
-        "effective_guide_id": null,
-        "effective_page_id": null,
+        "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+        "effective_page_id": "e369ce53118d4308e10000000a174cb4",
         "hints": [
           {
             "authority": "non_authoritative_hint",
@@ -28,7 +37,7 @@
         "local_page_available": false,
         "local_page_path": null,
         "probe_evidence": [],
-        "status": "card_identity_only"
+        "status": "corrected_identity"
       },
       "notes": [],
       "review_flag": false,
@@ -413,23 +422,23 @@
     {
       "citation": "[13] Budget Billing Plan (13_Budget_Billing_Plan.pdf, sha256:679da0708a9e)",
       "flags": [
-        "PAGE_CARD_IDENTITY_ONLY"
+        "PAGE_IDENTIFIED_NOT_LOCAL"
       ],
       "identity": {
-        "basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
         "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
         "card_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
         "conflict": null,
         "correction": null,
         "disagreements": [],
-        "effective_guide_id": null,
-        "effective_page_id": null,
+        "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+        "effective_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
         "hints": [],
         "local_content": null,
         "local_page_available": false,
         "local_page_path": null,
         "probe_evidence": [],
-        "status": "card_identity_only"
+        "status": "identified_not_local"
       },
       "notes": [],
       "review_flag": false,
@@ -530,23 +539,23 @@
     {
       "citation": "[16] Periodic Billing and Invoicing Analysis (16_Periodic_Billing_and_Invoicing_Analysis.pdf, sha256:5c9154368920)",
       "flags": [
-        "PAGE_CARD_IDENTITY_ONLY"
+        "PAGE_IDENTIFIED_NOT_LOCAL"
       ],
       "identity": {
-        "basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+        "basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
         "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
         "card_page_id": "549661e6541f403ea56196782e040bcc",
         "conflict": null,
         "correction": null,
         "disagreements": [],
-        "effective_guide_id": null,
-        "effective_page_id": null,
+        "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+        "effective_page_id": "549661e6541f403ea56196782e040bcc",
         "hints": [],
         "local_content": null,
         "local_page_available": false,
         "local_page_path": null,
         "probe_evidence": [],
-        "status": "card_identity_only"
+        "status": "identified_not_local"
       },
       "notes": [],
       "review_flag": false,
@@ -1019,13 +1028,13 @@
     "M2C-17"
   ],
   "identity_status_counts": {
-    "card_identity_only": 3,
     "conflicting_identity": 1,
-    "corrected_identity": 1,
-    "identified_not_local": 23,
+    "corrected_identity": 2,
+    "identified_not_local": 25,
     "resolved_local_page": 1
   },
   "recorded_numeric_pairs": {
+    "0": "021b182b0c47416c8fafed67ebfd78a9",
     "40374631": "e52c8ee6197147ec97dfc2eb8c46a3ad",
     "40374633": "a003b275c98148ee8a4c3fafe9588fe3",
     "40374682": "f4a255a5de524e3992155767996fb1fd",

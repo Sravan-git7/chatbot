@@ -546,12 +546,12 @@ Rank = position of the first expected card among 29. Top 5 = `card id (cosine)`.
 ## Appendix C. Files and integrity
 
 * `data/evaluation/independent_queries.json` sha256 `1ce1306db646981b68245d75a1a912310ad3d760d90593bd005dfcc3500956e4`
-* `data/evaluation/phase5_results.json` sha256 `2ca554287c9c2397f125e086cd121e5bd67983588bf798011e0298b286f0ef6d`
-* protected, read only: `data/evaluation/card_retrieval_results.json` sha256 `c1b0459779eeb0ac0f4dbf26c6e128302c91ad7be0aa75db6a2d657e45c49206`; `data/card_collection_manifest.json` sha256 `5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731`
+* `data/evaluation/phase5_results.json` sha256 `5c898b92944418b4b845248e9e397ec958f3feb5361a07c5b7fb703bac1712b6`
+* protected, read only: `data/evaluation/card_retrieval_results.json` sha256 `0225891eca74a596480ffea32760cf3947c9acee7cd468a646a756e6cbeecb9c`; `data/card_collection_manifest.json` sha256 `aa859ea2ddc52114bfa9bd3e0309030f876f4f7b56aecbc1e8baa3f1f96a12bc`
 * retrieval units sha256 `f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21`; source corpus sha256 `0ee5cb8bda192250a14acdde95617e15b71f6fd803847fe25bae9999ea7e9e76`
 * Phase 5 code: `scripts/build_independent_queries.py`, `scripts/phase5_retrievers.py`, `scripts/evaluate_phase5.py`, `scripts/build_phase5_report.py`; tests in `tests/test_phase5.py`.
 * Reproduce: `python scripts/build_independent_queries.py && python scripts/evaluate_phase5.py && python scripts/build_phase5_report.py` (the store must exist; rebuild it with `build_card_collection.py --manifest <tmp path>` so the Phase 4 manifest is not overwritten). No network is used.
 
 ## Tests
 
-260 passed (full suite: pytest tests -q; 219 existing + 41 new Phase 5 tests)
+_Not recorded in this run. Pass `--test-summary "<pytest result>"`._

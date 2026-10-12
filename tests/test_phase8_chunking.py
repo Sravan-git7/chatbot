@@ -133,8 +133,19 @@ class RealCorpusChunkTests(unittest.TestCase):
             ids = [c["chunk_id"] for c in ch]
             self.assertEqual(len(ids), len(set(ids)))
             for r in self.records:
-                joined = " ".join(c["text"] for c in ch if c["page_id"] == r["page_id"])
-                missing = [b["text"][:50] for b in r["blocks"] if b["text"].split("\n")[0] not in joined and name != "A_legacy_1000c"]
+                if name == "A_legacy_1000c":
+                    continue
+                # Overlap-aware reconstruction (each chunk repeats its predecessor's last overlap_chars; strip the
+                # repeated prefix) with whitespace normalisation (the chunker folds intra-list spacing into "\n").
+                # Together this proves every block's text is preserved across chunk boundaries — no text loss.
+                page_ch = sorted((c for c in ch if c["page_id"] == r["page_id"]), key=lambda c: c["chunk_index"])
+                rebuilt = ""
+                for c in page_ch:
+                    o = c.get("overlap_chars") or 0
+                    t = c["text"]
+                    rebuilt += (t[o:] if rebuilt and 0 < o < len(t) else t) + " "
+                rebuilt_norm = re.sub(r"\s+", " ", rebuilt)
+                missing = [b["text"][:50] for b in r["blocks"] if re.sub(r"\s+", " ", b["text"]) not in rebuilt_norm]
                 self.assertEqual(missing, [], (name, r["doc_id"]))
 
     def test_model_token_limit_with_real_tokenizer_if_available(self):

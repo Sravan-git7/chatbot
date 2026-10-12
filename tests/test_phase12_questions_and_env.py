@@ -119,20 +119,25 @@ class OllamaCheck(unittest.TestCase):
 
 class CorpusStatus(unittest.TestCase):
     def test_recorded_status_is_honest(self):
+        # 2026-10-12: regenerated on the 28-page corpus. Every fetchable page is now ingested; the only card without
+        # a local page is the fail-closed M2C-18 conflict, which is not fetchable by recorded ids.
         s = json.loads((ROOT / "data" / "phase12" / "corpus_status.json").read_text(encoding="utf-8"))
         t = s["totals"]
-        self.assertEqual((t["cards"], t["local_pages"], t["identified_not_local_without_page"], t["not_fetchable"]), (29, 7, 18, 4))
+        self.assertEqual((t["cards"], t["local_pages"], t["identified_not_local_without_page"], t["not_fetchable"]), (29, 28, 0, 1))
         self.assertFalse(s["corpus_complete"])
         self.assertIn("NOT complete", s["statement"])
         self.assertNotIn("M2C-18", [c["source_id"] for c in s["cards"] if c["fetchable_with_recorded_ids"]])
+        self.assertEqual([c["source_id"] for c in s["cards"] if not c["local_page"]], ["M2C-18"])
         blocked = {p["host"]: p for p in s["network_probe"]}
         self.assertEqual(blocked["help.sap.com"]["failed_stage"], "tls_handshake")
 
-    def test_import_manifest_lists_only_the_18_fetchable_pages(self):
+    def test_import_manifest_is_empty_because_everything_fetchable_is_ingested(self):
+        # 2026-10-12: the 18 formerly-fetchable pages were imported and ingested, so the import manifest lists
+        # nothing. If a future page becomes fetchable-without-local-content, the count must reflect it exactly.
         m = json.loads((ROOT / "data" / "phase12" / "import_manifest.json").read_text(encoding="utf-8"))
-        ids = [i["source_id"] for i in m["items"]]
-        self.assertEqual(m["count"], 18)
-        self.assertTrue(set(ids).isdisjoint({"M2C-01", "M2C-13", "M2C-16", "M2C-18", "M2C-07", "M2C-05", "M2C-24", "M2C-14", "M2C-17", "M2C-11", "M2C-02"}))
+        self.assertEqual(m["count"], 0)
+        self.assertEqual(m["items"], [])
+        self.assertEqual(m["count"], len(m["items"]))
         self.assertTrue(all(i["request_url"].startswith("https://help.sap.com/http.svc/pagecontent?") for i in m["items"]))
 
     def test_fetch_attempt_saved_nothing(self):

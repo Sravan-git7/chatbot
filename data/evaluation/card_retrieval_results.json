@@ -6,7 +6,7 @@
   "distance_space": "cosine",
   "retrieval_units_file_sha256": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
   "questions_file_sha256": "530f2d96cb644518fcbe20b0082870b01a08fd4bc524c10d208fd9c72c1ceb36",
-  "collection_manifest_sha256": "5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731",
+  "collection_manifest_sha256": "aa859ea2ddc52114bfa9bd3e0309030f876f4f7b56aecbc1e8baa3f1f96a12bc",
   "question_count": 50,
   "metrics": {
     "overall": {

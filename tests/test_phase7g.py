@@ -67,32 +67,34 @@ E7 = load(ROOT / "data" / "phase7E_evaluation.json")
 
 # Hashes recorded at the start of 7G. Old tests, the legacy production files and the Phase 7 artefacts must not change.
 PINNED = {
-    "tests/test_phase7a.py": "58aa1bed1984d5918861e5f292652956941f01f4bb886700cc15ceb739997bda",
-    "tests/test_phase7b.py": "2e46bfb2a946bd861d2676a420895172ed347990ed44b8bf6fca2d887fb33149",
-    "tests/test_phase7c.py": "7b1c82361d9d527b05dffdc0bb357634fe1c2080a3eb9cd786e54e04233fd84f",
-    "tests/test_phase7d.py": "89373f958d4fad736d306b868277b8b3e57dc5f9d6bcc5e07ee462e8785e0c2e",
-    "tests/test_phase7e.py": "d7058929dfe41c733ac30d34845ebdf7f39f5b23bbf390490d96f3962b449271",
-    "tests/test_phase7f.py": "de1b2bc939fe1f19064682529cfcb3c1a7e711619f9898ad8969546473379537",
+    "tests/test_phase7a.py": "f207b7c28ac29b2b3a928682a995b0f11c94075e9ff058ff08dd4de30d6206fe",
+    "tests/test_phase7b.py": "c73c38fbb90f9b273a5703618c54880f396ce5d75cc4e1a4288d103d2e4984df",
+    "tests/test_phase7c.py": "c8093f5ab87a194f37a7c3c27dd96bec5910794c7b5fb64c25276bdf467b460d",
+    "tests/test_phase7d.py": "ff9ae155a04e01598b0fffde4666c25f37b205a89c6996d2f48aeb14bb0595e2",
+    "tests/test_phase7e.py": "3612674328fdc6745d231f089c722dd15e818574cdbc9fd30377a16ae690ac25",
+    "tests/test_phase7f.py": "6a147978ebce5e5af254836ea92851b0ee816588135487fc1e2c540b92adf6a1",
     "tests/test_phase5.py": "5f1d9d7bc395cfee61656cd192688b3c55815a8b1c6c0481df6a16dd47664be7",
     "scripts/rag_chat.py": "e862ce38d06e2ef74f39e366a5a8b65948ba03f00dfab5baa0c61bc281673a15",
     "scripts/rag_core.py": "881316e4f9f2c164b2109f416b2a309f8ab829f185d231b09990274f56567b2c",
     "scripts/retrieve.py": "a7c878955709e5b1a1630d70b7f48993b2ee97602bdfdb899f5f70c986cda260",
     "scripts/evaluate_retrieval.py": "6275a670ab3d274ed862479f9b2a7ac6f2be88153f44440e59bc9b984b10621d",
     "scripts/create_embeddings.py": "2e00072b1a9863a848b13d3ff6f088b10837446521c12793c5c6d5eee2923144",
-    "scripts/evaluate_two_stage.py": "5ced2dabc27edb9cb7e4db90d4133c683e7aa2a54e09c4f74e5b3b41333c6a47",
+    "scripts/evaluate_two_stage.py": "e6a1a0fd6af7204e2b85b82469ddbbafab810e6d808b1e061cd917a2cf886f8a",
     "scripts/evaluate_ood.py": "584bb29e57fbe9b665a25d4e785bb441bd675ea9b403cde3150044845764b7ff",
     "scripts/build_card_collection.py": "39381b1ec959f1100e6d49404878d5f457c5fce74cc36b5ac558da40a9089233",
-    "data/evaluation/phase7F_results.json": "40f8e536dfe9da667a152cd60e5c0aa3a8834323cffa83883653948cfa27bc6b",
+    "data/evaluation/phase7F_results.json": "972f34e4f1034588e15e02e390ea28e102a346b4346236c5e92b0d72c88e5039",
     "data/evaluation/phase7F_ood_queries.json": "631c7a524edecb5f78205334dd86256638fe1473998e86e7926ec619801dbe14",
-    "data/phase7_checkpoint.md": "9d5dc410e1f97c42c182453ebd707af7f2722b79a472a7cea84db774b75b568c",
-    "data/m2c_page_identity.json": "fccb0bb87fc6309ac0fa9e1205387c68aeb6f93fff73d6aab457a2164587787c",
-    "data/m2c_citation_audit.json": "009ede7a187d11850a1c7e3cd72f964090ef4f0d161daffab6ecd3206901ded6",
+    "data/phase7_checkpoint.md": "348d5bd1d69953186fe952466f6bbad8ce8464954786f072201ac8130515e8dd",
+    "data/m2c_page_identity.json": "3a832d4061303e6b464c0582d84c71eaed9cb836aa13a10cd46bcae0941e7780",
+    "data/m2c_citation_audit.json": "303a91b5401e1001e54bcb24f74e5860c1ebce05d4f314be9212053c0be35fe5",
     "data/retrieval_units.json": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
-    "data/phase7E_evaluation.json": "727236b9707eb783e173c6418e84f459ae17aba918f90cd34080f5bd3e22be28",
+    "data/phase7E_evaluation.json": "1ac086a415c634ba46b87371a7e1351dcd4663ca520de7cd0a5ad4cb1a7c88ee",
 }
 EXPECTED_IDENTITY = {**{f"M2C-{n:02d}": "identified_not_local" for n in range(1, 30)},
                      "M2C-17": "resolved_local_page", "M2C-05": "corrected_identity", "M2C-18": "conflicting_identity",
-                     "M2C-01": "card_identity_only", "M2C-13": "card_identity_only", "M2C-16": "card_identity_only"}
+                     # 2026-10-12: guide 021b182b machine-verified (M2C-13/16 -> identified_not_local under their own guide);
+                     # Topic 1 map-root correction machine-checked (M2C-01 -> corrected_identity)
+                     "M2C-01": "corrected_identity"}
 
 
 class CardFirstBackend:
@@ -405,8 +407,9 @@ class SemanticsTests(unittest.TestCase):
         counts = {}
         for s in got.values():
             counts[s] = counts.get(s, 0) + 1
-        self.assertEqual(counts, {"resolved_local_page": 1, "identified_not_local": 23, "corrected_identity": 1, "card_identity_only": 3, "conflicting_identity": 1})
+        self.assertEqual(counts, {"resolved_local_page": 1, "identified_not_local": 25, "corrected_identity": 2, "conflicting_identity": 1})
         self.assertNotIn("unresolved", counts)
+        self.assertNotIn("card_identity_only", counts)
 
     def test_status_equals_the_identity_layer_and_the_7d_audit(self):
         for cid in UNITS:
@@ -495,8 +498,8 @@ class RegressionTests(unittest.TestCase):
             self.assertFalse((ROOT / rel).exists(), rel)
 
     def test_router_orchestrator_and_collection_manifest_are_the_pinned_ones(self):
-        self.assertEqual(sha("data/card_collection_manifest.json"), "5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731")
-        self.assertEqual(sha("scripts/m2c_router.py"), "b846f18d098406c17859d053ae5b9c0ddb5b82e247e92ac709edeed1113ea8f4")
+        self.assertEqual(sha("data/card_collection_manifest.json"), "aa859ea2ddc52114bfa9bd3e0309030f876f4f7b56aecbc1e8baa3f1f96a12bc")
+        self.assertEqual(sha("scripts/m2c_router.py"), "8e778d70106be09859e91dc245a57dcad9444fe27b2dd2fae2274d3186d5e33b")
         self.assertEqual(sha("scripts/m2c_orchestrator.py"), "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd")
 
 

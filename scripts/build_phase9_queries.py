@@ -10,7 +10,13 @@ hash differs). ``labels_changed_after_retrieval`` is therefore False by construc
 Query types: answerable | absent_detail | not_ingested | unresolved_identity | out_of_domain.
 Facets (answerable queries and a few others): keyword | natural | paraphrase | entity | rare_term | multi_concept | section_specific |
 sibling_ambiguous | terminology_mismatch.
-Only 7 of 29 pages exist locally, so 22 cards can only be answered with ``page_not_ingested`` / ``unresolved_identity`` by design.
+The answerable/absent_detail queries were authored for the seven originally ingested pages (all still ingested). The
+not_ingested and unresolved_identity categories are DERIVED from the current identity state and corpus: a card
+contributes a not_ingested query only if its page identity is established but its page text is absent from the local
+corpus, and unresolved_identity queries only if its identity is conflicting or unresolved. The builder fails if a
+hand-written query contradicts the derived category. Re-frozen 2026-10-12 after the corpus grew to 28 of 29 pages:
+every card with an established identity is now ingested (not_ingested is empty), and M2C-01/13/16 left the
+unresolved category when their identities became machine-checked; only M2C-18 (conflicting, fail-closed) remains.
 """
 from __future__ import annotations
 
@@ -135,40 +141,22 @@ ABSENT = [
     ("M2C-02", "Which fields are mandatory on the move-in screen?", ["mandatory"]),
 ]
 
-# card -> (query, acceptable sibling ids) ; the card's page is not in the local corpus
-NOT_INGESTED = [
-    ("M2C-03", "What are the steps to register a new tenant in a utility installation?", []),
-    ("M2C-04", "How do I terminate a customer's supply contract when they leave?", ["M2C-02"]),
-    ("M2C-06", "How do I enter a meter reading result manually?", []),
-    ("M2C-08", "How does the system estimate a reading when no actual value is available?", ["M2C-09"]),
-    ("M2C-09", "What are the individual estimation procedures for meter readings and how do they differ?", ["M2C-08"]),
-    ("M2C-10", "How do I record the starting meter reading when a customer moves in?", ["M2C-03"]),
-    ("M2C-12", "How do I schedule billing to run automatically in the background?", ["M2C-11"]),
-    ("M2C-15", "How are budget billing amounts collected and processed after plan creation?", []),
-    ("M2C-19", "How can I check payments that arrived on the bank statement?", ["M2C-20"]),
-    ("M2C-20", "How does the system decide which open items an incoming payment clears?", ["M2C-21"]),
-    ("M2C-21", "What kinds of clearing exist for posted payments?", ["M2C-20"]),
-    ("M2C-22", "How are payments collected at an external cash desk posted?", ["M2C-19"]),
-    ("M2C-23", "What is an installment plan and why would a utility offer one?", ["M2C-24"]),
-    ("M2C-25", "How do I look at an installment plan I created earlier and change its terms?", ["M2C-24"]),
-    ("M2C-26", "How does the system send reminders for unpaid invoices?", []),
-    ("M2C-27", "How do I hand over overdue accounts to an external collections agency?", []),
-    ("M2C-28", "Which enterprise services are available for communicating with a collection agency?", ["M2C-27"]),
-    ("M2C-29", "How do I reconnect a customer after payment is received?", []),
-    ("M2C-04", "Which steps are needed to issue a final bill after a customer moves out?", ["M2C-02", "M2C-14"]),
-    ("M2C-29", "How do I deactivate supply for a customer who has not paid?", []),
-]
+# Hand-written queries for the "page identity established but no local page text" category, keyed by card, each with
+# its acceptable sibling ids. The builder verifies every entry against the derived category and fails on drift (see
+# main()). As of the 2026-10-12 re-freeze every card with an established identity has its page text ingested, so this
+# mapping is empty; the twenty queries formerly listed here (M2C-03/04/06/08/09/10/12/15/19/20/21/22/23/25/26/27/28/29)
+# were removed when those pages were ingested.
+NOT_INGESTED_QUERIES = {}
 
-UNRESOLVED = [
-    ("M2C-01", "How do premises, connection objects and device locations fit together in utilities master data?"),
-    ("M2C-01", "What master data objects must exist before I can install a meter?"),
-    ("M2C-13", "How do I give a customer fixed monthly payments for consumption?"),
-    ("M2C-13", "What is a budget billing plan and how is it structured?"),
-    ("M2C-16", "How do I analyse billing and invoicing results over a period?"),
-    ("M2C-16", "What analysis tools exist for periodic billing?"),
-    ("M2C-18", "What is the structure of a contract account as a business object?"),
-    ("M2C-18", "Which object model classes represent a contract account in SAP?"),
-]
+# Hand-written queries for cards whose page identity is conflicting or unresolved (fail-closed). M2C-18 is
+# conflicting_identity and stays fail-closed. M2C-01/13/16 used to stand here before guide 021b182b was
+# machine-verified and the Topic 1 map-root correction was machine-checked (2026-10-12 re-freeze).
+UNRESOLVED_QUERIES = {
+    "M2C-18": [
+        "What is the structure of a contract account as a business object?",
+        "Which object model classes represent a contract account in SAP?",
+    ],
+}
 
 OUT_OF_DOMAIN = [
     "Which city is Canada's capital?", "How do I bake sourdough bread at home?", "Explain how a transformer neural network works.",
@@ -267,12 +255,33 @@ def main() -> int:
                 problems.append((sid, q, "absent term present", a))
         add(query=q, type="absent_detail", facet="natural", answerability="not_answerable_detail_absent_from_page", gold_source_id=sid, gold_doc_id=recs[sid]["doc_id"], acceptable_source_ids=[],
             evidence=[], absent_terms=absent, expected_status="insufficient_context", notes="topic is on the page, the asked detail is not (term search)")
-    for sid, q, acc in NOT_INGESTED:
-        add(query=q, type="not_ingested", facet="natural", answerability="not_answerable_page_not_in_local_corpus", gold_source_id=sid, gold_doc_id=None, acceptable_source_ids=acc,
-            evidence=[], expected_status="page_not_ingested", notes="page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome")
-    for sid, q in UNRESOLVED:
-        add(query=q, type="unresolved_identity", facet="natural", answerability="not_answerable_identity_unresolved", gold_source_id=sid, gold_doc_id=None, acceptable_source_ids=[],
-            evidence=[], expected_status="unresolved_identity", notes="card has conflicting or identity-only status (7C)")
+    import m2c_page_identity as pid
+    ctx = pid.IdentityContext.from_root(ROOT)
+    idents = {i.source_id: i for i in pid.resolve_all(ctx)}
+    established = {sid for sid, i in idents.items()
+                   if i.resolution_status in (pid.CORRECTED_IDENTITY, pid.IDENTIFIED_NOT_LOCAL, pid.RESOLVED_LOCAL_PAGE)}
+    derived_not_ingested = sorted(established - set(recs))
+    derived_unresolved = sorted(sid for sid, i in idents.items()
+                                if i.resolution_status in (pid.CONFLICTING_IDENTITY, pid.UNRESOLVED))
+    for sid in sorted(set(NOT_INGESTED_QUERIES) - set(derived_not_ingested)):
+        problems.append((sid, NOT_INGESTED_QUERIES[sid], "hand-written not_ingested query but the card is no longer in that category", ""))
+    for sid in derived_not_ingested:
+        entry = NOT_INGESTED_QUERIES.get(sid)
+        if entry is None:
+            problems.append((sid, None, "card is identified-but-not-ingested but has no hand-written not_ingested query", ""))
+        else:
+            q, acc = entry
+            add(query=q, type="not_ingested", facet="natural", answerability="not_answerable_page_not_in_local_corpus", gold_source_id=sid, gold_doc_id=None, acceptable_source_ids=acc,
+                evidence=[], expected_status="page_not_ingested", notes="page exists on SAP Help but is not in the local corpus; status page_not_ingested is the correct outcome")
+    for sid, qs in UNRESOLVED_QUERIES.items():
+        if sid not in derived_unresolved:
+            problems.append((sid, qs, "hand-written unresolved_identity query but the card identity is no longer unresolved/conflicting", ""))
+            continue
+        for q in qs:
+            add(query=q, type="unresolved_identity", facet="natural", answerability="not_answerable_identity_unresolved", gold_source_id=sid, gold_doc_id=None, acceptable_source_ids=[],
+                evidence=[], expected_status="unresolved_identity", notes="card has conflicting or unresolved status (7C)")
+    for sid in sorted(set(derived_unresolved) - set(UNRESOLVED_QUERIES)):
+        problems.append((sid, None, "card identity is unresolved/conflicting but has no hand-written unresolved_identity query", ""))
     for q in OUT_OF_DOMAIN:
         add(query=q, type="out_of_domain", facet="natural", answerability="out_of_domain", gold_source_id=None, gold_doc_id=None, acceptable_source_ids=[], evidence=[], expected_status="out_of_domain",
             notes="")
@@ -299,8 +308,9 @@ def main() -> int:
 
     counts = {t: sum(1 for q in queries if q["type"] == t) for t in ("answerable", "absent_detail", "not_ingested", "unresolved_identity", "out_of_domain")}
     payload = {
-        "schema_version": 1, "description": "Phase 9 fresh retrieval and end-to-end evaluation queries (frozen before any retrieval was run)",
-        "authorship": {"authored_by": "AI coding assistant, after reading the 7 ingested pages; not a human domain expert; no LLM generation at runtime",
+        "schema_version": 1, "description": "Phase 9 fresh retrieval and end-to-end evaluation queries (frozen before any retrieval was run; re-frozen 2026-10-12 "
+                       "after the corpus grew from 7 to 28 ingested pages - not_ingested/unresolved_identity categories re-derived from the current state)",
+        "authorship": {"authored_by": "AI coding assistant, after reading the seven originally ingested pages; not a human domain expert; no LLM generation at runtime",
                        "caveat": "answerable queries were written with the page text in view (not blind); a human domain review has not been done; per-page n is 5-14, so every rate has a wide interval",
                        "fresh_check": "no exact/near duplicate (Jaccard<0.8) of any Phase 4/5/7F/8 query; no query shares more than 3 contiguous words with any card text",
                        "written_before_evaluation": True, "labels_changed_after_retrieval": False, "authored_on": AUTHORED_ON},

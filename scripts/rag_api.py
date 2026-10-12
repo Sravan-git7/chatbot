@@ -58,7 +58,11 @@ def build_csp(frame_ancestors: Optional[str] = None) -> str:
 
 CSP = build_csp()
 
-# Per-IP rate limiting tracker: client_ip -> list of epoch timestamps
+# Deprecated: the per-IP sliding window is now stored per application instance
+# (``app.state.rag["ip_request_history"]``) so that independent app instances -
+# including test clients - never share rate-limit state. This module-level dict
+# is kept only for backward compatibility with older imports; the API no longer
+# reads or writes it.
 ip_request_history: Dict[str, List[float]] = {}
 
 
@@ -246,6 +250,9 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         "error": None,
         "shutting_down": False,
         "active_requests": 0,
+        # Per-IP sliding-window rate limiting tracker: client_ip -> list of epoch
+        # timestamps. Stored per app so separate instances never share state.
+        "ip_request_history": {},
     }
     in_flight_lock = threading.Lock()
 
@@ -348,7 +355,8 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
                     return JSONResponse(error_body("model_unavailable", "Ollama model is not reachable.", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
         except Exception as e:
             return JSONResponse(error_body("service_not_ready", f"Readiness check failed: {e}", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
-        # Match /api/health: count pages actually admitted/searchable, not the 29 registered topic cards (25/29 today).
+        # Match /api/health: count pages actually admitted/searchable, not the 29 registered topic cards (28/29 today;
+        # only M2C-18 stays un-ingested under its conflicting identity).
         # This is a reporting correction only; the readiness checks above and the response shape stay unchanged.
         return JSONResponse({"status": "ok", "ready": True, "topics": len(svc.pipeline.cards),
                              "pages_available": svc.info()["pages_available"], "generator": svc.generator_name},
@@ -379,7 +387,8 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
                 now_sec = time.time()
                 window_start = now_sec - 60.0
                 with in_flight_lock:
-                    hist = ip_request_history.setdefault(client_ip, [])
+                    history = state["ip_request_history"]
+                    hist = history.setdefault(client_ip, [])
                     hist[:] = [t for t in hist if t > window_start]
                     if len(hist) >= limit_per_min:
                         return JSONResponse(

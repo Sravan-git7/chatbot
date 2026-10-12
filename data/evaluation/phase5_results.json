@@ -27,7 +27,7 @@
     "retrieval_units_sha256": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
     "independent_queries_sha256": "1ce1306db646981b68245d75a1a912310ad3d760d90593bd005dfcc3500956e4",
     "phase4_questions_sha256": "530f2d96cb644518fcbe20b0082870b01a08fd4bc524c10d208fd9c72c1ceb36",
-    "phase4_results_sha256": "c1b0459779eeb0ac0f4dbf26c6e128302c91ad7be0aa75db6a2d657e45c49206",
+    "phase4_results_sha256": "0225891eca74a596480ffea32760cf3947c9acee7cd468a646a756e6cbeecb9c",
     "source_corpus_sha256": "0ee5cb8bda192250a14acdde95617e15b71f6fd803847fe25bae9999ea7e9e76",
     "collection": "sap_m2c_card_v1",
     "collection_metadata": {

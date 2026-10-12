@@ -28,8 +28,8 @@
       "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
       "selected_card": "M2C-01",
       "gold_card": "M2C-07",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
+      "identity_status": "corrected_identity",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4",
       "retrieved_chunk_ids": [],
       "context_chunk_ids": [],
       "answer": null,
@@ -41,77 +41,35 @@
     },
     {
       "mode": "router_rank1",
-      "id": "P9-003",
-      "query": "Which business function does the AMI monitoring pushbutton for meter readings require?",
-      "type": "answerable",
-      "facet": "entity",
-      "expected_status": "answered",
-      "actual_status": "answered",
-      "reason_code": null,
-      "selected_card": "M2C-05",
-      "gold_card": "M2C-07",
-      "identity_status": "corrected_identity",
-      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
-      "retrieved_chunk_ids": [
-        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
-        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003",
-        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
-        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001"
-      ],
-      "context_chunk_ids": [
-        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
-        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
-        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
-        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
-      ],
-      "answer": "If you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1) and you are in an advanced metering infrastructure, you can find more information under Advanced Metering Infrastructure . [S1]",
-      "cited_chunk_ids": [
-        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000"
-      ],
-      "expected_evidence": [
-        "you have activated the business function Advanced Metering Infrastructure 2 ( ISU_AMI_2 )"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-004",
-      "query": "Can I ask a smart meter for a reading right now from the result list?",
-      "type": "answerable",
-      "facet": "natural",
-      "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-06",
-      "gold_card": "M2C-07",
-      "identity_status": "identified_not_local",
-      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "you can use the pushbutton to request on-demand meter readings"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
       "id": "P9-007",
       "query": "What can I display when I enter contracts, installations or business partners?",
       "type": "answerable",
       "facet": "multi_concept",
       "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CONFLICTING_IDENTITY",
-      "selected_card": "M2C-18",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-17",
       "gold_card": "M2C-07",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "resolved_local_page",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001"
+      ],
+      "context_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+      ],
+      "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]",
+      "cited_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+      ],
       "expected_evidence": [
         "you can display billing orders, meter reading orders, or meter reading results"
       ],
@@ -124,62 +82,24 @@
       "type": "answerable",
       "facet": "section_specific",
       "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-08",
+      "actual_status": "insufficient_context",
+      "reason_code": "GENERATOR_REFUSED",
+      "selected_card": "M2C-10",
       "gold_card": "M2C-07",
       "identity_status": "identified_not_local",
-      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "effective_page": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/001",
+        "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000"
+      ],
+      "context_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+        "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/001"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
         "Automatic Monitoring of Meter Reading Data"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-009",
-      "query": "Which function shows how many IDocs from the discrete upload failed to post?",
-      "type": "answerable",
-      "facet": "terminology_mismatch",
-      "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-16",
-      "gold_card": "M2C-07",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "IDocs from category ISU_MR_UPLOAD"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-010",
-      "query": "quantity determination trigger",
-      "type": "answerable",
-      "facet": "keyword",
-      "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-27",
-      "gold_card": "M2C-07",
-      "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "For meter readings with a quantity determination trigger"
       ],
       "failure_category": "wrong_route"
     },
@@ -190,14 +110,25 @@
       "type": "answerable",
       "facet": "natural",
       "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-20",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-24",
       "gold_card": "M2C-07",
       "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "effective_page": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
@@ -239,144 +170,34 @@
     },
     {
       "mode": "router_rank1",
-      "id": "P9-014",
-      "query": "How can I get the system to run follow-up actions automatically after readings come in?",
-      "type": "answerable",
-      "facet": "terminology_mismatch",
-      "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-10",
-      "gold_card": "M2C-07",
-      "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "trigger automatic follow-on processing for selected meter reading orders"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-017",
-      "query": "LO-MD material master device category",
-      "type": "answerable",
-      "facet": "entity",
-      "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CARD_IDENTITY_ONLY",
-      "selected_card": "M2C-01",
-      "gold_card": "M2C-05",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "Name in IS-U: Device Category; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Material"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-018",
-      "query": "goods issue and return delivery",
-      "type": "answerable",
-      "facet": "rare_term",
-      "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-27",
-      "gold_card": "M2C-05",
-      "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "Goods Issue and Return Delivery from MM-IM"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
       "id": "P9-021",
       "query": "When I receive meters into stock, what record does SAP create?",
       "type": "answerable",
       "facet": "terminology_mismatch",
       "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-10",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-07",
       "gold_card": "M2C-05",
       "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "retrieved_chunk_ids": [
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000"
+      ],
+      "context_chunk_ids": [
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
         "Equipment records are created automatically during goods receipt"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-022",
-      "query": "Which related documentation is listed for planning and posting goods receipts?",
-      "type": "answerable",
-      "facet": "section_specific",
-      "expected_status": "answered",
-      "actual_status": "insufficient_context",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
-      "selected_card": "M2C-14",
-      "gold_card": "M2C-05",
-      "identity_status": "identified_not_local",
-      "effective_page": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [
-        "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/000",
-        "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/001",
-        "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/002",
-        "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/004",
-        "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/005"
-      ],
-      "context_chunk_ids": [
-        "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/000",
-        "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/001",
-        "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/002",
-        "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/004"
-      ],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "MM-IM: Planning Goods Receipts , Goods Receipts for Purchase Orders"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-024",
-      "query": "ISU_AMI_1 advanced metering",
-      "type": "answerable",
-      "facet": "entity",
-      "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-06",
-      "gold_card": "M2C-05",
-      "identity_status": "identified_not_local",
-      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "If you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1)"
       ],
       "failure_category": "wrong_route"
     },
@@ -389,10 +210,10 @@
       "expected_status": "answered",
       "actual_status": "out_of_domain",
       "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-18",
+      "selected_card": "M2C-17",
       "gold_card": "M2C-24",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
+      "identity_status": "resolved_local_page",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
       "retrieved_chunk_ids": [],
       "context_chunk_ids": [],
       "answer": null,
@@ -409,14 +230,18 @@
       "type": "answerable",
       "facet": "natural",
       "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
       "selected_card": "M2C-20",
       "gold_card": "M2C-24",
       "identity_status": "identified_not_local",
       "effective_page": "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c/000"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c/000"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
@@ -431,40 +256,22 @@
       "type": "answerable",
       "facet": "rare_term",
       "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-18",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-11",
       "gold_card": "M2C-24",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "identity_status": "identified_not_local",
+      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+      ],
+      "context_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
         "sample function module FKK_SAMPLE_3000"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-028",
-      "query": "Can the opening installment be a fixed share of the whole plan amount?",
-      "type": "answerable",
-      "facet": "paraphrase",
-      "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-23",
-      "gold_card": "M2C-24",
-      "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "The system can calculate the first installment as a percentage of the total amount of the installment plan."
       ],
       "failure_category": "wrong_route"
     },
@@ -489,28 +296,6 @@
         "specify whether this remaining amount is to be included in the first or last installment, or in a new installment"
       ],
       "failure_category": "ood_or_context_gate_false_refusal"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-031",
-      "query": "Distribute indicator",
-      "type": "answerable",
-      "facet": "entity",
-      "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-25",
-      "gold_card": "M2C-24",
-      "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "If you set the Distribute indicator, the interest and charges are distributed over all of the due dates."
-      ],
-      "failure_category": "wrong_route"
     },
     {
       "mode": "router_rank1",
@@ -552,14 +337,24 @@
       "type": "answerable",
       "facet": "natural",
       "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+      "actual_status": "insufficient_context",
+      "reason_code": "GENERATOR_REFUSED",
       "selected_card": "M2C-25",
       "gold_card": "M2C-24",
       "identity_status": "identified_not_local",
       "effective_page": "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/000",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/001",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/002",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/003",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/004"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/000",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/001",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/002"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
@@ -574,14 +369,24 @@
       "type": "answerable",
       "facet": "section_specific",
       "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-20",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-21",
       "gold_card": "M2C-24",
       "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "effective_page": "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d",
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/003",
+        "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/000",
+        "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/002",
+        "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/001"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/000",
+        "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/001",
+        "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/002",
+        "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/003"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
@@ -596,14 +401,18 @@
       "type": "answerable",
       "facet": "rare_term",
       "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
       "selected_card": "M2C-20",
       "gold_card": "M2C-24",
       "identity_status": "identified_not_local",
       "effective_page": "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c/000"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c/000"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
@@ -618,42 +427,31 @@
       "type": "answerable",
       "facet": "multi_concept",
       "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-23",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-24",
       "gold_card": "M2C-24",
       "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "effective_page": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
         "installment amount * number of installments + remaining amount = total of original receivable"
       ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-042",
-      "query": "IS-U-BI contract billing prerequisite",
-      "type": "answerable",
-      "facet": "entity",
-      "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-12",
-      "gold_card": "M2C-14",
-      "identity_status": "identified_not_local",
-      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "Billing documents from the Contract Billing (IS-U-BI) component"
-      ],
-      "failure_category": "wrong_route"
+      "failure_category": "ood_or_context_gate_false_refusal"
     },
     {
       "mode": "router_rank1",
@@ -684,16 +482,24 @@
       "type": "answerable",
       "facet": "multi_concept",
       "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CARD_IDENTITY_ONLY",
+      "actual_status": "answered",
+      "reason_code": null,
       "selected_card": "M2C-13",
       "gold_card": "M2C-14",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "identified_not_local",
+      "effective_page": "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b",
+      "retrieved_chunk_ids": [
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+      ],
+      "context_chunk_ids": [
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+      ],
+      "answer": "Therefore, they charge budget billing amounts during the supply period instead of the actual amount owed, in order to remain solvent. [S1]\nYou specify the budget billing amounts and the dates that are due in the budget billing plan. [S1]\nThe budget billing plan is the basis for charging budget billing amounts. [S1]",
+      "cited_chunk_ids": [
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000"
+      ],
       "expected_evidence": [
         "you use either the Partial Bill Creation function or the Budget Billing Request function"
       ],
@@ -734,43 +540,29 @@
     },
     {
       "mode": "router_rank1",
-      "id": "P9-046",
-      "query": "What happens after the bill has been sent to the recipient?",
-      "type": "answerable",
-      "facet": "section_specific",
-      "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-27",
-      "gold_card": "M2C-14",
-      "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "the bill amounts are paid, regulated by the utility company, or dunned"
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
       "id": "P9-048",
       "query": "What comes after billing in the end-to-end utilities revenue cycle?",
       "type": "answerable",
       "facet": "sibling_ambiguous",
       "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CARD_IDENTITY_ONLY",
+      "actual_status": "answered",
+      "reason_code": null,
       "selected_card": "M2C-13",
       "gold_card": "M2C-14",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "identified_not_local",
+      "effective_page": "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b",
+      "retrieved_chunk_ids": [
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+      ],
+      "context_chunk_ids": [
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+      ],
+      "answer": "Utility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. [S1]",
+      "cited_chunk_ids": [
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000"
+      ],
       "expected_evidence": [
         "Once the contract is billed, you start bill creation."
       ],
@@ -783,106 +575,24 @@
       "type": "answerable",
       "facet": "keyword",
       "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CARD_IDENTITY_ONLY",
+      "actual_status": "answered",
+      "reason_code": null,
       "selected_card": "M2C-01",
       "gold_card": "M2C-17",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "corrected_identity",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+      ],
+      "context_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+      ],
+      "answer": "There are two different types of master data: [S1]\nBusiness master data includes: [S1]\nBusiness master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]",
+      "cited_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+      ],
       "expected_evidence": [
         "This component enables you to create and manage contract account master data."
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-050",
-      "query": "Can one business partner have several contract accounts?",
-      "type": "answerable",
-      "facet": "natural",
-      "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CONFLICTING_IDENTITY",
-      "selected_card": "M2C-18",
-      "gold_card": "M2C-17",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "You can assign more than one contract account to a given business partner."
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-051",
-      "query": "IS-T contract account one business partner",
-      "type": "answerable",
-      "facet": "entity",
-      "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CONFLICTING_IDENTITY",
-      "selected_card": "M2C-18",
-      "gold_card": "M2C-17",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "In this component, a contract account can be assigned to one business partner only."
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-053",
-      "query": "one-time accounts",
-      "type": "answerable",
-      "facet": "rare_term",
-      "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CONFLICTING_IDENTITY",
-      "selected_card": "M2C-18",
-      "gold_card": "M2C-17",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "This does not apply to one-time accounts."
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-054",
-      "query": "Which processes can be defined per business partner in the account master record?",
-      "type": "answerable",
-      "facet": "multi_concept",
-      "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-03",
-      "gold_card": "M2C-17",
-      "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "the procedures that apply when posting and processing the line items of a given contract account"
       ],
       "failure_category": "wrong_route"
     },
@@ -893,14 +603,18 @@
       "type": "answerable",
       "facet": "terminology_mismatch",
       "expected_status": "answered",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-29",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-20",
       "gold_card": "M2C-17",
       "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "effective_page": "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c",
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c/000"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c/000"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
@@ -915,40 +629,24 @@
       "type": "answerable",
       "facet": "natural",
       "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CARD_IDENTITY_ONLY",
+      "actual_status": "answered",
+      "reason_code": null,
       "selected_card": "M2C-01",
       "gold_card": "M2C-17",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "corrected_identity",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+      ],
+      "context_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+      ],
+      "answer": "There are two different types of master data: [S1]\nBusiness master data includes: [S1]\nBusiness master data includes: [S1]\n- Business partner [S1]\nTechnical master data includes: [S1]\n- Grid [S1]",
+      "cited_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+      ],
       "expected_evidence": [
         "The system logs changes to master data."
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-058",
-      "query": "Explain the purpose of a contract account.",
-      "type": "answerable",
-      "facet": "sibling_ambiguous",
-      "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CONFLICTING_IDENTITY",
-      "selected_card": "M2C-18",
-      "gold_card": "M2C-17",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "each business partner posting is assigned to one business partner and to one contract account"
       ],
       "failure_category": "wrong_route"
     },
@@ -976,73 +674,33 @@
     },
     {
       "mode": "router_rank1",
-      "id": "P9-061",
-      "query": "rate creation calculations",
-      "type": "answerable",
-      "facet": "keyword",
-      "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-12",
-      "gold_card": "M2C-11",
-      "identity_status": "identified_not_local",
-      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "All calculations required for rate creation are made during schema execution."
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-062",
-      "query": "Can master data change while a billing period is running?",
-      "type": "answerable",
-      "facet": "paraphrase",
-      "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-12",
-      "gold_card": "M2C-11",
-      "identity_status": "identified_not_local",
-      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "All master and billing master data can change during a billing period."
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
       "id": "P9-063",
       "query": "How does billing work for utilities?",
       "type": "answerable",
       "facet": "sibling_ambiguous",
       "expected_status": "answered",
-      "actual_status": "insufficient_context",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
-      "selected_card": "M2C-11",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-13",
       "gold_card": "M2C-11",
       "identity_status": "identified_not_local",
-      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "effective_page": "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b",
       "retrieved_chunk_ids": [
-        "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
       ],
       "context_chunk_ids": [
-        "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
       ],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "answer": "Utility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. [S1]",
+      "cited_chunk_ids": [
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000"
+      ],
       "expected_evidence": [
         "You can process all known period categories using different billing procedures."
       ],
-      "failure_category": "ood_or_context_gate_false_refusal"
+      "failure_category": "wrong_route"
     },
     {
       "mode": "router_rank1",
@@ -1053,10 +711,10 @@
       "expected_status": "answered",
       "actual_status": "out_of_domain",
       "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-29",
+      "selected_card": "M2C-02",
       "gold_card": "M2C-02",
       "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4",
+      "effective_page": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4",
       "retrieved_chunk_ids": [],
       "context_chunk_ids": [],
       "answer": null,
@@ -1064,7 +722,7 @@
       "expected_evidence": [
         "create a final bill for the move-out customer"
       ],
-      "failure_category": "wrong_route"
+      "failure_category": "ood_or_context_gate_false_refusal"
     },
     {
       "mode": "router_rank1",
@@ -1073,16 +731,30 @@
       "type": "answerable",
       "facet": "keyword",
       "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+      "actual_status": "answered",
+      "reason_code": null,
       "selected_card": "M2C-03",
       "gold_card": "M2C-02",
       "identity_status": "identified_not_local",
       "effective_page": "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "retrieved_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/000",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/006",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/007",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/001"
+      ],
+      "context_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/000",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/006",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/007"
+      ],
+      "answer": "From the move-in, you can also trigger the charges levied at the commencement of a utility service, as well as a welcome letter to the customer. [S1]\n- The data required to print the welcome letter is incomplete [S2]",
+      "cited_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/000",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003"
+      ],
       "expected_evidence": [
         "create a welcome letter for the move-in customer"
       ],
@@ -1112,41 +784,30 @@
     },
     {
       "mode": "router_rank1",
-      "id": "P9-067",
-      "query": "Which component produces confirmation letters for customers who move out?",
-      "type": "answerable",
-      "facet": "paraphrase",
-      "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-04",
-      "gold_card": "M2C-02",
-      "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [
-        "Letters to the customer, such as welcome letters and move-out confirmations are created using the Print Workbench component."
-      ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
       "id": "P9-068",
       "query": "What happens to the installation when a new customer replaces the old one?",
       "type": "answerable",
       "facet": "section_specific",
       "expected_status": "answered",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+      "actual_status": "insufficient_context",
+      "reason_code": "GENERATOR_REFUSED",
       "selected_card": "M2C-03",
       "gold_card": "M2C-02",
       "identity_status": "identified_not_local",
       "effective_page": "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "retrieved_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/000",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/001",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/002",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/006"
+      ],
+      "context_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/000",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/001",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/002",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [
@@ -1161,39 +822,33 @@
       "type": "answerable",
       "facet": "multi_concept",
       "expected_status": "answered",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CONFLICTING_IDENTITY",
-      "selected_card": "M2C-18",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-17",
       "gold_card": "M2C-02",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "resolved_local_page",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001"
+      ],
+      "context_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+      ],
+      "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]",
+      "cited_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+      ],
       "expected_evidence": [
         "you can create a business partner and contract account for the customer, or select existing ones."
       ],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-070",
-      "query": "What is the maximum number of rows the EL31 result list can display?",
-      "type": "absent_detail",
-      "facet": "natural",
-      "expected_status": "insufficient_context",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-09",
-      "gold_card": "M2C-07",
-      "identity_status": "identified_not_local",
-      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
       "failure_category": "wrong_route"
     },
     {
@@ -1203,38 +858,31 @@
       "type": "absent_detail",
       "facet": "natural",
       "expected_status": "insufficient_context",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-09",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-05",
       "gold_card": "M2C-05",
-      "identity_status": "identified_not_local",
-      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "corrected_identity",
+      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000"
+      ],
+      "context_chunk_ids": [
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
+      ],
+      "answer": "The device, device category, and device number in the Utilities Industry (IS-U) component correspond to equipment, material, and the serial number in the standard system: [S2]\nName in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment [S2]\nName in IS-U: Device Number; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Serial Number [S2]\nThe device is identified by a unique material and serial number combination to distinguish it from other pieces of material that may have the same serial number. [S3]",
+      "cited_chunk_ids": [
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002"
+      ],
       "expected_evidence": [],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-073",
-      "query": "Which transaction creates a brand-new device in IS-U?",
-      "type": "absent_detail",
-      "facet": "natural",
-      "expected_status": "insufficient_context",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-03",
-      "gold_card": "M2C-05",
-      "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "wrong_route"
+      "failure_category": "failure_to_abstain"
     },
     {
       "mode": "router_rank1",
@@ -1276,16 +924,29 @@
       "type": "absent_detail",
       "facet": "natural",
       "expected_status": "insufficient_context",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-23",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-25",
       "gold_card": "M2C-24",
       "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "effective_page": "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/000",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/001",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/003",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/002"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/000",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/001",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/003",
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/004"
+      ],
+      "answer": "In the SAP Easy Access screen, choose Account > Installment Plan > Display (transaction FPR3 ). [S1]\nNote If you use the input help for the Installment Plan Number field, for selection using the installment plan history, the system displays only active installment plans as standard. [S1]\nIf you also want to display deactivated installment plans, you have to specify a deactivation reason on the tab page Installment Plan History . [S1]",
+      "cited_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/000"
+      ],
       "expected_evidence": [],
       "failure_category": "wrong_route"
     },
@@ -1324,43 +985,37 @@
     },
     {
       "mode": "router_rank1",
-      "id": "P9-077",
-      "query": "How many hours does bill creation take for large volumes?",
-      "type": "absent_detail",
-      "facet": "natural",
-      "expected_status": "insufficient_context",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-16",
-      "gold_card": "M2C-14",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "wrong_route"
-    },
-    {
-      "mode": "router_rank1",
       "id": "P9-078",
       "query": "What is the maximum number of contracts one contract account can hold?",
       "type": "absent_detail",
       "facet": "natural",
       "expected_status": "insufficient_context",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CONFLICTING_IDENTITY",
-      "selected_card": "M2C-18",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-17",
       "gold_card": "M2C-17",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "resolved_local_page",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001"
+      ],
+      "context_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+      ],
+      "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nSimilarly, a single contract account can be assigned to more than one business partner. [S2]",
+      "cited_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+      ],
       "expected_evidence": [],
-      "failure_category": "wrong_route"
+      "failure_category": "failure_to_abstain"
     },
     {
       "mode": "router_rank1",
@@ -1369,16 +1024,63 @@
       "type": "absent_detail",
       "facet": "natural",
       "expected_status": "insufficient_context",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CONFLICTING_IDENTITY",
-      "selected_card": "M2C-18",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-17",
       "gold_card": "M2C-17",
-      "identity_status": "conflicting_identity",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "resolved_local_page",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003"
+      ],
+      "context_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+      ],
+      "answer": "In the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]\nContract accounts tend to be managed on an open item basis. [S3]",
+      "cited_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+      ],
+      "expected_evidence": [],
+      "failure_category": "failure_to_abstain"
+    },
+    {
+      "mode": "router_rank1",
+      "id": "P9-080",
+      "query": "Which transaction runs a billing simulation?",
+      "type": "absent_detail",
+      "facet": "natural",
+      "expected_status": "insufficient_context",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-12",
+      "gold_card": "M2C-11",
+      "identity_status": "identified_not_local",
+      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/002"
+      ],
+      "context_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/002",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003"
+      ],
+      "answer": "Scheduling determines how often billing runs occur. [S2]\n- Simulation/Billing Simulation [S4]\n- Billing Simulation [S4]",
+      "cited_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003"
+      ],
       "expected_evidence": [],
       "failure_category": "wrong_route"
     },
@@ -1389,18 +1091,24 @@
       "type": "absent_detail",
       "facet": "natural",
       "expected_status": "insufficient_context",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CARD_IDENTITY_ONLY",
-      "selected_card": "M2C-13",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-11",
       "gold_card": "M2C-11",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "identity_status": "identified_not_local",
+      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+      ],
+      "context_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+      ],
+      "answer": "Different billing periods are included in the various billing procedures. [S1]\nYou can process all known period categories using different billing procedures. [S1]",
+      "cited_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+      ],
       "expected_evidence": [],
-      "failure_category": "wrong_route"
+      "failure_category": "failure_to_abstain"
     },
     {
       "mode": "router_rank1",
@@ -1409,16 +1117,30 @@
       "type": "absent_detail",
       "facet": "natural",
       "expected_status": "insufficient_context",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-03",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-04",
       "gold_card": "M2C-02",
       "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "effective_page": "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/000",
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/005",
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/003",
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/002",
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/004"
+      ],
+      "context_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/000",
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/002",
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/003",
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/005"
+      ],
+      "answer": "During the move-out transaction, you execute most of the activities required to cancel the customer's supply of utilities services. [S1]\nMove-out processing stops the active payment plans. [S1]\nThis shows how far you have completed move-out processing for this contract. [S2]",
+      "cited_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/000",
+        "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/002"
+      ],
       "expected_evidence": [],
       "failure_category": "wrong_route"
     },
@@ -1429,188 +1151,126 @@
       "type": "absent_detail",
       "facet": "natural",
       "expected_status": "insufficient_context",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+      "actual_status": "answered",
+      "reason_code": null,
       "selected_card": "M2C-03",
       "gold_card": "M2C-02",
       "identity_status": "identified_not_local",
       "effective_page": "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "retrieved_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/007",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/006",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/001",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/005"
+      ],
+      "context_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/001",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/006",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/007"
+      ],
+      "answer": "When you save the move-in, the initial move-in or move-in/out screen reappears. [S3]\nYou can also save your changes in the move-in without leaving the move-in screen. [S4]",
+      "cited_chunk_ids": [
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/006",
+        "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/007"
+      ],
       "expected_evidence": [],
       "failure_category": "wrong_route"
     },
     {
       "mode": "router_rank1",
-      "id": "P9-085",
-      "query": "How do I terminate a customer's supply contract when they leave?",
-      "type": "not_ingested",
+      "id": "P9-084",
+      "query": "What is the structure of a contract account as a business object?",
+      "type": "unresolved_identity",
       "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-04",
-      "gold_card": "M2C-04",
-      "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-087",
-      "query": "How does the system estimate a reading when no actual value is available?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-08",
-      "gold_card": "M2C-08",
-      "identity_status": "identified_not_local",
-      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-090",
-      "query": "How do I schedule billing to run automatically in the background?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-12",
-      "gold_card": "M2C-12",
-      "identity_status": "identified_not_local",
-      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-092",
-      "query": "How can I check payments that arrived on the bank statement?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-19",
-      "gold_card": "M2C-19",
-      "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-096",
-      "query": "What is an installment plan and why would a utility offer one?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
+      "expected_status": "unresolved_identity",
       "actual_status": "answered",
       "reason_code": null,
-      "selected_card": "M2C-24",
-      "gold_card": "M2C-23",
-      "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "selected_card": "M2C-17",
+      "gold_card": "M2C-18",
+      "identity_status": "resolved_local_page",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
       "retrieved_chunk_ids": [
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/000",
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001"
       ],
       "context_chunk_ids": [
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/000",
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006"
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
       ],
-      "answer": "You create an installment plan when both of the following apply: [S1]\n- There are one or more open items on the contract account of a business partner. [S1]\nThe system can calculate the first installment as a percentage of the total amount of the installment plan. [S2]\nTo do this, under: Business Transactions > Deferral and Installment Plan > Define Categories for Installment Plan , specify a percentage and activate the enhancement under Business Transactions > Deferral and Installment Plan > Activate Installment Plan Enhancement for Surcharges/Interest . [S2]",
+      "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]",
       "cited_chunk_ids": [
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/000",
-        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003"
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
       ],
       "expected_evidence": [],
       "failure_category": "failure_to_abstain"
     },
     {
       "mode": "router_rank1",
-      "id": "P9-098",
-      "query": "How does the system send reminders for unpaid invoices?",
-      "type": "not_ingested",
+      "id": "P9-085",
+      "query": "Which object model classes represent a contract account in SAP?",
+      "type": "unresolved_identity",
       "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CARD_IDENTITY_ONLY",
-      "selected_card": "M2C-16",
-      "gold_card": "M2C-26",
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
+      "expected_status": "unresolved_identity",
+      "actual_status": "answered",
+      "reason_code": null,
+      "selected_card": "M2C-17",
+      "gold_card": "M2C-18",
+      "identity_status": "resolved_local_page",
+      "effective_page": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001"
+      ],
+      "context_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+      ],
+      "answer": "You assign contract objects to a contract account for which relevant taxes are levied. [S4]\nIf different taxes are levied for a contract object, you can make assignments to several contract accounts. [S4]\nContract Accounts Receivable and Payable under Contract Object. [S4]",
+      "cited_chunk_ids": [
+        "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+      ],
       "expected_evidence": [],
-      "failure_category": "wrong_route"
+      "failure_category": "failure_to_abstain"
     },
     {
       "mode": "router_rank1",
-      "id": "P9-101",
-      "query": "How do I reconnect a customer after payment is received?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-29",
-      "gold_card": "M2C-29",
-      "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "router_rank1",
-      "id": "P9-126",
-      "query": "How do I read the dial of my home electricity meter?",
+      "id": "P9-089",
+      "query": "How do I add a new app tile to the Fiori launchpad?",
       "type": "out_of_domain",
       "facet": "natural",
       "expected_status": "out_of_domain",
-      "actual_status": "page_not_ingested",
-      "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-      "selected_card": "M2C-06",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-24",
       "gold_card": null,
       "identity_status": "identified_not_local",
-      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "effective_page": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/002"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [],
@@ -1618,19 +1278,148 @@
     },
     {
       "mode": "router_rank1",
-      "id": "P9-127",
+      "id": "P9-090",
+      "query": "How do I set up a SAP SuccessFactors performance review?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "expected_status": "out_of_domain",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-24",
+      "gold_card": null,
+      "identity_status": "identified_not_local",
+      "effective_page": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/002",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/001",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/001",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/002",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004"
+      ],
+      "answer": null,
+      "cited_chunk_ids": [],
+      "expected_evidence": [],
+      "failure_category": "other_status_mismatch"
+    },
+    {
+      "mode": "router_rank1",
+      "id": "P9-097",
+      "query": "What is the current price of gold?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "expected_status": "out_of_domain",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-12",
+      "gold_card": null,
+      "identity_status": "identified_not_local",
+      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/002",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000"
+      ],
+      "context_chunk_ids": [
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/002",
+        "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003"
+      ],
+      "answer": null,
+      "cited_chunk_ids": [],
+      "expected_evidence": [],
+      "failure_category": "other_status_mismatch"
+    },
+    {
+      "mode": "router_rank1",
+      "id": "P9-099",
+      "query": "How do I create a workflow in Salesforce?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "expected_status": "out_of_domain",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-24",
+      "gold_card": null,
+      "identity_status": "identified_not_local",
+      "effective_page": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+      "retrieved_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/002",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/001"
+      ],
+      "context_chunk_ids": [
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/002",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+        "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+      ],
+      "answer": null,
+      "cited_chunk_ids": [],
+      "expected_evidence": [],
+      "failure_category": "other_status_mismatch"
+    },
+    {
+      "mode": "router_rank1",
+      "id": "P9-100",
+      "query": "How do I read the dial of my home electricity meter?",
+      "type": "out_of_domain",
+      "facet": "natural",
+      "expected_status": "out_of_domain",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+      "selected_card": "M2C-07",
+      "gold_card": null,
+      "identity_status": "identified_not_local",
+      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+      "retrieved_chunk_ids": [
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001"
+      ],
+      "context_chunk_ids": [
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+        "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
+      ],
+      "answer": null,
+      "cited_chunk_ids": [],
+      "expected_evidence": [],
+      "failure_category": "other_status_mismatch"
+    },
+    {
+      "mode": "router_rank1",
+      "id": "P9-101",
       "query": "How can I reduce my household electricity bill?",
       "type": "out_of_domain",
       "facet": "natural",
       "expected_status": "out_of_domain",
-      "actual_status": "unresolved_identity",
-      "reason_code": "CARD_IDENTITY_ONLY",
+      "actual_status": "insufficient_context",
+      "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
       "selected_card": "M2C-13",
       "gold_card": null,
-      "identity_status": "card_identity_only",
-      "effective_page": "None/None",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
+      "identity_status": "identified_not_local",
+      "effective_page": "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b",
+      "retrieved_chunk_ids": [
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+      ],
+      "context_chunk_ids": [
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+        "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+      ],
       "answer": null,
       "cited_chunk_ids": [],
       "expected_evidence": [],
@@ -2188,126 +1977,6 @@
       ],
       "expected_evidence": [],
       "failure_category": "failure_to_abstain"
-    },
-    {
-      "mode": "oracle",
-      "id": "P9-085",
-      "query": "How do I terminate a customer's supply contract when they leave?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-04",
-      "gold_card": "M2C-04",
-      "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "oracle",
-      "id": "P9-087",
-      "query": "How does the system estimate a reading when no actual value is available?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-08",
-      "gold_card": "M2C-08",
-      "identity_status": "identified_not_local",
-      "effective_page": "2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "oracle",
-      "id": "P9-090",
-      "query": "How do I schedule billing to run automatically in the background?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-12",
-      "gold_card": "M2C-12",
-      "identity_status": "identified_not_local",
-      "effective_page": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "oracle",
-      "id": "P9-092",
-      "query": "How can I check payments that arrived on the bank statement?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-19",
-      "gold_card": "M2C-19",
-      "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "oracle",
-      "id": "P9-098",
-      "query": "How does the system send reminders for unpaid invoices?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-26",
-      "gold_card": "M2C-26",
-      "identity_status": "identified_not_local",
-      "effective_page": "9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
-    },
-    {
-      "mode": "oracle",
-      "id": "P9-101",
-      "query": "How do I reconnect a customer after payment is received?",
-      "type": "not_ingested",
-      "facet": "natural",
-      "expected_status": "page_not_ingested",
-      "actual_status": "out_of_domain",
-      "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-      "selected_card": "M2C-29",
-      "gold_card": "M2C-29",
-      "identity_status": "identified_not_local",
-      "effective_page": "f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4",
-      "retrieved_chunk_ids": [],
-      "context_chunk_ids": [],
-      "answer": null,
-      "cited_chunk_ids": [],
-      "expected_evidence": [],
-      "failure_category": "ood_gate_false_positive"
     }
   ]
 }

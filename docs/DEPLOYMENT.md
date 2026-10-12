@@ -45,7 +45,7 @@ The default static directory is `web/dist`. If the build is deployed elsewhere, 
 
 ### Supply prebuilt stores
 
-Provision the complete card store at `data/vector_store/` and the complete page store at `data/vector_store/page_collection/` (for example, mount them as persistent read-only runtime assets). Keep each Chroma database with the collection it was built for. Expected collection names are `sap_m2c_card_v1` and `sap_pages_v1`; both use cosine distance. Current manifests describe 29 card vectors and 106 page chunks, but those counts must be verified against the supplied databases.
+Provision the complete card store at `data/vector_store/` and the complete page store at `data/vector_store/page_collection/` (for example, mount them as persistent read-only runtime assets). Keep each Chroma database with the collection it was built for. Expected collection names are `sap_m2c_card_v1` and `sap_pages_v1`; both use cosine distance. Current manifests describe 29 card vectors and 113 page chunks, but those counts must be verified against the supplied databases.
 
 Startup now fails readiness for missing/empty required stores, an incompatible page distance metric, or card/page vector counts inconsistent with their collection metadata when those counts are present. These checks do **not** recompute every embedding/content hash or prove that a supplied store matches every checked-in manifest field. Validate the build manifests and corpus fingerprints when promoting replacement indexes.
 
@@ -87,7 +87,7 @@ Systemd’s `EnvironmentFile=` is another option. Protect any real `.env` file a
 | `M2C_MODEL_DIR` | unset | Optional absolute path to local model files; no download is attempted. |
 | `RAG_STATIC_DIR` | repository `web/dist` | Built frontend directory served by the API. |
 | `RAG_CORS_ORIGINS` | localhost development origins | Comma-separated exact origins. Same-origin UI/API deployment does not require cross-origin access. If a separate browser origin is deliberately used, configure CORS and account for the current UI Content-Security-Policy `connect-src 'self'`; the frontend is designed for same-origin API requests. |
-| `RAG_ENABLE_DEBUG` | `1` | Allows debug payloads when requested. Set to `0` for production unless debug output is explicitly needed. |
+| `RAG_ENABLE_DEBUG` | `0` | Allows debug payloads when requested (`1`/`true`/`yes`). Off by default; debug requests are rejected with 403 while it is off. Leave it at `0` in production unless debug output is explicitly needed. |
 | `RAG_CSP_FRAME_ANCESTORS` | `'none'` | CSP `frame-ancestors` value; the CSP keyword needs its literal apostrophes (for example, `'none'`). |
 | `SURA_LOG_QUERIES` | `0` | Hashes query text in structured request logs by default. Set to `1` only if raw-query logging is approved. |
 | `SURA_RATE_LIMIT_PER_MINUTE` | `60` | Per-client-IP request limit; `0` disables that limit. A separate in-process concurrency cap is also enforced. |

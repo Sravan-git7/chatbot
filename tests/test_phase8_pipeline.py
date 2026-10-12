@@ -120,16 +120,20 @@ class PipelineStatusTests(unittest.TestCase):
         ctx_markers = {i["marker"] for i in a["debug"]["context"]["items"]}
         self.assertTrue({s["marker"] for s in a["citations"]["answer_sources"]} <= ctx_markers)
 
-    def test_not_ingested_page_is_never_answered(self):
-        stub = _Stub("should never be called")
-        a = self.ans("How do I create a budget billing plan?", ["M2C-15"], generator=stub)
-        self.assertEqual(a["status"], "page_not_ingested")
-        self.assertEqual(a["reason_code"], "PAGE_IDENTIFIED_NO_LOCAL_CONTENT")
-        self.assertIsNone(a["answer"])
-        self.assertEqual(a["topic"]["source_id"], "M2C-13")
-        self.assertEqual(a["citations"]["answer_sources"], [])
-        self.assertEqual(stub.prompts, [])
-        self.assertNotIn("generation", a["debug"])
+    def test_formerly_missing_page_is_now_answered_from_its_own_ingested_page(self):
+        # 2026-10-12: M2C-15's page was ingested, so this query goes through the real chain instead of the
+        # not-ingested gate. The not-ingested status itself stays covered: the corpus invariant below proves M2C-18
+        # is the only card without local content, and the M2C-18 test right after this one exercises that path.
+        import page_corpus as PC
+        cards = {c["source_id"]: c for c in json.loads((PC.CORPUS_DIR / "manifest.json").read_text(encoding="utf-8"))["cards"]}
+        self.assertEqual(sorted(s for s, c in cards.items() if c["corpus_status"] != PC.S_INGESTED), ["M2C-18"])
+        a = self.ans("How do I create a budget billing plan?", ["M2C-15"])
+        self.assertEqual(a["status"], "answered", a["reason_code"])
+        self.assertEqual(a["routing"]["selected_source_id"], "M2C-15")
+        ident = a["debug"]["identity"]
+        self.assertTrue(a["citations"]["answer_sources"])
+        self.assertTrue(all((s["guide_id"], s["page_id"]) == (ident["effective_guide_id"], ident["effective_page_id"])
+                            for s in a["citations"]["answer_sources"]))
 
     def test_explicitly_named_m2c18_conflict_is_unavailable_without_generation(self):
         stub = _Stub("must not be used")
@@ -142,11 +146,16 @@ class PipelineStatusTests(unittest.TestCase):
         self.assertEqual(stub.prompts, [])
         self.assertTrue(any("conflicting identity" in n for n in a["citations"]["notes"]))
 
-    def test_identity_only_cards_are_unresolved(self):
+    def test_formerly_identity_only_cards_now_answer_from_machine_checked_pages(self):
+        # 2026-10-12: the Topic 1 map-root correction is machine-checked (M2C-01) and guide 021b182b is
+        # machine-verified (M2C-13), so both cards carry an effective identity page and answer from it.
+        expected_pages = {"M2C-01": ("e52c8ee6197147ec97dfc2eb8c46a3ad", "e369ce53118d4308e10000000a174cb4"),
+                          "M2C-13": ("021b182b0c47416c8fafed67ebfd78a9", "c1a5e8aee73440ee971a768af5b9ea1b")}
         for sid, q in (("M2C-01", "How are business partner premise and installation related?"), ("M2C-13", "How is a budget billing plan set up for a customer?")):
             a = self.ans(q, [sid])
-            self.assertEqual(a["status"], "unresolved_identity", sid)
-            self.assertEqual(a["citations"]["answer_sources"], [])
+            self.assertEqual(a["status"], "answered", (sid, a["reason_code"]))
+            self.assertTrue(a["citations"]["answer_sources"], sid)
+            self.assertTrue(all((s["guide_id"], s["page_id"]) == expected_pages[sid] for s in a["citations"]["answer_sources"]), sid)
 
     def test_out_of_domain_by_lexical_gate(self):
         a = self.ans("What is the capital of France?", ["M2C-24"])

@@ -277,9 +277,11 @@ EDGE_CARDS = {
     "M2C-14": "needs_review",
     "M2C-18": "conflicting_identity",
     "M2C-23": "needs_review",
-    "M2C-01": "card_identity_only",
-    "M2C-13": "card_identity_only",
-    "M2C-16": "card_identity_only",
+    # 2026-10-12: guide 021b182b became machine-verified; M2C-13/16 resolve under their own guide, and the Topic 1
+    # map-root correction for M2C-01 is machine-checked against the repo-local official response.
+    "M2C-01": "corrected_identity (Topic 1 map-root correction)",
+    "M2C-13": "identified_not_local",
+    "M2C-16": "identified_not_local",
     "M2C-17": "resolved_local_page",
     "M2C-07": "identified_not_local (url_only in the 7A join)",
 }
@@ -498,10 +500,13 @@ def evaluate(vector_dir: Path = C.VECTOR_DIR, backend: Any = None, ctx: Optional
         check("no ranking difference to explain (0 differing queries)", not pc["phase4"]["differing_queries"] and not pc["phase5"]["differing_queries"]),
         check("citation layer: every selected card has its URL byte-identical, review flag == needs_review, card_route never used text",
               all(layers[n]["citation"][k] for n in layers for k in layers[n]["citation"])),
-        check("edge cases: M2C-05 corrected, M2C-18 conflicting without effective guide, M2C-01/13/16 card_identity_only, M2C-17 resolved_local_page",
+        check("edge cases: M2C-05 and M2C-01 corrected to their machine-checked guides, M2C-18 conflicting without effective guide, M2C-13/16 identified under their own verified guide, M2C-17 resolved_local_page",
               edges["M2C-05"]["forced"]["route_state_7c"] == "corrected_identity" and edges["M2C-18"]["forced"]["route_state_7c"] == "conflicting_identity"
               and edges["M2C-18"]["forced"]["effective_guide_id"] is None
-              and all(edges[s]["forced"]["route_state_7c"] == "card_identity_only" for s in ("M2C-01", "M2C-13", "M2C-16"))
+              and edges["M2C-01"]["forced"]["route_state_7c"] == "corrected_identity"
+              and edges["M2C-01"]["forced"]["effective_guide_id"] == "e52c8ee6197147ec97dfc2eb8c46a3ad"
+              and all(edges[s]["forced"]["route_state_7c"] == "identified_not_local" for s in ("M2C-13", "M2C-16"))
+              and all(edges[s]["forced"]["effective_guide_id"] == "021b182b0c47416c8fafed67ebfd78a9" for s in ("M2C-13", "M2C-16"))
               and edges["M2C-17"]["forced"]["route_state_7c"] == "resolved_local_page"),
         check("edge cases: M2C-14, 18, 23 carry the review flag; no other edge card does",
               all(edges[s]["forced"]["citation"]["review_flag"] for s in ("M2C-14", "M2C-18", "M2C-23"))

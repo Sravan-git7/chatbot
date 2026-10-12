@@ -16,10 +16,11 @@
    "router_top1_misses": 52,
    "rule_counts": {
     "vocabulary_mismatch": 8,
-    "other_ranking": 12,
+    "other_ranking": 15,
     "near_tie_embedding": 5,
-    "identity_hub": 11,
-    "sibling_ambiguity": 16
+    "identity_hub": 6,
+    "sibling_ambiguity": 17,
+    "query_underspecified": 1
    },
    "gold_page_not_available": 46,
    "ood_gate_on_correct_top1": [],
@@ -136,7 +137,7 @@
     },
     {
      "id": "P12-022",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-17",
      "gold_rank": 9,
      "top1": "M2C-01",
@@ -147,7 +148,7 @@
     },
     {
      "id": "P12-023",
-     "rule": "identity_hub",
+     "rule": "sibling_ambiguity",
      "gold": "M2C-11",
      "gold_rank": 3,
      "top1": "M2C-13",
@@ -202,7 +203,7 @@
     },
     {
      "id": "P12-031",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-14",
      "gold_rank": 10,
      "top1": "M2C-13",
@@ -510,7 +511,7 @@
     },
     {
      "id": "P12-078",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-11",
      "gold_rank": 4,
      "top1": "M2C-16",
@@ -587,7 +588,7 @@
     },
     {
      "id": "P12-099",
-     "rule": "identity_hub",
+     "rule": "query_underspecified",
      "gold": "M2C-14",
      "gold_rank": 3,
      "top1": "M2C-13",
@@ -599,16 +600,16 @@
    ]
   },
   "phase8": {
-   "n_with_gold_card": 80,
-   "router_top1_misses": 43,
+   "n_with_gold_card": 72,
+   "router_top1_misses": 41,
    "rule_counts": {
-    "sibling_ambiguity": 15,
-    "other_ranking": 7,
-    "near_tie_embedding": 5,
+    "sibling_ambiguity": 14,
+    "other_ranking": 11,
+    "near_tie_embedding": 6,
     "vocabulary_mismatch": 2,
-    "identity_hub": 14
+    "identity_hub": 8
    },
-   "gold_page_not_available": 35,
+   "gold_page_not_available": 33,
    "ood_gate_on_correct_top1": [],
    "misses": [
     {
@@ -778,7 +779,7 @@
     },
     {
      "id": "P8-033",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-14",
      "gold_rank": 11,
      "top1": "M2C-13",
@@ -789,7 +790,7 @@
     },
     {
      "id": "P8-036",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-14",
      "gold_rank": 6,
      "top1": "M2C-13",
@@ -855,7 +856,7 @@
     },
     {
      "id": "P8-044",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-17",
      "gold_rank": 3,
      "top1": "M2C-01",
@@ -877,7 +878,7 @@
     },
     {
      "id": "P8-047",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-11",
      "gold_rank": 6,
      "top1": "M2C-13",
@@ -899,7 +900,7 @@
     },
     {
      "id": "P8-050",
-     "rule": "identity_hub",
+     "rule": "sibling_ambiguity",
      "gold": "M2C-11",
      "gold_rank": 2,
      "top1": "M2C-13",
@@ -910,7 +911,7 @@
     },
     {
      "id": "P8-051",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-11",
      "gold_rank": 4,
      "top1": "M2C-13",
@@ -1061,42 +1062,20 @@
      "type": "absent_detail",
      "category": null,
      "gold_page_not_available": true
-    },
-    {
-     "id": "P8-071",
-     "rule": "sibling_ambiguity",
-     "gold": "M2C-26",
-     "gold_rank": 2,
-     "top1": "M2C-27",
-     "margin": 0.049,
-     "type": "not_ingested",
-     "category": null,
-     "gold_page_not_available": true
-    },
-    {
-     "id": "P8-074",
-     "rule": "sibling_ambiguity",
-     "gold": "M2C-21",
-     "gold_rank": 2,
-     "top1": "M2C-20",
-     "margin": 0.0065,
-     "type": "not_ingested",
-     "category": null,
-     "gold_page_not_available": true
     }
    ]
   },
   "phase9": {
-   "n_with_gold_card": 111,
-   "router_top1_misses": 60,
+   "n_with_gold_card": 85,
+   "router_top1_misses": 56,
    "rule_counts": {
-    "identity_hub": 20,
-    "sibling_ambiguity": 16,
-    "other_ranking": 15,
-    "vocabulary_mismatch": 7,
-    "near_tie_embedding": 2
+    "vocabulary_mismatch": 9,
+    "sibling_ambiguity": 13,
+    "identity_hub": 10,
+    "other_ranking": 19,
+    "near_tie_embedding": 5
    },
-   "gold_page_not_available": 50,
+   "gold_page_not_available": 46,
    "ood_gate_on_correct_top1": [
     {
      "id": "P9-030",
@@ -1108,7 +1087,7 @@
    "misses": [
     {
      "id": "P9-002",
-     "rule": "identity_hub",
+     "rule": "vocabulary_mismatch",
      "gold": "M2C-07",
      "gold_rank": 23,
      "top1": "M2C-01",
@@ -1163,7 +1142,7 @@
     },
     {
      "id": "P9-009",
-     "rule": "identity_hub",
+     "rule": "vocabulary_mismatch",
      "gold": "M2C-07",
      "gold_rank": 9,
      "top1": "M2C-16",
@@ -1218,7 +1197,7 @@
     },
     {
      "id": "P9-017",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-05",
      "gold_rank": 2,
      "top1": "M2C-01",
@@ -1394,7 +1373,7 @@
     },
     {
      "id": "P9-044",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-14",
      "gold_rank": 4,
      "top1": "M2C-13",
@@ -1416,7 +1395,7 @@
     },
     {
      "id": "P9-048",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-14",
      "gold_rank": 5,
      "top1": "M2C-13",
@@ -1427,7 +1406,7 @@
     },
     {
      "id": "P9-049",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-17",
      "gold_rank": 2,
      "top1": "M2C-01",
@@ -1493,7 +1472,7 @@
     },
     {
      "id": "P9-057",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-17",
      "gold_rank": 20,
      "top1": "M2C-01",
@@ -1658,7 +1637,7 @@
     },
     {
      "id": "P9-077",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-14",
      "gold_rank": 4,
      "top1": "M2C-16",
@@ -1691,7 +1670,7 @@
     },
     {
      "id": "P9-081",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-11",
      "gold_rank": 4,
      "top1": "M2C-13",
@@ -1721,50 +1700,6 @@
      "type": "absent_detail",
      "category": "natural",
      "gold_page_not_available": true
-    },
-    {
-     "id": "P9-088",
-     "rule": "sibling_ambiguity",
-     "gold": "M2C-09",
-     "gold_rank": 2,
-     "top1": "M2C-08",
-     "margin": 0.0179,
-     "type": "not_ingested",
-     "category": "natural",
-     "gold_page_not_available": true
-    },
-    {
-     "id": "P9-094",
-     "rule": "sibling_ambiguity",
-     "gold": "M2C-21",
-     "gold_rank": 2,
-     "top1": "M2C-20",
-     "margin": 0.0316,
-     "type": "not_ingested",
-     "category": "natural",
-     "gold_page_not_available": true
-    },
-    {
-     "id": "P9-096",
-     "rule": "sibling_ambiguity",
-     "gold": "M2C-23",
-     "gold_rank": 2,
-     "top1": "M2C-24",
-     "margin": 0.0119,
-     "type": "not_ingested",
-     "category": "natural",
-     "gold_page_not_available": true
-    },
-    {
-     "id": "P9-098",
-     "rule": "identity_hub",
-     "gold": "M2C-26",
-     "gold_rank": 19,
-     "top1": "M2C-16",
-     "margin": 0.1636,
-     "type": "not_ingested",
-     "category": "natural",
-     "gold_page_not_available": true
     }
    ]
   },
@@ -1772,12 +1707,12 @@
    "n_with_gold_card": 65,
    "router_top1_misses": 42,
    "rule_counts": {
-    "vocabulary_mismatch": 8,
-    "near_tie_embedding": 5,
-    "other_ranking": 12,
+    "vocabulary_mismatch": 9,
+    "near_tie_embedding": 6,
+    "other_ranking": 15,
     "sibling_ambiguity": 8,
-    "identity_hub": 8,
-    "query_underspecified": 1
+    "query_underspecified": 1,
+    "identity_hub": 3
    },
    "gold_page_not_available": 37,
    "ood_gate_on_correct_top1": [],
@@ -1883,7 +1818,7 @@
     },
     {
      "id": "P10D-011",
-     "rule": "identity_hub",
+     "rule": "vocabulary_mismatch",
      "gold": "M2C-05",
      "gold_rank": 11,
      "top1": "M2C-16",
@@ -1993,7 +1928,7 @@
     },
     {
      "id": "P10D-024",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-14",
      "gold_rank": 11,
      "top1": "M2C-13",
@@ -2048,7 +1983,7 @@
     },
     {
      "id": "P10D-031",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-17",
      "gold_rank": 3,
      "top1": "M2C-01",
@@ -2114,7 +2049,7 @@
     },
     {
      "id": "P10D-039",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-11",
      "gold_rank": 4,
      "top1": "M2C-16",
@@ -2202,7 +2137,7 @@
     },
     {
      "id": "P10D-052",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-11",
      "gold_rank": 4,
      "top1": "M2C-13",
@@ -2251,10 +2186,10 @@
    "router_top1_misses": 34,
    "rule_counts": {
     "sibling_ambiguity": 9,
-    "vocabulary_mismatch": 7,
-    "identity_hub": 12,
-    "near_tie_embedding": 2,
-    "other_ranking": 4
+    "vocabulary_mismatch": 9,
+    "near_tie_embedding": 4,
+    "identity_hub": 7,
+    "other_ranking": 5
    },
    "gold_page_not_available": 26,
    "ood_gate_on_correct_top1": [],
@@ -2283,7 +2218,7 @@
     },
     {
      "id": "P10T-003",
-     "rule": "identity_hub",
+     "rule": "vocabulary_mismatch",
      "gold": "M2C-07",
      "gold_rank": 27,
      "top1": "M2C-01",
@@ -2371,7 +2306,7 @@
     },
     {
      "id": "P10T-018",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-24",
      "gold_rank": 4,
      "top1": "M2C-13",
@@ -2382,7 +2317,7 @@
     },
     {
      "id": "P10T-019",
-     "rule": "identity_hub",
+     "rule": "vocabulary_mismatch",
      "gold": "M2C-24",
      "gold_rank": 14,
      "top1": "M2C-13",
@@ -2426,7 +2361,7 @@
     },
     {
      "id": "P10T-027",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-17",
      "gold_rank": 4,
      "top1": "M2C-01",
@@ -2481,7 +2416,7 @@
     },
     {
      "id": "P10T-032",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-11",
      "gold_rank": 4,
      "top1": "M2C-01",
@@ -2639,11 +2574,11 @@
    "n_with_gold_card": 65,
    "router_top1_misses": 37,
    "rule_counts": {
-    "sibling_ambiguity": 15,
-    "vocabulary_mismatch": 3,
-    "other_ranking": 6,
-    "identity_hub": 11,
-    "near_tie_embedding": 2
+    "sibling_ambiguity": 16,
+    "vocabulary_mismatch": 4,
+    "other_ranking": 9,
+    "near_tie_embedding": 4,
+    "identity_hub": 4
    },
    "gold_page_not_available": 31,
    "ood_gate_on_correct_top1": [],
@@ -2716,7 +2651,7 @@
     },
     {
      "id": "P111H-014",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-05",
      "gold_rank": 2,
      "top1": "M2C-01",
@@ -2837,7 +2772,7 @@
     },
     {
      "id": "P111H-030",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-14",
      "gold_rank": 6,
      "top1": "M2C-13",
@@ -2848,7 +2783,7 @@
     },
     {
      "id": "P111H-031",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-14",
      "gold_rank": 6,
      "top1": "M2C-13",
@@ -2870,7 +2805,7 @@
     },
     {
      "id": "P111H-033",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-17",
      "gold_rank": 2,
      "top1": "M2C-01",
@@ -2892,7 +2827,7 @@
     },
     {
      "id": "P111H-035",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-11",
      "gold_rank": 4,
      "top1": "M2C-13",
@@ -3024,7 +2959,7 @@
     },
     {
      "id": "P111H-052",
-     "rule": "identity_hub",
+     "rule": "vocabulary_mismatch",
      "gold": "M2C-17",
      "gold_rank": 22,
      "top1": "M2C-01",
@@ -3046,7 +2981,7 @@
     },
     {
      "id": "P111H-055",
-     "rule": "identity_hub",
+     "rule": "sibling_ambiguity",
      "gold": "M2C-14",
      "gold_rank": 3,
      "top1": "M2C-16",
@@ -3061,11 +2996,11 @@
    "n_with_gold_card": 44,
    "router_top1_misses": 24,
    "rule_counts": {
-    "other_ranking": 5,
-    "near_tie_embedding": 4,
+    "other_ranking": 8,
+    "near_tie_embedding": 5,
     "vocabulary_mismatch": 1,
-    "identity_hub": 10,
-    "sibling_ambiguity": 4
+    "identity_hub": 4,
+    "sibling_ambiguity": 6
    },
    "gold_page_not_available": 19,
    "ood_gate_on_correct_top1": [],
@@ -3138,7 +3073,7 @@
     },
     {
      "id": "P111H2-018",
-     "rule": "identity_hub",
+     "rule": "near_tie_embedding",
      "gold": "M2C-14",
      "gold_rank": 4,
      "top1": "M2C-13",
@@ -3149,7 +3084,7 @@
     },
     {
      "id": "P111H2-019",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-14",
      "gold_rank": 10,
      "top1": "M2C-13",
@@ -3204,7 +3139,7 @@
     },
     {
      "id": "P111H2-024",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-11",
      "gold_rank": 5,
      "top1": "M2C-13",
@@ -3215,7 +3150,7 @@
     },
     {
      "id": "P111H2-025",
-     "rule": "identity_hub",
+     "rule": "sibling_ambiguity",
      "gold": "M2C-11",
      "gold_rank": 3,
      "top1": "M2C-13",
@@ -3270,7 +3205,7 @@
     },
     {
      "id": "P111H2-030",
-     "rule": "identity_hub",
+     "rule": "sibling_ambiguity",
      "gold": "M2C-14",
      "gold_rank": 2,
      "top1": "M2C-16",
@@ -3292,7 +3227,7 @@
     },
     {
      "id": "P111H2-035",
-     "rule": "identity_hub",
+     "rule": "other_ranking",
      "gold": "M2C-11",
      "gold_rank": 4,
      "top1": "M2C-16",
@@ -3394,11 +3329,11 @@
   }
  },
  "total_rule_counts": {
-  "vocabulary_mismatch": 36,
-  "other_ranking": 61,
-  "near_tie_embedding": 25,
-  "identity_hub": 88,
+  "vocabulary_mismatch": 42,
+  "other_ranking": 82,
+  "near_tie_embedding": 35,
+  "identity_hub": 44,
   "sibling_ambiguity": 85,
-  "query_underspecified": 1
+  "query_underspecified": 2
  }
 }

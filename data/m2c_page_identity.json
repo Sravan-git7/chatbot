@@ -10,8 +10,8 @@
       "card_title": "Utilities Master Data",
       "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
       "disagreements": [],
-      "effective_guide_id": null,
-      "effective_page_id": null,
+      "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+      "effective_page_id": "e369ce53118d4308e10000000a174cb4",
       "evidence": [
         {
           "authority": "card_record",
@@ -27,32 +27,39 @@
         },
         {
           "authority": "guide_registrations.json",
-          "capture_check": null,
-          "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "549661e6541f403ea56196782e040bcc",
+              "c1a5e8aee73440ee971a768af5b9ea1b"
+            ],
+            "matching_saved_responses": [
+              "data/toc/021b182b0c47416c8fafed67ebfd78a9.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
           "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
           "kind": "guide_registration",
-          "numeric_deliverable_id_declared": null,
-          "reasons": [
-            "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
-          ],
+          "numeric_deliverable_id_declared": "0",
+          "reasons": [],
           "registry_json_status": "unresolved",
           "role": "card_guide",
-          "toc_file": null,
-          "toc_loio_equals_guide_id": null,
-          "toc_node_count": 0,
-          "verification_basis": null,
-          "verified": false
+          "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 731,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
         },
         {
           "authority": "saved_toc_membership",
           "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
           "kind": "toc_membership",
           "page_is_landing_page": false,
-          "page_is_toc_node": false,
+          "page_is_toc_node": true,
           "role": "card_guide",
-          "toc_available": false,
-          "toc_file": null,
-          "toc_node_count": 0
+          "toc_available": true,
+          "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+          "toc_node_count": 731
         },
         {
           "authority": "non_authoritative_hint",
@@ -61,12 +68,77 @@
           ],
           "kind": "page_is_map_root_of_saved_toc",
           "meaning": "map root of that guide's saved TOC; card guide segment differs; NOT confirmed"
+        },
+        {
+          "authority": "topic_correction",
+          "card_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "card_page_id": "0a6ace53118d4308e10000000a174cb4",
+          "card_page_is_map_root": true,
+          "card_record_modified": false,
+          "correction_matches_card_ids": true,
+          "evidence_items": [
+            {
+              "current_page_id": "e369ce53118d4308e10000000a174cb4",
+              "file": "data/page_corpus/fetched/1_40374631_e369ce53118d4308e10000000a174cb4.json",
+              "kind": "saved_response",
+              "machine_checked": true,
+              "note": "repo-local official SAP Help pagecontent response (deliverable_id=40374631): deliverable.loio=e52c8ee6197147ec97dfc2eb8c46a3ad ('Master Data', 2025.002), buildableMapLoio=0a6ace53118d4308e10000000a174cb4 (the original card #1 page id), currentPage.loio=e369ce53118d4308e10000000a174cb4 == resolved_page_id; supersedes the machine-unreachable external capture path D:/sap-captures/M2C-01.json recorded when this correction was first written",
+              "numeric_deliverable_id": "",
+              "passed": true,
+              "response_loio": "e52c8ee6197147ec97dfc2eb8c46a3ad"
+            },
+            {
+              "date": "2026-10-11",
+              "kind": "user_reported_browser",
+              "machine_checked": false,
+              "machine_verified_declared": false,
+              "observation": "Opening original card URL .../021b182b.../0a6ace53....html in browser resolves to Master Data guide .../e52c8ee6.../e369ce53....html",
+              "passed": null
+            }
+          ],
+          "kind": "correction",
+          "machine_checked_saved_response_passed": true,
+          "reason": "SAP resolves the original card #1 map-root URL (under 021b182b.../0a6ace53...) to guide e52c8ee6197147ec97dfc2eb8c46a3ad ('Master Data'); 0a6ace53... is that guide's DITA buildableMapLoio and e369ce53... is its declared landing page and first TOC root.",
+          "registers_a_guide": false,
+          "resolved_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "resolved_page_id": "e369ce53118d4308e10000000a174cb4",
+          "resolved_page_is_landing_page": true,
+          "topic_id": 1
+        },
+        {
+          "authority": "guide_registrations.json",
+          "capture_check": null,
+          "declared_verification": null,
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "kind": "guide_registration",
+          "numeric_deliverable_id_declared": "40374631",
+          "reasons": [
+            "verified through data/guide_registry.json local-evidence entry (master_data.json); not in guide_registrations.json"
+          ],
+          "registry_json_status": "verified",
+          "role": "corrected_guide",
+          "toc_file": "master_data.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 81,
+          "verification_basis": "registry_local_evidence_only",
+          "verified": true
+        },
+        {
+          "authority": "saved_toc_membership",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "kind": "toc_membership",
+          "page_is_landing_page": true,
+          "page_is_toc_node": true,
+          "role": "corrected_guide",
+          "toc_available": true,
+          "toc_file": "master_data.json",
+          "toc_node_count": 81
         }
       ],
       "local_page_available": false,
       "local_page_path": null,
-      "resolution_basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
-      "resolution_status": "card_identity_only",
+      "resolution_basis": "CORRECTION_APPLIED_PAGE_IN_CORRECTED_GUIDE_TOC",
+      "resolution_status": "corrected_identity",
       "source_id": "M2C-01"
     },
     {
@@ -100,7 +172,8 @@
               "8082ce53118d4308e10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json",
+              "data/toc/f4a255a5de524e3992155767996fb1fd.json"
             ],
             "passed": true
           },
@@ -166,7 +239,8 @@
               "8082ce53118d4308e10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json",
+              "data/toc/f4a255a5de524e3992155767996fb1fd.json"
             ],
             "passed": true
           },
@@ -232,7 +306,8 @@
               "8082ce53118d4308e10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json",
+              "data/toc/f4a255a5de524e3992155767996fb1fd.json"
             ],
             "passed": true
           },
@@ -293,21 +368,28 @@
         },
         {
           "authority": "guide_registrations.json",
-          "capture_check": null,
-          "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "549661e6541f403ea56196782e040bcc",
+              "c1a5e8aee73440ee971a768af5b9ea1b"
+            ],
+            "matching_saved_responses": [
+              "data/toc/021b182b0c47416c8fafed67ebfd78a9.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
           "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
           "kind": "guide_registration",
-          "numeric_deliverable_id_declared": null,
-          "reasons": [
-            "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
-          ],
+          "numeric_deliverable_id_declared": "0",
+          "reasons": [],
           "registry_json_status": "unresolved",
           "role": "card_guide",
-          "toc_file": null,
-          "toc_loio_equals_guide_id": null,
-          "toc_node_count": 0,
-          "verification_basis": null,
-          "verified": false
+          "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 731,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
         },
         {
           "authority": "saved_toc_membership",
@@ -316,9 +398,9 @@
           "page_is_landing_page": false,
           "page_is_toc_node": false,
           "role": "card_guide",
-          "toc_available": false,
-          "toc_file": null,
-          "toc_node_count": 0
+          "toc_available": true,
+          "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+          "toc_node_count": 731
         },
         {
           "authority": "topic_correction",
@@ -383,7 +465,8 @@
               "4d76765c1e012b8ae10000000a42189b"
             ],
             "matching_saved_responses": [
-              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json",
+              "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json"
             ],
             "passed": true
           },
@@ -449,7 +532,8 @@
               "4d76765c1e012b8ae10000000a42189b"
             ],
             "matching_saved_responses": [
-              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json",
+              "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json"
             ],
             "passed": true
           },
@@ -515,7 +599,8 @@
               "4d76765c1e012b8ae10000000a42189b"
             ],
             "matching_saved_responses": [
-              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json",
+              "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json"
             ],
             "passed": true
           },
@@ -581,7 +666,8 @@
               "4d76765c1e012b8ae10000000a42189b"
             ],
             "matching_saved_responses": [
-              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json",
+              "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json"
             ],
             "passed": true
           },
@@ -647,7 +733,8 @@
               "4d76765c1e012b8ae10000000a42189b"
             ],
             "matching_saved_responses": [
-              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+              "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json",
+              "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json"
             ],
             "passed": true
           },
@@ -713,7 +800,8 @@
               "8082ce53118d4308e10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json",
+              "data/toc/f4a255a5de524e3992155767996fb1fd.json"
             ],
             "passed": true
           },
@@ -779,7 +867,8 @@
               "147bce53118d4308e10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json"
+              "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json",
+              "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json"
             ],
             "passed": true
           },
@@ -845,7 +934,8 @@
               "147bce53118d4308e10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json"
+              "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json",
+              "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json"
             ],
             "passed": true
           },
@@ -889,8 +979,8 @@
       "card_title": "Budget Billing Plan",
       "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
       "disagreements": [],
-      "effective_guide_id": null,
-      "effective_page_id": null,
+      "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "effective_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
       "evidence": [
         {
           "authority": "card_record",
@@ -906,38 +996,45 @@
         },
         {
           "authority": "guide_registrations.json",
-          "capture_check": null,
-          "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "549661e6541f403ea56196782e040bcc",
+              "c1a5e8aee73440ee971a768af5b9ea1b"
+            ],
+            "matching_saved_responses": [
+              "data/toc/021b182b0c47416c8fafed67ebfd78a9.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
           "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
           "kind": "guide_registration",
-          "numeric_deliverable_id_declared": null,
-          "reasons": [
-            "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
-          ],
+          "numeric_deliverable_id_declared": "0",
+          "reasons": [],
           "registry_json_status": "unresolved",
           "role": "card_guide",
-          "toc_file": null,
-          "toc_loio_equals_guide_id": null,
-          "toc_node_count": 0,
-          "verification_basis": null,
-          "verified": false
+          "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 731,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
         },
         {
           "authority": "saved_toc_membership",
           "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
           "kind": "toc_membership",
           "page_is_landing_page": false,
-          "page_is_toc_node": false,
+          "page_is_toc_node": true,
           "role": "card_guide",
-          "toc_available": false,
-          "toc_file": null,
-          "toc_node_count": 0
+          "toc_available": true,
+          "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+          "toc_node_count": 731
         }
       ],
       "local_page_available": false,
       "local_page_path": null,
-      "resolution_basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
-      "resolution_status": "card_identity_only",
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
       "source_id": "M2C-13"
     },
     {
@@ -975,7 +1072,8 @@
               "cc7bce53118d4308e10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json"
+              "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json",
+              "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json"
             ],
             "passed": true
           },
@@ -1049,7 +1147,8 @@
               "cc7bce53118d4308e10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json"
+              "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json",
+              "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json"
             ],
             "passed": true
           },
@@ -1101,8 +1200,8 @@
       "card_title": "Periodic Billing and Invoicing Analysis",
       "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
       "disagreements": [],
-      "effective_guide_id": null,
-      "effective_page_id": null,
+      "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+      "effective_page_id": "549661e6541f403ea56196782e040bcc",
       "evidence": [
         {
           "authority": "card_record",
@@ -1118,38 +1217,45 @@
         },
         {
           "authority": "guide_registrations.json",
-          "capture_check": null,
-          "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+          "capture_check": {
+            "captured_page_ids_declared": [
+              "549661e6541f403ea56196782e040bcc",
+              "c1a5e8aee73440ee971a768af5b9ea1b"
+            ],
+            "matching_saved_responses": [
+              "data/toc/021b182b0c47416c8fafed67ebfd78a9.json"
+            ],
+            "passed": true
+          },
+          "declared_verification": "response_loio_verified",
           "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
           "kind": "guide_registration",
-          "numeric_deliverable_id_declared": null,
-          "reasons": [
-            "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
-          ],
+          "numeric_deliverable_id_declared": "0",
+          "reasons": [],
           "registry_json_status": "unresolved",
           "role": "card_guide",
-          "toc_file": null,
-          "toc_loio_equals_guide_id": null,
-          "toc_node_count": 0,
-          "verification_basis": null,
-          "verified": false
+          "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+          "toc_loio_equals_guide_id": true,
+          "toc_node_count": 731,
+          "verification_basis": "registration_response_loio_verified_and_machine_checked",
+          "verified": true
         },
         {
           "authority": "saved_toc_membership",
           "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
           "kind": "toc_membership",
           "page_is_landing_page": false,
-          "page_is_toc_node": false,
+          "page_is_toc_node": true,
           "role": "card_guide",
-          "toc_available": false,
-          "toc_file": null,
-          "toc_node_count": 0
+          "toc_available": true,
+          "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+          "toc_node_count": 731
         }
       ],
       "local_page_available": false,
       "local_page_path": null,
-      "resolution_basis": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
-      "resolution_status": "card_identity_only",
+      "resolution_basis": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
+      "resolution_status": "identified_not_local",
       "source_id": "M2C-16"
     },
     {
@@ -1258,7 +1364,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1352,7 +1459,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1418,7 +1526,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1484,7 +1593,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1550,7 +1660,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1620,7 +1731,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1686,7 +1798,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1752,7 +1865,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1818,7 +1932,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1884,7 +1999,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -1950,7 +2066,8 @@
               "790dc5536a51204be10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+              "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+              "data/toc/9442486404b54071b4ebeab6a16628e7.json"
             ],
             "passed": true
           },
@@ -2016,7 +2133,8 @@
               "8082ce53118d4308e10000000a174cb4"
             ],
             "matching_saved_responses": [
-              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+              "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json",
+              "data/toc/f4a255a5de524e3992155767996fb1fd.json"
             ],
             "passed": true
           },
@@ -2057,15 +2175,24 @@
   ],
   "guide_verification_summary": {
     "guides_known": 7,
-    "guides_verified": 6,
-    "saved_tocs_in_data_toc": 5,
-    "saved_tocs_readable": 6,
-    "verified_by_registration": 5,
+    "guides_verified": 7,
+    "saved_tocs_in_data_toc": 6,
+    "saved_tocs_readable": 7,
+    "verified_by_registration": 6,
     "verified_by_registry_local_evidence_only": 1
   },
   "guides": [
     {
-      "capture_check": null,
+      "capture_check": {
+        "captured_page_ids_declared": [
+          "549661e6541f403ea56196782e040bcc",
+          "c1a5e8aee73440ee971a768af5b9ea1b"
+        ],
+        "matching_saved_responses": [
+          "data/toc/021b182b0c47416c8fafed67ebfd78a9.json"
+        ],
+        "passed": true
+      },
       "card_topic_ids": [
         1,
         5,
@@ -2073,19 +2200,26 @@
         16
       ],
       "corrected_topic_ids_resolving_here": [],
-      "declared_verification": "unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (see evidence); own deliverable_id/buildNo unknown",
+      "declared_verification": "response_loio_verified",
       "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
-      "numeric_deliverable_id_declared": null,
-      "reasons": [
-        "registration verification is 'unresolved: numeric_id 40374657 belongs to guide 2ac7fe29 (s', not 'response_loio_verified'"
-      ],
+      "numeric_deliverable_id_declared": "0",
+      "reasons": [],
       "registry_json_status": "unresolved",
-      "toc": null,
-      "toc_file": null,
-      "toc_loio_equals_guide_id": null,
-      "toc_node_count": 0,
-      "verification_basis": null,
-      "verified": false
+      "toc": {
+        "file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+        "landing_page": "266dce53118d4308e10000000a174cb4",
+        "map_root_page_id": "436dce53118d4308e10000000a174cb4",
+        "node_count": 731,
+        "title": "Utilities",
+        "toc_loio": "021b182b0c47416c8fafed67ebfd78a9",
+        "toc_loio_equals_guide_id": true,
+        "unique_page_ids": 730
+      },
+      "toc_file": "data/toc/021b182b0c47416c8fafed67ebfd78a9.json",
+      "toc_loio_equals_guide_id": true,
+      "toc_node_count": 731,
+      "verification_basis": "registration_response_loio_verified_and_machine_checked",
+      "verified": true
     },
     {
       "capture_check": {
@@ -2093,7 +2227,8 @@
           "4d76765c1e012b8ae10000000a42189b"
         ],
         "matching_saved_responses": [
-          "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json"
+          "captured_responses/3_40374657_4d76765c1e012b8ae10000000a42189b.json",
+          "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json"
         ],
         "passed": true
       },
@@ -2133,7 +2268,8 @@
           "790dc5536a51204be10000000a174cb4"
         ],
         "matching_saved_responses": [
-          "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json"
+          "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+          "data/toc/9442486404b54071b4ebeab6a16628e7.json"
         ],
         "passed": true
       },
@@ -2178,7 +2314,8 @@
           "cc7bce53118d4308e10000000a174cb4"
         ],
         "matching_saved_responses": [
-          "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json"
+          "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json",
+          "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json"
         ],
         "passed": true
       },
@@ -2213,7 +2350,9 @@
       "card_topic_ids": [
         17
       ],
-      "corrected_topic_ids_resolving_here": [],
+      "corrected_topic_ids_resolving_here": [
+        1
+      ],
       "declared_verification": null,
       "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
       "numeric_deliverable_id_declared": "40374631",
@@ -2243,7 +2382,8 @@
           "147bce53118d4308e10000000a174cb4"
         ],
         "matching_saved_responses": [
-          "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json"
+          "captured_responses/4_40404052_147bce53118d4308e10000000a174cb4.json",
+          "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json"
         ],
         "passed": true
       },
@@ -2279,7 +2419,8 @@
           "8082ce53118d4308e10000000a174cb4"
         ],
         "matching_saved_responses": [
-          "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json"
+          "captured_responses/2_40374682_8082ce53118d4308e10000000a174cb4.json",
+          "data/toc/f4a255a5de524e3992155767996fb1fd.json"
         ],
         "passed": true
       },
@@ -2322,16 +2463,17 @@
     "captured_responses/5_40374633_cc7bce53118d4308e10000000a174cb4.json": "ac3164f8c1b6cb8cbf0c67453ce5f100af67d0c05fcdd291a3b0b01b147a78a8",
     "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json": "769ae06af51e73a9fa7858ddf0d9c59a8164a4c38ae7c8f06ced0381733137aa",
     "data/final_corpus_manifest.json": "77ad52cce25deb7aa5b4e44169d2efd087bb864fd1ffa9185bfd92138e979dbc",
-    "data/guide_registrations.json": "fe83f7d69ab6f5ee3511d5aa4b933293e1b9ece6c92d75f45aa71c1782b92a53",
+    "data/guide_registrations.json": "d5d00fbf2d3fde0f2ac24cf66731c8532c4e353491d5a7e4d66f51969727a613",
     "data/guide_registry.json": "3ce74f9747c73f0a2cb24b0cb6c1073d71c4d2b22ff8fee00203ffd99151d01b",
     "data/retrieval_units.json": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
     "data/source_manifest.json": "08ad208c0187e935377c828faef36ec9fe077704cd580bb38004356f51b740b1",
+    "data/toc/021b182b0c47416c8fafed67ebfd78a9.json": "cbf9c1e89eb8fc82e2edda1fd34b5f0ced1cbc286888c38505ff544a79bb4333",
     "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json": "ff0f6c77cf09496a51cb566776633aa1c5f9aa17baf06edfbde6aaec1b6d755d",
     "data/toc/9442486404b54071b4ebeab6a16628e7.json": "6c3da0345b96cd246ac779d7b1d6f1cbb70698d829bc63496b8d2c5453ad4112",
     "data/toc/a003b275c98148ee8a4c3fafe9588fe3.json": "77d48416c1bae5ff7fe804e0805e8e42bbccba2cbd27e7b8daa2dfd78f681294",
     "data/toc/ed84b70c199d4470ae2e5ccb93b2e45b.json": "dadb19b61b47a11b0188ed1283622404a07dd74eda9b6d223ed9ed74c8564bf6",
     "data/toc/f4a255a5de524e3992155767996fb1fd.json": "70e661ebce5fdfd26c5efc2513417cd510be68bb3e53f731490116e7f69f6941",
-    "data/topic_corrections.json": "68adee37c1bf8dcaf044a070458e27b5548d72e43520406c8042e4bda5950b06",
+    "data/topic_corrections.json": "dec2dbe4a38d531fc7f6c5837e6030daf388bbcc0c2911d17bbaadc480101119",
     "data/topic_manifest.json": "936500096311853a69c9100aca155f5fed4c352f3b2a74ec4d2fe54f78ee08f6",
     "master_data.json": "e700a061480050b9bdcd7ea9a3a7b85a610a282400f47a5898bdd2c0a9d7e032"
   },
@@ -2393,10 +2535,10 @@
     "note": "recorded as written; superseded by the registrations + saved TOCs; not silently preferred or ignored"
   },
   "status_counts": {
-    "card_identity_only": 3,
+    "card_identity_only": 0,
     "conflicting_identity": 1,
-    "corrected_identity": 1,
-    "identified_not_local": 23,
+    "corrected_identity": 2,
+    "identified_not_local": 25,
     "resolved_local_page": 1,
     "unresolved": 0
   }

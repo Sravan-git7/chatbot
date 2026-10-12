@@ -71,12 +71,12 @@ P5_QUERIES = {q["query"].strip().lower() for q in load(EVAL / "independent_queri
 
 QUERIES_SHA256 = "631c7a524edecb5f78205334dd86256638fe1473998e86e7926ec619801dbe14"
 ROUTER_PINS = {   # the router and the 7A-7D implementation must be untouched by 7F
-    "scripts/m2c_router.py": "b846f18d098406c17859d053ae5b9c0ddb5b82e247e92ac709edeed1113ea8f4",
+    "scripts/m2c_router.py": "8e778d70106be09859e91dc245a57dcad9444fe27b2dd2fae2274d3186d5e33b",
     "scripts/m2c_page_join.py": "a7744701a710df9575eea3861a61204ee63deb995f761cc715dcd150b6dee156",
     "scripts/m2c_orchestrator.py": "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd",
-    "scripts/m2c_page_identity.py": "877b4f52d841bf475b149d9bcb601ad858b97bf2c6d3059ad5fbd5abe2c96163",
+    "scripts/m2c_page_identity.py": "0f9e65b8a921803a4aba29f0ef9a20e73b87b3c33115b45743a870564bee7936",
     "scripts/m2c_citations.py": "379fc6b89c587df227fa23e4053c8d4927b5902cf4484c61c0080abf3fdd4fb9",
-    "data/card_collection_manifest.json": "5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731",
+    "data/card_collection_manifest.json": "aa859ea2ddc52114bfa9bd3e0309030f876f4f7b56aecbc1e8baa3f1f96a12bc",
     "data/evaluation/card_retrieval_questions.json": "530f2d96cb644518fcbe20b0082870b01a08fd4bc524c10d208fd9c72c1ceb36",
     "data/evaluation/independent_queries.json": "1ce1306db646981b68245d75a1a912310ad3d760d90593bd005dfcc3500956e4",
     "data/evaluation_questions.json": "dc0801cce3ec63e176062ea46914500169b5cfd8c8a1f2991b060edb3108a674",

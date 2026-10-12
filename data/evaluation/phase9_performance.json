@@ -1,38 +1,38 @@
 {
-  "embedder_load_s": 5.083,
-  "router_ms_per_query_mean": 23.77,
+  "embedder_load_s": 4.742,
+  "router_ms_per_query_mean": 25.04,
   "per_query_ms_router_mode_extractive": {
     "context_ms": {
-      "median": 2.91,
-      "p95": 6.51,
-      "max": 8.47,
-      "n": 30
+      "median": 2.47,
+      "p95": 5.66,
+      "max": 12.26,
+      "n": 84
     },
     "generate_ms": {
-      "median": 0.37,
-      "p95": 0.85,
-      "max": 0.96,
-      "n": 25
+      "median": 0.31,
+      "p95": 0.47,
+      "max": 0.62,
+      "n": 66
     },
     "retrieve_ms": {
-      "median": 20.94,
-      "p95": 28.94,
-      "max": 44.64,
-      "n": 30
+      "median": 0.01,
+      "p95": 0.01,
+      "max": 0.01,
+      "n": 84
     },
     "route_ms": {
-      "median": 21.4,
-      "p95": 29.89,
-      "max": 37.89,
-      "n": 127
+      "median": 23.73,
+      "p95": 27.19,
+      "max": 47.79,
+      "n": 101
     },
     "total_ms": {
-      "median": 22.54,
-      "p95": 61.13,
-      "max": 78.1,
-      "n": 127
+      "median": 27.56,
+      "p95": 33.57,
+      "max": 63.19,
+      "n": 101
     }
   },
-  "peak_rss_mb": 958.9,
+  "peak_rss_mb": 959.6,
   "ollama_latency": "NOT MEASURED: local model unavailable"
 }

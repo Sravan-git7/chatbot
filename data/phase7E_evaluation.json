@@ -107,7 +107,7 @@
       "ok": true
     },
     {
-      "check": "edge cases: M2C-05 corrected, M2C-18 conflicting without effective guide, M2C-01/13/16 card_identity_only, M2C-17 resolved_local_page",
+      "check": "edge cases: M2C-05 and M2C-01 corrected to their machine-checked guides, M2C-18 conflicting without effective guide, M2C-13/16 identified under their own verified guide, M2C-17 resolved_local_page",
       "detail": null,
       "ok": true
     },
@@ -166,9 +166,9 @@
         "citation": {
           "citation": "[01] Utilities Master Data (01_Utilities_Master_Data.pdf, sha256:c4aecd08f56a)",
           "conflict_present": false,
-          "correction_present": false,
+          "correction_present": true,
           "flags": [
-            "PAGE_CARD_IDENTITY_ONLY"
+            "PAGE_CORRECTED_IDENTITY"
           ],
           "fresh_network_fetch_claimed": null,
           "local_content_is_legacy_copy": null,
@@ -182,20 +182,20 @@
           "verified_used": false
         },
         "distance": 0.488306,
-        "effective_guide_id": null,
-        "effective_page_id": null,
+        "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+        "effective_page_id": "e369ce53118d4308e10000000a174cb4",
         "has_source_correction": false,
         "join_state_7a": "url_only",
         "page_content_available": false,
         "rank1_of_that_query": "M2C-01",
         "rank_of_card": 1,
-        "route_state_7c": "card_identity_only",
+        "route_state_7c": "corrected_identity",
         "source_status": "verified",
         "source_url_status": "ok",
         "warnings": []
       },
       "forced_on_query": "Q19",
-      "label": "card_identity_only",
+      "label": "corrected_identity (Topic 1 map-root correction)",
       "natural_rank1_count": 1,
       "natural_rank1_queries": [
         "phase4:Q19"
@@ -296,7 +296,7 @@
           "conflict_present": false,
           "correction_present": false,
           "flags": [
-            "PAGE_CARD_IDENTITY_ONLY"
+            "PAGE_IDENTIFIED_NOT_LOCAL"
           ],
           "fresh_network_fetch_claimed": null,
           "local_content_is_legacy_copy": null,
@@ -310,20 +310,20 @@
           "verified_used": false
         },
         "distance": 0.432503,
-        "effective_guide_id": null,
-        "effective_page_id": null,
+        "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+        "effective_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
         "has_source_correction": false,
         "join_state_7a": "url_only",
         "page_content_available": false,
         "rank1_of_that_query": "M2C-13",
         "rank_of_card": 1,
-        "route_state_7c": "card_identity_only",
+        "route_state_7c": "identified_not_local",
         "source_status": "verified",
         "source_url_status": "ok",
         "warnings": []
       },
       "forced_on_query": "Q04",
-      "label": "card_identity_only",
+      "label": "identified_not_local",
       "natural_rank1_count": 4,
       "natural_rank1_queries": [
         "phase4:Q04",
@@ -389,7 +389,7 @@
           "conflict_present": false,
           "correction_present": false,
           "flags": [
-            "PAGE_CARD_IDENTITY_ONLY"
+            "PAGE_IDENTIFIED_NOT_LOCAL"
           ],
           "fresh_network_fetch_claimed": null,
           "local_content_is_legacy_copy": null,
@@ -403,20 +403,20 @@
           "verified_used": false
         },
         "distance": 0.323748,
-        "effective_guide_id": null,
-        "effective_page_id": null,
+        "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+        "effective_page_id": "549661e6541f403ea56196782e040bcc",
         "has_source_correction": false,
         "join_state_7a": "url_only",
         "page_content_available": false,
         "rank1_of_that_query": "M2C-16",
         "rank_of_card": 1,
-        "route_state_7c": "card_identity_only",
+        "route_state_7c": "identified_not_local",
         "source_status": "verified",
         "source_url_status": "ok",
         "warnings": []
       },
       "forced_on_query": "Q30",
-      "label": "card_identity_only",
+      "label": "identified_not_local",
       "natural_rank1_count": 4,
       "natural_rank1_queries": [
         "phase4:Q30",
@@ -577,12 +577,12 @@
     }
   },
   "inputs": {
-    "collection_manifest_sha256": "5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731",
+    "collection_manifest_sha256": "aa859ea2ddc52114bfa9bd3e0309030f876f4f7b56aecbc1e8baa3f1f96a12bc",
     "legacy_questions_sha256": "dc0801cce3ec63e176062ea46914500169b5cfd8c8a1f2991b060edb3108a674",
     "legacy_results_sha256": "8edaa6cea367cc814c5ed5de550e061220a7231893c2f702b499b2d89f3de063",
-    "phase4_results_sha256": "c1b0459779eeb0ac0f4dbf26c6e128302c91ad7be0aa75db6a2d657e45c49206",
+    "phase4_results_sha256": "0225891eca74a596480ffea32760cf3947c9acee7cd468a646a756e6cbeecb9c",
     "phase5_queries_sha256": "1ce1306db646981b68245d75a1a912310ad3d760d90593bd005dfcc3500956e4",
-    "phase5_results_sha256": "2ca554287c9c2397f125e086cd121e5bd67983588bf798011e0298b286f0ef6d",
+    "phase5_results_sha256": "5c898b92944418b4b845248e9e397ec958f3feb5361a07c5b7fb703bac1712b6",
     "retrieval_units_sha256": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21"
   },
   "isolation": {
@@ -599,7 +599,9 @@
       "in_domain": true,
       "join_state_7a": "url_only",
       "legacy_chunk_urls_unmodified": true,
-      "legacy_top5_joined_to_routed_card_at_ranks": [],
+      "legacy_top5_joined_to_routed_card_at_ranks": [
+        1
+      ],
       "legacy_top5_page_ids": [
         "e369ce53118d4308e10000000a174cb4",
         "23fcc5536a51204be10000000a174cb4",
@@ -611,7 +613,7 @@
       "page_content_available": false,
       "rank1_card": "M2C-01",
       "rank1_distance": 0.466279,
-      "route_state_7c": "card_identity_only"
+      "route_state_7c": "corrected_identity"
     },
     {
       "card_needs_review": true,
@@ -714,7 +716,9 @@
       "in_domain": true,
       "join_state_7a": "url_only",
       "legacy_chunk_urls_unmodified": true,
-      "legacy_top5_joined_to_routed_card_at_ranks": [],
+      "legacy_top5_joined_to_routed_card_at_ranks": [
+        1
+      ],
       "legacy_top5_page_ids": [
         "e369ce53118d4308e10000000a174cb4",
         "22fbe156e374be43e10000000a441470",
@@ -726,7 +730,7 @@
       "page_content_available": false,
       "rank1_card": "M2C-01",
       "rank1_distance": 0.306717,
-      "route_state_7c": "card_identity_only"
+      "route_state_7c": "corrected_identity"
     },
     {
       "card_needs_review": false,
@@ -737,7 +741,9 @@
       "in_domain": true,
       "join_state_7a": "url_only",
       "legacy_chunk_urls_unmodified": true,
-      "legacy_top5_joined_to_routed_card_at_ranks": [],
+      "legacy_top5_joined_to_routed_card_at_ranks": [
+        1
+      ],
       "legacy_top5_page_ids": [
         "e369ce53118d4308e10000000a174cb4",
         "e31ce056045c122fe10000000a441470",
@@ -749,7 +755,7 @@
       "page_content_available": false,
       "rank1_card": "M2C-01",
       "rank1_distance": 0.307102,
-      "route_state_7c": "card_identity_only"
+      "route_state_7c": "corrected_identity"
     },
     {
       "card_needs_review": true,
@@ -993,7 +999,9 @@
       "in_domain": true,
       "join_state_7a": "url_only",
       "legacy_chunk_urls_unmodified": true,
-      "legacy_top5_joined_to_routed_card_at_ranks": [],
+      "legacy_top5_joined_to_routed_card_at_ranks": [
+        1
+      ],
       "legacy_top5_page_ids": [
         "e369ce53118d4308e10000000a174cb4",
         "23fcc5536a51204be10000000a174cb4",
@@ -1005,7 +1013,7 @@
       "page_content_available": false,
       "rank1_card": "M2C-01",
       "rank1_distance": 0.386809,
-      "route_state_7c": "card_identity_only"
+      "route_state_7c": "corrected_identity"
     },
     {
       "card_needs_review": false,
@@ -1016,7 +1024,9 @@
       "in_domain": true,
       "join_state_7a": "url_only",
       "legacy_chunk_urls_unmodified": true,
-      "legacy_top5_joined_to_routed_card_at_ranks": [],
+      "legacy_top5_joined_to_routed_card_at_ranks": [
+        1
+      ],
       "legacy_top5_page_ids": [
         "e369ce53118d4308e10000000a174cb4",
         "2cfcc5536a51204be10000000a174cb4",
@@ -1028,7 +1038,7 @@
       "page_content_available": false,
       "rank1_card": "M2C-01",
       "rank1_distance": 0.330252,
-      "route_state_7c": "card_identity_only"
+      "route_state_7c": "corrected_identity"
     },
     {
       "card_needs_review": true,
@@ -1108,7 +1118,9 @@
       "in_domain": true,
       "join_state_7a": "url_only",
       "legacy_chunk_urls_unmodified": true,
-      "legacy_top5_joined_to_routed_card_at_ranks": [],
+      "legacy_top5_joined_to_routed_card_at_ranks": [
+        1
+      ],
       "legacy_top5_page_ids": [
         "e369ce53118d4308e10000000a174cb4",
         "23fcc5536a51204be10000000a174cb4",
@@ -1120,7 +1132,7 @@
       "page_content_available": false,
       "rank1_card": "M2C-01",
       "rank1_distance": 0.454788,
-      "route_state_7c": "card_identity_only"
+      "route_state_7c": "corrected_identity"
     },
     {
       "card_needs_review": true,
@@ -1166,7 +1178,7 @@
       "page_content_available": false,
       "rank1_card": "M2C-01",
       "rank1_distance": 0.632961,
-      "route_state_7c": "card_identity_only"
+      "route_state_7c": "corrected_identity"
     },
     {
       "card_needs_review": false,
@@ -1212,7 +1224,7 @@
       "page_content_available": false,
       "rank1_card": "M2C-01",
       "rank1_distance": 0.58626,
-      "route_state_7c": "card_identity_only"
+      "route_state_7c": "corrected_identity"
     },
     {
       "card_needs_review": true,
@@ -1294,6 +1306,7 @@
       },
       "note": "legacy labels are titles, not cards or page ids; these counts describe agreement of two different retrieval stages, not correctness. The recorded legacy results are the only legacy evidence; legacy mode was not run live.",
       "numeric_pairs_used_for_joins": {
+        "0": "021b182b0c47416c8fafed67ebfd78a9",
         "40374631": "e52c8ee6197147ec97dfc2eb8c46a3ad",
         "40374633": "a003b275c98148ee8a4c3fafe9588fe3",
         "40374682": "f4a255a5de524e3992155767996fb1fd",
@@ -1301,7 +1314,7 @@
         "40404052": "ed84b70c199d4470ae2e5ccb93b2e45b"
       },
       "questions": 30,
-      "questions_with_legacy_top5_page_joined_to_routed_card": 1,
+      "questions_with_legacy_top5_page_joined_to_routed_card": 7,
       "rank1_card_counts": {
         "M2C-01": 8,
         "M2C-03": 1,
@@ -1313,8 +1326,8 @@
         "M2C-24": 1
       },
       "route_state_counts": {
-        "card_identity_only": 8,
         "conflicting_identity": 15,
+        "corrected_identity": 8,
         "identified_not_local": 5,
         "resolved_local_page": 2
       },
@@ -1482,7 +1495,7 @@
         "rank2_routing": {
           "card_needs_review": false,
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "recorded_first_expected_rank": 1,
         "routing": {
@@ -1539,10 +1552,10 @@
         "recorded_first_expected_rank": 1,
         "routing": {
           "card_needs_review": false,
-          "fallback_reason": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+          "fallback_reason": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
           "join_state_7a": "url_only",
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "top5": [
           "M2C-13",
@@ -2319,10 +2332,10 @@
         "recorded_first_expected_rank": 1,
         "routing": {
           "card_needs_review": false,
-          "fallback_reason": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+          "fallback_reason": "CORRECTION_APPLIED_PAGE_IN_CORRECTED_GUIDE_TOC",
           "join_state_7a": "url_only",
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "corrected_identity"
         },
         "top5": [
           "M2C-01",
@@ -2470,7 +2483,7 @@
         "rank2_routing": {
           "card_needs_review": false,
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "recorded_first_expected_rank": 1,
         "routing": {
@@ -2683,10 +2696,10 @@
         "recorded_first_expected_rank": 1,
         "routing": {
           "card_needs_review": false,
-          "fallback_reason": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+          "fallback_reason": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
           "join_state_7a": "url_only",
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "top5": [
           "M2C-13",
@@ -2891,10 +2904,10 @@
         "recorded_first_expected_rank": 1,
         "routing": {
           "card_needs_review": false,
-          "fallback_reason": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+          "fallback_reason": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
           "join_state_7a": "url_only",
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "top5": [
           "M2C-16",
@@ -3465,7 +3478,7 @@
         "rank2_routing": {
           "card_needs_review": false,
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "corrected_identity"
         },
         "recorded_first_expected_rank": 1,
         "routing": {
@@ -4202,10 +4215,10 @@
         "recorded_first_expected_rank": 13,
         "routing": {
           "card_needs_review": false,
-          "fallback_reason": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+          "fallback_reason": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
           "join_state_7a": "url_only",
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "top5": [
           "M2C-16",
@@ -4670,10 +4683,10 @@
         "recorded_first_expected_rank": 1,
         "routing": {
           "card_needs_review": false,
-          "fallback_reason": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+          "fallback_reason": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
           "join_state_7a": "url_only",
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "top5": [
           "M2C-13",
@@ -4723,10 +4736,10 @@
         "recorded_first_expected_rank": 1,
         "routing": {
           "card_needs_review": false,
-          "fallback_reason": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+          "fallback_reason": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
           "join_state_7a": "url_only",
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "top5": [
           "M2C-13",
@@ -4874,7 +4887,7 @@
         "rank2_routing": {
           "card_needs_review": false,
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "recorded_first_expected_rank": 1,
         "routing": {
@@ -5240,7 +5253,7 @@
         "rank2_routing": {
           "card_needs_review": false,
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "recorded_first_expected_rank": 2,
         "routing": {
@@ -5448,7 +5461,7 @@
         "rank2_routing": {
           "card_needs_review": false,
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "recorded_first_expected_rank": 1,
         "routing": {
@@ -5604,7 +5617,7 @@
         "rank2_routing": {
           "card_needs_review": false,
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "recorded_first_expected_rank": 15,
         "routing": {
@@ -5921,10 +5934,10 @@
         "recorded_first_expected_rank": 1,
         "routing": {
           "card_needs_review": false,
-          "fallback_reason": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+          "fallback_reason": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
           "join_state_7a": "url_only",
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "top5": [
           "M2C-16",
@@ -6181,10 +6194,10 @@
         "recorded_first_expected_rank": 3,
         "routing": {
           "card_needs_review": false,
-          "fallback_reason": "CARD_URL_ONLY_GUIDE_UNVERIFIED",
+          "fallback_reason": "CARD_PAGE_IN_VERIFIED_GUIDE_TOC_NO_LOCAL_RECORD",
           "join_state_7a": "url_only",
           "page_content_available": false,
-          "route_state_7c": "card_identity_only"
+          "route_state_7c": "identified_not_local"
         },
         "top5": [
           "M2C-16",
@@ -7015,12 +7028,6 @@
   "routing_layers": {
     "phase4": {
       "by_route_state": {
-        "card_identity_only": {
-          "page_content_available": 0,
-          "queries": 4,
-          "rank1_is_expected": 4,
-          "review_flag": 0
-        },
         "conflicting_identity": {
           "page_content_available": 0,
           "queries": 1,
@@ -7029,14 +7036,14 @@
         },
         "corrected_identity": {
           "page_content_available": 0,
-          "queries": 1,
-          "rank1_is_expected": 1,
+          "queries": 2,
+          "rank1_is_expected": 2,
           "review_flag": 0
         },
         "identified_not_local": {
           "page_content_available": 0,
-          "queries": 43,
-          "rank1_is_expected": 39,
+          "queries": 46,
+          "rank1_is_expected": 42,
           "review_flag": 4
         },
         "resolved_local_page": {
@@ -7101,12 +7108,6 @@
     },
     "phase5": {
       "by_route_state": {
-        "card_identity_only": {
-          "page_content_available": 0,
-          "queries": 5,
-          "rank1_is_expected": 3,
-          "review_flag": 0
-        },
         "conflicting_identity": {
           "page_content_available": 0,
           "queries": 3,
@@ -7121,8 +7122,8 @@
         },
         "identified_not_local": {
           "page_content_available": 0,
-          "queries": 43,
-          "rank1_is_expected": 32,
+          "queries": 48,
+          "rank1_is_expected": 35,
           "review_flag": 4
         }
       },

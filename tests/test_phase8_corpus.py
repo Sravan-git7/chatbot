@@ -153,9 +153,11 @@ class CorpusManifestTests(unittest.TestCase):
         self.assertEqual(sum(self.m["totals"]["status_counts"].values()), 29)
 
     def test_expected_pages_ingested(self):
+        # 2026-10-12: every card with an established identity has its page text ingested; the only excluded card is
+        # the fail-closed conflicting M2C-18.
         got = sorted(s for s, c in self.cards.items() if c["corpus_status"] == PC.S_INGESTED)
-        self.assertEqual(got, ["M2C-02", "M2C-05", "M2C-07", "M2C-11", "M2C-14", "M2C-17", "M2C-24"])
-        self.assertEqual(self.m["totals"]["pages_ingested"], 7)
+        self.assertEqual(got, sorted(s for s in self.cards if s != "M2C-18"))
+        self.assertEqual(self.m["totals"]["pages_ingested"], 28)
 
     def test_m2c18_conflict_is_protected(self):
         c = self.cards["M2C-18"]
@@ -164,9 +166,15 @@ class CorpusManifestTests(unittest.TestCase):
         self.assertNotIn("record", c)
         self.assertEqual([u["page_id"] for u in self.m["unused_captures"]], ["b1a202c9bb3011da2b24000f20dac9ef"])
 
-    def test_identity_only_cards_excluded(self):
+    def test_formerly_identity_only_cards_are_now_machine_checked_and_ingested(self):
+        # 2026-10-12: guide 021b182b machine-verified and the Topic 1 map-root correction machine-checked.
+        # The excluded_card_identity_only category no longer occurs anywhere in the corpus.
+        self.assertNotIn(PC.S_IDENTITY_ONLY, [c["corpus_status"] for c in self.cards.values()])
         for s in ("M2C-01", "M2C-13", "M2C-16"):
-            self.assertEqual(self.cards[s]["corpus_status"], PC.S_IDENTITY_ONLY)
+            self.assertEqual(self.cards[s]["corpus_status"], PC.S_INGESTED, s)
+        self.assertEqual(self.cards["M2C-01"]["effective_guide_id"], "e52c8ee6197147ec97dfc2eb8c46a3ad")
+        for s in ("M2C-13", "M2C-16"):
+            self.assertEqual(self.cards[s]["effective_guide_id"], "021b182b0c47416c8fafed67ebfd78a9", s)
 
     def test_m2c05_keeps_correction(self):
         rec = [r for r in self.res["records"].values() if r["source_ids"] == ["M2C-05"]][0]

@@ -1147,7 +1147,8 @@ class ApiElaborationTests(unittest.TestCase):
         ranking[Q_PLAN] = ["M2C-24"]
         ranking["What is invoicing?"] = ["M2C-14"]
         cls.svc = S.RagService(make_pipeline(RG_MOD.ExtractiveGenerator(), ranking), "extractive")
-        cls.client = TestClient(rag_api.create_app(service=cls.svc, static_dir=Path("/nonexistent")))
+        # Debug is opted in per-app for these tests (the shipped default is debug-disabled; see DebugAndSecurityTests).
+        cls.client = TestClient(rag_api.create_app(service=cls.svc, static_dir=Path("/nonexistent"), enable_debug=True))
 
     @classmethod
     def tearDownClass(cls):

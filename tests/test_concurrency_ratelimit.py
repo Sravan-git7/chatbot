@@ -132,7 +132,7 @@ class ConcurrencyRateLimitTests(unittest.TestCase):
         old_val = os.environ.get("SURA_RATE_LIMIT_PER_MINUTE")
         os.environ["SURA_RATE_LIMIT_PER_MINUTE"] = "3"
         try:
-            rag_api.ip_request_history.clear()
+            self.app.state.rag["ip_request_history"].clear()
             # Send 3 requests (should succeed)
             for i in range(3):
                 resp = self.client.post("/api/chat", json={"message": Q_PLAN})

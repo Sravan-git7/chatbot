@@ -322,6 +322,8 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     grounded_ok = status == ANSWERED and grounding_view["ok"] is True
     if raw.get("reason_code") == ELABORATION_CONTEXT_MISSING:
         page_available = None  # no topic was resolved, so do not imply a page is missing
+    elif pstatus == "page_not_ingested":
+        page_available = False  # the pipeline itself established that the identified page has no usable local content
     else:
         page_available = (topic.get("corpus_status") == "ingested") if routed else None
     meta = {"card_id": topic.get("source_id") if routed else None, "card_title": topic.get("title") if routed else None,
@@ -495,42 +497,49 @@ class RagService:
         q = clean_question(question)
         cid = resolve_conversation_id(conversation_id)
 
-        # Context resolution: explicit caller context beats internal session state
+        # Context resolution: explicit caller context beats internal session state for the fields it provides, but a
+        # caller context that omits ``active_topic`` must not wipe the topic the conversation already established.
+        # Without this, a relational follow-up sent with legacy history (questions/answer only) loses its anchor and
+        # can be hijacked by the focused unavailable-topic gate onto a sibling topic. The merge applies only when the
+        # caller context carries substantive history; an explicitly empty context (e.g. ``{"questions": []}``) means
+        # "no elaboration context" and must keep failing closed with ELABORATION_CONTEXT_MISSING.
         effective_context: Optional[Mapping[str, Any]] = None
+        session_active_topic: Optional[Dict[str, Any]] = None
+        with self._lock:
+            now = time.time()
+            self._prune_conversations(now)
+            prev = self._conversations.get(cid)
+            if prev and prev.get("topic_identity") and prev.get("query") and prev.get("answer") and prev.get("status") in (ANSWERED, NO_ADDITIONAL_VERIFIED_EVIDENCE):
+                session_active_topic = {
+                    "query": prev["query"],
+                    "answer": prev["answer"],
+                    "identity": prev.get("topic_identity"),
+                    "seen_answers": prev.get("seen_answers", []),
+                }
         if isinstance(context, Mapping) and context:
             effective_context = dict(context)
+            caller_questions = effective_context.get("questions") or ()
+            has_substantive_history = bool(caller_questions) or bool(effective_context.get("answer"))
+            if "active_topic" not in effective_context and session_active_topic is not None and has_substantive_history:
+                effective_context["active_topic"] = session_active_topic
         else:
-            with self._lock:
-                now = time.time()
-                self._prune_conversations(now)
-                prev = self._conversations.get(cid)
-                if prev and prev.get("status") == ANSWERED and prev.get("grounded") and prev.get("answer"):
-                    effective_context = {
-                        "questions": [prev["query"]],
-                        "answer": prev["answer"],
-                        "active_topic": {
-                            "query": prev["query"],
-                            "answer": prev["answer"],
-                            "identity": prev.get("topic_identity"),
-                            "seen_answers": prev.get("seen_answers", []),
-                        } if prev.get("topic_identity") else None,
-                    }
-                elif (prev and prev.get("status") == NO_ADDITIONAL_VERIFIED_EVIDENCE and prev.get("topic_identity")
+            if prev and prev.get("status") == ANSWERED and prev.get("grounded") and prev.get("answer"):
+                effective_context = {
+                    "questions": [prev["query"]],
+                    "answer": prev["answer"],
+                    "active_topic": session_active_topic,
+                }
+            elif (prev and prev.get("status") == NO_ADDITIONAL_VERIFIED_EVIDENCE and prev.get("topic_identity")
                         and prev.get("answer") and prev.get("query")):
-                    # The active topic survives an exhausted elaboration: the topic stays anchored, only the unused
-                    # verified evidence is spent. Follow-ups keep resolving against it instead of falling through to
-                    # out-of-scope routing.
-                    effective_context = {
-                        "questions": [prev["query"]],
-                        "answer": prev["answer"],
-                        "active_topic": {
-                            "query": prev["query"],
-                            "answer": prev["answer"],
-                            "identity": prev.get("topic_identity"),
-                            "seen_answers": prev.get("seen_answers", []),
-                        },
-                        "elaboration_exhausted": bool(prev.get("elaboration_exhausted")),
-                    }
+                # The active topic survives an exhausted elaboration: the topic stays anchored, only the unused
+                # verified evidence is spent. Follow-ups keep resolving against it instead of falling through to
+                # out-of-scope routing.
+                effective_context = {
+                    "questions": [prev["query"]],
+                    "answer": prev["answer"],
+                    "active_topic": session_active_topic,
+                    "elaboration_exhausted": bool(prev.get("elaboration_exhausted")),
+                }
 
         follow_up = FU.resolve(q, effective_context) if effective_context else None
         category = follow_up["category"] if follow_up else None
@@ -621,6 +630,16 @@ class RagService:
                 active_identity=active_identity,
             )
             pipeline_query = anchor_query if follow_up.get("form") == "clause" else follow_up["query"]
+        elif follow_up:
+            # A resolved relational/reference follow-up belongs to the active topic of the conversation. Bind it so
+            # the pipeline's focused unavailable-topic gate cannot hijack the rewritten query onto a *different*
+            # unavailable topic whose title merely overlaps the anchor's words (e.g. "business partner" vs. the
+            # unavailable "Contract Account Business Object"), and so the topic-consistency gate keeps retrieval on
+            # the anchor page. The anchor topic comes from the explicit active_topic contract when present; for
+            # legacy history it is derived by routing the anchor question itself (routing only, no generation).
+            active_topic = self._canonical_active_topic(effective_context)
+            if active_topic:
+                expected_topic = {"identity": active_topic["identity"]}
 
         t0 = time.perf_counter()
         if short_circuited:

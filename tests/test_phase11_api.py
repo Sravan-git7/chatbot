@@ -18,7 +18,8 @@ import rag_service as S  # noqa: E402
 
 HAVE_API = importlib.util.find_spec("fastapi") is not None and importlib.util.find_spec("httpx") is not None
 NEED_API = unittest.skipUnless(HAVE_API and HAVE_BS4 and HAVE_CHROMA, "fastapi / httpx / bs4 / chromadb not installed")
-from tests.test_phase11_service import Boom, Q_ABSENT, Q_BILLING, Q_CONFLICT, Q_DUNNING, Q_OOD, Q_PLAN, Q_UNAVAILABLE, RANKING  # noqa: E402
+from tests.test_phase11_service import (Boom, Q_ABSENT, Q_BILLING, Q_CONFLICT, Q_DUNNING, Q_OOD, Q_PLAN,  # noqa: E402
+                                        Q_UNAVAILABLE, RANKING, _resolver_fixture)
 
 if HAVE_API:
     import warnings
@@ -73,7 +74,7 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
         b = r.json()
         self.assertEqual((b["status"], b["ready"], b["generator"], b["topics"]), ("ok", True, "extractive", 29))
-        self.assertIn(b["pages_available"], (7, 25))
+        self.assertEqual(b["pages_available"], 28)  # 2026-10-12: the verified corpus ingests 28 pages (all except M2C-18)
 
     def test_health_reports_a_failed_start_instead_of_hiding_it(self):
         def factory(generator):
@@ -139,7 +140,15 @@ class ChatRequestTests(unittest.TestCase):
 class ResponseContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        # M2C-16 is ingested in the 28-page corpus; the documentation_unavailable contract needs an identified but
+        # un-ingested topic, supplied by the same honest fixture used by the service-layer suite.
+        _resolver_fixture.install()
         cls.c, cls.svc = client()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.c.close()
+        _resolver_fixture.restore()
 
     def test_answer_response_schema(self):
         b = post(self.c).json()
@@ -380,7 +389,8 @@ class RealPipelineTests(unittest.TestCase):
 
     def test_health_is_ready_with_the_real_corpus(self):
         b = self.c.get("/api/health").json()
-        self.assertEqual((b["ready"], b["topics"], b["pages_available"]), (True, 29, 25))
+        # 2026-10-12: the verified corpus ingests 28 pages (every established identity except the M2C-18 conflict).
+        self.assertEqual((b["ready"], b["topics"], b["pages_available"]), (True, 29, 28))
 
     def test_real_question_gets_a_real_grounded_cited_answer(self):
         r = post(self.c, "How do I create an installment plan?")
@@ -400,10 +410,14 @@ class RealPipelineTests(unittest.TestCase):
             self.assertIn(marker, {s["marker"] for s in b["sources"]})
 
     def test_real_missing_page_is_not_answered_from_the_card(self):
-        with unittest.mock.patch("phase13_reranker.rerank_candidates", return_value=(self.c.app.state.rag["service"].pipeline.cards["M2C-16"], [])):
-            b = post(self.c, Q_UNAVAILABLE).json()
-            self.assertEqual((b["status"], b["sources"]), ("documentation_unavailable", []))
-            self.assertEqual(b["metadata"]["page_available"], False)
+        # 2026-10-12: every established identity is ingested in the 28-page corpus, so the un-ingested scenario this
+        # regression guards is set up with the same identity fixture the service suite uses (M2C-16's effective page
+        # becomes a verified-guide TOC node that was never fetched). Everything else here stays real.
+        with _resolver_fixture():
+            with unittest.mock.patch("phase13_reranker.rerank_candidates", return_value=(self.c.app.state.rag["service"].pipeline.cards["M2C-16"], [])):
+                b = post(self.c, Q_UNAVAILABLE).json()
+                self.assertEqual((b["status"], b["sources"]), ("documentation_unavailable", []))
+                self.assertEqual(b["metadata"]["page_available"], False)
 
     def test_real_out_of_scope_and_absent_detail(self):
         self.assertEqual(post(self.c, "What is the weather in Hyderabad?").json()["status"], "out_of_scope")

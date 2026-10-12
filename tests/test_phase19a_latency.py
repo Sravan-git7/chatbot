@@ -250,12 +250,28 @@ class TestPhase19ALatency(unittest.TestCase):
             direct_hits = self.pipe.retriever.retrieve_in_page(
                 q, win_g, win_p, top_k=self.cfg.k_chunks, query_embedding=q_emb
             )
-            direct_ctx = RC.build_context(
-                direct_hits,
-                self.pipe.count_tokens,
-                self.cfg.context_budget_tokens,
-                self.cfg.max_context_chunks,
-            )
+            # The pipeline applies a deterministic ordered-workflow-evidence selection for the extractive generator
+            # (rag_evidence.workflow_context_selection_key); the reproduction must apply the exact same rule.
+            import rag_evidence as EV
+            selection_key = EV.workflow_context_selection_key(q, direct_hits)
+            if selection_key is None:
+                direct_ctx = RC.build_context(
+                    direct_hits,
+                    self.pipe.count_tokens,
+                    self.cfg.context_budget_tokens,
+                    self.cfg.max_context_chunks,
+                )
+                self.assertNotIn("context_selection", ans["debug"])
+            else:
+                direct_ctx = RC.build_context(
+                    direct_hits,
+                    self.pipe.count_tokens,
+                    self.cfg.context_budget_tokens,
+                    self.cfg.max_context_chunks,
+                    selection_key=selection_key,
+                )
+                self.assertEqual(ans["debug"]["context_selection"],
+                                 {"strategy": "ordered_workflow_evidence", "max_chunks": self.cfg.max_context_chunks})
             self.assertEqual(ans["debug"]["context"], direct_ctx.to_dict(with_text=True))
 
     # 9. citation & grounding equivalence

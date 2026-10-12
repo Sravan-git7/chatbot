@@ -26,6 +26,12 @@ INTERNAL_ID = re.compile(r"\bM2C-\d+\b")
 
 _orig_resolve = pid.resolve_identity
 
+# Fixture page: a real node of the verified guide 021b182b TOC that was never fetched and has no local record or
+# vector-store chunks. Redirecting M2C-16's identity to it gives the service layer a genuinely un-ingested topic
+# without fabricating impossible state (2026-10-12: M2C-16's real page is ingested).
+_FIXTURE_GUIDE = "021b182b0c47416c8fafed67ebfd78a9"
+_FIXTURE_PAGE = "018ace53118d4308e10000000a174cb4"
+
 def _test_resolve_identity(card, ctx):
     ident = _orig_resolve(card, ctx)
     sid = getattr(card, "source_id", None) or (card.get("source_id") if isinstance(card, dict) else None)
@@ -36,8 +42,8 @@ def _test_resolve_identity(card, ctx):
             card_url=ident.card_url or "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
             card_guide_id="021b182b0c47416c8fafed67ebfd78a9",
             card_page_id="549661e6541f403ea56196782e040bcc",
-            effective_guide_id="021b182b0c47416c8fafed67ebfd78a9",
-            effective_page_id="549661e6541f403ea56196782e040bcc",
+            effective_guide_id=_FIXTURE_GUIDE,
+            effective_page_id=_FIXTURE_PAGE,
             resolution_basis="test_un_ingested_fixture",
             resolution_status=pid.IDENTIFIED_NOT_LOCAL,
             local_page_path=None,
@@ -45,11 +51,34 @@ def _test_resolve_identity(card, ctx):
         )
     return ident
 
-pid.resolve_identity = _test_resolve_identity
-
 
 def service(generator=None, name="extractive"):
     return S.RagService(make_pipeline(generator or RG.ExtractiveGenerator(), RANKING), name)
+
+
+class _resolver_fixture:
+    """Scope the M2C-16 un-ingested identity fixture to one test class; always restore the real resolver.
+
+    The redirect used to be installed at import time, which leaked into every later test module in the process.
+    """
+
+    @classmethod
+    def install(cls):
+        assert pid.resolve_identity is _orig_resolve, "resolver fixture nested or left dirty by an earlier test"
+        pid.resolve_identity = _test_resolve_identity
+
+    @classmethod
+    def restore(cls):
+        pid.resolve_identity = _orig_resolve
+
+    # Scoped use: ``with _resolver_fixture(): ...``
+    def __enter__(self):
+        self.install()
+        return self
+
+    def __exit__(self, *exc):
+        self.restore()
+        return False
 
 
 class Boom:
@@ -114,7 +143,13 @@ class MappingTests(unittest.TestCase):
 class ContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        _resolver_fixture.install()
         cls.svc = service()
+
+    @classmethod
+    def tearDownClass(cls):
+        _resolver_fixture.restore()
+        del cls.svc
 
     def test_answered_result_matches_the_pipeline_answer_verbatim(self):
         r = self.svc.ask(Q_PLAN)
@@ -194,6 +229,14 @@ class ContractTests(unittest.TestCase):
 
 @NEED_PIPE
 class FailureTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        _resolver_fixture.install()
+
+    @classmethod
+    def tearDownClass(cls):
+        _resolver_fixture.restore()
+
     def test_generator_exception_becomes_generator_failure(self):
         svc = service(Boom(), "boom")
         with self.assertRaises(S.GeneratorFailure) as cm:

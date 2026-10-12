@@ -1,6 +1,29 @@
 # Phase 9 report — Real corpus completion, retrieval validation & LLM evaluation
 
-**Status: PARTIALLY COMPLETE.** Corpus completion (9A.2) and the Ollama evaluation (9C) are **BLOCKED** by the environment (re-verified in the completion pass: `help.sap.com` drops the TLS handshake, and there is no Ollama, no model and no route to download one). Fresh retrieval validation (9B), page retrieval, the chunking comparison, the gate analysis, the source chains and the extractive end-to-end evaluation were completed on the 7-page corpus.
+## Revision 2026-10-12 — re-run on the 28-page corpus (supersedes the 7-page figures below)
+
+The corpus grew from 7 to 28 ingested pages (every card with an established identity now has page text; only M2C-18, conflicting identity, stays fail-closed), the M2C-01 Topic 1 map-root correction and the M2C-05 correction are machine-checked, and guide 021b182b is machine-verified (M2C-13/16 resolve under their own guide). The frozen query set was re-frozen with its not_ingested/unresolved_identity categories re-derived from the current state (freeze sha256 `101a5edb…`), and every Phase 9 measurement below was re-run. All figures in this section come from the re-run `data/evaluation/phase9_results.json`, `phase9_extras.json` and `phase9_source_chains.json`; the sections after it preserve the original 7-page snapshot for traceability.
+
+| Item | Re-run result (2026-10-12) |
+|---|---|
+| Cards / pages with real text | 29 cards, **28 pages available, 1 missing** (M2C-18, fail-closed) |
+| Fresh query set | 101 queries: 69 answerable, 14 absent_detail, 0 not_ingested (category empty: no identified card lacks a page), 2 unresolved_identity (M2C-18), 16 out_of_domain |
+| Card router, all 85 gold-card queries | R@1 **0.3412** (Wilson 0.249–0.447), R@3 0.6235, R@5 0.7529, MRR 0.5238 |
+| Page retrieval, inside the gold page | R@1 0.7971, R@3 0.9275, R@5 1.0, MRR 0.8756 |
+| Extractive answer, oracle routing | 58/69 answerable answered, grounded and cited from the gold page (0.8406) |
+| Extractive answer, real router | 48/69 answerable answered (0.6957) |
+| Failure audit | 18 oracle-routing failures and 47 real-router failures |
+| Source chains | 186 source chains (101 real-router + 85 oracle), six traceability checks, all passed |
+| OOD gate | false refusals on in-domain gold-card queries: 7/85 (0.0824) |
+| Ollama / LLM metrics | **BLOCKED — not measured.** Ollama evaluation blocked: local model unavailable. |
+
+What changed vs the original snapshot: the not_ingested category vanished because its 20 pages were ingested from saved official responses (`data/page_corpus/fetched/`, provenance recorded, verified against card identity); the M2C-01/13/16 unresolved queries were removed when their identities became machine-checked; the router now competes only against cards that have pages, so router-mode answerable status match rose from 0.2899 to 0.6957 while the harder fresh-set R@1 (0.3412) remains the dominant loss. The two historical fetch attempts against help.sap.com (`fetch_attempt_log.json`, `fetch_attempt_log_run2.json`, 0 pages saved, circuit breaker) are kept unchanged as the record of the blocked direct fetch; the pages ingested later came from saved official responses, not from those runs.
+
+**Status: PARTIALLY COMPLETE.** The Ollama evaluation (9C) remains **BLOCKED** by the environment: there is no Ollama, no model and no route to download one. Everything else is re-measured on the 28-page corpus.
+
+## Original snapshot (2026-10-01, 7-page corpus) — historical
+
+**Status at the time: PARTIALLY COMPLETE.** Corpus completion (9A.2) and the Ollama evaluation (9C) were **BLOCKED** by the environment (`help.sap.com` dropped the TLS handshake, and there was no Ollama, no model and no route to download one). Fresh retrieval validation (9B), page retrieval, the chunking comparison, the gate analysis, the source chains and the extractive end-to-end evaluation were completed on the 7-page corpus.
 
 > **Ollama evaluation blocked: local model unavailable.**
 > No LLM metric in this report was measured. No LLM metric was estimated or inferred.

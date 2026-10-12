@@ -1,22 +1,21 @@
 {
  "schema_version": 1,
- "generated_at": "2026-10-11T09:11:14+00:00",
+ "generated_at": "2026-10-12T16:43:25+00:00",
  "totals": {
   "cards": 29,
   "local_pages": 28,
-  "answerable_content": 25,
+  "answerable_content": 28,
   "identified_not_local_without_page": 0,
   "not_fetchable": 1,
   "identity_status_counts": {
-   "card_identity_only": 3,
-   "identified_not_local": 23,
-   "corrected_identity": 1,
+   "corrected_identity": 2,
+   "identified_not_local": 25,
    "resolved_local_page": 1,
    "conflicting_identity": 1
   }
  },
  "corpus_complete": false,
- "statement": "Corpus is NOT complete: 7 of 29 cards have a local page. The 18 fetchable pages are BLOCKED by the network (see fetch_attempt); the 4 others cannot be fetched without a new verified identity.",
+ "statement": "Corpus is NOT complete: 28 of 29 cards have a local page. 0 page(s) would still need an official pagecontent response (see import_manifest.json); 1 cannot be fetched without a new verified identity.",
  "fetch_attempt": {
   "started_at": "2026-10-01T15:15:32+00:00",
   "robots": {
@@ -64,15 +63,15 @@
    "category": "Master Data & Customer Lifecycle",
    "official_card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
    "card_url_status": "ok",
-   "identity_status": "card_identity_only",
+   "identity_status": "corrected_identity",
    "unresolved": false,
    "review_flag": false,
    "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
    "effective_page_id": "e369ce53118d4308e10000000a174cb4",
    "corpus_status": "ingested",
    "local_page": true,
-   "page_chunks": null,
-   "answerable_content": false,
+   "page_chunks": 1,
+   "answerable_content": true,
    "acquisition": "saved_sap_help_pagecontent_response",
    "needed_to_complete": "none (page present)",
    "fetchable_with_recorded_ids": false
@@ -292,15 +291,15 @@
    "category": "Billing",
    "official_card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
    "card_url_status": "ok",
-   "identity_status": "card_identity_only",
+   "identity_status": "identified_not_local",
    "unresolved": false,
    "review_flag": false,
    "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
    "effective_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
    "corpus_status": "ingested",
    "local_page": true,
-   "page_chunks": null,
-   "answerable_content": false,
+   "page_chunks": 2,
+   "answerable_content": true,
    "acquisition": "saved_sap_help_pagecontent_response",
    "needed_to_complete": "none (page present)",
    "fetchable_with_recorded_ids": false
@@ -349,15 +348,15 @@
    "category": "Invoicing",
    "official_card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
    "card_url_status": "ok",
-   "identity_status": "card_identity_only",
+   "identity_status": "identified_not_local",
    "unresolved": false,
    "review_flag": false,
    "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
    "effective_page_id": "549661e6541f403ea56196782e040bcc",
    "corpus_status": "ingested",
    "local_page": true,
-   "page_chunks": null,
-   "answerable_content": false,
+   "page_chunks": 4,
+   "answerable_content": true,
    "acquisition": "saved_sap_help_pagecontent_response",
    "needed_to_complete": "none (page present)",
    "fetchable_with_recorded_ids": false
@@ -608,6 +607,90 @@
    "acquisition": "saved_sap_help_pagecontent_response",
    "needed_to_complete": "none (page present)",
    "fetchable_with_recorded_ids": false
+  }
+ ],
+ "network_probe": [
+  {
+   "host": "help.sap.com",
+   "dns": [
+    "23.216.147.195",
+    "23.216.147.196",
+    "2600:140a:1000:b::b81e:9651"
+   ],
+   "tcp_443": true,
+   "tls": {
+    "ok": false
+   },
+   "failed_stage": "tls_handshake",
+   "error": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
+  },
+  {
+   "host": "ollama.com",
+   "dns": [
+    "34.36.133.15"
+   ],
+   "tcp_443": true,
+   "tls": {
+    "ok": false
+   },
+   "failed_stage": "tls_handshake",
+   "error": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
+  },
+  {
+   "host": "registry.ollama.ai",
+   "dns": [
+    "104.18.16.170",
+    "104.18.17.170",
+    "2606:4700::6812:10aa"
+   ],
+   "tcp_443": true,
+   "tls": {
+    "ok": false
+   },
+   "failed_stage": "tls_handshake",
+   "error": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
+  },
+  {
+   "host": "huggingface.co",
+   "dns": [
+    "2600:9000:212d:2800:17:b174:6d00:93a1",
+    "2600:9000:212d:3800:17:b174:6d00:93a1",
+    "2600:9000:212d:5600:17:b174:6d00:93a1"
+   ],
+   "tcp_443": true,
+   "tls": {
+    "ok": false
+   },
+   "failed_stage": "tls_handshake",
+   "error": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
+  },
+  {
+   "host": "github.com",
+   "dns": [
+    "20.29.134.23"
+   ],
+   "tcp_443": true,
+   "tls": {
+    "ok": true,
+    "version": "TLSv1.3"
+   },
+   "failed_stage": null,
+   "error": null
+  },
+  {
+   "host": "pypi.org",
+   "dns": [
+    "151.101.0.223",
+    "151.101.128.223",
+    "151.101.192.223"
+   ],
+   "tcp_443": true,
+   "tls": {
+    "ok": true,
+    "version": "TLSv1.3"
+   },
+   "failed_stage": null,
+   "error": null
   }
  ]
 }

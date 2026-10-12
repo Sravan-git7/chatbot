@@ -111,7 +111,10 @@ def build(probe: bool = False, with_chunks: bool = True) -> Dict[str, Any]:
                    "identified_not_local_without_page": sum(1 for c in cards if c["fetchable_with_recorded_ids"]), "not_fetchable": sum(1 for c in cards if not c["local_page"] and not c["fetchable_with_recorded_ids"]),
                    "identity_status_counts": by_id},
         "corpus_complete": all(c["local_page"] for c in cards),
-        "statement": "Corpus is NOT complete: 7 of 29 cards have a local page. The 18 fetchable pages are BLOCKED by the network (see fetch_attempt); the 4 others cannot be fetched without a new verified identity.",
+        "statement": (f"Corpus is {'COMPLETE' if all(c['local_page'] for c in cards) else 'NOT complete'}: "
+                      f"{sum(c['local_page'] for c in cards)} of {len(cards)} cards have a local page. "
+                      f"{sum(1 for c in cards if c['fetchable_with_recorded_ids'])} page(s) would still need an official pagecontent response "
+                      f"(see import_manifest.json); {sum(1 for c in cards if not c['local_page'] and not c['fetchable_with_recorded_ids'])} cannot be fetched without a new verified identity."),
         "fetch_attempt": last_fetch_attempt(), "cards": cards}
     if probe:
         out["network_probe"] = [probe_host(h) for h in PROBE_HOSTS]

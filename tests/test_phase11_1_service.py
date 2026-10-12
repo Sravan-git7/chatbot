@@ -78,7 +78,8 @@ class ChainDowngrade(unittest.TestCase):
 class RealAnswerCorrectness(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.app_cm = TestClient(rag_api.create_app(generator="extractive", static_dir=Path("/nonexistent")))
+        # Debug is opted in per-app for these tests (the shipped default is debug-disabled; see DebugAndSecurityTests).
+        cls.app_cm = TestClient(rag_api.create_app(generator="extractive", static_dir=Path("/nonexistent"), enable_debug=True))
         cls.c = cls.app_cm.__enter__()
 
     @classmethod
@@ -133,15 +134,20 @@ class RealAnswerCorrectness(unittest.TestCase):
 
     # --- routing failures never fabricate ---------------------------------------------------------------------------------------------
     def test_routing_failures_abstain_or_say_unavailable_but_never_invent(self):
-        for q in ("Which authorization object is needed for transaction EL31?", "What is a business partner?", "What is the weather in Hyderabad?",
-                  "How are dunning notices created?", "How do I submit receivables to a collection agency?"):
+        # 2026-10-12: "What is a business partner?", "How are dunning notices created?" and the receivables question
+        # are no longer routing failures — the 28-page corpus answers them with grounded citations. The M2C-18
+        # conflict topic takes the unavailable-topic slot; absent-detail questions keep abstaining.
+        for q in ("Which authorization object is needed for transaction EL31?",
+                  "What is the contract account business object and what does it represent?", "What is the weather in Hyderabad?",
+                  "Which authorization object is needed to run the monitoring transaction?",
+                  "What is the pricing model for residential customers?"):
             b = self.ask(q)
             self.assertNotEqual(b["status"], "answered", q)
             self.assertEqual(b["sources"], [], q)
             self.assertFalse(b["metadata"]["grounded"], q)
-        self.assertEqual(self.ask("What is a business partner?")["answer"], UNVERIFIED)
+        self.assertEqual(self.ask("What is the contract account business object and what does it represent?")["status"], "documentation_unavailable")
         self.assertEqual(self.ask("What is the weather in Hyderabad?")["status"], "out_of_scope")
-        self.assertEqual(self.ask("How are dunning notices created?")["status"], "documentation_unavailable")
+        self.assertEqual(self.ask("Which authorization object is needed for transaction EL31?")["status"], "unable_to_verify")
 
     def test_wrongly_routed_sibling_questions_never_return_an_ungrounded_answer(self):
         for q in ("What happens to the contract in a move-out?", "What does the Contract Accounts component enable me to do?"):
@@ -154,8 +160,12 @@ class RealAnswerCorrectness(unittest.TestCase):
 
     # --- API contract ------------------------------------------------------------------------------------------------------------------------
     def test_api_contract_for_each_status(self):
-        seen = {self.ask(q, debug=False)["status"]: self.ask(q, debug=False) for q in ("When do I create an installment plan?", "What is the minimum installment amount?",
-                                                                                      "How are dunning notices created?", "What is the weather in Hyderabad?")}
+        # 2026-10-12: with the 28-page corpus, the fail-closed M2C-18 conflict topic is the documentation_unavailable
+        # case and an absent detail on a routed page abstains (unable_to_verify).
+        seen = {self.ask(q, debug=False)["status"]: self.ask(q, debug=False) for q in ("When do I create an installment plan?",
+                                                                                      "Which authorization object is needed for transaction EL31?",
+                                                                                      "What is the contract account business object and what does it represent?",
+                                                                                      "What is the weather in Hyderabad?")}
         self.assertEqual(set(seen), {"answered", "unable_to_verify", "documentation_unavailable", "out_of_scope"})
         for st, b in seen.items():
             self.assertNotIn("debug", b)

@@ -22,7 +22,7 @@ URL17_LOIO = f"https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/{G17}/{P17}.html"
 URL17_NUM = f"https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/40374631/{P17}.html"
 PINNED = {
     "data/source_manifest.json": "08ad208c0187e935377c828faef36ec9fe077704cd580bb38004356f51b740b1",
-    "data/card_collection_manifest.json": "5b3a5c30bc637c8b61573983a16cf252f7899d2c279eae3895e06476482d2731",
+    "data/card_collection_manifest.json": "aa859ea2ddc52114bfa9bd3e0309030f876f4f7b56aecbc1e8baa3f1f96a12bc",
 }
 
 _CTX = None
@@ -206,19 +206,28 @@ class ReviewFlagTests(unittest.TestCase):
         self.assertEqual(e["url"], c.source_url if hasattr(c, "source_url") else c["source_url"])
         self.assertNotEqual(e["identity"]["effective_guide_id"], e["identity"]["card_guide_id"])
 
-    def test_identity_only_cards_stay_identity_only(self):
-        for n in (1, 13, 16):
+    def test_formerly_identity_only_cards_now_carry_their_machine_checked_identities(self):
+        # 2026-10-12: guide 021b182b is machine-verified, so M2C-13/16 identify under their own guide, and the
+        # Topic 1 map-root correction is machine-checked for M2C-01. The legacy local index still has no page
+        # record for any of the three, so nothing about them is presented as locally available content.
+        expected = {1: pid.CORRECTED_IDENTITY, 13: pid.IDENTIFIED_NOT_LOCAL, 16: pid.IDENTIFIED_NOT_LOCAL}
+        for n, status in expected.items():
             i = cit.cite_card(card(n), ctx()).sources[0]["identity"]
-            self.assertEqual(i["status"], pid.CARD_IDENTITY_ONLY)
-            self.assertFalse(i["local_page_available"])
+            self.assertEqual(i["status"], status, n)
+            self.assertFalse(i["local_page_available"], n)
+        i1 = cit.cite_card(card(1), ctx()).sources[0]["identity"]
+        self.assertEqual(i1["effective_guide_id"], "e52c8ee6197147ec97dfc2eb8c46a3ad")
+        for n in (13, 16):
+            i = cit.cite_card(card(n), ctx()).sources[0]["identity"]
+            self.assertEqual(i["effective_guide_id"], "021b182b0c47416c8fafed67ebfd78a9", n)
 
     def test_identified_not_local_is_not_resolved(self):
         counts = {}
         for n in range(1, 30):
             s = cit.cite_card(card(n), ctx()).sources[0]["identity"]["status"]
             counts[s] = counts.get(s, 0) + 1
-        self.assertEqual(counts, {"card_identity_only": 3, "conflicting_identity": 1, "corrected_identity": 1,
-                                  "identified_not_local": 23, "resolved_local_page": 1})
+        self.assertEqual(counts, {"conflicting_identity": 1, "corrected_identity": 2,
+                                  "identified_not_local": 25, "resolved_local_page": 1})
 
     def test_local_content_provenance_not_relabelled(self):
         lc = cit.cite_card(card(17), ctx()).sources[0]["identity"]["local_content"]

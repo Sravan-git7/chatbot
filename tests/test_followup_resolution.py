@@ -263,7 +263,8 @@ class ApiContextTests(unittest.TestCase):
         ranking[cls.RESOLVED] = ["M2C-24"]                       # the installment-plan query stays on its Utilities page
         ranking[cls.CONTRACT_RESOLVED] = ["M2C-17"]
         cls.svc = S.RagService(make_pipeline(RG.ExtractiveGenerator(), ranking), "extractive")
-        cls.client = TestClient(rag_api.create_app(service=cls.svc, static_dir=Path("/nonexistent")))
+        # Debug is opted in per-app for these tests (the shipped default is debug-disabled; see DebugAndSecurityTests).
+        cls.client = TestClient(rag_api.create_app(service=cls.svc, static_dir=Path("/nonexistent"), enable_debug=True))
 
     @classmethod
     def tearDownClass(cls):

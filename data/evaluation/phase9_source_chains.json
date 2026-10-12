@@ -51,8 +51,8 @@
    "citation_urls": [],
    "cited_chunk_ids": [],
    "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "e369ce53118d4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-002",
    "identity_status": null,
@@ -64,8 +64,8 @@
    "type": "answerable"
   },
   {
-   "answer": "If you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1) and you are in an advanced metering infrastructure, you can find more information under Advanced Metering Infrastructure . [S1]",
-   "card": "M2C-05",
+   "answer": "If the business function Utilities, Quantity Determination ( ISU_QD_1 ) is active, you can also display meter reading results. [S2]\nIf there are meter reading orders for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more orders. [S2]\n- AMI monitoring If there are meter readings for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more meter readings. [S3]",
+   "card": "M2C-07",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -76,19 +76,20 @@
     "topic_pointer_url_equals_card_source_url": true
    },
    "citation_urls": [
-    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
    ],
    "cited_chunk_ids": [
-    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000"
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003"
    ],
    "context_chunk_ids": [
-    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
-    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
-    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
-    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
    ],
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "8990d0533f8e4308e10000000a174cb4",
+   "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
    "expected_status": "answered",
    "id": "P9-003",
    "identity_status": null,
@@ -96,12 +97,12 @@
    "query": "Which business function does the AMI monitoring pushbutton for meter readings require?",
    "reason_code": null,
    "status": "answered",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-06",
+   "answer": "To monitor meter reading results, you can use the following transactions in the Utilities Industry menu under Device Management > Meter Reading > Monitoring . [S1]\nMonitoring of Meter Reading Results [S2]\nThe following functions are available in the lists of meter reading results: [S4]\n- On-demand meter reading For the right kind of devices, you can use the pushbutton to request on-demand meter readings. [S4]",
+   "card": "M2C-07",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -111,19 +112,30 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+   ],
+   "cited_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003"
+   ],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003"
+   ],
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "bc90d0533f8e4308e10000000a174cb4",
+   "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
    "expected_status": "answered",
    "id": "P9-004",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Can I ask a smart meter for a reading right now from the result list?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
    "type": "answerable"
   },
   {
@@ -202,8 +214,8 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-18",
+   "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]",
+   "card": "M2C-17",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -213,24 +225,34 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-007",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What can I display when I enter contracts, installations or business partners?",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
    "answer": null,
-   "card": "M2C-08",
+   "card": "M2C-10",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -242,22 +264,25 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "d090d0533f8e4308e10000000a174cb4",
+   "context_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+    "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/001"
+   ],
+   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+   "effective_page_id": "b781ce53118d4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-008",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Where is the setting that drives automatic follow-up of readings maintained?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
+   "reason_code": "GENERATOR_REFUSED",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-16",
+   "answer": "You can use this transaction to display the successfully and unsuccessfully posted meter reading documents after uploading discrete meter reading data (IDocs from category ISU_MR_UPLOAD). [S4]",
+   "card": "M2C-07",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -267,24 +292,33 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+   ],
+   "cited_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
+   ],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
+   ],
+   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+   "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
    "expected_status": "answered",
    "id": "P9-009",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which function shows how many IDocs from the discrete upload failed to post?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-27",
+   "answer": "If the business function Utilities, Quantity Determination ( ISU_QD_1 ) is active, you can also display meter reading results. [S3]\n- Quantity determination For meter readings with a quantity determination trigger, you can use the pushbutton to carry out quantity determination. [S4]\nNote A prerequisite is that you have activated the business function Utilities, Quantity Determination ( ISU_QD_1 ). [S4]",
+   "card": "M2C-07",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -294,24 +328,34 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "10e7c5536a51204be10000000a174cb4",
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+   ],
+   "cited_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003"
+   ],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003"
+   ],
+   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+   "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
    "expected_status": "answered",
    "id": "P9-010",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "quantity determination trigger",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
    "type": "answerable"
   },
   {
    "answer": null,
-   "card": "M2C-20",
+   "card": "M2C-24",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -323,17 +367,22 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
+   "effective_page_id": "790dc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-011",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which objects are shown when I enter portions?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -406,8 +455,8 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-10",
+   "answer": "For the follow-on processing actions, this transaction interprets the settings in Customizing for the automatic monitoring of meter reading data: [S4]\nCustomizing for SAP Utilities > Device Management > Meter Reading > Basic Settings > Automatic Monitoring of Meter Reading Data . [S4]",
+   "card": "M2C-07",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -417,19 +466,28 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "b781ce53118d4308e10000000a174cb4",
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+   ],
+   "cited_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
+   ],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
+   ],
+   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+   "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
    "expected_status": "answered",
    "id": "P9-014",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How can I get the system to run follow-up actions automatically after readings come in?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
    "type": "answerable"
   },
   {
@@ -505,8 +563,8 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-01",
+   "answer": "The device, device category, and device number in the Utilities Industry (IS-U) component correspond to equipment, material, and the serial number in the standard system: [S2]\nName in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment [S2]\nName in IS-U: Device Category; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Material [S2]\nThe device is identified by a unique material and serial number combination to distinguish it from other pieces of material that may have the same serial number. [S3]",
+   "card": "M2C-05",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -516,24 +574,34 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
+   ],
+   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+   "effective_page_id": "8990d0533f8e4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-017",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "LO-MD material master device category",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-27",
+   "answer": "Function: Outward Movement (such as scrapping or sales); Component: Goods Issue and Return Delivery from MM-IM [S3]\nFunction: Stock Transfer; Component: Goods Issue and Return Delivery from MM-IM [S3]",
+   "card": "M2C-05",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -543,19 +611,28 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "10e7c5536a51204be10000000a174cb4",
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
+   ],
+   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+   "effective_page_id": "8990d0533f8e4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-018",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "goods issue and return delivery",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -633,34 +710,7 @@
   },
   {
    "answer": null,
-   "card": "M2C-10",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "b781ce53118d4308e10000000a174cb4",
-   "expected_status": "answered",
-   "id": "P9-021",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "When I receive meters into stock, what record does SAP create?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
-   "type": "answerable"
-  },
-  {
-   "answer": null,
-   "card": "M2C-14",
+   "card": "M2C-07",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -673,21 +723,57 @@
    "citation_urls": [],
    "cited_chunk_ids": [],
    "context_chunk_ids": [
-    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/000",
-    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/001",
-    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/002",
-    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/004"
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
    ],
-   "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
-   "effective_page_id": "cc7bce53118d4308e10000000a174cb4",
+   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+   "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
+   "expected_status": "answered",
+   "id": "P9-021",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "When I receive meters into stock, what record does SAP create?",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
+   "type": "answerable"
+  },
+  {
+   "answer": "- MM-IM: Planning Goods Receipts , Goods Receipts for Purchase Orders , Goods Receipts for Orders , Other Goods Receipts , Goods Issues . [S4]",
+   "card": "M2C-05",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
+   ],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
+   ],
+   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+   "effective_page_id": "8990d0533f8e4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-022",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which related documentation is listed for planning and posting goods receipts?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
-   "status": "insufficient_context",
-   "topic_pointer_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -727,8 +813,8 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-06",
+   "answer": "If you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1) and you are in an advanced metering infrastructure, you can find more information under Advanced Metering Infrastructure . [S1]",
+   "card": "M2C-05",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -738,24 +824,33 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000"
+   ],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
+   ],
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "bc90d0533f8e4308e10000000a174cb4",
+   "effective_page_id": "8990d0533f8e4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-024",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "ISU_AMI_1 advanced metering",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
    "answer": null,
-   "card": "M2C-18",
+   "card": "M2C-17",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -768,8 +863,8 @@
    "citation_urls": [],
    "cited_chunk_ids": [],
    "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-025",
    "identity_status": null,
@@ -777,7 +872,7 @@
    "query": "FPR1",
    "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
    "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -794,7 +889,9 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c/000"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
    "expected_status": "answered",
@@ -802,14 +899,14 @@
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What do I do when a customer cannot pay open items under normal terms?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
    "type": "answerable"
   },
   {
    "answer": null,
-   "card": "M2C-18",
+   "card": "M2C-11",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -821,22 +918,24 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "context_chunk_ids": [
+    "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+   ],
+   "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+   "effective_page_id": "147bce53118d4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-027",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "sample function module FKK_SAMPLE_3000",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-23",
+   "answer": "The system can calculate the first installment as a percentage of the total amount of the installment plan. [S2]\nRegardless of whether you have the system create an installment plan proposal by entering the installment amount or by entering the rounding amount and number of installments, there may be a remaining amount when the individual installments are calculated. [S3]\nSelect the open items that you want to include in the installment plan. [S4]",
+   "card": "M2C-24",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -846,19 +945,30 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006"
+   ],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/000",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "730dc5536a51204be10000000a174cb4",
+   "effective_page_id": "790dc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-028",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Can the opening installment be a fixed share of the whole plan amount?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -926,8 +1036,8 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-25",
+   "answer": "If you set the Distribute indicator, the interest and charges are distributed over all of the due dates. [S3]",
+   "card": "M2C-24",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -937,19 +1047,28 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005"
+   ],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/001",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "630dc5536a51204be10000000a174cb4",
+   "effective_page_id": "790dc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-031",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Distribute indicator",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -1035,7 +1154,11 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/000",
+    "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/001",
+    "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/002"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "630dc5536a51204be10000000a174cb4",
    "expected_status": "answered",
@@ -1043,14 +1166,14 @@
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What changes can I make on the proposal screen?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
+   "reason_code": "GENERATOR_REFUSED",
+   "status": "insufficient_context",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
    "answer": null,
-   "card": "M2C-20",
+   "card": "M2C-21",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1062,17 +1185,22 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/000",
+    "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/001",
+    "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/002",
+    "9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d/003"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
+   "effective_page_id": "e63529e1a3fd42e3a0e2c009ac783e0d",
    "expected_status": "answered",
    "id": "P9-035",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Where in Customizing do I switch on the priority-clearing enhancement?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
    "type": "answerable"
   },
   {
@@ -1089,7 +1217,9 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c/000"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
    "expected_status": "answered",
@@ -1097,8 +1227,8 @@
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How do I influence which original items are cleared first by incoming money?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
    "type": "answerable"
   },
@@ -1141,7 +1271,7 @@
   },
   {
    "answer": null,
-   "card": "M2C-23",
+   "card": "M2C-24",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1153,17 +1283,22 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "730dc5536a51204be10000000a174cb4",
+   "effective_page_id": "790dc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-038",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which formula links the plan amount, the count of installments and the leftover?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -1275,8 +1410,8 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-12",
+   "answer": "Invoicing creates the link to contract accounting and provides the basis for bill creation. [S1]\nThe contracts of a contract account are grouped together in invoicing for the joint bill. [S1]\nBilling documents from the Contract Billing (IS-U-BI) component, or budget billing plans, which are managed in the Budget Billing Plan component must exist if billing is to take place. [S2]",
+   "card": "M2C-14",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1286,19 +1421,29 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
-   "effective_page_id": "297bce53118d4308e10000000a174cb4",
+   "citation_urls": [
+    "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/000",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/001"
+   ],
+   "context_chunk_ids": [
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/000",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/001",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/002",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/005"
+   ],
+   "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+   "effective_page_id": "cc7bce53118d4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-042",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "IS-U-BI contract billing prerequisite",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -1329,7 +1474,7 @@
    "type": "answerable"
   },
   {
-   "answer": null,
+   "answer": "Therefore, they charge budget billing amounts during the supply period instead of the actual amount owed, in order to remain solvent. [S1]\nYou specify the budget billing amounts and the dates that are due in the budget billing plan. [S1]\nThe budget billing plan is the basis for charging budget billing amounts. [S1]",
    "card": "M2C-13",
    "card_rank": 1,
    "checks": {
@@ -1340,18 +1485,25 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html"
+   ],
+   "cited_chunk_ids": [
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000"
+   ],
+   "context_chunk_ids": [
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+   ],
+   "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+   "effective_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
    "expected_status": "answered",
    "id": "P9-044",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How are budget billing amounts communicated to customers?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
+   "reason_code": null,
+   "status": "answered",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
    "type": "answerable"
   },
@@ -1388,8 +1540,8 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-27",
+   "answer": "After the bill has been created, it is sent to the bill recipient. [S4]",
+   "card": "M2C-14",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1399,19 +1551,28 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "10e7c5536a51204be10000000a174cb4",
+   "citation_urls": [
+    "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/005"
+   ],
+   "context_chunk_ids": [
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/002",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/003",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/004",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/005"
+   ],
+   "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+   "effective_page_id": "cc7bce53118d4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-046",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What happens after the bill has been sent to the recipient?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -1452,7 +1613,7 @@
    "type": "answerable"
   },
   {
-   "answer": null,
+   "answer": "Utility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. [S1]",
    "card": "M2C-13",
    "card_rank": 1,
    "checks": {
@@ -1463,23 +1624,30 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html"
+   ],
+   "cited_chunk_ids": [
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000"
+   ],
+   "context_chunk_ids": [
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+   ],
+   "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+   "effective_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
    "expected_status": "answered",
    "id": "P9-048",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What comes after billing in the end-to-end utilities revenue cycle?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
+   "reason_code": null,
+   "status": "answered",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
    "type": "answerable"
   },
   {
-   "answer": null,
+   "answer": "There are two different types of master data: [S1]\nBusiness master data includes: [S1]\nBusiness master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]",
    "card": "M2C-01",
    "card_rank": 1,
    "checks": {
@@ -1490,24 +1658,30 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "e369ce53118d4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-049",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "contract account master data",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
+   "reason_code": null,
+   "status": "answered",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-18",
+   "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nSimilarly, a single contract account can be assigned to more than one business partner. [S2]",
+   "card": "M2C-17",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1517,24 +1691,34 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-050",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Can one business partner have several contract accounts?",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-18",
+   "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nSimilarly, a single contract account can be assigned to more than one business partner. [S2]",
+   "card": "M2C-17",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1544,19 +1728,29 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-051",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "IS-T contract account one business partner",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -1598,8 +1792,8 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-18",
+   "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S3]\nThis does not apply to one-time accounts. [S4]",
+   "card": "M2C-17",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1609,24 +1803,35 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-053",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "one-time accounts",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-03",
+   "answer": "In the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]",
+   "card": "M2C-17",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1636,19 +1841,28 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0981ce53118d4308e10000000a174cb4",
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-054",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which processes can be defined per business partner in the account master record?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -1689,7 +1903,7 @@
   },
   {
    "answer": null,
-   "card": "M2C-29",
+   "card": "M2C-20",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1701,21 +1915,23 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "8682ce53118d4308e10000000a174cb4",
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c/000"
+   ],
+   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+   "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
    "expected_status": "answered",
    "id": "P9-056",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What triggers a block being set automatically on a customer's account after a return?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
    "type": "answerable"
   },
   {
-   "answer": null,
+   "answer": "There are two different types of master data: [S1]\nBusiness master data includes: [S1]\nBusiness master data includes: [S1]\n- Business partner [S1]\nTechnical master data includes: [S1]\n- Grid [S1]",
    "card": "M2C-01",
    "card_rank": 1,
    "checks": {
@@ -1726,24 +1942,30 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "e369ce53118d4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-057",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Does the system record changes to the master data?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
+   "reason_code": null,
+   "status": "answered",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-18",
+   "answer": "This component enables you to create and manage contract account master data. [S1]\nIn Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]",
+   "card": "M2C-17",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1753,19 +1975,28 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-058",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Explain the purpose of a contract account.",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -1829,61 +2060,7 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-12",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
-   "effective_page_id": "297bce53118d4308e10000000a174cb4",
-   "expected_status": "answered",
-   "id": "P9-061",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "rate creation calculations",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
-   "type": "answerable"
-  },
-  {
-   "answer": null,
-   "card": "M2C-12",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
-   "effective_page_id": "297bce53118d4308e10000000a174cb4",
-   "expected_status": "answered",
-   "id": "P9-062",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Can master data change while a billing period is running?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
-   "type": "answerable"
-  },
-  {
-   "answer": null,
+   "answer": "All calculations required for rate creation are made during schema execution. [S1]",
    "card": "M2C-11",
    "card_rank": 1,
    "checks": {
@@ -1894,26 +2071,97 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+   ],
    "context_chunk_ids": [
     "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
    ],
    "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
    "effective_page_id": "147bce53118d4308e10000000a174cb4",
    "expected_status": "answered",
-   "id": "P9-063",
+   "id": "P9-061",
    "identity_status": null,
    "mode": "router_rank1",
-   "query": "How does billing work for utilities?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
-   "status": "insufficient_context",
+   "query": "rate creation calculations",
+   "reason_code": null,
+   "status": "answered",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
+   "answer": "All master and billing master data can change during a billing period. [S1]",
+   "card": "M2C-11",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+   ],
+   "context_chunk_ids": [
+    "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+   ],
+   "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+   "effective_page_id": "147bce53118d4308e10000000a174cb4",
+   "expected_status": "answered",
+   "id": "P9-062",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "Can master data change while a billing period is running?",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+   "type": "answerable"
+  },
+  {
+   "answer": "Utility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. [S1]",
+   "card": "M2C-13",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html"
+   ],
+   "cited_chunk_ids": [
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000"
+   ],
+   "context_chunk_ids": [
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+   ],
+   "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+   "effective_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
+   "expected_status": "answered",
+   "id": "P9-063",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "How does billing work for utilities?",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
+   "type": "answerable"
+  },
+  {
    "answer": null,
-   "card": "M2C-29",
+   "card": "M2C-02",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -1927,7 +2175,7 @@
    "cited_chunk_ids": [],
    "context_chunk_ids": [],
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "8682ce53118d4308e10000000a174cb4",
+   "effective_page_id": "8082ce53118d4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-064",
    "identity_status": null,
@@ -1935,11 +2183,11 @@
    "query": "What can I automate when a tenant leaves?",
    "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
    "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
-   "answer": null,
+   "answer": "From the move-in, you can also trigger the charges levied at the commencement of a utility service, as well as a welcome letter to the customer. [S1]\n- The data required to print the welcome letter is incomplete [S2]",
    "card": "M2C-03",
    "card_rank": 1,
    "checks": {
@@ -1950,9 +2198,19 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/000",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003"
+   ],
+   "context_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/000",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/006",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/007"
+   ],
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
    "effective_page_id": "0981ce53118d4308e10000000a174cb4",
    "expected_status": "answered",
@@ -1960,8 +2218,8 @@
    "identity_status": null,
    "mode": "router_rank1",
    "query": "welcome letter move-in",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
+   "reason_code": null,
+   "status": "answered",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
@@ -1993,8 +2251,8 @@
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-04",
+   "answer": "This component enables you to process a customer move-in or move-out. [S1]\nLetters to the customer, such as welcome letters and move-out confirmations are created using the Print Workbench component. [S2]\n- create a welcome letter for the move-in customer. [S3]",
+   "card": "M2C-02",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2004,19 +2262,29 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/000",
+    "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/001",
+    "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/000",
+    "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/001",
+    "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/002"
+   ],
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0f81ce53118d4308e10000000a174cb4",
+   "effective_page_id": "8082ce53118d4308e10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-067",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which component produces confirmation letters for customers who move out?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
@@ -2033,7 +2301,12 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/000",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/001",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/002",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003"
+   ],
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
    "effective_page_id": "0981ce53118d4308e10000000a174cb4",
    "expected_status": "answered",
@@ -2041,14 +2314,14 @@
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What happens to the installation when a new customer replaces the old one?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
+   "reason_code": "GENERATOR_REFUSED",
+   "status": "insufficient_context",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
    "type": "answerable"
   },
   {
-   "answer": null,
-   "card": "M2C-18",
+   "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]",
+   "card": "M2C-17",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2058,24 +2331,34 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
    "expected_status": "answered",
    "id": "P9-069",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "At move-in, can I reuse an existing business partner and contract account?",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
    "type": "answerable"
   },
   {
    "answer": null,
-   "card": "M2C-09",
+   "card": "M2C-07",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2087,17 +2370,22 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
+   ],
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "bf74c1d28fd54f77b228772b98b72fba",
+   "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
    "expected_status": "insufficient_context",
    "id": "P9-070",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What is the maximum number of rows the EL31 result list can display?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html",
+   "reason_code": "GENERATOR_REFUSED",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
    "type": "absent_detail"
   },
   {
@@ -2133,8 +2421,8 @@
    "type": "absent_detail"
   },
   {
-   "answer": null,
-   "card": "M2C-09",
+   "answer": "The device, device category, and device number in the Utilities Industry (IS-U) component correspond to equipment, material, and the serial number in the standard system: [S2]\nName in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment [S2]\nName in IS-U: Device Number; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Serial Number [S2]\nThe device is identified by a unique material and serial number combination to distinguish it from other pieces of material that may have the same serial number. [S3]",
+   "card": "M2C-05",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2144,24 +2432,34 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
+   ],
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "bf74c1d28fd54f77b228772b98b72fba",
+   "effective_page_id": "8990d0533f8e4308e10000000a174cb4",
    "expected_status": "insufficient_context",
    "id": "P9-072",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What is the maximum length of a device serial number?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
    "type": "absent_detail"
   },
   {
    "answer": null,
-   "card": "M2C-03",
+   "card": "M2C-05",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2173,17 +2471,22 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0981ce53118d4308e10000000a174cb4",
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003"
+   ],
+   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+   "effective_page_id": "8990d0533f8e4308e10000000a174cb4",
    "expected_status": "insufficient_context",
    "id": "P9-073",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which transaction creates a brand-new device in IS-U?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html",
    "type": "absent_detail"
   },
   {
@@ -2223,8 +2526,8 @@
    "type": "absent_detail"
   },
   {
-   "answer": null,
-   "card": "M2C-23",
+   "answer": "In the SAP Easy Access screen, choose Account > Installment Plan > Display (transaction FPR3 ). [S1]\nNote If you use the input help for the Installment Plan Number field, for selection using the installment plan history, the system displays only active installment plans as standard. [S1]\nIf you also want to display deactivated installment plans, you have to specify a deactivation reason on the tab page Installment Plan History . [S1]",
+   "card": "M2C-25",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2234,19 +2537,28 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/000"
+   ],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/000",
+    "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/001",
+    "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/003",
+    "9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4/004"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "730dc5536a51204be10000000a174cb4",
+   "effective_page_id": "630dc5536a51204be10000000a174cb4",
    "expected_status": "insufficient_context",
    "id": "P9-075",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which transaction displays an existing installment plan?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
    "type": "absent_detail"
   },
   {
@@ -2287,88 +2599,7 @@
   },
   {
    "answer": null,
-   "card": "M2C-16",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "insufficient_context",
-   "id": "P9-077",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How many hours does bill creation take for large volumes?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
-   "type": "absent_detail"
-  },
-  {
-   "answer": null,
-   "card": "M2C-18",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "insufficient_context",
-   "id": "P9-078",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "What is the maximum number of contracts one contract account can hold?",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
-   "type": "absent_detail"
-  },
-  {
-   "answer": null,
-   "card": "M2C-18",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "insufficient_context",
-   "id": "P9-079",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Which transaction code opens a new contract account record?",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
-   "type": "absent_detail"
-  },
-  {
-   "answer": null,
-   "card": "M2C-11",
+   "card": "M2C-14",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2381,23 +2612,137 @@
    "citation_urls": [],
    "cited_chunk_ids": [],
    "context_chunk_ids": [
-    "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/000",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/002",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/003",
+    "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/005"
+   ],
+   "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+   "effective_page_id": "cc7bce53118d4308e10000000a174cb4",
+   "expected_status": "insufficient_context",
+   "id": "P9-077",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "How many hours does bill creation take for large volumes?",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
+   "type": "absent_detail"
+  },
+  {
+   "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nSimilarly, a single contract account can be assigned to more than one business partner. [S2]",
+   "card": "M2C-17",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
+   "expected_status": "insufficient_context",
+   "id": "P9-078",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "What is the maximum number of contracts one contract account can hold?",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+   "type": "absent_detail"
+  },
+  {
+   "answer": "In the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]\nContract accounts tend to be managed on an open item basis. [S3]",
+   "card": "M2C-17",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
+   "expected_status": "insufficient_context",
+   "id": "P9-079",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "Which transaction code opens a new contract account record?",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+   "type": "absent_detail"
+  },
+  {
+   "answer": "Scheduling determines how often billing runs occur. [S2]\n- Simulation/Billing Simulation [S4]\n- Billing Simulation [S4]",
+   "card": "M2C-12",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003"
+   ],
+   "context_chunk_ids": [
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/002",
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003"
    ],
    "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
-   "effective_page_id": "147bce53118d4308e10000000a174cb4",
+   "effective_page_id": "297bce53118d4308e10000000a174cb4",
    "expected_status": "insufficient_context",
    "id": "P9-080",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which transaction runs a billing simulation?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
-   "status": "insufficient_context",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
    "type": "absent_detail"
   },
   {
-   "answer": null,
-   "card": "M2C-13",
+   "answer": "Different billing periods are included in the various billing procedures. [S1]\nYou can process all known period categories using different billing procedures. [S1]",
+   "card": "M2C-11",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2407,104 +2752,29 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+   ],
+   "context_chunk_ids": [
+    "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+   ],
+   "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+   "effective_page_id": "147bce53118d4308e10000000a174cb4",
    "expected_status": "insufficient_context",
    "id": "P9-081",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How many different billing period categories are there?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
    "type": "absent_detail"
   },
   {
-   "answer": null,
-   "card": "M2C-03",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0981ce53118d4308e10000000a174cb4",
-   "expected_status": "insufficient_context",
-   "id": "P9-082",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Which transaction processes a move-in?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
-   "type": "absent_detail"
-  },
-  {
-   "answer": null,
-   "card": "M2C-03",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0981ce53118d4308e10000000a174cb4",
-   "expected_status": "insufficient_context",
-   "id": "P9-083",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Which fields are mandatory on the move-in screen?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
-   "type": "absent_detail"
-  },
-  {
-   "answer": null,
-   "card": "M2C-03",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0981ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-084",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "What are the steps to register a new tenant in a utility installation?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
+   "answer": "During the move-out transaction, you execute most of the activities required to cancel the customer's supply of utilities services. [S1]\nMove-out processing stops the active payment plans. [S1]\nThis shows how far you have completed move-out processing for this contract. [S2]",
    "card": "M2C-04",
    "card_rank": 1,
    "checks": {
@@ -2515,20 +2785,167 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/000",
+    "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/000",
+    "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/002",
+    "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/003",
+    "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/005"
+   ],
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
    "effective_page_id": "0f81ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
+   "expected_status": "insufficient_context",
+   "id": "P9-082",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "Which transaction processes a move-in?",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
+   "type": "absent_detail"
+  },
+  {
+   "answer": "When you save the move-in, the initial move-in or move-in/out screen reappears. [S3]\nYou can also save your changes in the move-in without leaving the move-in screen. [S4]",
+   "card": "M2C-03",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/006",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/007"
+   ],
+   "context_chunk_ids": [
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/001",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/003",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/006",
+    "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/007"
+   ],
+   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
+   "effective_page_id": "0981ce53118d4308e10000000a174cb4",
+   "expected_status": "insufficient_context",
+   "id": "P9-083",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "Which fields are mandatory on the move-in screen?",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+   "type": "absent_detail"
+  },
+  {
+   "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]",
+   "card": "M2C-17",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
+   "expected_status": "unresolved_identity",
+   "id": "P9-084",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "What is the structure of a contract account as a business object?",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+   "type": "unresolved_identity"
+  },
+  {
+   "answer": "You assign contract objects to a contract account for which relevant taxes are levied. [S4]\nIf different taxes are levied for a contract object, you can make assignments to several contract accounts. [S4]\nContract Accounts Receivable and Payable under Contract Object. [S4]",
+   "card": "M2C-17",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [
+    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+   ],
+   "cited_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "context_chunk_ids": [
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+    "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+   ],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
+   "expected_status": "unresolved_identity",
    "id": "P9-085",
    "identity_status": null,
    "mode": "router_rank1",
-   "query": "How do I terminate a customer's supply contract when they leave?",
+   "query": "Which object model classes represent a contract account in SAP?",
+   "reason_code": null,
+   "status": "answered",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
+   "type": "unresolved_identity"
+  },
+  {
+   "answer": null,
+   "card": "M2C-01",
+   "card_rank": 1,
+   "checks": {
+    "answer_urls_equal_card_source_url": true,
+    "card_not_used_as_answer_text": true,
+    "cited_chunks_belong_to_the_effective_identity_page": true,
+    "cited_chunks_were_in_the_generator_context": true,
+    "no_sources_unless_answered": true,
+    "topic_pointer_url_equals_card_source_url": true
+   },
+   "citation_urls": [],
+   "cited_chunk_ids": [],
+   "context_chunk_ids": [],
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "e369ce53118d4308e10000000a174cb4",
+   "expected_status": "out_of_domain",
+   "id": "P9-086",
+   "identity_status": null,
+   "mode": "router_rank1",
+   "query": "Which city is Canada's capital?",
    "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
    "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
+   "type": "out_of_domain"
   },
   {
    "answer": null,
@@ -2547,73 +2964,19 @@
    "context_chunk_ids": [],
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
    "effective_page_id": "bc90d0533f8e4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-086",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How do I enter a meter reading result manually?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-08",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "d090d0533f8e4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
+   "expected_status": "out_of_domain",
    "id": "P9-087",
    "identity_status": null,
    "mode": "router_rank1",
-   "query": "How does the system estimate a reading when no actual value is available?",
+   "query": "How do I bake sourdough bread at home?",
    "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
    "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
-   "type": "not_ingested"
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
+   "type": "out_of_domain"
   },
   {
    "answer": null,
-   "card": "M2C-08",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "d090d0533f8e4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-088",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "What are the individual estimation procedures for meter readings and how do they differ?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-10",
+   "card": "M2C-02",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2627,181 +2990,19 @@
    "cited_chunk_ids": [],
    "context_chunk_ids": [],
    "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "b781ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-089",
+   "effective_page_id": "8082ce53118d4308e10000000a174cb4",
+   "expected_status": "out_of_domain",
+   "id": "P9-088",
    "identity_status": null,
    "mode": "router_rank1",
-   "query": "How do I record the starting meter reading when a customer moves in?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-12",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
-   "effective_page_id": "297bce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-090",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How do I schedule billing to run automatically in the background?",
+   "query": "Explain how a transformer neural network works.",
    "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
    "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html",
+   "type": "out_of_domain"
   },
   {
    "answer": null,
-   "card": "M2C-15",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
-   "effective_page_id": "147cce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-091",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How are budget billing amounts collected and processed after plan creation?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-19",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "063bf3eb68e347efa5c0fc1d389f70f7",
-   "expected_status": "page_not_ingested",
-   "id": "P9-092",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How can I check payments that arrived on the bank statement?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-20",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
-   "expected_status": "page_not_ingested",
-   "id": "P9-093",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How does the system decide which open items an incoming payment clears?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-20",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
-   "expected_status": "page_not_ingested",
-   "id": "P9-094",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "What kinds of clearing exist for posted payments?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-22",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-095",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How are payments collected at an external cash desk posted?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": "You create an installment plan when both of the following apply: [S1]\n- There are one or more open items on the contract account of a business partner. [S1]\nThe system can calculate the first installment as a percentage of the total amount of the installment plan. [S2]\nTo do this, under: Business Transactions > Deferral and Installment Plan > Define Categories for Installment Plan , specify a percentage and activate the enhancement under Business Transactions > Deferral and Installment Plan > Activate Installment Plan Enhancement for Surcharges/Interest . [S2]",
    "card": "M2C-24",
    "card_rank": 1,
    "checks": {
@@ -2812,34 +3013,29 @@
     "no_sources_unless_answered": true,
     "topic_pointer_url_equals_card_source_url": true
    },
-   "citation_urls": [
-    "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
-   ],
-   "cited_chunk_ids": [
-    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/000",
-    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003"
-   ],
+   "citation_urls": [],
+   "cited_chunk_ids": [],
    "context_chunk_ids": [
-    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/000",
     "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
-    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
-    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006"
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
    ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "790dc5536a51204be10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-096",
+   "expected_status": "out_of_domain",
+   "id": "P9-089",
    "identity_status": null,
    "mode": "router_rank1",
-   "query": "What is an installment plan and why would a utility offer one?",
-   "reason_code": null,
-   "status": "answered",
+   "query": "How do I add a new app tile to the Fiori launchpad?",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
-   "type": "not_ingested"
+   "type": "out_of_domain"
   },
   {
    "answer": null,
-   "card": "M2C-25",
+   "card": "M2C-24",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -2851,45 +3047,23 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/001",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/002",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/003",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004"
+   ],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "630dc5536a51204be10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-097",
+   "effective_page_id": "790dc5536a51204be10000000a174cb4",
+   "expected_status": "out_of_domain",
+   "id": "P9-090",
    "identity_status": null,
    "mode": "router_rank1",
-   "query": "How do I look at an installment plan I created earlier and change its terms?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-16",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "page_not_ingested",
-   "id": "P9-098",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How does the system send reminders for unpaid invoices?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
-   "type": "not_ingested"
+   "query": "How do I set up a SAP SuccessFactors performance review?",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
+   "type": "out_of_domain"
   },
   {
    "answer": null,
@@ -2908,370 +3082,19 @@
    "context_chunk_ids": [],
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "10e7c5536a51204be10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-099",
+   "expected_status": "out_of_domain",
+   "id": "P9-091",
    "identity_status": null,
    "mode": "router_rank1",
-   "query": "How do I hand over overdue accounts to an external collections agency?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
+   "query": "Who won the football world cup in 2014?",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+   "status": "out_of_domain",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-28",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "9c9c2344851f412f823d5f8a9dc7c694",
-   "expected_status": "page_not_ingested",
-   "id": "P9-100",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Which enterprise services are available for communicating with a collection agency?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-29",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "8682ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-101",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How do I reconnect a customer after payment is received?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-04",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0f81ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-102",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Which steps are needed to issue a final bill after a customer moves out?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-29",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "8682ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-103",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How do I deactivate supply for a customer who has not paid?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-01",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-104",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How do premises, connection objects and device locations fit together in utilities master data?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-01",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-105",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "What master data objects must exist before I can install a meter?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-13",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-106",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How do I give a customer fixed monthly payments for consumption?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-13",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-107",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "What is a budget billing plan and how is it structured?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-16",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-108",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How do I analyse billing and invoicing results over a period?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-16",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-109",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "What analysis tools exist for periodic billing?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-18",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-110",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "What is the structure of a contract account as a business object?",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-18",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-111",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Which object model classes represent a contract account in SAP?",
-   "reason_code": "CONFLICTING_IDENTITY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-22",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
-   "expected_status": "out_of_domain",
-   "id": "P9-112",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Which city is Canada's capital?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
    "type": "out_of_domain"
   },
   {
    "answer": null,
-   "card": "M2C-22",
+   "card": "M2C-14",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -3284,70 +3107,16 @@
    "citation_urls": [],
    "cited_chunk_ids": [],
    "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
+   "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+   "effective_page_id": "cc7bce53118d4308e10000000a174cb4",
    "expected_status": "out_of_domain",
-   "id": "P9-113",
+   "id": "P9-092",
    "identity_status": null,
    "mode": "router_rank1",
-   "query": "How do I bake sourdough bread at home?",
+   "query": "Write a Python function that reverses a string.",
    "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
    "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
-   "type": "out_of_domain"
-  },
-  {
-   "answer": null,
-   "card": "M2C-03",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0981ce53118d4308e10000000a174cb4",
-   "expected_status": "out_of_domain",
-   "id": "P9-114",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Explain how a transformer neural network works.",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
-   "type": "out_of_domain"
-  },
-  {
-   "answer": null,
-   "card": "M2C-22",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
-   "expected_status": "out_of_domain",
-   "id": "P9-115",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "How do I add a new app tile to the Fiori launchpad?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
+   "topic_pointer_url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html",
    "type": "out_of_domain"
   },
   {
@@ -3368,10 +3137,10 @@
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
    "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
    "expected_status": "out_of_domain",
-   "id": "P9-116",
+   "id": "P9-093",
    "identity_status": null,
    "mode": "router_rank1",
-   "query": "How do I set up a SAP SuccessFactors performance review?",
+   "query": "What are the symptoms of vitamin D deficiency?",
    "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
    "status": "out_of_domain",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
@@ -3379,7 +3148,7 @@
   },
   {
    "answer": null,
-   "card": "M2C-27",
+   "card": "M2C-17",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -3392,97 +3161,16 @@
    "citation_urls": [],
    "cited_chunk_ids": [],
    "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "10e7c5536a51204be10000000a174cb4",
+   "effective_guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+   "effective_page_id": "0bfcc5536a51204be10000000a174cb4",
    "expected_status": "out_of_domain",
-   "id": "P9-117",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Who won the football world cup in 2014?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
-   "type": "out_of_domain"
-  },
-  {
-   "answer": null,
-   "card": "M2C-22",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
-   "expected_status": "out_of_domain",
-   "id": "P9-118",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "Write a Python function that reverses a string.",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
-   "type": "out_of_domain"
-  },
-  {
-   "answer": null,
-   "card": "M2C-08",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "d090d0533f8e4308e10000000a174cb4",
-   "expected_status": "out_of_domain",
-   "id": "P9-119",
-   "identity_status": null,
-   "mode": "router_rank1",
-   "query": "What are the symptoms of vitamin D deficiency?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
-   "type": "out_of_domain"
-  },
-  {
-   "answer": null,
-   "card": "M2C-18",
-   "card_rank": 1,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "out_of_domain",
-   "id": "P9-120",
+   "id": "P9-094",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How do I reset my Windows password?",
    "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
    "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html",
    "type": "out_of_domain"
   },
   {
@@ -3503,7 +3191,7 @@
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
    "effective_page_id": "bf74c1d28fd54f77b228772b98b72fba",
    "expected_status": "out_of_domain",
-   "id": "P9-121",
+   "id": "P9-095",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "Which camera settings are best for night photography?",
@@ -3530,7 +3218,7 @@
    "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
    "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
    "expected_status": "out_of_domain",
-   "id": "P9-122",
+   "id": "P9-096",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How do I configure SAP Ariba sourcing events?",
@@ -3541,7 +3229,7 @@
   },
   {
    "answer": null,
-   "card": "M2C-08",
+   "card": "M2C-12",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -3553,17 +3241,22 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "d090d0533f8e4308e10000000a174cb4",
+   "context_chunk_ids": [
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/002",
+    "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003"
+   ],
+   "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+   "effective_page_id": "297bce53118d4308e10000000a174cb4",
    "expected_status": "out_of_domain",
-   "id": "P9-123",
+   "id": "P9-097",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "What is the current price of gold?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
    "type": "out_of_domain"
   },
   {
@@ -3584,7 +3277,7 @@
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
    "effective_page_id": "bc90d0533f8e4308e10000000a174cb4",
    "expected_status": "out_of_domain",
-   "id": "P9-124",
+   "id": "P9-098",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How do I train for a half marathon?",
@@ -3595,7 +3288,7 @@
   },
   {
    "answer": null,
-   "card": "M2C-03",
+   "card": "M2C-24",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -3607,22 +3300,27 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0981ce53118d4308e10000000a174cb4",
+   "context_chunk_ids": [
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/002",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+    "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/007"
+   ],
+   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
+   "effective_page_id": "790dc5536a51204be10000000a174cb4",
    "expected_status": "out_of_domain",
-   "id": "P9-125",
+   "id": "P9-099",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How do I create a workflow in Salesforce?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html",
    "type": "out_of_domain"
   },
   {
    "answer": null,
-   "card": "M2C-06",
+   "card": "M2C-07",
    "card_rank": 1,
    "checks": {
     "answer_urls_equal_card_source_url": true,
@@ -3634,17 +3332,22 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
+   "context_chunk_ids": [
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+    "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004"
+   ],
    "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "bc90d0533f8e4308e10000000a174cb4",
+   "effective_page_id": "4d76765c1e012b8ae10000000a42189b",
    "expected_status": "out_of_domain",
-   "id": "P9-126",
+   "id": "P9-100",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How do I read the dial of my home electricity meter?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
+   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html",
    "type": "out_of_domain"
   },
   {
@@ -3661,16 +3364,19 @@
    },
    "citation_urls": [],
    "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
+   "context_chunk_ids": [
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+    "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/001"
+   ],
+   "effective_guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+   "effective_page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
    "expected_status": "out_of_domain",
-   "id": "P9-127",
+   "id": "P9-101",
    "identity_status": null,
    "mode": "router_rank1",
    "query": "How can I reduce my household electricity bill?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
+   "reason_code": "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT",
+   "status": "insufficient_context",
    "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
    "type": "out_of_domain"
   },
@@ -6590,708 +6296,6 @@
   },
   {
    "answer": null,
-   "card": "M2C-03",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0981ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-084",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "What are the steps to register a new tenant in a utility installation?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-04",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0f81ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-085",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I terminate a customer's supply contract when they leave?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-06",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "bc90d0533f8e4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-086",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I enter a meter reading result manually?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bc90d0533f8e4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-08",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "d090d0533f8e4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-087",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How does the system estimate a reading when no actual value is available?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-09",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
-   "effective_page_id": "bf74c1d28fd54f77b228772b98b72fba",
-   "expected_status": "page_not_ingested",
-   "id": "P9-088",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "What are the individual estimation procedures for meter readings and how do they differ?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-10",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "b781ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-089",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I record the starting meter reading when a customer moves in?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-12",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
-   "effective_page_id": "297bce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-090",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I schedule billing to run automatically in the background?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-15",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
-   "effective_page_id": "147cce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-091",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How are budget billing amounts collected and processed after plan creation?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/a003b275c98148ee8a4c3fafe9588fe3/147cce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-19",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "063bf3eb68e347efa5c0fc1d389f70f7",
-   "expected_status": "page_not_ingested",
-   "id": "P9-092",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How can I check payments that arrived on the bank statement?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/063bf3eb68e347efa5c0fc1d389f70f7.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-20",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "edcd0c5823854d3296f2591e9f5d118c",
-   "expected_status": "page_not_ingested",
-   "id": "P9-093",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How does the system decide which open items an incoming payment clears?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/edcd0c5823854d3296f2591e9f5d118c.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-21",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "e63529e1a3fd42e3a0e2c009ac783e0d",
-   "expected_status": "page_not_ingested",
-   "id": "P9-094",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "What kinds of clearing exist for posted payments?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/e63529e1a3fd42e3a0e2c009ac783e0d.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-22",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "3d0ac5536a51204be10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-095",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How are payments collected at an external cash desk posted?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-23",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "730dc5536a51204be10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-096",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "What is an installment plan and why would a utility offer one?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-25",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "630dc5536a51204be10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-097",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I look at an installment plan I created earlier and change its terms?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/630dc5536a51204be10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-26",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "b1ffc5536a51204be10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-098",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How does the system send reminders for unpaid invoices?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-27",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "10e7c5536a51204be10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-099",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I hand over overdue accounts to an external collections agency?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/10e7c5536a51204be10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-28",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "9442486404b54071b4ebeab6a16628e7",
-   "effective_page_id": "9c9c2344851f412f823d5f8a9dc7c694",
-   "expected_status": "page_not_ingested",
-   "id": "P9-100",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "Which enterprise services are available for communicating with a collection agency?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/9c9c2344851f412f823d5f8a9dc7c694.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-29",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "8682ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-101",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I reconnect a customer after payment is received?",
-   "reason_code": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
-   "status": "out_of_domain",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-04",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "0f81ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-102",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "Which steps are needed to issue a final bill after a customer moves out?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-29",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": "f4a255a5de524e3992155767996fb1fd",
-   "effective_page_id": "8682ce53118d4308e10000000a174cb4",
-   "expected_status": "page_not_ingested",
-   "id": "P9-103",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I deactivate supply for a customer who has not paid?",
-   "reason_code": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
-   "status": "page_not_ingested",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html",
-   "type": "not_ingested"
-  },
-  {
-   "answer": null,
-   "card": "M2C-01",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-104",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do premises, connection objects and device locations fit together in utilities master data?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-01",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-105",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "What master data objects must exist before I can install a meter?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/0a6ace53118d4308e10000000a174cb4.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-13",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-106",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I give a customer fixed monthly payments for consumption?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-13",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-107",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "What is a budget billing plan and how is it structured?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-16",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-108",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "How do I analyse billing and invoicing results over a period?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
-   "card": "M2C-16",
-   "card_rank": null,
-   "checks": {
-    "answer_urls_equal_card_source_url": true,
-    "card_not_used_as_answer_text": true,
-    "cited_chunks_belong_to_the_effective_identity_page": true,
-    "cited_chunks_were_in_the_generator_context": true,
-    "no_sources_unless_answered": true,
-    "topic_pointer_url_equals_card_source_url": true
-   },
-   "citation_urls": [],
-   "cited_chunk_ids": [],
-   "context_chunk_ids": [],
-   "effective_guide_id": null,
-   "effective_page_id": null,
-   "expected_status": "unresolved_identity",
-   "id": "P9-109",
-   "identity_status": null,
-   "mode": "oracle",
-   "query": "What analysis tools exist for periodic billing?",
-   "reason_code": "CARD_IDENTITY_ONLY",
-   "status": "unresolved_identity",
-   "topic_pointer_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html",
-   "type": "unresolved_identity"
-  },
-  {
-   "answer": null,
    "card": "M2C-18",
    "card_rank": null,
    "checks": {
@@ -7308,7 +6312,7 @@
    "effective_guide_id": null,
    "effective_page_id": null,
    "expected_status": "unresolved_identity",
-   "id": "P9-110",
+   "id": "P9-084",
    "identity_status": null,
    "mode": "oracle",
    "query": "What is the structure of a contract account as a business object?",
@@ -7335,7 +6339,7 @@
    "effective_guide_id": null,
    "effective_page_id": null,
    "expected_status": "unresolved_identity",
-   "id": "P9-111",
+   "id": "P9-085",
    "identity_status": null,
    "mode": "oracle",
    "query": "Which object model classes represent a contract account in SAP?",
@@ -7347,30 +6351,30 @@
  ],
  "summary": {
   "answer_urls_equal_card_source_url": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
-  "answered": 88,
+  "answered": 125,
   "card_not_used_as_answer_text": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
-  "chains": 238,
+  "chains": 186,
   "cited_chunks_belong_to_the_effective_identity_page": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
   "cited_chunks_were_in_the_generator_context": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
   "no_sources_unless_answered": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   },
   "topic_pointer_url_equals_card_source_url": {
-   "of": 238,
-   "passed": 238
+   "of": 186,
+   "passed": 186
   }
  }
 }

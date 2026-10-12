@@ -10,8 +10,12 @@ written before the first evaluation run and the evaluator refuses a query file w
 Every answerable query carries ``evidence``: one or more VERBATIM quotes from the page text. This builder fails if a quote is not
 found in the page text, so the retrieval hit definition (the chunk contains a quote) is strategy independent.
 
-Query types: answerable | absent_detail | not_ingested | unresolved_identity | out_of_domain. Seven pages are ingested; a query
-about the other 22 cards can only receive ``page_not_ingested`` (or ``unresolved_identity``), by design.
+Query types: answerable | absent_detail | not_ingested | unresolved_identity | out_of_domain. The answerable and
+absent_detail queries were authored against the seven originally ingested pages (still ingested). The not_ingested and
+unresolved_identity categories are DERIVED from the current identity state and corpus: a card contributes a
+not_ingested query only if its page identity is established but its page text is absent from the local corpus, and an
+unresolved_identity query only if its identity is conflicting or unresolved. The builder fails if a hand-written query
+contradicts the derived category, so the file cannot drift from the corpus it records.
 """
 from __future__ import annotations
 
@@ -119,23 +123,21 @@ ABSENT = [
     ("M2C-02", "How long does a move-out take to post in the system?", ["how long", "duration"]),
 ]
 
-# about a card whose page is known (7C) but not ingested -> page_not_ingested
-NOT_INGESTED = [
-    ("M2C-26", "How are dunning notices created for overdue receivables?"),
-    ("M2C-29", "How do I disconnect a utility installation for non-payment?"),
-    ("M2C-27", "How do I submit open receivables to a collection agency?"),
-    ("M2C-21", "What clearing types exist for incoming payments?"),
-    ("M2C-25", "How can I display or change an existing installment plan afterwards?"),
-    ("M2C-19", "How do I analyse incoming payments that have not been assigned?"),
-]
+# Hand-written queries for the "page identity established but no local page text" category, keyed by card. The
+# builder verifies each entry against the derived category and fails on drift (see main()). As of 2026-10-12 every
+# card with an established identity has its page text ingested, so this mapping is empty; the six queries formerly
+# listed here (M2C-19/21/25/26/27/29) were removed when those pages were ingested.
+NOT_INGESTED_QUERIES = {}
 
-# cards without an established page identity
-UNRESOLVED = [
-    ("M2C-18", "What is the contract account business object and what does it represent?"),
-    ("M2C-18", "Which attributes does the contract account business object expose?"),
-    ("M2C-13", "How is a budget billing plan set up for a customer?"),
-    ("M2C-01", "How are business partner, premise and installation related in the utilities master data?"),
-]
+# Hand-written queries for cards without an established page identity (fail-closed). M2C-18 is conflicting_identity
+# and stays fail-closed; M2C-13 and M2C-01 used to stand here before guide 021b182b was machine-verified and the
+# Topic 1 map-root correction was machine-checked (2026-10-12), which moved them out of this category.
+UNRESOLVED_QUERIES = {
+    "M2C-18": [
+        "What is the contract account business object and what does it represent?",
+        "Which attributes does the contract account business object expose?",
+    ],
+}
 
 PREREGISTERED = {
     "declared_before_evaluation": True,
@@ -179,10 +181,30 @@ def main() -> int:
             if a.lower() in text:
                 problems.append((sid, q, f"absent term present: {a}"))
         add(query=q, type="absent_detail", gold_source_id=sid, gold_doc_id=recs[sid]["doc_id"], evidence=[], absent_terms=absent, expected_status="insufficient_context")
-    for sid, q in NOT_INGESTED:
-        add(query=q, type="not_ingested", gold_source_id=sid, gold_doc_id=None, evidence=[], expected_status="page_not_ingested")
-    for sid, q in UNRESOLVED:
-        add(query=q, type="unresolved_identity", gold_source_id=sid, gold_doc_id=None, evidence=[], expected_status="unresolved_identity")
+    import m2c_page_identity as pid
+    ctx = pid.IdentityContext.from_root(ROOT)
+    idents = {i.source_id: i for i in pid.resolve_all(ctx)}
+    established = {sid for sid, i in idents.items()
+                   if i.resolution_status in (pid.CORRECTED_IDENTITY, pid.IDENTIFIED_NOT_LOCAL, pid.RESOLVED_LOCAL_PAGE)}
+    derived_not_ingested = sorted(established - set(recs))
+    derived_unresolved = sorted(sid for sid, i in idents.items()
+                                if i.resolution_status in (pid.CONFLICTING_IDENTITY, getattr(pid, "UNRESOLVED", "unresolved")))
+    for sid in sorted(set(NOT_INGESTED_QUERIES) - set(derived_not_ingested)):
+        problems.append((sid, NOT_INGESTED_QUERIES[sid], "hand-written not_ingested query but the card is no longer in that category"))
+    for sid in derived_not_ingested:
+        q = NOT_INGESTED_QUERIES.get(sid)
+        if q is None:
+            problems.append((sid, None, "card is identified-but-not-ingested but has no hand-written not_ingested query"))
+        else:
+            add(query=q, type="not_ingested", gold_source_id=sid, gold_doc_id=None, evidence=[], expected_status="page_not_ingested")
+    for sid, qs in UNRESOLVED_QUERIES.items():
+        if sid not in derived_unresolved:
+            problems.append((sid, qs, "hand-written unresolved_identity query but the card identity is no longer unresolved/conflicting"))
+            continue
+        for q in qs:
+            add(query=q, type="unresolved_identity", gold_source_id=sid, gold_doc_id=None, evidence=[], expected_status="unresolved_identity")
+    for sid in sorted(set(derived_unresolved) - set(UNRESOLVED_QUERIES)):
+        problems.append((sid, None, "card identity is unresolved/conflicting but has no hand-written unresolved_identity query"))
     ood = [x for x in json.loads(OOD_SOURCE.read_text(encoding="utf-8"))["queries"] if x["label"] == "out_of_domain"]
     ood = sorted(ood, key=lambda x: x["id"])
     for x in ood[::7][:8]:
@@ -191,7 +213,10 @@ def main() -> int:
         for p in problems:
             print("PROBLEM", p)
         return 1
-    payload = {"schema_version": 1, "description": "Phase 8 page-level and end-to-end evaluation queries for the 7 ingested SAP Help pages",
+    payload = {"schema_version": 1,
+               "description": "Phase 8 page-level and end-to-end evaluation queries; answerable/absent_detail authored for the seven "
+                              "originally ingested SAP Help pages (all still ingested); not_ingested and unresolved_identity derived "
+                              "from the current identity state and corpus",
                "authorship": {"authored_by": "AI coding assistant, after reading the ingested pages; not a human domain expert; no LLM generation at runtime",
                               "caveat": "answerable queries are paraphrases of page facts written with the page text in view; they are not blind. The set is small "
                                         "(per-page n of 6-10) and every metric derived from it is a point estimate with wide uncertainty.",

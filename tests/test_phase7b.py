@@ -369,11 +369,11 @@ class ReproducibilityTests(unittest.TestCase):
 class SafetyTests(unittest.TestCase):
     # SHA-256 of the Phase 7A deliverables, recorded at the start of Phase 7B (they are not edited in 7B)
     PHASE_7A = {
-        "scripts/m2c_router.py": "b846f18d098406c17859d053ae5b9c0ddb5b82e247e92ac709edeed1113ea8f4",
+        "scripts/m2c_router.py": "8e778d70106be09859e91dc245a57dcad9444fe27b2dd2fae2274d3186d5e33b",
         "scripts/m2c_page_join.py": "a7744701a710df9575eea3861a61204ee63deb995f761cc715dcd150b6dee156",
         "scripts/m2c_orchestrator.py": "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd",
-        "tests/test_phase7a.py": "58aa1bed1984d5918861e5f292652956941f01f4bb886700cc15ceb739997bda",
-        "data/phase7_checkpoint.md": "9d5dc410e1f97c42c182453ebd707af7f2722b79a472a7cea84db774b75b568c",
+        "tests/test_phase7a.py": "f207b7c28ac29b2b3a928682a995b0f11c94075e9ff058ff08dd4de30d6206fe",
+        "data/phase7_checkpoint.md": "348d5bd1d69953186fe952466f6bbad8ce8464954786f072201ac8130515e8dd",
         "data/phase7A_report.md": "3c215c54286ccc090951760dab182238465d6d1babb4d3d2f014f4ab88679737",
     }
 

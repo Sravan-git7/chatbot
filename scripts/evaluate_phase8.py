@@ -415,7 +415,11 @@ def main() -> int:
         "token_counter": tinfo, "chunking_comparison": comparison, "end_to_end_by_chunk_strategy_oracle_routing": strat_e2e,
         "end_to_end_router_rank1": e2e_router, "end_to_end_oracle_routing": e2e_oracle, "hallucination_guard": halluc,
         "llm_generation": {"validated": False, "reason": "no Ollama server and no model weights are reachable from this environment (network blocked); OllamaClient is implemented and unit-tested with stubs only"},
-        "limitations": ["7 of 29 cards have page text; 22 can only be answered with page_not_ingested / unresolved_identity",
+        "limitations": [f"{manifest['totals']['pages_ingested']} of {manifest['totals']['cards']} cards have page text; the only card "
+                        "without page text is M2C-18 (conflicting identity, fail-closed), so page_not_ingested can only be observed "
+                        "for it, and only when a query focuses that topic uniquely",
+                        "the answerable/absent_detail queries were authored for the seven originally ingested pages; the 21 pages "
+                        "ingested later are exercised by the corpus consistency suites but have no hand-written eval questions yet",
                         "queries are AI-authored with the page text in view; n per page is 6-10; every rate has a wide Wilson interval",
                         "the extractive generator is not an LLM; answer fluency and paraphrase quality are not measured",
                         "lexical gates are uncalibrated heuristics"],
