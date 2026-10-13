@@ -79,13 +79,13 @@ def main() -> int:
     }
     payload = {"schema_version": 1, "kind": "phase9_corpus_status", "note": "identity statuses are the Phase 7C statuses, copied as recorded; 'identified_not_local' for a card whose page is in the Phase 8 corpus refers to data/sap_help only",
                "summary": summary, "cards": rows}
-    OUT_JSON.write_text(json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+    OUT_JSON.write_bytes((json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8"))
     lines = ["# Phase 9 corpus status (29 cards)", "", f"corpus sha256 `{manifest['corpus_sha256'][:16]}...` | pages available {summary['pages_available']} | missing {summary['pages_missing']} | fetched in Phase 9: {len(saved_ids)}", "",
              "| card | title | identity (7C) | corpus status | page | review | page hash | verification |", "|---|---|---|---|---|---|---|---|"]
     for r in rows:
         lines.append(f"| {r['card_id']} | {r['title']} | {r['identity_status_7c']} | {r['corpus_status']} | {'yes' if r['local_page_available'] else 'no'} | {'FLAG' if r['review_flag'] else ''} | "
                      f"{(r['page_hash_sha256'] or '-')[:10]} | {r['verification_status'].split(' (')[0]} |")
-    OUT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    OUT_MD.write_bytes(("\n".join(lines) + "\n").encode("utf-8"))
     print(json.dumps(summary, indent=1))
     return 0
 

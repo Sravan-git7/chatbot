@@ -226,7 +226,7 @@ def main() -> int:
                "counts": {t: sum(1 for q in queries if q["type"] == t) for t in ("answerable", "absent_detail", "not_ingested", "unresolved_identity", "out_of_domain")},
                "corpus_sha256": json.loads((PC.CORPUS_DIR / "manifest.json").read_text(encoding="utf-8"))["corpus_sha256"],
                "queries": queries}
-    OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    OUT.write_bytes((json.dumps(payload, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
     print(f"wrote {OUT.relative_to(ROOT)}: {len(queries)} queries {payload['counts']}")
     return 0
 

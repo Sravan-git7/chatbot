@@ -319,9 +319,9 @@ def main() -> int:
         "corpus_sha256": json.loads((PC.CORPUS_DIR / "manifest.json").read_text(encoding="utf-8"))["corpus_sha256"],
         "queries": queries}
     data = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
-    OUT.write_text(data, encoding="utf-8")
-    FREEZE.write_text(json.dumps({"file": "data/evaluation/phase9_queries.json", "sha256": hashlib.sha256(data.encode("utf-8")).hexdigest(), "queries": len(queries),
-                                  "frozen_on": AUTHORED_ON, "statement": "frozen before any retrieval result was computed; evaluate_phase9.py refuses a different hash"}, indent=2) + "\n", encoding="utf-8")
+    OUT.write_bytes((data).encode("utf-8"))
+    FREEZE.write_bytes((json.dumps({"file": "data/evaluation/phase9_queries.json", "sha256": hashlib.sha256(data.encode("utf-8")).hexdigest(), "queries": len(queries),
+                                  "frozen_on": AUTHORED_ON, "statement": "frozen before any retrieval result was computed; evaluate_phase9.py refuses a different hash"}, indent=2) + "\n").encode("utf-8"))
     print(f"wrote {OUT.relative_to(ROOT)}: {len(queries)} queries {counts}")
     return 0
 

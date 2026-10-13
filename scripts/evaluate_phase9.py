@@ -16,7 +16,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-import resource
+from platform_metrics import peak_rss_mb
 import shutil
 import socket
 import statistics
@@ -395,9 +395,10 @@ def main() -> int:
             stages.setdefault(k, []).append(v)
     pct = lambda xs, p: round(sorted(xs)[min(len(xs) - 1, int(round((len(xs) - 1) * p)))], 2)   # noqa: E731
     perf["per_query_ms_router_mode_extractive"] = {k: {"median": round(statistics.median(v), 2), "p95": pct(v, 0.95), "max": round(max(v), 2), "n": len(v)} for k, v in sorted(stages.items())}
-    perf["peak_rss_mb"] = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)
+    perf["peak_rss_mb"] = peak_rss_mb()
+    perf["peak_rss_status"] = "measured" if perf["peak_rss_mb"] is not None else "UNSUPPORTED: resource module unavailable"
     perf["ollama_latency"] = "NOT MEASURED: local model unavailable" if not ollama["available"] else "see llm block timings in per-query rows (not stored in deterministic results)"
-    PERF.write_text(json.dumps(perf, indent=2) + "\n", encoding="utf-8")
+    PERF.write_bytes((json.dumps(perf, indent=2) + "\n").encode("utf-8"))
 
     results = {
         "schema_version": 1, "queries_file": str(QUERIES.relative_to(ROOT)), "freeze": freeze, "query_counts": payload["counts"], "facet_counts": payload["facet_counts"],
@@ -418,12 +419,12 @@ def main() -> int:
                                      "note": "Phase 4 scores are not representative of real-world queries; the Phase 9 set is the primary evidence"},
         "limitations": ["7 of 29 cards have page text; 22 pages are pending external retrieval (help.sap.com unreachable)", "queries are AI-authored with the page text in view; frozen before retrieval; per-page n 5-14",
                         "extractive generator only; real Ollama evaluation BLOCKED", "lexical OOD and context gates are uncalibrated heuristics", "failure-cause labels are heuristic hypotheses"]}
-    RESULTS.write_text(json.dumps(results, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
-    AUDIT.write_text(json.dumps({"schema_version": 1, "taxonomy": ["wrong_route", "wrong_page", "insufficient_retrieval", "unsupported_claim", "hallucinated_detail", "citation_mismatch",
+    RESULTS.write_bytes((json.dumps(results, indent=2, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8"))
+    AUDIT.write_bytes((json.dumps({"schema_version": 1, "taxonomy": ["wrong_route", "wrong_page", "insufficient_retrieval", "unsupported_claim", "hallucinated_detail", "citation_mismatch",
                                                                    "failure_to_abstain", "correct_retrieval_incorrect_synthesis", "correct_answer_incomplete_citation", "model_runtime_failure",
                                                                    "ood_gate_false_positive", "ood_or_context_gate_false_refusal", "other_status_mismatch"],
                                  "note": "wrong_page is subsumed by wrong_route here (the page is always the routed card's page); unsupported_claim / hallucinated_detail / model_runtime_failure can only occur with a real LLM and are 0 by construction for the extractive generator",
-                                 "rows": audit}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+                                 "rows": audit}, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
     c = rmet["all_gold_card_queries"]
     print("router R@1/3/5", [c[f"recall@{k}"]["rate"] for k in KS], "MRR", c["mrr"], "| answerable R@1", rmet["answerable_only"]["recall@1"]["rate"], "| failures", rmet["failure_count"], rmet["failure_causes_heuristic"])
     pg = page["in_gold_page"]

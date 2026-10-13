@@ -2,7 +2,8 @@ param(
     [string]$Python = ".\av\Scripts\python.exe",
     [switch]$InstallPrerequisites,
     [switch]$BuildMissingStores,
-    [switch]$Ollama
+    [switch]$Ollama,
+    [switch]$DiagnosticsOnly
 )
 # Run from the safely updated checkout. Never modifies git history, deletes caches,
 # replaces a venv, rewrites provenance manifests, or deploys publicly.
@@ -17,7 +18,15 @@ $Python = (Resolve-Path $Python).Path
 $Commit = (git rev-parse HEAD).Trim()
 $Results = Join-Path $env:TEMP ("SURA-verification-" + $Commit.Substring(0,7) + "-" + (Get-Date -Format yyyyMMddHHmmss))
 New-Item -ItemType Directory -Path $Results | Out-Null
+Start-Transcript -Path (Join-Path $Results "verification-transcript.txt") | Out-Null
+try {
 Write-Host "Commit: $Commit; results: $Results; no public deployment."
+Run $Python @("-m", "pip", "freeze", "--all")
+if ($DiagnosticsOnly) {
+    # Stop all SURA/Chroma processes first. Snapshot copies only; never rebuilds.
+    Run $Python @("scripts/diagnose_windows_verification.py", "--store-quiesced", "--out", (Join-Path $Results "store-diagnostic.json"))
+    return
+}
 Run $Python @("scripts/refresh_checkout_bytes.py", "--apply")
 if ($InstallPrerequisites) {
     # Existing packages satisfying constraints are not reinstalled. On Python 3.10,
@@ -69,8 +78,11 @@ if ($LASTEXITCODE -eq 2) { Write-Warning "Browser binaries unavailable: E2E BLOC
 elseif ($LASTEXITCODE -ne 0) { throw "Browser E2E failed." }
 # Full suite last so test failure does not prevent evidence/benchmark collection.
 # Native Windows sealed-artifact failures must be fixed/approved, NOT skipped.
-& $Python -m pytest tests/ -q -ra
+$Junit = Join-Path $Results "backend-junit.xml"
+& $Python -m pytest tests/ -q -ra "--junitxml=$Junit" | Tee-Object -FilePath (Join-Path $Results "backend-pytest.txt")
 $SuiteExit = $LASTEXITCODE
 Write-Host "Saved results: $Results; backend suite exit: $SuiteExit"
-if ($SuiteExit -ne 0) { throw "Full suite failed. Preserve output; see the native Windows sealed-writer caveat." }
+if ($SuiteExit -ne 0) { throw "Full suite failed. Preserve backend-pytest.txt, backend-junit.xml and verification-transcript.txt; see WINDOWS_REMEDIATION_REPORT.md." }
 Write-Host "Local automated verification completed; deployment remains prohibited until the documented release gate is approved."
+
+} finally { Stop-Transcript | Out-Null }

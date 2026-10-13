@@ -29,7 +29,9 @@ def main():
     if sys.version_info[:2] == (3, 10):
         result["warnings"].append("Python 3.10 can use ranged prerequisites, but the verified Linux closure is Python 3.11. Do not install requirements.lock.txt here.")
     if sys.platform == "win32":
-        result["warnings"].append("Native Windows sealed chunk generation may produce CRLF. Do not skip its byte-equivalence tests; see the documented pending gate.")
+        result["warnings"].append("The original sealed chunk producer still uses native newlines. A separate LF writer is available, but its checkpoint migration is not approved; do not skip the legacy byte test. See WINDOWS_REMEDIATION_REPORT.md.")
+    if (ROOT / "chroma_db").exists():
+        result["warnings"].append("Ignored legacy chroma_db exists. Legacy tools may use it, but current SURA uses data/vector_store. Preserve and diagnose/archive it only with approval; historical absence assertions will still fail. See WINDOWS_REMEDIATION_REPORT.md.")
     print(json.dumps(result, indent=2))
     return 2 if result["errors"] else 0
 

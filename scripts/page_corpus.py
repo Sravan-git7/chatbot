@@ -288,14 +288,14 @@ def write_corpus(result: Mapping[str, Any], out_dir: Path = CORPUS_DIR) -> None:
     for rec in result["records"].values():
         p = pages / rec["guide_id"] / f"{rec['page_id']}.json"
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(canonical_json(rec), encoding="utf-8")
+        p.write_bytes((canonical_json(rec)).encode("utf-8"))
         keep.add(p)
     if pages.is_dir():                                           # records of pages no longer admitted are removed (derived output only)
         for old in pages.glob("*/*.json"):
             if old not in keep:
                 old.unlink()
-    (out_dir / "manifest.json").write_text(canonical_json(result["manifest"]), encoding="utf-8")
-    (out_dir / "fetch_plan.json").write_text(canonical_json(result["fetch_plan"]), encoding="utf-8")
+    (out_dir / "manifest.json").write_bytes((canonical_json(result["manifest"])).encode("utf-8"))
+    (out_dir / "fetch_plan.json").write_bytes((canonical_json(result["fetch_plan"])).encode("utf-8"))
 
 
 def load_records(out_dir: Path = CORPUS_DIR) -> List[Dict[str, Any]]:

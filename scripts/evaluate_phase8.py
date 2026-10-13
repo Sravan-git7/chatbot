@@ -403,7 +403,7 @@ def main() -> int:
     if resource is not None else None
 )
     perf["note"] = "CPU, no GPU, extractive generator; LLM generation latency is NOT measured (no LLM available)"
-    PERF.write_text(json.dumps(perf, indent=2) + "\n", encoding="utf-8")
+    PERF.write_bytes((json.dumps(perf, indent=2) + "\n").encode("utf-8"))
 
     for e in (e2e_router, e2e_oracle):
         e["failures"] = e.pop("_failures")
@@ -424,7 +424,7 @@ def main() -> int:
                         "the extractive generator is not an LLM; answer fluency and paraphrase quality are not measured",
                         "lexical gates are uncalibrated heuristics"],
     }
-    RESULTS.write_text(json.dumps(results, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+    RESULTS.write_bytes((json.dumps(results, indent=2, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8"))
     print(f"wrote {RESULTS.relative_to(ROOT)} and {PERF.relative_to(ROOT)}")
     for name, s in comparison["strategies"].items():
         r = s["retrieval"]
