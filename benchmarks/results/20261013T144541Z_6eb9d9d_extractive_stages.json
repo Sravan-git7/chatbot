@@ -1,0 +1,1211 @@
+{
+  "benchmark_version": "1.0",
+  "workload_version": "v1",
+  "workload_sha256": "f4d0fea668f86bf3ea56de1050cf9520a6ef58ac9619916d4abcf52f2c22c852",
+  "mode": "stages",
+  "generator": "extractive",
+  "started_utc": "2026-10-13T14:44:46+00:00",
+  "duration_s": 55.3,
+  "config": {
+    "repeat_per_item": 100,
+    "warmup": 10,
+    "concurrency_levels": null,
+    "concurrency_requests_per_level": null,
+    "percentile_method": "nearest-rank (ceil(q/100*n), 1-based)",
+    "generation_timeout_s": 60.0
+  },
+  "environment": {
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+    "python": "3.11.2",
+    "cpu_model": "Intel(R) Xeon(R) Processor @ 2.60GHz",
+    "cpu_count_logical": 2,
+    "mem_total_kb": 4034452,
+    "packages": {
+      "chromadb": "1.5.9",
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.1",
+      "fastapi": "0.142.2",
+      "uvicorn": "0.54.0",
+      "httpx": "0.28.1",
+      "ollama": "0.6.3",
+      "numpy": "2.4.6",
+      "pydantic": "2.13.5"
+    },
+    "generator": "extractive",
+    "git": {
+      "commit": "6eb9d9d25dda75bf9092838b813faa7a51cd8473",
+      "branch": "arena/b450cda2-chatbot",
+      "dirty": true
+    },
+    "workload_sha256": "f4d0fea668f86bf3ea56de1050cf9520a6ef58ac9619916d4abcf52f2c22c852",
+    "embedding_model": {
+      "name": "all-MiniLM-L6-v2",
+      "dir": "/home/user/chatbot/.venv/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
+      "source": null
+    },
+    "corpus": {
+      "corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
+      "chunks_fingerprint": "bc6aa3a580c5427f4c566e012c2d5390ee8025ef214d33f2c22ec2da0347281d",
+      "page_vector_count": 113,
+      "card_vector_count": 29
+    }
+  },
+  "results": {
+    "status": "OK",
+    "service_build_s": 5.481,
+    "cold_start": [
+      {
+        "wall_ms": 67.66,
+        "status": "answered",
+        "timings_ms": {
+          "route_ms": 59.83,
+          "retrieve_ms": 0.0,
+          "context_ms": 2.89,
+          "generate_ms": 2.36,
+          "total_ms": 66.88,
+          "queue_wait_ms": 0.0
+        }
+      }
+    ],
+    "per_item": [
+      {
+        "id": "simple-01-billing",
+        "category": "simple_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 28.397159000178362,
+          "p95_ms": 36.02876800005106,
+          "p99_ms": 42.32861200011939,
+          "mean_ms": 29.48,
+          "stdev_ms": 3.19,
+          "min_ms": 26.489910999998756,
+          "max_ms": 43.071147999853565
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 28.02,
+          "p95_ms": 35.38,
+          "p99_ms": 41.87,
+          "mean_ms": 29.15,
+          "stdev_ms": 3.15,
+          "min_ms": 26.16,
+          "max_ms": 42.66
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 23.69,
+            "p95_ms": 29.92,
+            "p99_ms": 35.97,
+            "mean_ms": 24.75,
+            "stdev_ms": 2.79,
+            "min_ms": 22.0,
+            "max_ms": 37.14
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.01,
+            "p99_ms": 0.01,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.01
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 1.66,
+            "p95_ms": 2.1,
+            "p99_ms": 2.8,
+            "mean_ms": 1.71,
+            "stdev_ms": 0.22,
+            "min_ms": 1.54,
+            "max_ms": 3.0
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.09,
+            "p95_ms": 1.54,
+            "p99_ms": 1.97,
+            "mean_ms": 1.15,
+            "stdev_ms": 0.18,
+            "min_ms": 1.05,
+            "max_ms": 2.11
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 28.02,
+            "p95_ms": 35.38,
+            "p99_ms": 41.87,
+            "mean_ms": 29.15,
+            "stdev_ms": 3.15,
+            "min_ms": 26.16,
+            "max_ms": 42.66
+          }
+        }
+      },
+      {
+        "id": "simple-02-movein",
+        "category": "simple_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 44.01193800003966,
+          "p95_ms": 49.12810899986653,
+          "p99_ms": 59.73095200010903,
+          "mean_ms": 44.97,
+          "stdev_ms": 3.07,
+          "min_ms": 41.63627999992059,
+          "max_ms": 60.60789600019234
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 43.64,
+          "p95_ms": 48.61,
+          "p99_ms": 59.21,
+          "mean_ms": 44.6,
+          "stdev_ms": 3.04,
+          "min_ms": 41.29,
+          "max_ms": 60.1
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 31.94,
+            "p95_ms": 36.27,
+            "p99_ms": 40.15,
+            "mean_ms": 32.58,
+            "stdev_ms": 2.17,
+            "min_ms": 29.71,
+            "max_ms": 42.87
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.01,
+            "p99_ms": 0.03,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.01,
+            "min_ms": 0.0,
+            "max_ms": 0.05
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 6.46,
+            "p95_ms": 7.69,
+            "p99_ms": 11.22,
+            "mean_ms": 6.65,
+            "stdev_ms": 0.75,
+            "min_ms": 6.32,
+            "max_ms": 11.3
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 2.93,
+            "p95_ms": 3.21,
+            "p99_ms": 5.06,
+            "mean_ms": 3.02,
+            "stdev_ms": 0.37,
+            "min_ms": 2.83,
+            "max_ms": 5.17
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 43.64,
+            "p95_ms": 48.61,
+            "p99_ms": 59.21,
+            "mean_ms": 44.6,
+            "stdev_ms": 3.04,
+            "min_ms": 41.29,
+            "max_ms": 60.1
+          }
+        }
+      },
+      {
+        "id": "simple-03-dunning",
+        "category": "simple_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 33.84972200001357,
+          "p95_ms": 40.01578700012942,
+          "p99_ms": 45.56843399996069,
+          "mean_ms": 34.5,
+          "stdev_ms": 2.97,
+          "min_ms": 31.47338700000546,
+          "max_ms": 49.638039999990724
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 33.44,
+          "p95_ms": 39.59,
+          "p99_ms": 45.13,
+          "mean_ms": 34.05,
+          "stdev_ms": 2.92,
+          "min_ms": 31.07,
+          "max_ms": 48.92
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 24.95,
+            "p95_ms": 29.94,
+            "p99_ms": 33.94,
+            "mean_ms": 25.35,
+            "stdev_ms": 2.16,
+            "min_ms": 22.91,
+            "max_ms": 34.1
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.01,
+            "p99_ms": 0.01,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.02
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 4.41,
+            "p95_ms": 5.52,
+            "p99_ms": 7.98,
+            "mean_ms": 4.6,
+            "stdev_ms": 0.68,
+            "min_ms": 4.27,
+            "max_ms": 8.64
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 2.07,
+            "p95_ms": 2.63,
+            "p99_ms": 3.78,
+            "mean_ms": 2.18,
+            "stdev_ms": 0.36,
+            "min_ms": 1.99,
+            "max_ms": 4.0
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 33.44,
+            "p95_ms": 39.59,
+            "p99_ms": 45.13,
+            "mean_ms": 34.05,
+            "stdev_ms": 2.92,
+            "min_ms": 31.07,
+            "max_ms": 48.92
+          }
+        }
+      },
+      {
+        "id": "complex-01-automatic-billing",
+        "category": "complex_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 26.86678899999606,
+          "p95_ms": 30.72883400000137,
+          "p99_ms": 35.045553000145446,
+          "mean_ms": 27.57,
+          "stdev_ms": 1.85,
+          "min_ms": 25.763029000017923,
+          "max_ms": 35.1069229998302
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 26.46,
+          "p95_ms": 30.3,
+          "p99_ms": 34.45,
+          "mean_ms": 27.16,
+          "stdev_ms": 1.82,
+          "min_ms": 25.36,
+          "max_ms": 34.59
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 22.29,
+            "p95_ms": 25.94,
+            "p99_ms": 27.88,
+            "mean_ms": 22.94,
+            "stdev_ms": 1.63,
+            "min_ms": 21.35,
+            "max_ms": 29.9
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.01,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.02
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 1.6,
+            "p95_ms": 1.73,
+            "p99_ms": 2.27,
+            "mean_ms": 1.62,
+            "stdev_ms": 0.14,
+            "min_ms": 1.51,
+            "max_ms": 2.64
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.11,
+            "p95_ms": 1.19,
+            "p99_ms": 1.26,
+            "mean_ms": 1.12,
+            "stdev_ms": 0.08,
+            "min_ms": 1.06,
+            "max_ms": 1.78
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 26.46,
+            "p95_ms": 30.3,
+            "p99_ms": 34.45,
+            "mean_ms": 27.16,
+            "stdev_ms": 1.82,
+            "min_ms": 25.36,
+            "max_ms": 34.59
+          }
+        }
+      },
+      {
+        "id": "complex-02-installment-lifecycle",
+        "category": "complex_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 32.33548499997596,
+          "p95_ms": 39.350467000076605,
+          "p99_ms": 44.724881000092864,
+          "mean_ms": 33.19,
+          "stdev_ms": 3.07,
+          "min_ms": 29.81612899998254,
+          "max_ms": 46.274835000076564
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 31.92,
+          "p95_ms": 38.83,
+          "p99_ms": 44.06,
+          "mean_ms": 32.73,
+          "stdev_ms": 3.03,
+          "min_ms": 29.41,
+          "max_ms": 45.81
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 27.49,
+            "p95_ms": 33.97,
+            "p99_ms": 38.2,
+            "mean_ms": 28.2,
+            "stdev_ms": 2.7,
+            "min_ms": 25.19,
+            "max_ms": 39.69
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.01,
+            "p99_ms": 0.01,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.01
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 1.33,
+            "p95_ms": 1.55,
+            "p99_ms": 1.97,
+            "mean_ms": 1.37,
+            "stdev_ms": 0.15,
+            "min_ms": 1.26,
+            "max_ms": 2.28
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.32,
+            "p95_ms": 1.65,
+            "p99_ms": 1.91,
+            "mean_ms": 1.36,
+            "stdev_ms": 0.15,
+            "min_ms": 1.25,
+            "max_ms": 2.41
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 31.92,
+            "p95_ms": 38.83,
+            "p99_ms": 44.06,
+            "mean_ms": 32.73,
+            "stdev_ms": 3.03,
+            "min_ms": 29.41,
+            "max_ms": 45.81
+          }
+        }
+      },
+      {
+        "id": "followup-01-billing-duodate",
+        "category": "followup",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 56.41801199999463,
+          "p95_ms": 60.6462719999854,
+          "p99_ms": 61.73250000006192,
+          "mean_ms": 56.65,
+          "stdev_ms": 2.06,
+          "min_ms": 53.38398000003508,
+          "max_ms": 64.69859900016672
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 27.47,
+          "p95_ms": 29.6,
+          "p99_ms": 30.26,
+          "mean_ms": 27.77,
+          "stdev_ms": 1.05,
+          "min_ms": 26.17,
+          "max_ms": 31.68
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 23.44,
+            "p95_ms": 25.39,
+            "p99_ms": 26.22,
+            "mean_ms": 23.72,
+            "stdev_ms": 0.96,
+            "min_ms": 22.26,
+            "max_ms": 27.39
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.01,
+            "p99_ms": 0.01,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.02
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 1.21,
+            "p95_ms": 1.34,
+            "p99_ms": 1.43,
+            "mean_ms": 1.23,
+            "stdev_ms": 0.09,
+            "min_ms": 1.15,
+            "max_ms": 1.99
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.4,
+            "p95_ms": 1.58,
+            "p99_ms": 2.02,
+            "mean_ms": 1.43,
+            "stdev_ms": 0.14,
+            "min_ms": 1.34,
+            "max_ms": 2.36
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 27.47,
+            "p95_ms": 29.6,
+            "p99_ms": 30.26,
+            "mean_ms": 27.77,
+            "stdev_ms": 1.05,
+            "min_ms": 26.17,
+            "max_ms": 31.68
+          }
+        }
+      },
+      {
+        "id": "followup-02-topic-switch",
+        "category": "followup",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 77.02725199987981,
+          "p95_ms": 89.7235229999751,
+          "p99_ms": 93.84282399992117,
+          "mean_ms": 78.71,
+          "stdev_ms": 5.77,
+          "min_ms": 72.1064159999969,
+          "max_ms": 108.73430799983907
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 31.69,
+          "p95_ms": 37.75,
+          "p99_ms": 44.11,
+          "mean_ms": 32.49,
+          "stdev_ms": 3.3,
+          "min_ms": 28.86,
+          "max_ms": 53.44
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 23.22,
+            "p95_ms": 27.1,
+            "p99_ms": 30.26,
+            "mean_ms": 23.88,
+            "stdev_ms": 2.56,
+            "min_ms": 20.86,
+            "max_ms": 42.41
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.01,
+            "p99_ms": 0.01,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.01
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 4.38,
+            "p95_ms": 5.59,
+            "p99_ms": 7.45,
+            "mean_ms": 4.57,
+            "stdev_ms": 0.59,
+            "min_ms": 4.23,
+            "max_ms": 7.53
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 2.02,
+            "p95_ms": 2.74,
+            "p99_ms": 3.5,
+            "mean_ms": 2.11,
+            "stdev_ms": 0.29,
+            "min_ms": 1.96,
+            "max_ms": 3.53
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 31.69,
+            "p95_ms": 37.75,
+            "p99_ms": 44.11,
+            "mean_ms": 32.49,
+            "stdev_ms": 3.3,
+            "min_ms": 28.86,
+            "max_ms": 53.44
+          }
+        }
+      },
+      {
+        "id": "scope-01-weather",
+        "category": "out_of_scope",
+        "expected_status": "out_of_scope",
+        "observed_statuses": {
+          "out_of_scope": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 24.96860199994444,
+          "p95_ms": 28.69896799984417,
+          "p99_ms": 30.55291800001214,
+          "mean_ms": 25.48,
+          "stdev_ms": 1.73,
+          "min_ms": 23.26794800001153,
+          "max_ms": 34.73910299999261
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 24.63,
+          "p95_ms": 28.33,
+          "p99_ms": 29.84,
+          "mean_ms": 25.1,
+          "stdev_ms": 1.7,
+          "min_ms": 22.88,
+          "max_ms": 34.15
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 23.38,
+            "p95_ms": 26.93,
+            "p99_ms": 27.92,
+            "mean_ms": 23.82,
+            "stdev_ms": 1.63,
+            "min_ms": 21.71,
+            "max_ms": 32.71
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 24.63,
+            "p95_ms": 28.33,
+            "p99_ms": 29.84,
+            "mean_ms": 25.1,
+            "stdev_ms": 1.7,
+            "min_ms": 22.88,
+            "max_ms": 34.15
+          }
+        }
+      },
+      {
+        "id": "evidence-01-el31-price",
+        "category": "insufficient_evidence",
+        "expected_status": "unable_to_verify",
+        "observed_statuses": {
+          "unable_to_verify": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 45.21271699991303,
+          "p95_ms": 54.56458699995892,
+          "p99_ms": 68.35711300004732,
+          "mean_ms": 46.88,
+          "stdev_ms": 6.23,
+          "min_ms": 41.0425640000085,
+          "max_ms": 91.14074900003288
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 44.79,
+          "p95_ms": 54.15,
+          "p99_ms": 67.66,
+          "mean_ms": 46.42,
+          "stdev_ms": 6.15,
+          "min_ms": 40.66,
+          "max_ms": 90.05
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 36.29,
+            "p95_ms": 45.43,
+            "p99_ms": 48.24,
+            "mean_ms": 37.77,
+            "stdev_ms": 4.87,
+            "min_ms": 32.62,
+            "max_ms": 72.57
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.01,
+            "p99_ms": 0.03,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.01,
+            "min_ms": 0.0,
+            "max_ms": 0.03
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 3.87,
+            "p95_ms": 4.8,
+            "p99_ms": 8.28,
+            "mean_ms": 4.07,
+            "stdev_ms": 0.83,
+            "min_ms": 3.7,
+            "max_ms": 9.28
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 2.47,
+            "p95_ms": 4.25,
+            "p99_ms": 5.62,
+            "mean_ms": 2.63,
+            "stdev_ms": 0.6,
+            "min_ms": 2.37,
+            "max_ms": 6.21
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 44.79,
+            "p95_ms": 54.15,
+            "p99_ms": 67.66,
+            "mean_ms": 46.42,
+            "stdev_ms": 6.15,
+            "min_ms": 40.66,
+            "max_ms": 90.05
+          }
+        }
+      },
+      {
+        "id": "evidence-02-validation-transfer",
+        "category": "insufficient_evidence",
+        "expected_status": "unable_to_verify",
+        "observed_statuses": {
+          "unable_to_verify": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 33.108301000083884,
+          "p95_ms": 46.02733299998363,
+          "p99_ms": 57.89804899995943,
+          "mean_ms": 35.22,
+          "stdev_ms": 5.81,
+          "min_ms": 31.57235200001196,
+          "max_ms": 69.57659299996521
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 32.64,
+          "p95_ms": 45.16,
+          "p99_ms": 56.92,
+          "mean_ms": 34.72,
+          "stdev_ms": 5.7,
+          "min_ms": 31.1,
+          "max_ms": 68.43
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 28.39,
+            "p95_ms": 39.4,
+            "p99_ms": 47.28,
+            "mean_ms": 30.08,
+            "stdev_ms": 4.83,
+            "min_ms": 26.95,
+            "max_ms": 58.97
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.01,
+            "p99_ms": 0.02,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.02
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 1.62,
+            "p95_ms": 2.89,
+            "p99_ms": 3.19,
+            "mean_ms": 1.76,
+            "stdev_ms": 0.41,
+            "min_ms": 1.55,
+            "max_ms": 3.43
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.32,
+            "p95_ms": 2.55,
+            "p99_ms": 3.55,
+            "mean_ms": 1.49,
+            "stdev_ms": 0.5,
+            "min_ms": 1.27,
+            "max_ms": 4.17
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 32.64,
+            "p95_ms": 45.16,
+            "p99_ms": 56.92,
+            "mean_ms": 34.72,
+            "stdev_ms": 5.7,
+            "min_ms": 31.1,
+            "max_ms": 68.43
+          }
+        }
+      },
+      {
+        "id": "identity-01-m2c18",
+        "category": "unresolved_identity",
+        "expected_status": "documentation_unavailable",
+        "observed_statuses": {
+          "documentation_unavailable": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 0.3668490001018654,
+          "p95_ms": 0.4500449999795819,
+          "p99_ms": 0.48237800001516007,
+          "mean_ms": 0.38,
+          "stdev_ms": 0.05,
+          "min_ms": 0.3323580001506343,
+          "max_ms": 0.7172010000431328
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 0.2,
+          "p95_ms": 0.24,
+          "p99_ms": 0.28,
+          "mean_ms": 0.2,
+          "stdev_ms": 0.02,
+          "min_ms": 0.18,
+          "max_ms": 0.32
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 0.19,
+            "p95_ms": 0.23,
+            "p99_ms": 0.27,
+            "mean_ms": 0.2,
+            "stdev_ms": 0.02,
+            "min_ms": 0.17,
+            "max_ms": 0.31
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 0.2,
+            "p95_ms": 0.24,
+            "p99_ms": 0.28,
+            "mean_ms": 0.2,
+            "stdev_ms": 0.02,
+            "min_ms": 0.18,
+            "max_ms": 0.32
+          }
+        }
+      },
+      {
+        "id": "length-01-installment",
+        "category": "doc_length_variation",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 44.83279900000525,
+          "p95_ms": 50.71237999982259,
+          "p99_ms": 53.61772400010523,
+          "mean_ms": 45.83,
+          "stdev_ms": 2.37,
+          "min_ms": 43.38049500006491,
+          "max_ms": 54.042650999917896
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 44.09,
+          "p95_ms": 49.91,
+          "p99_ms": 52.6,
+          "mean_ms": 45.09,
+          "stdev_ms": 2.34,
+          "min_ms": 42.69,
+          "max_ms": 53.33
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 28.72,
+            "p95_ms": 33.09,
+            "p99_ms": 33.34,
+            "mean_ms": 29.28,
+            "stdev_ms": 1.67,
+            "min_ms": 27.46,
+            "max_ms": 36.98
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.01,
+            "p99_ms": 0.01,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.01
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 8.39,
+            "p95_ms": 9.98,
+            "p99_ms": 10.71,
+            "mean_ms": 8.63,
+            "stdev_ms": 0.67,
+            "min_ms": 8.21,
+            "max_ms": 12.67
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 4.34,
+            "p95_ms": 5.31,
+            "p99_ms": 6.34,
+            "mean_ms": 4.49,
+            "stdev_ms": 0.43,
+            "min_ms": 4.25,
+            "max_ms": 6.84
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 44.09,
+            "p95_ms": 49.91,
+            "p99_ms": 52.6,
+            "mean_ms": 45.09,
+            "stdev_ms": 2.34,
+            "min_ms": 42.69,
+            "max_ms": 53.33
+          }
+        }
+      },
+      {
+        "id": "length-02-collection-agency",
+        "category": "doc_length_variation",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 33.31819599998198,
+          "p95_ms": 39.59838399987348,
+          "p99_ms": 50.835879999795,
+          "mean_ms": 34.42,
+          "stdev_ms": 5.0,
+          "min_ms": 30.275212999868018,
+          "max_ms": 70.34151699986069
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 32.52,
+          "p95_ms": 38.46,
+          "p99_ms": 49.44,
+          "mean_ms": 33.51,
+          "stdev_ms": 4.84,
+          "min_ms": 29.41,
+          "max_ms": 68.33
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 26.83,
+            "p95_ms": 32.13,
+            "p99_ms": 42.9,
+            "mean_ms": 27.63,
+            "stdev_ms": 3.83,
+            "min_ms": 24.28,
+            "max_ms": 53.29
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.01,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.01,
+            "min_ms": 0.0,
+            "max_ms": 0.01
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 1.58,
+            "p95_ms": 2.15,
+            "p99_ms": 3.11,
+            "mean_ms": 1.7,
+            "stdev_ms": 0.54,
+            "min_ms": 1.43,
+            "max_ms": 6.22
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.54,
+            "p95_ms": 2.17,
+            "p99_ms": 2.84,
+            "mean_ms": 1.63,
+            "stdev_ms": 0.3,
+            "min_ms": 1.45,
+            "max_ms": 3.24
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 32.52,
+            "p95_ms": 38.46,
+            "p99_ms": 49.44,
+            "mean_ms": 33.51,
+            "stdev_ms": 4.84,
+            "min_ms": 29.41,
+            "max_ms": 68.33
+          }
+        }
+      }
+    ],
+    "aggregate_by_category": {
+      "simple_supported": {
+        "items": 3
+      },
+      "complex_supported": {
+        "items": 2
+      },
+      "followup": {
+        "items": 2
+      },
+      "out_of_scope": {
+        "items": 1
+      },
+      "insufficient_evidence": {
+        "items": 2
+      },
+      "unresolved_identity": {
+        "items": 1
+      },
+      "doc_length_variation": {
+        "items": 2
+      }
+    },
+    "correctness": {
+      "expected_status_mismatches": [],
+      "mismatch_count": 0
+    },
+    "peak_rss_mb": 923.6
+  }
+}

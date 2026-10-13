@@ -1,0 +1,92 @@
+{
+  "generator": "extractive",
+  "status": "PASS",
+  "checks": [
+    {
+      "workflow": "billing",
+      "http": 200,
+      "status": "answered",
+      "sources": [
+        {
+          "type": "page",
+          "marker": "S1",
+          "title": "Billing Procedure",
+          "section": "Billing Procedure",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+          "source_id": "M2C-11",
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+        }
+      ],
+      "grounded": true
+    },
+    {
+      "workflow": "followup",
+      "http": 200,
+      "status": "answered",
+      "sources": [
+        {
+          "type": "page",
+          "marker": "S1",
+          "title": "Billing Procedure",
+          "section": "Billing Procedure",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html",
+          "source_id": "M2C-11",
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000"
+        }
+      ],
+      "grounded": true
+    },
+    {
+      "workflow": "unsupported",
+      "http": 200,
+      "status": "out_of_scope",
+      "sources": [],
+      "grounded": false
+    },
+    {
+      "workflow": "missing_evidence",
+      "http": 200,
+      "status": "unable_to_verify",
+      "sources": [],
+      "grounded": false
+    },
+    {
+      "workflow": "M2C18",
+      "http": 200,
+      "status": "documentation_unavailable",
+      "sources": [],
+      "grounded": false
+    },
+    {
+      "workflow": "malformed",
+      "http": 422,
+      "error": "invalid_request"
+    },
+    {
+      "workflow": "empty",
+      "http": 422,
+      "error": "invalid_request"
+    },
+    {
+      "workflow": "oversized",
+      "http": 413,
+      "error": "payload_too_large"
+    },
+    {
+      "workflow": "served_ui_security",
+      "http": 200,
+      "debug_http": 403
+    }
+  ],
+  "readiness": {
+    "http": 200,
+    "body": {
+      "status": "ok",
+      "ready": true,
+      "topics": 29,
+      "pages_available": 28,
+      "generator": "extractive"
+    }
+  },
+  "real_ollama_round_trip": false
+}

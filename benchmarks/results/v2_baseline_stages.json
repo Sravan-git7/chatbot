@@ -1,0 +1,1310 @@
+{
+  "benchmark_version": "1.1",
+  "source_commit": "6eb9d9d",
+  "source_tree": "immutable git archive",
+  "workload_version": "v2",
+  "workload_sha256": "d54ecbf2e223e7efad16b0b54aef47d2172c2a741228d75f75f448c791660d22",
+  "mode": "stages",
+  "generator": "extractive",
+  "started_utc": "2026-10-13T16:06:48+00:00",
+  "duration_s": 70.3,
+  "config": {
+    "repeat_per_item": 100,
+    "warmup": 10,
+    "concurrency_levels": null,
+    "concurrency_requests_per_level": null,
+    "percentile_method": "nearest-rank (ceil(q/100*n), 1-based)",
+    "generation_timeout_s": 90.0
+  },
+  "environment": {
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+    "python": "3.11.2",
+    "cpu_model": "Intel(R) Xeon(R) Processor @ 2.60GHz",
+    "cpu_count_logical": 2,
+    "mem_total_kb": 4034452,
+    "cgroup_cpu_max": null,
+    "cgroup_memory_max": null,
+    "cpu_affinity_count": 2,
+    "packages": {
+      "chromadb": "1.5.9",
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.1",
+      "fastapi": "0.142.2",
+      "uvicorn": "0.54.0",
+      "httpx": "0.28.1",
+      "ollama": "0.6.3",
+      "numpy": "2.4.6",
+      "pydantic": "2.13.5"
+    },
+    "generator": "extractive",
+    "git": {
+      "commit": "6eb9d9d25dda75bf9092838b813faa7a51cd8473",
+      "branch": "arena/b450cda2-chatbot",
+      "dirty": true
+    },
+    "workload_sha256": "d54ecbf2e223e7efad16b0b54aef47d2172c2a741228d75f75f448c791660d22",
+    "embedding_model": {
+      "name": "all-MiniLM-L6-v2",
+      "dir": "/home/user/chatbot/.venv/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
+      "source": null
+    },
+    "corpus": {
+      "corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
+      "chunks_fingerprint": "bc6aa3a580c5427f4c566e012c2d5390ee8025ef214d33f2c22ec2da0347281d",
+      "page_vector_count": 113,
+      "card_vector_count": 29
+    }
+  },
+  "results": {
+    "status": "OK",
+    "service_build_s": 6.881,
+    "cold_start": [
+      {
+        "wall_ms": 85.77,
+        "status": "answered",
+        "timings_ms": {
+          "route_ms": 75.83,
+          "retrieve_ms": 0.01,
+          "context_ms": 3.88,
+          "generate_ms": 2.57,
+          "total_ms": 84.7,
+          "queue_wait_ms": 0.0
+        }
+      }
+    ],
+    "per_item": [
+      {
+        "id": "simple-01-billing",
+        "category": "simple_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 38.744211999983236,
+          "p95_ms": 57.96746600026381,
+          "p99_ms": 63.226127000234555,
+          "mean_ms": 42.35,
+          "stdev_ms": 8.12,
+          "min_ms": 32.061494999652496,
+          "max_ms": 67.31189400034054
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 38.37,
+          "p95_ms": 57.34,
+          "p99_ms": 62.55,
+          "mean_ms": 41.87,
+          "stdev_ms": 8.01,
+          "min_ms": 31.7,
+          "max_ms": 66.27
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 32.47,
+            "p95_ms": 49.04,
+            "p99_ms": 54.51,
+            "mean_ms": 35.43,
+            "stdev_ms": 6.66,
+            "min_ms": 26.87,
+            "max_ms": 55.35
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.06,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.01,
+            "min_ms": 0.0,
+            "max_ms": 0.1
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 2.02,
+            "p95_ms": 3.92,
+            "p99_ms": 4.8,
+            "mean_ms": 2.46,
+            "stdev_ms": 0.87,
+            "min_ms": 1.74,
+            "max_ms": 7.41
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.24,
+            "p95_ms": 2.45,
+            "p99_ms": 2.97,
+            "mean_ms": 1.53,
+            "stdev_ms": 0.49,
+            "min_ms": 1.12,
+            "max_ms": 2.99
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 38.37,
+            "p95_ms": 57.34,
+            "p99_ms": 62.55,
+            "mean_ms": 41.87,
+            "stdev_ms": 8.01,
+            "min_ms": 31.7,
+            "max_ms": 66.27
+          }
+        },
+        "observed_card_id": "M2C-11",
+        "context_chunk_count": 1,
+        "page_char_count": 794
+      },
+      {
+        "id": "simple-02-movein",
+        "category": "simple_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 54.57379499966919,
+          "p95_ms": 82.12807699965197,
+          "p99_ms": 93.44642300038686,
+          "mean_ms": 59.09,
+          "stdev_ms": 10.94,
+          "min_ms": 49.517579000166734,
+          "max_ms": 96.86954599965247
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 54.01,
+          "p95_ms": 81.32,
+          "p99_ms": 92.88,
+          "mean_ms": 58.59,
+          "stdev_ms": 10.87,
+          "min_ms": 49.08,
+          "max_ms": 95.78
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 39.99,
+            "p95_ms": 61.86,
+            "p99_ms": 69.02,
+            "mean_ms": 43.69,
+            "stdev_ms": 7.85,
+            "min_ms": 36.51,
+            "max_ms": 70.9
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.04,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.01,
+            "min_ms": 0.0,
+            "max_ms": 0.06
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 7.01,
+            "p95_ms": 12.62,
+            "p99_ms": 16.46,
+            "mean_ms": 8.08,
+            "stdev_ms": 2.66,
+            "min_ms": 6.71,
+            "max_ms": 25.3
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 3.18,
+            "p95_ms": 5.99,
+            "p99_ms": 8.44,
+            "mean_ms": 3.69,
+            "stdev_ms": 1.18,
+            "min_ms": 2.96,
+            "max_ms": 9.54
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 54.01,
+            "p95_ms": 81.32,
+            "p99_ms": 92.88,
+            "mean_ms": 58.59,
+            "stdev_ms": 10.87,
+            "min_ms": 49.08,
+            "max_ms": 95.78
+          }
+        },
+        "observed_card_id": "M2C-03",
+        "context_chunk_count": 4,
+        "page_char_count": 5408
+      },
+      {
+        "id": "simple-03-dunning",
+        "category": "simple_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 41.6610269994635,
+          "p95_ms": 63.118547999692964,
+          "p99_ms": 71.89169199955359,
+          "mean_ms": 46.01,
+          "stdev_ms": 9.44,
+          "min_ms": 36.784179999813205,
+          "max_ms": 73.30444599938346
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 41.19,
+          "p95_ms": 62.37,
+          "p99_ms": 70.79,
+          "mean_ms": 45.39,
+          "stdev_ms": 9.34,
+          "min_ms": 36.21,
+          "max_ms": 72.59
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 31.48,
+            "p95_ms": 48.97,
+            "p99_ms": 51.55,
+            "mean_ms": 34.3,
+            "stdev_ms": 7.01,
+            "min_ms": 27.33,
+            "max_ms": 52.36
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.02,
+            "p99_ms": 0.03,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.03
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 4.8,
+            "p95_ms": 8.56,
+            "p99_ms": 11.47,
+            "mean_ms": 5.62,
+            "stdev_ms": 1.66,
+            "min_ms": 4.51,
+            "max_ms": 13.27
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 2.21,
+            "p95_ms": 4.29,
+            "p99_ms": 6.02,
+            "mean_ms": 2.68,
+            "stdev_ms": 0.86,
+            "min_ms": 2.04,
+            "max_ms": 6.28
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 41.19,
+            "p95_ms": 62.37,
+            "p99_ms": 70.79,
+            "mean_ms": 45.39,
+            "stdev_ms": 9.34,
+            "min_ms": 36.21,
+            "max_ms": 72.59
+          }
+        },
+        "observed_card_id": "M2C-26",
+        "context_chunk_count": 3,
+        "page_char_count": 2053
+      },
+      {
+        "id": "complex-01-cash-desk",
+        "category": "complex_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 41.27078799956507,
+          "p95_ms": 57.87589699957607,
+          "p99_ms": 67.79783299953124,
+          "mean_ms": 43.15,
+          "stdev_ms": 6.63,
+          "min_ms": 37.251910000122734,
+          "max_ms": 75.92957400083833
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 40.74,
+          "p95_ms": 56.99,
+          "p99_ms": 66.82,
+          "mean_ms": 42.55,
+          "stdev_ms": 6.52,
+          "min_ms": 36.75,
+          "max_ms": 74.83
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 31.89,
+            "p95_ms": 43.06,
+            "p99_ms": 54.71,
+            "mean_ms": 33.25,
+            "stdev_ms": 4.94,
+            "min_ms": 28.67,
+            "max_ms": 56.97
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.01,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.02
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 4.3,
+            "p95_ms": 6.15,
+            "p99_ms": 10.02,
+            "mean_ms": 4.69,
+            "stdev_ms": 1.12,
+            "min_ms": 4.15,
+            "max_ms": 10.31
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 2.03,
+            "p95_ms": 3.25,
+            "p99_ms": 3.92,
+            "mean_ms": 2.24,
+            "stdev_ms": 0.48,
+            "min_ms": 1.94,
+            "max_ms": 4.55
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 40.74,
+            "p95_ms": 56.99,
+            "p99_ms": 66.82,
+            "mean_ms": 42.55,
+            "stdev_ms": 6.52,
+            "min_ms": 36.75,
+            "max_ms": 74.83
+          }
+        },
+        "observed_card_id": "M2C-22",
+        "context_chunk_count": 4,
+        "page_char_count": 1999
+      },
+      {
+        "id": "complex-02-installment-lifecycle",
+        "category": "complex_supported",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 36.66974699990533,
+          "p95_ms": 49.21992799972941,
+          "p99_ms": 60.915916000340076,
+          "mean_ms": 38.92,
+          "stdev_ms": 6.14,
+          "min_ms": 34.004030000687635,
+          "max_ms": 74.72883300033573
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 36.16,
+          "p95_ms": 48.39,
+          "p99_ms": 59.93,
+          "mean_ms": 38.34,
+          "stdev_ms": 6.06,
+          "min_ms": 33.53,
+          "max_ms": 73.79
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 31.15,
+            "p95_ms": 42.32,
+            "p99_ms": 52.18,
+            "mean_ms": 33.14,
+            "stdev_ms": 5.25,
+            "min_ms": 28.95,
+            "max_ms": 62.57
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.03,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.01,
+            "min_ms": 0.0,
+            "max_ms": 0.03
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 1.37,
+            "p95_ms": 2.11,
+            "p99_ms": 2.77,
+            "mean_ms": 1.48,
+            "stdev_ms": 0.31,
+            "min_ms": 1.29,
+            "max_ms": 2.79
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.38,
+            "p95_ms": 2.01,
+            "p99_ms": 2.49,
+            "mean_ms": 1.47,
+            "stdev_ms": 0.26,
+            "min_ms": 1.29,
+            "max_ms": 2.62
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 36.16,
+            "p95_ms": 48.39,
+            "p99_ms": 59.93,
+            "mean_ms": 38.34,
+            "stdev_ms": 6.06,
+            "min_ms": 33.53,
+            "max_ms": 73.79
+          }
+        },
+        "observed_card_id": "M2C-23",
+        "context_chunk_count": 3,
+        "page_char_count": 1154
+      },
+      {
+        "id": "followup-01-billing-elaborate",
+        "category": "followup",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 57.40872299975308,
+          "p95_ms": 77.3373210004138,
+          "p99_ms": 89.40339299988409,
+          "mean_ms": 59.64,
+          "stdev_ms": 7.73,
+          "min_ms": 52.96346100021765,
+          "max_ms": 95.75717600000644
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 56.53,
+          "p95_ms": 75.92,
+          "p99_ms": 88.04,
+          "mean_ms": 58.71,
+          "stdev_ms": 7.62,
+          "min_ms": 52.19,
+          "max_ms": 94.54
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 28.5,
+            "p95_ms": 39.38,
+            "p99_ms": 44.35,
+            "mean_ms": 30.04,
+            "stdev_ms": 4.14,
+            "min_ms": 26.44,
+            "max_ms": 46.66
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 21.2,
+            "p95_ms": 28.59,
+            "p99_ms": 39.32,
+            "mean_ms": 22.21,
+            "stdev_ms": 3.42,
+            "min_ms": 19.54,
+            "max_ms": 39.94
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 0.89,
+            "p95_ms": 1.6,
+            "p99_ms": 2.0,
+            "mean_ms": 1.04,
+            "stdev_ms": 0.45,
+            "min_ms": 0.8,
+            "max_ms": 4.73
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 3.2,
+            "p95_ms": 5.89,
+            "p99_ms": 6.18,
+            "mean_ms": 3.55,
+            "stdev_ms": 0.82,
+            "min_ms": 2.97,
+            "max_ms": 6.23
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 56.53,
+            "p95_ms": 75.92,
+            "p99_ms": 88.04,
+            "mean_ms": 58.71,
+            "stdev_ms": 7.62,
+            "min_ms": 52.19,
+            "max_ms": 94.54
+          }
+        },
+        "observed_card_id": "M2C-11",
+        "context_chunk_count": 1,
+        "page_char_count": 794
+      },
+      {
+        "id": "followup-02-topic-switch",
+        "category": "followup",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 35.03385499971046,
+          "p95_ms": 42.361447000075714,
+          "p99_ms": 50.2227059996585,
+          "mean_ms": 36.28,
+          "stdev_ms": 3.38,
+          "min_ms": 33.236760000363574,
+          "max_ms": 51.05750200073089
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 34.32,
+          "p95_ms": 41.36,
+          "p99_ms": 48.82,
+          "mean_ms": 35.57,
+          "stdev_ms": 3.31,
+          "min_ms": 32.52,
+          "max_ms": 50.21
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 25.37,
+            "p95_ms": 30.63,
+            "p99_ms": 36.77,
+            "mean_ms": 26.52,
+            "stdev_ms": 2.81,
+            "min_ms": 23.84,
+            "max_ms": 41.56
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.03,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.02,
+            "min_ms": 0.0,
+            "max_ms": 0.18
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 4.57,
+            "p95_ms": 6.12,
+            "p99_ms": 7.32,
+            "mean_ms": 4.75,
+            "stdev_ms": 0.59,
+            "min_ms": 4.42,
+            "max_ms": 7.44
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 2.07,
+            "p95_ms": 2.49,
+            "p99_ms": 3.89,
+            "mean_ms": 2.16,
+            "stdev_ms": 0.34,
+            "min_ms": 1.99,
+            "max_ms": 3.95
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 34.32,
+            "p95_ms": 41.36,
+            "p99_ms": 48.82,
+            "mean_ms": 35.57,
+            "stdev_ms": 3.31,
+            "min_ms": 32.52,
+            "max_ms": 50.21
+          }
+        },
+        "observed_card_id": "M2C-26",
+        "context_chunk_count": 3,
+        "page_char_count": 2053
+      },
+      {
+        "id": "scope-01-weather",
+        "category": "out_of_scope",
+        "expected_status": "out_of_scope",
+        "observed_statuses": {
+          "out_of_scope": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 29.868927000279655,
+          "p95_ms": 34.19300299992756,
+          "p99_ms": 35.45944600045914,
+          "mean_ms": 30.39,
+          "stdev_ms": 1.88,
+          "min_ms": 27.714406000086456,
+          "max_ms": 39.67228800047451
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 29.41,
+          "p95_ms": 33.74,
+          "p99_ms": 34.98,
+          "mean_ms": 29.92,
+          "stdev_ms": 1.87,
+          "min_ms": 27.24,
+          "max_ms": 39.21
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 27.9,
+            "p95_ms": 32.24,
+            "p99_ms": 33.71,
+            "mean_ms": 28.41,
+            "stdev_ms": 1.8,
+            "min_ms": 25.94,
+            "max_ms": 37.5
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 29.41,
+            "p95_ms": 33.74,
+            "p99_ms": 34.98,
+            "mean_ms": 29.92,
+            "stdev_ms": 1.87,
+            "min_ms": 27.24,
+            "max_ms": 39.21
+          }
+        },
+        "observed_card_id": null,
+        "context_chunk_count": 0,
+        "page_char_count": 0
+      },
+      {
+        "id": "evidence-01-el31-price",
+        "category": "insufficient_evidence",
+        "expected_status": "unable_to_verify",
+        "observed_statuses": {
+          "unable_to_verify": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 49.420421999457176,
+          "p95_ms": 74.00683099967864,
+          "p99_ms": 78.93703900026594,
+          "mean_ms": 53.39,
+          "stdev_ms": 9.46,
+          "min_ms": 45.15120599990041,
+          "max_ms": 97.416723000606
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 48.89,
+          "p95_ms": 73.04,
+          "p99_ms": 78.26,
+          "mean_ms": 52.8,
+          "stdev_ms": 9.36,
+          "min_ms": 44.55,
+          "max_ms": 96.34
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 39.43,
+            "p95_ms": 58.91,
+            "p99_ms": 68.5,
+            "mean_ms": 42.87,
+            "stdev_ms": 7.74,
+            "min_ms": 36.02,
+            "max_ms": 76.24
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.02,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.03
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 4.16,
+            "p95_ms": 6.81,
+            "p99_ms": 8.65,
+            "mean_ms": 4.64,
+            "stdev_ms": 1.08,
+            "min_ms": 3.92,
+            "max_ms": 9.23
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 2.55,
+            "p95_ms": 4.45,
+            "p99_ms": 6.19,
+            "mean_ms": 2.86,
+            "stdev_ms": 0.79,
+            "min_ms": 2.4,
+            "max_ms": 6.66
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 48.89,
+            "p95_ms": 73.04,
+            "p99_ms": 78.26,
+            "mean_ms": 52.8,
+            "stdev_ms": 9.36,
+            "min_ms": 44.55,
+            "max_ms": 96.34
+          }
+        },
+        "observed_card_id": "M2C-07",
+        "context_chunk_count": 4,
+        "page_char_count": 3936
+      },
+      {
+        "id": "evidence-02-validation-transfer",
+        "category": "insufficient_evidence",
+        "expected_status": "unable_to_verify",
+        "observed_statuses": {
+          "unable_to_verify": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 35.45181700064859,
+          "p95_ms": 42.037303000142856,
+          "p99_ms": 42.83473400028015,
+          "mean_ms": 36.59,
+          "stdev_ms": 2.65,
+          "min_ms": 31.956617000105325,
+          "max_ms": 48.01355600011448
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 34.9,
+          "p95_ms": 41.12,
+          "p99_ms": 42.33,
+          "mean_ms": 36.01,
+          "stdev_ms": 2.61,
+          "min_ms": 31.42,
+          "max_ms": 47.21
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 30.16,
+            "p95_ms": 35.67,
+            "p99_ms": 37.54,
+            "mean_ms": 31.15,
+            "stdev_ms": 2.38,
+            "min_ms": 27.17,
+            "max_ms": 41.59
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.01,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.01
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 1.76,
+            "p95_ms": 2.22,
+            "p99_ms": 3.09,
+            "mean_ms": 1.84,
+            "stdev_ms": 0.25,
+            "min_ms": 1.66,
+            "max_ms": 3.23
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.39,
+            "p95_ms": 1.91,
+            "p99_ms": 2.4,
+            "mean_ms": 1.45,
+            "stdev_ms": 0.27,
+            "min_ms": 1.28,
+            "max_ms": 3.23
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 34.9,
+            "p95_ms": 41.12,
+            "p99_ms": 42.33,
+            "mean_ms": 36.01,
+            "stdev_ms": 2.61,
+            "min_ms": 31.42,
+            "max_ms": 47.21
+          }
+        },
+        "observed_card_id": "M2C-06",
+        "context_chunk_count": 3,
+        "page_char_count": 1390
+      },
+      {
+        "id": "identity-01-m2c18",
+        "category": "unresolved_identity",
+        "expected_status": "documentation_unavailable",
+        "observed_statuses": {
+          "documentation_unavailable": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 0.36328999976831255,
+          "p95_ms": 0.4658859998016851,
+          "p99_ms": 0.5499399994732812,
+          "mean_ms": 0.38,
+          "stdev_ms": 0.05,
+          "min_ms": 0.33352399987052195,
+          "max_ms": 0.7511220001106267
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 0.19,
+          "p95_ms": 0.26,
+          "p99_ms": 0.33,
+          "mean_ms": 0.2,
+          "stdev_ms": 0.03,
+          "min_ms": 0.18,
+          "max_ms": 0.34
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 0.18,
+            "p95_ms": 0.25,
+            "p99_ms": 0.32,
+            "mean_ms": 0.2,
+            "stdev_ms": 0.03,
+            "min_ms": 0.17,
+            "max_ms": 0.32
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 0.19,
+            "p95_ms": 0.26,
+            "p99_ms": 0.33,
+            "mean_ms": 0.2,
+            "stdev_ms": 0.03,
+            "min_ms": 0.18,
+            "max_ms": 0.34
+          }
+        },
+        "observed_card_id": "M2C-18",
+        "context_chunk_count": 0,
+        "page_char_count": 0
+      },
+      {
+        "id": "length-01-installment",
+        "category": "doc_length_variation",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 49.32377799923415,
+          "p95_ms": 68.58525000006921,
+          "p99_ms": 76.88717099972564,
+          "mean_ms": 52.04,
+          "stdev_ms": 7.02,
+          "min_ms": 45.49448600027972,
+          "max_ms": 77.064744999916
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 48.48,
+          "p95_ms": 67.27,
+          "p99_ms": 75.19,
+          "mean_ms": 51.09,
+          "stdev_ms": 6.8,
+          "min_ms": 44.67,
+          "max_ms": 75.56
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 31.64,
+            "p95_ms": 41.37,
+            "p99_ms": 47.06,
+            "mean_ms": 33.35,
+            "stdev_ms": 4.2,
+            "min_ms": 29.03,
+            "max_ms": 52.44
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.03,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.01,
+            "min_ms": 0.0,
+            "max_ms": 0.07
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 8.81,
+            "p95_ms": 14.1,
+            "p99_ms": 17.27,
+            "mean_ms": 9.51,
+            "stdev_ms": 1.98,
+            "min_ms": 8.45,
+            "max_ms": 18.71
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 4.46,
+            "p95_ms": 7.74,
+            "p99_ms": 9.15,
+            "mean_ms": 4.97,
+            "stdev_ms": 1.35,
+            "min_ms": 4.29,
+            "max_ms": 13.14
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 48.48,
+            "p95_ms": 67.27,
+            "p99_ms": 75.19,
+            "mean_ms": 51.09,
+            "stdev_ms": 6.8,
+            "min_ms": 44.67,
+            "max_ms": 75.56
+          }
+        },
+        "observed_card_id": "M2C-24",
+        "context_chunk_count": 4,
+        "page_char_count": 5036
+      },
+      {
+        "id": "length-02-collection-agency",
+        "category": "doc_length_variation",
+        "expected_status": "answered",
+        "observed_statuses": {
+          "answered": 100
+        },
+        "wall": {
+          "n": 100,
+          "p50_ms": 40.642947000378626,
+          "p95_ms": 61.18203099958919,
+          "p99_ms": 63.48264699954598,
+          "mean_ms": 42.91,
+          "stdev_ms": 8.46,
+          "min_ms": 33.77218100013124,
+          "max_ms": 65.83477200001653
+        },
+        "pipeline_total": {
+          "n": 100,
+          "p50_ms": 39.44,
+          "p95_ms": 59.31,
+          "p99_ms": 62.26,
+          "mean_ms": 41.74,
+          "stdev_ms": 8.29,
+          "min_ms": 32.86,
+          "max_ms": 64.39
+        },
+        "stages": {
+          "route_ms": {
+            "n": 100,
+            "p50_ms": 32.53,
+            "p95_ms": 49.25,
+            "p99_ms": 54.2,
+            "mean_ms": 34.14,
+            "stdev_ms": 6.88,
+            "min_ms": 26.83,
+            "max_ms": 56.03
+          },
+          "retrieve_ms": {
+            "n": 100,
+            "p50_ms": 0.01,
+            "p95_ms": 0.01,
+            "p99_ms": 0.03,
+            "mean_ms": 0.01,
+            "stdev_ms": 0.01,
+            "min_ms": 0.0,
+            "max_ms": 0.04
+          },
+          "context_ms": {
+            "n": 100,
+            "p50_ms": 1.77,
+            "p95_ms": 3.94,
+            "p99_ms": 4.53,
+            "mean_ms": 2.14,
+            "stdev_ms": 0.76,
+            "min_ms": 1.57,
+            "max_ms": 4.82
+          },
+          "generate_ms": {
+            "n": 100,
+            "p50_ms": 1.66,
+            "p95_ms": 3.55,
+            "p99_ms": 4.46,
+            "mean_ms": 2.0,
+            "stdev_ms": 0.67,
+            "min_ms": 1.49,
+            "max_ms": 4.48
+          },
+          "queue_wait_ms": {
+            "n": 100,
+            "p50_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "mean_ms": 0.0,
+            "stdev_ms": 0.0,
+            "min_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "total_ms": {
+            "n": 100,
+            "p50_ms": 39.44,
+            "p95_ms": 59.31,
+            "p99_ms": 62.26,
+            "mean_ms": 41.74,
+            "stdev_ms": 8.29,
+            "min_ms": 32.86,
+            "max_ms": 64.39
+          }
+        },
+        "observed_card_id": "M2C-27",
+        "context_chunk_count": 2,
+        "page_char_count": 1463
+      }
+    ],
+    "aggregate_wall": {
+      "n": 1300,
+      "p50_ms": 40.61384399938106,
+      "p95_ms": 64.779002999785,
+      "p99_ms": 78.77755600020464,
+      "mean_ms": 41.63,
+      "stdev_ms": 16.25,
+      "min_ms": 0.33352399987052195,
+      "max_ms": 97.416723000606
+    },
+    "aggregate_stages": {
+      "route_ms": {
+        "n": 1300,
+        "p50_ms": 30.98,
+        "p95_ms": 48.08,
+        "p99_ms": 58.91,
+        "mean_ms": 31.27,
+        "stdev_ms": 11.42,
+        "min_ms": 0.17,
+        "max_ms": 76.24
+      },
+      "retrieve_ms": {
+        "n": 1100,
+        "p50_ms": 0.01,
+        "p95_ms": 21.09,
+        "p99_ms": 23.93,
+        "mean_ms": 2.03,
+        "stdev_ms": 6.47,
+        "min_ms": 0.0,
+        "max_ms": 39.94
+      },
+      "context_ms": {
+        "n": 1100,
+        "p50_ms": 4.17,
+        "p95_ms": 8.99,
+        "p99_ms": 13.27,
+        "mean_ms": 4.2,
+        "stdev_ms": 2.93,
+        "min_ms": 0.8,
+        "max_ms": 25.3
+      },
+      "generate_ms": {
+        "n": 1100,
+        "p50_ms": 2.17,
+        "p95_ms": 4.62,
+        "p99_ms": 7.34,
+        "mean_ms": 2.6,
+        "stdev_ms": 1.3,
+        "min_ms": 1.12,
+        "max_ms": 13.14
+      },
+      "queue_wait_ms": {
+        "n": 1300,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "mean_ms": 0.0,
+        "stdev_ms": 0.0,
+        "min_ms": 0.0,
+        "max_ms": 0.0
+      },
+      "total_ms": {
+        "n": 1300,
+        "p50_ms": 39.98,
+        "p95_ms": 63.78,
+        "p99_ms": 77.87,
+        "mean_ms": 40.98,
+        "stdev_ms": 16.08,
+        "min_ms": 0.18,
+        "max_ms": 96.34
+      }
+    },
+    "observed_statuses": {
+      "answered": 900,
+      "out_of_scope": 100,
+      "unable_to_verify": 200,
+      "documentation_unavailable": 100
+    },
+    "correctness": {
+      "expected_status_mismatches": [],
+      "mismatch_count": 0
+    },
+    "peak_rss_mb": 926.9
+  }
+}

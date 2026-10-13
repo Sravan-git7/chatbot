@@ -1,0 +1,26 @@
+{
+  "generator": "ollama",
+  "status": "BLOCKED",
+  "checks": [],
+  "readiness": {
+    "http": 503,
+    "body": {
+      "error": {
+        "code": "model_unavailable",
+        "message": "Ollama model is not reachable.",
+        "request_id": "19e1000689004d7db5e130914c792099"
+      }
+    }
+  },
+  "outage_response": {
+    "http": 502,
+    "body": {
+      "error": {
+        "code": "generator_failed",
+        "message": "The answer generator failed (ConnectionError). No answer was produced.",
+        "request_id": "72909aaf511343eaa7d775e30507d859"
+      }
+    }
+  },
+  "reason": "Real Ollama/model unavailable; outage contract verified, inference NOT verified."
+}

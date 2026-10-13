@@ -30,7 +30,7 @@ python -m pip install -r requirements.txt -r requirements-phase11.txt \
 
 The API stack is pinned in `requirements-phase11.txt`; `requirements.txt` retains minimum-version ranges for the retrieval stack. The direct Chroma/Sentence Transformers/Ollama-client versions above match the tested versions recorded in `requirements.txt`; the model-wheel pin is the only published PyPI version retrieved for this audit.
 
-**Byte-for-byte environment reproduction:** `requirements.lock.txt` holds the complete locked closure (129 distributions) of the environment the release suite and the benchmark baseline were verified on (Python **3.11**, Linux). Install it with `python -m pip install -r requirements.lock.txt` in a fresh 3.11 venv. The complete closure requires Python ≥3.11 (numpy/scipy/scikit-learn/filelock/networkx/onnxruntime/rpds-py/websockets declare `>=3.11`); on a Python **3.10** interpreter (e.g. an existing 3.10.11 venv) do **not** use the lock file as-is — install with the ranged command above instead and let pip resolve 3.10-compatible versions. That produces a *different, non-byte-identical* closure which this repository's CI has not verified; treat results from it as environment-specific.
+**Byte-for-byte environment reproduction:** `requirements.lock.txt` holds the locked runtime/test closure (127 pins; pip/setuptools bootstrap tooling excluded) of the environment the release suite and the benchmark baseline were verified on (Python **3.11**, Linux). Install it with `python -m pip install -r requirements.lock.txt` in a fresh 3.11 venv. The complete closure requires Python ≥3.11 (numpy/scipy/scikit-learn/filelock/networkx/onnxruntime/rpds-py/websockets declare `>=3.11`); on a Python **3.10** interpreter (e.g. an existing 3.10.11 venv) do **not** use the lock file as-is — install with the ranged command above instead and let pip resolve 3.10-compatible versions. That produces a *different, non-byte-identical* closure which this repository's CI has not verified; treat results from it as environment-specific.
 
 Alternatively to the model wheel, place an approved local model directory somewhere outside Git and set `M2C_MODEL_DIR` to its absolute path; it must contain at least `model.safetensors` and `tokenizer.json`. No personal Hugging Face cache path is required by any runtime code path: resolution order is `--model-path` → `$M2C_MODEL_DIR` → the `gt-all-minilm-l6-v2` pip package; if none provides the weights, startup fails with an explicit `FileNotFoundError` telling you exactly which of those to supply. There is no automatic Hugging Face download or fallback to a generative model.
 
@@ -136,13 +136,13 @@ python scripts/rag_api.py
 python scripts/rag_api.py --host 0.0.0.0 --port 8000 --generator extractive
 ```
 
-A valid Uvicorn ASGI-factory form is:
+The factory form can initialize the API, but it does not call the CLI structured-logging setup. Use the recommended CLI for production verification, or supply an operator logging configuration explicitly before using the factory form:
 
 ```bash
 python -m uvicorn scripts.rag_api:create_app --factory --host 0.0.0.0 --port 8000 --workers 1 --log-level info
 ```
 
-The factory takes generator/configuration values from the process environment; Uvicorn’s explicit host/port options control the socket. One worker avoids duplicating the model and in-process conversation/rate-limit state on a small host. If deploying multiple workers/replicas, account for separate memory use and per-process state.
+The factory alone is not the fully verified production logging entrypoint. It takes generator/configuration values from the process environment; Uvicorn’s explicit host/port options control the socket. One worker avoids duplicating the model and in-process conversation/rate-limit state on a small host. If deploying multiple workers/replicas, account for separate memory use and per-process state.
 
 Example systemd unit (set production environment values in the referenced `EnvironmentFile`):
 

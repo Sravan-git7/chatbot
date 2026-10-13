@@ -1,0 +1,68 @@
+{
+  "benchmark_version": "1.1",
+  "source_commit": "6eb9d9d25dda75bf9092838b813faa7a51cd8473",
+  "source_tree": "working tree (see git dirty flag)",
+  "workload_version": "v1",
+  "workload_sha256": "f4d0fea668f86bf3ea56de1050cf9520a6ef58ac9619916d4abcf52f2c22c852",
+  "mode": "stages",
+  "generator": "ollama",
+  "started_utc": "2026-10-13T15:54:05+00:00",
+  "duration_s": 6.2,
+  "config": {
+    "repeat_per_item": 1,
+    "warmup": 10,
+    "concurrency_levels": null,
+    "concurrency_requests_per_level": null,
+    "percentile_method": "nearest-rank (ceil(q/100*n), 1-based)",
+    "generation_timeout_s": 90.0
+  },
+  "environment": {
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+    "python": "3.11.2",
+    "cpu_model": "Intel(R) Xeon(R) Processor @ 2.60GHz",
+    "cpu_count_logical": 2,
+    "mem_total_kb": 4034452,
+    "cgroup_cpu_max": null,
+    "cgroup_memory_max": null,
+    "cpu_affinity_count": 2,
+    "packages": {
+      "chromadb": "1.5.9",
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.1",
+      "fastapi": "0.142.2",
+      "uvicorn": "0.54.0",
+      "httpx": "0.28.1",
+      "ollama": "0.6.3",
+      "numpy": "2.4.6",
+      "pydantic": "2.13.5"
+    },
+    "generator": "ollama",
+    "git": {
+      "commit": "6eb9d9d25dda75bf9092838b813faa7a51cd8473",
+      "branch": "arena/b450cda2-chatbot",
+      "dirty": true
+    },
+    "workload_sha256": "f4d0fea668f86bf3ea56de1050cf9520a6ef58ac9619916d4abcf52f2c22c852",
+    "embedding_model": {
+      "name": "all-MiniLM-L6-v2",
+      "dir": "/home/user/chatbot/.venv/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
+      "source": null
+    },
+    "corpus": {
+      "corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
+      "chunks_fingerprint": "bc6aa3a580c5427f4c566e012c2d5390ee8025ef214d33f2c22ec2da0347281d",
+      "page_vector_count": 113,
+      "card_vector_count": 29
+    },
+    "ollama": {
+      "model": "llama3.2:3b",
+      "host": "http://localhost:11434",
+      "timeout_s_env": null
+    }
+  },
+  "results": {
+    "status": "BLOCKED",
+    "blocked_reason": "Ollama server/model not reachable from this environment (check_available() == False); no measurement performed.",
+    "service_build_s": 6.025
+  }
+}

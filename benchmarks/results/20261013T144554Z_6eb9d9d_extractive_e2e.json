@@ -1,0 +1,767 @@
+{
+  "benchmark_version": "1.0",
+  "workload_version": "v1",
+  "workload_sha256": "f4d0fea668f86bf3ea56de1050cf9520a6ef58ac9619916d4abcf52f2c22c852",
+  "mode": "e2e",
+  "generator": "extractive",
+  "started_utc": "2026-10-13T14:45:43+00:00",
+  "duration_s": 10.8,
+  "config": {
+    "repeat_per_item": 30,
+    "warmup": 5,
+    "concurrency_levels": [
+      1,
+      5,
+      10,
+      20
+    ],
+    "concurrency_requests_per_level": 100,
+    "percentile_method": "nearest-rank (ceil(q/100*n), 1-based)",
+    "generation_timeout_s": 60.0
+  },
+  "environment": {
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+    "python": "3.11.2",
+    "cpu_model": "Intel(R) Xeon(R) Processor @ 2.60GHz",
+    "cpu_count_logical": 2,
+    "mem_total_kb": 4034452,
+    "packages": {
+      "chromadb": "1.5.9",
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.1",
+      "fastapi": "0.142.2",
+      "uvicorn": "0.54.0",
+      "httpx": "0.28.1",
+      "ollama": "0.6.3",
+      "numpy": "2.4.6",
+      "pydantic": "2.13.5"
+    },
+    "generator": "extractive",
+    "git": {
+      "commit": "6eb9d9d25dda75bf9092838b813faa7a51cd8473",
+      "branch": "arena/b450cda2-chatbot",
+      "dirty": true
+    },
+    "workload_sha256": "f4d0fea668f86bf3ea56de1050cf9520a6ef58ac9619916d4abcf52f2c22c852",
+    "embedding_model": {
+      "name": "all-MiniLM-L6-v2",
+      "dir": "/home/user/chatbot/.venv/lib/python3.11/site-packages/gt_all_minilm_l6_v2/model",
+      "source": null
+    },
+    "corpus": {
+      "corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
+      "chunks_fingerprint": "bc6aa3a580c5427f4c566e012c2d5390ee8025ef214d33f2c22ec2da0347281d",
+      "page_vector_count": 113,
+      "card_vector_count": 29
+    }
+  },
+  "results": {
+    "status": "OK",
+    "base_url": "http://127.0.0.1:8300",
+    "ready_http_status": 200,
+    "ready_body": {
+      "status": "ok",
+      "ready": true,
+      "topics": 29,
+      "pages_available": 28,
+      "generator": "extractive"
+    },
+    "cold_start": [
+      {
+        "wall_ms": 77.66526999989765,
+        "http_status": 200,
+        "body_status": "answered",
+        "error_code": null
+      },
+      {
+        "wall_ms": 40.18263299985847,
+        "http_status": 200,
+        "body_status": "answered",
+        "error_code": null
+      },
+      {
+        "wall_ms": 41.60841500015522,
+        "http_status": 200,
+        "body_status": "answered",
+        "error_code": null
+      }
+    ],
+    "concurrency_sweep": [
+      {
+        "concurrency": 1,
+        "requests": 100,
+        "wall_span_s": 0.176,
+        "throughput_rps": 567.95,
+        "latency": {
+          "n": 100,
+          "p50_ms": 1.67108300001928,
+          "p95_ms": 2.0606999999017717,
+          "p99_ms": 2.2491400000035355,
+          "mean_ms": 1.7,
+          "stdev_ms": 0.25,
+          "min_ms": 1.3451119998535432,
+          "max_ms": 3.1085159998838208
+        },
+        "http_5xx": 0,
+        "http_429": 100,
+        "answered": 0,
+        "abstentions": 0
+      },
+      {
+        "concurrency": 5,
+        "requests": 100,
+        "wall_span_s": 0.086,
+        "throughput_rps": 1162.37,
+        "latency": {
+          "n": 100,
+          "p50_ms": 3.8331779999225546,
+          "p95_ms": 5.621000000019194,
+          "p99_ms": 6.355591000101413,
+          "mean_ms": 4.11,
+          "stdev_ms": 0.98,
+          "min_ms": 1.8376850000549894,
+          "max_ms": 8.959084000025541
+        },
+        "http_5xx": 0,
+        "http_429": 100,
+        "answered": 0,
+        "abstentions": 0
+      },
+      {
+        "concurrency": 10,
+        "requests": 100,
+        "wall_span_s": 0.099,
+        "throughput_rps": 1006.52,
+        "latency": {
+          "n": 100,
+          "p50_ms": 8.94771999992372,
+          "p95_ms": 13.030592000177421,
+          "p99_ms": 14.401851000002353,
+          "mean_ms": 9.32,
+          "stdev_ms": 1.93,
+          "min_ms": 5.047719000003781,
+          "max_ms": 15.193687999953909
+        },
+        "http_5xx": 0,
+        "http_429": 100,
+        "answered": 0,
+        "abstentions": 0
+      },
+      {
+        "concurrency": 20,
+        "requests": 100,
+        "wall_span_s": 0.114,
+        "throughput_rps": 877.2,
+        "latency": {
+          "n": 100,
+          "p50_ms": 19.28074099987498,
+          "p95_ms": 24.57562999984475,
+          "p99_ms": 30.8746279999923,
+          "mean_ms": 18.26,
+          "stdev_ms": 5.88,
+          "min_ms": 1.725537000083932,
+          "max_ms": 35.24311299997862
+        },
+        "http_5xx": 0,
+        "http_429": 100,
+        "answered": 0,
+        "abstentions": 0
+      }
+    ],
+    "per_item": [
+      {
+        "id": "simple-01-billing",
+        "category": "simple_supported",
+        "expected_status": "answered",
+        "http_codes": {
+          "200": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 38.03893999997854,
+          "p95_ms": 59.72966899980747,
+          "p99_ms": 72.24410300000272,
+          "mean_ms": 41.57,
+          "stdev_ms": 8.54,
+          "min_ms": 34.089538999978686,
+          "max_ms": 72.24410300000272
+        }
+      },
+      {
+        "id": "simple-02-movein",
+        "category": "simple_supported",
+        "expected_status": "answered",
+        "http_codes": {
+          "200": 22,
+          "429": 8
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 52.37640299992563,
+          "p95_ms": 66.45984399983718,
+          "p99_ms": 66.46475000002283,
+          "mean_ms": 41.41,
+          "stdev_ms": 24.74,
+          "min_ms": 1.416386000073544,
+          "max_ms": 66.46475000002283
+        }
+      },
+      {
+        "id": "simple-03-dunning",
+        "category": "simple_supported",
+        "expected_status": "answered",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.4635959998940962,
+          "p95_ms": 1.6803569999410684,
+          "p99_ms": 1.6925100001117244,
+          "mean_ms": 1.47,
+          "stdev_ms": 0.08,
+          "min_ms": 1.343856999937998,
+          "max_ms": 1.6925100001117244
+        }
+      },
+      {
+        "id": "complex-01-automatic-billing",
+        "category": "complex_supported",
+        "expected_status": "answered",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.5137660000164033,
+          "p95_ms": 1.9880729998931201,
+          "p99_ms": 1.9893879998562625,
+          "mean_ms": 1.58,
+          "stdev_ms": 0.17,
+          "min_ms": 1.385599000059301,
+          "max_ms": 1.9893879998562625
+        }
+      },
+      {
+        "id": "complex-02-installment-lifecycle",
+        "category": "complex_supported",
+        "expected_status": "answered",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.4982280001731851,
+          "p95_ms": 1.6943590001119446,
+          "p99_ms": 1.696475000017017,
+          "mean_ms": 1.52,
+          "stdev_ms": 0.1,
+          "min_ms": 1.3552939999499358,
+          "max_ms": 1.696475000017017
+        }
+      },
+      {
+        "id": "followup-01-billing-duodate",
+        "category": "followup",
+        "expected_status": "answered",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.491140999860363,
+          "p95_ms": 1.7578710001089348,
+          "p99_ms": 1.905061999877944,
+          "mean_ms": 1.53,
+          "stdev_ms": 0.13,
+          "min_ms": 1.2898719999157038,
+          "max_ms": 1.905061999877944
+        }
+      },
+      {
+        "id": "followup-02-topic-switch",
+        "category": "followup",
+        "expected_status": "answered",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.4582329999939248,
+          "p95_ms": 1.754612000013367,
+          "p99_ms": 1.7787690001114242,
+          "mean_ms": 1.52,
+          "stdev_ms": 0.11,
+          "min_ms": 1.4099770000939316,
+          "max_ms": 1.7787690001114242
+        }
+      },
+      {
+        "id": "scope-01-weather",
+        "category": "out_of_scope",
+        "expected_status": "out_of_scope",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.4478749999398133,
+          "p95_ms": 1.7125450001458375,
+          "p99_ms": 1.721545000009428,
+          "mean_ms": 1.49,
+          "stdev_ms": 0.11,
+          "min_ms": 1.3654990000304679,
+          "max_ms": 1.721545000009428
+        }
+      },
+      {
+        "id": "evidence-01-el31-price",
+        "category": "insufficient_evidence",
+        "expected_status": "unable_to_verify",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.4401169999018748,
+          "p95_ms": 1.7223529998773301,
+          "p99_ms": 1.905549999946743,
+          "mean_ms": 1.47,
+          "stdev_ms": 0.11,
+          "min_ms": 1.3737259998833906,
+          "max_ms": 1.905549999946743
+        }
+      },
+      {
+        "id": "evidence-02-validation-transfer",
+        "category": "insufficient_evidence",
+        "expected_status": "unable_to_verify",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.4661739999155543,
+          "p95_ms": 1.7329970000901085,
+          "p99_ms": 1.7531590001453878,
+          "mean_ms": 1.49,
+          "stdev_ms": 0.1,
+          "min_ms": 1.38006200018026,
+          "max_ms": 1.7531590001453878
+        }
+      },
+      {
+        "id": "identity-01-m2c18",
+        "category": "unresolved_identity",
+        "expected_status": "documentation_unavailable",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.482570999996824,
+          "p95_ms": 1.7092089999550808,
+          "p99_ms": 1.7417589999695338,
+          "mean_ms": 1.52,
+          "stdev_ms": 0.11,
+          "min_ms": 1.3765660000899516,
+          "max_ms": 1.7417589999695338
+        }
+      },
+      {
+        "id": "length-01-installment",
+        "category": "doc_length_variation",
+        "expected_status": "answered",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.448272000061479,
+          "p95_ms": 1.7450889999963692,
+          "p99_ms": 1.8592000001262932,
+          "mean_ms": 1.49,
+          "stdev_ms": 0.12,
+          "min_ms": 1.3562090000505123,
+          "max_ms": 1.8592000001262932
+        }
+      },
+      {
+        "id": "length-02-collection-agency",
+        "category": "doc_length_variation",
+        "expected_status": "answered",
+        "http_codes": {
+          "429": 30
+        },
+        "latency": {
+          "n": 30,
+          "p50_ms": 1.4277759999004047,
+          "p95_ms": 1.6794030000255589,
+          "p99_ms": 1.693516999921485,
+          "mean_ms": 1.46,
+          "stdev_ms": 0.09,
+          "min_ms": 1.3754669998888858,
+          "max_ms": 1.693516999921485
+        }
+      }
+    ],
+    "correctness": {
+      "expected_status_mismatches": [
+        {
+          "item": "simple-02-movein",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-02-movein",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-02-movein",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-02-movein",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-02-movein",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-02-movein",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-02-movein",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-02-movein",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "simple-03-dunning",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        },
+        {
+          "item": "complex-01-automatic-billing",
+          "expected": "answered",
+          "observed": null,
+          "http": 429,
+          "error_code": "rate_limited"
+        }
+      ],
+      "mismatch_count": 338,
+      "http_5xx_sequential": 0
+    },
+    "server_peak_rss_mb": 941.1,
+    "peak_rss_mb_client": 36.4
+  }
+}

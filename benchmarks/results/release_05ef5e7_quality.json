@@ -1,0 +1,2448 @@
+{
+  "quality_version": "v1",
+  "started_utc": "2026-10-13T16:29:44.408581+00:00",
+  "source_commit": "05ef5e7",
+  "generator": "extractive",
+  "real_llm": false,
+  "dataset_sha256": "3c5a9ddd2d62e9cb1919a4fbb7c81cd5239994ff230abbbe6440fb6fa5c132ac",
+  "label_authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+  "label_corpus_sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d",
+  "runtime_corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
+  "config": {
+    "top_k_cards": 10,
+    "k_chunks": 5,
+    "context_budget_tokens": 700,
+    "max_context_chunks": 4,
+    "ood_min_coverage": 0.25,
+    "context_min_coverage": 0.5,
+    "rerank_router": true,
+    "code_aware_router": true,
+    "in_page_grounding": true,
+    "citation_normalization": true,
+    "relaxed_context_gate": true,
+    "evidence_frame_normalization": false,
+    "phase16_context_experiment": false,
+    "phrase_reranker": true,
+    "phrase_min_corroboration": 2,
+    "full_page_coverage": false,
+    "citation_repair": false,
+    "elaboration_candidate_pool_size": 0,
+    "elaboration_retrieval_enabled": false,
+    "ollama_num_predict": null,
+    "ollama_keep_alive": null
+  },
+  "totals": {
+    "n": 113,
+    "answerable_n": 65,
+    "answerable_strict_correct": 37,
+    "answerable_answered": 52,
+    "wrong_page_answered": 0,
+    "negative_n": 40,
+    "negative_abstained": 30,
+    "negative_answered": 10,
+    "grounded_answers": 70,
+    "answered": 70,
+    "phantom_citations": 0,
+    "source_identity_violations": 0,
+    "supported_sentences_lexical": 189,
+    "sentences_checked": 189,
+    "gold_evidence_in_context": 62,
+    "recall_at_1_hits": 62,
+    "recall_at_5_hits": 65,
+    "recall_at_10_hits": 65,
+    "reciprocal_rank_sum_truncated_10": 63.333333333333336
+  },
+  "metrics": {
+    "recall_at_1": 0.9538461538461539,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "precision_at_1_known_gold": 0.9538461538461539,
+    "mrr_truncated_10": 0.9743589743589745,
+    "strict_evidence_answer_accuracy": 0.5692307692307692,
+    "gold_evidence_context_coverage": 0.9538461538461539,
+    "appropriate_abstention_frozen_negative_labels": 0.75,
+    "unsupported_answer_rate_frozen_negative_labels": 0.25,
+    "grounded_answer_rate_lexical": 1.0,
+    "supported_sentence_rate_lexical": 1.0
+  },
+  "limits": [
+    "Labels are frozen AI-authored reference-evidence labels, not blind human gold.",
+    "Negative labels may drift as the admitted corpus expands; they are not relabelled.",
+    "Grounding and sentence support are lexical, not semantic truth judgements.",
+    "Precision@k beyond 1 is not reported: complete relevance judgements are unavailable.",
+    "Follow-up/topic isolation is evaluated by the fixed multi-turn workload and regression suite."
+  ],
+  "per_query": [
+    {
+      "id": "P12-001",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Transaction EL43 [S4]\nYou can use this transaction to get an overview of the devices of a meter reading unit. [S4]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-002",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "You can use this transaction to display the successfully and unsuccessfully posted meter reading documents after uploading discrete meter reading data (IDocs from category ISU_MR_UPLOAD). [S4]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-003",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "(*) At first the system displays a summarized list grouped by date (meter reading date, billing date); from here you can navigate to more detailed lists. [S2]\nIn almost all of the lists for the monitoring function, you can navigate to the detailed display of an object by choosing Edit > Select or by double clicking on the field in question. [S2]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-004",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The available SAP Help page explains the purpose and parameters of Device Management, but it does not document the steps to complete this procedure.\n\nThis component manages technical data, installations, meter readings, and the inspection of devices. [S1]\nThe following table lists the standard application components that must be integrated into device management before you can manage devices. [S2]\nName in IS-U: Device Number; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Serial Number [S2]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-005",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Name in IS-U: Device Category; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Material [S2]\nName in IS-U: Device Number; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Serial Number [S2]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-006",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Equipment records are created automatically during goods receipt . [S4]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/003",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-007",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "To be able to prioritize the clearing of original items when payments are received, you set the Clrg Priority indicator. [S1]\nThis enables you to influence the clearing priority of the selected original items when payments are received. [S3]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/001",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-008",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "If you set the Distribute indicator, the interest and charges are distributed over all of the due dates. [S3]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-009",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Invoicing creates the link to contract accounting and provides the basis for bill creation. [S1]\n\nIn addition to these general activities, the following individual processing steps are useful: [S3]\n- When you create a consumption bill, you can run various bill checks, which may result in outsorting of the bill. [S3]\nA print document is generated, which you can use to simulate the bill using the Print Document Display function. [S3]\nHowever, no postings occur in contract accounts receivable and payable. [S3]\nPostings do not take place until the bill is released using the Outsorting function. [S3]\n- If bills are found to be incorrect, and their documents have been updated in the Contract Accounts Receivable and Payable (FI-CA) component, you must process them using the Bill Reversal function. [S3]\nIn this way you create a reverse document in FI-CA. [S3]\nThis document clears the bill items in FI-CA, carries out offsetting entries, and creates a reverse print document. [S3]\nTo reverse billing documents that have been invoiced, you can use the Full Reversal function. [S3]\nInvoicing reversal, therefore, is integrated with the Contract Billing (IS-U-BI) component. [S3]",
+      "sources": [
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/000",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/003",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-010",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Invoicing creates the link to contract accounting and provides the basis for bill creation. [S1]\nOnce the contract is billed, you start bill creation. [S2]\nInvoicing with Bill Creation results in a print document and a contract accounting document. [S2]",
+      "sources": [
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/000",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/002",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-011",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-17",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "In Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]\nThis component enables you to create and manage contract account master data. [S1]\nContract account master data is usually created and changed from the operational system using an interface. [S4]",
+      "sources": [
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-012",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-11",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Different billing periods are included in the various billing procedures. [S1]\nYou can process all known period categories using different billing procedures. [S1]",
+      "sources": [
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "page_id": "147bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-013",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-02",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Letters to the customer, such as welcome letters and move-out confirmations are created using the Print Workbench component. [S2]",
+      "sources": [
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/001",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "8082ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-014",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-02",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "This component enables you to process a customer move-in or move-out. [S1]\nIn the case of a move-in, you can create a business partner and contract account for the customer, or select existing ones. [S1]\nYou can have the system trigger a number of activities automatically. [S3]",
+      "sources": [
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/000",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "8082ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/002",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "8082ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-015",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-06",
+      "rank_gold": 2,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-016",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "To monitor meter reading results, you can use the following transactions in the Utilities Industry menu under Device Management > Meter Reading > Monitoring . [S1]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-017",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-018",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-019",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Invoicing with Bill Creation results in a print document and a contract accounting document. [S1]\nTo print the bill, you require the print document. [S1]\nA print document is generated, which you can use to simulate the bill using the Print Document Display function. [S2]",
+      "sources": [
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/002",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/003",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-020",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "This document clears the bill items in FI-CA, carries out offsetting entries, and creates a reverse print document. [S3]",
+      "sources": [
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/003",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-021",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-17",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "In Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]\nYou assign your business partner contracts to the contract accounts. [S3]\nAlthough one contract account can contain more than one contract, each individual contract is assigned to one contract account only. [S3]",
+      "sources": [
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-022",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-17",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Master data can be changed automatically by certain business transactions. [S2]\nThe system logs changes to master data. [S3]\nContract account master data is usually created and changed from the operational system using an interface. [S4]",
+      "sources": [
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/001",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-023",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-11",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "For example, a price change causes the system to divide the total period into subperiods, each with the price valid for that subperiod. [S1]",
+      "sources": [
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "page_id": "147bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-024",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-02",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-025",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Name in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment [S2]\nName in IS-U: Device Category; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Material [S2]\nName in IS-U: Device Number; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Serial Number [S2]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-026",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The following functions are available in the lists of meter reading results: [S3]\n- On-demand meter reading For the right kind of devices, you can use the pushbutton to request on-demand meter readings. [S3]\nNote A prerequisite is that you have activated the business function Advanced Metering Infrastructure ( ISU_AMI_1 ). [S3]\n- AMI monitoring If there are meter readings for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more meter readings. [S3]\nNote A prerequisite is that you have activated the business function Advanced Metering Infrastructure 2 ( ISU_AMI_2 ). [S3]\n- Quantity determination For meter readings with a quantity determination trigger, you can use the pushbutton to carry out quantity determination. [S3]\nNote A prerequisite is that you have activated the business function Utilities, Quantity Determination ( ISU_QD_1 ). [S3]\n\n(*) At first the system displays a summarized list grouped by date (meter reading date, billing date); from here you can navigate to more detailed lists. [S2]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        },
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-027",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-05",
+      "rank_gold": 2,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-028",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The device number is created in MM with the Goods Receipt function and transferred to the device. [S3]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-029",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "This is because the total of the individual installments must always equal the total of the original receivable (installment amount * number of installments + remaining amount = total of original receivable). [S4]\nIn the Remaining Amount field, specify whether this remaining amount is to be included in the first or last installment, or in a new installment. [S4]\nEnter values in the fields Rounding Amount and No. of Instmnts . [S4]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/005",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-030",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "If you do not want to fill these fields in the installment plan, or want to enter other values, you can do this by defining event 3000 accordingly (see the documentation of the sample function module FKK_SAMPLE_3000). [S2]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/002",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-031",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "In addition to these general activities, the following individual processing steps are useful: [S3]\n- When you create a consumption bill, you can run various bill checks, which may result in outsorting of the bill. [S3]\nA print document is generated, which you can use to simulate the bill using the Print Document Display function. [S3]\nHowever, no postings occur in contract accounts receivable and payable. [S3]\nPostings do not take place until the bill is released using the Outsorting function. [S3]\n- If bills are found to be incorrect, and their documents have been updated in the Contract Accounts Receivable and Payable (FI-CA) component, you must process them using the Bill Reversal function. [S3]\nIn this way you create a reverse document in FI-CA. [S3]\nThis document clears the bill items in FI-CA, carries out offsetting entries, and creates a reverse print document. [S3]\nTo reverse billing documents that have been invoiced, you can use the Full Reversal function. [S3]\nInvoicing reversal, therefore, is integrated with the Contract Billing (IS-U-BI) component. [S3]",
+      "sources": [
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/003",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-032",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-17",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn this component, a contract account can be assigned to one business partner only. [S2]\nIn Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]",
+      "sources": [
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-033",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-11",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The billing module ensures that all billing-relevant changes that occur during a billing period are taken into consideration. [S1]\nBilling uses meter reading results or load profiles to determine the evaluation basis for schema execution. [S1]\nFor example, a price change causes the system to divide the total period into subperiods, each with the price valid for that subperiod. [S1]",
+      "sources": [
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "page_id": "147bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-034",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-02",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The available SAP Help page explains the purpose and parameters of Move-In/Out, but it does not document the steps to complete this procedure.\n\nThe SAP Business Workflow component (BC-BMT-WFM) enables you to monitor and configure the workflow processes. [S2]",
+      "sources": [
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/001",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "8082ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-035",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Transaction EL43 [S4]\nYou can use this transaction to get an overview of the devices of a meter reading unit. [S4]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-036",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Transaction EL31 [S2]\nYou can use this transaction to monitor meter reading results based on different selection criteria. [S2]\nTransaction EL32 [S4]\nYou can use this transaction to monitor meter reading data and trigger automatic follow-on processing for selected meter reading orders. [S4]\nYou can use this transaction to display the successfully and unsuccessfully posted meter reading documents after uploading discrete meter reading data (IDocs from category ISU_MR_UPLOAD). [S4]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        },
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-037",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "If the business function Utilities, Quantity Determination ( ISU_QD_1 ) is active, you can also display meter reading results. [S3]\nNote A prerequisite is that you have activated the business function Advanced Metering Infrastructure ( ISU_AMI_1 ). [S4]\nNote A prerequisite is that you have activated the business function Advanced Metering Infrastructure 2 ( ISU_AMI_2 ). [S4]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        },
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-038",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "If the business function Utilities, Quantity Determination ( ISU_QD_1 ) is active, you can also display meter reading results. [S3]\nNote A prerequisite is that you have activated the business function Utilities, Quantity Determination ( ISU_QD_1 ). [S4]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        },
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-039",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "You can use this transaction to display the successfully and unsuccessfully posted meter reading documents after uploading discrete meter reading data (IDocs from category ISU_MR_UPLOAD). [S4]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/004",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-040",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "In the SAP Easy Access screen, choose Account > Installment Plan > Create (transaction FPR1 ). [S3]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-041",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "To be able to prioritize the clearing of original items when payments are received, you set the Clrg Priority indicator. [S1]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/001",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-042",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-043",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-02",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The available SAP Help page explains the purpose and parameters of Move-In/Out, but it does not document the steps to complete this procedure.\n\nThe SAP Business Workflow component (BC-BMT-WFM) enables you to monitor and configure the workflow processes. [S2]",
+      "sources": [
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/001",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "8082ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-044",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Note: When you create an installment plan, the system copies the company code, contract, business area, and business place from the original item (in the standard system), as long as these fields have the same value in all original items selected. [S2]\nIf you do not want to fill these fields in the installment plan, or want to enter other values, you can do this by defining event 3000 accordingly (see the documentation of the sample function module FKK_SAMPLE_3000). [S2]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/002",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-045",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-25",
+      "rank_gold": 3,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-046",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-047",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-048",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-049",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-050",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "You can either copy default values to the initial screen using the Installment Plan Type or enter the installment plan parameters manually. [S2]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-051",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-052",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-02",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "This component enables you to process a customer move-in or move-out. [S1]\nLetters to the customer, such as welcome letters and move-out confirmations are created using the Print Workbench component. [S2]\nIn the case of a move-in, you can create a business partner and contract account for the customer, or select existing ones. [S1]",
+      "sources": [
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/000",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "8082ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4/001",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "8082ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8082ce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-053",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "To monitor meter reading results, you can use the following transactions in the Utilities Industry menu under Device Management > Meter Reading > Monitoring . [S1]\n(*) At first the system displays a summarized list grouped by date (meter reading date, billing date); from here you can navigate to more detailed lists. [S3]\n\nThe following functions are available in the lists of meter reading results: [S4]\n- On-demand meter reading For the right kind of devices, you can use the pushbutton to request on-demand meter readings. [S4]\nNote A prerequisite is that you have activated the business function Advanced Metering Infrastructure ( ISU_AMI_1 ). [S4]\n- AMI monitoring If there are meter readings for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more meter readings. [S4]\nNote A prerequisite is that you have activated the business function Advanced Metering Infrastructure 2 ( ISU_AMI_2 ). [S4]\n- Quantity determination For meter readings with a quantity determination trigger, you can use the pushbutton to carry out quantity determination. [S4]\nNote A prerequisite is that you have activated the business function Utilities, Quantity Determination ( ISU_QD_1 ). [S4]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/000",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        },
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        },
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/003",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-054",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-11",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "All master and billing master data can change during a billing period. [S1]\nThe billing module ensures that all billing-relevant changes that occur during a billing period are taken into consideration. [S1]",
+      "sources": [
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4/000",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "page_id": "147bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/147bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-055",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Invoicing creates the link to contract accounting and provides the basis for bill creation. [S1]\nThe contracts of a contract account are grouped together in invoicing for the joint bill. [S1]\nThe bill requests can be followed up in contract accounts receivable and payable. [S4]",
+      "sources": [
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/000",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/005",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-056",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-17",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "This component enables you to create and manage contract account master data. [S1]\nSimilarly, a single contract account can be assigned to more than one business partner. [S2]\nIn this component, a contract account can be assigned to one business partner only. [S2]",
+      "sources": [
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-057",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The following table lists the standard application components that must be integrated into device management before you can manage devices. [S2]\nName in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment [S2]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-058",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "If you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1) and you are in an advanced metering infrastructure, you can find more information under Advanced Metering Infrastructure . [S1]\nThis component manages technical data, installations, meter readings, and the inspection of devices. [S1]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-059",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Function: Stock Transfer; Component: Goods Issue and Return Delivery from MM-IM [S3]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-060",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The device is identified by a unique material and serial number combination to distinguish it from other pieces of material that may have the same serial number. [S3]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-061",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Name in IS-U: Device Category; From Component: Logistics Basic Data (LO-MD); Name in Standard System: Material [S2]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-062",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The equipment number is the same throughout the system. [S3]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-063",
+      "type": "answerable",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-064",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "In addition to these general activities, the following individual processing steps are useful: [S2]\n- When you create a consumption bill, you can run various bill checks, which may result in outsorting of the bill. [S2]\nA print document is generated, which you can use to simulate the bill using the Print Document Display function. [S2]\nHowever, no postings occur in contract accounts receivable and payable. [S2]\nPostings do not take place until the bill is released using the Outsorting function. [S2]\n- If bills are found to be incorrect, and their documents have been updated in the Contract Accounts Receivable and Payable (FI-CA) component, you must process them using the Bill Reversal function. [S2]\nIn this way you create a reverse document in FI-CA. [S2]\nThis document clears the bill items in FI-CA, carries out offsetting entries, and creates a reverse print document. [S2]\nTo reverse billing documents that have been invoiced, you can use the Full Reversal function. [S2]\nInvoicing reversal, therefore, is integrated with the Contract Billing (IS-U-BI) component. [S2]",
+      "sources": [
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/003",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-065",
+      "type": "answerable",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": true,
+      "gold_evidence_in_context": true,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "You must release the documents previously outsorted during billing checks. [S2]\nPostings do not take place until the bill is released using the Outsorting function. [S3]",
+      "sources": [
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/002",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/003",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-066",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-067",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-068",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-069",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-070",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-071",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-072",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-23",
+      "rank_gold": 2,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-073",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-074",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-04",
+      "rank_gold": 2,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-075",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-076",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-17",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-077",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-17",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-078",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-13",
+      "rank_gold": 3,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-079",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-11",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-080",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-04",
+      "rank_gold": 3,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-081",
+      "type": "absent_detail",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-03",
+      "rank_gold": 3,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-082",
+      "type": "not_ingested",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-23",
+      "rank_gold": 2,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The number of the installment plan is saved in the source items. [S3]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/002",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "730dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001"
+        }
+      ]
+    },
+    {
+      "id": "P12-083",
+      "type": "not_ingested",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-04",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-084",
+      "type": "not_ingested",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-03",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The available SAP Help page explains the purpose and parameters of Move-in, but it does not document the steps to complete this procedure.\n\nYou use the move-in function to carry out most of the activities required to begin providing a business partner with a utility service. [S1]\nIn these instances, you can, in Customizing under Move-In/Out -> Move-In -> Define Control Parameters at Document Level configure the system to either output a confirmation prompt or save the data automatically before the action is carried out. [S4]",
+      "sources": [
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/000",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "0981ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4/007",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "0981ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0981ce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-085",
+      "type": "not_ingested",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-12",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Automatic billing enables you to bill a single contract or any selection of contracts. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\nScheduling determines how often billing runs occur. [S2]",
+      "sources": [
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "page_id": "297bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "page_id": "297bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-086",
+      "type": "not_ingested",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-08",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "This component allows you to estimate meter reading results automatically in the case of missing meter readings or implausible consumption. [S1]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4/000",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "d090d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/d090d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-087",
+      "type": "not_ingested",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-09",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "In SAP Utilities, estimation procedures are used in the following processes: [S1]\n- Estimate meter reading results [S1]\n- Validate meter reading results [S1]\n- Billing simulation [S1]\n- Budget billing plan creation [S1]\n- Unbilled revenue reporting [S1]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba/000",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "bf74c1d28fd54f77b228772b98b72fba",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/bf74c1d28fd54f77b228772b98b72fba.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-088",
+      "type": "not_ingested",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-23",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "An installment plan consists of a statistical document with several installment receivables. [S3]\nThe number of the installment plan is saved in the source items. [S3]\nIf interest is payable on an installment plan, the installment plan will also have an interest supplement. [S3]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/002",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "730dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4.html?version=2025.001"
+        }
+      ]
+    },
+    {
+      "id": "P12-089",
+      "type": "not_ingested",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-23",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-090",
+      "type": "not_ingested",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-26",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The available SAP Help page explains the purpose and parameters of Dunning, but it does not document the steps to complete this procedure.\n\nYou can create payment reminders or dunning letters and send them to your business partners, to alert them of overdue payables and to request payment. [S1]\nIf receivables have reached a specific collection step, you can lock the contract account or the service for a business partner automatically in the dunning activities run (see Lock Services Using SAP RM-CA and SAP CRM ). [S2]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4/000",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "b1ffc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4/001",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "b1ffc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1ffc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-091",
+      "type": "not_ingested",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-29",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "If you disconnect a business partner because he/she has reached the disconnection dunning level, the system changes the creditworthiness of the business partner for each disconnection. [S3]\nYou can configure the system to generate a contract-related proposal for the object to be disconnected/reconnected. [S4]",
+      "sources": [
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4/003",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "8682ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4/005",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "8682ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/8682ce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-092",
+      "type": "unresolved_identity",
+      "status": "page_not_ingested",
+      "reason": "PAGE_IDENTIFIED_NO_LOCAL_CONTENT",
+      "selected": "M2C-18",
+      "rank_gold": null,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": null,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-093",
+      "type": "unresolved_identity",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-17",
+      "rank_gold": 10,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-094",
+      "type": "unresolved_identity",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-17",
+      "rank_gold": 10,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-095",
+      "type": "unresolved_identity",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-13",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "You specify the budget billing amounts and the dates that are due in the budget billing plan. [S1]\nThe budget billing plan is the basis for charging budget billing amounts. [S1]\nWith budget billing plans, you manage the budget billing requests in a billing period in between two periodic bills. [S1]",
+      "sources": [
+        {
+          "chunk_id": "021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b/000",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "page_id": "c1a5e8aee73440ee971a768af5b9ea1b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/c1a5e8aee73440ee971a768af5b9ea1b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-096",
+      "type": "unresolved_identity",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-16",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "This app is available for the role Billing Specialist (Utilities) ( SAP_BR_BILLING_SPECIALIST_ISU ). [S1]\nYou can use this app to analyze the billing and invoicing process for all billing and invoicing statuses and KPIs. [S1]\nThe app presents the most relevant KPIs for a portion-centered analysis of the billing and invoicing process. [S2]",
+      "sources": [
+        {
+          "chunk_id": "021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc/000",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "page_id": "549661e6541f403ea56196782e040bcc",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html"
+        },
+        {
+          "chunk_id": "021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc/001",
+          "guide_id": "021b182b0c47416c8fafed67ebfd78a9",
+          "page_id": "549661e6541f403ea56196782e040bcc",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/549661e6541f403ea56196782e040bcc.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-097",
+      "type": "unresolved_identity",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-01",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-098",
+      "type": "ambiguous",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "In the SAP Easy Access screen, choose Account > Installment Plan > Create (transaction FPR1 ). [S2]\nEnter the installment plan parameters. [S2]\nYou can either copy default values to the initial screen using the Installment Plan Type or enter the installment plan parameters manually. [S2]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/004",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-099",
+      "type": "ambiguous",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-14",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Billing documents from the Contract Billing (IS-U-BI) component, or budget billing plans, which are managed in the Budget Billing Plan component must exist if billing is to take place. [S1]\nAfter the bill has been created, it is sent to the bill recipient. [S4]\nThe bill requests can be followed up in contract accounts receivable and payable. [S4]",
+      "sources": [
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/001",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4/005",
+          "guide_id": "a003b275c98148ee8a4c3fafe9588fe3",
+          "page_id": "cc7bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/sap_s4hana_on-premise/a003b275c98148ee8a4c3fafe9588fe3/cc7bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-100",
+      "type": "ambiguous",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-17",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The available SAP Help page explains the purpose and parameters of Contract Accounts, but it does not document the steps to complete this procedure.\n\nThis component enables you to create and manage contract account master data. [S1]\nIn Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]",
+      "sources": [
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+          "guide_id": "e52c8ee6197147ec97dfc2eb8c46a3ad",
+          "page_id": "0bfcc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-101",
+      "type": "ambiguous",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-04",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "During the move-out transaction, you execute most of the activities required to cancel the customer's supply of utilities services. [S1]\nYou make changes to the business partner master data that result from a move-out. [S1]\nYou specifically end the allocation of a contract to an installation on the move-out date. [S1]",
+      "sources": [
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4/000",
+          "guide_id": "f4a255a5de524e3992155767996fb1fd",
+          "page_id": "0f81ce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f4a255a5de524e3992155767996fb1fd/0f81ce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-102",
+      "type": "ambiguous",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-07",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The objects that you can monitor using these selection criteria are marked with x in each row. [S2]\nIf there are meter reading orders for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more orders. [S3]\nIn almost all of the lists for the monitoring function, you can navigate to the detailed display of an object by choosing Edit > Select or by double clicking on the field in question. [S3]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/001",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        },
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b/002",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "4d76765c1e012b8ae10000000a42189b",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-103",
+      "type": "ambiguous",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-24",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "- Create or delete an installment plan surcharge and/or an inflation surcharge The prerequisite in this case is that you activated the enhancement in Customizing under Business Transactions > Deferral and Installment Plans > Activate Installment Plan Enhancement for Charges/Interest . [S3]",
+      "sources": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4/006",
+          "guide_id": "9442486404b54071b4ebeab6a16628e7",
+          "page_id": "790dc5536a51204be10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-104",
+      "type": "ambiguous",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-05",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "The available SAP Help page explains the purpose and parameters of Device Management, but it does not document the steps to complete this procedure.\n\nThis component manages technical data, installations, meter readings, and the inspection of devices. [S1]\nThe following table lists the standard application components that must be integrated into device management before you can manage devices. [S2]\nName in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment [S2]",
+      "sources": [
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/000",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/8990d0533f8e4308e10000000a174cb4/001",
+          "guide_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758",
+          "page_id": "8990d0533f8e4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/021b182b0c47416c8fafed67ebfd78a9/8990d0533f8e4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-105",
+      "type": "ambiguous",
+      "status": "answered",
+      "reason": null,
+      "selected": "M2C-12",
+      "rank_gold": 1,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": "Automatic billing enables you to bill a single contract or any selection of contracts. [S1]\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]",
+      "sources": [
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "page_id": "297bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html"
+        },
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+          "guide_id": "ed84b70c199d4470ae2e5ccb93b2e45b",
+          "page_id": "297bce53118d4308e10000000a174cb4",
+          "url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4.html"
+        }
+      ]
+    },
+    {
+      "id": "P12-106",
+      "type": "out_of_domain",
+      "status": "out_of_domain",
+      "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+      "selected": "M2C-01",
+      "rank_gold": null,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": null,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-107",
+      "type": "out_of_domain",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-16",
+      "rank_gold": null,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-108",
+      "type": "out_of_domain",
+      "status": "out_of_domain",
+      "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+      "selected": "M2C-19",
+      "rank_gold": null,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": null,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-109",
+      "type": "out_of_domain",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-24",
+      "rank_gold": null,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-110",
+      "type": "out_of_domain",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-01",
+      "rank_gold": null,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-111",
+      "type": "out_of_domain",
+      "status": "out_of_domain",
+      "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+      "selected": "M2C-03",
+      "rank_gold": null,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": null,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-112",
+      "type": "out_of_domain",
+      "status": "insufficient_context",
+      "reason": "GENERATOR_REFUSED",
+      "selected": "M2C-25",
+      "rank_gold": null,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": true,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    },
+    {
+      "id": "P12-113",
+      "type": "out_of_domain",
+      "status": "out_of_domain",
+      "reason": "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC",
+      "selected": "M2C-01",
+      "rank_gold": null,
+      "strict_evidence_correct": false,
+      "gold_evidence_in_context": false,
+      "grounding_ok": null,
+      "phantom_citations": 0,
+      "identity_violations": 0,
+      "answer": null,
+      "sources": []
+    }
+  ]
+}

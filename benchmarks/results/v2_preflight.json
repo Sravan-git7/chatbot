@@ -1,0 +1,28 @@
+{
+  "python": "3.11.2",
+  "packages": {
+    "chromadb": "1.5.9",
+    "sentence-transformers": "6.1.0",
+    "fastapi": "0.142.2",
+    "uvicorn": "0.54.0",
+    "pydantic": "2.13.5",
+    "httpx": "0.28.1",
+    "pytest": "9.1.1",
+    "lxml": "6.1.3",
+    "numpy": "2.4.6"
+  },
+  "errors": [],
+  "warnings": [],
+  "embedding_model": {
+    "model": "all-MiniLM-L6-v2",
+    "origin": "pip package gt-all-minilm-l6-v2 (third-party re-packaging of sentence-transformers/all-MiniLM-L6-v2)",
+    "files_sha256": {
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+    }
+  }
+}
