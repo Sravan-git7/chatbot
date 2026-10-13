@@ -173,7 +173,7 @@ class OllamaClient:
             models = resp.get("models") if isinstance(resp, Mapping) else getattr(resp, "models", None)
             names = set()
             for m in models or []:
-                n = m.get("name") if isinstance(m, Mapping) else getattr(m, "name", None)
+                n = (m.get("model") or m.get("name")) if isinstance(m, Mapping) else (getattr(m, "model", None) or getattr(m, "name", None))
                 if n:
                     names.add(str(n))
             want = str(self.model or "")

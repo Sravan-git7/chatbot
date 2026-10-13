@@ -231,6 +231,22 @@ class HealthReadyTests(unittest.TestCase):
         self.assertFalse(probe(raises=ConnectionError("refused")))           # server down
         self.assertTrue(probe(models=["llama3.2:latest"], model="llama3.2")) # implicit-tag convention accepted
 
+        # Regression: ollama>=0.4 returns Model objects with `model` attribute instead of `name`
+        class FakeModernOllama:
+            def Client(self, timeout=None):
+                return SimpleNamespace(list=lambda: SimpleNamespace(models=[SimpleNamespace(model="llama3.2:3b")]))
+
+        saved = _sys.modules.get("ollama")
+        _sys.modules["ollama"] = FakeModernOllama()
+        try:
+            self.assertTrue(RG.OllamaClient(model="llama3.2:3b").check_available(timeout=0.01))
+            self.assertFalse(RG.OllamaClient(model="other:model").check_available(timeout=0.01))
+        finally:
+            if saved is None:
+                _sys.modules.pop("ollama", None)
+            else:
+                _sys.modules["ollama"] = saved
+
     def test_ollama_generation_timeout_is_opt_in_and_wired(self):
         """SURA_OLLAMA_TIMEOUT_SECONDS caps a hung local server so a generation cannot hold a request (and a
         concurrency slot) forever. Unset keeps the ollama client's own default (module-level chat, no Client)."""
