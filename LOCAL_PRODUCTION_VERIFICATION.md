@@ -5,6 +5,8 @@ The user's existing `av` environment is Python 3.10.11. That Windows machine was
 These commands are a handoff, not a claim that native Windows/Ollama verification has passed.
 Current release decision and evidence: `FINAL_RELEASE_REPORT.md`, `PRE_DEPLOYMENT_AUDIT.md`, `LATENCY_RAG_COMPARISON.md`.
 
+**2026-10-14 Windows failure follow-up:** see `WINDOWS_REMEDIATION_REPORT.md` before rebuilding or installing dependencies. The reported 35 failures/1 error are not yet independently diagnosed from full tracebacks. Stop all store writers and use `verify_windows.ps1 -Python .\av\Scripts\python.exe -DiagnosticsOnly` first; this captures the current package closure and compares scratch copies of the original stores. It never rebuilds them. Full reruns now save pytest text, JUnit and a transcript. Native Windows success remains pending.
+
 ## One compact PowerShell sequence
 
 Run in a normal local PowerShell window (Node 20+ required; Node 22 was measured in Arena).
@@ -43,7 +45,7 @@ The pinned MiniLM wheel resolves its weights without a personal cache path. An o
 
 This addresses checkout-induced `test_phase7b.py` hash failures. It **does not** fix Python-generated CRLF from the sealed, checkpoint-pinned `build_chunk_candidates.py` writer. Native Windows `test_chunk_candidates.py` may still fail its byte-reproduction assertion. **Do not skip the test, weaken its assertion, regenerate the checkpoint, or overwrite sealed candidates.** The full suite passes on Linux. Until an approved versioned producer/checkpoint migration exists, exact historical reproduction requires Linux/WSL with the measured dependency line. This native Windows gate is pending, not green.
 
-`chroma_db/` is legacy, ignored and inert in the shipped system; preserve it. Current runtime stores are the separate card/page collections under `data/vector_store/`. No operation above deletes an existing collection. For an intentional rebuild, first back up the complete store outside Git and explicitly approve the rebuild; use scratch `--manifest` outputs.
+`chroma_db/` is legacy and ignored; preserve it. Current SURA retrieval uses the stores below, but old `rag_core.py`/`rag_modes.py --mode legacy` and diagnostic scripts can still use `chroma_db/`. Historical clean-checkout tests assert its absence. Do not delete it or weaken those assertions; first capture its hashes and confirm whether legacy tooling needs it, then review the external backup/archive procedure in `WINDOWS_REMEDIATION_REPORT.md`. Current runtime stores are the separate card/page collections under `data/vector_store/`. No operation above deletes an existing collection. For an intentional rebuild, first back up the complete store outside Git and explicitly approve the rebuild; use scratch `--manifest` outputs.
 
 ## Real Ollama (use the model already available, never auto-pull)
 

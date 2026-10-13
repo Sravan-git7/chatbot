@@ -1,0 +1,28 @@
+
+> sap-utilities-chat@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.11 /home/user/chatbot/web
+
+ ✓ src/__tests__/app.test.tsx (43 tests) 5813ms
+     ✓ keeps answer controls separated and aligns citation numbers, source counts, and copied evidence  1640ms
+ ✓ src/__tests__/sura_ux.test.tsx (6 tests) 1860ms
+     ✓ renders SURA assistant introduction, domain suggested questions, and Explore SAP Utilities categories  315ms
+     ✓ cycles through thinking stages while waiting for the backend response  593ms
+     ✓ end-to-end validation against live localhost:8000 backend (welcome, real question, citations, source cards, follow-ups, out-of-scope, sequential questions)  572ms
+ ✓ src/__tests__/abstention.test.tsx (4 tests) 353ms
+ ✓ src/__tests__/messageView.test.tsx (4 tests) 212ms
+ ✓ src/__tests__/markdown.test.tsx (9 tests) 181ms
+ ✓ src/__tests__/structuredAnswer.test.tsx (8 tests) 222ms
+ ✓ src/__tests__/api.test.ts (12 tests) 60ms
+ ✓ src/__tests__/followup.test.ts (12 tests) 15ms
+ ✓ src/__tests__/util.test.ts (10 tests) 14ms
+ ✓ src/__tests__/storage.test.ts (6 tests) 8ms
+ ✓ src/__tests__/typography.test.ts (4 tests) 8ms
+ ✓ src/__tests__/dependencySecurity.test.ts (2 tests) 5ms
+
+ Test Files  12 passed (12)
+      Tests  120 passed (120)
+   Start at  19:07:05
+   Duration  17.76s (transform 506ms, setup 1.61s, import 1.44s, tests 8.75s, environment 4.43s)
