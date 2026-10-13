@@ -150,6 +150,149 @@ class HealthReadyTests(unittest.TestCase):
         self.assertEqual(r_bad.status_code, 503)
         self.assertEqual(r_bad.json()["error"]["code"], "model_unavailable")
 
+    def test_readiness_reaches_ollama_client_through_the_shipped_guard_chain(self):
+        """build_service ships GeneratorGuard(EvidenceGuard(LLMGenerator(client))); readiness must find the client
+        at that depth - the old single-level lookup silently skipped the check and reported ready:true with an
+        unreachable model (false success)."""
+        import rag_evidence as EV
+
+        class StubOllamaClient:
+            def __init__(self, available: bool):
+                self._available = available
+
+            def check_available(self) -> bool:
+                return self._available
+
+        def shipped(available: bool):
+            llm = RG.LLMGenerator(StubOllamaClient(available), name="ollama")
+            guarded = S.GeneratorGuard(EV.EvidenceGuard(llm))
+            svc = S.RagService(make_pipeline(guarded, RANKING), "ollama")
+            return TestClient(rag_api.create_app(service=svc, static_dir=Path("/nonexistent")))
+
+        r_ok = shipped(True).get("/ready")
+        self.assertEqual(r_ok.status_code, 200)
+        r_bad = shipped(False).get("/ready")
+        self.assertEqual(r_bad.status_code, 503)
+        self.assertEqual(r_bad.json()["error"]["code"], "model_unavailable")
+
+    def test_readiness_fails_closed_when_no_ollama_probe_exists(self):
+        """An ollama generator whose chain exposes no check_available probe cannot be verified: readiness must
+        fail closed (503) instead of claiming ready."""
+        class ProbelessClient:
+            def generate(self, prompt: str) -> str:
+                return "text"
+
+        gen = RG.LLMGenerator(ProbelessClient(), name="ollama")
+        svc = S.RagService(make_pipeline(gen, RANKING), "ollama")
+        r = TestClient(rag_api.create_app(service=svc, static_dir=Path("/nonexistent"))).get("/ready")
+        self.assertEqual(r.status_code, 503)
+        self.assertEqual(r.json()["error"]["code"], "model_unavailable")
+
+    def test_ollama_client_check_available_is_bounded_and_never_raises(self):
+        """Unit contract of the real probe: injected stub chat is available without network; against a stubbed
+        ollama module it requires an answering server AND the configured model (strict tag matching); every
+        failure mode returns False instead of raising."""
+        import sys as _sys
+        from types import SimpleNamespace
+
+        # injected chat callable -> available, and the ollama package is never imported for the probe
+        self.assertTrue(RG.OllamaClient(model="m", chat=lambda **kw: {}).check_available())
+
+        class FakeOllama:
+            def __init__(self, models=None, raises=None):
+                self._models, self._raises = models, raises
+
+            def Client(self, timeout=None):                     # noqa: N802 - mirrors the ollama package API
+                outer = self
+
+                class _C:
+                    def list(self_inner):
+                        if outer._raises:
+                            raise outer._raises
+                        return SimpleNamespace(models=[SimpleNamespace(name=n) for n in outer._models])
+                return _C()
+
+        def probe(models=None, raises=None, model="llama3.2:3b"):
+            fake = FakeOllama(models=models, raises=raises)
+            saved = _sys.modules.get("ollama")
+            _sys.modules["ollama"] = fake
+            try:
+                return RG.OllamaClient(model=model).check_available(timeout=0.01)
+            finally:
+                if saved is None:
+                    _sys.modules.pop("ollama", None)
+                else:
+                    _sys.modules["ollama"] = saved
+
+        self.assertTrue(probe(models=["llama3.2:3b"]))                       # exact configured model pulled
+        self.assertFalse(probe(models=["llama3.2:latest"]))                  # different tag of same base: not accepted
+        self.assertFalse(probe(models=["qwen2:7b"]))                         # model not pulled
+        self.assertFalse(probe(models=[]))                                   # server up, nothing pulled
+        self.assertFalse(probe(raises=ConnectionError("refused")))           # server down
+        self.assertTrue(probe(models=["llama3.2:latest"], model="llama3.2")) # implicit-tag convention accepted
+
+    def test_ollama_generation_timeout_is_opt_in_and_wired(self):
+        """SURA_OLLAMA_TIMEOUT_SECONDS caps a hung local server so a generation cannot hold a request (and a
+        concurrency slot) forever. Unset keeps the ollama client's own default (module-level chat, no Client)."""
+        import os as _os
+        import sys as _sys
+
+        calls = []
+
+        class FakeOllamaModule:
+            @staticmethod
+            def chat(**kw):
+                calls.append(("module_chat", None))
+                return {"message": {"content": "text"}}
+
+            @staticmethod
+            def Client(timeout=None):                            # noqa: N802 - mirrors the ollama package API
+                calls.append(("client", timeout))
+
+                class _C:
+                    @staticmethod
+                    def chat(**kw):
+                        return {"message": {"content": "text"}}
+                return _C()
+
+        saved_mod = _sys.modules.get("ollama")
+        saved_env = _os.environ.get("SURA_OLLAMA_TIMEOUT_SECONDS")
+        _sys.modules["ollama"] = FakeOllamaModule
+        try:
+            # 1) no env, no explicit timeout -> ollama.chat used directly, no timeout invented
+            _os.environ.pop("SURA_OLLAMA_TIMEOUT_SECONDS", None)
+            self.assertIsNone(RG.OllamaClient(model="m").timeout)
+            calls.clear()
+            RG.OllamaClient(model="m").generate("prompt")
+            self.assertEqual(calls, [("module_chat", None)])
+
+            # 2) env knob -> ollama.Client(timeout=X).chat
+            _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = "2.5"
+            c = RG.OllamaClient(model="m")
+            self.assertEqual(c.timeout, 2.5)
+            calls.clear()
+            c.generate("prompt")
+            self.assertEqual(calls, [("client", 2.5)])
+
+            # 3) invalid / non-positive values fall back to the default (never crash construction)
+            _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = "not-a-number"
+            self.assertIsNone(RG.OllamaClient(model="m").timeout)
+            _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = "-3"
+            self.assertIsNone(RG.OllamaClient(model="m").timeout)
+
+            # 4) explicit constructor argument wins over the environment
+            _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = "9"
+            self.assertEqual(RG.OllamaClient(model="m", timeout=1.25).timeout, 1.25)
+        finally:
+            if saved_mod is None:
+                _sys.modules.pop("ollama", None)
+            else:
+                _sys.modules["ollama"] = saved_mod
+            if saved_env is None:
+                _os.environ.pop("SURA_OLLAMA_TIMEOUT_SECONDS", None)
+            else:
+                _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = saved_env
+
     def test_graceful_shutdown_flag(self):
         # When shutting down flag is set, new requests receive 503
         self.app.state.rag["shutting_down"] = True

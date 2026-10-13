@@ -50,6 +50,32 @@ logger = logging.getLogger("sura.api")
 structured_logger = logging.getLogger("sura.structured")
 
 
+def _configure_structured_logging() -> None:
+    """Emit the per-request structured JSON observability records on stdout by default.
+
+    ``structured_logger.info(json.dumps(record))`` produces the record, but without a handler the module logger
+    propagates to root, whose last-resort handler only emits WARNING and above - so the INFO records were silently
+    dropped under a normal ``python scripts/rag_api.py`` start even though ``docs/DEPLOYMENT.md`` documents them.
+    Attach exactly one stdout handler (raw message = one JSON object per line) and stop propagation so the lines are
+    not re-formatted or duplicated. Idempotent across repeated imports/``create_app`` calls; a deployment that has
+    already attached its own handler to ``sura.structured`` is left untouched.
+    """
+    if getattr(structured_logger, "_sura_default_handler", None) is not None:
+        return
+    if structured_logger.handlers:            # an operator/test handler is already configured; do not interfere
+        return
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(logging.Formatter("%(message)s"))
+    structured_logger.addHandler(handler)
+    structured_logger.setLevel(logging.INFO)
+    structured_logger.propagate = False
+    structured_logger._sura_default_handler = handler
+
+
+# Configured from main() (the documented production start), not at import time, so embedding tests that call
+# create_app() directly keep full control of the logger and are not polluted with stdout records.
+
+
 def build_csp(frame_ancestors: Optional[str] = None) -> str:
     """The Content-Security-Policy for static (non-API) responses; ``frame-ancestors`` is overridable, everything else is fixed."""
     value = frame_ancestors if frame_ancestors is not None else os.environ.get(FRAME_ANCESTORS_ENV)
@@ -349,9 +375,23 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
             if callable(card_health_check):
                 card_health_check()
             if svc.generator_name == "ollama":
-                gen = getattr(svc.pipeline, "generator", None)
-                client = getattr(gen, "client", None) or getattr(getattr(gen, "inner", None), "client", None)
-                if client and hasattr(client, "check_available") and not client.check_available():
+                # Walk the shipped guard chain (GeneratorGuard -> EvidenceGuard -> LLMGenerator -> OllamaClient) to
+                # find a model client exposing check_available. The old single-level lookup stopped at EvidenceGuard
+                # and silently skipped the check, so readiness claimed ready:true even when the model was
+                # unreachable. If no probe is found at all, fail closed rather than falsely report ready.
+                client = None
+                node = getattr(svc.pipeline, "generator", None)
+                for _ in range(8):                                   # bounded guard-chain depth
+                    if node is None:
+                        break
+                    cand = getattr(node, "client", None)
+                    if cand is not None and hasattr(cand, "check_available"):
+                        client = cand
+                        break
+                    node = getattr(node, "inner", None)
+                if client is None:
+                    return JSONResponse(error_body("model_unavailable", "Ollama model availability cannot be verified (no probe in the generator chain).", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
+                if not client.check_available():
                     return JSONResponse(error_body("model_unavailable", "Ollama model is not reachable.", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
         except Exception as e:
             return JSONResponse(error_body("service_not_ready", f"Readiness check failed: {e}", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
@@ -496,6 +536,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--host", default=os.environ.get("HOST", "127.0.0.1"))
     ap.add_argument("--port", type=int, default=os.environ.get("PORT", "8000"))
     a = ap.parse_args(argv)
+    _configure_structured_logging()          # production start emits the structured JSON request records on stdout
     import uvicorn
     uvicorn.run(create_app(generator=a.generator), host=a.host, port=a.port, log_level="info")
     return 0

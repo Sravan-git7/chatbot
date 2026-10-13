@@ -19,6 +19,7 @@ The checks are lexical. They catch fabricated codes, URLs, citations and off-con
 """
 from __future__ import annotations
 
+import os
 import re
 import sys
 import threading
@@ -100,13 +101,24 @@ class OllamaClient:
     """
 
     def __init__(self, model: Optional[str] = None, options: Optional[Dict[str, Any]] = None, chat: Any = None,
-                 num_predict: Optional[int] = None, keep_alive: Optional[Any] = None) -> None:
+                 num_predict: Optional[int] = None, keep_alive: Optional[Any] = None, timeout: Optional[float] = None) -> None:
         import rag_core
         self.model = model or rag_core.LLM_MODEL_NAME
         self.options = dict(options or rag_core.LLM_OPTIONS)
         if num_predict is not None:
             self.options["num_predict"] = int(num_predict)
         self.keep_alive = keep_alive
+        if timeout is None:
+            # Opt-in production hardening: cap a hung local Ollama server so a generation cannot block a request
+            # (and hold a concurrency slot) indefinitely. Unset keeps the ollama client's own default behaviour.
+            raw = os.environ.get("SURA_OLLAMA_TIMEOUT_SECONDS", "").strip()
+            try:
+                timeout = float(raw) if raw else None
+                if timeout is not None and timeout <= 0:
+                    timeout = None
+            except ValueError:
+                timeout = None
+        self.timeout = timeout
         self._chat = chat
         self._tls = threading.local()
 
@@ -126,7 +138,7 @@ class OllamaClient:
         chat = self._chat
         if chat is None:
             import ollama                                   # lazy: only when a real generation is requested
-            chat = ollama.chat
+            chat = ollama.Client(timeout=self.timeout).chat if self.timeout is not None else ollama.chat
         kwargs: Dict[str, Any] = {
             "model": self.model,
             "messages": [{"role": "user", "content": prompt}],
@@ -142,6 +154,36 @@ class OllamaClient:
     def generate(self, prompt: str) -> str:
         text, _ = self.generate_with_telemetry(prompt)
         return text
+
+    def check_available(self, timeout: float = 5.0) -> bool:
+        """Bounded readiness probe for ``/ready``: True only when the local Ollama server answers AND the configured
+        model is pulled. Never raises and never fabricates availability - any failure (unreachable server, missing
+        model, import error, timeout) reports False so readiness fails closed instead of claiming a ready model.
+
+        An injected ``chat`` callable (tests/evaluation stubs) counts as available: stubs must not touch the network.
+        Model matching is strict: the exact configured name, or ``<name>:latest`` when the configured name carries no
+        tag (Ollama's implicit-tag convention). A different tag of the same base model is NOT accepted.
+        """
+        if self._chat is not None:
+            return callable(self._chat)
+        try:
+            import ollama                                   # lazy: only when readiness is actually probed
+            client = ollama.Client(timeout=timeout)
+            resp = client.list()
+            models = resp.get("models") if isinstance(resp, Mapping) else getattr(resp, "models", None)
+            names = set()
+            for m in models or []:
+                n = m.get("name") if isinstance(m, Mapping) else getattr(m, "name", None)
+                if n:
+                    names.add(str(n))
+            want = str(self.model or "")
+            if not want:
+                return False
+            if want in names:
+                return True
+            return ":" not in want and f"{want}:latest" in names
+        except Exception:                                   # noqa: BLE001 - readiness must never raise
+            return False
 
 
 @dataclass

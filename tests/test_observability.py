@@ -144,6 +144,55 @@ class ObservabilityTests(unittest.TestCase):
         finally:
             target_logger.removeHandler(handler)
 
+    def test_production_start_configures_structured_stdout_logging(self):
+        """The documented production start (``python scripts/rag_api.py`` -> main()) must actually emit the
+        structured records: _configure_structured_logging attaches exactly one raw-message stdout handler, sets
+        INFO + propagate=False, is idempotent, and never interferes when an operator handler already exists.
+        Without this, records were produced but silently dropped (root lastResort only emits WARNING+)."""
+        import io
+        import sys as _sys
+
+        target = rag_api.structured_logger
+        saved = (list(target.handlers), target.level, target.propagate,
+                 getattr(target, "_sura_default_handler", None))
+        try:
+            # 1) fresh logger: the configurator attaches its handler and stops propagation
+            target.handlers.clear()
+            target._sura_default_handler = None
+            target.propagate = True
+            rag_api._configure_structured_logging()
+            self.assertEqual(len(target.handlers), 1)
+            self.assertIsInstance(target.handlers[0], logging.StreamHandler)
+            self.assertEqual(target.level, logging.INFO)
+            self.assertFalse(target.propagate)
+
+            # 2) idempotent: repeated calls (re-imports, repeated main()) never duplicate the handler
+            rag_api._configure_structured_logging()
+            rag_api._configure_structured_logging()
+            self.assertEqual(len(target.handlers), 1)
+
+            # 3) records flow to stdout as raw one-line JSON
+            buf = io.StringIO()
+            target.handlers[0].setStream(buf)
+            target.info(json.dumps({"request_id": "prod-check", "status": "answered"}))
+            self.assertEqual(buf.getvalue().strip(), '{"request_id": "prod-check", "status": "answered"}')
+
+            # 4) an operator/test handler already attached: the configurator leaves it untouched
+            target.handlers.clear()
+            target._sura_default_handler = None
+            operator = logging.StreamHandler(_sys.stderr)
+            target.addHandler(operator)
+            target.propagate = True
+            rag_api._configure_structured_logging()
+            self.assertEqual(target.handlers, [operator])
+            self.assertTrue(target.propagate)
+        finally:
+            handlers, level, propagate, default_handler = saved
+            target.handlers[:] = handlers
+            target.setLevel(level)
+            target.propagate = propagate
+            target._sura_default_handler = default_handler
+
     def test_log_summary_utility(self):
         sample_logs = [
             {"request_id": "r1", "status": "answered", "route": "M2C-24", "latency_ms": 20.0, "http_status": 200},

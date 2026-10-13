@@ -83,7 +83,8 @@ Systemd’s `EnvironmentFile=` is another option. Protect any real `.env` file a
 | Variable | Default | Effect |
 | :--- | :--- | :--- |
 | `HOST` / `PORT` | `127.0.0.1` / `8000` | CLI bind address and port. Use `0.0.0.0` only when the service must be reachable through a container/proxy. Explicit CLI flags override these defaults. |
-| `RAG_GENERATOR` | `extractive` | `extractive` or optional `ollama`. |
+| `RAG_GENERATOR` | `extractive` | `extractive` or optional `ollama`. With `ollama`, `/ready` probes the local server and configured model and reports `503 model_unavailable` when either is missing; chat requests then fail closed with `502 generator_failed` (never a fabricated answer, never a silent fallback to extractive). |
+| `SURA_OLLAMA_TIMEOUT_SECONDS` | unset | Optional cap (seconds) on a real Ollama generation call, so a hung local server cannot hold a request and a concurrency slot indefinitely. Unset keeps the Ollama client's own default. Ignored by the readiness probe, which is always bounded. |
 | `M2C_MODEL_DIR` | unset | Optional absolute path to local model files; no download is attempted. |
 | `RAG_STATIC_DIR` | repository `web/dist` | Built frontend directory served by the API. |
 | `RAG_CORS_ORIGINS` | localhost development origins | Comma-separated exact origins. Same-origin UI/API deployment does not require cross-origin access. If a separate browser origin is deliberately used, configure CORS and account for the current UI Content-Security-Policy `connect-src 'self'`; the frontend is designed for same-origin API requests. |

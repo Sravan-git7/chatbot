@@ -182,14 +182,58 @@ class MapRootIdentityTests(unittest.TestCase):
         self.assertIn("RESOLVED_PAGE_NOT_LANDING_PAGE_OF_CORRECTED_GUIDE", conflict["reasons"])
 
     def test_m2c18_remains_protected_conflicting_identity(self):
-        """M2C-18 remains conflicting_identity without authoritative evidence."""
+        """M2C-18 remains conflicting_identity and fail-closed without authoritative evidence.
+
+        Root of the conflict (machine-checked against the repository's own saved evidence):
+          * The card names guide ``9442486404b54071b4ebeab6a16628e7`` (registered + verified, 1481-node TOC at
+            ``data/toc/9442486404b54071b4ebeab6a16628e7.json``) and page ``b1a202c9bb3011da2b24000f20dac9ef``.
+          * That page is NOT a node of the card guide's verified TOC (``page_is_toc_node`` is False).
+          * The only evidence that the page exists is ``captured_responses/1_40374490_b1a202c9...json``: an
+            ``http.svc/pagecontent?deliverable_id=40374490&file_path=b1a202c9...`` API capture whose deliverable loio is
+            ``e4375c1cad104b2eb7d027369bd76638`` ('Enterprise Services in Financials'). That guide is NOT registered and
+            NOT verified, and the capture proves only that the page exists inside that deliverable -- it does NOT prove
+            that SAP serves the card's original public URL
+            (``.../9442486404b54071.../b1a202c9....html?version=2025.001``) from it.
+
+        Evidence that is still MISSING to resolve this honestly (do not invent a mapping without it):
+          (a) a capture of the card's exact public URL showing it resolves/redirects to a *registered+verified* guide
+              whose TOC contains ``b1a202c9...``; OR
+          (b) a verified TOC + guide registration for ``e4375c1cad104b2eb7d027369bd76638`` (deliverable 40374490) that
+              lists ``b1a202c9...`` as a node, plus authority that the card should point there instead of 94424864...
+
+        help.sap.com is unreachable in this environment, so neither (a) nor (b) can be produced now; the topic stays
+        fail-closed (no effective guide/page is chosen, and it is never answered from another page's text).
+        """
         ctx = pid.IdentityContext.from_root(ROOT)
         card = self.cards["M2C-18"]
         ident = pid.resolve_identity(card, ctx)
 
         self.assertEqual(ident.resolution_status, pid.CONFLICTING_IDENTITY)
+        self.assertEqual(ident.resolution_basis, "PAGE_NOT_IN_CARD_GUIDE_TOC_PAGE_SEEN_ELSEWHERE")
         self.assertIsNone(ident.effective_guide_id)
         self.assertIsNone(ident.effective_page_id)
+        # The card's own claimed identity is preserved verbatim (never rewritten to the probe guide).
+        self.assertEqual(ident.card_guide_id, "9442486404b54071b4ebeab6a16628e7")
+        self.assertEqual(ident.card_page_id, "b1a202c9bb3011da2b24000f20dac9ef")
+
+        kinds = {e.get("kind"): e for e in ident.evidence}
+        # (1) the card guide's verified TOC does not contain the page
+        toc = kinds.get("toc_membership")
+        self.assertIsNotNone(toc, "expected saved TOC-membership evidence")
+        self.assertIs(toc["page_is_toc_node"], False)
+        # (2) the conflict is recorded with both reasons
+        conflict = kinds.get("conflict")
+        self.assertIsNotNone(conflict, "expected an explicit conflict record")
+        self.assertEqual(sorted(conflict["reasons"]),
+                         sorted(["PAGE_NOT_A_NODE_OF_CARD_GUIDE_TOC", "PAGE_SEEN_IN_OTHER_DELIVERABLE"]))
+        self.assertEqual(conflict["other_loios_seen"], ["e4375c1cad104b2eb7d027369bd76638"])
+        # (3) the probe capture is existence-only: unregistered, not the card guide, never used as effective guide
+        probe = kinds.get("captured_response")
+        self.assertIsNotNone(probe, "expected the existence-only probe capture evidence")
+        self.assertEqual(probe["response_loio"], "e4375c1cad104b2eb7d027369bd76638")
+        self.assertIs(probe["response_loio_registered_verified"], False)
+        self.assertIs(probe["response_loio_is_card_guide"], False)
+        self.assertIs(probe["used_as_effective_guide"], False)
 
     def test_m2c05_standard_correction_unaffected(self):
         """M2C-05 standard page-preserving correction continues to work without regression."""
