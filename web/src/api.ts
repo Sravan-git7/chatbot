@@ -19,6 +19,8 @@ const HTTP_HINTS: Record<string, string> = {
   generator_failed: 'The answer generator failed, so no answer was produced. If the backend is configured for Ollama, check that Ollama is running and the model is installed.',
   service_not_ready: 'The RAG service has not finished starting or its document stores are missing.',
   pipeline_failed: 'The retrieval pipeline failed while handling your question, so no answer was produced.',
+  request_timeout: 'The request waited too long in the server queue; no answer was produced. Try again shortly.',
+  request_body_timeout: 'The server did not receive the full request in time. Check your connection and try again.',
   invalid_request: 'The request was not accepted.',
   payload_too_large: 'The message is too large to send.',
   debug_disabled: 'Developer details are disabled on this server.',

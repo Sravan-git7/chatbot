@@ -1,0 +1,101 @@
+{
+  "workload_version": "v1",
+  "description": "Fixed SURA latency/performance workload. Covers every mission category: simple supported, complex supported, follow-up (2-turn), ambiguous/out-of-scope, insufficient-evidence, unresolved identity (M2C-18, fail-closed), and document-length / retrieval-count variation (single-chunk vs multi-chunk pages). expected_status values are the public API statuses asserted on every measured response, so the benchmark doubles as a correctness smoke gate. Versioned: do not edit in place; create workload_v2.json for changes.",
+  "status_vocabulary": ["answered", "out_of_scope", "unable_to_verify", "documentation_unavailable", "page_not_ingested"],
+  "items": [
+    {
+      "id": "simple-01-billing",
+      "category": "simple_supported",
+      "note": "short question, single-chunk winning page (Billing Procedure)",
+      "turns": [{ "message": "How does billing work in SAP Utilities?" }],
+      "expected_status": "answered"
+    },
+    {
+      "id": "simple-02-movein",
+      "category": "simple_supported",
+      "turns": [{ "message": "What is the move-in process in SAP Utilities?" }],
+      "expected_status": "answered"
+    },
+    {
+      "id": "simple-03-dunning",
+      "category": "simple_supported",
+      "turns": [{ "message": "How does dunning work in SAP Utilities?" }],
+      "expected_status": "answered"
+    },
+    {
+      "id": "complex-01-automatic-billing",
+      "category": "complex_supported",
+      "note": "multi-aspect question over a multi-chunk page (Automatic Billing)",
+      "turns": [{ "message": "How does automatic billing work and which billing periods are included in billing?" }],
+      "expected_status": "answered"
+    },
+    {
+      "id": "complex-02-installment-lifecycle",
+      "category": "complex_supported",
+      "note": "spans overview + creation; yields the largest evidence set (3 sources) in the workload",
+      "turns": [{ "message": "What is the overview of installment plans and how are they created?" }],
+      "expected_status": "answered"
+    },
+    {
+      "id": "followup-01-billing-duodate",
+      "category": "followup",
+      "note": "turn 2 refers back to the turn-1 answer; must resolve inside the billing conversation",
+      "turns": [
+        { "message": "How does billing work in SAP Utilities?" },
+        { "message": "And what is the billing due date?" }
+      ],
+      "expected_status": "answered",
+      "measured_turn": 2
+    },
+    {
+      "id": "followup-02-topic-switch",
+      "category": "followup",
+      "note": "turn 2 switches topic inside an active conversation; checks conversation isolation",
+      "turns": [
+        { "message": "What is the move-in process in SAP Utilities?" },
+        { "message": "How does dunning work?" }
+      ],
+      "expected_status": "answered",
+      "measured_turn": 2
+    },
+    {
+      "id": "scope-01-weather",
+      "category": "out_of_scope",
+      "turns": [{ "message": "What is the weather in Berlin today?" }],
+      "expected_status": "out_of_scope"
+    },
+    {
+      "id": "evidence-01-el31-price",
+      "category": "insufficient_evidence",
+      "note": "specific detail that the corpus does not contain; must abstain",
+      "turns": [{ "message": "What is the exact license price of transaction code EL31?" }],
+      "expected_status": "unable_to_verify"
+    },
+    {
+      "id": "evidence-02-validation-transfer",
+      "category": "insufficient_evidence",
+      "note": "complex-phrased question whose validation/transfer detail is not in any admitted page (verified by corpus scan); the extractive guard must keep refusing (LOW_FOCUS_COVERAGE) rather than fabricate - guards against future regression into a fabricated answer",
+      "turns": [{ "message": "How are meter reading results validated and transferred toward billing?" }],
+      "expected_status": "unable_to_verify"
+    },
+    {
+      "id": "identity-01-m2c18",
+      "category": "unresolved_identity",
+      "note": "M2C-18 conflicting identity; must stay fail-closed with a topic reference, never an assembled answer",
+      "turns": [{ "message": "Tell me about the Contract Account Business Object page." }],
+      "expected_status": "documentation_unavailable"
+    },
+    {
+      "id": "length-01-installment",
+      "category": "doc_length_variation",
+      "turns": [{ "message": "How do I create an installment plan in SAP Utilities?" }],
+      "expected_status": "answered"
+    },
+    {
+      "id": "length-02-collection-agency",
+      "category": "doc_length_variation",
+      "turns": [{ "message": "What is the submission of receivables to a collection agency?" }],
+      "expected_status": "answered"
+    }
+  ]
+}

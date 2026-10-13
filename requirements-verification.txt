@@ -1,0 +1,9 @@
+# Targeted prerequisites for an existing environment (including Python 3.10).
+# This is NOT the Linux 3.11 version lock: pip resolves Python-compatible versions.
+# Does not require personal cache paths. The model wheel supplies the already-used
+# MiniLM embedding weights, not a new generative model.
+-r requirements.txt
+-r requirements-phase11.txt
+gt-all-minilm-l6-v2==0.1.0
+lxml
+numpy

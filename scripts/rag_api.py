@@ -5,7 +5,8 @@ Features:
 - Structured JSON observability per request (with query suppression by default, controlled by SURA_LOG_QUERIES)
 - X-Request-Id propagation across all requests, responses, and errors
 - Consistent error schema: {"error": {"code": str, "message": str, "request_id": str}}
-- Concurrency rate-limiting (MAX_CONCURRENT_REQUESTS = 4) returning HTTP 429 with Retry-After
+- Concurrency rate-limiting: fail-fast admission cap (default MAX_CONCURRENT_REQUESTS = 4, configurable via
+  SURA_MAX_CONCURRENT_REQUESTS) returning HTTP 429 with Retry-After; admitted requests queue FIFO in RagService
 - Separate /health (liveness) and /ready (readiness validating retriever/index/model)
 - Backward-compatible /api/health
 - Graceful shutdown draining in-flight requests
@@ -20,6 +21,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 import sys
 import threading
 import time
@@ -115,6 +117,20 @@ def validate_configuration() -> Dict[str, Any]:
     except ValueError:
         raise ValueError(f"Invalid SURA_RATE_LIMIT_PER_MINUTE='{rate_limit_raw}'; expected non-negative integer")
 
+    # Concurrency admission cap (the fail-fast 429 gate). Default: rag_service.MAX_CONCURRENT_REQUESTS.
+    # Requests admitted past this gate queue FIFO inside RagService (max_concurrency), so raising the cap
+    # converts fast rejections into graceful queuing rather than unbounded admission.
+    max_conc_raw = os.environ.get("SURA_MAX_CONCURRENT_REQUESTS", "")
+    if max_conc_raw.strip():
+        try:
+            max_concurrent = int(max_conc_raw)
+            if max_concurrent < 1:
+                raise ValueError()
+        except ValueError:
+            raise ValueError(f"Invalid SURA_MAX_CONCURRENT_REQUESTS='{max_conc_raw}'; expected integer >= 1")
+    else:
+        max_concurrent = S.MAX_CONCURRENT_REQUESTS
+
     # Logging mode
     log_queries_raw = os.environ.get("SURA_LOG_QUERIES", "0").lower()
     if log_queries_raw not in ("0", "1", "true", "false", "yes", "no", ""):
@@ -127,6 +143,7 @@ def validate_configuration() -> Dict[str, Any]:
         "generator": gen,
         "feature_flags": flags,
         "rate_limit_per_minute": rate_limit,
+        "max_concurrent_requests": max_concurrent,
         "log_queries_raw": log_queries_raw in ("1", "true", "yes"),
         "card_collection_exists": (card_store_dir / "chroma.sqlite3").is_file(),
         "page_collection_exists": (page_store_dir / "chroma.sqlite3").is_file(),
@@ -288,9 +305,12 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
             cfg_validation = validate_configuration()
             logger.info("Configuration validated: %s", cfg_validation)
         except Exception as e:
-            logger.warning("Configuration validation warning: %s", e)
+            logger.warning("Configuration rejected (%s)", type(e).__name__)
+            state["configuration_invalid"] = True
+            state["error"] = "Invalid configuration; see startup configuration documentation."
+            state["service"] = None
 
-        if state["service"] is None:
+        if state["service"] is None and not state.get("configuration_invalid"):
             try:
                 state["service"] = (service_factory or S.build_service)(gen)
             except Exception as e:                                   # noqa: BLE001
@@ -308,7 +328,8 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
 
     @app.middleware("http")
     async def guard(request: Request, call_next):
-        req_id = request.headers.get("x-request-id") or uuid.uuid4().hex
+        supplied_id = request.headers.get("x-request-id", "")
+        req_id = supplied_id if re.fullmatch(r"[A-Za-z0-9_-]{1,64}", supplied_id) else uuid.uuid4().hex
         request.state.request_id = req_id
 
         cl = request.headers.get("content-length")
@@ -316,6 +337,25 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
             resp = JSONResponse(error_body("payload_too_large", f"The request body is larger than {MAX_BODY_BYTES} bytes.", request_id=req_id), status_code=413)
             resp.headers["X-Request-Id"] = req_id
             return resp
+
+        if request.method == "POST" and request.url.path.startswith("/api/"):
+            async def consume_body():
+                body = bytearray()
+                async for chunk in request.stream():
+                    body.extend(chunk)
+                    if len(body) > MAX_BODY_BYTES:
+                        return None
+                return bytes(body)
+            try:
+                body = await asyncio.wait_for(consume_body(), timeout=10.0)
+            except asyncio.TimeoutError:
+                return JSONResponse(error_body("request_body_timeout", "The request body was not received in time.", request_id=req_id),
+                                    status_code=408, headers={"X-Request-Id": req_id, "Cache-Control": "no-store"})
+            if body is None:
+                return JSONResponse(error_body("payload_too_large", f"The request body is larger than {MAX_BODY_BYTES} bytes.", request_id=req_id),
+                                    status_code=413, headers={"X-Request-Id": req_id, "X-Content-Type-Options": "nosniff",
+                                                              "Referrer-Policy": "no-referrer", "Cache-Control": "no-store"})
+            request._body = body
 
         resp = await call_next(request)
         resp.headers["X-Request-Id"] = req_id
@@ -341,7 +381,7 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
     @app.exception_handler(Exception)
     async def on_unexpected_error(request: Request, exc: Exception):
         req_id = getattr(request.state, "request_id", "")
-        logger.error("Unhandled exception for request %s: %s", req_id, exc, exc_info=True)
+        logger.error("Unhandled exception for request %s (%s)", req_id, type(exc).__name__)
         return JSONResponse(error_body("internal_error", "An unexpected error occurred.", request_id=req_id), status_code=500, headers={"X-Request-Id": req_id})
 
     def current() -> S.RagService:
@@ -408,6 +448,10 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         svc = state.get("service")
         if svc is None:
             return JSONResponse({"status": "unavailable", "ready": False, "reason": state.get("error") or "starting", "debug_enabled": debug_on}, status_code=503, headers={"X-Request-Id": req_id})
+        dependency_readiness = readiness(request)
+        if dependency_readiness.status_code != 200:
+            return JSONResponse({"status": "unavailable", "ready": False, "reason": "Dependency readiness failed.",
+                                 "debug_enabled": debug_on}, status_code=503, headers={"X-Request-Id": req_id})
         return JSONResponse({"status": "ok", "ready": True, "debug_enabled": debug_on, **svc.info()}, headers={"X-Request-Id": req_id})
 
     @app.post("/api/chat", response_model=ChatResponse)
@@ -418,6 +462,10 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
 
         if req.debug and not debug_on:
             return JSONResponse(error_body("debug_disabled", "Debug output is disabled on this server.", request_id=req_id), status_code=403, headers={"X-Request-Id": req_id})
+
+        if state.get("configuration_invalid"):
+            return JSONResponse(error_body("service_not_ready", "Invalid server configuration.", request_id=req_id),
+                                status_code=503, headers={"X-Request-Id": req_id})
 
         # Rate limiting: configurable per-IP window (SURA_RATE_LIMIT_PER_MINUTE)
         client_ip = request.client.host if request.client else "unknown"
@@ -438,9 +486,10 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
                         )
                     hist.append(now_sec)
 
-        # Rate limiting: max concurrent requests
+        # Rate limiting: max concurrent requests (admission cap; SURA_MAX_CONCURRENT_REQUESTS validated at startup)
+        max_concurrent = int(os.environ.get("SURA_MAX_CONCURRENT_REQUESTS", "").strip() or S.MAX_CONCURRENT_REQUESTS)
         with in_flight_lock:
-            if state["active_requests"] >= S.MAX_CONCURRENT_REQUESTS:
+            if state["active_requests"] >= max_concurrent:
                 return JSONResponse(
                     error_body("rate_limited", "Too many concurrent requests. Please retry shortly.", request_id=req_id),
                     status_code=429,
@@ -449,14 +498,14 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
             state["active_requests"] += 1
 
         t_req0 = time.perf_counter()
-        svc = current()
         try:
+            svc = current()
             context = req.context.model_dump(exclude_none=True) if req.context else None
             result = svc.ask(req.message, conversation_id=req.conversation_id, debug=(req.debug and debug_on), context=context)
         except S.ServiceError:
             raise
         except Exception as exc:
-            logger.error("Unhandled exception for request %s: %s", req_id, exc, exc_info=True)
+            logger.error("Unhandled exception for request %s (%s)", req_id, type(exc).__name__)
             return JSONResponse(error_body("internal_error", "An unexpected error occurred.", request_id=req_id), status_code=500, headers={"X-Request-Id": req_id})
         finally:
             with in_flight_lock:

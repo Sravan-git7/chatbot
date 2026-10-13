@@ -65,6 +65,24 @@ describe('api client', () => {
     expect(e.info.message).toContain('stores')
   })
 
+  it('queue deadline is actionable and the next request succeeds', async () => {
+    vi.stubGlobal('fetch', vi.fn()
+      .mockImplementationOnce(async () => json({ error: { code: 'request_timeout', message: 'raw' } }, 504))
+      .mockImplementationOnce(async () => json(result())))
+    const error = await catchErr(sendChat('q', 'c', false))
+    expect(error.info).toMatchObject({ kind: 'http', code: 'request_timeout' })
+    expect(error.info.message).toContain('queue')
+    expect(error.info.message).toContain('no answer')
+    expect((await sendChat('q', 'c', false)).status).toBe('answered')
+  })
+
+  it('body deadline explains a controlled HTTP 408', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => json({ error: { code: 'request_body_timeout', message: 'raw' } }, 408)))
+    const error = await catchErr(sendChat('q', 'c', false))
+    expect(error.info.code).toBe('request_body_timeout')
+    expect(error.info.message).toContain('connection')
+  })
+
   it('validation error keeps the server detail', async () => {
     vi.stubGlobal('fetch', vi.fn(async () => json({ error: { code: 'invalid_request', message: 'The message is empty.' } }, 422)))
     expect((await catchErr(sendChat('q', 'c', false))).info.message).toContain('The message is empty.')

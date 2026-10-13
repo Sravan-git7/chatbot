@@ -520,7 +520,10 @@ class RagPipeline:
             except Exception:
                 pass
             if retrieval_query and hasattr(self.retriever, "embed"):
+                t_emb = time.perf_counter()
                 q_emb = self.retriever.embed([retrieval_query])
+                timings["embed_ms"] = timings.get("embed_ms", 0.0) + (time.perf_counter() - t_emb) * 1000
+            t_cq = time.perf_counter()
             outcome = route_to_page(
                 query,
                 self.backend,
@@ -532,11 +535,15 @@ class RagPipeline:
             candidates = list(outcome.candidates)
             if getattr(self.cfg, "code_aware_router", False):
                 candidates = self._inject_code_aware_candidates(query, candidates, query_embedding=q_emb)
+            timings["card_query_ms"] = (time.perf_counter() - t_cq) * 1000
 
             if getattr(self.cfg, "rerank_router", False) and candidates:
                 import phase13_reranker as PR13
                 if q_emb is None and hasattr(self.retriever, "embed"):
+                    t_emb = time.perf_counter()
                     q_emb = self.retriever.embed([query])
+                    timings["embed_ms"] = timings.get("embed_ms", 0.0) + (time.perf_counter() - t_emb) * 1000
+                t_rr = time.perf_counter()
                 card, scored = PR13.rerank_candidates(
                     query,
                     candidates,
@@ -553,6 +560,7 @@ class RagPipeline:
                     k_chunks=self.cfg.k_chunks,
                     hits_out=rerank_hits_cache,
                 )
+                timings["rerank_ms"] = (time.perf_counter() - t_rr) * 1000
                 mode_str = f"router_reranked_top{self.cfg.top_k_cards}"
                 if getattr(self.cfg, "code_aware_router", False):
                     mode_str += "_code_aware"
@@ -711,7 +719,9 @@ class RagPipeline:
         cit_norm = getattr(self.cfg, "citation_normalization", False) or getattr(self.cfg, "phase16_context_experiment", False)
         generation_evidence = getattr(gen, "evidence", None)
         citation_context = _citation_context_after_scope(context, generation_evidence)
+        t_v = time.perf_counter()
         report = verify_grounding(gen.text, citation_context, in_page_grounding=in_page, citation_normalization=cit_norm)
+        timings["verify_ms"] = timings.get("verify_ms", 0.0) + (time.perf_counter() - t_v) * 1000
         dbg["generation"] = {"generator": gen.generator, "refused": gen.refused, "raw_text": gen.raw_text, "prompt": gen.prompt}
         if getattr(gen, "telemetry", None):
             dbg["generation"]["telemetry"] = dict(gen.telemetry)
@@ -737,7 +747,9 @@ class RagPipeline:
             import rag_citation_repair as CRC
             repaired_text, repair_log = CRC.repair_citations(gen.text, citation_context, citation_normalization=bool(cit_norm))
             if repair_log.get("changed"):
+                t_v = time.perf_counter()
                 repaired_report = verify_grounding(repaired_text, citation_context, in_page_grounding=in_page, citation_normalization=cit_norm)
+                timings["verify_ms"] = timings.get("verify_ms", 0.0) + (time.perf_counter() - t_v) * 1000
                 if repaired_report.ok and not repaired_report.refusal:
                     report = repaired_report
                 else:

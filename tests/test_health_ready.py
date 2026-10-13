@@ -247,9 +247,9 @@ class HealthReadyTests(unittest.TestCase):
             else:
                 _sys.modules["ollama"] = saved
 
-    def test_ollama_generation_timeout_is_opt_in_and_wired(self):
+    def test_ollama_generation_timeout_is_finite_by_default_and_wired(self):
         """SURA_OLLAMA_TIMEOUT_SECONDS caps a hung local server so a generation cannot hold a request (and a
-        concurrency slot) forever. Unset keeps the ollama client's own default (module-level chat, no Client)."""
+        concurrency slot) forever. Unset and invalid settings use a finite 60-second Client timeout."""
         import os as _os
         import sys as _sys
 
@@ -275,12 +275,12 @@ class HealthReadyTests(unittest.TestCase):
         saved_env = _os.environ.get("SURA_OLLAMA_TIMEOUT_SECONDS")
         _sys.modules["ollama"] = FakeOllamaModule
         try:
-            # 1) no env, no explicit timeout -> ollama.chat used directly, no timeout invented
+            # 1) no env, no explicit timeout -> a bounded Client, never unbounded module chat
             _os.environ.pop("SURA_OLLAMA_TIMEOUT_SECONDS", None)
-            self.assertIsNone(RG.OllamaClient(model="m").timeout)
+            self.assertEqual(RG.OllamaClient(model="m").timeout, 60.0)
             calls.clear()
             RG.OllamaClient(model="m").generate("prompt")
-            self.assertEqual(calls, [("module_chat", None)])
+            self.assertEqual(calls, [("client", 60.0)])
 
             # 2) env knob -> ollama.Client(timeout=X).chat
             _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = "2.5"
@@ -292,9 +292,14 @@ class HealthReadyTests(unittest.TestCase):
 
             # 3) invalid / non-positive values fall back to the default (never crash construction)
             _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = "not-a-number"
-            self.assertIsNone(RG.OllamaClient(model="m").timeout)
+            self.assertEqual(RG.OllamaClient(model="m").timeout, 60.0)
             _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = "-3"
-            self.assertIsNone(RG.OllamaClient(model="m").timeout)
+            self.assertEqual(RG.OllamaClient(model="m").timeout, 60.0)
+
+            for invalid in ("0", "nan", "inf", "-inf", ""):
+                _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = invalid
+                self.assertEqual(RG.OllamaClient(model="m").timeout, 60.0)
+            self.assertEqual(RG.OllamaClient(model="m", timeout=float("inf")).timeout, 60.0)
 
             # 4) explicit constructor argument wins over the environment
             _os.environ["SURA_OLLAMA_TIMEOUT_SECONDS"] = "9"

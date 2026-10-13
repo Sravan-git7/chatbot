@@ -1,0 +1,172 @@
+{
+  "workload_version": "v2",
+  "description": "Frozen v2 correctness-aware workload. v1 is preserved as an exploratory baseline; v2 uses a truly anchored elaboration and records expected card identity (not just status). These are verified-corpus smoke expectations, not blind expert gold. Quality is measured separately against frozen Phase-12 evidence labels.",
+  "status_vocabulary": [
+    "answered",
+    "out_of_scope",
+    "unable_to_verify",
+    "documentation_unavailable",
+    "page_not_ingested"
+  ],
+  "items": [
+    {
+      "id": "simple-01-billing",
+      "category": "simple_supported",
+      "note": "short question, single-chunk winning page (Billing Procedure)",
+      "turns": [
+        {
+          "message": "How does billing work in SAP Utilities?"
+        }
+      ],
+      "expected_status": "answered",
+      "expected_card_id": "M2C-11"
+    },
+    {
+      "id": "simple-02-movein",
+      "category": "simple_supported",
+      "turns": [
+        {
+          "message": "What is the move-in process in SAP Utilities?"
+        }
+      ],
+      "expected_status": "answered",
+      "expected_card_id": "M2C-03"
+    },
+    {
+      "id": "simple-03-dunning",
+      "category": "simple_supported",
+      "turns": [
+        {
+          "message": "How does dunning work in SAP Utilities?"
+        }
+      ],
+      "expected_status": "answered",
+      "expected_card_id": "M2C-26"
+    },
+    {
+      "id": "complex-01-cash-desk",
+      "category": "complex_supported",
+      "note": "Multi-chunk page and two-source evidence set: Processing Incoming Payments from External Cash Desks.",
+      "turns": [
+        {
+          "message": "How are incoming payments from external cash desks processed?"
+        }
+      ],
+      "expected_status": "answered",
+      "expected_card_id": "M2C-22"
+    },
+    {
+      "id": "complex-02-installment-lifecycle",
+      "category": "complex_supported",
+      "note": "spans overview + creation; yields the largest evidence set (3 sources) in the workload",
+      "turns": [
+        {
+          "message": "What is the overview of installment plans and how are they created?"
+        }
+      ],
+      "expected_status": "answered",
+      "expected_card_id": "M2C-23"
+    },
+    {
+      "id": "followup-01-billing-elaborate",
+      "category": "followup",
+      "note": "Explicit anaphoric elaboration; must stay on the preceding Billing Procedure page, not a neighbouring billing topic.",
+      "turns": [
+        {
+          "message": "How does billing work in SAP Utilities?"
+        },
+        {
+          "message": "elaborate"
+        }
+      ],
+      "expected_status": "answered",
+      "measured_turn": 2,
+      "expected_card_id": "M2C-11"
+    },
+    {
+      "id": "followup-02-topic-switch",
+      "category": "followup",
+      "note": "turn 2 switches topic inside an active conversation; checks conversation isolation",
+      "turns": [
+        {
+          "message": "What is the move-in process in SAP Utilities?"
+        },
+        {
+          "message": "How does dunning work?"
+        }
+      ],
+      "expected_status": "answered",
+      "measured_turn": 2,
+      "expected_card_id": "M2C-26"
+    },
+    {
+      "id": "scope-01-weather",
+      "category": "out_of_scope",
+      "turns": [
+        {
+          "message": "What is the weather in Berlin today?"
+        }
+      ],
+      "expected_status": "out_of_scope",
+      "expected_card_id": null
+    },
+    {
+      "id": "evidence-01-el31-price",
+      "category": "insufficient_evidence",
+      "note": "specific detail that the corpus does not contain; must abstain",
+      "turns": [
+        {
+          "message": "What is the exact license price of transaction code EL31?"
+        }
+      ],
+      "expected_status": "unable_to_verify",
+      "expected_card_id": "M2C-07"
+    },
+    {
+      "id": "evidence-02-validation-transfer",
+      "category": "insufficient_evidence",
+      "note": "complex-phrased question whose validation/transfer detail is not in any admitted page (verified by corpus scan); the extractive guard must keep refusing (LOW_FOCUS_COVERAGE) rather than fabricate - guards against future regression into a fabricated answer",
+      "turns": [
+        {
+          "message": "How are meter reading results validated and transferred toward billing?"
+        }
+      ],
+      "expected_status": "unable_to_verify",
+      "expected_card_id": "M2C-06"
+    },
+    {
+      "id": "identity-01-m2c18",
+      "category": "unresolved_identity",
+      "note": "M2C-18 conflicting identity; must stay fail-closed with a topic reference, never an assembled answer",
+      "turns": [
+        {
+          "message": "Tell me about the Contract Account Business Object page."
+        }
+      ],
+      "expected_status": "documentation_unavailable",
+      "expected_card_id": "M2C-18"
+    },
+    {
+      "id": "length-01-installment",
+      "category": "doc_length_variation",
+      "turns": [
+        {
+          "message": "How do I create an installment plan in SAP Utilities?"
+        }
+      ],
+      "expected_status": "answered",
+      "expected_card_id": "M2C-24"
+    },
+    {
+      "id": "length-02-collection-agency",
+      "category": "doc_length_variation",
+      "turns": [
+        {
+          "message": "What is the submission of receivables to a collection agency?"
+        }
+      ],
+      "expected_status": "answered",
+      "expected_card_id": "M2C-27"
+    }
+  ]
+}

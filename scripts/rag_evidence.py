@@ -81,7 +81,7 @@ CUES: Dict[str, Tuple[str, ...]] = {
     "number": (r"\bhow\s+(many|much)\b", r"\bwhat\s+(is|are)\s+the\s+(\w+\s+){0,2}(amount|percentage|percent|rate|number|total|price|cost|fee|size|length|duration)\b",
                r"\b(what|which)\s+(\w+\s+){0,2}(rate|fee|price|cost|amount|percentage|percent)\b"),
     "limit": (r"\b(minimum|maximum|at\s+least|at\s+most|upper\s+limit|lower\s+limit|limit|threshold|largest|smallest|highest|lowest|longest|shortest|cap|ceiling)\b",),
-    "default": (r"\bdefault\b",),
+    "default": (r"\b(?:default|preselected|pre-selected|preset|predefined|pre-defined)\b",),
     "time": (r"\b(what|which)\s+(date|time|day|year|month|week)\b", r"\bhow\s+(long|often|soon|early|late)\b", r"\bby\s+when\b", r"\bdeadline\b"),
 }
 LIMIT_GROUPS = {"min": ("minimum", "minimal", "least", "smallest", "lowest", "shortest", "lower"), "max": ("maximum", "most", "largest", "highest", "longest", "upper", "ceiling", "up to"),
@@ -91,7 +91,7 @@ _LIMIT_Q = {"minimum": "min", "at least": "min", "lower limit": "min", "smallest
             "limit": "limit", "threshold": "limit", "cap": "limit"}
 NUMBER_WORDS = ("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "twenty", "thirty", "forty", "fifty", "hundred", "thousand", "percent", "half")
 TIME_WORDS = ("day", "days", "week", "weeks", "month", "months", "year", "years", "hour", "hours", "minute", "minutes", "daily", "weekly", "monthly", "yearly", "annually", "date", "dates", "time")
-DEFAULT_WORDS = ("default", "predefined", "preset", "pre-defined", "initial value")
+DEFAULT_WORDS = ("default", "predefined", "preset", "pre-defined", "preselected", "pre-selected", "initial value")
 _CODE_TOKEN = re.compile(r"\b[A-Z][A-Z0-9_]*[0-9_][A-Z0-9_]*\b")
 _NUMBER = re.compile(r"(?<![A-Za-z0-9_])\d+(?:[.,]\d+)?(?![A-Za-z0-9_])")
 
@@ -1083,6 +1083,12 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
     if missing:
         return Decision(False, "ASKED_TERM_NOT_IN_EVIDENCE", {"missing": missing}), []
     pool = [u for u in units if unit_kinds_ok(u, needs)]
+    # A named-code purpose question needs functional evidence, not a navigation pointer.
+    # A sentence saying only "activate CODE; find more information under ..." mentions the
+    # code but does not document what it is required/used for. Never promote that pointer
+    # into an answer merely because its lexical overlap is high. IDs/labels are not hardcoded.
+    if _CODE_TOKEN.search(needs.question) and re.search(r"\b(?:required|used)\s+for\b", needs.question, re.I):
+        pool = [u for u in pool if not re.search(r"\b(?:find|see|refer to)\s+(?:more|further)\s+information\b", u.text, re.I)]
     if needs.kinds and not pool:
         return Decision(False, "KIND_NOT_IN_EVIDENCE", {"kinds": list(needs.kinds)}), []
     w = focus_weights(needs, units)

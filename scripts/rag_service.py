@@ -22,6 +22,7 @@ from __future__ import annotations
 from collections import deque
 import copy
 import re
+import os
 import sys
 import threading
 import time
@@ -86,6 +87,10 @@ class GeneratorFailure(ServiceError):
     code, http_status = "generator_failed", 502
 
 
+class RequestTimeout(ServiceError):
+    code, http_status = "request_timeout", 504
+
+
 class PipelineFailure(ServiceError):
     code, http_status = "pipeline_failed", 500
 
@@ -120,9 +125,10 @@ CONVERSATION_TTL_SECONDS = 3600.0  # 1 hour TTL
 class _FIFOBoundedSemaphore:
     """Fair FIFO bounded semaphore so concurrent workers acquire permits in arrival order without starvation."""
 
-    def __init__(self, value: int = 1) -> None:
+    def __init__(self, value: int = 1, wait_timeout: Optional[float] = None) -> None:
         if value < 1:
             raise ValueError("Semaphore initial value must be >= 1")
+        self._wait_timeout = wait_timeout
         self._value = int(value)
         self._max_value = int(value)
         self._lock = threading.Lock()
@@ -137,10 +143,13 @@ class _FIFOBoundedSemaphore:
                 return False
             ev = threading.Event()
             self._waiters.append(ev)
-        if not ev.wait(timeout=timeout):
+        implicit_deadline = timeout is None and self._wait_timeout is not None
+        if not ev.wait(timeout=self._wait_timeout if implicit_deadline else timeout):
             with self._lock:
                 if ev in self._waiters:
                     self._waiters.remove(ev)
+                    if implicit_deadline:
+                        raise RequestTimeout("The request queue deadline expired. Please retry shortly.")
                     return False
                 return True
         return True
@@ -203,6 +212,8 @@ class GeneratorGuard:
                 tel.setdefault("queue_wait_ms", queue_wait_ms)
                 res.telemetry = tel
             return res
+        except RequestTimeout:
+            raise
         except Exception as e:                                       # noqa: BLE001 - re-raised as a typed, controlled failure
             raise GeneratorFailure(f"The answer generator failed ({type(e).__name__}). No answer was produced.") from e
 
@@ -387,8 +398,16 @@ class RagService:
         self.max_concurrency = max(1, int(max_concurrency))
         self.generation_concurrency = max(1, int(generation_concurrency))
         self.coarse_lock = bool(coarse_lock)
-        self._request_sem = _FIFOBoundedSemaphore(self.max_concurrency)
-        self._gen_sem = _FIFOBoundedSemaphore(self.generation_concurrency)
+        import math
+        try:
+            queue_timeout = float(os.environ.get("SURA_QUEUE_TIMEOUT_SECONDS", "30"))
+            if not math.isfinite(queue_timeout) or queue_timeout <= 0:
+                queue_timeout = 30.0
+        except ValueError:
+            queue_timeout = 30.0
+        self.queue_timeout = queue_timeout
+        self._request_sem = _FIFOBoundedSemaphore(self.max_concurrency, wait_timeout=queue_timeout)
+        self._gen_sem = _FIFOBoundedSemaphore(self.generation_concurrency, wait_timeout=queue_timeout)
         self._lock = threading.Lock()
         self._conversations: Dict[str, Dict[str, Any]] = {}
         self._evidence_gen = pipeline.generator
@@ -478,7 +497,10 @@ class RagService:
         request_generator = getattr(active_pipeline, "generator", self._evidence_gen)
         actual_generator = str(getattr(request_generator, "name", self.generator_name))
         if actual_generator == "extractive" and raw["status"] == "answered":
+            t_chain = time.perf_counter()
             chain = support_chain(raw["answer"], raw.get("debug") or {})
+            if isinstance(timings, dict):
+                timings["support_chain_ms"] = round((time.perf_counter() - t_chain) * 1000, 2)
             evidence = dict(evidence or {}, support_chain=chain)
             if not chain["ok"]:                                      # support cannot be established -> abstain, never "answered"
                 raw = dict(raw, status="insufficient_context", answer=None, reason_code="SUPPORT_CHAIN_FAILED", citations={"answer_sources": []})
@@ -494,8 +516,10 @@ class RagService:
         follow-up requests (such as "elaborate", "explain more", etc.) are handled deterministically
         via scoped elaboration on the grounded topic without generative LLM calls.
         """
+        t_validation = time.perf_counter()
         q = clean_question(question)
         cid = resolve_conversation_id(conversation_id)
+        validation_ms = (time.perf_counter() - t_validation) * 1000
 
         # Context resolution: explicit caller context beats internal session state for the fields it provides, but a
         # caller context that omits ``active_topic`` must not wipe the topic the conversation already established.
@@ -726,6 +750,7 @@ class RagService:
         if scoped is not None and raw.get("status") == "answered" and (evidence or {}).get("elaborated") is True:
             presentation_sections = (evidence or {}).get("presentation_sections")
 
+        raw.setdefault("timings_ms", {})["validation_ms"] = round(validation_ms, 4)
         result = to_chat_result(
             raw,
             "extractive" if (scoped is not None or short_circuited) else self.generator_name,

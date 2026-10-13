@@ -151,6 +151,98 @@ class ConcurrencyRateLimitTests(unittest.TestCase):
                 os.environ.pop("SURA_RATE_LIMIT_PER_MINUTE", None)
             rag_api.ip_request_history.clear()
 
+    def _with_env(self, name: str, value):
+        """Context-manager-free env swap helper: returns the previous value for restoration."""
+        import os
+        prev = os.environ.get(name)
+        if value is None:
+            os.environ.pop(name, None)
+        else:
+            os.environ[name] = value
+        return prev
+
+    def _restore_env(self, name: str, prev):
+        import os
+        if prev is None:
+            os.environ.pop(name, None)
+        else:
+            os.environ[name] = prev
+
+    def test_max_concurrent_requests_env_override_raises_admission_cap(self):
+        """SURA_MAX_CONCURRENT_REQUESTS is the documented saturation knob: raising it must admit more
+        concurrent requests (graceful queuing inside RagService) instead of fail-fast 429 rejections."""
+        orig_ask = self.svc.ask
+
+        def slow_ask(*a, **k):
+            time.sleep(0.3)
+            return orig_ask(*a, **k)
+
+        self.svc.ask = slow_ask
+        prev = self._with_env("SURA_MAX_CONCURRENT_REQUESTS", "8")
+        try:
+            def make_request(idx: int):
+                return self.client.post("/api/chat", json={"message": Q_PLAN},
+                                        headers={"X-Request-Id": f"cap-8-{idx}"}).status_code
+            with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+                codes = [f.result() for f in [pool.submit(make_request, i) for i in range(8)]]
+            self.assertNotIn(429, codes, "8 concurrent requests must all be admitted when the cap is raised to 8")
+            self.assertEqual(codes.count(200), 8)
+        finally:
+            self._restore_env("SURA_MAX_CONCURRENT_REQUESTS", prev)
+
+    def test_max_concurrent_requests_env_override_can_lower_cap(self):
+        orig_ask = self.svc.ask
+
+        def slow_ask(*a, **k):
+            time.sleep(0.3)
+            return orig_ask(*a, **k)
+
+        self.svc.ask = slow_ask
+        prev = self._with_env("SURA_MAX_CONCURRENT_REQUESTS", "2")
+        try:
+            def make_request(idx: int):
+                r = self.client.post("/api/chat", json={"message": Q_PLAN},
+                                     headers={"X-Request-Id": f"cap-2-{idx}"})
+                return r.status_code, r
+            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+                results = [f.result() for f in [pool.submit(make_request, i) for i in range(4)]]
+            codes = [c for c, _ in results]
+            self.assertIn(429, codes, "with the cap lowered to 2, four concurrent slow requests must see rejections")
+            for code, resp in results:
+                if code == 429:
+                    self.assertEqual(resp.headers.get("Retry-After"), "1")
+                    self.assertEqual(resp.json()["error"]["code"], "rate_limited")
+        finally:
+            self._restore_env("SURA_MAX_CONCURRENT_REQUESTS", prev)
+
+    def test_max_concurrent_requests_invalid_values_rejected_at_startup(self):
+        for bad in ("abc", "0", "-3", "2.5"):
+            prev = self._with_env("SURA_MAX_CONCURRENT_REQUESTS", bad)
+            try:
+                with self.assertRaises(ValueError, msg=f"SURA_MAX_CONCURRENT_REQUESTS={bad!r} must fail fast"):
+                    rag_api.validate_configuration()
+            finally:
+                self._restore_env("SURA_MAX_CONCURRENT_REQUESTS", prev)
+        prev = self._with_env("SURA_MAX_CONCURRENT_REQUESTS", "8")
+        try:
+            self.assertEqual(rag_api.validate_configuration()["max_concurrent_requests"], 8)
+        finally:
+            self._restore_env("SURA_MAX_CONCURRENT_REQUESTS", prev)
+        # Default (unset): the documented shipped cap
+        prev = self._with_env("SURA_MAX_CONCURRENT_REQUESTS", None)
+        try:
+            self.assertEqual(rag_api.validate_configuration()["max_concurrent_requests"], S.MAX_CONCURRENT_REQUESTS)
+        finally:
+            self._restore_env("SURA_MAX_CONCURRENT_REQUESTS", prev)
+
+    def test_blank_admission_setting_uses_default_without_runtime_error(self):
+        prev = self._with_env("SURA_MAX_CONCURRENT_REQUESTS", "   ")
+        try:
+            self.assertEqual(rag_api.validate_configuration()["max_concurrent_requests"], S.MAX_CONCURRENT_REQUESTS)
+            self.assertEqual(self.client.post("/api/chat", json={"message": Q_PLAN}).status_code, 200)
+        finally:
+            self._restore_env("SURA_MAX_CONCURRENT_REQUESTS", prev)
+
     def test_configuration_validation(self):
         cfg = rag_api.validate_configuration()
         self.assertIn("generator", cfg)

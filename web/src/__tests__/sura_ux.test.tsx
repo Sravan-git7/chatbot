@@ -169,10 +169,12 @@ describe('SURA UX enhancements', () => {
       // 1. Verify welcome state + live coverage from /api/health
       expect(screen.getByTestId('sura-intro')).toHaveTextContent('Documentation-grounded assistant')
       const coverage = await screen.findByTestId('coverage')
-      expect(coverage).toHaveTextContent('Currently 25 of 29 documentation pages are available.')
+      expect(coverage).toHaveTextContent('Currently 28 of 29 documentation sources are available.')
 
-      // 2. Submit a real question by clicking a suggested question
-      await userEvent.click(screen.getByRole('button', { name: 'How do I create an installment plan?' }))
+      // 2. Submit a real question through the current composer
+      // The welcome suggestions changed; exercise the real composer instead of a removed historical button.
+      const composer = screen.getByRole('textbox', { name: 'Message' })
+      await userEvent.type(composer, 'How do I create an installment plan?{Enter}')
       const msgs1 = await screen.findAllByTestId('assistant-message')
       await waitFor(() => expect(within(msgs1[0]).queryByTestId('loading')).not.toBeInTheDocument(), { timeout: 10000 })
 

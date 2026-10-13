@@ -1,0 +1,17 @@
+# SURA integrity policy: byte-exact checkouts on every platform.
+#
+# Why: the Phase-7 integrity checkpoint (data/phase7_checkpoint.md) and tests such as
+# tests/test_phase7b.py and tests/test_chunk_candidates.py pin SHA-256 hashes of file BYTES.
+# With core.autocrlf=true (the common Git-for-Windows default), text files are checked out
+# with CRLF endings, every pinned LF-blob hash mismatches, and those tests fail for
+# environment reasons rather than product reasons.
+#
+# `* -text` disables ALL line-ending conversion by Git (checkout and commit) for tracked
+# files, so the working tree always matches the stored blob bytes exactly - on Windows,
+# Linux and macOS alike. Historical artifacts that were committed with CRLF bytes
+# (e.g. some data/evaluation/phase12_* files from a Windows capture) keep their exact
+# bytes too; nothing is renormalized, no pinned hash changes.
+#
+# Consequence: new text files must be committed with the endings their producer wrote.
+# Tooling in this repository generates LF; keep it that way.
+* -text

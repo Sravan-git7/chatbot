@@ -20,6 +20,7 @@ The checks are lexical. They catch fabricated codes, URLs, citations and off-con
 from __future__ import annotations
 
 import os
+import math
 import re
 import sys
 import threading
@@ -103,22 +104,21 @@ class OllamaClient:
     def __init__(self, model: Optional[str] = None, options: Optional[Dict[str, Any]] = None, chat: Any = None,
                  num_predict: Optional[int] = None, keep_alive: Optional[Any] = None, timeout: Optional[float] = None) -> None:
         import rag_core
-        self.model = model or rag_core.LLM_MODEL_NAME
+        self.model = model or os.environ.get("OLLAMA_MODEL", "").strip() or rag_core.LLM_MODEL_NAME
         self.options = dict(options or rag_core.LLM_OPTIONS)
         if num_predict is not None:
             self.options["num_predict"] = int(num_predict)
         self.keep_alive = keep_alive
-        if timeout is None:
-            # Opt-in production hardening: cap a hung local Ollama server so a generation cannot block a request
-            # (and hold a concurrency slot) indefinitely. Unset keeps the ollama client's own default behaviour.
-            raw = os.environ.get("SURA_OLLAMA_TIMEOUT_SECONDS", "").strip()
-            try:
-                timeout = float(raw) if raw else None
-                if timeout is not None and timeout <= 0:
-                    timeout = None
-            except ValueError:
-                timeout = None
-        self.timeout = timeout
+        # Finite network timeout by default. No unbounded ollama.chat path in production.
+        # Invalid values cannot disable the bound; explicitly injected test clients remain offline.
+        raw = timeout if timeout is not None else os.environ.get("SURA_OLLAMA_TIMEOUT_SECONDS", "60")
+        try:
+            bounded_timeout = float(raw)
+            if not math.isfinite(bounded_timeout) or bounded_timeout <= 0:
+                bounded_timeout = 60.0
+        except (TypeError, ValueError):
+            bounded_timeout = 60.0
+        self.timeout = bounded_timeout
         self._chat = chat
         self._tls = threading.local()
 
@@ -138,7 +138,7 @@ class OllamaClient:
         chat = self._chat
         if chat is None:
             import ollama                                   # lazy: only when a real generation is requested
-            chat = ollama.Client(timeout=self.timeout).chat if self.timeout is not None else ollama.chat
+            chat = ollama.Client(timeout=self.timeout).chat
         kwargs: Dict[str, Any] = {
             "model": self.model,
             "messages": [{"role": "user", "content": prompt}],
