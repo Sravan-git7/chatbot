@@ -1,14 +1,18 @@
 # SURA — SAP Utilities Documentation Assistant — Release Readiness Report
 
-Date: 2026-10-12 · Branch: `arena/b450cda2-chatbot` · Prepared by: release engineering (Agent Mode)
+Date: 2026-10-13 · Branch: `arena/b450cda2-chatbot` · Final commit: `a6b1b53` · Prepared by: release engineering (Agent Mode)
 
 ## Release status
 
 **READY WITH EXPLICIT LIMITATIONS**
 
 The backend RAG pipeline, API security posture, frontend, and evaluation harness are verified green end-to-end on
-the current 28-page corpus. Every limitation listed in Section C is known, documented, fail-safe (never fabricates
-an answer), and does not block deployment of the shipped `extractive` configuration.
+the current 28-page corpus. A final blocker-resolution pass (commit `a6b1b53`, on top of the `9be6553` release)
+found and fixed two production-honesty defects that the green test suite did not catch — an Ollama `/ready`
+false-success and a structured-logging handler that silently dropped records under the documented production start
+(Section B items 13–15) — each now covered by regression tests and live-verified. Every limitation listed in
+Section C is known, documented, fail-safe (never fabricates an answer), and does not block deployment of the
+shipped `extractive` configuration.
 
 ---
 
@@ -16,11 +20,13 @@ an answer), and does not block deployment of the shipped `extractive` configurat
 
 | Area | Result |
 | --- | --- |
-| Backend test suite (`tests/`) | **1333 passed, 225 subtests passed, 0 failed** (1 warning) |
+| Backend test suite (`tests/`) | **1338 passed, 225 subtests passed, 0 failed** (1 warning) |
 | Frontend unit tests (`web/`, vitest) | **115 passed, 1 skipped** across 11 files |
 | Frontend typecheck (`tsc --noEmit`) | clean (exit 0) |
-| Frontend production build (`vite build`) | clean — `web/dist/` produced (296 modules) |
-| Live API smoke (extractive generator) | `/health`, `/ready`, `/api/health`, chat, fail-closed paths all correct |
+| Frontend production build (`vite build`) | clean — `web/dist/` produced (296 modules; JS 366 kB / gzip 114 kB, CSS 41 kB) |
+| Live API smoke (extractive generator) | `/health`, `/ready`, `/api/health`, chat, follow-up, fail-closed, CORS, rate-limit, body-size, SPA paths all correct |
+| Ollama readiness (generator `ollama`, model absent) | `/health` 200 · `/ready` **503 model_unavailable** (fail-closed) · `/api/chat` **502 generator_failed** — no false success, no fabricated answer, no silent extractive fallback |
+| Structured request logging (production start) | one-line JSON records emitted on stdout; query text hashed by default (`SURA_LOG_QUERIES=0`) |
 | Debug endpoint security | off by default; debug requests rejected with **403** |
 | Corpus | 29 registered topic cards, **28 admitted pages**, 113 page chunks |
 | Identity | 25 identified_not_local · 2 corrected (M2C-01, M2C-05) · 1 resolved_local_page (M2C-17) · **1 conflicting (M2C-18, fail-closed)** |
@@ -48,7 +54,7 @@ an answer), and does not block deployment of the shipped `extractive` configurat
    relational follow-ups onto sibling topics. Fix: `expected_topic` guard in `scripts/rag_pipeline.py` (~:473–495)
    plus session `active_topic` merge in `scripts/rag_service.py` (~:499–540). Explicit caller context must not wipe a
    conversation-established topic. Regression: follow-up suites (95 passed / 146 subtests at introduction; now part
-   of the 1333-green run).
+   of the 1338-green run).
 5. **Bare elaboration with explicitly empty context must fail closed.** Root cause: the session-topic merge from
    fix #4 also fired for an explicitly empty caller context (`{"questions": []}`). Fix: merge only when the caller
    context carries substantive history (non-empty `questions` or an `answer`); otherwise the request keeps failing
@@ -106,16 +112,78 @@ an answer), and does not block deployment of the shipped `extractive` configurat
     artifact was altered; `data/source_corpus.json` stays sealed at `0ee5cb8b…` because Phase 4/5 provenance
     (`card_collection_manifest.source_corpus_file_sha256`, retrieval units, Phase 4/5 reports) is bound to it.
 
+### Final blocker-resolution pass (commit `a6b1b53`, on top of the `9be6553` release)
+
+The following were found by inspecting the shipped code paths against the live server — not from the report — and
+each slipped past a green suite because the tests exercised object shapes or logging setups that never occur in the
+shipped configuration. All are fixed at the root cause, live-verified, and now carry regression tests.
+
+13. **Ollama `/ready` false-success (fail-open readiness).** Root cause: the readiness probe used a single-level
+    `gen.client or gen.inner.client` lookup and an `hasattr(client, "check_available")` gate. The shipped chain is
+    `GeneratorGuard → EvidenceGuard → LLMGenerator → OllamaClient` (and `RagService` re-wraps the generator, so the
+    real depth is 4), which the one-level lookup could not traverse; and the shipped `OllamaClient` had no
+    `check_available`, so the `hasattr` gate skipped the check entirely. `/ready` therefore reported
+    `ready:true, generator:"ollama"` while the model was unreachable, and the next `/api/chat` failed with a 502 —
+    a false success. Fix: (a) `rag_generate.OllamaClient.check_available(timeout=5.0)` — a bounded probe that lists
+    local models and matches the configured model strictly (exact, or implicit `:latest` for an untagged name),
+    never raises, and treats an injected `chat` stub as available without touching the network; (b) `rag_api`
+    `/ready` walks the guard chain (bounded ≤8 `.client`/`.inner` hops) and **fails closed** — no probe found →
+    `503 model_unavailable` ("cannot be verified"), probe False → `503 model_unavailable` ("not reachable"). Also
+    added an opt-in `SURA_OLLAMA_TIMEOUT_SECONDS` so a hung local server cannot hold a request and a concurrency
+    slot indefinitely (unset = ollama default; invalid/non-positive ignored; the readiness probe is always bounded).
+    Live-verified with `--generator ollama` and no Ollama installed: `/health` 200, `/ready` **503
+    model_unavailable**, `/api/chat` **502 generator_failed** ("No answer was produced") — never a fabricated answer,
+    never a silent extractive fallback. Regression: `tests/test_health_ready.py` (shipped-chain traversal via
+    `build_service`, probeless fail-closed, `check_available` units with a fake `ollama` module, timeout wiring) —
+    15 passed.
+14. **Structured request logs silently dropped under the production start.** Root cause: `sura.structured` had no
+    handler, so `structured_logger.info(json.dumps(record))` propagated to the root logger, whose last-resort handler
+    emits WARNING and above only — every INFO record was dropped under the documented `python scripts/rag_api.py`
+    start, even though `docs/DEPLOYMENT.md` states the records are emitted. The observability tests passed only
+    because they attach their own handler. Fix: `_configure_structured_logging()` in `rag_api`, called from `main()`
+    (the CLI production start) rather than at import, so embedding tests keep full control of the logger. It is
+    idempotent, defers to any pre-existing operator handler, attaches exactly one stdout handler with a raw
+    `%(message)s` formatter (one JSON object per line), sets INFO, and disables propagation. Live-verified: a chat
+    request now emits a single-line JSON record (request_id, route, selected/retrieved chunk ids, validator results,
+    latency, config/corpus hash, status, http_status) with the query **hashed** by default. Regression:
+    `tests/test_observability.py::test_production_start_configures_structured_stdout_logging` (attaches one stdout
+    handler, idempotent, emits raw JSON, defers to an operator handler) — 5 passed.
+15. **M2C-18 disposition made machine-checked (still fail-closed, still unresolved).** The M2C-18 identity remains
+    `conflicting_identity` and fail-closed — no authoritative guide/page mapping could be established from verified
+    evidence, and none was invented. `tests/test_map_root_identity.py` was strengthened from a one-line assertion
+    into a machine check against the repository's own saved evidence: the card's claimed identity is preserved
+    verbatim (guide `94424864…`, page `b1a202c9…`), the card guide's verified TOC does **not** contain the page
+    (`page_is_toc_node` False), the conflict records both reasons
+    (`PAGE_NOT_A_NODE_OF_CARD_GUIDE_TOC`, `PAGE_SEEN_IN_OTHER_DELIVERABLE`), and the existence-only probe capture
+    (deliverable `40374490` / loio `e4375c1c…`, unregistered, not the card guide) is never used as an effective
+    guide. The precise missing evidence is documented in Section C item 1.
+
 ---
 
 ## C. Explicit limitations (the reason status is not unconditional)
 
-1. **M2C-18 (Contract Account Business Object) remains unresolved and fail-closed.** Two different guides claim the
-   card page; identity is `conflicting_identity`. No mapping is invented. The system answers
-   `documentation_unavailable` with a topic reference. Resolution requires SAP-side source confirmation.
-2. **Ollama generation path is unverified in this environment** (`NO_OLLAMA_EXECUTABLE`, server not responding). The
-   phase-12 ollama configurations are recorded honestly as BLOCKED in `data/evaluation/phase12_results.json` — no
-   fake LLM numbers. The shipped and evaluated default is the deterministic `extractive` generator.
+1. **M2C-18 (Contract Account Business Object) remains unresolved and fail-closed.** The card names guide
+   `9442486404b54071b4ebeab6a16628e7` (registered + verified, 1481-node TOC) and page
+   `b1a202c9bb3011da2b24000f20dac9ef`, but that page is **not** a node of the card guide's verified TOC. The only
+   evidence the page exists is a captured `http.svc/pagecontent` API response for deliverable `40374490` whose loio is
+   `e4375c1cad104b2eb7d027369bd76638` ("Enterprise Services in Financials") — a guide that is **not** registered and
+   **not** verified, and the capture proves only that the page exists inside that deliverable, not that SAP serves the
+   card's original public URL from it. Identity is therefore `conflicting_identity`
+   (`PAGE_NOT_IN_CARD_GUIDE_TOC_PAGE_SEEN_ELSEWHERE`); no mapping is invented and the topic answers
+   `documentation_unavailable` with an honest topic reference. **Missing evidence to resolve it (either one):**
+   (a) a capture of the card's exact public URL showing it resolves/redirects to a *registered+verified* guide whose
+   TOC contains `b1a202c9…`; or (b) a verified TOC + guide registration for `e4375c1c…` (deliverable 40374490) that
+   lists `b1a202c9…` as a node, plus authority that the card should point there instead of `94424864…`.
+   `help.sap.com` is unreachable in this sandbox, so neither can be produced here; resolution requires SAP-side
+   source confirmation. Regression: `tests/test_map_root_identity.py` (machine-checked, Section B item 15).
+2. **Real Ollama/model inference is not verified in this sandbox** (`NO_OLLAMA_EXECUTABLE`, server not responding);
+   the phase-12 ollama configurations are recorded honestly as BLOCKED in `data/evaluation/phase12_results.json` — no
+   fake LLM numbers. The shipped and evaluated default is the deterministic `extractive` generator. **The readiness
+   and error-handling contract for the `ollama` path is, however, now fixed and live-verified** (Section B item 13):
+   a missing/unreachable model makes `/ready` fail closed with `503 model_unavailable` and `/api/chat` fail closed
+   with `502 generator_failed` — never a startup crash, never a false `ready:true`, never a fabricated answer, never
+   a silent fallback to extractive. What remains unverified here is only the positive path (an actual generated answer
+   from a real local model), which requires an Ollama runtime and pulled model that this environment does not have.
 3. **`data/source_corpus.json` is a sealed Phase-2 snapshot** (`0ee5cb8b…`) built before the Topic 1/5 correction
    set reached its current form; its `corrections_sha256` therefore records the older corrections file by design.
    Phase 4/5 provenance is bound to this exact artifact, so it is intentionally not regenerated. The live correction
@@ -144,11 +212,12 @@ an answer), and does not block deployment of the shipped `extractive` configurat
 
 ## D. Verification results (exact commands)
 
-All commands from the repository root, Python venv `.venv`, 2026-10-12.
+All commands from the repository root, Python venv `.venv`. Release suite 2026-10-12; final blocker-resolution
+pass re-run 2026-10-13 at commit `a6b1b53`.
 
 | # | Command | Result |
 | -- | --- | --- |
-| 1 | `.venv/bin/python -m pytest tests/ -q` | **1333 passed, 225 subtests passed, 0 failed**, 1 warning, 108 s |
+| 1 | `.venv/bin/python -m pytest tests/ -q` | **1338 passed, 225 subtests passed, 0 failed**, 1 warning, 134 s |
 | 2 | `.venv/bin/python -m pytest tests/test_phase7a.py tests/test_phase7b.py tests/test_phase7g.py tests/test_source_corpus.py -q` | 129 passed |
 | 3 | `.venv/bin/python -m pytest tests/test_rag_evidence_quality.py tests/test_phase2_fixes.py tests/test_followup_state.py tests/test_phase11_1_service.py tests/test_phase11_service.py tests/test_followup_elaboration.py -q` | 157 passed, 126 subtests |
 | 4 | `.venv/bin/python -m pytest tests/test_followup_state.py tests/test_followup_resolution.py tests/test_followup_elaboration.py tests/test_phase11_service.py tests/test_phase11_1_service.py tests/test_phase11_api.py -q` | 198 passed, 151 subtests |
@@ -171,6 +240,24 @@ All commands from the repository root, Python venv `.venv`, 2026-10-12.
 | `POST /api/chat` "Tell me about Contract Account Business Object." (M2C-18) | `documentation_unavailable`, card_id M2C-18, honest message + topic reference |
 | `POST /api/chat` "What is the weather in Tokyo?" | `out_of_scope` |
 | `POST /api/chat` "elaborate" (same conversation) | `answered`, `grounded: true` |
+| `POST /api/chat` malformed / empty `message` | **422** `invalid_request` envelope with `fields:["message"]` |
+| `POST /api/chat` body > 16 KB | **413** `payload_too_large` |
+| `GET /api/nonexistent` | **404** JSON envelope (not the SPA) |
+| `GET /some/spa/route` | **200** `text/html` (SPA deep link) |
+| CORS preflight from an allowed origin | **200** with `access-control-allow-origin` |
+| CORS preflight from a disallowed origin | **400**, no `access-control-allow-origin` |
+| 3rd request/min with `SURA_RATE_LIMIT_PER_MINUTE=2` | **429** `rate_limited` + `Retry-After: 60` |
+
+**Live API smoke (generator `ollama`, no Ollama runtime installed — final pass, port 8023):**
+
+| Probe | Result |
+| --- | --- |
+| `GET /health` | **200** `{"status":"ok","process":"live"}` (startup does not crash on a missing model) |
+| `GET /ready` | **503** `model_unavailable` "Ollama model is not reachable." (fail-closed — was a false `ready:true` before item 13) |
+| `POST /api/chat` | **502** `generator_failed` "The answer generator failed (ConnectionError). No answer was produced." |
+
+**Production start structured logging (final pass):** `python scripts/rag_api.py … --generator extractive` emits one
+JSON line per request on stdout, e.g. `{"request_id":…,"route":"M2C-12","validator_results":{"grounding":{"violations":0,…},"grounded":true,…},"latency_ms":62.4,"config_hash":…,"corpus_hash":…,"query":"1637695ab84cc32b","status":"answered","http_status":200}` — `query` is a hash because `SURA_LOG_QUERIES` defaults to `0`.
 
 ---
 
@@ -236,12 +323,23 @@ required — the stack is fully local/offline (no external LLM calls in the ship
 
 ## G. GitHub status
 
-- Repository: `Sravan-git7/chatbot` · working branch: `arena/b450cda2-chatbot` (session-fixed), branched from
-  `c7527ed` of `arena/4fe57164-chatbot`.
-- All changes committed on `arena/b450cda2-chatbot` and pushed with a **normal (non-force) push**; no history was
-  rewritten, no protected backups (`av/`, `local_backup2/`, `scratch/`) were touched.
-- Secrets/env files: none committed (`git ls-files` secret scan is part of the green suite, `tests/test_phase9.py`).
+- Repository: `Sravan-git7/chatbot` · working/release branch: `arena/b450cda2-chatbot` (session-fixed) at final
+  commit **`a6b1b53`**, descended from `9be6553` (prior release) ← `c7527ed` (tip of `arena/4fe57164-chatbot`).
+  Both `c7527ed` and `9be6553` are ancestors of `a6b1b53`, so the intended release branch contains all prior work.
+- **Both existing branches are preserved** on the remote and neither was merged, deleted, reset, or force-pushed:
+  `arena/4fe57164-chatbot` → `c7527ed` and `arena/b450cda2-chatbot` → `a6b1b53` (verified with
+  `git ls-remote --heads origin`). Other sessions' `arena/*` branches, `captured-responses-data`, and `main`
+  (`d85c31e`) were left untouched. No protected backups (`av/`, `local_backup2/`, `scratch/`) were modified.
+- All changes committed on `arena/b450cda2-chatbot` and pushed with a **normal (non-force) push**
+  (`9be6553..a6b1b53`, a clean fast-forward — the remote was a strict ancestor, no divergence); local HEAD and
+  `origin/arena/b450cda2-chatbot` are in sync at `a6b1b53`; working tree clean. No history was rewritten.
+- Secrets/env files: none committed (`git ls-files` secret scan is part of the green suite, `tests/test_phase9.py`);
+  the final diff was additionally scanned for key/token patterns and hardcoded absolute local paths — none
+  introduced. `.env.example` holds placeholders only.
 - Generated heavy artifacts (`data/vector_store/`, `.venv/`, `web/node_modules/`, `web/dist/`) stay git-ignored per
-  repository convention; all evaluation artifacts recorded above are checked in and hash-verified.
+  repository convention; all evaluation artifacts recorded above are checked in and hash-verified. Sealed historical
+  baselines (`data/source_corpus.json` `0ee5cb8b…`, `data/phase12/ollama_environment.json`, frozen phase 8/9/10/12
+  query/result sets, pinned `data/m2c_page_identity.json` `3a832d40…`) were **not** regenerated; the runtime uses the
+  live inputs (`data/topic_corrections.json` `dec2dbe4…`, card/page corpora, vector stores) — see Section C item 3.
 
 *End of report.*
