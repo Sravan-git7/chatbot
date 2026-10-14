@@ -24,8 +24,16 @@ Write-Host "Commit: $Commit; results: $Results; no public deployment."
 Run $Python @("-m", "pip", "freeze", "--all")
 if ($DiagnosticsOnly) {
     # Stop all SURA/Chroma processes first. Snapshot copies only; never rebuilds.
-    Run $Python @("scripts/diagnose_windows_verification.py", "--store-quiesced", "--out", (Join-Path $Results "store-diagnostic.json"))
-    return
+    & $Python scripts/diagnose_windows_verification.py --store-quiesced --out (Join-Path $Results "store-diagnostic.json")
+    $DiagnosticExit = $LASTEXITCODE
+    if ($DiagnosticExit -eq 2) {
+        Write-Warning "Diagnostic completed: integrity/reproduction checks FAILED. This is not a diagnostic crash. Preserve JSON; do not rebuild."
+    } elseif ($DiagnosticExit -eq 3) {
+        Write-Warning "Diagnostic incomplete or execution error: inspect outcome.execution_errors and child status in JSON."
+    } elseif ($DiagnosticExit -ne 0) {
+        throw "Unexpected diagnostic process failure ($DiagnosticExit); preserve transcript."
+    }
+    exit $DiagnosticExit
 }
 Run $Python @("scripts/refresh_checkout_bytes.py", "--apply")
 if ($InstallPrerequisites) {

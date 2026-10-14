@@ -108,6 +108,11 @@ def build(vector_dir: Path, collection_name: str, strategy_name: str, rebuild: b
     if not records:
         raise SystemExit(f"no page records in {corpus_dir}: run scripts/page_corpus.py first")
     corpus_manifest = json.loads((corpus_dir / "manifest.json").read_text(encoding="utf-8"))
+    from page_corpus_integrity import validate_records
+    try:
+        validate_records(records, corpus_manifest)
+    except (KeyError, TypeError, ValueError) as exc:
+        raise SystemExit(f"STOP: invalid page corpus/admission manifest: {exc}") from exc
     cfg = PK.STRATEGIES[strategy_name]
     embed, minfo = load_embedder(model_path)
     count, tinfo = PK.make_token_counter(minfo["model_dir"])
