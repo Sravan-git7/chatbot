@@ -1,0 +1,27 @@
+{
+  "fixture_only": true,
+  "production_data_changed": false,
+  "source_store_unchanged": true,
+  "method": "Copy a scratch-built 113-vector page store; add live MiniLM embeddings of unused capture in a different scratch fixture only. No card mapping assigned.",
+  "capture": "captured_responses/1_40374490_b1a202c9bb3011da2b24000f20dac9ef.json",
+  "capture_sha256": "02347ba7114d855d038aceac7d509071aa48f438729584fb3ef43c65b70fa8ce",
+  "candidate_ids": [
+    "e4375c1cad104b2eb7d027369bd76638/b1a202c9bb3011da2b24000f20dac9ef/000",
+    "e4375c1cad104b2eb7d027369bd76638/b1a202c9bb3011da2b24000f20dac9ef/001"
+  ],
+  "source_page_store_hashes": {
+    "bf642807-689c-4ff5-b275-ae0c17f66d9e/data_level0.bin": "ea9ac6972cb4666769a17755f17c5727f676f11a742e9553bf3a21119ab54394",
+    "bf642807-689c-4ff5-b275-ae0c17f66d9e/header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+    "bf642807-689c-4ff5-b275-ae0c17f66d9e/length.bin": "f783a2f5d7fd19106d719dd24ec382b9729ddb75fa93e9f26101c73a0f242b0b",
+    "bf642807-689c-4ff5-b275-ae0c17f66d9e/link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "chroma.sqlite3": "cf767ee3aa87fe0f6a37d3af26febfee394209d6825b2765094dbeda46a4b5cf"
+  },
+  "model_files": {
+    "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+    "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+    "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+    "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+    "sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+    "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+  }
+}

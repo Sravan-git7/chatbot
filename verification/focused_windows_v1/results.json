@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "date": "2026-10-14",
+  "branch": "arena/b450cda2-chatbot",
+  "baseline_commit": "a155a8795e52135f6e55e298bf82965a6bcea8b2",
+  "source_commit": "afc76b024b42d74b0951d8f29207abcd440b3503",
+  "verdict": "NOT READY",
+  "public_deployment": false,
+  "native_windows": {
+    "executed_by_arena": false,
+    "artifact_accessed_by_arena": false,
+    "findings_source": "User-provided summary of D:\\temp\\SURA-verification-a155a87-20261014060253\\store-diagnostic.json"
+  },
+  "linux_tests": {
+    "passed": 165,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 11.73,
+    "new_regression_cases": 27,
+    "files": [
+      "tests/test_focused_windows_diagnostic.py",
+      "tests/test_windows_portability.py",
+      "tests/test_map_root_identity.py",
+      "tests/test_phase8_corpus.py",
+      "tests/test_phase8_pipeline.py",
+      "tests/test_phase7a.py"
+    ]
+  },
+  "full_backend_and_frontend": "Not rerun in this focused mission; prior results remain historical, not new evidence.",
+  "diagnostic_experiments": {
+    "clean_exit": 0,
+    "seeded_115_vector_fixture_exit": 2,
+    "missing_store_exit": 3,
+    "seeded_fixture_only": true,
+    "seeded_extra_documents_match_current_capture_probe": true,
+    "all_opened_source_stores_in_scratch": true,
+    "clean_stores_unchanged": true,
+    "seeded_stores_unchanged_during_diagnosis": true
+  },
+  "source_sha256": {
+    "scripts/build_page_collection.py": "6af2229d2995638610953f8618c8fe2a6817c8e0c55081578e10f9a0a7180ed7",
+    "scripts/diagnose_windows_verification.py": "4a68b3b6b1fcef4b39e0739526391c62d315f5b6e917388afeb68c4f28b7f81a",
+    "scripts/page_corpus_integrity.py": "3e5b705a838fde7488f73f06521eef6f7039585e7142b5752209618faf221044",
+    "scripts/verify_windows.ps1": "34f8c4a3cf80aed8042605979929537e751c068979697f8dcc112d023ee2175f",
+    "scripts/windows_diagnostic_policy.py": "00e54e157091d35299e53c06a340d48d0dc8c43fd2314f1e47634ccbaef8b48f",
+    "tests/test_focused_windows_diagnostic.py": "58eb2b2fd72ef8874c8e009e27010ed27441a6e8d730227f19adc70799541754"
+  },
+  "evidence_sha256": {
+    "verification/focused_windows_v1/linux-clean.json": "4807896888937848fd0d0c06413fd32ff500752336c4ab85237ae61f318f51bf",
+    "verification/focused_windows_v1/linux-blocked.json": "08ae035365b170c2ba37763fcbaa0aaae24c439637affe029cb59c159fe57ec5",
+    "verification/focused_windows_v1/linux-seeded-excluded.json": "b0e18398f797f7d060cc00e05dc3a21fa30efbf10ff03d6c4525a66c4a3db13f",
+    "verification/focused_windows_v1/linux-tests.txt": "c9395202f3733eb1b5dd33c8db979889229f83628e1744c4a0816e7ea496350c",
+    "verification/focused_windows_v1/linux-seeding-method.json": "2caf347e71a2a23b239d8c18862383a923f5801a1566f519b732bd017528aaa8"
+  },
+  "unchanged_historical_checkpoint_count": 222,
+  "quantization_acceptance_policy": "Existing round(float,4) equality unchanged. Existing vector tolerance unchanged. No new tolerance introduced.",
+  "remaining": [
+    "Windows raw numerical/kernel attribution",
+    "Windows focused and full verification",
+    "Approved isolated store repair/migration",
+    "Sealed-producer migration",
+    "Semantic quality",
+    "Real Ollama",
+    "Chromium",
+    "Security gates"
+  ]
+}
