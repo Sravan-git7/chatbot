@@ -166,8 +166,13 @@ class OwnedPageRetriever(_Owner, PR.PageRetriever):
         expected_model=None,
     ):
         BP.guard_names(collection, Path(vector_dir))
-        if not Path(vector_dir).is_dir():
-            raise FileNotFoundError("Page store is unavailable")
+        if not (
+            Path(vector_dir).is_dir()
+            and (Path(vector_dir) / "chroma.sqlite3").is_file()
+        ):
+            raise FileNotFoundError(
+                "Page store is unavailable; implicit database creation is forbidden"
+            )
         client = _client(vector_dir)
         try:
             col = client.get_collection(collection)

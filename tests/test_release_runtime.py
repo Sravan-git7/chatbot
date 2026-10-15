@@ -267,6 +267,7 @@ def test_partial_owned_close_retains_diagnostic_state_blocks_cleanup_and_retry(
 
 
 def test_partial_page_initialization_closes_only_new_client(tmp_path):
+    (tmp_path / "chroma.sqlite3").write_bytes(b"synthetic SDK-mock sentinel only")
     client = Mock()
     client.get_collection.side_effect = RuntimeError("missing fixture collection")
     with patch.object(OWN, "_client", return_value=client):
@@ -597,3 +598,18 @@ def test_production_factory_passes_loaded_model_contract_to_both_owners():
     OWN.release_pipeline(pipeline)
     backend.close.assert_called_once()
     retriever.close.assert_called_once()
+
+
+@pytest.mark.parametrize("kind", ["card", "page"])
+def test_missing_database_never_invokes_sdk_or_creates_store(tmp_path, kind):
+    with patch.object(OWN, "_client") as factory:
+        if kind == "page":
+            with pytest.raises(
+                FileNotFoundError, match="implicit database creation is forbidden"
+            ):
+                OWN.OwnedPageRetriever.from_store(tmp_path, embed=lambda _: [])
+        else:
+            with pytest.raises(OWN.RT.CardStoreUnavailable):
+                OWN.OwnedCardBackend(vector_dir=tmp_path).health_check()
+        factory.assert_not_called()
+    assert not (tmp_path / "chroma.sqlite3").exists()
