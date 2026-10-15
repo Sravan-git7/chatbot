@@ -18,6 +18,8 @@ import argparse
 import asyncio
 import datetime
 import hashlib
+import hmac
+import secrets
 import json
 import logging
 import os
@@ -38,6 +40,7 @@ from fastapi import FastAPI, Request  # noqa: E402
 from fastapi.exceptions import RequestValidationError  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
 from fastapi.responses import FileResponse, JSONResponse  # noqa: E402
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.staticfiles import StaticFiles  # noqa: E402
 from pydantic import BaseModel, ConfigDict, Field, field_validator  # noqa: E402
 
@@ -45,6 +48,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_STATIC_DIR = ROOT / "web" / "dist"
 DEFAULT_CORS = ("http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:4173", "http://127.0.0.1:4173", "http://localhost:8000", "http://127.0.0.1:8000")
 MAX_BODY_BYTES = 16 * 1024
+MAX_IP_BUCKETS = 4096
 FRAME_ANCESTORS_ENV = "RAG_CSP_FRAME_ANCESTORS"
 CSP_TEMPLATE = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors {frame_ancestors}"
 
@@ -136,11 +140,29 @@ def validate_configuration() -> Dict[str, Any]:
     if log_queries_raw not in ("0", "1", "true", "false", "yes", "no", ""):
         raise ValueError(f"Invalid SURA_LOG_QUERIES='{log_queries_raw}'")
 
+    profile = os.environ.get("SURA_PROFILE", "local")
+    if profile not in ("local", "production"):
+        raise ValueError("SURA_PROFILE must be local or production")
+    token = os.environ.get("SURA_API_TOKEN", "")
+    if token and (not 32 <= len(token) <= 256 or not token.isascii() or any(c.isspace() for c in token)):
+        raise ValueError("SURA_API_TOKEN must contain 32-256 non-whitespace ASCII characters")
+    hosts = [h.strip() for h in os.environ.get("SURA_ALLOWED_HOSTS", "").split(",") if h.strip()]
+    if profile == "production":
+        if not token or not hosts or any("*" in h for h in hosts):
+            raise ValueError("Production requires an API token and explicit allowed hosts")
+        if log_queries_raw in ("1", "true", "yes") or os.environ.get("RAG_ENABLE_DEBUG", "0").lower() in ("1", "true", "yes"):
+            raise ValueError("Production forbids raw query logging and debug output")
+        if any(flags.values()) or "*" in os.environ.get("RAG_CORS_ORIGINS", ""):
+            raise ValueError("Production forbids experimental flags and wildcard CORS")
+
     card_store_dir = ROOT / "data" / "vector_store"
     page_store_dir = card_store_dir / "page_collection"
     page_corpus_dir = ROOT / "data" / "page_corpus"
     return {
         "generator": gen,
+        "profile": profile,
+        "authentication_enabled": bool(token),
+        "allowed_hosts": hosts,
         "feature_flags": flags,
         "rate_limit_per_minute": rate_limit,
         "max_concurrent_requests": max_concurrent,
@@ -288,6 +310,10 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
     csp = build_csp()
     sdir = Path(static_dir) if static_dir is not None else Path(os.environ.get("RAG_STATIC_DIR", DEFAULT_STATIC_DIR))
 
+    profile = os.environ.get("SURA_PROFILE", "local")
+    api_token = os.environ.get("SURA_API_TOKEN", "")
+    log_key = secrets.token_bytes(32)  # Never logged; production hashes resist query dictionary lookup.
+    owned_service = service is None
     state: Dict[str, Any] = {
         "service": service,
         "error": None,
@@ -298,6 +324,14 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         "ip_request_history": {},
     }
     in_flight_lock = threading.Lock()
+    # Fail closed even when an ASGI host omits lifespan startup.
+    try:
+        initial_config = validate_configuration()
+        if profile == "production" and (debug_on or "*" in origins):
+            raise ValueError("Unsafe production app overrides")
+    except ValueError:
+        initial_config = {}
+        state.update(configuration_invalid=True, error="Invalid server configuration.", service=None)
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -314,51 +348,31 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
             try:
                 state["service"] = (service_factory or S.build_service)(gen)
             except Exception as e:                                   # noqa: BLE001
-                state["error"] = f"{type(e).__name__}: {e}"
-        yield
-        # Graceful shutdown: drain in-flight requests (up to 5s timeout)
-        state["shutting_down"] = True
-        t_drain0 = time.time()
-        while state["active_requests"] > 0 and (time.time() - t_drain0) < 5.0:
-            await asyncio.sleep(0.05)
+                logger.error("Service initialization failed (%s)", type(e).__name__)
+                state["error"] = "Service initialization failed; consult operator diagnostics."
+        try:
+            yield
+        finally:
+            state["shutting_down"] = True
+            t_drain0 = time.monotonic()
+            while state["active_requests"] > 0 and (time.monotonic() - t_drain0) < 5.0:
+                await asyncio.sleep(0.05)
+            if state["active_requests"]:
+                logger.error("Shutdown drain deadline expired; resources retained until process exit")
+            elif owned_service and state.get("service") is not None:
+                close = getattr(state["service"], "close", None)
+                if callable(close):
+                    close()  # Failure is visible, never falsely report a successful shutdown.
 
     app = FastAPI(title="SAP Utilities RAG chat API", version="11.1", lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url="/api/openapi.json")
     app.state.rag = state
-    app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=False, allow_methods=["GET", "POST", "OPTIONS"], allow_headers=["Content-Type", "X-Request-Id"], max_age=600)
+    app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=False, allow_methods=["GET", "POST", "OPTIONS"], allow_headers=["Content-Type", "X-Request-Id", "Authorization"], max_age=600)
 
-    @app.middleware("http")
-    async def guard(request: Request, call_next):
-        supplied_id = request.headers.get("x-request-id", "")
-        req_id = supplied_id if re.fullmatch(r"[A-Za-z0-9_-]{1,64}", supplied_id) else uuid.uuid4().hex
-        request.state.request_id = req_id
+    if profile == "production" and initial_config.get("allowed_hosts"):
+        app.add_middleware(TrustedHostMiddleware, allowed_hosts=initial_config["allowed_hosts"])
 
-        cl = request.headers.get("content-length")
-        if cl and cl.isdigit() and int(cl) > MAX_BODY_BYTES:
-            resp = JSONResponse(error_body("payload_too_large", f"The request body is larger than {MAX_BODY_BYTES} bytes.", request_id=req_id), status_code=413)
-            resp.headers["X-Request-Id"] = req_id
-            return resp
-
-        if request.method == "POST" and request.url.path.startswith("/api/"):
-            async def consume_body():
-                body = bytearray()
-                async for chunk in request.stream():
-                    body.extend(chunk)
-                    if len(body) > MAX_BODY_BYTES:
-                        return None
-                return bytes(body)
-            try:
-                body = await asyncio.wait_for(consume_body(), timeout=10.0)
-            except asyncio.TimeoutError:
-                return JSONResponse(error_body("request_body_timeout", "The request body was not received in time.", request_id=req_id),
-                                    status_code=408, headers={"X-Request-Id": req_id, "Cache-Control": "no-store"})
-            if body is None:
-                return JSONResponse(error_body("payload_too_large", f"The request body is larger than {MAX_BODY_BYTES} bytes.", request_id=req_id),
-                                    status_code=413, headers={"X-Request-Id": req_id, "X-Content-Type-Options": "nosniff",
-                                                              "Referrer-Policy": "no-referrer", "Cache-Control": "no-store"})
-            request._body = body
-
-        resp = await call_next(request)
-        resp.headers["X-Request-Id"] = req_id
+    def secure(resp, request):
+        resp.headers["X-Request-Id"] = getattr(request.state, "request_id", "")
         resp.headers.setdefault("X-Content-Type-Options", "nosniff")
         resp.headers.setdefault("Referrer-Policy", "no-referrer")
         if request.url.path.startswith("/api/") or request.url.path in ("/health", "/ready"):
@@ -366,6 +380,45 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         else:
             resp.headers.setdefault("Content-Security-Policy", csp)
         return resp
+
+    @app.middleware("http")
+    async def guard(request: Request, call_next):
+        supplied_id = request.headers.get("x-request-id", "")
+        req_id = supplied_id if re.fullmatch(r"[A-Za-z0-9_-]{1,64}", supplied_id) else uuid.uuid4().hex
+        request.state.request_id = req_id
+
+        if state.get("configuration_invalid") and request.url.path != "/health":
+            return secure(JSONResponse(error_body("service_not_ready", "Invalid server configuration.", request_id=req_id), status_code=503), request)
+        if api_token and request.url.path not in ("/health", "/ready") and request.method != "OPTIONS":
+            scheme, _, credential = request.headers.get("authorization", "").partition(" ")
+            if scheme.lower() != "bearer" or len(credential) > 256 or not secrets.compare_digest(credential.encode("utf-8"), api_token.encode("utf-8")):
+                return secure(JSONResponse(error_body("unauthorized", "Authentication required.", request_id=req_id), status_code=401,
+                                           headers={"WWW-Authenticate": "Bearer"}), request)
+
+        cl = request.headers.get("content-length")
+        if cl and cl.isdigit() and int(cl) > MAX_BODY_BYTES:
+            resp = JSONResponse(error_body("payload_too_large", f"The request body is larger than {MAX_BODY_BYTES} bytes.", request_id=req_id), status_code=413)
+            return secure(resp, request)
+
+        if request.method == "POST" and request.url.path.startswith("/api/"):
+            async def consume_body():
+                body = bytearray()
+                async for chunk in request.stream():
+                    if len(body) + len(chunk) > MAX_BODY_BYTES:
+                        return None
+                    body.extend(chunk)
+                return bytes(body)
+            try:
+                body = await asyncio.wait_for(consume_body(), timeout=10.0)
+            except asyncio.TimeoutError:
+                return secure(JSONResponse(error_body("request_body_timeout", "The request body was not received in time.", request_id=req_id),
+                                    status_code=408), request)
+            if body is None:
+                return secure(JSONResponse(error_body("payload_too_large", f"The request body is larger than {MAX_BODY_BYTES} bytes.", request_id=req_id),
+                                    status_code=413), request)
+            request._body = body
+
+        return secure(await call_next(request), request)
 
     @app.exception_handler(S.ServiceError)
     async def on_service_error(request: Request, exc: S.ServiceError):
@@ -434,7 +487,8 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
                 if not client.check_available():
                     return JSONResponse(error_body("model_unavailable", "Ollama model is not reachable.", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
         except Exception as e:
-            return JSONResponse(error_body("service_not_ready", f"Readiness check failed: {e}", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
+            logger.error("Readiness check failed (%s)", type(e).__name__)
+            return JSONResponse(error_body("service_not_ready", "Dependency readiness check failed.", request_id=req_id), status_code=503, headers={"X-Request-Id": req_id})
         # Match /api/health: count pages actually admitted/searchable, not the 29 registered topic cards (28/29 today;
         # only M2C-18 stays un-ingested under its conflicting identity).
         # This is a reporting correction only; the readiness checks above and the response shape stay unchanged.
@@ -476,6 +530,13 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
                 window_start = now_sec - 60.0
                 with in_flight_lock:
                     history = state["ip_request_history"]
+                    if client_ip not in history and len(history) >= MAX_IP_BUCKETS:
+                        expired = [ip for ip, stamps in history.items() if not stamps or max(stamps) <= window_start]
+                        for ip in expired:
+                            del history[ip]
+                        if len(history) >= MAX_IP_BUCKETS:
+                            return JSONResponse(error_body("rate_limited", "Rate-limit capacity reached; retry later.", request_id=req_id),
+                                                status_code=429, headers={"Retry-After": "60"})
                     hist = history.setdefault(client_ip, [])
                     hist[:] = [t for t in hist if t > window_start]
                     if len(hist) >= limit_per_min:
@@ -501,7 +562,13 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         try:
             svc = current()
             context = req.context.model_dump(exclude_none=True) if req.context else None
-            result = svc.ask(req.message, conversation_id=req.conversation_id, debug=(req.debug and debug_on), context=context)
+            # Shared production API is stateless across requests: never trust a caller's
+            # conversation ID to retrieve another caller's server-side conversation.
+            # The UI already sends its explicit context; revalidate it in RagService.
+            if profile == "production":
+                result = svc.ask_stateless(req.message, debug=False, context=context)
+            else:
+                result = svc.ask(req.message, conversation_id=req.conversation_id, debug=(req.debug and debug_on), context=context)
         except S.ServiceError:
             raise
         except Exception as exc:
@@ -516,7 +583,10 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
         # Structured JSON observability log record
         try:
             log_query_raw = os.environ.get("SURA_LOG_QUERIES", "").lower() in ("1", "true", "yes")
-            logged_query = req.message if log_query_raw else hashlib.sha256(req.message.encode("utf-8")).hexdigest()[:16]
+            if profile == "production":
+                logged_query = hmac.new(log_key, req.message.encode("utf-8"), hashlib.sha256).hexdigest()[:16]
+            else:
+                logged_query = req.message if log_query_raw else hashlib.sha256(req.message.encode("utf-8")).hexdigest()[:16]
 
             dbg = result.get("debug") or {}
             routing = dbg.get("routing") or {}
@@ -585,6 +655,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--host", default=os.environ.get("HOST", "127.0.0.1"))
     ap.add_argument("--port", type=int, default=os.environ.get("PORT", "8000"))
     a = ap.parse_args(argv)
+    if a.host not in ("127.0.0.1", "localhost", "::1") and os.environ.get("SURA_PROFILE") != "production":
+        ap.error("Non-loopback binding requires SURA_PROFILE=production and authenticated configuration")
+    validate_configuration()  # Invalid production settings must not start a listening socket.
     _configure_structured_logging()          # production start emits the structured JSON request records on stdout
     import uvicorn
     uvicorn.run(create_app(generator=a.generator), host=a.host, port=a.port, log_level="info")

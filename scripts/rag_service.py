@@ -421,6 +421,7 @@ class RagService:
             cards=list(pipeline.cards.values()),
             config=pipeline.cfg,
         )
+        self.pipeline._owned_resources = getattr(pipeline, "_owned_resources", [])
 
     def _prune_conversations(self, current_time: float) -> None:
         """Evict expired conversations (TTL) and enforce bounded capacity (LRU/FIFO)."""
@@ -433,6 +434,20 @@ class RagService:
         while len(self._conversations) > MAX_CONVERSATION_HISTORY:
             oldest_cid = next(iter(self._conversations))
             self._conversations.pop(oldest_cid, None)
+
+    def ask_stateless(self, question: Any, debug: bool = False, context: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
+        """Use only this request's explicit context; retain no server conversation."""
+        cid = uuid.uuid4().hex
+        try:
+            return self.ask(question, conversation_id=cid, debug=debug, context=context)
+        finally:
+            with self._lock:
+                self._conversations.pop(cid, None)
+
+    def close(self) -> None:
+        """After admission has stopped and workers drained; never global SDK shutdown."""
+        from owned_retrieval import release_pipeline
+        release_pipeline(self.pipeline)
 
     def info(self) -> Dict[str, Any]:
         entries = self.pipeline.corpus.entries
@@ -865,16 +880,24 @@ def build_service(generator: str = "extractive") -> RagService:
     # Phase 11.1: the shipped configuration is "C1" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.
     # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).
     pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())
-    # The card backend is lazy by design; validate its required collection here so an absent/empty card index cannot
-    # appear ready and fail only on the first user question. PageRetriever.from_store opens the page collection, but
-    # check that it contains searchable chunks as well.
-    card_health_check = getattr(pipeline.backend, "health_check", None)
-    if callable(card_health_check):
-        card_health_check()
-    page_count = getattr(pipeline.retriever, "count", None)
-    if callable(page_count) and int(page_count()) < 1:
-        raise FileNotFoundError("page vector collection is empty; rebuild it with scripts/build_page_collection.py")
-    return RagService(EV.build_evidence_pipeline(pipeline, tau=EV.SHIPPED_TAU, widen=False, generator=generator), generator)
+    try:
+        # The card backend is lazy by design; validate its required collection here so an absent/empty card index cannot
+        # appear ready and fail only on the first user question. PageRetriever.from_store opens the page collection, but
+        # check that it contains searchable chunks as well.
+        card_health_check = getattr(pipeline.backend, "health_check", None)
+        if callable(card_health_check):
+            card_health_check()
+        page_count = getattr(pipeline.retriever, "count", None)
+        if callable(page_count) and int(page_count()) < 1:
+            raise FileNotFoundError("page vector collection is empty; rebuild it with scripts/build_page_collection.py")
+        guarded = EV.build_evidence_pipeline(pipeline, tau=EV.SHIPPED_TAU, widen=False, generator=generator)
+        guarded._owned_resources = getattr(pipeline, "_owned_resources", [])
+        return RagService(guarded, generator)
+
+    except BaseException:
+        from owned_retrieval import release_pipeline
+        release_pipeline(pipeline)
+        raise
 
 
 def answer_question(question: str, service: Optional[RagService] = None, generator: str = "extractive", conversation_id: Optional[str] = None,

@@ -1,0 +1,138 @@
+"""Production client ownership without editing checkpoint-pinned router code.
+
+Only clients created here are closed. Shared Chroma refcounts, not global cache
+clearing, protect other owners. A close failure is terminal until process restart.
+The factory lock coordinates SURA-owned clients; unrelated SDK users must not
+concurrently reopen the same path during shutdown.
+"""
+
+from pathlib import Path
+from threading import RLock
+
+import m2c_router as RT
+import page_retriever as PR
+import build_page_collection as BP
+
+_FACTORY_LOCK = RLock()
+_FAILED_CLIENTS = {}
+
+
+def assert_path_reusable(path):
+    root = Path(path).resolve()
+    for failed, client in _FAILED_CLIENTS.items():
+        if root == failed or root in failed.parents or failed in root.parents:
+            raise RuntimeError(
+                "Owned Chroma close failed; restart process before reuse"
+            )
+
+
+def _release_client(client, path):
+    with _FACTORY_LOCK:
+        assert_path_reusable(path)
+        try:
+            client.close()
+        except BaseException:
+            _FAILED_CLIENTS[Path(path).resolve()] = client
+            raise
+
+
+def _client(path):
+    import chromadb
+    from chromadb.config import Settings
+
+    with _FACTORY_LOCK:
+        assert_path_reusable(path)
+        try:
+            return chromadb.PersistentClient(
+                path=str(path), settings=Settings(anonymized_telemetry=False)
+            )
+        except BaseException:
+            _FAILED_CLIENTS[Path(path).resolve()] = (
+                None  # Constructor may have partly registered a native system.
+            )
+            raise
+
+
+class _Owner:
+    def close(self):
+        with _FACTORY_LOCK:
+            if getattr(self, "_close_failed", False):
+                raise RuntimeError(
+                    "Owned Chroma close previously failed; restart process"
+                )
+            client = getattr(self, "_client", None)
+            if client is None:
+                return
+            try:
+                _release_client(client, self._store_path)
+            except BaseException:
+                self._close_failed = True
+                raise
+            self._client = None
+            self._closed = True
+
+
+class OwnedCardBackend(_Owner, RT.ChromaCardBackend):
+    def _open(self):
+        with _FACTORY_LOCK:
+            if getattr(self, "_closed", False):
+                raise RT.CardStoreUnavailable("Owned card backend is closed")
+            if self._collection is not None:
+                return self._collection
+            if not (
+                self.vector_dir.is_dir()
+                and (self.vector_dir / "chroma.sqlite3").is_file()
+            ):
+                raise RT.CardStoreUnavailable("Card store is unavailable")
+            client = _client(self.vector_dir)
+            self._store_path = Path(self.vector_dir)
+            self._client = client
+            try:
+                collection = client.get_collection(self.collection_name)
+                if (collection.metadata or {}).get("hnsw:space") != RT.DISTANCE_METRIC:
+                    raise RT.RouterConfigError("Unexpected card distance metric")
+            except BaseException:
+                self.close()
+                raise
+            self._client = client
+            self._collection = collection
+            return collection
+
+
+class OwnedPageRetriever(_Owner, PR.PageRetriever):
+    @classmethod
+    def from_store(
+        cls, vector_dir=BP.PAGE_VECTOR_DIR, collection=BP.PAGE_COLLECTION, embed=None
+    ):
+        BP.guard_names(collection, Path(vector_dir))
+        if not Path(vector_dir).is_dir():
+            raise FileNotFoundError("Page store is unavailable")
+        client = _client(vector_dir)
+        try:
+            col = client.get_collection(collection)
+            metadata = col.metadata or {}
+            if metadata.get("hnsw:space") != BP.DISTANCE_SPACE:
+                raise PR.PageStoreUnavailable("Unexpected page distance metric")
+            count = int(col.count())
+            if count < 1 or (
+                metadata.get("vector_count") is not None
+                and int(metadata["vector_count"]) != count
+            ):
+                raise PR.PageStoreUnavailable(
+                    "Page vector count is empty or differs from metadata"
+                )
+            result = cls(col, embed or BP.load_embedder()[0])
+        except BaseException:
+            _release_client(client, vector_dir)
+            raise
+        result._store_path = Path(vector_dir)
+        result._client = client
+        return result
+
+
+def release_pipeline(pipeline):
+    """Only build_pipeline-created resources, never injected fixture/third-party clients."""
+    resources = getattr(pipeline, "_owned_resources", [])
+    while resources:
+        resources[-1].close()
+        resources.pop()  # Remove only after successful close; failure remains retry-visible.

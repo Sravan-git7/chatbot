@@ -45,7 +45,9 @@ def post(c, message=Q_PLAN, **kw):
 @NEED_API
 class HealthTests(unittest.TestCase):
     def test_cli_uses_host_and_port_environment_defaults(self):
-        with unittest.mock.patch.dict("os.environ", {"HOST": "0.0.0.0", "PORT": "8123"}), \
+        with unittest.mock.patch.dict("os.environ", {"HOST": "0.0.0.0", "PORT": "8123",
+             "SURA_PROFILE": "production", "SURA_API_TOKEN": "fixture-not-secret-0123456789abcdef",
+             "SURA_ALLOWED_HOSTS": "testserver", "RAG_ENABLE_DEBUG": "0", "SURA_LOG_QUERIES": "0"}), \
              unittest.mock.patch("uvicorn.run") as run:
             self.assertEqual(rag_api.main([]), 0)
         self.assertEqual(run.call_args.kwargs["host"], "0.0.0.0")
@@ -83,7 +85,8 @@ class HealthTests(unittest.TestCase):
             h = c.get("/api/health")
             self.assertEqual(h.status_code, 503)
             self.assertFalse(h.json()["ready"])
-            self.assertIn("card store missing", h.json()["reason"])
+            self.assertIn("Service initialization failed", h.json()["reason"])
+            self.assertNotIn("card store missing", h.text)  # Private startup details must not cross the API.
             r = post(c)
             self.assertEqual((r.status_code, r.json()["error"]["code"]), (503, "service_not_ready"))
             self.assertNotIn("answer", r.json())

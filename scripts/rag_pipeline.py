@@ -805,20 +805,26 @@ def format_answer(a: Mapping[str, Any]) -> str:
 def build_pipeline(generator: str = "extractive", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:
     """Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded)."""
     import build_page_collection as BP
-    import m2c_router as rt
     import page_chunker as PK
-    import page_retriever as PR
     from rag_generate import LLMGenerator, OllamaClient
     embed, minfo = BP.load_embedder()
     count, _ = PK.make_token_counter(minfo["model_dir"])
-    backend = rt.ChromaCardBackend(embedder=embed)
-    retriever = PR.PageRetriever.from_store(embed=embed)
-    ctx = pid.IdentityContext.from_root(root)
-    client = llm_client
-    if generator != "extractive" and client is None:
-        client = OllamaClient(
-            num_predict=getattr(config, "ollama_num_predict", None),
-            keep_alive=getattr(config, "ollama_keep_alive", None),
-        )
-    gen = ExtractiveGenerator() if generator == "extractive" else LLMGenerator(client, name="ollama" if llm_client is None else "llm")
-    return RagPipeline(backend, retriever, ctx, PageCorpusIndex.from_dir(), gen, count, config=config)
+    from owned_retrieval import OwnedCardBackend, OwnedPageRetriever
+    backend = OwnedCardBackend(embedder=embed)
+    retriever = OwnedPageRetriever.from_store(embed=embed)
+    try:
+        ctx = pid.IdentityContext.from_root(root)
+        client = llm_client
+        if generator != "extractive" and client is None:
+            client = OllamaClient(
+                num_predict=getattr(config, "ollama_num_predict", None),
+                keep_alive=getattr(config, "ollama_keep_alive", None),
+            )
+        gen = ExtractiveGenerator() if generator == "extractive" else LLMGenerator(client, name="ollama" if llm_client is None else "llm")
+        pipeline = RagPipeline(backend, retriever, ctx, PageCorpusIndex.from_dir(), gen, count, config=config)
+        pipeline._owned_resources = [backend, retriever]
+        return pipeline
+    except BaseException:
+        retriever.close()
+        backend.close()
+        raise

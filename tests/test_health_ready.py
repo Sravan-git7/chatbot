@@ -124,7 +124,8 @@ class HealthReadyTests(unittest.TestCase):
             r = self.c.get("/ready")
             self.assertEqual(r.status_code, 503)
             self.assertEqual(r.json()["error"]["code"], "service_not_ready")
-            self.assertIn("card collection is missing", r.json()["error"]["message"])
+            self.assertEqual("Dependency readiness check failed.", r.json()["error"]["message"])
+            self.assertNotIn("card collection is missing", r.text)  # Do not disclose private dependency errors.
 
     def test_readiness_verifies_ollama_model_when_configured(self):
         class StubOllamaClient:
