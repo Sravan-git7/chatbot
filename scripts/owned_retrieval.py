@@ -81,7 +81,9 @@ def _validate_vector_contract(
     # Shape/metadata agreement is insufficient for cosine search: NaN/Inf and zero vectors have no
     # usable cosine direction. Validate the existing sampled vector, never rewrite/normalise the store.
     values = [float(value) for value in vectors[0]]
-    if not all(math.isfinite(value) for value in values) or not any(value != 0.0 for value in values):
+    if not all(math.isfinite(value) for value in values) or not any(
+        value != 0.0 for value in values
+    ):
         raise error_type("Stored cosine vector must be finite nonzero")
     declared = metadata.get("embedding_dimensions")
     if declared is not None and declared != expected_dimension:

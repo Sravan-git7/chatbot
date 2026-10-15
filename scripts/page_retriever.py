@@ -153,8 +153,8 @@ class PageRetriever:
         import chromadb
         from chromadb.config import Settings
         BP.guard_names(collection, vector_dir)
-        if not Path(vector_dir).is_dir():
-            raise FileNotFoundError(f"page vector store {vector_dir} not found: run scripts/build_page_collection.py")
+        if not (Path(vector_dir).is_dir() and (Path(vector_dir) / "chroma.sqlite3").is_file()):
+            raise FileNotFoundError(f"page vector store {vector_dir} is unavailable; implicit database creation is forbidden")
         client = chromadb.PersistentClient(path=str(vector_dir), settings=Settings(anonymized_telemetry=False))
         try:
             col = client.get_collection(collection)
