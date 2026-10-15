@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "readiness": "NOT READY",
+  "scope": "Documentation/integrity and opaque synthetic copy-recipe checks only; NOT application/model/store/native/security certification",
+  "delivery_baseline": "8895a964f7ac9a4543a30073a16ce66b12f9857a",
+  "tested_functional_source": "29ca4ba2182b47f8452630ae5dd856ac946afe70",
+  "branch": "arena/b450cda2-chatbot",
+  "inherited_tracked_files_verified": 979,
+  "published_artifact_hashes_verified": 72,
+  "published_tested_file_hashes_verified": 12,
+  "gzip_and_uncompressed_archives_verified": 39,
+  "tested_to_delivery_changes": {
+    "files": 68,
+    "scope": "report/evidence only; no application/test/dependency/evaluation modifications"
+  },
+  "historical_reconciliation": {
+    "status": "BYTE_IDENTICAL",
+    "command": [
+      "python",
+      "release/closure_v2/reconcile_provenance.py",
+      "--out",
+      "/home/user/closure-provenance-recheck.json"
+    ],
+    "result_sha256": "1377855b15388469c7ad19d6bf2f04ffcdffd6ad201553033510b06a667a6bf0"
+  },
+  "document_validation": {
+    "markdown_files": 7,
+    "relative_links_checked": 49,
+    "bash_blocks_syntax_checked": 11,
+    "python_snippets_syntax_checked": 3,
+    "powershell_execution": "NOT RUN",
+    "sap_worksheet_rows": 184,
+    "sap_rows_reviewed": 0,
+    "security_decisions": "5 OPEN, no approvals",
+    "new_worksheet_line_endings": "LF; original frozen artifacts unchanged"
+  },
+  "cold_copy_documentation_recipe": {
+    "scope": "Linux stdlib copying/hashing of owned opaque synthetic files only; no real SQLite, Chroma, models, production access, signature/quiescence proof or Windows execution",
+    "checks": [
+      {
+        "case": "valid",
+        "expected_exit": "0",
+        "exit_code": 0,
+        "source_fixture_bytes_unchanged": true,
+        "result": "PASS"
+      },
+      {
+        "case": "existing-sealed",
+        "expected_exit": "nonzero",
+        "exit_code": 1,
+        "source_fixture_bytes_unchanged": true,
+        "result": "PASS"
+      },
+      {
+        "case": "existing-run",
+        "expected_exit": "nonzero",
+        "exit_code": 1,
+        "source_fixture_bytes_unchanged": true,
+        "result": "PASS"
+      },
+      {
+        "case": "existing-evidence",
+        "expected_exit": "nonzero",
+        "exit_code": 1,
+        "source_fixture_bytes_unchanged": true,
+        "result": "PASS"
+      },
+      {
+        "case": "wrong-inventory",
+        "expected_exit": "nonzero",
+        "exit_code": 1,
+        "source_fixture_bytes_unchanged": true,
+        "result": "PASS"
+      },
+      {
+        "case": "symlink-file",
+        "expected_exit": "nonzero",
+        "exit_code": 1,
+        "source_fixture_bytes_unchanged": true,
+        "result": "PASS"
+      },
+      {
+        "case": "hardlink-file",
+        "expected_exit": "nonzero",
+        "exit_code": 1,
+        "source_fixture_bytes_unchanged": true,
+        "result": "PASS"
+      },
+      {
+        "case": "dangling-sealed-link",
+        "expected_exit": "nonzero",
+        "exit_code": 1,
+        "source_fixture_bytes_unchanged": true,
+        "result": "PASS"
+      }
+    ]
+  },
+  "original_preservation": {
+    "files_verified": 822,
+    "baseline_manifest_sha256": "10c33dcdc3adb2b0cbc955fe1fbd4275d8a7c2119e170e0801d1e38af9c82c87",
+    "head": "c7527edeb5d4a2963d8bac0072a8e7e5d0ba091f",
+    "git_status_identical": true,
+    "staged_diff_identical": true,
+    "stashes_identical": true
+  },
+  "functional_code_or_evaluation_changes": false,
+  "application_tests_this_request": "NOT RUN (approved runtime not provisioned)",
+  "full_current_quality": "BLOCKED / NOT RUN",
+  "real_ollama": "BLOCKED / NOT RUN",
+  "native_windows": "BLOCKED / NOT RUN",
+  "independent_sap": "NOT REVIEWED",
+  "deployed_security": "OPEN / UNVERIFIED",
+  "private_rehearsal": "NOT APPROVED / NOT RUN",
+  "model_package_browser_downloads_or_installs": false,
+  "production_or_original_store_SDK_access": false,
+  "services_launched": false,
+  "new_defect_reproduced": false,
+  "checked_at": "2026-10-15T16:37:25.882821+00:00",
+  "published_baseline_verification": {
+    "git_remote": "8895a964f7ac9a4543a30073a16ce66b12f9857a",
+    "github_branch_api": "8895a964f7ac9a4543a30073a16ce66b12f9857a",
+    "commands": [
+      "git ls-remote origin refs/heads/arena/b450cda2-chatbot",
+      "gh api repos/Sravan-git7/chatbot/branches/arena%2Fb450cda2-chatbot --jq .commit.sha"
+    ],
+    "recorded_before_package_publication": true
+  },
+  "inherited_functional_trees_compared": [
+    "scripts",
+    "tests",
+    "benchmarks",
+    "eval",
+    "data",
+    "web",
+    "requirements.txt",
+    "requirements-phase11.txt",
+    "requirements-verification.txt",
+    "requirements.lock.txt"
+  ]
+}

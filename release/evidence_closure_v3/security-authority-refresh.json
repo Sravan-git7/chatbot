@@ -1,0 +1,159 @@
+{
+  "checked_at": "2026-10-15T16:25:40.986996+00:00",
+  "advisories": [
+    {
+      "ghsa_id": "GHSA-f4j7-r4q5-qw2c",
+      "cve_id": "CVE-2026-45829",
+      "html_url": "https://github.com/advisories/GHSA-f4j7-r4q5-qw2c",
+      "severity": "critical",
+      "type": "reviewed",
+      "updated_at": "2026-10-05T21:32:32Z",
+      "withdrawn_at": null,
+      "summary": "ChromaDB Python project has a pre-authentication code injection vulnerability",
+      "description": "A pre-authentication, code injection vulnerability in version 1.0.0 or later of the ChromaDB Python project allows an unauthenticated attacker to run arbitrary code on the server by sending a malicious model repository and trust_remote_code set to true in the\u00a0/api/v2/tenants/{tenant}/databases/{db}/collections endpoint.",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 1.0.0, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-45829",
+        "https://github.com/chroma-core/chroma/issues/6717",
+        "https://www.hiddenlayer.com/research/chromatoast-served-pre-auth",
+        "https://access.redhat.com/security/cve/CVE-2026-45829",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2479623",
+        "https://github.com/advisories/GHSA-f4j7-r4q5-qw2c",
+        "https://github.com/chroma-core/chroma",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/chromadb/PYSEC-2026-311.yaml",
+        "https://pypi.org/project/chromadb"
+      ]
+    },
+    {
+      "ghsa_id": "GHSA-36p7-vc44-83pf",
+      "cve_id": "CVE-2026-45833",
+      "html_url": "https://github.com/advisories/GHSA-36p7-vc44-83pf",
+      "severity": "critical",
+      "type": "reviewed",
+      "updated_at": "2026-08-24T20:03:34Z",
+      "withdrawn_at": null,
+      "summary": "ChromaDB has a code injection vulnerability",
+      "description": "A code injection vulnerability in version 0.4.17 or later of the ChromaDB Python project allows an authenticated attacker to run arbitrary code on the server by sending a malicious model repository and trust_remote_code set to true in the\u00a0/api/v2/tenants/default_tenant/databases/default_database/collections/{collection_id} if they have the UPDATE_COLLECTION permission.",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.4.17, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-45833",
+        "https://www.hiddenlayer.com/sai-security-advisory/2026-06-chromadb-5",
+        "https://access.redhat.com/security/cve/CVE-2026-45833",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2488430",
+        "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-45833.json",
+        "https://github.com/advisories/GHSA-36p7-vc44-83pf"
+      ]
+    },
+    {
+      "ghsa_id": "GHSA-xph7-9rjv-w5fr",
+      "cve_id": "CVE-2026-45831",
+      "html_url": "https://github.com/advisories/GHSA-xph7-9rjv-w5fr",
+      "severity": "high",
+      "type": "reviewed",
+      "updated_at": "2026-08-24T20:00:43Z",
+      "withdrawn_at": null,
+      "summary": "ChromaDB's SimpleRBACAuthorizationProvider doesn't check which tenant, database, or collection a permission applies to",
+      "description": "The SimpleRBACAuthorizationProvider authorization provider in versions 0.5.0 or later of the ChromaDB Python project evaluates whether a user holds a given permission but never checks which tenant, database, or collection that permission applies to allowing users to perform cross tenant actions.",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.5.0, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-45831",
+        "https://www.hiddenlayer.com/sai-security-advisory/2026-06-chromadb-3",
+        "https://github.com/chroma-core/chroma/issues/7588",
+        "https://github.com/chroma-core/chroma/pull/7602",
+        "https://github.com/advisories/GHSA-xph7-9rjv-w5fr"
+      ]
+    },
+    {
+      "ghsa_id": "GHSA-2wm9-hf6c-p5cr",
+      "cve_id": "CVE-2026-45830",
+      "html_url": "https://github.com/advisories/GHSA-2wm9-hf6c-p5cr",
+      "severity": "high",
+      "type": "reviewed",
+      "updated_at": "2026-08-24T19:57:43Z",
+      "withdrawn_at": null,
+      "summary": "ChromaDB allows any authenticated users to arbitrarily read, write, update, or delete data in any tenant's collection",
+      "description": "A lack of authorization validation in version 0.4.17 or later of the ChromaDB Python project allows any authenticated users to arbitrarily read, write, update, or delete data in any tenant's collection regardless of which tenant they belong to.",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.4.17, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-45830",
+        "https://www.hiddenlayer.com/sai-security-advisory/2026-06-chromadb",
+        "https://access.redhat.com/security/cve/CVE-2026-45830",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2488408",
+        "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-45830.json",
+        "https://github.com/chroma-core/chroma/issues/7588",
+        "https://github.com/chroma-core/chroma/pull/7602",
+        "https://github.com/advisories/GHSA-2wm9-hf6c-p5cr"
+      ]
+    },
+    {
+      "ghsa_id": "GHSA-x97m-f58v-9cwg",
+      "cve_id": "CVE-2026-45832",
+      "html_url": "https://github.com/advisories/GHSA-x97m-f58v-9cwg",
+      "severity": "high",
+      "type": "unreviewed",
+      "updated_at": "2026-06-30T03:38:05Z",
+      "withdrawn_at": null,
+      "summary": "All V1 collection-level endpoints in ChromaDB's Python project pass None for the tenant and datab...",
+      "description": "All V1 collection-level endpoints in ChromaDB's Python project pass None for the tenant and database to the authorization layer, allowing attackers to bypass authorization controls by using the V1 endpoints.",
+      "vulnerabilities": [],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-45832",
+        "https://www.hiddenlayer.com/sai-security-advisory/2026-06-chromadb-4",
+        "https://access.redhat.com/security/cve/CVE-2026-45832",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2488411",
+        "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-45832.json",
+        "https://github.com/advisories/GHSA-x97m-f58v-9cwg"
+      ]
+    }
+  ],
+  "pr7602": {
+    "html_url": "https://github.com/chroma-core/chroma/pull/7602",
+    "state": "open",
+    "merged": false,
+    "merged_at": null,
+    "updated_at": "2026-10-07T08:07:27Z"
+  },
+  "pr_head_sha": "cf7295cfe2134452bcc9bfbded0c3d771392f4f7",
+  "metadata_only": true,
+  "downloads_or_installs": false
+}

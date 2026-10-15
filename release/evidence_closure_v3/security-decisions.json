@@ -1,0 +1,172 @@
+{
+  "readiness": "NOT READY",
+  "fresh_authority_metadata": "security-authority-refresh.json",
+  "fresh_metadata_is_not_mitigation": true,
+  "reviewed_version": "chromadb 1.5.9",
+  "decisions": [
+    {
+      "ghsa_id": "GHSA-f4j7-r4q5-qw2c",
+      "cve_id": "CVE-2026-45829",
+      "severity": "critical",
+      "advisory_type": "reviewed",
+      "authoritative_package_ranges": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 1.0.0, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "source": "https://github.com/advisories/GHSA-f4j7-r4q5-qw2c",
+      "source_path_under_review": "Python HTTP create configuration -> embedding function/provider constructor -> model kwargs, before auth; poisoned SDK configuration reconstruction is a separate path",
+      "static_evidence": "release/closure_v2/security-source-audit.json; recorded installed 1.5.9 source, not current deployment inspection",
+      "actual_target_reachability": "UNVERIFIED; Rust backend alone is not exemption",
+      "proposed_mitigation_NOT_certified": "Block all untrusted Chroma HTTP ingress, restrict SDK configuration provenance, explicit vectors only, isolate trusted stores/model trees; no inspection of untrusted SDK .configuration",
+      "status": "OPEN",
+      "security_owner": null,
+      "operator_owner": null,
+      "decision": null,
+      "approver": null,
+      "approval_date": null,
+      "expiry": null,
+      "actual_target_sbom_and_routes_evidence": [],
+      "isolation_test_evidence": [],
+      "patch_compatibility_evidence": [],
+      "residual_risk": null
+    },
+    {
+      "ghsa_id": "GHSA-36p7-vc44-83pf",
+      "cve_id": "CVE-2026-45833",
+      "severity": "critical",
+      "advisory_type": "reviewed",
+      "authoritative_package_ranges": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.4.17, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "source": "https://github.com/advisories/GHSA-36p7-vc44-83pf",
+      "source_path_under_review": "Authenticated UPDATE_COLLECTION -> configuration reconstruction/embedding provider",
+      "static_evidence": "release/closure_v2/security-source-audit.json; recorded installed 1.5.9 source, not current deployment inspection",
+      "actual_target_reachability": "UNVERIFIED; Rust backend alone is not exemption",
+      "proposed_mitigation_NOT_certified": "Deny collection/config mutation to untrusted users across all API versions; no read/constructor of poisoned configs; provenance-bound stores and private identity-separated processes",
+      "status": "OPEN",
+      "security_owner": null,
+      "operator_owner": null,
+      "decision": null,
+      "approver": null,
+      "approval_date": null,
+      "expiry": null,
+      "actual_target_sbom_and_routes_evidence": [],
+      "isolation_test_evidence": [],
+      "patch_compatibility_evidence": [],
+      "residual_risk": null
+    },
+    {
+      "ghsa_id": "GHSA-xph7-9rjv-w5fr",
+      "cve_id": "CVE-2026-45831",
+      "severity": "high",
+      "advisory_type": "reviewed",
+      "authoritative_package_ranges": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.5.0, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "source": "https://github.com/advisories/GHSA-xph7-9rjv-w5fr",
+      "source_path_under_review": "SimpleRBAC checks user/action but ignores resource identity",
+      "static_evidence": "release/closure_v2/security-source-audit.json; recorded installed 1.5.9 source, not current deployment inspection",
+      "actual_target_reachability": "UNVERIFIED; Rust backend alone is not exemption",
+      "proposed_mitigation_NOT_certified": "Do not depend on SimpleRBAC for tenant/database isolation; enforce/test principal-to-resource authorization outside it or separate processes and storage roots",
+      "status": "OPEN",
+      "security_owner": null,
+      "operator_owner": null,
+      "decision": null,
+      "approver": null,
+      "approval_date": null,
+      "expiry": null,
+      "actual_target_sbom_and_routes_evidence": [],
+      "isolation_test_evidence": [],
+      "patch_compatibility_evidence": [],
+      "residual_risk": null
+    },
+    {
+      "ghsa_id": "GHSA-2wm9-hf6c-p5cr",
+      "cve_id": "CVE-2026-45830",
+      "severity": "high",
+      "advisory_type": "reviewed",
+      "authoritative_package_ranges": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.4.17, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "source": "https://github.com/advisories/GHSA-2wm9-hf6c-p5cr",
+      "source_path_under_review": "Python v1/SegmentAPI collection-ID paths can disregard tenant/database; authenticated cross-tenant CRUD",
+      "static_evidence": "release/closure_v2/security-source-audit.json; recorded installed 1.5.9 source, not current deployment inspection",
+      "actual_target_reachability": "UNVERIFIED; Rust backend alone is not exemption",
+      "proposed_mitigation_NOT_certified": "Deny v1 including aliases/encoded routes; verify every v2 operation, default resource path and internal SDK path; enforce identity isolation and disjoint roots",
+      "status": "OPEN",
+      "security_owner": null,
+      "operator_owner": null,
+      "decision": null,
+      "approver": null,
+      "approval_date": null,
+      "expiry": null,
+      "actual_target_sbom_and_routes_evidence": [],
+      "isolation_test_evidence": [],
+      "patch_compatibility_evidence": [],
+      "residual_risk": null
+    },
+    {
+      "ghsa_id": "GHSA-x97m-f58v-9cwg",
+      "cve_id": "CVE-2026-45832",
+      "severity": "high",
+      "advisory_type": "unreviewed",
+      "authoritative_package_ranges": [],
+      "source": "https://github.com/advisories/GHSA-x97m-f58v-9cwg",
+      "source_path_under_review": "Related unreviewed high: Python v1 endpoints pass None tenant/database to authorization",
+      "static_evidence": "release/closure_v2/security-source-audit.json; recorded installed 1.5.9 source, not current deployment inspection",
+      "actual_target_reachability": "UNVERIFIED; Rust backend alone is not exemption",
+      "proposed_mitigation_NOT_certified": "Deny v1 and prove routes cannot bypass identity enforcement; investigate despite absent package/version range",
+      "status": "OPEN",
+      "security_owner": null,
+      "operator_owner": null,
+      "decision": null,
+      "approver": null,
+      "approval_date": null,
+      "expiry": null,
+      "actual_target_sbom_and_routes_evidence": [],
+      "isolation_test_evidence": [],
+      "patch_compatibility_evidence": [],
+      "residual_risk": null
+    }
+  ],
+  "upstream_PR_7602": {
+    "html_url": "https://github.com/chroma-core/chroma/pull/7602",
+    "state": "open",
+    "merged": false,
+    "merged_at": null,
+    "updated_at": "2026-10-07T08:07:27Z"
+  },
+  "no_patch_established": "Original four first_patched_version=null; related high has no package range. Open PR is not a released patch. No upgrade/application performed.",
+  "human_release_acceptance": null
+}

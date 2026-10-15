@@ -1,0 +1,344 @@
+{
+  "scope": "Review pointers and existing candidate observations ONLY, no new gold or authority mapping",
+  "independent_review_complete": false,
+  "M2C-18": {
+    "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+    "card_needs_review": true,
+    "card_page_id": "b1a202c9bb3011da2b24000f20dac9ef",
+    "card_source_status": "needs_review",
+    "card_source_url_status": "needs_review",
+    "card_title": "Contract Account Business Object",
+    "card_url": "https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9442486404b54071b4ebeab6a16628e7/b1a202c9bb3011da2b24000f20dac9ef.html?version=2025.001",
+    "disagreements": [],
+    "effective_guide_id": null,
+    "effective_page_id": null,
+    "evidence": [
+      {
+        "authority": "card_record",
+        "card_url_query": "version=2025.001",
+        "kind": "card",
+        "source_manifest_present": true,
+        "source_number": 18,
+        "source_status": "needs_review",
+        "source_url_status": "needs_review",
+        "source_url_status_reasons": [
+          "query string '?version=2025.001' present (not on most cards; version pin to be confirmed)"
+        ],
+        "topic_manifest_present": true,
+        "topic_manifest_warnings": [
+          "URL carries ?version=2025.001 (kept as url_version; not part of identity)"
+        ]
+      },
+      {
+        "authority": "guide_registrations.json",
+        "capture_check": {
+          "captured_page_ids_declared": [
+            "790dc5536a51204be10000000a174cb4"
+          ],
+          "matching_saved_responses": [
+            "captured_responses/6_40374790_790dc5536a51204be10000000a174cb4.json",
+            "data/toc/9442486404b54071b4ebeab6a16628e7.json"
+          ],
+          "passed": true
+        },
+        "declared_verification": "response_loio_verified",
+        "guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "kind": "guide_registration",
+        "numeric_deliverable_id_declared": "40374790",
+        "reasons": [],
+        "registry_json_status": "unresolved",
+        "role": "card_guide",
+        "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+        "toc_loio_equals_guide_id": true,
+        "toc_node_count": 1481,
+        "verification_basis": "registration_response_loio_verified_and_machine_checked",
+        "verified": true
+      },
+      {
+        "authority": "saved_toc_membership",
+        "guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "kind": "toc_membership",
+        "page_is_landing_page": false,
+        "page_is_toc_node": false,
+        "role": "card_guide",
+        "toc_available": true,
+        "toc_file": "data/toc/9442486404b54071b4ebeab6a16628e7.json",
+        "toc_node_count": 1481
+      },
+      {
+        "authority": "probe_evidence_only",
+        "current_page_id": "b1a202c9bb3011da2b24000f20dac9ef",
+        "current_page_title": "Contract Account",
+        "file": "captured_responses/1_40374490_b1a202c9bb3011da2b24000f20dac9ef.json",
+        "kind": "captured_response",
+        "meaning": "page exists inside that deliverable; it does not prove SAP serves the original card URL from it",
+        "numeric_deliverable_id": "40374490",
+        "response_deliverable_title": "Enterprise Services in Financials",
+        "response_loio": "e4375c1cad104b2eb7d027369bd76638",
+        "response_loio_is_card_guide": false,
+        "response_loio_registered_verified": false,
+        "response_toc_nodes": 669,
+        "used_as_effective_guide": false
+      },
+      {
+        "authority": "resolver",
+        "card_guide_id": "9442486404b54071b4ebeab6a16628e7",
+        "kind": "conflict",
+        "meaning": "the card's guide TOC does not contain the page; other evidence exists but is not authoritative; no effective identity is chosen",
+        "other_loios_seen": [
+          "e4375c1cad104b2eb7d027369bd76638"
+        ],
+        "reasons": [
+          "PAGE_NOT_A_NODE_OF_CARD_GUIDE_TOC",
+          "PAGE_SEEN_IN_OTHER_DELIVERABLE"
+        ]
+      }
+    ],
+    "local_page_available": false,
+    "local_page_path": null,
+    "resolution_basis": "PAGE_NOT_IN_CARD_GUIDE_TOC_PAGE_SEEN_ELSEWHERE",
+    "resolution_status": "conflicting_identity",
+    "source_id": "M2C-18"
+  },
+  "focus_cases": [
+    {
+      "id": "CASE-012",
+      "question": "What objects belong to business master data in SAP Utilities?",
+      "review_status": "UNREVIEWED",
+      "frozen_cache_chunks": [
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+          "url": null,
+          "source_id": null
+        }
+      ],
+      "prohibited_strings_from_unchanged_matcher": [],
+      "candidate_output_reference": "release/closure_v2/semantic-case-review.json modes.{a0,oracle}.cases; raw archived contexts; NOT authoritative gold",
+      "official_edition_version_build": null
+    },
+    {
+      "id": "CASE-020",
+      "question": "How do I process meter reading data during move-in?",
+      "review_status": "UNREVIEWED",
+      "frozen_cache_chunks": [
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/001",
+          "url": null,
+          "source_id": null
+        }
+      ],
+      "prohibited_strings_from_unchanged_matcher": [
+        "does not document the steps to complete this procedure"
+      ],
+      "candidate_output_reference": "release/closure_v2/semantic-case-review.json modes.{a0,oracle}.cases; raw archived contexts; NOT authoritative gold",
+      "official_edition_version_build": null
+    },
+    {
+      "id": "CASE-023",
+      "question": "How do I process incoming payments from external cash desks?",
+      "review_status": "UNREVIEWED",
+      "frozen_cache_chunks": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/003",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/004",
+          "url": null,
+          "source_id": null
+        }
+      ],
+      "prohibited_strings_from_unchanged_matcher": [
+        "does not document the steps to complete this procedure"
+      ],
+      "candidate_output_reference": "release/closure_v2/semantic-case-review.json modes.{a0,oracle}.cases; raw archived contexts; NOT authoritative gold",
+      "official_edition_version_build": null
+    },
+    {
+      "id": "CASE-024",
+      "question": "How do I execute automatic billing in SAP Utilities?",
+      "review_status": "UNREVIEWED",
+      "frozen_cache_chunks": [
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/002",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003",
+          "url": null,
+          "source_id": null
+        }
+      ],
+      "prohibited_strings_from_unchanged_matcher": [
+        "does not document the steps to complete this procedure"
+      ],
+      "candidate_output_reference": "release/closure_v2/semantic-case-review.json modes.{a0,oracle}.cases; raw archived contexts; NOT authoritative gold",
+      "official_edition_version_build": null
+    },
+    {
+      "id": "CASE-037",
+      "question": "How do incoming payments interact with installment plans?",
+      "review_status": "UNREVIEWED",
+      "frozen_cache_chunks": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/000",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/001",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/002",
+          "url": null,
+          "source_id": null
+        }
+      ],
+      "prohibited_strings_from_unchanged_matcher": [
+        "payments cannot be applied to installment plans"
+      ],
+      "candidate_output_reference": "release/closure_v2/semantic-case-review.json modes.{a0,oracle}.cases; raw archived contexts; NOT authoritative gold",
+      "official_edition_version_build": null
+    },
+    {
+      "id": "CASE-039",
+      "question": "Can multiple contracts belong to one contract account?",
+      "review_status": "UNREVIEWED",
+      "frozen_cache_chunks": [
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004",
+          "url": null,
+          "source_id": null
+        }
+      ],
+      "prohibited_strings_from_unchanged_matcher": [
+        "only one contract per account is permitted"
+      ],
+      "candidate_output_reference": "release/closure_v2/semantic-case-review.json modes.{a0,oracle}.cases; raw archived contexts; NOT authoritative gold",
+      "official_edition_version_build": null
+    },
+    {
+      "id": "CASE-040",
+      "question": "Can you explain the business master data objects in more detail?",
+      "review_status": "UNREVIEWED",
+      "frozen_cache_chunks": [
+        {
+          "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+          "url": null,
+          "source_id": null
+        }
+      ],
+      "prohibited_strings_from_unchanged_matcher": [],
+      "candidate_output_reference": "release/closure_v2/semantic-case-review.json modes.{a0,oracle}.cases; raw archived contexts; NOT authoritative gold",
+      "official_edition_version_build": null
+    },
+    {
+      "id": "CASE-052",
+      "question": "How do I process payments?",
+      "review_status": "UNREVIEWED",
+      "frozen_cache_chunks": [
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/000",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+          "url": null,
+          "source_id": null
+        },
+        {
+          "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/003",
+          "url": null,
+          "source_id": null
+        }
+      ],
+      "prohibited_strings_from_unchanged_matcher": [],
+      "candidate_output_reference": "release/closure_v2/semantic-case-review.json modes.{a0,oracle}.cases; raw archived contexts; NOT authoritative gold",
+      "official_edition_version_build": null
+    },
+    {
+      "id": "P12-002",
+      "question": "What does transaction ELDM display?",
+      "review_status": "UNREVIEWED",
+      "AI_reference_not_authority": {
+        "gold_source_id": "M2C-07",
+        "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+        "evidence": [
+          "display the successfully and unsuccessfully posted meter reading documents"
+        ]
+      },
+      "review_issue": "Check ELDM versus FPR3 identity/function; do not transfer transaction claims",
+      "official_edition_version_build": null
+    },
+    {
+      "id": "P12-027",
+      "question": "What is the business function ISU_AMI_1 required for?",
+      "review_status": "UNREVIEWED",
+      "AI_reference_not_authority": {
+        "gold_source_id": "M2C-07",
+        "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+        "evidence": [
+          "request on-demand meter readings"
+        ]
+      },
+      "review_issue": "Navigation to another page is not substantive business-function evidence; retrieve and verify actual target/version",
+      "official_edition_version_build": null
+    }
+  ],
+  "full_review_datasets": {
+    "phase12": "data/evaluation/phase12_queries.json",
+    "cached_phase3": "eval/phase3/evidence_cache.json"
+  },
+  "worksheet": "sap-review-worksheet.csv",
+  "version_identity_requirement": "Authoritative product/edition/release/build/locale/guide/page/TOC and source claim spans, not a local status=verified flag or null URL"
+}

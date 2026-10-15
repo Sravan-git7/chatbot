@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-15T16:27:50.185378+00:00",
+  "scope": "Fresh isolated clone; stdlib metadata only, not test execution or global artifact discovery",
+  "python": "3.11.2 (main, Apr  8 2026, 01:58:00) [GCC 12.2.0]",
+  "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+  "module_specs_present": {
+    "pytest": false,
+    "chromadb": false,
+    "sentence_transformers": false,
+    "tokenizers": false,
+    "torch": false,
+    "fastapi": false,
+    "bs4": false
+  },
+  "clone_store_sqlite_present": {
+    "data/vector_store/chroma.sqlite3": false,
+    "data/vector_store/page_collection/chroma.sqlite3": false
+  },
+  "model_or_package_downloads": false,
+  "services_launched": false,
+  "application_test_suites_run_this_request": false,
+  "documentation_recipe_checks": "Reported separately in validation.json; opaque synthetic bytes only, not application/model/native tests"
+}
