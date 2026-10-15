@@ -1154,6 +1154,14 @@ class Decision:
 
 def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_normalization: bool = False) -> Tuple[Decision, List[Unit]]:
     """Decide whether the evidence supports an answer; return the supporting units (best first, document order not applied)."""
+    # Bare payment-processing requests name no payment type/channel. A top-ranked specialty page
+    # is not user intent; fail closed before choosing cash-desk (or any other channel's) evidence.
+    if re.fullmatch(
+        r"\s*(?:how\s+(?:do|can|should)\s+(?:i|we)\s+(?:process|handle)\s+(?:the\s+)?payments"
+        r"|how\s+are\s+(?:the\s+)?payments\s+(?:processed|handled))\s*[?.!]*\s*",
+        needs.question, re.IGNORECASE,
+    ):
+        return Decision(False, "AMBIGUOUS_PAYMENT_PROCESS", {"clarification_required": True}), []
     if not needs.focus:
         return Decision(False, "NO_QUERY_TERMS"), []
     if not units:

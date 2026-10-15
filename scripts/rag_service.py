@@ -59,6 +59,7 @@ USER_TEXT = {
     NO_ADDITIONAL_VERIFIED_EVIDENCE: "That's all the additional detail I could verify from the available documentation.",
 }
 UNRESOLVED_TEXT = "I couldn't verify the relevant documentation."
+PAYMENT_SCOPE_CLARIFICATION_TEXT = "Please clarify which payment process you mean, including the payment type or channel."
 REFERENCE_NOTE = "Topic reference only - not used as evidence for any answer."
 ACTIVE_INDUSTRY_CONTEXT = "SAP Utilities/IS-U"
 
@@ -310,6 +311,9 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     elif raw.get("reason_code") == ELABORATION_CONTEXT_MISSING:
         answer = ELABORATION_CONTEXT_MISSING_TEXT
         sources = []
+    elif raw.get("reason_code") == "AMBIGUOUS_PAYMENT_PROCESS":
+        answer = PAYMENT_SCOPE_CLARIFICATION_TEXT
+        sources = []
     else:
         answer = UNRESOLVED_TEXT if pstatus == "unresolved_identity" else USER_TEXT[status]
         sources = []
@@ -326,9 +330,9 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
 
     is_relevant_topic = has_routing_relevance if status == UNABLE_TO_VERIFY else True
 
-    if status in (DOC_UNAVAILABLE, UNABLE_TO_VERIFY) and pstatus != "unresolved_identity" and topic.get("title") and _safe_url(topic.get("card_url")) and is_relevant_topic:
+    if status in (DOC_UNAVAILABLE, UNABLE_TO_VERIFY) and pstatus != "unresolved_identity" and raw.get("reason_code") != "AMBIGUOUS_PAYMENT_PROCESS" and topic.get("title") and _safe_url(topic.get("card_url")) and is_relevant_topic:
         reference = {"type": "topic_reference", "title": topic["title"], "url": _safe_url(topic["card_url"]), "note": REFERENCE_NOTE}
-    routed = status != OUT_OF_SCOPE
+    routed = status != OUT_OF_SCOPE and raw.get("reason_code") != "AMBIGUOUS_PAYMENT_PROCESS"
     grounding_view = _grounding(dbg, pstatus)
     grounded_ok = status == ANSWERED and grounding_view["ok"] is True
     if raw.get("reason_code") == ELABORATION_CONTEXT_MISSING:
@@ -340,6 +344,8 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     meta = {"card_id": topic.get("source_id") if routed else None, "card_title": topic.get("title") if routed else None,
             "identity_status": topic.get("identity_status") if routed else None, "page_available": page_available, "generator": generator, "grounded": grounded_ok,
             "can_elaborate": grounded_ok, "grounding": grounding_view, "pipeline_status": pstatus, "reason_code": raw.get("reason_code"), "latency_ms": round(latency_ms, 1)}
+    if raw.get("reason_code") == "AMBIGUOUS_PAYMENT_PROCESS":
+        meta["clarification_required"] = True
     if (status == ANSWERED and topic.get("source_id") and topic.get("effective_guide_id") and topic.get("effective_page_id")):
         meta["topic_identity"] = {
             "source_id": topic["source_id"], "title": topic.get("title"),

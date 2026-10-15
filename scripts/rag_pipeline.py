@@ -732,7 +732,10 @@ class RagPipeline:
         dbg["grounding"] = report.to_dict()
         if gen.refused or report.refusal:
             out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry)
-            return self._finish(out, INSUFFICIENT, "GENERATOR_REFUSED", MESSAGES[INSUFFICIENT], dbg, debug, timings, t0)
+            reason = "GENERATOR_REFUSED"
+            if gen.refused and isinstance(generation_evidence, dict) and generation_evidence.get("reason") == "AMBIGUOUS_PAYMENT_PROCESS":
+                reason = "AMBIGUOUS_PAYMENT_PROCESS"
+            return self._finish(out, INSUFFICIENT, reason, MESSAGES[INSUFFICIENT], dbg, debug, timings, t0)
         if not report.ok:
             out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry)
             dbg["answer_withheld"] = gen.text
