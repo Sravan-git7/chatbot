@@ -446,6 +446,71 @@ def is_incomplete_list_leadin(text: str, supporting_follow: Optional[str] = None
     return False
 
 
+def _explicit_list_subject(unit: Unit) -> set[str]:
+    if not unit.list_items or unit.source_line_index < 0 or unit.source_line != unit.text:
+        return set()
+    parts = re.split(r"\b(?:includes?|contains?|comprises?|consists?\s+of)\b", unit.text, maxsplit=1, flags=re.IGNORECASE)
+    return set(terms2(parts[0])) if len(parts) == 2 else set()
+
+
+def filter_list_subject_units(question: str, units: Sequence[Unit]) -> tuple[list[Unit], list[Unit], dict[str, Any]]:
+    """Keep a specifically requested sibling list, not every list sharing its generic topic.
+
+    Only standalone, explicit "X includes/contains/...:" lead-ins in the SAME chunk/marker are compared.
+    A shared topic and a uniquely requested qualifier are both required. Broad/comparison questions keep
+    both lists. No guide IDs, benchmark IDs, object taxonomy or new factual content is inferred.
+    """
+    query_terms = set(terms2(question))
+    leads = []
+    for unit in units:
+        subject = _explicit_list_subject(unit)
+        if subject:
+            leads.append((unit, subject))
+    excluded_leads = {}
+    for requested, requested_terms in leads:
+        for sibling, sibling_terms in leads:
+            if (requested.marker, requested.chunk_id) != (sibling.marker, sibling.chunk_id):
+                continue
+            if (requested_terms & sibling_terms and (requested_terms - sibling_terms) & query_terms
+                    and not (sibling_terms - requested_terms) & query_terms):
+                excluded_leads[sibling.order] = sibling
+    blocked_lines = {
+        (unit.marker, unit.chunk_id, index)
+        for unit in excluded_leads.values()
+        for index in range(unit.source_line_index, unit.source_line_index + 1 + len(unit.list_items))
+    }
+    kept, excluded = [], []
+    for unit in units:
+        if (unit.marker, unit.chunk_id, unit.source_line_index) in blocked_lines:
+            excluded.append(unit)
+        else:
+            if unit.prev_line and (unit.marker, unit.chunk_id, unit.source_line_index - 1) in blocked_lines:
+                unit = dataclasses.replace(unit, prev_line=None)
+            kept.append(unit)
+    return kept, excluded, {"excluded_units": len(excluded),
+                            "excluded_list_leadins": [unit.text for unit in excluded_leads.values()]}
+
+
+def _context_without_unrequested_lists(context: Any, excluded: Sequence[Unit]) -> Any:
+    """Request-local prompt view by source line position; preserve duplicate values in the requested list."""
+    if not excluded:
+        return context
+    blocked = {(unit.marker, unit.chunk_id, unit.source_line_index) for unit in excluded}
+    filtered = copy.copy(context)
+    filtered.items = []
+    for item in context.items:
+        body = getattr(item, "rendered_text", None) or item.text
+        clean = "\n".join(line for index, (line, _) in enumerate(_lines(body))
+                          if (item.marker, item.chunk_id, index) not in blocked)
+        if clean:
+            cloned = copy.copy(item)
+            cloned.text = clean
+            if hasattr(cloned, "rendered_text"):
+                cloned.rendered_text = clean
+            filtered.items.append(cloned)
+    return filtered
+
+
 def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[List[Unit], List[Unit], Dict[str, Any]]:
     """Apply the shared deterministic quality filter before evidence scoring/selection.
 
@@ -464,6 +529,15 @@ def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[Li
         if chunk_id is not None and labels:
             headings_by_chunk.setdefault(str(chunk_id), []).extend(labels)
 
+    # A noun-phrase list item is meaningful membership evidence when attached to an explicit subject/lead-in.
+    # Do not erase it from the guarded model's prompt as if it were an unattached heading/configuration field.
+    attached_members = set()
+    for parent in original:
+        if _explicit_list_subject(parent) and not is_incomplete_list_leadin(parent.text, list_items=parent.list_items):
+            for offset, member in enumerate(parent.list_items, 1):
+                body = _QUALITY_BARE_LIST_ITEM.sub("", member)
+                if not _QUALITY_CONFIG_LIST_ITEM.match(member) and not is_low_quality_fragment(body):
+                    attached_members.add((parent.marker, parent.chunk_id, parent.source_line_index + offset))
     kept: List[Unit] = []
     excluded: List[Unit] = []
     excluded_adjacent = 0
@@ -476,7 +550,8 @@ def filter_quality_units(units: Sequence[Unit], context: Any = None) -> Tuple[Li
             unit_labels = (unit_labels,)
         labels = tuple(dict.fromkeys((*unit_labels, *headings_by_marker.get(marker, ()), *headings_by_chunk.get(chunk_id, ()))))
         unit_chunk_text = str(getattr(unit, "chunk_text", "") or "")
-        if is_low_quality_fragment(getattr(unit, "text", ""), labels, unit_chunk_text):
+        attached_member = (unit.marker, unit.chunk_id, unit.source_line_index) in attached_members
+        if not attached_member and is_low_quality_fragment(getattr(unit, "text", ""), labels, unit_chunk_text):
             excluded.append(unit)
             continue
         if is_incomplete_list_leadin(getattr(unit, "text", ""), getattr(unit, "follow", None), labels, getattr(unit, "list_items", ())):
@@ -1093,6 +1168,13 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
     for u in units:
         present |= u.own | u.head | frozenset(terms2(u.prev_line or ""))
     missing = [a for a in needs.asked if a not in present]
+    # In "what objects belong to X", objects/items/elements are the enumeration frame, not an absent fact.
+    # Only an explicit, complete list whose entire subject is named in the question can establish membership.
+    # Named identifiers, numeric/default/kind gates and the coverage threshold remain unchanged.
+    if (missing and not needs.kinds
+            and re.search(r"\b(?:what|which)\s+(?:objects|items|elements)\s+(?:belong\s+to|are\s+(?:included\s+in|part\s+of)|make\s+up)\b", needs.question, re.IGNORECASE)
+            and any(len(subject := _explicit_list_subject(unit)) >= 2 and subject <= set(needs.focus) for unit in units)):
+        missing = [term for term in missing if term not in {stem2(word) for word in ("object", "item", "element")}]
     if missing and frame_normalization:
         missing = [a for a in missing if not structural_evidence_present(a, units)]
     if missing:
@@ -1182,11 +1264,14 @@ class EvidenceExtractiveGenerator:
     def generate(self, question: str, context: Any) -> GenerationResult:
         self._tls.last = None
         needs = analyze_question(question)
-        units, excluded_quality_units, quality_filter = filter_quality_units(build_units(context.items), context)
+        units, excluded_list_units, list_filter = filter_list_subject_units(question, build_units(context.items))
+        units, excluded_quality_units, quality_filter = filter_quality_units(units, context)
         decision, chosen = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
         if excluded_quality_units or quality_filter["excluded_adjacent_fragments"]:
             record["quality_filter"] = quality_filter
+        if excluded_list_units:
+            record["list_subject_filter"] = list_filter
         if not decision.supported:
             self.last = record
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
@@ -1284,15 +1369,20 @@ class EvidenceGuard:
     def generate(self, question: str, context: Any) -> GenerationResult:
         self.reset_request_state()
         needs = analyze_question(question)
-        units, excluded_quality_units, quality_filter = filter_quality_units(build_units(context.items), context)
+        units, excluded_list_units, list_filter = filter_list_subject_units(question, build_units(context.items))
+        units, excluded_quality_units, quality_filter = filter_quality_units(units, context)
         decision, _ = assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason, "detail": decision.detail, **needs.to_dict(), "selected": []}
         if excluded_quality_units or quality_filter["excluded_adjacent_fragments"]:
             record["quality_filter"] = quality_filter
+        if excluded_list_units:
+            record["list_subject_filter"] = list_filter
         if not decision.supported:                                          # the model is not even asked: the evidence cannot contain the answer
             self.last = record
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
-        model_context = _context_without_rejected_units(context, excluded_quality_units)
+        model_context = _context_without_rejected_units(
+            _context_without_unrequested_lists(context, excluded_list_units), excluded_quality_units,
+        )
         if self._gen_sem.acquire(blocking=False):
             queue_wait_ms = 0.0
         else:
@@ -1310,6 +1400,13 @@ class EvidenceGuard:
         if not res.refused:
             body = re.sub(r"\[S\d+\]", "", res.text)
             normalized_answer = quality_norm(body)
+            allowed_texts = {quality_norm(unit.text) for unit in units}
+            if any(not any(f" {quality_norm(unit.text)} " in f" {allowed} " for allowed in allowed_texts)
+                   and f" {quality_norm(unit.text)} " in f" {normalized_answer} "
+                   for unit in excluded_list_units if quality_norm(unit.text)):
+                record.update({"supported": False, "reason": "ANSWER_INCLUDES_UNREQUESTED_LIST"})
+                self.last = record
+                return GenerationResult(NO_ANSWER_TEXT, True, self.name, res.raw_text, res.prompt, tel, evidence=copy.deepcopy(record))
             if excluded_quality_units and any(
                 quality_norm(getattr(unit, "text", "")) in normalized_answer
                 for unit in excluded_quality_units if quality_norm(getattr(unit, "text", ""))
