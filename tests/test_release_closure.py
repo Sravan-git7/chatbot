@@ -117,3 +117,42 @@ def test_frontend_verifier_parses_arguments_before_any_server_launch(
         module.main()
     assert exc.value.code == expected_exit
     launch.assert_not_called()
+
+
+@pytest.mark.parametrize("requested,other", [("ELDM", "FPR3"), ("TXN_A", "TXN_B")])
+def test_named_transaction_cannot_be_answered_by_another_code_and_correct_evidence_recovers(
+    requested, other
+):
+    # Synthetic counterexamples, not SAP factual gold or a live retrieval replay.
+    gen = EV.EvidenceExtractiveGenerator()
+    question = f"What does transaction {requested} display?"
+    wrong = _Context(
+        [
+            _Item(
+                "S1",
+                "wrong",
+                0,
+                f"Transaction {other} displays uploaded records.",
+                "Transaction",
+            )
+        ]
+    )
+    result = gen.generate(question, wrong)
+    assert result.refused
+    assert result.evidence["reason"] == "ASKED_IDENTIFIER_NOT_IN_EVIDENCE"
+    correct = _Context(
+        [
+            _Item(
+                "S1",
+                "correct",
+                0,
+                f"Transaction {requested} displays uploaded records.",
+                "Transaction",
+            )
+        ]
+    )
+    recovered = gen.generate(question, correct)
+    assert not recovered.refused
+    assert requested in recovered.text
+    assert RG.verify_grounding(recovered.text, correct).ok
+    assert EV.verify_support_chain(recovered.text, correct)["ok"]

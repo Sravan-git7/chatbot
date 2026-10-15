@@ -100,6 +100,19 @@ _CODE_TOKEN = re.compile(r"\b[A-Z][A-Z0-9_]*[0-9_][A-Z0-9_]*\b")
 _NUMBER = re.compile(r"(?<![A-Za-z0-9_])\d+(?:[.,]\d+)?(?![A-Za-z0-9_])")
 
 
+def _named_identifiers(question: str) -> Tuple[str, ...]:
+    """Explicit identifier after a named code kind; includes all-letter transactions."""
+    tokens = re.findall(
+        r"\b(?i:transaction(?:\s+code)?|t-?code|business function|function module|badi|user exit)\s+([A-Za-z][A-Za-z0-9_]{1,})\b",
+        question,
+    )
+    return tuple(t for t in tokens if t.isupper() or any(c.isdigit() or c == "_" for c in t))
+
+
+def _has_identifier(text: str, identifier: str) -> bool:
+    return bool(re.search(r"(?<![A-Za-z0-9_])" + re.escape(identifier) + r"(?![A-Za-z0-9_])", text, re.I))
+
+
 @dataclass
 class QuestionNeeds:
     question: str
@@ -157,7 +170,9 @@ def analyze_question(question: str) -> QuestionNeeds:
 def kind_satisfied(kind: str, text: str, needs: QuestionNeeds) -> bool:
     low = (text or "").lower()
     if kind == "code":
-        if not _CODE_TOKEN.search(text or ""):
+        if not _CODE_TOKEN.search(text or "") and not any(
+            _has_identifier(text or "", code) for code in _named_identifiers(needs.question)
+        ):
             return False
         return not needs.code_words or any(w in low for w in needs.code_words)
     if kind == "number":
@@ -1068,6 +1083,12 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
         return Decision(False, "NO_QUERY_TERMS"), []
     if not units:
         return Decision(False, "NO_EVIDENCE"), []
+    # A code-kind match is not evidence for a different named identifier. The
+    # historical ELDM -> FPR3 wrong-page excerpt otherwise passes lexical coverage.
+    evidence_text = "\n".join(u.full_text() for u in units)
+    missing_identifiers = [code for code in _named_identifiers(needs.question) if not _has_identifier(evidence_text, code)]
+    if missing_identifiers:
+        return Decision(False, "ASKED_IDENTIFIER_NOT_IN_EVIDENCE", {"missing": missing_identifiers}), []
     present = set()
     for u in units:
         present |= u.own | u.head | frozenset(terms2(u.prev_line or ""))
