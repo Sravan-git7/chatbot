@@ -38,7 +38,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_text as T  # noqa: E402
 from rag_generate import (  # noqa: E402
     EXTRACTIVE_MAX_SENTENCES, NO_ANSWER_TEXT, GenerationResult,
-    PROCEDURAL_LIMITATION_NOTICE, is_procedural_limitation_sentence,
+    PROCEDURAL_LIMITATION_NOTICE,
+    is_procedural_limitation_sentence as _is_exact_procedural_limitation_sentence,
 )
 
 TAU = 0.6                           # pre-declared: share of focus terms the best answer sentence (+ its section heading) must cover
@@ -755,6 +756,17 @@ def _procedural_limitation_notice(question: str, chosen: Sequence[Unit]) -> str:
     return PROCEDURAL_LIMITATION_NOTICE
 
 
+def is_procedural_limitation_sentence(text: str) -> bool:
+    """Legacy display/evaluation prefix detector, NOT a validator exemption.
+
+    The Phase 3 evaluator also passes a complete multi-line answer here. Keep its
+    partial-answer classification without permitting arbitrary prose in a notice.
+    Validators below must check the complete sentence with the strict helper.
+    """
+    lines = text.strip().splitlines()
+    return bool(lines and _is_exact_procedural_limitation_sentence(lines[0]))
+
+
 def _workflow_sequence_has_heading_support(unit: Unit, needs: QuestionNeeds) -> bool:
     """A numbered sentence may be relevant through its explicit workflow section, not repeated query wording."""
     if not _source_sequence_info(unit) or not _has_workflow_heading(unit):
@@ -1410,7 +1422,7 @@ def verify_support_chain(answer: str, context: Any) -> Dict[str, Any]:
     for line in T.split_cited_sentences(answer or ""):
         markers = re.findall(r"\[(S\d+)\]", line)
         body = _norm(re.sub(r"\[S\d+\]", "", line))
-        if not body or (not markers and is_procedural_limitation_sentence(body)):
+        if not body or (not markers and _is_exact_procedural_limitation_sentence(body)):
             continue
         hit = [m for m in markers if m in by and body in _norm(by[m].text)]
         records.append({"sentence": body[:160], "markers": markers, "verbatim_in": hit})

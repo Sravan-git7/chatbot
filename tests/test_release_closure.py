@@ -76,3 +76,19 @@ def test_unsupported_meta_prose_cannot_bypass_either_verifier_and_valid_text_rec
     assert not EV.verify_support_chain(forged + "\n" + valid, ctx)["ok"]
     assert RG.verify_grounding(valid, ctx).ok
     assert EV.verify_support_chain(valid, ctx)["ok"]
+
+
+def test_legacy_evaluator_retains_partial_answer_classification_without_validator_prefix_exemption():
+    from eval.phase3.metrics import determine_actual_behavior
+
+    ctx = context()
+    answer = NOTICE + "\nThe widget plan records the due dates. [S1]"
+    assert determine_actual_behavior("answered", answer, False) == "partial_answer"
+    assert RG.verify_grounding(answer, ctx).ok
+    assert EV.verify_support_chain(answer, ctx)["ok"]
+    forged = (
+        NOTICE
+        + "\nUnsupported arbitrary benefit is guaranteed.\nThe widget plan records the due dates. [S1]"
+    )
+    assert not RG.verify_grounding(forged, ctx).ok
+    assert not EV.verify_support_chain(forged, ctx)["ok"]
