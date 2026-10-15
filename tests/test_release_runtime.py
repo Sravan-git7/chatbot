@@ -93,6 +93,7 @@ def test_production_authentication_and_stateless_conversation_recovery():
         {"RAG_ENABLE_DEBUG": "1"},
         {"SURA_INTENT_AWARE": "1"},
         {"RAG_CORS_ORIGINS": "*"},
+        {"RAG_CSP_FRAME_ANCESTORS": "*"},
     ],
 )
 def test_unsafe_production_fails_closed_and_valid_new_app_recovers(override):
@@ -393,3 +394,23 @@ def test_closed_owned_page_cannot_serve_even_cached_page_data(tmp_path):
         retriever.count()
     with pytest.raises(Exception, match="closed"):
         retriever.page_chunks("fixture-guide", "fixture-page")
+
+
+def test_production_has_no_implicit_development_cors_origin():
+    with patch.dict(os.environ, PRODUCTION):
+        client = TestClient(app(service=service()))
+        response = client.get(
+            "/api/health", headers={**AUTH, "Origin": "http://localhost:5173"}
+        )
+        assert response.status_code == 200
+        assert "access-control-allow-origin" not in response.headers
+    with patch.dict(
+        os.environ, {**PRODUCTION, "RAG_CORS_ORIGINS": "https://trusted.example"}
+    ):
+        client = TestClient(app(service=service()))
+        response = client.get(
+            "/api/health", headers={**AUTH, "Origin": "https://trusted.example"}
+        )
+        assert (
+            response.headers["access-control-allow-origin"] == "https://trusted.example"
+        )

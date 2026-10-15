@@ -154,6 +154,8 @@ def validate_configuration() -> Dict[str, Any]:
             raise ValueError("Production forbids raw query logging and debug output")
         if any(flags.values()) or "*" in os.environ.get("RAG_CORS_ORIGINS", ""):
             raise ValueError("Production forbids experimental flags and wildcard CORS")
+        if "*" in os.environ.get(FRAME_ANCESTORS_ENV, ""):
+            raise ValueError("Production forbids wildcard frame ancestors")
 
     card_store_dir = ROOT / "data" / "vector_store"
     page_store_dir = card_store_dir / "page_collection"
@@ -305,7 +307,7 @@ def error_body(code: str, message: str, request_id: Optional[str] = None, **extr
 def create_app(service: Optional[S.RagService] = None, generator: Optional[str] = None, cors_origins: Optional[Sequence[str]] = None, enable_debug: Optional[bool] = None,
                static_dir: Optional[Path] = None, service_factory: Optional[Callable[[str], S.RagService]] = None) -> FastAPI:
     gen = generator or os.environ.get("RAG_GENERATOR", "extractive")
-    origins = list(cors_origins) if cors_origins is not None else ([o.strip() for o in os.environ["RAG_CORS_ORIGINS"].split(",") if o.strip()] if os.environ.get("RAG_CORS_ORIGINS") else list(DEFAULT_CORS))
+    origins = list(cors_origins) if cors_origins is not None else ([o.strip() for o in os.environ["RAG_CORS_ORIGINS"].split(",") if o.strip()] if os.environ.get("RAG_CORS_ORIGINS") else ([] if os.environ.get("SURA_PROFILE") == "production" else list(DEFAULT_CORS)))
     debug_on = bool(enable_debug) if enable_debug is not None else (os.environ.get("RAG_ENABLE_DEBUG", "0").strip().lower() in ("1", "true", "yes"))
     csp = build_csp()
     sdir = Path(static_dir) if static_dir is not None else Path(os.environ.get("RAG_STATIC_DIR", DEFAULT_STATIC_DIR))
