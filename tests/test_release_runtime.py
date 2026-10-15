@@ -414,3 +414,88 @@ def test_production_has_no_implicit_development_cors_origin():
         assert (
             response.headers["access-control-allow-origin"] == "https://trusted.example"
         )
+
+
+def test_real_sdk_partial_bindings_stop_is_quarantined_in_child(tmp_path):
+    import subprocess
+    import sys
+
+    code = r"""
+import json, sys
+from pathlib import Path
+sys.path.insert(0, str(Path("scripts").resolve()))
+import chromadb, chroma_temp, owned_retrieval
+from chromadb.config import Settings
+from chromadb.api.shared_system_client import SharedSystemClient
+root = Path(sys.argv[1])
+store = root / "owned"
+client = chromadb.PersistentClient(path=str(store), settings=Settings(anonymized_telemetry=False))
+col = client.create_collection("partial_fixture")
+col.add(ids=["fixture"], embeddings=[[1.,0.]])
+outside = chromadb.PersistentClient(path=str(root / "outside"), settings=Settings(anonymized_telemetry=False))
+other = outside.create_collection("outside_fixture")
+other.add(ids=["fixture"], embeddings=[[1.,0.]])
+system = SharedSystemClient._identifier_to_system[str(store)]
+rust = next(c for c in system.components() if type(c).__name__ == "RustBindingsAPI")
+assert hasattr(rust, "bindings")
+calls = []
+def partial_stop():
+    calls.append(1)
+    rust.stop()  # Actual installed native bindings deletion, not a fake binding.
+    raise RuntimeError("injected after native stop")
+system.stop = partial_stop
+try:
+    chroma_temp.close_systems_under(store)
+except RuntimeError as exc:
+    assert str(exc) == "injected after native stop"
+else:
+    raise AssertionError("Native partial failure was swallowed")
+assert not hasattr(rust, "bindings")
+for action in (lambda: chroma_temp.close_systems_under(store), lambda: owned_retrieval._client(store)):
+    try:
+        action()
+    except RuntimeError as exc:
+        assert "restart the process" in str(exc)
+    else:
+        raise AssertionError("Failed native path was reused")
+assert calls == [1]
+assert SharedSystemClient._identifier_to_system[str(store)] is system
+assert other.count() == 1
+assert (store / "chroma.sqlite3").exists()
+print(json.dumps({"native_bindings_deleted": True, "stop_calls": len(calls), "tree_retained": True, "outside_usable": True}))
+# Process exit is the required recovery boundary. Parent removes only its fixture
+# after this process has exited; never clear a failed real registry in-process.
+"""
+    result = subprocess.run(
+        [sys.executable, "-c", code, str(tmp_path)],
+        cwd=Path(__file__).resolve().parents[1],
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 0, result.stderr
+    proof = json.loads(result.stdout.strip().splitlines()[-1])
+    assert proof == {
+        "native_bindings_deleted": True,
+        "stop_calls": 1,
+        "tree_retained": True,
+        "outside_usable": True,
+    }
+    assert (tmp_path / "owned/chroma.sqlite3").exists()
+    recovery = r"""
+import sys, chromadb
+from chromadb.config import Settings
+client = chromadb.PersistentClient(path=sys.argv[1], settings=Settings(anonymized_telemetry=False))
+collection = client.get_collection("partial_fixture")
+assert collection.count() == 1
+assert collection.query(query_embeddings=[[1., 0.]], n_results=1)["ids"] == [["fixture"]]
+"""
+    restored = subprocess.run(
+        [sys.executable, "-c", recovery, str(tmp_path / "owned")],
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert restored.returncode == 0, (
+        restored.stderr
+    )  # Recovery ONLY after first process exit.

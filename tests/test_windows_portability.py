@@ -408,10 +408,12 @@ class ChromaCleanupUnitTests(unittest.TestCase):
     def test_partial_stop_is_terminal_and_never_retried(self):
         calls = []
         def partial_stop():
+            del failed.bindings  # Model the actual non-idempotent Rust stop operation.
             calls.append("bindings_deleted")
             raise RuntimeError("later component failed")
         module, cache, counts = self.fake_cache(partial_stop)
         failed = cache["owned"]
+        failed.bindings = object()
         with patch.dict(sys.modules, {"chromadb.api.shared_system_client": module}), \
              patch.object(chroma_temp, "_wait_for_sqlite_release") as wait:
             with self.assertRaisesRegex(RuntimeError, "later component failed"):
@@ -420,6 +422,7 @@ class ChromaCleanupUnitTests(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError, "restart the process"):
                     chroma_temp.close_systems_under(target)
         self.assertEqual(calls, ["bindings_deleted"])
+        self.assertFalse(hasattr(failed, "bindings"))
         self.assertIs(cache["owned"], failed)
         self.assertEqual(counts, {"owned": 2, "outside": 2})
         self.assertTrue(self.database.exists())
