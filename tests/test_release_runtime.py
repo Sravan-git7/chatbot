@@ -368,3 +368,28 @@ def test_evidence_pipeline_wrapper_transfers_owned_resource_list():
     first.close.assert_called_once()
     second.close.assert_called_once()
     assert base._owned_resources == []
+
+
+def test_temporary_partial_stop_quarantine_blocks_production_factory(tmp_path):
+    import chromadb
+
+    marker = object()
+    TEMP._FAILED_SHUTDOWNS[id(marker)] = (tmp_path.resolve(), marker)
+    try:
+        with patch.object(chromadb, "PersistentClient") as factory:
+            with pytest.raises(RuntimeError, match="restart the process"):
+                OWN._client(tmp_path)
+            factory.assert_not_called()
+    finally:
+        TEMP._FAILED_SHUTDOWNS.pop(id(marker), None)  # Synthetic failed stop only.
+
+
+def test_closed_owned_page_cannot_serve_even_cached_page_data(tmp_path):
+    retriever = OWN.OwnedPageRetriever(Mock(), lambda _: [])
+    retriever._store_path = tmp_path
+    retriever._client = Mock()
+    retriever.close()
+    with pytest.raises(Exception, match="closed"):
+        retriever.count()
+    with pytest.raises(Exception, match="closed"):
+        retriever.page_chunks("fixture-guide", "fixture-page")

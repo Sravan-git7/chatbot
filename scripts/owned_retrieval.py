@@ -6,6 +6,7 @@ The factory lock coordinates SURA-owned clients; unrelated SDK users must not
 concurrently reopen the same path during shutdown.
 """
 
+import sys
 from pathlib import Path
 from threading import RLock
 
@@ -19,6 +20,9 @@ _FAILED_CLIENTS = {}
 
 def assert_path_reusable(path):
     root = Path(path).resolve()
+    temporary = sys.modules.get("chroma_temp")
+    if temporary is not None:
+        temporary.assert_shutdown_safe(root)
     for failed, client in _FAILED_CLIENTS.items():
         if root == failed or root in failed.parents or failed in root.parents:
             raise RuntimeError(
@@ -75,6 +79,7 @@ class _Owner:
 class OwnedCardBackend(_Owner, RT.ChromaCardBackend):
     def _open(self):
         with _FACTORY_LOCK:
+            assert_path_reusable(self.vector_dir)
             if getattr(self, "_closed", False):
                 raise RT.CardStoreUnavailable("Owned card backend is closed")
             if self._collection is not None:
@@ -100,6 +105,19 @@ class OwnedCardBackend(_Owner, RT.ChromaCardBackend):
 
 
 class OwnedPageRetriever(_Owner, PR.PageRetriever):
+    @property
+    def collection(self):
+        if getattr(self, "_closed", False):
+            raise PR.PageStoreUnavailable("Owned page retriever is closed")
+        path = getattr(self, "_store_path", None)
+        if path is not None:
+            assert_path_reusable(path)
+        return self._owned_collection
+
+    @collection.setter
+    def collection(self, value):
+        self._owned_collection = value
+
     @classmethod
     def from_store(
         cls, vector_dir=BP.PAGE_VECTOR_DIR, collection=BP.PAGE_COLLECTION, embed=None

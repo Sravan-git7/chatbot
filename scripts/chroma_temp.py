@@ -22,13 +22,18 @@ _SQLITE_POLL_INTERVAL = 0.01
 _FAILED_SHUTDOWNS = {}
 
 
-def _reject_failed_shutdown(root):
-    owners = sys.modules.get("owned_retrieval")
-    if owners is not None:
-        owners.assert_path_reusable(root)
+def assert_shutdown_safe(directory):
+    root = Path(directory).resolve()
     for path, system in _FAILED_SHUTDOWNS.values():
         if path == root or root in path.parents or path in root.parents:
             raise RuntimeError("Previous owned Chroma shutdown failed; preserve the tree and restart the process before reuse")
+
+
+def _reject_failed_shutdown(root):
+    assert_shutdown_safe(root)
+    owners = sys.modules.get("owned_retrieval")
+    if owners is not None:
+        owners.assert_path_reusable(root)
 
 
 def _windows_file_probe():
