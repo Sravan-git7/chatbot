@@ -1,0 +1,766 @@
+{
+  "scope": "historical artifact/implementation reconciliation only; not current inference",
+  "dataset": {
+    "path": "data/evaluation/phase12_queries.json",
+    "sha256": "3c5a9ddd2d62e9cb1919a4fbb7c81cd5239994ff230abbbe6440fb6fa5c132ac",
+    "last_file_commit": "dc5c23a215ed8b378f5008ff4b0b00d0462f24e8",
+    "introduced_commit": "dc5c23a215ed8b378f5008ff4b0b00d0462f24e8",
+    "n": 113,
+    "types": {
+      "answerable": 65,
+      "absent_detail": 16,
+      "not_ingested": 10,
+      "unresolved_identity": 6,
+      "ambiguous": 8,
+      "out_of_domain": 8
+    }
+  },
+  "historical37": [
+    {
+      "path": "benchmarks/results/v1_baseline_quality.json",
+      "sha256": "23b1ce2b96ace774decd1fc31a212cbcb8501dfcfdadba173c0b658b19f3eb0c",
+      "last_file_commit": "d7ca2156b5352f0e2a5e5a00c7c14d5b1f1ed1a8",
+      "introduced_commit": "d7ca2156b5352f0e2a5e5a00c7c14d5b1f1ed1a8",
+      "claimed_runtime_commit": "6eb9d9d25dda75bf9092838b813faa7a51cd8473",
+      "stored_source_commit": "6eb9d9d",
+      "stored_timestamp": "2026-10-13T15:53:50.597905+00:00",
+      "totals": {
+        "n": 113,
+        "answerable_n": 65,
+        "answerable_strict_correct": 37,
+        "answerable_answered": 53,
+        "wrong_page_answered": 1,
+        "negative_n": 40,
+        "negative_abstained": 29,
+        "negative_answered": 11,
+        "grounded_answers": 72,
+        "answered": 72,
+        "phantom_citations": 0,
+        "source_identity_violations": 0,
+        "supported_sentences_lexical": 192,
+        "sentences_checked": 192,
+        "gold_evidence_in_context": 62,
+        "recall_at_1_hits": 62,
+        "recall_at_5_hits": 65,
+        "recall_at_10_hits": 65,
+        "reciprocal_rank_sum_truncated_10": 63.333333333333336
+      },
+      "config": {
+        "top_k_cards": 10,
+        "k_chunks": 5,
+        "context_budget_tokens": 700,
+        "max_context_chunks": 4,
+        "ood_min_coverage": 0.25,
+        "context_min_coverage": 0.5,
+        "rerank_router": true,
+        "code_aware_router": true,
+        "in_page_grounding": true,
+        "citation_normalization": true,
+        "relaxed_context_gate": true,
+        "evidence_frame_normalization": false,
+        "phase16_context_experiment": false,
+        "phrase_reranker": true,
+        "phrase_min_corroboration": 2,
+        "full_page_coverage": false,
+        "citation_repair": false,
+        "elaboration_candidate_pool_size": 0,
+        "elaboration_retrieval_enabled": false,
+        "ollama_num_predict": null,
+        "ollama_keep_alive": null
+      },
+      "runtime_corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
+      "label_corpus_sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d"
+    },
+    {
+      "path": "benchmarks/results/release_05ef5e7_quality.json",
+      "sha256": "72759f75c9c503f854cd7bef2a05982b7f28f1a228b5e2588495e8c80dba7a49",
+      "last_file_commit": "d7ca2156b5352f0e2a5e5a00c7c14d5b1f1ed1a8",
+      "introduced_commit": "d7ca2156b5352f0e2a5e5a00c7c14d5b1f1ed1a8",
+      "claimed_runtime_commit": "05ef5e7c99aca8a03ee05b61ba16128093c2e1b9",
+      "stored_source_commit": "05ef5e7",
+      "stored_timestamp": "2026-10-13T16:29:44.408581+00:00",
+      "totals": {
+        "n": 113,
+        "answerable_n": 65,
+        "answerable_strict_correct": 37,
+        "answerable_answered": 52,
+        "wrong_page_answered": 0,
+        "negative_n": 40,
+        "negative_abstained": 30,
+        "negative_answered": 10,
+        "grounded_answers": 70,
+        "answered": 70,
+        "phantom_citations": 0,
+        "source_identity_violations": 0,
+        "supported_sentences_lexical": 189,
+        "sentences_checked": 189,
+        "gold_evidence_in_context": 62,
+        "recall_at_1_hits": 62,
+        "recall_at_5_hits": 65,
+        "recall_at_10_hits": 65,
+        "reciprocal_rank_sum_truncated_10": 63.333333333333336
+      },
+      "config": {
+        "top_k_cards": 10,
+        "k_chunks": 5,
+        "context_budget_tokens": 700,
+        "max_context_chunks": 4,
+        "ood_min_coverage": 0.25,
+        "context_min_coverage": 0.5,
+        "rerank_router": true,
+        "code_aware_router": true,
+        "in_page_grounding": true,
+        "citation_normalization": true,
+        "relaxed_context_gate": true,
+        "evidence_frame_normalization": false,
+        "phase16_context_experiment": false,
+        "phrase_reranker": true,
+        "phrase_min_corroboration": 2,
+        "full_page_coverage": false,
+        "citation_repair": false,
+        "elaboration_candidate_pool_size": 0,
+        "elaboration_retrieval_enabled": false,
+        "ollama_num_predict": null,
+        "ollama_keep_alive": null
+      },
+      "runtime_corpus_sha256": "46e7c63af630de1a99f924320092b3bce4e29751add1eb3177b357cabd136008",
+      "label_corpus_sha256": "fd55d20fd1a4ede8418a624684305854dd16a386b2475b4f1f82580c75702e8d"
+    }
+  ],
+  "historical38": {
+    "path": "data/evaluation/phase12_results.json",
+    "sha256": "428301e8a522483b6b0cd42bb7c6f8e3e95208d27abd3fe8d3b1f0c6f6d4c61a",
+    "last_file_commit": "9be6553473fa27abbf915c395d4204ca4beae123",
+    "introduced_commit": "dc5c23a215ed8b378f5008ff4b0b00d0462f24e8",
+    "stored_run": {
+      "git_head": "c7527edeb5d4a2963d8bac0072a8e7e5d0ba091f",
+      "python": "3.11.2",
+      "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+      "machine": "x86_64",
+      "started_at_unix": 1791823658
+    },
+    "corpus": {
+      "local_pages": 28,
+      "cards": 29,
+      "complete": false
+    },
+    "config_name": "evidence",
+    "routing": "real",
+    "answer_metrics": {
+      "answerable": {
+        "n": 65,
+        "answered_correct": 38,
+        "answered_wrong_page": 2,
+        "answered_citation_evidence_failure": 6,
+        "incorrectly_abstained": 19,
+        "generator_errors": 0
+      },
+      "unsupported": {
+        "n": 40,
+        "correctly_abstained": 29,
+        "generator_errors": 0,
+        "incorrectly_answered": 11,
+        "status_match": 19
+      },
+      "absent_detail": {
+        "n": 16,
+        "abstained": 15,
+        "answered": 1
+      },
+      "ambiguous": {
+        "n": 8,
+        "answered_acceptable": 8,
+        "answered_wrong_page": 0,
+        "abstained": 0
+      },
+      "generator_errors_total": 0,
+      "non_answer_reason_counts": {
+        "GENERATOR_REFUSED": 26,
+        "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT": 16,
+        "LOW_QUERY_TERM_COVERAGE_VS_ROUTED_TOPIC": 5,
+        "PAGE_IDENTIFIED_NO_LOCAL_CONTENT": 1
+      },
+      "wrong_page_answers": 2,
+      "wrong_topic_answers": 11,
+      "grounding_failures": 0,
+      "support_chain_failures": 0,
+      "citation_evidence_failures": 6,
+      "phantom_citations": 0,
+      "url_changes": 0,
+      "by_category_outcomes": {
+        "direct_factual": {
+          "answerable_abstained": 3,
+          "answerable_answered_wrong_page": 1,
+          "answerable_answered_correct": 7,
+          "answerable_answered_citation_evidence_failure": 3,
+          "not_ingested_incorrectly_answered": 2
+        },
+        "paraphrased": {
+          "answerable_abstained": 5,
+          "answerable_answered_correct": 6
+        },
+        "terminology": {
+          "answerable_answered_correct": 6,
+          "answerable_answered_wrong_page": 1,
+          "answerable_abstained": 2
+        },
+        "code_transaction": {
+          "answerable_answered_correct": 7,
+          "answerable_abstained": 2
+        },
+        "numeric_detail": {
+          "answerable_answered_correct": 1,
+          "answerable_abstained": 5
+        },
+        "sibling_topic": {
+          "answerable_answered_correct": 4,
+          "answerable_abstained": 1,
+          "answerable_answered_citation_evidence_failure": 2,
+          "not_ingested_incorrectly_answered": 5,
+          "not_ingested_correctly_abstained": 1
+        },
+        "corrected_identity": {
+          "answerable_answered_citation_evidence_failure": 1,
+          "answerable_answered_correct": 5,
+          "answerable_abstained": 1
+        },
+        "review_conflict": {
+          "answerable_answered_correct": 2,
+          "not_ingested_incorrectly_answered": 1,
+          "not_ingested_correctly_abstained": 1,
+          "unresolved_identity_correctly_abstained": 4,
+          "unresolved_identity_incorrectly_answered": 2
+        },
+        "absent_detail": {
+          "absent_detail_correctly_abstained": 15,
+          "absent_detail_incorrectly_answered": 1
+        },
+        "ambiguous": {
+          "ambiguous_answered_acceptable": 8
+        },
+        "out_of_domain": {
+          "out_of_domain_correctly_abstained": 8
+        }
+      }
+    },
+    "page_metrics": {
+      "n": 65,
+      "chunk_R@1": 0.7538,
+      "chunk_R@3": 0.9692,
+      "chunk_R@5": 0.9846,
+      "chunk_MRR": 0.8595,
+      "counts": {
+        "top1": 49,
+        "top3": 63,
+        "top5": 64
+      },
+      "evidence_in_context_real_routing": 52,
+      "evidence_in_context_oracle_routing": 63
+    },
+    "documented_historical_command": ".venv/bin/python scripts/evaluate_phase12.py",
+    "command_evidence": "RELEASE_REPORT.md table row 9; shell argv/environment/dirty tree not independently attested"
+  },
+  "evaluators": {
+    "path": "benchmarks/run_quality.py",
+    "sha256": "ba5304c341212cd274dbb34ad0d96315c79a68985800a5fbf69d677c164403c4",
+    "last_file_commit": "05ef5e7c99aca8a03ee05b61ba16128093c2e1b9",
+    "introduced_commit": "05ef5e7c99aca8a03ee05b61ba16128093c2e1b9",
+    "historical_git_blobs": {
+      "c7527edeb5d4a2963d8bac0072a8e7e5d0ba091f": {
+        "scripts/evaluate_phase12.py": {
+          "git_blob": "744e006ab9ab9c443756c919c256243b634cf780",
+          "sha256": "8a0f1207654f61252a3955ce4f7fe7e553be13825e0c7046af4a0949a8fc6b92"
+        },
+        "scripts/phase10_lib.py": {
+          "git_blob": "d5e32d8e75e0d8397a3b57a56476ae5b4dc15b7e",
+          "sha256": "583c5cbac55234eb0c804e7245f6d75b9c61f96fce9646e6fd1405096d601d17"
+        },
+        "scripts/evaluate_phase11_1.py": {
+          "git_blob": "7f0ab630bb3e8ff9ab5b3f97a24ea612329f9cbb",
+          "sha256": "2ef2169e722d000aaab8260d345488118cfc231ab3a3e27826fb64f6193af586"
+        },
+        "scripts/rag_pipeline.py": {
+          "git_blob": "cf1a61a23477a60c3805c6bd933b60e01e5a88a1",
+          "sha256": "56b0f8015dc3045c6072a470881bf3246ba2cd54f61661e152a440f3ade4d9c9"
+        },
+        "scripts/rag_service.py": {
+          "git_blob": "8449691e3bdd6f73e2c8ba2cfeaecc0fe4bf29c0",
+          "sha256": "c7280ed9632babe2fd896f06a83af021ab9d9e17265f176f251245c27f68cea5"
+        },
+        "scripts/rag_evidence.py": {
+          "git_blob": "2f74a7c89c77c721858a2cde16b9cd195f972499",
+          "sha256": "bdae17390b32cfa1b874b53d2014547e74d0101653b96ab13d5ad28730762b5e"
+        }
+      },
+      "9be6553473fa27abbf915c395d4204ca4beae123": {
+        "scripts/evaluate_phase12.py": {
+          "git_blob": "744e006ab9ab9c443756c919c256243b634cf780",
+          "sha256": "8a0f1207654f61252a3955ce4f7fe7e553be13825e0c7046af4a0949a8fc6b92"
+        },
+        "scripts/phase10_lib.py": {
+          "git_blob": "d5e32d8e75e0d8397a3b57a56476ae5b4dc15b7e",
+          "sha256": "583c5cbac55234eb0c804e7245f6d75b9c61f96fce9646e6fd1405096d601d17"
+        },
+        "scripts/evaluate_phase11_1.py": {
+          "git_blob": "9e347af22abf7a13567c3f789930b4f5d7453f7e",
+          "sha256": "26c59e34933cfcd33720528eade114e723928636faa9c98d9750454dcff60bd5"
+        },
+        "scripts/rag_pipeline.py": {
+          "git_blob": "0eee9dfac10f37f432f9824c38a33c50fccbb7cb",
+          "sha256": "10521bd5d3ed5a886ba03b71560863f4d753fed5604ff6e3807f7b1fda0c41b7"
+        },
+        "scripts/rag_service.py": {
+          "git_blob": "ecb3519422da8e6d77156fb38009e108ee29477f",
+          "sha256": "dfb1562eded38f33183324a135ecfa641ebfcf46714afb91853172277d605df0"
+        },
+        "scripts/rag_evidence.py": {
+          "git_blob": "aa3f3a8c7a8b44b5e28b4917076c76bc37544be2",
+          "sha256": "b9e0b7f25aa67d284756891f7ef69e8debacc77816cab118c19b44efcabd6e23"
+        }
+      },
+      "6eb9d9d25dda75bf9092838b813faa7a51cd8473": {
+        "scripts/evaluate_phase12.py": {
+          "git_blob": "744e006ab9ab9c443756c919c256243b634cf780",
+          "sha256": "8a0f1207654f61252a3955ce4f7fe7e553be13825e0c7046af4a0949a8fc6b92"
+        },
+        "scripts/phase10_lib.py": {
+          "git_blob": "d5e32d8e75e0d8397a3b57a56476ae5b4dc15b7e",
+          "sha256": "583c5cbac55234eb0c804e7245f6d75b9c61f96fce9646e6fd1405096d601d17"
+        },
+        "scripts/evaluate_phase11_1.py": {
+          "git_blob": "9e347af22abf7a13567c3f789930b4f5d7453f7e",
+          "sha256": "26c59e34933cfcd33720528eade114e723928636faa9c98d9750454dcff60bd5"
+        },
+        "scripts/rag_pipeline.py": {
+          "git_blob": "0eee9dfac10f37f432f9824c38a33c50fccbb7cb",
+          "sha256": "10521bd5d3ed5a886ba03b71560863f4d753fed5604ff6e3807f7b1fda0c41b7"
+        },
+        "scripts/rag_service.py": {
+          "git_blob": "ecb3519422da8e6d77156fb38009e108ee29477f",
+          "sha256": "dfb1562eded38f33183324a135ecfa641ebfcf46714afb91853172277d605df0"
+        },
+        "scripts/rag_evidence.py": {
+          "git_blob": "aa3f3a8c7a8b44b5e28b4917076c76bc37544be2",
+          "sha256": "b9e0b7f25aa67d284756891f7ef69e8debacc77816cab118c19b44efcabd6e23"
+        }
+      },
+      "05ef5e7c99aca8a03ee05b61ba16128093c2e1b9": {
+        "benchmarks/run_quality.py": {
+          "git_blob": "e6c12c42ed1ad3f1b2fe7c9cafdbb46a95c347b2",
+          "sha256": "ba5304c341212cd274dbb34ad0d96315c79a68985800a5fbf69d677c164403c4"
+        },
+        "scripts/evaluate_phase12.py": {
+          "git_blob": "744e006ab9ab9c443756c919c256243b634cf780",
+          "sha256": "8a0f1207654f61252a3955ce4f7fe7e553be13825e0c7046af4a0949a8fc6b92"
+        },
+        "scripts/phase10_lib.py": {
+          "git_blob": "d5e32d8e75e0d8397a3b57a56476ae5b4dc15b7e",
+          "sha256": "583c5cbac55234eb0c804e7245f6d75b9c61f96fce9646e6fd1405096d601d17"
+        },
+        "scripts/evaluate_phase11_1.py": {
+          "git_blob": "9e347af22abf7a13567c3f789930b4f5d7453f7e",
+          "sha256": "26c59e34933cfcd33720528eade114e723928636faa9c98d9750454dcff60bd5"
+        },
+        "scripts/rag_pipeline.py": {
+          "git_blob": "fcc5fae237c7d6341db13989e1e74d2061241a85",
+          "sha256": "d9683ae04a41fc0e7df63c17a8b02fce3a7a8e82654be591e67dd9e4467ad9b9"
+        },
+        "scripts/rag_service.py": {
+          "git_blob": "d412af484beea12fc7b8a335e9dcd61f717df5ef",
+          "sha256": "1dbf99bc7e8384b98c39495aec5e71ae601f0923189aae28087449043da6625d"
+        },
+        "scripts/rag_evidence.py": {
+          "git_blob": "29235a13180d320853843246bb26d5d58a5350ee",
+          "sha256": "2506c5d486941d3b232595eb24531e89e1e380bed546ab8311374762f6d92539"
+        }
+      }
+    },
+    "strict37_definition": "answered, expected guide/page in BOTH cited source and its context item, and reference quote in BOTH answer and cited context",
+    "context38_definition": "answered, expected guide/page in cited source and reference quote in cited source text or its debug context; no answer-quote requirement",
+    "routing_difference": "37 uses rag_service.production_pipeline_config; 38 build_configs(evidence) wraps RP.build_pipeline defaults, not production config"
+  },
+  "comparisons": {
+    "baseline37_vs_context38": {
+      "correctness_disagreements": [
+        {
+          "id": "P12-001",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-002",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-005",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-007",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-013",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-014",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-019",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-020",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-022",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-028",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-030",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "out_of_domain"
+        },
+        {
+          "id": "P12-034",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-035",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-036",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-052",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        }
+      ],
+      "selected_source_disagreements": [
+        {
+          "id": "P12-001",
+          "production": "M2C-07",
+          "phase12": "M2C-22"
+        },
+        {
+          "id": "P12-002",
+          "production": "M2C-07",
+          "phase12": "M2C-25"
+        },
+        {
+          "id": "P12-007",
+          "production": "M2C-24",
+          "phase12": "M2C-20"
+        },
+        {
+          "id": "P12-013",
+          "production": "M2C-02",
+          "phase12": "M2C-04"
+        },
+        {
+          "id": "P12-022",
+          "production": "M2C-17",
+          "phase12": "M2C-01"
+        },
+        {
+          "id": "P12-030",
+          "production": "M2C-24",
+          "phase12": "M2C-05"
+        },
+        {
+          "id": "P12-034",
+          "production": "M2C-02",
+          "phase12": "M2C-03"
+        },
+        {
+          "id": "P12-041",
+          "production": "M2C-24",
+          "phase12": "M2C-21"
+        },
+        {
+          "id": "P12-042",
+          "production": "M2C-05",
+          "phase12": "M2C-17"
+        },
+        {
+          "id": "P12-047",
+          "production": "M2C-24",
+          "phase12": "M2C-27"
+        }
+      ]
+    },
+    "release37_vs_context38": {
+      "correctness_disagreements": [
+        {
+          "id": "P12-001",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-002",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-005",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-007",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-013",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-014",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-019",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-020",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-022",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-028",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-030",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "out_of_domain"
+        },
+        {
+          "id": "P12-034",
+          "production_strict": true,
+          "phase12_context_correct": false,
+          "production_status": "answered",
+          "phase12_status": "insufficient_context"
+        },
+        {
+          "id": "P12-035",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-036",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        },
+        {
+          "id": "P12-052",
+          "production_strict": false,
+          "phase12_context_correct": true,
+          "production_status": "answered",
+          "phase12_status": "answered"
+        }
+      ],
+      "selected_source_disagreements": [
+        {
+          "id": "P12-001",
+          "production": "M2C-07",
+          "phase12": "M2C-22"
+        },
+        {
+          "id": "P12-002",
+          "production": "M2C-07",
+          "phase12": "M2C-25"
+        },
+        {
+          "id": "P12-007",
+          "production": "M2C-24",
+          "phase12": "M2C-20"
+        },
+        {
+          "id": "P12-013",
+          "production": "M2C-02",
+          "phase12": "M2C-04"
+        },
+        {
+          "id": "P12-022",
+          "production": "M2C-17",
+          "phase12": "M2C-01"
+        },
+        {
+          "id": "P12-030",
+          "production": "M2C-24",
+          "phase12": "M2C-05"
+        },
+        {
+          "id": "P12-034",
+          "production": "M2C-02",
+          "phase12": "M2C-03"
+        },
+        {
+          "id": "P12-041",
+          "production": "M2C-24",
+          "phase12": "M2C-21"
+        },
+        {
+          "id": "P12-042",
+          "production": "M2C-05",
+          "phase12": "M2C-17"
+        },
+        {
+          "id": "P12-047",
+          "production": "M2C-24",
+          "phase12": "M2C-27"
+        }
+      ]
+    }
+  },
+  "historical_manifest": {
+    "path": "benchmarks/results/run_manifest_v2.json",
+    "sha256": "52968519c297585c4b504edabe84f4f562f88d377b25a986f535187ca00dcd6a",
+    "last_file_commit": "d7ca2156b5352f0e2a5e5a00c7c14d5b1f1ed1a8",
+    "introduced_commit": "d7ca2156b5352f0e2a5e5a00c7c14d5b1f1ed1a8",
+    "artifact_hashes_verified": {
+      "benchmarks/results/20261013T144541Z_6eb9d9d_extractive_stages.json": "d772442ff02ade23598029156ed45b41b8f16d63e1f5ef8b0cd99053259540ed",
+      "benchmarks/results/20261013T144554Z_6eb9d9d_extractive_e2e.json": "b8c5bdbf31b3f2ae245b93b19e74cfb45098e252323d3ba569c5a5255fbfa2ca",
+      "benchmarks/results/20261013T151050Z_6eb9d9d_extractive_stages.json": "3aab7a956027afe2f5b3ef322f1bbeb1b9e31f54f0b749d071d1dd59b9ae1669",
+      "benchmarks/results/20261013T151120Z_6eb9d9d_extractive_e2e.json": "c18a350f2e8af169893c6f4b858814e3119bf63018bb5cc51efd5edce418dfda",
+      "benchmarks/results/release_05ef5e7_e2e.json": "8177a529f60232e9fb5f931d5f0263fe9bf7ecb32731f6be744bb0ba75f14545",
+      "benchmarks/results/release_05ef5e7_quality.json": "72759f75c9c503f854cd7bef2a05982b7f28f1a228b5e2588495e8c80dba7a49",
+      "benchmarks/results/release_05ef5e7_queued20_e2e.json": "b0be3d59f3740e8df16b2f0c7e0fb4bebe4feb797bb44167c435f223115800cb",
+      "benchmarks/results/release_05ef5e7_stages.json": "8f08f505f7c22acde203c85ed7a0a7f0123a24b7a1f5c441b52d83c927dd3bec",
+      "benchmarks/results/v1_baseline_e2e.json": "09c2ac316206281470c74797301ec08c356dc6bd203987ac0faf00286fb191bc",
+      "benchmarks/results/v1_baseline_quality.json": "23b1ce2b96ace774decd1fc31a212cbcb8501dfcfdadba173c0b658b19f3eb0c",
+      "benchmarks/results/v1_baseline_stages.json": "8ac8463588fc9cfcb6f5cfa6d0efaef6019a7031b6cea5bf06b617dce5a06775",
+      "benchmarks/results/v1_browser_e2e.json": "41740ae249cd216c2075879233376b5c5d7f1241c6849756fa6faa2222323246",
+      "benchmarks/results/v1_live_ollama_smoke.json": "42cf135dd63aa5388b77f44da083806ed5d7d3d0a8209dbad581700a613e733a",
+      "benchmarks/results/v1_live_smoke.json": "138a82e428d16ea031d1fb2c5a3dd3f8b68e97c733a6d9b426bb5c15f0be46f1",
+      "benchmarks/results/v1_npm_audit.json": "77545c9caed0d9da56dd1bd1e2bc17ab3a0c49528f1b67a8bd2984588fc9fb63",
+      "benchmarks/results/v1_npm_audit_post.json": "7a3389ffee59cce62eb9ea5c6934162f3c1b4f0612739c043c86c7353aee3012",
+      "benchmarks/results/v1_ollama_blocked.json": "f36c18698ae9e321ef0d6b98e0478fffaa3ee89df41095e07ba7c98881cd7f3f",
+      "benchmarks/results/v1_phase3_a0.json": "db9a534b6a80ad86f8863b5b6965b1a77b7dfd6100a8576a1f3992dbd75bf075",
+      "benchmarks/results/v1_phase3_a0_oracle.json": "01f196723eca4605e4dfe9e5c9c00d68c8cc170de578ea2d80050d37f58f6952",
+      "benchmarks/results/v1_phase3_a2_mock.json": "92581a414e0ed08df2a72c904c8210812c0240657a5ae94308fdfd60e8605e5a",
+      "benchmarks/results/v1_pip_audit.json": "2255519dce085ff146b749a2ed84043c30d943b5069d6b77251628628d0d3195",
+      "benchmarks/results/v1_post_e2e.json": "2d40ba557f7bd9cf6ddb85f85fae1fb57291950c3a8504eb090e72252adf1554",
+      "benchmarks/results/v1_post_quality.json": "58ce303149372390c3103888af58627013643d336e72f58c6de9eaada52bc72e",
+      "benchmarks/results/v1_post_queued20_e2e.json": "db313b735727e1219910c8a7d4893cd75850eca702c1e6c64ddc4e706e21ba46",
+      "benchmarks/results/v1_post_stages.json": "8c1c074b68af342a839c9d028106f15c81015351fa3de65c79a179afa405858d",
+      "benchmarks/results/v1_source_inventory.json": "94e550c49ad9f760aa2397d2c73faf47f7ee42d386d5c035da9eb782f73d4921",
+      "benchmarks/results/v2_baseline_e2e.json": "d92a256c68bdbf571f7509e9be4c7a0cb540fb0c9e81b2611f2aa512af64bcdd",
+      "benchmarks/results/v2_baseline_stages.json": "e6763a755b5a3271acf142c04f8c488db112a81d909057ee3996589f89001165",
+      "benchmarks/results/v2_browser_e2e.json": "41740ae249cd216c2075879233376b5c5d7f1241c6849756fa6faa2222323246",
+      "benchmarks/results/v2_final_e2e.json": "6d45be23c192325c784ea0e7a5e89f7bec5f84910e757a71bd82234703fd823e",
+      "benchmarks/results/v2_final_quality.json": "89237233501ecdc5ab2a6de579528b5db51815699d0dffffa74e6d54e5a85ae2",
+      "benchmarks/results/v2_final_queued20_e2e.json": "bdc70ac77de9b4dbe847d345854f7f42a19953febb244c2fceb528eb83b357ed",
+      "benchmarks/results/v2_final_stages.json": "3f631408ae76969132dbc3d337e6cf71ae077d835241a7325ec69a068b14da7a",
+      "benchmarks/results/v2_live_smoke.json": "e8ac0753ff47046541a9f6ddc158a47e76b1333cb369ecb0885bce59e8dfc3ce",
+      "benchmarks/results/v2_npm_audit.json": "7a3389ffee59cce62eb9ea5c6934162f3c1b4f0612739c043c86c7353aee3012",
+      "benchmarks/results/v2_ollama_blocked.json": "0451acb3c0be06b2013d9cdc4081be32c63d4aef9d11ccc76a948d1e79f9d034",
+      "benchmarks/results/v2_ollama_smoke.json": "394031f3061bdd8cc6100ba31713713867c6cf411f48a8e000275eff77578012",
+      "benchmarks/results/v2_phase3_a0.json": "95c330625f3b1590f936ddadc6011614f3aefca4d129a76221fafec796d8c159",
+      "benchmarks/results/v2_phase3_a0_oracle.json": "6723bc558deaa65c20df12980f4de7d1b521743a82a8e54a47c70f630d800dd8",
+      "benchmarks/results/v2_phase3_a2_mock.json": "58d101e60436fb5de0f9601537d7d32a1951510abf08f54891a03adb3f5e5c71",
+      "benchmarks/results/v2_phase3_baseline_a0.json": "1561a170ceb4e9e553ca392e041cd8d5162e68d1c7aca288fde2fb64c9c3fc4a",
+      "benchmarks/results/v2_preflight.json": "8e70f7fcfc1ca7b44525d434edf98eace34a4d3a3c933d44f216677a84a6664c"
+    },
+    "contains_commands_key": false
+  },
+  "limitations": [
+    "Same 113 frozen inputs and 65 answerable denominator; scores are not the same metric/pipeline.",
+    "The 38 artifact reports HEAD c7527ed, but is published in a later corpus/evaluator commit 9be6553. HEAD does not identify uncommitted producing bytes.",
+    "The committed evaluator blobs and report establish reproducible implementation references, not exact historical argv or a signed clean-tree execution record.",
+    "The 37 evaluator was introduced at 05ef5e7 and can run against an older --source-root; its absence from 6eb9d9d is not a contradiction.",
+    "Historical summaries do not retain full debug contexts; cannot recompute both predicates on identical historical raw outputs from these files alone.",
+    "No meaningful one-case regression/improvement can be inferred from 37 versus 38.",
+    "Labels are AI-authored frozen references, not independent SAP approval."
+  ]
+}

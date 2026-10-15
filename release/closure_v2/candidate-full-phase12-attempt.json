@@ -1,0 +1,23 @@
+{
+  "name": "candidate-full-phase12-strict-production",
+  "scope": "full production extractive factory + 113 sealed questions; NOT cached replay",
+  "command": [
+    "../.venv/bin/python",
+    "benchmarks/run_quality.py",
+    "--source-commit",
+    "8c636d56676a190a80d2e14b045189685a71d2a8",
+    "--out",
+    "../closure-v2/candidate-full-phase12.json"
+  ],
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "exit_code": 1,
+  "status": "BLOCKED",
+  "result_written": false,
+  "log_sha256": "db10d556f74aa4956978dc44672d9ff2345a52032b564da049e8dd47c55c625f",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/benchmarks/run_quality.py\", line 143, in <module>\n    main()\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/benchmarks/run_quality.py\", line 59, in main\n    svc = S.build_service(\"extractive\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/rag_service.py\", line 882, in build_service\n    pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/rag_pipeline.py\", line 810, in build_pipeline\n    embed, minfo = BP.load_embedder()\n                   ^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/build_page_collection.py\", line 56, in load_embedder\n    from sentence_transformers import SentenceTransformer\nModuleNotFoundError: No module named 'sentence_transformers'\n",
+  "candidate_runtime_git_head": "8c636d56676a190a80d2e14b045189685a71d2a8",
+  "note": "Only new reconciliation reports are uncommitted; runtime matches 8c636d5. No score exists if factory fails."
+}
