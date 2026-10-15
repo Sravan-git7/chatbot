@@ -810,8 +810,8 @@ def build_pipeline(generator: str = "extractive", llm_client: Any = None, config
     embed, minfo = BP.load_embedder()
     count, _ = PK.make_token_counter(minfo["model_dir"])
     from owned_retrieval import OwnedCardBackend, OwnedPageRetriever
-    backend = OwnedCardBackend(embedder=embed)
-    retriever = OwnedPageRetriever.from_store(embed=embed)
+    backend = OwnedCardBackend(embedder=embed, expected_dimension=minfo["dimensions"], expected_model=BP.C.MODEL_NAME)
+    retriever = OwnedPageRetriever.from_store(embed=embed, expected_dimension=minfo["dimensions"], expected_model=BP.C.MODEL_NAME)
     try:
         ctx = pid.IdentityContext.from_root(root)
         client = llm_client

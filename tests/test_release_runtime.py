@@ -499,3 +499,101 @@ assert collection.query(query_embeddings=[[1., 0.]], n_results=1)["ids"] == [["f
     assert restored.returncode == 0, (
         restored.stderr
     )  # Recovery ONLY after first process exit.
+
+
+def test_real_stored_vector_contract_rejects_forged_dimension_and_recovers():
+    import chromadb
+    from chromadb.config import Settings
+
+    with TEMP.ChromaTemporaryDirectory(prefix="vector-contract-") as td:
+        root = Path(td)
+        client = chromadb.PersistentClient(
+            path=str(root), settings=Settings(anonymized_telemetry=False)
+        )
+        collection = client.create_collection(
+            "sap_pages_v1",
+            metadata={
+                "hnsw:space": "cosine",
+                "vector_count": 1,
+                "embedding_model": "fixture-model",
+                "embedding_dimensions": 384,
+            },
+        )
+        collection.add(ids=["fixture"], embeddings=[[1.0, 0.0]], documents=["fixture"])
+        # Metadata claims384, physical vector has2. Count/metadata-only readiness is insufficient.
+        with pytest.raises(
+            OWN.PR.PageStoreUnavailable, match="Stored vector dimension"
+        ):
+            OWN.OwnedPageRetriever.from_store(
+                root,
+                embed=lambda _: [[1.0, 0.0]],
+                expected_dimension=384,
+                expected_model="fixture-model",
+            )
+        with pytest.raises(OWN.PR.PageStoreUnavailable, match="Stored embedding model"):
+            OWN.OwnedPageRetriever.from_store(
+                root,
+                embed=lambda _: [[1.0, 0.0]],
+                expected_dimension=2,
+                expected_model="different-model",
+            )
+        assert collection.count() == 1  # Failed owners never stop the external owner.
+        bad_card = OWN.OwnedCardBackend(
+            vector_dir=root,
+            collection_name="sap_pages_v1",
+            embedder=lambda _: [1.0, 0.0],
+            expected_dimension=384,
+            expected_model="fixture-model",
+        )
+        with pytest.raises(
+            OWN.RT.CardStoreUnavailable, match="Stored vector dimension"
+        ):
+            bad_card.health_check()
+        corrected = client.create_collection(
+            "recovered_fixture",
+            metadata={
+                "hnsw:space": "cosine",
+                "vector_count": 1,
+                "embedding_model": "fixture-model",
+                "embedding_dimensions": 2,
+            },
+        )
+        corrected.add(ids=["fixture"], embeddings=[[1.0, 0.0]], documents=["fixture"])
+        healthy = OWN.OwnedPageRetriever.from_store(
+            root,
+            collection="recovered_fixture",
+            embed=lambda _: [[1.0, 0.0]],
+            expected_dimension=2,
+            expected_model="fixture-model",
+        )
+        assert healthy.count() == 1
+        healthy.close()
+        assert collection.count() == 1
+        client.close()
+
+
+def test_production_factory_passes_loaded_model_contract_to_both_owners():
+    import build_page_collection as BP
+    import page_chunker as PK
+    import rag_pipeline as RP
+
+    backend, retriever = Mock(), Mock()
+    with (
+        patch.object(
+            BP,
+            "load_embedder",
+            return_value=(lambda _: [], {"dimensions": 384, "model_dir": "fixture"}),
+        ),
+        patch.object(PK, "make_token_counter", return_value=(len, {"exact": True})),
+        patch.object(OWN, "OwnedCardBackend", return_value=backend) as card,
+        patch.object(
+            OWN.OwnedPageRetriever, "from_store", return_value=retriever
+        ) as page,
+    ):
+        pipeline = RP.build_pipeline()
+    for factory in (card, page):
+        assert factory.call_args.kwargs["expected_dimension"] == 384
+        assert factory.call_args.kwargs["expected_model"] == BP.C.MODEL_NAME
+    OWN.release_pipeline(pipeline)
+    backend.close.assert_called_once()
+    retriever.close.assert_called_once()

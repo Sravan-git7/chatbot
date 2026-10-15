@@ -57,6 +57,33 @@ def _client(path):
             raise
 
 
+def _validate_vector_contract(
+    collection, expected_dimension, expected_model, error_type
+):
+    metadata = collection.metadata or {}
+    if expected_model is not None and metadata.get("embedding_model") != expected_model:
+        raise error_type(
+            "Stored embedding model differs from the loaded model contract"
+        )
+    if expected_dimension is None:
+        return  # Generic resource-only callers; production factory always supplies its loaded dimension.
+    vectors = collection.get(limit=1, include=["embeddings"])["embeddings"]
+    if (
+        vectors is None
+        or len(vectors) != 1
+        or vectors[0] is None
+        or len(vectors[0]) != expected_dimension
+    ):
+        raise error_type(
+            "Stored vector dimension differs from the loaded embedding model"
+        )
+    declared = metadata.get("embedding_dimensions")
+    if declared is not None and declared != expected_dimension:
+        raise error_type(
+            "Declared vector dimension differs from the loaded embedding model"
+        )
+
+
 class _Owner:
     def close(self):
         with _FACTORY_LOCK:
@@ -77,6 +104,11 @@ class _Owner:
 
 
 class OwnedCardBackend(_Owner, RT.ChromaCardBackend):
+    def __init__(self, *args, expected_dimension=None, expected_model=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.expected_dimension = expected_dimension
+        self.expected_model = expected_model
+
     def _open(self):
         with _FACTORY_LOCK:
             assert_path_reusable(self.vector_dir)
@@ -96,6 +128,12 @@ class OwnedCardBackend(_Owner, RT.ChromaCardBackend):
                 collection = client.get_collection(self.collection_name)
                 if (collection.metadata or {}).get("hnsw:space") != RT.DISTANCE_METRIC:
                     raise RT.RouterConfigError("Unexpected card distance metric")
+                _validate_vector_contract(
+                    collection,
+                    self.expected_dimension,
+                    self.expected_model,
+                    RT.RouterConfigError,
+                )
             except BaseException:
                 self.close()
                 raise
@@ -120,7 +158,12 @@ class OwnedPageRetriever(_Owner, PR.PageRetriever):
 
     @classmethod
     def from_store(
-        cls, vector_dir=BP.PAGE_VECTOR_DIR, collection=BP.PAGE_COLLECTION, embed=None
+        cls,
+        vector_dir=BP.PAGE_VECTOR_DIR,
+        collection=BP.PAGE_COLLECTION,
+        embed=None,
+        expected_dimension=None,
+        expected_model=None,
     ):
         BP.guard_names(collection, Path(vector_dir))
         if not Path(vector_dir).is_dir():
@@ -139,6 +182,9 @@ class OwnedPageRetriever(_Owner, PR.PageRetriever):
                 raise PR.PageStoreUnavailable(
                     "Page vector count is empty or differs from metadata"
                 )
+            _validate_vector_contract(
+                col, expected_dimension, expected_model, PR.PageStoreUnavailable
+            )
             result = cls(col, embed or BP.load_embedder()[0])
         except BaseException:
             _release_client(client, vector_dir)
