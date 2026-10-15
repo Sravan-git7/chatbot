@@ -1,0 +1,71 @@
+{
+  "ghsa_id": "GHSA-xph7-9rjv-w5fr",
+  "cve_id": "CVE-2026-45831",
+  "url": "https://api.github.com/advisories/GHSA-xph7-9rjv-w5fr",
+  "html_url": "https://github.com/advisories/GHSA-xph7-9rjv-w5fr",
+  "summary": "ChromaDB's SimpleRBACAuthorizationProvider doesn't check which tenant, database, or collection a permission applies to",
+  "description": "The SimpleRBACAuthorizationProvider authorization provider in versions 0.5.0 or later of the ChromaDB Python project evaluates whether a user holds a given permission but never checks which tenant, database, or collection that permission applies to allowing users to perform cross tenant actions.",
+  "type": "reviewed",
+  "severity": "high",
+  "repository_advisory_url": null,
+  "source_code_location": "https://github.com/chroma-core/chroma",
+  "identifiers": [
+    {
+      "value": "GHSA-xph7-9rjv-w5fr",
+      "type": "GHSA"
+    },
+    {
+      "value": "CVE-2026-45831",
+      "type": "CVE"
+    }
+  ],
+  "references": [
+    "https://nvd.nist.gov/vuln/detail/CVE-2026-45831",
+    "https://www.hiddenlayer.com/sai-security-advisory/2026-06-chromadb-3",
+    "https://github.com/chroma-core/chroma/issues/7588",
+    "https://github.com/chroma-core/chroma/pull/7602",
+    "https://github.com/advisories/GHSA-xph7-9rjv-w5fr"
+  ],
+  "published_at": "2026-06-12T18:31:56Z",
+  "updated_at": "2026-08-24T20:00:43Z",
+  "github_reviewed_at": "2026-08-24T20:00:42Z",
+  "nvd_published_at": "2026-06-12T16:16:28Z",
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "chromadb"
+      },
+      "vulnerable_version_range": ">= 0.5.0, <= 1.5.9",
+      "first_patched_version": null,
+      "vulnerable_functions": []
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+      "score": 8.8
+    },
+    "cvss_v4": {
+      "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:H/VI:H/VA:N/SC:H/SI:H/SA:N",
+      "score": 8.8
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-863",
+      "name": "Incorrect Authorization"
+    }
+  ],
+  "credits": [],
+  "comments": 0,
+  "cvss": {
+    "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "score": 8.8
+  },
+  "epss": {
+    "percentage": 0.00422,
+    "percentile": 0.3451
+  }
+}

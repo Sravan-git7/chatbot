@@ -1,0 +1,27 @@
+{
+  "name": "candidate-final-full-phase12-strict-production",
+  "candidate_runtime_git_head": "5cff9621cbb4ef4f2b7a2718d0b455f72db0050f",
+  "command": [
+    "../.venv/bin/python",
+    "benchmarks/run_quality.py",
+    "--source-commit",
+    "5cff9621cbb4ef4f2b7a2718d0b455f72db0050f",
+    "--out",
+    "../closure-v2/candidate-final-full-phase12.json"
+  ],
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "exit_code": 1,
+  "status": "BLOCKED",
+  "result_written": false,
+  "traceback": "Traceback (most recent call last):\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/benchmarks/run_quality.py\", line 143, in <module>\n    main()\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/benchmarks/run_quality.py\", line 59, in main\n    svc = S.build_service(\"extractive\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/rag_service.py\", line 888, in build_service\n    pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/rag_pipeline.py\", line 813, in build_pipeline\n    embed, minfo = BP.load_embedder()\n                   ^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/build_page_collection.py\", line 56, in load_embedder\n    from sentence_transformers import SentenceTransformer\nModuleNotFoundError: No module named 'sentence_transformers'\n",
+  "log_sha256": "b7e55f6283aceaef8859311915044182c726335fc6fa4b917db39e9a6370c608",
+  "runtime_sha256": {
+    "scripts/rag_evidence.py": "46d3c5cbd39ef98058f6bc879d9ea4fda9e8459826b45b5b5378e7243db30bfb",
+    "scripts/rag_pipeline.py": "911731a93149b4fe3ce70c8b3a8412eb514c7e2f150446bf60311e07710c17a8",
+    "scripts/rag_service.py": "9d00c41727eaec1dad3ceb6973d7c35b975d8d20981d990a55aecb33559a160e",
+    "scripts/owned_retrieval.py": "1d4c198ccf5dfe51b555968d276df16934599187266ac3c33e4dd1c489045dac"
+  }
+}

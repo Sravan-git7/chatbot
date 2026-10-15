@@ -1,0 +1,31 @@
+{
+  "source": "https://pypi.org/pypi/chromadb/json",
+  "latest": "1.5.9",
+  "checked_at": "2026-10-15T15:00:37.157622+00:00",
+  "latest_files": [
+    {
+      "filename": "chromadb-1.5.9-cp39-abi3-macosx_10_12_x86_64.whl",
+      "sha256": "60701011b5e6409647fa40d12c7c5a66b2b0bfcf33a52db2ad53a30a2abc4957"
+    },
+    {
+      "filename": "chromadb-1.5.9-cp39-abi3-macosx_11_0_arm64.whl",
+      "sha256": "814b9c95617377f6501e5757d63dfddb554a283a7739c87b9fa573850174e6f3"
+    },
+    {
+      "filename": "chromadb-1.5.9-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "sha256": "9192d111bd662241625867962333d99369a00769a50f8b2f58cb388731274d7e"
+    },
+    {
+      "filename": "chromadb-1.5.9-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "cc09b3df76e5a5cb386aed2715a2eea152e3949f9e1ba93c7119505377749929"
+    },
+    {
+      "filename": "chromadb-1.5.9-cp39-abi3-win_amd64.whl",
+      "sha256": "4fd0b560e56761b7f3cb4d5c6205fd5f20814484b4a3e4e9af9038c2b428fc6c"
+    },
+    {
+      "filename": "chromadb-1.5.9.tar.gz",
+      "sha256": "5c20e62a455c28bacac927f26116a73fd8e1799e0d908be8e8a4f02197a54731"
+    }
+  ]
+}

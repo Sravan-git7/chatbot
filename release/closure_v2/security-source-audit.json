@@ -1,0 +1,412 @@
+{
+  "scope": "Installed Chroma source + repository AST inventory; not deployed reachability proof",
+  "package": "chromadb 1.5.9",
+  "installed_source": {
+    "server/fastapi/__init__.py": {
+      "sha256": "5cb749811396f66f84c49d453a665d0d950356a8a799914c265be5c0aa711c10",
+      "functions": [
+        {
+          "function": "process_create_collection",
+          "line_start": 809,
+          "line_end": 847,
+          "source": "        def process_create_collection(\n            request: Request, tenant: str, database: str, raw_body: bytes\n        ) -> CollectionModel:\n            create = validate_model(CreateCollection, orjson.loads(raw_body))\n            if not create.configuration:\n                if create.metadata:\n                    configuration = (\n                        create_collection_configuration_from_legacy_collection_metadata(\n                            create.metadata\n                        )\n                    )\n                else:\n                    configuration = None\n            else:\n                configuration = load_create_collection_configuration_from_json(\n                    create.configuration\n                )\n\n            # NOTE(rescrv, iron will auth):  Implemented.\n            self.sync_auth_request(\n                request.headers,\n                AuthzAction.CREATE_COLLECTION,\n                tenant,\n                database,\n                create.name,\n            )\n\n            self._set_request_context(request=request)\n\n            add_attributes_to_current_span({\"tenant\": tenant})\n\n            return self._api.create_collection(\n                name=create.name,\n                configuration=configuration,\n                metadata=create.metadata,\n                get_or_create=create.get_or_create,\n                tenant=tenant,\n                database=database,\n            )"
+        },
+        {
+          "function": "process_update_collection",
+          "line_start": 932,
+          "line_end": 960,
+          "source": "        def process_update_collection(\n            request: Request, collection_id: str, raw_body: bytes\n        ) -> None:\n            update = validate_model(UpdateCollection, orjson.loads(raw_body))\n            # NOTE(rescrv, iron will auth):  Implemented.\n            self.sync_auth_request(\n                request.headers,\n                AuthzAction.UPDATE_COLLECTION,\n                tenant,\n                database_name,\n                collection_id,\n            )\n            configuration = (\n                None\n                if not update.new_configuration\n                else load_update_collection_configuration_from_json(\n                    update.new_configuration\n                )\n            )\n            self._set_request_context(request=request)\n            add_attributes_to_current_span({\"tenant\": tenant})\n            return self._api._modify(\n                id=_uuid(collection_id),\n                new_name=update.new_name,\n                new_metadata=update.new_metadata,\n                new_configuration=configuration,\n                tenant=tenant,\n                database=database_name,\n            )"
+        },
+        {
+          "function": "process_create_collection",
+          "line_start": 1875,
+          "line_end": 1910,
+          "source": "        def process_create_collection(\n            request: Request, tenant: str, database: str, raw_body: bytes\n        ) -> CollectionModel:\n            create = validate_model(CreateCollection, orjson.loads(raw_body))\n            configuration = (\n                CreateCollectionConfiguration()\n                if not create.configuration\n                else load_create_collection_configuration_from_json(\n                    create.configuration\n                )\n            )\n\n            (\n                maybe_tenant,\n                maybe_database,\n                # NOTE(rescrv, iron will auth):  v1\n            ) = self.sync_auth_and_get_tenant_and_database_for_request(\n                request.headers,\n                AuthzAction.CREATE_COLLECTION,\n                tenant,\n                database,\n                create.name,\n            )\n            if maybe_tenant:\n                tenant = maybe_tenant\n            if maybe_database:\n                database = maybe_database\n\n            return self._api.create_collection(\n                name=create.name,\n                configuration=configuration,\n                metadata=create.metadata,\n                get_or_create=create.get_or_create,\n                tenant=tenant,\n                database=database,\n            )"
+        },
+        {
+          "function": "process_update_collection",
+          "line_start": 1971,
+          "line_end": 1995,
+          "source": "        def process_update_collection(\n            request: Request, collection_id: str, raw_body: bytes\n        ) -> None:\n            update = validate_model(UpdateCollection, orjson.loads(raw_body))\n            # NOTE(rescrv, iron will auth):  v1\n            self.sync_auth_and_get_tenant_and_database_for_request(\n                request.headers,\n                AuthzAction.UPDATE_COLLECTION,\n                None,\n                None,\n                collection_id,\n            )\n            configuration = (\n                None\n                if not update.new_configuration\n                else load_update_collection_configuration_from_json(\n                    update.new_configuration\n                )\n            )\n            return self._api._modify(\n                id=_uuid(collection_id),\n                new_name=update.new_name,\n                new_metadata=update.new_metadata,\n                new_configuration=configuration,\n            )"
+        },
+        {
+          "function": "add_v1",
+          "line_start": 2039,
+          "line_end": 2080,
+          "source": "    async def add_v1(\n        self,\n        request: Request,\n        collection_id: str,\n    ) -> bool:\n        try:\n\n            def process_add(request: Request, raw_body: bytes) -> bool:\n                add = validate_model(AddEmbedding, orjson.loads(raw_body))\n                # NOTE(rescrv, iron will auth):  v1\n                self.sync_auth_and_get_tenant_and_database_for_request(\n                    request.headers,\n                    AuthzAction.ADD,\n                    None,\n                    None,\n                    collection_id,\n                )\n                return self._api._add(\n                    collection_id=_uuid(collection_id),\n                    ids=add.ids,\n                    embeddings=cast(\n                        Embeddings,\n                        convert_list_embeddings_to_np(add.embeddings)\n                        if add.embeddings\n                        else None,\n                    ),\n                    metadatas=add.metadatas,  # type: ignore\n                    documents=add.documents,  # type: ignore\n                    uris=add.uris,  # type: ignore\n                )\n\n            return cast(\n                bool,\n                await to_thread.run_sync(\n                    process_add,\n                    request,\n                    await request.body(),\n                    limiter=self._capacity_limiter,\n                ),\n            )\n        except InvalidDimensionException as e:\n            raise HTTPException(status_code=500, detail=str(e))"
+        },
+        {
+          "function": "update_v1",
+          "line_start": 2083,
+          "line_end": 2116,
+          "source": "    async def update_v1(\n        self,\n        request: Request,\n        collection_id: str,\n    ) -> None:\n        def process_update(request: Request, raw_body: bytes) -> bool:\n            update = validate_model(UpdateEmbedding, orjson.loads(raw_body))\n\n            # NOTE(rescrv, iron will auth):  v1\n            self.sync_auth_and_get_tenant_and_database_for_request(\n                request.headers,\n                AuthzAction.UPDATE,\n                None,\n                None,\n                collection_id,\n            )\n\n            return self._api._update(\n                collection_id=_uuid(collection_id),\n                ids=update.ids,\n                embeddings=convert_list_embeddings_to_np(update.embeddings)\n                if update.embeddings\n                else None,\n                metadatas=update.metadatas,  # type: ignore\n                documents=update.documents,  # type: ignore\n                uris=update.uris,  # type: ignore\n            )\n\n        await to_thread.run_sync(\n            process_update,\n            request,\n            await request.body(),\n            limiter=self._capacity_limiter,\n        )"
+        },
+        {
+          "function": "upsert_v1",
+          "line_start": 2120,
+          "line_end": 2156,
+          "source": "    async def upsert_v1(\n        self,\n        request: Request,\n        collection_id: str,\n    ) -> None:\n        def process_upsert(request: Request, raw_body: bytes) -> bool:\n            upsert = validate_model(AddEmbedding, orjson.loads(raw_body))\n\n            # NOTE(rescrv, iron will auth):  v1\n            self.sync_auth_and_get_tenant_and_database_for_request(\n                request.headers,\n                AuthzAction.UPSERT,\n                None,\n                None,\n                collection_id,\n            )\n\n            return self._api._upsert(\n                collection_id=_uuid(collection_id),\n                ids=upsert.ids,\n                embeddings=cast(\n                    Embeddings,\n                    convert_list_embeddings_to_np(upsert.embeddings)\n                    if upsert.embeddings\n                    else None,\n                ),\n                metadatas=upsert.metadatas,  # type: ignore\n                documents=upsert.documents,  # type: ignore\n                uris=upsert.uris,  # type: ignore\n            )\n\n        await to_thread.run_sync(\n            process_upsert,\n            request,\n            await request.body(),\n            limiter=self._capacity_limiter,\n        )"
+        },
+        {
+          "function": "get_v1",
+          "line_start": 2160,
+          "line_end": 2201,
+          "source": "    async def get_v1(\n        self,\n        collection_id: str,\n        request: Request,\n    ) -> GetResult:\n        def process_get(request: Request, raw_body: bytes) -> GetResult:\n            get = validate_model(GetEmbedding, orjson.loads(raw_body))\n            # NOTE(rescrv, iron will auth):  v1\n            self.sync_auth_and_get_tenant_and_database_for_request(\n                request.headers,\n                AuthzAction.GET,\n                None,\n                None,\n                collection_id,\n            )\n            return self._api._get(\n                collection_id=_uuid(collection_id),\n                ids=get.ids,\n                where=get.where,\n                limit=get.limit,\n                offset=get.offset,\n                where_document=get.where_document,\n                include=get.include,\n            )\n\n        get_result = cast(\n            GetResult,\n            await to_thread.run_sync(\n                process_get,\n                request,\n                await request.body(),\n                limiter=self._capacity_limiter,\n            ),\n        )\n\n        if get_result[\"embeddings\"] is not None:\n            get_result[\"embeddings\"] = [\n                cast(Embedding, embedding).tolist()\n                for embedding in get_result[\"embeddings\"]\n            ]\n\n        return get_result"
+        },
+        {
+          "function": "delete_v1",
+          "line_start": 2205,
+          "line_end": 2233,
+          "source": "    async def delete_v1(\n        self,\n        collection_id: str,\n        request: Request,\n    ) -> DeleteResult:\n        def process_delete(request: Request, raw_body: bytes) -> DeleteResult:\n            delete = validate_model(DeleteEmbedding, orjson.loads(raw_body))\n            # NOTE(rescrv, iron will auth):  v1\n            self.sync_auth_and_get_tenant_and_database_for_request(\n                request.headers,\n                AuthzAction.DELETE,\n                None,\n                None,\n                collection_id,\n            )\n            return self._api._delete(\n                collection_id=_uuid(collection_id),\n                ids=delete.ids,\n                where=delete.where,\n                where_document=delete.where_document,\n                limit=delete.limit,\n            )\n\n        return await to_thread.run_sync(\n            process_delete,\n            request,\n            await request.body(),\n            limiter=self._capacity_limiter,\n        )"
+        },
+        {
+          "function": "count_v1",
+          "line_start": 2237,
+          "line_end": 2257,
+          "source": "    async def count_v1(\n        self,\n        request: Request,\n        collection_id: str,\n    ) -> int:\n        await self.auth_and_get_tenant_and_database_for_request(\n            request.headers,\n            AuthzAction.COUNT,\n            None,\n            None,\n            collection_id,\n        )\n\n        return cast(\n            int,\n            await to_thread.run_sync(\n                self._api._count,\n                _uuid(collection_id),\n                limiter=self._capacity_limiter,\n            ),\n        )"
+        }
+      ]
+    },
+    "api/collection_configuration.py": {
+      "sha256": "f57493390de09d2e79efb5925d37b171b03cded907b15d70fe28cd42e5281c38",
+      "functions": [
+        {
+          "function": "load_collection_configuration_from_json",
+          "line_start": 56,
+          "line_end": 111,
+          "source": "def load_collection_configuration_from_json(\n    config_json_map: Dict[str, Any]\n) -> CollectionConfiguration:\n    if (\n        config_json_map.get(\"spann\") is not None\n        and config_json_map.get(\"hnsw\") is not None\n    ):\n        raise ValueError(\"hnsw and spann cannot both be provided\")\n\n    hnsw_config = None\n    spann_config = None\n    ef_config = None\n\n    # Process vector index configuration (HNSW or SPANN)\n    if config_json_map.get(\"hnsw\") is not None:\n        hnsw_config = cast(HNSWConfiguration, config_json_map[\"hnsw\"])\n    if config_json_map.get(\"spann\") is not None:\n        spann_config = cast(SpannConfiguration, config_json_map[\"spann\"])\n\n    # Process embedding function configuration\n    if config_json_map.get(\"embedding_function\") is not None:\n        ef_config = config_json_map[\"embedding_function\"]\n        if ef_config[\"type\"] == \"legacy\":\n            warnings.warn(\n                \"legacy embedding function config\",\n                DeprecationWarning,\n                stacklevel=2,\n            )\n            ef = None\n        else:\n            try:\n                ef_name = ef_config[\"name\"]\n            except KeyError:\n                raise ValueError(\n                    f\"Embedding function name not found in config: {ef_config}\"\n                )\n            try:\n                ef = known_embedding_functions[ef_name]\n            except KeyError:\n                raise ValueError(\n                    f\"Embedding function {ef_name} not found. Add @register_embedding_function decorator to the class definition.\"\n                )\n            try:\n                ef = ef.build_from_config(ef_config[\"config\"])  # type: ignore\n            except Exception as e:\n                raise ValueError(\n                    f\"Could not build embedding function {ef_config['name']} from config {ef_config['config']}: {e}\"\n                )\n    else:\n        ef = None\n\n    return CollectionConfiguration(\n        hnsw=hnsw_config,\n        spann=spann_config,\n        embedding_function=ef,  # type: ignore\n    )"
+        },
+        {
+          "function": "load_create_collection_configuration_from_json",
+          "line_start": 291,
+          "line_end": 319,
+          "source": "def load_create_collection_configuration_from_json(\n    json_map: Dict[str, Any]\n) -> CreateCollectionConfiguration:\n    if json_map.get(\"hnsw\") is not None and json_map.get(\"spann\") is not None:\n        raise ValueError(\"hnsw and spann cannot both be provided\")\n\n    result = CreateCollectionConfiguration()\n\n    # Handle vector index configuration\n    if json_map.get(\"hnsw\") is not None:\n        result[\"hnsw\"] = json_to_create_hnsw_configuration(json_map[\"hnsw\"])\n\n    if json_map.get(\"spann\") is not None:\n        result[\"spann\"] = json_to_create_spann_configuration(json_map[\"spann\"])\n\n    # Handle embedding function configuration\n    if json_map.get(\"embedding_function\") is not None:\n        ef_config = json_map[\"embedding_function\"]\n        if ef_config[\"type\"] == \"legacy\":\n            warnings.warn(\n                \"legacy embedding function config\",\n                DeprecationWarning,\n                stacklevel=2,\n            )\n        else:\n            ef = known_embedding_functions[ef_config[\"name\"]]\n            result[\"embedding_function\"] = ef.build_from_config(ef_config[\"config\"])\n\n    return result"
+        },
+        {
+          "function": "load_update_collection_configuration_from_json",
+          "line_start": 605,
+          "line_end": 635,
+          "source": "def load_update_collection_configuration_from_json(\n    json_map: Dict[str, Any]\n) -> UpdateCollectionConfiguration:\n    \"\"\"Convert a JSON dict to an UpdateCollectionConfiguration\"\"\"\n    if json_map.get(\"hnsw\") is not None and json_map.get(\"spann\") is not None:\n        raise ValueError(\"hnsw and spann cannot both be provided\")\n\n    result = UpdateCollectionConfiguration()\n\n    # Handle vector index configurations\n    if json_map.get(\"hnsw\") is not None:\n        result[\"hnsw\"] = json_to_update_hnsw_configuration(json_map[\"hnsw\"])\n\n    if json_map.get(\"spann\") is not None:\n        result[\"spann\"] = json_to_update_spann_configuration(json_map[\"spann\"])\n\n    # Handle embedding function\n    if json_map.get(\"embedding_function\") is not None:\n        if json_map[\"embedding_function\"][\"type\"] == \"legacy\":\n            warnings.warn(\n                \"legacy embedding function config\",\n                DeprecationWarning,\n                stacklevel=2,\n            )\n        else:\n            ef = known_embedding_functions[json_map[\"embedding_function\"][\"name\"]]\n            result[\"embedding_function\"] = ef.build_from_config(\n                json_map[\"embedding_function\"][\"config\"]\n            )\n\n    return result"
+        }
+      ]
+    },
+    "api/models/CollectionCommon.py": {
+      "sha256": "d17bf514620155905e9aa227567614c7acc1625ee0dde6a3a40b03cecada2df4",
+      "functions": [
+        {
+          "function": "configuration",
+          "line_start": 154,
+          "line_end": 155,
+          "source": "    def configuration(self) -> CollectionConfiguration:\n        return load_collection_configuration_from_json(self._model.configuration_json)"
+        },
+        {
+          "function": "_embed",
+          "line_start": 746,
+          "line_end": 799,
+          "source": "    def _embed(self, input: Any, is_query: bool = False) -> Embeddings:\n        if self._embedding_function is not None and not isinstance(\n            self._embedding_function, DefaultEmbeddingFunction\n        ):\n            if is_query:\n                return self._embedding_function.embed_query(input=input)\n            else:\n                return self._embedding_function(input=input)\n\n        config_ef = self.configuration.get(\"embedding_function\")\n        if config_ef is not None:\n            if is_query:\n                return config_ef.embed_query(input=input)\n            else:\n                return config_ef(input=input)\n        schema = self.schema\n        schema_embedding_function: Optional[EmbeddingFunction[Embeddable]] = None\n        if schema is not None:\n            override = schema.keys.get(EMBEDDING_KEY)\n            if (\n                override is not None\n                and override.float_list is not None\n                and override.float_list.vector_index is not None\n                and override.float_list.vector_index.config.embedding_function\n                is not None\n            ):\n                schema_embedding_function = cast(\n                    EmbeddingFunction[Embeddable],\n                    override.float_list.vector_index.config.embedding_function,\n                )\n            elif (\n                schema.defaults.float_list is not None\n                and schema.defaults.float_list.vector_index is not None\n                and schema.defaults.float_list.vector_index.config.embedding_function\n                is not None\n            ):\n                schema_embedding_function = cast(\n                    EmbeddingFunction[Embeddable],\n                    schema.defaults.float_list.vector_index.config.embedding_function,\n                )\n\n        if schema_embedding_function is not None:\n            if is_query and hasattr(schema_embedding_function, \"embed_query\"):\n                return schema_embedding_function.embed_query(input=input)\n            return schema_embedding_function(input=input)\n        if self._embedding_function is None:\n            raise ValueError(\n                \"You must provide an embedding function to compute embeddings.\"\n                \"https://docs.trychroma.com/guides/embeddings\"\n            )\n        if is_query:\n            return self._embedding_function.embed_query(input=input)\n        else:\n            return self._embedding_function(input=input)"
+        }
+      ]
+    },
+    "utils/embedding_functions/sentence_transformer_embedding_function.py": {
+      "sha256": "2b7c4adcaeb2d8b91123322f3610177ca42563d03a00ff5ca5e53cfdb77789f9",
+      "functions": [
+        {
+          "function": "__init__",
+          "line_start": 13,
+          "line_end": 47,
+          "source": "    def __init__(\n        self,\n        model_name: str = \"all-MiniLM-L6-v2\",\n        device: str = \"cpu\",\n        normalize_embeddings: bool = False,\n        **kwargs: Any,\n    ):\n        \"\"\"Initialize SentenceTransformerEmbeddingFunction.\n\n        Args:\n            model_name (str, optional): Identifier of the SentenceTransformer model, defaults to \"all-MiniLM-L6-v2\"\n            device (str, optional): Device used for computation, defaults to \"cpu\"\n            normalize_embeddings (bool, optional): Whether to normalize returned vectors, defaults to False\n            **kwargs: Additional arguments to pass to the SentenceTransformer model.\n        \"\"\"\n        try:\n            from sentence_transformers import SentenceTransformer\n        except ImportError:\n            raise ValueError(\n                \"The sentence_transformers python package is not installed. Please install it with `pip install sentence_transformers`\"\n            )\n\n        self.model_name = model_name\n        self.device = device\n        self.normalize_embeddings = normalize_embeddings\n        for key, value in kwargs.items():\n            if not isinstance(value, (str, int, float, bool, list, dict, tuple)):\n                raise ValueError(f\"Keyword argument {key} is not a primitive type\")\n        self.kwargs = kwargs\n\n        if model_name not in self.models:\n            self.models[model_name] = SentenceTransformer(\n                model_name_or_path=model_name, device=device, **kwargs\n            )\n        self._model = self.models[model_name]"
+        },
+        {
+          "function": "build_from_config",
+          "line_start": 78,
+          "line_end": 92,
+          "source": "    def build_from_config(config: Dict[str, Any]) -> \"EmbeddingFunction[Documents]\":\n        model_name = config.get(\"model_name\")\n        device = config.get(\"device\")\n        normalize_embeddings = config.get(\"normalize_embeddings\")\n        kwargs = config.get(\"kwargs\", {})\n\n        if model_name is None or device is None or normalize_embeddings is None:\n            assert False, \"This code should not be reached\"\n\n        return SentenceTransformerEmbeddingFunction(\n            model_name=model_name,\n            device=device,\n            normalize_embeddings=normalize_embeddings,\n            **kwargs,\n        )"
+        }
+      ]
+    },
+    "auth/simple_rbac_authz/__init__.py": {
+      "sha256": "2dd5b1c6fe44285ee19d7fb7344045ed195d0d398148156a3f52265bc7420452",
+      "functions": [
+        {
+          "function": "authorize_or_raise",
+          "line_start": 58,
+          "line_end": 75,
+          "source": "    def authorize_or_raise(\n        self, user: UserIdentity, action: AuthzAction, resource: AuthzResource\n    ) -> None:\n        policy_decision = False\n        if (\n            user.user_id in self._permissions\n            and action in self._permissions[user.user_id]\n        ):\n            policy_decision = True\n\n        logger.debug(\n            f\"Authorization decision: Access \"\n            f\"{'granted' if policy_decision else 'denied'} for \"\n            f\"user [{user.user_id}] attempting to \"\n            f\"[{action}] [{resource}]\"\n        )\n        if not policy_decision:\n            raise HTTPException(status_code=403, detail=\"Forbidden\")"
+        }
+      ]
+    },
+    "api/segment.py": {
+      "sha256": "007075a0854d2c67b0ef2bd420eca1ddeafdbe7749018285b4df0e248f0e6323",
+      "functions": [
+        {
+          "function": "_get_collection",
+          "line_start": 1057,
+          "line_end": 1061,
+          "source": "    def _get_collection(self, collection_id: UUID) -> t.Collection:\n        collections = self._sysdb.get_collections(id=collection_id)\n        if not collections or len(collections) == 0:\n            raise NotFoundError(f\"Collection {collection_id} does not exist.\")\n        return collections[0]"
+        }
+      ]
+    }
+  },
+  "application_sources": {
+    "scripts/audit_corpus.py": "88a171912dc8d618cb6e21bc94319df75f89503db132ddc320eb3818cc6b3b30",
+    "scripts/build_card_collection.py": "39381b1ec959f1100e6d49404878d5f457c5fce74cc36b5ac558da40a9089233",
+    "scripts/build_card_eval_questions.py": "fddd7f977d58fd796b991c160279418241113dd66d3fc41b3b0639fa9982a347",
+    "scripts/build_chunk_candidates.py": "225ba3781ba4d18a2f80bf1e9d87ada9440cd900cc51f15a7a330ea07df571d1",
+    "scripts/build_chunk_candidates_portable.py": "bee6a68b085ec2c5ebb46b65e502c45fcc8190fc8ff778193754e62806bbfa66",
+    "scripts/build_corpus.py": "741f3a55dd041d39d48bef1e1177795076ebfb5a622cf45a511a7a7487c8d269",
+    "scripts/build_golden_v1.py": "ac33b1e3e24fbe8266c5bfb567b9e791d7e656d9005e86821974f83e0f3d7d64",
+    "scripts/build_independent_queries.py": "6fa45e111a0583914b54a8f6a2e48f77938e959f5db7e591b9132953b2fbf428",
+    "scripts/build_page_collection.py": "6af2229d2995638610953f8618c8fe2a6817c8e0c55081578e10f9a0a7180ed7",
+    "scripts/build_phase10_queries.py": "7394cf29160b7629985874e0bc1049ccb344aa87fad7c5ec1285b0a02befdf84",
+    "scripts/build_phase11_1_holdout.py": "54b29758b9ea8503f1adb78a77ee49bd9366295a9b631127e23d3f8856b96b3d",
+    "scripts/build_phase11_1_holdout2.py": "aa56e6c5922acdf6359c08032b1ff0f771ffa6da1f883d9d03649e8c1ec9d3ed",
+    "scripts/build_phase12_queries.py": "6174d23cd3dc3bbca621dabbe8495b58073f5c07e3b0d687495c69ade8d84309",
+    "scripts/build_phase4_report.py": "799032adee5c2ce05d157cdb02ee02d98169f397fc681c5ce1789a3bc88907c3",
+    "scripts/build_phase5_report.py": "1180b9dbc1d6c8ddd8cf91c8ef2842610876ec1619161a26e4fcd7bdc6a1a5c1",
+    "scripts/build_phase8_queries.py": "be070dfb3592321959a3b64902dbc71611f36855f6ad1de3013e6c092c9d5af9",
+    "scripts/build_phase9_queries.py": "a96ba18e2026a6bdda4ce3ec0e0ba2cd54358910f234aebed246c8236d0f04e7",
+    "scripts/build_retrieval_units.py": "bcfc54380394cf7443ab659c7820e4f466fdcda8e5c2bde6bd0a2ddf7021fad2",
+    "scripts/build_source_corpus.py": "d02fe5f29cf52796731d2c8caf4ff2c8a38e36d8ae1d67c308ff93ac59397215",
+    "scripts/build_source_manifest.py": "31cc0a60d4f85edd09dc1a5a07f0c0957b290b3efdc4ebbd3c8445e17d4d69e3",
+    "scripts/capture_responses.py": "368b068d1f1261a7e9ee641cf4068f8b76c4a72c0b4e476b04f0938b30f953e9",
+    "scripts/chroma_temp.py": "6253a33a1ba320b678434cd64d5248838666acee8a8090c888c1f6b1f5eda07d",
+    "scripts/chunk_pages.py": "d0d3c9df3de2a8ca1b5c33b31f5e787a0ff3093b4dd17e4a52b21aa6e4bdc01d",
+    "scripts/clean_sap_pages.py": "4ad4b47e7dd18219114da2e0c0f5399f6b589023c3c6c43171ae5488893199b2",
+    "scripts/compare_with_legacy.py": "9395963f3e826163ab56b7a31f072d5c63d4d4043fb4f9192f93d6772b7fe6c0",
+    "scripts/corpus_audit.py": "8464fd5acfb30a0913ef537eb02746a8e2b1cbaa4a8eab6e9fed325d1e8752dd",
+    "scripts/create_embeddings.py": "2e00072b1a9863a848b13d3ff6f088b10837446521c12793c5c6d5eee2923144",
+    "scripts/diagnose_windows_verification.py": "4a68b3b6b1fcef4b39e0739526391c62d315f5b6e917388afeb68c4f28b7f81a",
+    "scripts/eval_golden.py": "3e25334d576a82a5947b6d36123899113ff283bea180d4c3be28421b7476dd37",
+    "scripts/evaluate_answers.py": "48c871089de8f03735f5ced8ee604001a0f3c4880fcb713740172830ee01e1d9",
+    "scripts/evaluate_card_retrieval.py": "b73fef91daa6da83eab0b70a775d8955633da3b84c0ebe13e050498de167c6d5",
+    "scripts/evaluate_elaboration_llm.py": "b3aa248130831b9ae9a8eb50b4248886a3fb6d725ed164adaf183d35e14350df",
+    "scripts/evaluate_ood.py": "584bb29e57fbe9b665a25d4e785bb441bd675ea9b403cde3150044845764b7ff",
+    "scripts/evaluate_phase10.py": "a19e2a1d4d6c8433bb97be6e632db9c493cadd02444d86dd1836b2dbccb29823",
+    "scripts/evaluate_phase11_1.py": "26c59e34933cfcd33720528eade114e723928636faa9c98d9750454dcff60bd5",
+    "scripts/evaluate_phase12.py": "8a0f1207654f61252a3955ce4f7fe7e553be13825e0c7046af4a0949a8fc6b92",
+    "scripts/evaluate_phase13.py": "ae19d3e307ad76f9da4597f68ad66f8d4b412f233f6b18a04046bc425aecccfb",
+    "scripts/evaluate_phase13b.py": "829e895e80194a88b0339d7f9d20b56e245ae6a84f38d28eac65ef22bf6268d1",
+    "scripts/evaluate_phase14_recall.py": "f59aad1e7410e26c9e658b96d1bbed4291da474578acf025ad7e175dd3925eaf",
+    "scripts/evaluate_phase15_hybrid.py": "154b6ba7a21e940f1c26709bfbed83ac549b8c80af59b0c0916c6d7ad85aded6",
+    "scripts/evaluate_phase16_context.py": "235d7c8af1f3231e4ff965d140c43775e017206cb29cf910002be4d9d7534b51",
+    "scripts/evaluate_phase17a_evidence.py": "c411af96da80f7315e504faa52ed7a1abac3aec390f48d83a928e3655b19a8dc",
+    "scripts/evaluate_phase18.py": "b6caaf9cf41f4ef171111bd8dd6e023ba5d8d393efc580193c10e4bd1632a08b",
+    "scripts/evaluate_phase19b.py": "fb7633e56df754688719a454ffc1116954ab00c38732c3f7d28e0a6a7347648a",
+    "scripts/evaluate_phase5.py": "f5f4df96296802e98dfa0786d6c55569720af9fcb5be7b2db8dd0eb77ae8b179",
+    "scripts/evaluate_phase8.py": "8f5862c6e3fe6868c25b4bef3a84c2edaedd3399e5826bf22b7453e33861ddf3",
+    "scripts/evaluate_phase9.py": "20ffb420dbc26f8c5e700c4522adb6da5453c4e9685b3a869d36c34677a7ff93",
+    "scripts/evaluate_retrieval.py": "6275a670ab3d274ed862479f9b2a7ac6f2be88153f44440e59bc9b984b10621d",
+    "scripts/evaluate_two_stage.py": "e6a1a0fd6af7204e2b85b82469ddbbafab810e6d808b1e061cd917a2cf886f8a",
+    "scripts/evaluate_two_stage_llm.py": "8dbff1b58eafd1ef7f856564506d6291e5c8dc9a03100205a921a740e62534e2",
+    "scripts/forensic_search.py": "f3943f322ceedd93b77192cd0ec3e170723f0d0c1a089cc4fd80d18e2a08b823",
+    "scripts/frontend_live_verification.py": "d2b05a51367ae9862e092571772c95c169faee2875d672e05b6127ffd8d9300f",
+    "scripts/guide_intake.py": "52446312bb67419110e0e3ee98d2d554b0c3f629cadeb2c400d67c364653800e",
+    "scripts/inspect_pdf_cards.py": "e37d9fee4d03e2f17c341f660625318347d15ce49fb7bd3c47c5bc6e44c560c4",
+    "scripts/live_smoke.py": "8d3ef861296a5c0ccf47aa08a82fb3ee996c2632257f9355f13cbaa68886b64f",
+    "scripts/log_summary.py": "2d476c3ff7e1a5b7f790a8ce126c56764de88104dfa0e2fa2fd4ff0a6d38706f",
+    "scripts/m2c_citations.py": "379fc6b89c587df227fa23e4053c8d4927b5902cf4484c61c0080abf3fdd4fb9",
+    "scripts/m2c_common.py": "4d25dc1436c3465a55babdbe79ee7bce66f93d66049de21c7ba66fe483abea40",
+    "scripts/m2c_orchestrator.py": "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd",
+    "scripts/m2c_page_identity.py": "0f9e65b8a921803a4aba29f0ef9a20e73b87b3c33115b45743a870564bee7936",
+    "scripts/m2c_page_join.py": "a7744701a710df9575eea3861a61204ee63deb995f761cc715dcd150b6dee156",
+    "scripts/m2c_router.py": "8e778d70106be09859e91dc245a57dcad9444fe27b2dd2fae2274d3186d5e33b",
+    "scripts/owned_retrieval.py": "d5cd97616e10657a78e68cf0bf64684a11f50dc9affe5ccaf24c5e22eccd6826",
+    "scripts/page_chunker.py": "cf487b96d87fd06328be2987f1f5bf622a5365f97210426b2ef0c9e9d2701fd7",
+    "scripts/page_citations.py": "a08dad2bc46137862088d396561295b31adb7737314ee4bbfbca69fc367516b5",
+    "scripts/page_corpus.py": "718d8c001b27d46e27d79cd1d59fc92eafa7e5902fc5fb99a43e96351aadd405",
+    "scripts/page_corpus_integrity.py": "3e5b705a838fde7488f73f06521eef6f7039585e7142b5752209618faf221044",
+    "scripts/page_extract.py": "34a5a0b7d154e8c40fa7c847427fc9375648eab5be4cfc406abd142fedd481f9",
+    "scripts/page_fetch.py": "90b8bd22362d68cb4b0a1c586ec10ce6f74417047ca3f98876acd95e3152dbb6",
+    "scripts/page_retriever.py": "1e31e9bf12b655bf3b38636f78f3a9fbf4ff538d0a5789723d94f21a377052cf",
+    "scripts/phase10_lib.py": "583c5cbac55234eb0c804e7245f6d75b9c61f96fce9646e6fd1405096d601d17",
+    "scripts/phase10_select.py": "413cb49fa9de0358c1196bb3fdd8898fbdee26e05b0c46c6cc61dd52f810d96b",
+    "scripts/phase11_1_diagnose.py": "70a54de766e22042d62e6360d22f21c6ad5543825f761d8fccdcf5a593e20165",
+    "scripts/phase11_e2e.py": "a63f3197147e2bbb0cf29ed34ef2fed45c96a3596a37120c41352611151e967e",
+    "scripts/phase12_compare_results.py": "40bd71c483d2b435d735496d8ec7b366bf809791b4cf1a2a1c955889a975125d",
+    "scripts/phase12_corpus_status.py": "dc1ae15aad5fab81b0b9cd2a9f9c52f3b0af8e3d33a8048f94fe5fb89b515cb5",
+    "scripts/phase12_failure_audit.py": "1b2ff47b38a741ddc29aa388a7a31a64c5080ab5b87faed34cc1a6d8fb155cde",
+    "scripts/phase12_import_pages.py": "ce42cfbc6e3f5f73cf906e38f053a553ee949222999188da1204f435d92cd8e7",
+    "scripts/phase12_ollama_check.py": "d19eb1b8f182f8e94fa30bd6af0a8f0d303070e92d656b741c819d997f4e90bf",
+    "scripts/phase13_reranker.py": "d61e4e93cfdea1f57052fba9a861dbe4b5d140dc9042084328db7a23360226a2",
+    "scripts/phase5_retrievers.py": "0ec1e9e8d34a09425eecf1bf14cdafcfe4cd7781128bf7f83b395ad8c1d4f14a",
+    "scripts/phase7b_validate.py": "cbc0be098aa4d1e650f6079bec9753e8f91b9c125c73d71fc77870aafb454de8",
+    "scripts/phase9_corpus_audit.py": "b618bec729bc1149ae62815d811d5c36a0a5edd81750d4ca98b2718699f050fb",
+    "scripts/phase9_extras.py": "573d13740c0df305fa6c1fa6989ecf3da079c1e5c3ad546777c73918d07ac7f8",
+    "scripts/platform_metrics.py": "28ddba3f86b9107d5e528ee32e16b5891f9bc8ca1cdd38dec5e3533ca23b1790",
+    "scripts/preflight_verification.py": "714e7511ceaf979b714c25764eea394b7544ac54103d054461e3a36a3f858704",
+    "scripts/probe_q35_reproducibility.py": "e9706c35e1cde1cd74e23078ff4d037c7f11a5e5df86578ee83be87a2bb73a58",
+    "scripts/process_sap_pages.py": "a7a8d6fd5cc7b63ccdbbcd50c72ec238eac278fad0ab25fd56e73aa25c1fac66",
+    "scripts/rag_answer.py": "19ba454a15f689a56623fda4580179f87ce396fbc5e91a6d02453b9064bbf846",
+    "scripts/rag_api.py": "5ad90fe4f08b1e0d3253cb7e128f68c0f1855871c344f449157587f2bcd867fb",
+    "scripts/rag_chat.py": "e862ce38d06e2ef74f39e366a5a8b65948ba03f00dfab5baa0c61bc281673a15",
+    "scripts/rag_citation_repair.py": "ee77621c775216d62102e126e0efaa1d39b052ed37435eb8dde77d86c173e6b6",
+    "scripts/rag_completeness.py": "a3b6c458b226371be260161a617e7c762ff463ff065dbd21e0e203249b44801f",
+    "scripts/rag_context.py": "d4c8f215d4c0fbae8746c02ca18601dae39d2dba196794b66ddd79923c7f5474",
+    "scripts/rag_core.py": "881316e4f9f2c164b2109f416b2a309f8ab829f185d231b09990274f56567b2c",
+    "scripts/rag_elaborate.py": "ef51cef6102e9aa4650172484bda93582d2575b568074ba40153bd6a6b0cbf05",
+    "scripts/rag_evidence.py": "46d3c5cbd39ef98058f6bc879d9ea4fda9e8459826b45b5b5378e7243db30bfb",
+    "scripts/rag_followup.py": "c55db2d4feb9e33a73ca2aadb1673f890466f837597ac87a1c41b85a5e864ab9",
+    "scripts/rag_generate.py": "6d7900f02f9126a4fd3650aa07c343da1d8bf8cdcf43bf498c502038553ea691",
+    "scripts/rag_modes.py": "7c37be69008d4f9d8c88e653366085fa5d68b4af50e95aad6624457cb979e73d",
+    "scripts/rag_optimised.py": "0de04fa93c729d45b862cd5c8e8d016cc82e41cbbf20bd040575167e9ad838b7",
+    "scripts/rag_pipeline.py": "911731a93149b4fe3ce70c8b3a8412eb514c7e2f150446bf60311e07710c17a8",
+    "scripts/rag_response.py": "07aaeaefed59c14df0ea39cceab7b6cd8a6ddbad7cfaf04b1ff900e20e62fa11",
+    "scripts/rag_service.py": "9d00c41727eaec1dad3ceb6973d7c35b975d8d20981d990a55aecb33559a160e",
+    "scripts/rag_text.py": "31d7657e409453b583cc91860bc08af87b8b607b39fc28f5f92eb6d426f6652f",
+    "scripts/refresh_checkout_bytes.py": "8b0b1b296a4f03ee7b180dd9b428f0e279f2c9eee484209e20363fa457604d90",
+    "scripts/repair_captured_response.py": "fedc259b2a79d2f0f4cbd0384dcf0f2db2ed858063f0f9df8d53d29d7985c55b",
+    "scripts/repair_page_store.py": "4c983db38faf761ce591e445c7887c10ba2f5de33a9ab49d804c4873a6380bf4",
+    "scripts/resolve_topics.py": "0d26e9d488413ea5475ed6d77b060823ddd344c3c0b74986aec5025c093bdb51",
+    "scripts/retrieve.py": "a7c878955709e5b1a1630d70b7f48993b2ee97602bdfdb899f5f70c986cda260",
+    "scripts/run_phase3_experiment.py": "b23443226cc9d0b1f26ba545f241a8a90b183e6f83965fb7fd0525296faf4160",
+    "scripts/run_portable_evaluation.py": "6125c2e5926a7fb7c4fc9ec0d523951781e6245a95cb725a4ab06debe4530eb6",
+    "scripts/test_retrieval.py": "e8a67a748bb05fb9304bc7170435b9538de3912c4825904fc2c91812564f385c",
+    "scripts/test_search.py": "dfe916b60e9a5d82a3da43394e0434854b385e4141d082e2ddfef4955fa6f7e7",
+    "scripts/validate_token_lengths.py": "70943bc8ff0ddfdb54c7783518213298e811832605495e62888ee0709c80a29e",
+    "scripts/windows_diagnostic_policy.py": "00e54e157091d35299e53c06a340d48d0dc8c43fd2314f1e47634ccbaef8b48f"
+  },
+  "sdk_constructors": [
+    {
+      "path": "scripts/build_card_collection.py",
+      "line": 84,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(vector_dir), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/build_page_collection.py",
+      "line": 128,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(vector_dir), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/create_embeddings.py",
+      "line": 34,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(DB_DIR))"
+    },
+    {
+      "path": "scripts/diagnose_windows_verification.py",
+      "line": 133,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(store), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/evaluate_card_retrieval.py",
+      "line": 106,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(vector_dir), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/evaluate_phase5.py",
+      "line": 134,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(copy), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/evaluate_phase8.py",
+      "line": 145,
+      "name": "EphemeralClient",
+      "call": "chromadb.EphemeralClient(settings=Settings(anonymized_telemetry=False, allow_reset=True))"
+    },
+    {
+      "path": "scripts/evaluate_phase8.py",
+      "line": 368,
+      "name": "EphemeralClient",
+      "call": "chromadb.EphemeralClient(settings=Settings(anonymized_telemetry=False, allow_reset=True))"
+    },
+    {
+      "path": "scripts/evaluate_two_stage.py",
+      "line": 450,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(vector_dir), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/m2c_router.py",
+      "line": 235,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(self.vector_dir), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/owned_retrieval.py",
+      "line": 51,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(path), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/page_retriever.py",
+      "line": 158,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(vector_dir), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/phase7b_validate.py",
+      "line": 81,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(vector_dir), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/phase9_extras.py",
+      "line": 57,
+      "name": "EphemeralClient",
+      "call": "chromadb.EphemeralClient(settings=Settings(anonymized_telemetry=False, allow_reset=True))"
+    },
+    {
+      "path": "scripts/probe_q35_reproducibility.py",
+      "line": 52,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(store), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/rag_core.py",
+      "line": 89,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(DB_DIR))"
+    },
+    {
+      "path": "scripts/repair_page_store.py",
+      "line": 141,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=str(store), settings=Settings(anonymized_telemetry=False))"
+    },
+    {
+      "path": "scripts/test_retrieval.py",
+      "line": 15,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path=DB_DIR)"
+    },
+    {
+      "path": "scripts/test_search.py",
+      "line": 6,
+      "name": "PersistentClient",
+      "call": "chromadb.PersistentClient(path='chroma_db')"
+    }
+  ],
+  "configuration_property_accesses": [],
+  "api_routes": [
+    {
+      "line": 448,
+      "call": "app.get('/health')"
+    },
+    {
+      "line": 453,
+      "call": "app.get('/ready')"
+    },
+    {
+      "line": 501,
+      "call": "app.get('/api/health')"
+    },
+    {
+      "line": 513,
+      "call": "app.post('/api/chat', response_model=ChatResponse)"
+    },
+    {
+      "line": 643,
+      "call": "app.get('/{path:path}', include_in_schema=False)"
+    },
+    {
+      "line": 641,
+      "call": "app.mount('/assets', StaticFiles(directory=sdir / 'assets'), name='assets')"
+    }
+  ],
+  "application_source_commit": "29ca4ba2182b47f8452630ae5dd856ac946afe70"
+}

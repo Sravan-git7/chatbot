@@ -1,0 +1,87 @@
+{
+  "checked_at": "2026-10-15T15:00:37.157622+00:00",
+  "advisories": [
+    {
+      "ghsa_id": "GHSA-f4j7-r4q5-qw2c",
+      "cve_id": "CVE-2026-45829",
+      "severity": "critical",
+      "updated_at": "2026-10-05T21:32:32Z",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 1.0.0, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "sha256": "c1e80fadc24ce52e305ed2edb905ee1fb2e68afbf63b4a508f4d44e4e4d0cc75"
+    },
+    {
+      "ghsa_id": "GHSA-36p7-vc44-83pf",
+      "cve_id": "CVE-2026-45833",
+      "severity": "critical",
+      "updated_at": "2026-08-24T20:03:34Z",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.4.17, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "sha256": "4bc5d38d6a2067d5347be72bd81773ff1c90cfd0f33f1941031bfc8a02c7ee0e"
+    },
+    {
+      "ghsa_id": "GHSA-xph7-9rjv-w5fr",
+      "cve_id": "CVE-2026-45831",
+      "severity": "high",
+      "updated_at": "2026-08-24T20:00:43Z",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.5.0, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "sha256": "a805da77ae66e98e0f12beae7070881b914b589e716b3445c2d4f8330e0b2a24"
+    },
+    {
+      "ghsa_id": "GHSA-2wm9-hf6c-p5cr",
+      "cve_id": "CVE-2026-45830",
+      "severity": "high",
+      "updated_at": "2026-08-24T19:57:43Z",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.4.17, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "sha256": "0d4400ddac09c1ea10c60a0466ddec65152be8313419377997a122fac5300835"
+    }
+  ],
+  "installed": "1.5.9",
+  "dependency_changes": false,
+  "upstream_latest": "1.5.9",
+  "related_unreviewed_signal": {
+    "ghsa_id": "GHSA-x97m-f58v-9cwg",
+    "cve_id": "CVE-2026-45832",
+    "severity": "high",
+    "status": "OPEN; affected range/first patch unknown, installed Python v1 condition corroborated",
+    "vulnerabilities": []
+  }
+}

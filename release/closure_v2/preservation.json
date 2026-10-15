@@ -1,0 +1,59 @@
+{
+  "checked_at": "2026-10-15T15:19:10.222239+00:00",
+  "original_files_verified": 822,
+  "original_status_index_stashes_head_unchanged": true,
+  "candidate_baseline": "8c636d56676a190a80d2e14b045189685a71d2a8",
+  "baseline_files": 901,
+  "unchanged_existing_files": 896,
+  "only_existing_file_changes": {
+    "scripts/owned_retrieval.py": {
+      "before": "a8752d2ccb7b7fa5a9fcf7820d936487a965e2f0b1ea61966c8a2e87fdab6d14",
+      "after": "d5cd97616e10657a78e68cf0bf64684a11f50dc9affe5ccaf24c5e22eccd6826"
+    },
+    "scripts/page_retriever.py": {
+      "before": "9a09b32c2d2bce8158ffd4c483b054be088574a6a9eb6fd4c49ce49dfce94d1e",
+      "after": "1e31e9bf12b655bf3b38636f78f3a9fbf4ff538d0a5789723d94f21a377052cf"
+    },
+    "scripts/rag_evidence.py": {
+      "before": "58d37670447380f0a7f90b7afd1827e754110ab15601421d782af19477eb6f27",
+      "after": "46d3c5cbd39ef98058f6bc879d9ea4fda9e8459826b45b5b5378e7243db30bfb"
+    },
+    "scripts/rag_pipeline.py": {
+      "before": "98c6a7bac506ef4c5b396296a29ecacf24457105231cfa8420eb97d7a2277489",
+      "after": "911731a93149b4fe3ce70c8b3a8412eb514c7e2f150446bf60311e07710c17a8"
+    },
+    "scripts/rag_service.py": {
+      "before": "88117b835d227a7000e028ca1c222522df9db1258875a2596275327364a11fbf",
+      "after": "9d00c41727eaec1dad3ceb6973d7c35b975d8d20981d990a55aecb33559a160e"
+    }
+  },
+  "all_existing_tests_data_eval_caches_checkpoints_requirements_web_and_closure_v1_unchanged": true,
+  "source_commit": "29ca4ba2182b47f8452630ae5dd856ac946afe70",
+  "reviewed_commits": [
+    {
+      "sha": "8e7b0f013ee56e9d4551e13c761357edabaccdac",
+      "subject": "Reconcile 37 and 38 quality scopes without rewriting frozen history"
+    },
+    {
+      "sha": "ffa731d5d5dc5f7c78e4199c65efd85d42526a81",
+      "subject": "Keep explicitly requested sibling lists scoped and preserve attached members"
+    },
+    {
+      "sha": "cf5e042a2ca994036df8efbb0ca4f038a31ec5c0",
+      "subject": "Clarify unqualified payment requests instead of assuming a cash-desk process"
+    },
+    {
+      "sha": "5cff9621cbb4ef4f2b7a2718d0b455f72db0050f",
+      "subject": "Reject non-finite or zero sampled cosine vectors without repairing stores"
+    },
+    {
+      "sha": "a30de680ba9b8a88858e2839dd01793a2f22384c",
+      "subject": "Prevent legacy page reader from implicitly creating an empty database"
+    },
+    {
+      "sha": "29ca4ba2182b47f8452630ae5dd856ac946afe70",
+      "subject": "Add HTTP clarification regression and separately scoped cached replay tooling"
+    }
+  ],
+  "no_dependency_change_download_repair_activation_deployment": true
+}

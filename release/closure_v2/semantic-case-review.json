@@ -1,0 +1,1941 @@
+{
+  "scope": "cached generation, historical retrieval snapshots; no current routing/embedding/full-RAG inference or independent SAP correctness certification",
+  "before_source": "8e7b0f013ee56e9d4551e13c761357edabaccdac",
+  "after_source": "29ca4ba2182b47f8452630ae5dd856ac946afe70",
+  "input_sha256": {
+    "eval/phase3/dataset.json": "b376f90bcefa9d8fad4b5c3676d42eab2fa812c144761e066748865b15c12746",
+    "eval/phase3/evidence_cache.json": "619ec6a2a73b0b6b856330666ae8dea2fe3b96b597ab092beca80f7d297b580a",
+    "eval/phase3/runner.py": "e191b2a0e429ed7dd8237276302ee4f1b721f4e258e42c0960e1e6bae220c391",
+    "eval/phase3/adapters.py": "035d7be8a400e363f438d09f2f2b1e0123b596eeb4fdcd44a12bc9cc978a5619",
+    "eval/phase3/metrics.py": "b2ec0c2d37e6c6ad0cb8d9f74178cd3e1275206ecbed8d43da3140eb3c9feec1"
+  },
+  "modes": {
+    "a0": {
+      "before": {
+        "behavior_accuracy": 0.671,
+        "behavior_matches": 47,
+        "mean_key_fact_recall": 0.495,
+        "mean_citation_coverage": 1.0,
+        "mean_citation_precision": 1.0,
+        "total_hallucinated_tokens": 0,
+        "total_prohibited_claims_detected": 9
+      },
+      "after": {
+        "behavior_accuracy": 0.657,
+        "behavior_matches": 46,
+        "mean_key_fact_recall": 0.49,
+        "mean_citation_coverage": 1.0,
+        "mean_citation_precision": 1.0,
+        "total_hallucinated_tokens": 0,
+        "total_prohibited_claims_detected": 5
+      },
+      "cases": [
+        {
+          "id": "CASE-012",
+          "question": "What objects belong to business master data in SAP Utilities?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-01",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 92.02
+          },
+          "chunk_ids": [
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+          ],
+          "before_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+          "after_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Business master data includes:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Technical master data includes:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Business master data includes:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": {
+            "excluded_units": 10,
+            "excluded_list_leadins": [
+              "Technical master data includes:"
+            ]
+          },
+          "before_metrics": {
+            "case_id": "CASE-012",
+            "category": "enumeration",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 3,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "Premise",
+              "Grid"
+            ],
+            "prohibited_claims_count": 2,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": true,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-012",
+            "category": "enumeration",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 3,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [],
+            "prohibited_claims_count": 0,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": true,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": false,
+            "human_review_reasons": []
+          }
+        },
+        {
+          "id": "CASE-020",
+          "question": "How do I process meter reading data during move-in?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-10",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 86.58
+          },
+          "chunk_ids": [
+            "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+            "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/001"
+          ],
+          "before_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+          "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result.",
+              "coverage": 0.7,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If you change the meter reading result, a new result is created with the meter reading reason Move-in .",
+              "coverage": 0.7,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result.",
+              "coverage": 0.7,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If you change the meter reading result, a new result is created with the meter reading reason Move-in .",
+              "coverage": 0.7,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-020",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-020",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-023",
+          "question": "How do I process incoming payments from external cash desks?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-22",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 142.72
+          },
+          "chunk_ids": [
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/003",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/004"
+          ],
+          "before_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S1]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S1]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S2]",
+          "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S1]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S1]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S2]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "In the document display for a payment, the External Cash Desk tab page contains detailed information about the payment.",
+              "coverage": 0.833,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "For documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk .",
+              "coverage": 0.833,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+              "sentence": "Using the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA.",
+              "coverage": 0.667,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "In the document display for a payment, the External Cash Desk tab page contains detailed information about the payment.",
+              "coverage": 0.833,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "For documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk .",
+              "coverage": 0.833,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+              "sentence": "Using the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA.",
+              "coverage": 0.667,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-023",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-023",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-024",
+          "question": "How do I execute automatic billing in SAP Utilities?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-12",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 87.81
+          },
+          "chunk_ids": [
+            "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+            "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+            "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/002",
+            "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003"
+          ],
+          "before_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\n\nIn addition to general master data, the following billing master data are included in automatic billing: [S2]\n- Rate Type [S2]\n- Operand [S2]\n- Price [S2]\n- Price Adjustment Clause [S2]\n- Rate [S2]\n- Schema [S2]\n- Rate Category [S2]\n- Rate Determination [S2]\n- Variants [S2]\n- Discounts [S2]\n- Franchise Fees [S2]",
+          "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\n\nIn addition to general master data, the following billing master data are included in automatic billing: [S2]\n- Rate Type [S2]\n- Operand [S2]\n- Price [S2]\n- Price Adjustment Clause [S2]\n- Rate [S2]\n- Schema [S2]\n- Rate Category [S2]\n- Rate Determination [S2]\n- Variants [S2]\n- Discounts [S2]\n- Franchise Fees [S2]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+              "sentence": "Billing is executed based on intervals defined in scheduling.",
+              "coverage": 0.625,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+              "sentence": "Automatic billing provides a link between general master data and invoicing.",
+              "coverage": 0.5,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+              "sentence": "In addition to general master data, the following billing master data are included in automatic billing:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+              "sentence": "Billing is executed based on intervals defined in scheduling.",
+              "coverage": 0.625,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+              "sentence": "Automatic billing provides a link between general master data and invoicing.",
+              "coverage": 0.5,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+              "sentence": "In addition to general master data, the following billing master data are included in automatic billing:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-024",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-024",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-037",
+          "question": "How do incoming payments interact with installment plans?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-23",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 123.79
+          },
+          "chunk_ids": [
+            "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/000",
+            "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/001",
+            "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/002"
+          ],
+          "before_answer": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. [S2]\nThe individual installment receivable is cleared upon payment. [S3]",
+          "after_answer": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. [S2]\nThe individual installment receivable is cleared upon payment. [S3]",
+          "before_selected": [
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/001",
+              "sentence": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/002",
+              "sentence": "The individual installment receivable is cleared upon payment.",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/001",
+              "sentence": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/002",
+              "sentence": "The individual installment receivable is cleared upon payment.",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-037",
+            "category": "multi_step_or_multi_doc",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 2,
+            "key_facts_recalled": 0,
+            "key_fact_recall": 0.0,
+            "missing_facts": [
+              "clearing",
+              "incoming payments"
+            ],
+            "prohibited_claims_detected": [
+              "payments cannot be applied to installment plans"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-037",
+            "category": "multi_step_or_multi_doc",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 2,
+            "key_facts_recalled": 0,
+            "key_fact_recall": 0.0,
+            "missing_facts": [
+              "clearing",
+              "incoming payments"
+            ],
+            "prohibited_claims_detected": [
+              "payments cannot be applied to installment plans"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-039",
+          "question": "Can multiple contracts belong to one contract account?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-17",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 71.41
+          },
+          "chunk_ids": [
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+          ],
+          "before_answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nIn Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]",
+          "after_answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nIn Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+              "sentence": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+              "sentence": "You can assign more than one contract account to a given business partner.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+              "sentence": "In Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply.",
+              "coverage": 0.8,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+              "sentence": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+              "sentence": "You can assign more than one contract account to a given business partner.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+              "sentence": "In Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply.",
+              "coverage": 0.8,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-039",
+            "category": "followup_and_transition",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 2,
+            "key_facts_recalled": 1,
+            "key_fact_recall": 0.5,
+            "missing_facts": [
+              "single contract account"
+            ],
+            "prohibited_claims_detected": [
+              "only one contract per account is permitted"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": false,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-039",
+            "category": "followup_and_transition",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 2,
+            "key_facts_recalled": 1,
+            "key_fact_recall": 0.5,
+            "missing_facts": [
+              "single contract account"
+            ],
+            "prohibited_claims_detected": [
+              "only one contract per account is permitted"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": false,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-040",
+          "question": "Can you explain the business master data objects in more detail?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-01",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 54.49
+          },
+          "chunk_ids": [
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+          ],
+          "before_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+          "after_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Business master data includes:",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Technical master data includes:",
+              "coverage": 0.6,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Business master data includes:",
+              "coverage": 0.6,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": {
+            "excluded_units": 10,
+            "excluded_list_leadins": [
+              "Technical master data includes:"
+            ]
+          },
+          "before_metrics": {
+            "case_id": "CASE-040",
+            "category": "followup_and_transition",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 3,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "Device location is a business object"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": false,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-040",
+            "category": "followup_and_transition",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 3,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [],
+            "prohibited_claims_count": 0,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": false,
+            "fail_closed_correct": null,
+            "requires_human_review": false,
+            "human_review_reasons": []
+          }
+        },
+        {
+          "id": "CASE-052",
+          "question": "How do I process payments?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-22",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 101.71
+          },
+          "chunk_ids": [
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/000",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/003"
+          ],
+          "before_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S2]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S2]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S3]",
+          "after_answer": "I couldn't find this information in the provided SAP documentation.",
+          "before_selected": [
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "In the document display for a payment, the External Cash Desk tab page contains detailed information about the payment.",
+              "coverage": 0.75,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "For documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk .",
+              "coverage": 0.75,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+              "sentence": "Using the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA.",
+              "coverage": 0.75,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [],
+          "after_reason": "AMBIGUOUS_PAYMENT_PROCESS",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-052",
+            "category": "ambiguous",
+            "adapter_id": "A0",
+            "expected_behavior": "clarify",
+            "actual_behavior": "partial_answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 1,
+            "key_fact_recall": 0.333,
+            "missing_facts": [
+              "incoming payments",
+              "clearing"
+            ],
+            "prohibited_claims_detected": [
+              "assuming external cash desk without clarification"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Nuanced reasoning in ambiguous category benefits from qualitative inspection",
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-052",
+            "category": "ambiguous",
+            "adapter_id": "A0",
+            "expected_behavior": "clarify",
+            "actual_behavior": "abstain",
+            "behavior_match": false,
+            "key_facts_total": 3,
+            "key_facts_recalled": 0,
+            "key_fact_recall": 0.0,
+            "missing_facts": [
+              "incoming payments",
+              "external cash desk",
+              "clearing"
+            ],
+            "prohibited_claims_detected": [],
+            "prohibited_claims_count": 0,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 0.0,
+            "unsupported_spans": [
+              "I couldn't find this information in the provided SAP documentation."
+            ],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Nuanced reasoning in ambiguous category benefits from qualitative inspection"
+            ]
+          }
+        }
+      ]
+    },
+    "oracle": {
+      "before": {
+        "behavior_accuracy": 0.657,
+        "behavior_matches": 46,
+        "mean_key_fact_recall": 0.481,
+        "mean_citation_coverage": 1.0,
+        "mean_citation_precision": 1.0,
+        "total_hallucinated_tokens": 0,
+        "total_prohibited_claims_detected": 9
+      },
+      "after": {
+        "behavior_accuracy": 0.643,
+        "behavior_matches": 45,
+        "mean_key_fact_recall": 0.476,
+        "mean_citation_coverage": 1.0,
+        "mean_citation_precision": 1.0,
+        "total_hallucinated_tokens": 0,
+        "total_prohibited_claims_detected": 5
+      },
+      "cases": [
+        {
+          "id": "CASE-012",
+          "question": "What objects belong to business master data in SAP Utilities?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-01",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 92.02
+          },
+          "chunk_ids": [
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+          ],
+          "before_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+          "after_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Business master data includes:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Technical master data includes:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Business master data includes:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": {
+            "excluded_units": 10,
+            "excluded_list_leadins": [
+              "Technical master data includes:"
+            ]
+          },
+          "before_metrics": {
+            "case_id": "CASE-012",
+            "category": "enumeration",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 3,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "Premise",
+              "Grid"
+            ],
+            "prohibited_claims_count": 2,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": true,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-012",
+            "category": "enumeration",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 3,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [],
+            "prohibited_claims_count": 0,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": true,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": false,
+            "human_review_reasons": []
+          }
+        },
+        {
+          "id": "CASE-020",
+          "question": "How do I process meter reading data during move-in?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-10",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 86.58
+          },
+          "chunk_ids": [
+            "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+            "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/001"
+          ],
+          "before_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+          "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result.",
+              "coverage": 0.7,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If you change the meter reading result, a new result is created with the meter reading reason Move-in .",
+              "coverage": 0.7,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result.",
+              "coverage": 0.7,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If you change the meter reading result, a new result is created with the meter reading reason Move-in .",
+              "coverage": 0.7,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "f4a255a5de524e3992155767996fb1fd/b781ce53118d4308e10000000a174cb4/000",
+              "sentence": "- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-020",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-020",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-023",
+          "question": "How do I process incoming payments from external cash desks?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-22",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 142.72
+          },
+          "chunk_ids": [
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/003",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/004"
+          ],
+          "before_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S1]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S1]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S2]",
+          "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S1]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S1]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S2]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "In the document display for a payment, the External Cash Desk tab page contains detailed information about the payment.",
+              "coverage": 0.833,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "For documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk .",
+              "coverage": 0.833,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+              "sentence": "Using the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA.",
+              "coverage": 0.667,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "In the document display for a payment, the External Cash Desk tab page contains detailed information about the payment.",
+              "coverage": 0.833,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "For documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk .",
+              "coverage": 0.833,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+              "sentence": "Using the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA.",
+              "coverage": 0.667,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-023",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-023",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-024",
+          "question": "How do I execute automatic billing in SAP Utilities?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-12",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 87.81
+          },
+          "chunk_ids": [
+            "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+            "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+            "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/003"
+          ],
+          "before_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\n\nIn addition to general master data, the following billing master data are included in automatic billing: [S2]\n- Rate Type [S2]\n- Operand [S2]\n- Price [S2]\n- Price Adjustment Clause [S2]\n- Rate [S2]\n- Schema [S2]\n- Rate Category [S2]\n- Rate Determination [S2]\n- Variants [S2]\n- Discounts [S2]\n- Franchise Fees [S2]",
+          "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\n\nIn addition to general master data, the following billing master data are included in automatic billing: [S2]\n- Rate Type [S2]\n- Operand [S2]\n- Price [S2]\n- Price Adjustment Clause [S2]\n- Rate [S2]\n- Schema [S2]\n- Rate Category [S2]\n- Rate Determination [S2]\n- Variants [S2]\n- Discounts [S2]\n- Franchise Fees [S2]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+              "sentence": "Billing is executed based on intervals defined in scheduling.",
+              "coverage": 0.625,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+              "sentence": "Automatic billing provides a link between general master data and invoicing.",
+              "coverage": 0.5,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+              "sentence": "In addition to general master data, the following billing master data are included in automatic billing:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/000",
+              "sentence": "Billing is executed based on intervals defined in scheduling.",
+              "coverage": 0.625,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+              "sentence": "Automatic billing provides a link between general master data and invoicing.",
+              "coverage": 0.5,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "ed84b70c199d4470ae2e5ccb93b2e45b/297bce53118d4308e10000000a174cb4/001",
+              "sentence": "In addition to general master data, the following billing master data are included in automatic billing:",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-024",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-024",
+            "category": "procedural_documented",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "partial_answer",
+            "behavior_match": false,
+            "key_facts_total": 2,
+            "key_facts_recalled": 2,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "does not document the steps to complete this procedure"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": false,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-037",
+          "question": "How do incoming payments interact with installment plans?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-23",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 123.79
+          },
+          "chunk_ids": [
+            "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/000",
+            "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/001",
+            "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/002"
+          ],
+          "before_answer": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. [S2]\nThe individual installment receivable is cleared upon payment. [S3]",
+          "after_answer": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. [S2]\nThe individual installment receivable is cleared upon payment. [S3]",
+          "before_selected": [
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/001",
+              "sentence": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/002",
+              "sentence": "The individual installment receivable is cleared upon payment.",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/001",
+              "sentence": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/730dc5536a51204be10000000a174cb4/002",
+              "sentence": "The individual installment receivable is cleared upon payment.",
+              "coverage": 0.5,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-037",
+            "category": "multi_step_or_multi_doc",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 2,
+            "key_facts_recalled": 0,
+            "key_fact_recall": 0.0,
+            "missing_facts": [
+              "clearing",
+              "incoming payments"
+            ],
+            "prohibited_claims_detected": [
+              "payments cannot be applied to installment plans"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-037",
+            "category": "multi_step_or_multi_doc",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 2,
+            "key_facts_recalled": 0,
+            "key_fact_recall": 0.0,
+            "missing_facts": [
+              "clearing",
+              "incoming payments"
+            ],
+            "prohibited_claims_detected": [
+              "payments cannot be applied to installment plans"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-039",
+          "question": "Can multiple contracts belong to one contract account?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-17",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 71.41
+          },
+          "chunk_ids": [
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/004"
+          ],
+          "before_answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nIn Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]",
+          "after_answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nIn Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+              "sentence": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+              "sentence": "You can assign more than one contract account to a given business partner.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+              "sentence": "In Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply.",
+              "coverage": 0.8,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/000",
+              "sentence": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/002",
+              "sentence": "You can assign more than one contract account to a given business partner.",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/0bfcc5536a51204be10000000a174cb4/003",
+              "sentence": "In Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply.",
+              "coverage": 0.8,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-039",
+            "category": "followup_and_transition",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 2,
+            "key_facts_recalled": 1,
+            "key_fact_recall": 0.5,
+            "missing_facts": [
+              "single contract account"
+            ],
+            "prohibited_claims_detected": [
+              "only one contract per account is permitted"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": false,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-039",
+            "category": "followup_and_transition",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 2,
+            "key_facts_recalled": 1,
+            "key_fact_recall": 0.5,
+            "missing_facts": [
+              "single contract account"
+            ],
+            "prohibited_claims_detected": [
+              "only one contract per account is permitted"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": false,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          }
+        },
+        {
+          "id": "CASE-040",
+          "question": "Can you explain the business master data objects in more detail?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-01",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 54.49
+          },
+          "chunk_ids": [
+            "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000"
+          ],
+          "before_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+          "after_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]",
+          "before_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Business master data includes:",
+              "coverage": 0.6,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Technical master data includes:",
+              "coverage": 0.6,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [
+            {
+              "marker": "S1",
+              "chunk_id": "e52c8ee6197147ec97dfc2eb8c46a3ad/e369ce53118d4308e10000000a174cb4/000",
+              "sentence": "Business master data includes:",
+              "coverage": 0.6,
+              "kinds_ok": true
+            }
+          ],
+          "after_reason": "SUPPORTED",
+          "after_scope_filter": {
+            "excluded_units": 10,
+            "excluded_list_leadins": [
+              "Technical master data includes:"
+            ]
+          },
+          "before_metrics": {
+            "case_id": "CASE-040",
+            "category": "followup_and_transition",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 3,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [
+              "Device location is a business object"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": false,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-040",
+            "category": "followup_and_transition",
+            "adapter_id": "A0",
+            "expected_behavior": "answer",
+            "actual_behavior": "answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 3,
+            "key_fact_recall": 1.0,
+            "missing_facts": [],
+            "prohibited_claims_detected": [],
+            "prohibited_claims_count": 0,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": false,
+            "fail_closed_correct": null,
+            "requires_human_review": false,
+            "human_review_reasons": []
+          }
+        },
+        {
+          "id": "CASE-052",
+          "question": "How do I process payments?",
+          "historical_retrieval": {
+            "routed_source_id": "M2C-22",
+            "pipeline_status": "answered",
+            "reason_code": null,
+            "retrieval_ms": 101.71
+          },
+          "chunk_ids": [
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/000",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+            "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/003"
+          ],
+          "before_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S2]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S2]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S3]",
+          "after_answer": "I couldn't find this information in the provided SAP documentation.",
+          "before_selected": [
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "In the document display for a payment, the External Cash Desk tab page contains detailed information about the payment.",
+              "coverage": 0.75,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S2",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/001",
+              "sentence": "For documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk .",
+              "coverage": 0.75,
+              "kinds_ok": true
+            },
+            {
+              "marker": "S3",
+              "chunk_id": "9442486404b54071b4ebeab6a16628e7/3d0ac5536a51204be10000000a174cb4/002",
+              "sentence": "Using the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA.",
+              "coverage": 0.75,
+              "kinds_ok": true
+            }
+          ],
+          "after_selected": [],
+          "after_reason": "AMBIGUOUS_PAYMENT_PROCESS",
+          "after_scope_filter": null,
+          "before_metrics": {
+            "case_id": "CASE-052",
+            "category": "ambiguous",
+            "adapter_id": "A0",
+            "expected_behavior": "clarify",
+            "actual_behavior": "partial_answer",
+            "behavior_match": true,
+            "key_facts_total": 3,
+            "key_facts_recalled": 1,
+            "key_fact_recall": 0.333,
+            "missing_facts": [
+              "incoming payments",
+              "clearing"
+            ],
+            "prohibited_claims_detected": [
+              "assuming external cash desk without clarification"
+            ],
+            "prohibited_claims_count": 1,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 1.0,
+            "unsupported_spans": [],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Nuanced reasoning in ambiguous category benefits from qualitative inspection",
+              "Prohibited claim heuristic triggered: verify semantic intent"
+            ]
+          },
+          "after_metrics": {
+            "case_id": "CASE-052",
+            "category": "ambiguous",
+            "adapter_id": "A0",
+            "expected_behavior": "clarify",
+            "actual_behavior": "abstain",
+            "behavior_match": false,
+            "key_facts_total": 3,
+            "key_facts_recalled": 0,
+            "key_fact_recall": 0.0,
+            "missing_facts": [
+              "incoming payments",
+              "external cash desk",
+              "clearing"
+            ],
+            "prohibited_claims_detected": [],
+            "prohibited_claims_count": 0,
+            "citation_coverage": 1.0,
+            "citation_precision": 1.0,
+            "invalid_markers": [],
+            "hallucinated_tokens": [],
+            "substring_grounding_ratio": 0.0,
+            "unsupported_spans": [
+              "I couldn't find this information in the provided SAP documentation."
+            ],
+            "procedural_limitation_correct": null,
+            "enumeration_complete": null,
+            "topic_consistent": null,
+            "fail_closed_correct": null,
+            "requires_human_review": true,
+            "human_review_reasons": [
+              "Nuanced reasoning in ambiguous category benefits from qualitative inspection"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

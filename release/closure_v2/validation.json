@@ -1,0 +1,119 @@
+{
+  "source_commit": "29ca4ba2182b47f8452630ae5dd856ac946afe70",
+  "backend": {
+    "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 ../.venv/bin/python -m pytest tests -q -ra --tb=long --junitxml=../closure-v2/delivery-backend.xml",
+    "exit_code": 1,
+    "counts": {
+      "failed": 7,
+      "passed": 1365,
+      "skipped": 137,
+      "errors": 49,
+      "subtests_passed": 204,
+      "seconds": 64.91
+    },
+    "fail_error_set_identical_to_8c636d5_baseline": true,
+    "skip_test_reason_set_identical_to_baseline": true,
+    "observed_cause_counts": {
+      "sentence_transformers_missing": 36,
+      "exact_local_model_tokenizer_missing": 19,
+      "child_model_failure_requires_existing_child_traceback": 1
+    }
+  },
+  "new_regressions": {
+    "command": "../.venv/bin/python -m pytest tests/test_quality_provenance.py tests/test_list_subject_scope.py tests/test_payment_scope_clarification.py tests/test_stored_vector_safety.py tests/test_page_reader_no_implicit_create.py -q -ra --junitxml=../closure-v2/delivery-new-regressions.xml",
+    "exit_code": 0,
+    "passed": 35,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 1.5
+  },
+  "frontend": {
+    "cwd": "web",
+    "commands": [
+      "npm test",
+      "npm run typecheck",
+      "npm run build"
+    ],
+    "exit_codes": {
+      "tests": 0,
+      "typecheck": 0,
+      "build": 0
+    },
+    "passed": 119,
+    "skipped": 1,
+    "failed": 0,
+    "scope": "jsdom; skipped explicit LIVE_BACKEND test; no authenticated real browser"
+  },
+  "fatal_lint": {
+    "command": "../.venv/bin/python -m ruff check --isolated --select E9,F63,F7,F82 scripts tests release/closure_v2",
+    "exit_code": 0
+  },
+  "new_code_lint": {
+    "selection": "--isolated --select E,F,I --ignore E402,E501 on the five added tests and two added report/replay tools",
+    "exit_code": 0,
+    "command": "../.venv/bin/python -m ruff check --isolated --select E,F,I --ignore E402,E501 release/closure_v2/*.py tests/test_quality_provenance.py tests/test_list_subject_scope.py tests/test_payment_scope_clarification.py tests/test_stored_vector_safety.py tests/test_page_reader_no_implicit_create.py"
+  },
+  "format": {
+    "scope": "scripts/owned_retrieval.py + five added tests + two report tools",
+    "command": "../.venv/bin/python -m ruff format --check scripts/owned_retrieval.py release/closure_v2/*.py tests/test_quality_provenance.py tests/test_list_subject_scope.py tests/test_payment_scope_clarification.py tests/test_stored_vector_safety.py tests/test_page_reader_no_implicit_create.py",
+    "exit_code": 0,
+    "files_already_formatted": 8
+  },
+  "compile": {
+    "command": "../.venv/bin/python -m compileall -q scripts tests release/closure_v2",
+    "exit_code": 0
+  },
+  "pip_check": {
+    "command": "python -m pip --python ../.venv/bin/python check",
+    "exit_code": 0,
+    "stdout": "No broken requirements found.",
+    "limit": "Installed graph coherence only; does not prove all project runtime requirements/resources exist"
+  },
+  "preflight": {
+    "command": "../.venv/bin/python scripts/preflight_verification.py",
+    "exit_code": 2,
+    "status": "BLOCKED",
+    "evidence": "runtime-capabilities.json and candidate-delivery-full-phase12-attempt.json"
+  },
+  "provenance_reproduction": {
+    "command": "../.venv/bin/python release/closure_v2/reconcile_provenance.py --out ../closure-v2/provenance-reproduced.json",
+    "exit_code": 0,
+    "byte_identical_to": "historical-provenance.json"
+  },
+  "cached_replay": {
+    "command": "../.venv/bin/python release/closure_v2/replay_quality.py --out ../closure-v2/candidate-final-cached.json",
+    "exit_code": 0,
+    "scope": "cached generation only; no quality PASS"
+  },
+  "full_strict_candidate": {
+    "status": "BLOCKED",
+    "exit_code": 1,
+    "evidence": "candidate-delivery-full-phase12-attempt.json",
+    "score": null
+  },
+  "warning_skip_review": {
+    "pytest_emitted_warning_summary": false,
+    "frontend_build_warning_observed": false,
+    "backend_skip_inventory": "backend-review.json",
+    "default_ruff_style_audit": "lint-scope-review.json; 139 legacy + 1 new test-only suggestion, NOT CLEAN",
+    "all_failures_errors_preserved": true
+  },
+  "not_run": [
+    "native Windows/Q35 historical raw provenance",
+    "real embedding model/ST/stores/full RAG",
+    "real Ollama generation/cancel/drain",
+    "authenticated real browser/IAM/accessibility",
+    "independent authoritative SAP adjudication",
+    "actual private target mitigation/isolation/load/restore/rollback rehearsal",
+    "production activation/exposure/store repair/migration"
+  ],
+  "readiness": "NOT READY",
+  "npm_audit": {
+    "cwd": "web",
+    "command": "npm audit --json --registry=https://registry.npmjs.org",
+    "exit_code": 0,
+    "vulnerabilities_total": 0,
+    "evidence": "npm-audit.json",
+    "limits": "Dependency audit only, not browser/IAM/production certification"
+  }
+}

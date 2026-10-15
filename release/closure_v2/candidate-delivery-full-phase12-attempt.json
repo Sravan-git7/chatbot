@@ -1,0 +1,27 @@
+{
+  "name": "candidate-delivery-full-phase12-strict-production",
+  "candidate_runtime_git_head": "29ca4ba2182b47f8452630ae5dd856ac946afe70",
+  "command": [
+    "../.venv/bin/python",
+    "benchmarks/run_quality.py",
+    "--source-commit",
+    "29ca4ba2182b47f8452630ae5dd856ac946afe70",
+    "--out",
+    "../closure-v2/candidate-delivery-full-phase12.json"
+  ],
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "exit_code": 1,
+  "status": "BLOCKED",
+  "result_written": false,
+  "traceback": "Traceback (most recent call last):\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/benchmarks/run_quality.py\", line 143, in <module>\n    main()\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/benchmarks/run_quality.py\", line 59, in main\n    svc = S.build_service(\"extractive\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/rag_service.py\", line 888, in build_service\n    pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/rag_pipeline.py\", line 813, in build_pipeline\n    embed, minfo = BP.load_embedder()\n                   ^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/build_page_collection.py\", line 56, in load_embedder\n    from sentence_transformers import SentenceTransformer\nModuleNotFoundError: No module named 'sentence_transformers'\n",
+  "runtime_sha256": {
+    "scripts/rag_evidence.py": "46d3c5cbd39ef98058f6bc879d9ea4fda9e8459826b45b5b5378e7243db30bfb",
+    "scripts/rag_pipeline.py": "911731a93149b4fe3ce70c8b3a8412eb514c7e2f150446bf60311e07710c17a8",
+    "scripts/rag_service.py": "9d00c41727eaec1dad3ceb6973d7c35b975d8d20981d990a55aecb33559a160e",
+    "scripts/owned_retrieval.py": "d5cd97616e10657a78e68cf0bf64684a11f50dc9affe5ccaf24c5e22eccd6826",
+    "scripts/page_retriever.py": "1e31e9bf12b655bf3b38636f78f3a9fbf4ff538d0a5789723d94f21a377052cf"
+  }
+}

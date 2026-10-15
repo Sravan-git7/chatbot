@@ -1,0 +1,31 @@
+{
+  "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+  "python": "3.11.2",
+  "native_windows": false,
+  "exact_tokenizer": {
+    "tokenizer": "regex fallback (words+punctuation+2)",
+    "exact": false,
+    "reason": "FileNotFoundError: all-MiniLM-L6-v2 model files not found locally. Install `gt-all-minilm-l6-v2` or pass --model-path / set $M2C_MODEL_DIR. No download is attempted."
+  },
+  "packages": {
+    "chromadb": "1.5.9",
+    "sentence-transformers": null,
+    "torch": null,
+    "transformers": null,
+    "tokenizers": "0.23.3",
+    "numpy": "2.4.6",
+    "fastapi": "0.142.2",
+    "pydantic": "2.13.5",
+    "httpx": "0.28.1",
+    "ollama": "0.6.3",
+    "pytest": "9.1.1"
+  },
+  "local_model_error": {
+    "type": "FileNotFoundError",
+    "message": "all-MiniLM-L6-v2 model files not found locally. Install `gt-all-minilm-l6-v2` or pass --model-path / set $M2C_MODEL_DIR. No download is attempted."
+  },
+  "required_stores": {
+    "data/vector_store/chroma.sqlite3": false,
+    "data/vector_store/page_collection/chroma.sqlite3": false
+  }
+}

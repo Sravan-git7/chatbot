@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-10-15T15:08:07.295986+00:00",
+  "runs": [
+    {
+      "command": [
+        "../.venv/bin/python",
+        "scripts/frontend_live_verification.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout_stderr": "usage: frontend_live_verification.py [-h]\n\nRun the entire component suite including its real-HTTP UI workflow (jsdom, NOT\na browser). Starts a private local backend at port 8000 and stops it after the\ntests. Never overwrites historical reports. Use the current Python venv and\nthe installed web/node_modules.\n\noptions:\n  -h, --help  show this help message and exit\n",
+      "listening_ports_before": [
+        22,
+        111,
+        49983
+      ],
+      "listening_ports_after": [
+        22,
+        111,
+        49983
+      ]
+    },
+    {
+      "command": [
+        "../.venv/bin/python",
+        "scripts/frontend_live_verification.py",
+        "--unknown"
+      ],
+      "exit_code": 2,
+      "stdout_stderr": "usage: frontend_live_verification.py [-h]\nfrontend_live_verification.py: error: unrecognized arguments: --unknown\n",
+      "listening_ports_before": [
+        22,
+        111,
+        49983
+      ],
+      "listening_ports_after": [
+        22,
+        111,
+        49983
+      ]
+    }
+  ],
+  "scope": "CLI executions plus unchanged tests/test_release_closure.py mocks assert Popen is never called"
+}
