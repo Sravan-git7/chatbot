@@ -22,7 +22,7 @@
 | `3b95c7df081ff98d1dc9103fe3a92c22d85333cb` | Verify physical stored vector dimension and model identity against the loaded production embedding contract before readiness; actual SDK failure/recovery regressions |
 | `c324ffb366511b15385524aa8ed24e956f662780` | Refuse implicit page-database creation before SDK initialization; no-store-mutation regressions |
 
-Final functional source and source/test verification commit: `c324ffb366511b15385524aa8ed24e956f662780`. All are descendants of the audited repository rollback point `20cb6daa...`. Normal publication is performed after final packaging/preservation checks; the completed remote receipt will be recorded separately. No force push, history rewrite, branch switch or production deployment is part of publication.
+Final functional source and source/test verification commit: `c324ffb366511b15385524aa8ed24e956f662780`. All are descendants of the audited repository rollback point `20cb6daa...`. Source and reports were published normally at `d4f613b85ba189fe8e716d8a0c833c4c9102348f`; remote Git and GitHub API agreed, the candidate was clean, and rollback ancestry was verified. `release/evidence/publication-receipt.json` records that completed operation. This receipt-only descendant changes no runtime; its final delivery SHA is checked after publication and provided in the completion message. No force push, history rewrite, branch switch or production deployment is part of publication.
 
 ## Root-cause fixes and proof
 

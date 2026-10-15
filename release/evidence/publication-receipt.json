@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-10-15T14:13:45.817680+00:00",
+  "status": "PASS_REPOSITORY_PUBLICATION_ONLY",
+  "branch": "arena/b450cda2-chatbot",
+  "published_source_and_reports_commit": "d4f613b85ba189fe8e716d8a0c833c4c9102348f",
+  "runtime_verification_commit": "c324ffb366511b15385524aa8ed24e956f662780",
+  "repository_rollback_commit": "20cb6daa4c6cd4efd2c1d0ee117380101d843a5d",
+  "normal_push_exit": 0,
+  "remote_git_and_github_api_agree": true,
+  "rollback_is_ancestor": true,
+  "candidate_worktree_clean_at_verification": true,
+  "receipt_scope": "This receipt records the already-published source/report commit; the subsequent receipt-only commit is a descendant. Final delivery SHA is verified separately after that normal push. No runtime changes in report/receipt commits.",
+  "deployment": "NOT_PERFORMED",
+  "production_rollback": "BLOCKED; repository ancestry is not production rollback",
+  "release_verdict": "NOT READY"
+}

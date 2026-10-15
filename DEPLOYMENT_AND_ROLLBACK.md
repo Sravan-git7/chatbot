@@ -70,3 +70,7 @@ Before activation, identify the actual deployed known-good code, compatible stor
 If approved rollout fails: stop new ingress/admission, retain logs/artifacts and both store trees, stop affected processes safely, point the service to the **verified** previous immutable code+compatible restored store under approval, re-run readiness/authentication/quality smoke, and verify no acknowledged data/work is lost. An incompatible backup or unknown rollback point is a stop condition, not a rebuild invitation.
 
 Monitor readiness transitions, all HTTP status classes/429s, queue/admitted/generation utilization, p50/p95/p99/cold latency, timeouts/cancel/drain, process memory/CPU/disk, privacy-safe log health, claim/citation failures, quality drift and dependency advisories. Define owners/alerts on the actual platform; none deployed here.
+
+## Completed repository publication (not deployment)
+
+Source and reports were normally pushed on the same branch at `d4f613b85ba189fe8e716d8a0c833c4c9102348f`. Remote Git/GitHub API identity and rollback ancestry agree; see `release/evidence/publication-receipt.json`. A receipt-only descendant does not change runtime. The final delivery SHA is independently checked after pushing that receipt. Repository publication is PASS; actual production activation and rollback remain BLOCKED and were not attempted.
