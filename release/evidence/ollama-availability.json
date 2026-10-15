@@ -1,0 +1,6 @@
+{
+  "status": "BLOCKED",
+  "reason": "No local Ollama daemon reachable",
+  "error_type": "ConnectError",
+  "real_inference_executed": false
+}

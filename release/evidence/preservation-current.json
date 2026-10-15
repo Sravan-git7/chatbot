@@ -1,0 +1,20 @@
+{
+  "original_files_checked": 822,
+  "original_mismatches": [],
+  "original_head": "c7527edeb5d4a2963d8bac0072a8e7e5d0ba091f",
+  "original_branch": "arena/b450cda2-chatbot",
+  "original_index_diff": "",
+  "original_stashes": "",
+  "checkpoint_pins_checked": 222,
+  "checkpoint_mismatches": [],
+  "windows_original_prefix_sha256": "fdf52dbbaa0f18ec65db58befe65fe18d202088d5784a308eb3c81b45b017d7b",
+  "other_baseline_files_checked": 812,
+  "unexpected_candidate_baseline_changes": [],
+  "original_baseline_manifest_sha256": "a831a4fddf50766772beac663bba6ca54e3ef137782f5d8a75a7c272952b1ca5",
+  "runtime_commit": "c324ffb366511b15385524aa8ed24e956f662780",
+  "original_status_exact_match": true,
+  "original_index_exact_match": true,
+  "original_stashes_exact_match": true,
+  "additional_literal_pin_pairs_checked": 86,
+  "checkpoint_revalidation": "Prior 222-pin verification retained; protected candidate baseline files byte-identical; final full backend includes checkpoint tests; 86 literal path/digest pairs directly rechecked."
+}

@@ -1,0 +1,37 @@
+# SURA release gates — mission v3
+
+**Verdict: NOT READY.** Baseline: `20cb6daa4c6cd4efd2c1d0ee117380101d843a5d`, branch `arena/b450cda2-chatbot`. Historical reports are not current certification. This matrix is declared before final-candidate evaluation. No public deployment or data activation is authorized.
+
+## Acceptance policy
+
+- Backend: all applicable tests pass; every skip/resource error has a disposition. No native/store/model gate is satisfied by a mock or unavailable resource.
+- SAP quality: >=95% strict substantive evidence correctness on answerable frozen cases; 100% claim/citation identity validity; zero wrong-guide/version/unsupported factual answers; 100% safe responses on prohibited/navigation-only/insufficient-evidence cases. Abstention is reported separately, not counted as a substantive correct answer. Independent authoritative adjudication remains mandatory, not lexical overlap alone.
+- Frozen comparisons: exact existing labels, scores, equality, tolerances, corpus/model hashes and checkpoint pins remain unchanged.
+- Security: no unresolved reachable critical/high advisory; authenticated shared exposure; no disclosure of credentials, raw exception payloads or cross-user context. Exceptions need explicit authorized risk acceptance, not an engineering assertion.
+- Capacity target (to be verified on intended hardware): 4 admitted concurrent requests; warm extractive HTTP p95 <=200ms, p99 <=500ms, >=20 completed requests/s; zero accepted-work errors/timeouts/incorrect answers. Report 429 separately. Generative targets require real Ollama measurements; unavailable real generation is BLOCKED.
+- Deployment: verified immutable build/input identity, cold backup/restore to a new path, authenticated ingress, fail-closed readiness, measured draining/recovery and approved rollback. Human approval before exposure/migration.
+
+## Matrix (initial)
+
+| Gate | Criterion | Evidence/result now | Root cause / severity | Owner / closure | Exact command / final result |
+|---|---|---|---|---|---|
+| Repository/data safety | Recoverable baseline, no overwritten edits/stashes/stores | PASS: private 822-file hash baseline + dirty/untracked backups; isolated same-branch clone | Original local branch 11 behind, dirty; high | Release engineering; keep original untouched | Hash comparison against `../original-baseline.json`; pending final |
+| Full backend | Applicable suite green, complete failures/skip review | NOT RUN current candidate; historical 1444 pass only | Runtime provision required; high | Engineering Linux non-model environment | `../.venv/bin/python -m pytest tests -q -ra`; pending |
+| Source identity | Registered authoritative guide/version/page per SAP claim; M2C-18 unresolved => refuse | BLOCKED: no newly verified M2C-18 guide/TOC evidence | Missing authoritative SAP identity; critical | SAP content owner / authorized source access | `pytest tests/test_map_root_identity.py tests/test_phase8_corpus.py`; pending |
+| Corpus/checkpoints | All sealed hashes valid, originals unchanged | NOT RUN current validation; no stores present | Actual production stores outside workspace; high | Engineering + Windows operator | `pytest tests/test_phase7a.py tests/test_phase7b.py`; pending |
+| Quality / frozen evidence | Thresholds above, zero wrong-page factual responses | BLOCKED: historical 37/65, one wrong-page, negative-label drift; not new inference | Embedding runtime/weights absent; critical | RAG engineering + independent SAP reviewer | `benchmarks/run_quality.py --source-commit <runtime> --out <new.json>`; blocked until runtime provision |
+| Versioned adversarial quality | Positive/negative/ambiguous/navigation/wrong-guide/version/insufficient evidence classes; no invented gold | NOT RUN | Need source-pinned cases and separate fixture vs model evidence; critical | RAG/QA | New adversarial regression suite; pending |
+| Cached Phase 3 | Fresh generator against unchanged cache, prohibited flags adjudicated; not retrieval inference | NOT RUN current; old A0 47/70, ten flags | Cached/AI-authored reference limitations; high | RAG/QA/SAP reviewer | `python eval/phase3/runner.py --adapter A0 --out <new.json>`; pending |
+| Fail-closed/recovery | Reject unavailable/unverified/unsupported evidence; recover after errors | NOT RUN current candidate | End-to-end resources unavailable; critical | Backend/RAG | Focused service/guard/API tests; pending |
+| Native Windows/Chroma | Original finalizer assertion passes, retained/partial-stop/reuse isolation, real Win32 | BLOCKED: no Windows host | Native platform external; high | Windows QA; no Linux substitution | Targeted `tests/test_windows_portability.py` in Windows av; pending package |
+| Q35 strict reproduction | Original exact policy + raw outputs/hashes/version/batch/single provenance | BLOCKED: historical reference is quantized, original raw runtime missing | Historical numerical provenance and Windows mismatch; high | Retrieval/Windows QA | `scripts/probe_q35_reproducibility.py --card-store <offline> --store-quiesced --out <new.json>`; no baseline changes |
+| Real Ollama | Configured model ready, real grounded inference, outage/timeout/malformed recovery | BLOCKED: daemon/model absent | External model resource; critical for generative profile | Model operator + QA | Real model smoke on approved existing daemon; never mocked success |
+| Frontend/type/build | Complete suite + typecheck/build pass | NOT RUN current | Dependencies from existing lockfile; high | Frontend QA | `npm test; npm run typecheck; npm run build`; pending |
+| API/UI real browser | Supported browser, real service evidence, accessibility/reload/cancel/recovery | BLOCKED: no browser binary or embedding service | External binary/full RAG runtime; high | Browser QA | `node web/e2e/predeployment_smoke.mjs --out <new.json>`; pending |
+| Auth/authz/isolation/privacy | Shared exposure authenticated; principal-scoped context; no errors/secret leakage | NOT RUN audit; no first-party auth currently | Missing shared-exposure boundary, readiness raw exception; critical/high | Security/backend | New security regressions + existing API/isolation suite; pending |
+| Dependency/supply chain | Fresh intended-lock and actual-runtime advisories, SBOM inventory, no material unresolved risks | NOT RUN current | Lock is version-only, model third-party packaging; high | Security/operator | `npm audit --json`; GitHub reviewed pip advisory queries; pending |
+| Performance/concurrency | Targets above, all statuses/429/resources/cold vs warm separated; correctness prerequisite | BLOCKED full RAG; fixture-only tests possible | No embedding runtime/weights/real Ollama; high | Capacity QA on intended hardware | `benchmarks/run_benchmark.py --help`; workload v2 preserved |
+| Config/logging/startup | Validated defaults, secrets external, debug off, no raw internal errors | NOT RUN current audit | Configuration/auth/readiness review; high | Backend/ops | API configuration/readiness/redaction regressions; pending |
+| Operations/rollback | Approved staged promotion, fresh cold backup verification, restore new path, observation | BLOCKED: production target absent, no activation authorized | Operator environment/approval; high | Release/operations | `DEPLOYMENT_AND_ROLLBACK.md`; pending package |
+
+Final outcomes, commands, warnings, failures and source hashes will be recorded in `FINAL_RELEASE_REPORT.md`. Unavailable mandatory environments stay BLOCKED/NOT RUN, regardless of passing subsets.

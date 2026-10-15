@@ -1,0 +1,1477 @@
+{
+  "scope": "GitHub reviewed pip advisories against all version-pinned intended Linux closure and isolated installed test environment; not whole native/OS or unpinned Windows graph",
+  "requirements_lock_sha256": "950f5d5749650e9f686837e66d02a4aba3a9f8502031ba7f0cea012b4c3c6e22",
+  "locked_packages": [
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1",
+      "marker": null
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.14.5",
+      "marker": null
+    },
+    {
+      "name": "aiohttp-retry",
+      "version": "2.9.1",
+      "marker": null
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0",
+      "marker": null
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.5",
+      "marker": null
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "marker": null
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1",
+      "marker": null
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0",
+      "marker": null
+    },
+    {
+      "name": "bcrypt",
+      "version": "5.0.0",
+      "marker": null
+    },
+    {
+      "name": "beautifulsoup4",
+      "version": "4.15.0",
+      "marker": null
+    },
+    {
+      "name": "build",
+      "version": "1.6.1",
+      "marker": null
+    },
+    {
+      "name": "certifi",
+      "version": "2026.7.22",
+      "marker": null
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2",
+      "marker": null
+    },
+    {
+      "name": "chromadb",
+      "version": "1.5.9",
+      "marker": null
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "marker": null
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2",
+      "marker": null
+    },
+    {
+      "name": "cuda-bindings",
+      "version": "13.4.3",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "cuda-pathfinder",
+      "version": "1.8.3",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "cuda-toolkit",
+      "version": "13.0.3.0",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "durationpy",
+      "version": "0.11",
+      "marker": null
+    },
+    {
+      "name": "fastapi",
+      "version": "0.142.2",
+      "marker": null
+    },
+    {
+      "name": "filelock",
+      "version": "4.1.1",
+      "marker": null
+    },
+    {
+      "name": "flatbuffers",
+      "version": "25.12.19",
+      "marker": null
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0",
+      "marker": null
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0",
+      "marker": null
+    },
+    {
+      "name": "googleapis-common-protos",
+      "version": "1.75.5",
+      "marker": null
+    },
+    {
+      "name": "grpcio",
+      "version": "1.84.0",
+      "marker": null
+    },
+    {
+      "name": "gt-all-minilm-l6-v2",
+      "version": "0.1.0",
+      "marker": null
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "marker": null
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.7.0",
+      "marker": null
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "marker": null
+    },
+    {
+      "name": "httptools",
+      "version": "0.9.0",
+      "marker": null
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "marker": null
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "1.33.0",
+      "marker": null
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "marker": null
+    },
+    {
+      "name": "importlib-resources",
+      "version": "7.1.0",
+      "marker": null
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "marker": null
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.6",
+      "marker": null
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0",
+      "marker": null
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.26.0",
+      "marker": null
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "marker": null
+    },
+    {
+      "name": "kubernetes",
+      "version": "37.0.1",
+      "marker": null
+    },
+    {
+      "name": "lxml",
+      "version": "6.1.3",
+      "marker": null
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0",
+      "marker": null
+    },
+    {
+      "name": "markupsafe",
+      "version": "3.0.4",
+      "marker": null
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "marker": null
+    },
+    {
+      "name": "mmh3",
+      "version": "5.3.1",
+      "marker": null
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
+      "marker": null
+    },
+    {
+      "name": "multidict",
+      "version": "7.1.0",
+      "marker": null
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1",
+      "marker": null
+    },
+    {
+      "name": "networkx",
+      "version": "3.6.1",
+      "marker": null
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6",
+      "marker": null
+    },
+    {
+      "name": "nvidia-cublas",
+      "version": "13.1.1.3",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-cuda-cupti",
+      "version": "13.0.85",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-cuda-nvrtc",
+      "version": "13.0.88",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-cuda-runtime",
+      "version": "13.0.96",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-cudnn-cu13",
+      "version": "9.24.0.43",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-cufft",
+      "version": "12.0.0.61",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-cufile",
+      "version": "1.15.1.6",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-curand",
+      "version": "10.4.0.35",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-cusolver",
+      "version": "12.0.4.66",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-cusparse",
+      "version": "12.6.3.3",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-cusparselt-cu13",
+      "version": "0.8.1",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-nccl-cu13",
+      "version": "2.30.7",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-nvjitlink",
+      "version": "13.4.92",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-nvshmem-cu13",
+      "version": "3.4.5",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "nvidia-nvtx",
+      "version": "13.0.85",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "oauthlib",
+      "version": "4.0.0",
+      "marker": null
+    },
+    {
+      "name": "ollama",
+      "version": "0.6.3",
+      "marker": null
+    },
+    {
+      "name": "onnxruntime",
+      "version": "1.31.0",
+      "marker": null
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.1",
+      "marker": null
+    },
+    {
+      "name": "opentelemetry-exporter-otlp-common",
+      "version": "0.66b1",
+      "marker": null
+    },
+    {
+      "name": "opentelemetry-exporter-otlp-proto-common",
+      "version": "1.45.1",
+      "marker": null
+    },
+    {
+      "name": "opentelemetry-exporter-otlp-proto-grpc",
+      "version": "1.45.1",
+      "marker": null
+    },
+    {
+      "name": "opentelemetry-proto",
+      "version": "1.45.1",
+      "marker": null
+    },
+    {
+      "name": "opentelemetry-sdk",
+      "version": "1.45.1",
+      "marker": null
+    },
+    {
+      "name": "opentelemetry-semantic-conventions",
+      "version": "0.66b1",
+      "marker": null
+    },
+    {
+      "name": "orjson",
+      "version": "3.13.0",
+      "marker": null
+    },
+    {
+      "name": "overrides",
+      "version": "7.7.0",
+      "marker": null
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "marker": null
+    },
+    {
+      "name": "pluggy",
+      "version": "1.6.0",
+      "marker": null
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4",
+      "marker": null
+    },
+    {
+      "name": "protobuf",
+      "version": "7.36.2",
+      "marker": null
+    },
+    {
+      "name": "pybase64",
+      "version": "1.5.1",
+      "marker": null
+    },
+    {
+      "name": "pydantic",
+      "version": "2.13.5",
+      "marker": null
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.15.0",
+      "marker": null
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.46.5",
+      "marker": null
+    },
+    {
+      "name": "pygments",
+      "version": "2.21.0",
+      "marker": null
+    },
+    {
+      "name": "pypdf",
+      "version": "6.20.1",
+      "marker": null
+    },
+    {
+      "name": "pypika",
+      "version": "0.51.1",
+      "marker": null
+    },
+    {
+      "name": "pyproject-hooks",
+      "version": "1.3.3",
+      "marker": null
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1",
+      "marker": null
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "marker": null
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.4",
+      "marker": null
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "marker": null
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0",
+      "marker": null
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.29",
+      "marker": null
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "marker": null
+    },
+    {
+      "name": "requests-oauthlib",
+      "version": "2.0.0",
+      "marker": null
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0",
+      "marker": null
+    },
+    {
+      "name": "rpds-py",
+      "version": "2026.9.1",
+      "marker": null
+    },
+    {
+      "name": "safetensors",
+      "version": "0.8.0",
+      "marker": null
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.9.1",
+      "marker": null
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1",
+      "marker": null
+    },
+    {
+      "name": "sentence-transformers",
+      "version": "6.1.0",
+      "marker": null
+    },
+    {
+      "name": "shellingham",
+      "version": "1.5.4",
+      "marker": null
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "marker": null
+    },
+    {
+      "name": "soupsieve",
+      "version": "2.10",
+      "marker": null
+    },
+    {
+      "name": "starlette",
+      "version": "1.7.0",
+      "marker": null
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0",
+      "marker": null
+    },
+    {
+      "name": "tenacity",
+      "version": "9.2.1",
+      "marker": null
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0",
+      "marker": null
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.3",
+      "marker": null
+    },
+    {
+      "name": "torch",
+      "version": "2.14.1",
+      "marker": null
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1",
+      "marker": null
+    },
+    {
+      "name": "transformers",
+      "version": "5.19.0",
+      "marker": null
+    },
+    {
+      "name": "triton",
+      "version": "3.8.0",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "typer",
+      "version": "0.27.3",
+      "marker": null
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "marker": null
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "marker": null
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "marker": null
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.54.0",
+      "marker": null
+    },
+    {
+      "name": "uvloop",
+      "version": "0.23.0",
+      "marker": "sys_platform == \"linux\""
+    },
+    {
+      "name": "watchfiles",
+      "version": "1.3.0",
+      "marker": null
+    },
+    {
+      "name": "websocket-client",
+      "version": "1.9.2",
+      "marker": null
+    },
+    {
+      "name": "websockets",
+      "version": "17.2",
+      "marker": null
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1",
+      "marker": null
+    }
+  ],
+  "installed_test_packages": [
+    {
+      "name": "pypika",
+      "version": "0.51.1"
+    },
+    {
+      "name": "flatbuffers",
+      "version": "25.12.19"
+    },
+    {
+      "name": "durationpy",
+      "version": "0.11"
+    },
+    {
+      "name": "websockets",
+      "version": "17.2"
+    },
+    {
+      "name": "websocket-client",
+      "version": "1.9.2"
+    },
+    {
+      "name": "uvloop",
+      "version": "0.23.0"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.5"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "tenacity",
+      "version": "9.2.1"
+    },
+    {
+      "name": "soupsieve",
+      "version": "2.10"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "shellingham",
+      "version": "1.5.4"
+    },
+    {
+      "name": "ruff",
+      "version": "0.17.0"
+    },
+    {
+      "name": "rpds-py",
+      "version": "2026.9.1"
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3"
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.4"
+    },
+    {
+      "name": "pyproject-hooks",
+      "version": "1.3.3"
+    },
+    {
+      "name": "pypdf",
+      "version": "6.20.1"
+    },
+    {
+      "name": "pygments",
+      "version": "2.21.0"
+    },
+    {
+      "name": "pybase64",
+      "version": "1.5.1"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2"
+    },
+    {
+      "name": "protobuf",
+      "version": "7.36.2"
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "overrides",
+      "version": "7.7.0"
+    },
+    {
+      "name": "orjson",
+      "version": "3.13.0"
+    },
+    {
+      "name": "oauthlib",
+      "version": "4.0.0"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "multidict",
+      "version": "7.1.0"
+    },
+    {
+      "name": "mmh3",
+      "version": "5.3.1"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2"
+    },
+    {
+      "name": "lxml",
+      "version": "6.1.3"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1"
+    },
+    {
+      "name": "importlib-resources",
+      "version": "7.1.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "httptools",
+      "version": "0.9.0"
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.7.0"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.0"
+    },
+    {
+      "name": "click",
+      "version": "8.5.0"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.7.22"
+    },
+    {
+      "name": "bcrypt",
+      "version": "5.0.0"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.5"
+    },
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1"
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1"
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.54.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0"
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1"
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.46.5"
+    },
+    {
+      "name": "opentelemetry-proto",
+      "version": "1.45.1"
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.1"
+    },
+    {
+      "name": "onnxruntime",
+      "version": "1.31.0"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0"
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.13.1"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9"
+    },
+    {
+      "name": "grpcio",
+      "version": "1.84.0"
+    },
+    {
+      "name": "googleapis-common-protos",
+      "version": "1.75.5"
+    },
+    {
+      "name": "build",
+      "version": "1.6.1"
+    },
+    {
+      "name": "beautifulsoup4",
+      "version": "4.15.0"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1"
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0"
+    },
+    {
+      "name": "watchfiles",
+      "version": "1.3.0"
+    },
+    {
+      "name": "starlette",
+      "version": "1.7.0"
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0"
+    },
+    {
+      "name": "requests-oauthlib",
+      "version": "2.0.0"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.13.5"
+    },
+    {
+      "name": "opentelemetry-semantic-conventions",
+      "version": "0.66b1"
+    },
+    {
+      "name": "opentelemetry-exporter-otlp-proto-common",
+      "version": "1.45.1"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1"
+    },
+    {
+      "name": "httpx2",
+      "version": "2.13.1"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.14.5"
+    },
+    {
+      "name": "typer",
+      "version": "0.27.3"
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.16.0"
+    },
+    {
+      "name": "opentelemetry-sdk",
+      "version": "1.45.1"
+    },
+    {
+      "name": "ollama",
+      "version": "0.6.3"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.26.0"
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "2.2.0"
+    },
+    {
+      "name": "fastapi",
+      "version": "0.142.2"
+    },
+    {
+      "name": "aiohttp-retry",
+      "version": "2.9.1"
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.3"
+    },
+    {
+      "name": "opentelemetry-exporter-otlp-common",
+      "version": "0.66b1"
+    },
+    {
+      "name": "kubernetes",
+      "version": "37.0.1"
+    },
+    {
+      "name": "opentelemetry-exporter-otlp-proto-grpc",
+      "version": "1.45.1"
+    },
+    {
+      "name": "chromadb",
+      "version": "1.5.9"
+    }
+  ],
+  "queries": [
+    {
+      "query": [
+        "aiohappyeyeballs@2.7.1",
+        "aiohttp-retry@2.9.1",
+        "aiohttp@3.14.5",
+        "aiosignal@1.4.0",
+        "annotated-doc@0.0.5",
+        "annotated-types@0.8.0",
+        "anyio@4.15.1",
+        "attrs@26.1.0",
+        "bcrypt@5.0.0",
+        "beautifulsoup4@4.15.0",
+        "build@1.6.1",
+        "certifi@2026.7.22",
+        "charset-normalizer@3.5.2",
+        "chromadb@1.5.9",
+        "click@8.5.0",
+        "cloudpickle@3.1.2",
+        "cuda-bindings@13.4.3",
+        "cuda-pathfinder@1.8.3",
+        "cuda-toolkit@13.0.3.0",
+        "durationpy@0.11",
+        "fastapi@0.142.2",
+        "filelock@4.1.1",
+        "filelock@4.2.0",
+        "flatbuffers@25.12.19",
+        "frozenlist@1.8.0",
+        "fsspec@2026.9.0",
+        "googleapis-common-protos@1.75.5",
+        "grpcio@1.84.0",
+        "gt-all-minilm-l6-v2@0.1.0",
+        "h11@0.16.0",
+        "hf-xet@1.7.0",
+        "httpcore2@2.13.1",
+        "httpcore@1.0.9",
+        "httptools@0.9.0",
+        "httpx2@2.13.1",
+        "httpx@0.28.1",
+        "huggingface-hub@1.33.0",
+        "huggingface-hub@2.2.0",
+        "idna@3.20",
+        "importlib-resources@7.1.0",
+        "iniconfig@2.3.1",
+        "jinja2@3.1.6",
+        "joblib@1.6.0",
+        "jsonschema-specifications@2025.9.1",
+        "jsonschema@4.26.0",
+        "kubernetes@37.0.1",
+        "lxml@6.1.3",
+        "markdown-it-py@4.2.0",
+        "markupsafe@3.0.4",
+        "mdurl@0.1.2",
+        "mmh3@5.3.1",
+        "mpmath@1.3.0",
+        "multidict@7.1.0",
+        "narwhals@2.27.1",
+        "networkx@3.6.1",
+        "numpy@2.4.6",
+        "nvidia-cublas@13.1.1.3",
+        "nvidia-cuda-cupti@13.0.85",
+        "nvidia-cuda-nvrtc@13.0.88",
+        "nvidia-cuda-runtime@13.0.96",
+        "nvidia-cudnn-cu13@9.24.0.43",
+        "nvidia-cufft@12.0.0.61",
+        "nvidia-cufile@1.15.1.6",
+        "nvidia-curand@10.4.0.35",
+        "nvidia-cusolver@12.0.4.66",
+        "nvidia-cusparse@12.6.3.3",
+        "nvidia-cusparselt-cu13@0.8.1",
+        "nvidia-nccl-cu13@2.30.7",
+        "nvidia-nvjitlink@13.4.92",
+        "nvidia-nvshmem-cu13@3.4.5",
+        "nvidia-nvtx@13.0.85",
+        "oauthlib@4.0.0",
+        "ollama@0.6.3",
+        "onnxruntime@1.31.0",
+        "opentelemetry-api@1.45.1"
+      ],
+      "returned": 4
+    },
+    {
+      "query": [
+        "opentelemetry-exporter-otlp-common@0.66b1",
+        "opentelemetry-exporter-otlp-proto-common@1.45.1",
+        "opentelemetry-exporter-otlp-proto-grpc@1.45.1",
+        "opentelemetry-proto@1.45.1",
+        "opentelemetry-sdk@1.45.1",
+        "opentelemetry-semantic-conventions@0.66b1",
+        "orjson@3.13.0",
+        "overrides@7.7.0",
+        "packaging@26.3",
+        "pluggy@1.6.0",
+        "pluggy@1.7.0",
+        "propcache@0.5.4",
+        "protobuf@7.36.2",
+        "psutil@7.2.2",
+        "pybase64@1.5.1",
+        "pydantic-core@2.46.5",
+        "pydantic-settings@2.15.0",
+        "pydantic-settings@2.16.0",
+        "pydantic@2.13.5",
+        "pygments@2.21.0",
+        "pypdf@6.20.1",
+        "pypika@0.51.1",
+        "pyproject-hooks@1.3.3",
+        "pytest@9.1.1",
+        "python-dateutil@2.9.0.post0",
+        "python-dotenv@1.2.4",
+        "pyyaml@6.0.3",
+        "referencing@0.37.0",
+        "regex@2026.9.29",
+        "requests-oauthlib@2.0.0",
+        "requests@2.34.2",
+        "rich@15.0.0",
+        "rpds-py@2026.9.1",
+        "ruff@0.17.0",
+        "safetensors@0.8.0",
+        "scikit-learn@1.9.1",
+        "scipy@1.17.1",
+        "sentence-transformers@6.1.0",
+        "shellingham@1.5.4",
+        "six@1.17.0",
+        "soupsieve@2.10",
+        "starlette@1.7.0",
+        "sympy@1.14.0",
+        "tenacity@9.2.1",
+        "threadpoolctl@3.7.0",
+        "tokenizers@0.23.3",
+        "torch@2.14.1",
+        "tqdm@4.70.1",
+        "transformers@5.19.0",
+        "triton@3.8.0",
+        "truststore@0.10.5",
+        "typer@0.27.3",
+        "typing-extensions@4.16.0",
+        "typing-inspection@0.4.4",
+        "urllib3@2.8.0",
+        "uvicorn@0.54.0",
+        "uvloop@0.23.0",
+        "watchfiles@1.3.0",
+        "websocket-client@1.9.2",
+        "websockets@17.2",
+        "yarl@1.25.1"
+      ],
+      "returned": 0
+    }
+  ],
+  "advisories": [
+    {
+      "ghsa_id": "GHSA-36p7-vc44-83pf",
+      "cve_id": "CVE-2026-45833",
+      "url": "https://api.github.com/advisories/GHSA-36p7-vc44-83pf",
+      "html_url": "https://github.com/advisories/GHSA-36p7-vc44-83pf",
+      "summary": "ChromaDB has a code injection vulnerability",
+      "description": "A code injection vulnerability in version 0.4.17 or later of the ChromaDB Python project allows an authenticated attacker to run arbitrary code on the server by sending a malicious model repository and trust_remote_code set to true in the\u00a0/api/v2/tenants/default_tenant/databases/default_database/collections/{collection_id} if they have the UPDATE_COLLECTION permission.",
+      "type": "reviewed",
+      "severity": "critical",
+      "repository_advisory_url": null,
+      "source_code_location": "https://github.com/chroma-core/chroma",
+      "identifiers": [
+        {
+          "value": "GHSA-36p7-vc44-83pf",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-45833",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-45833",
+        "https://www.hiddenlayer.com/sai-security-advisory/2026-06-chromadb-5",
+        "https://access.redhat.com/security/cve/CVE-2026-45833",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2488430",
+        "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-45833.json",
+        "https://github.com/advisories/GHSA-36p7-vc44-83pf"
+      ],
+      "published_at": "2026-06-12T18:31:56Z",
+      "updated_at": "2026-08-24T20:03:34Z",
+      "github_reviewed_at": "2026-08-24T20:03:34Z",
+      "nvd_published_at": "2026-06-12T16:16:29Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.4.17, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": 0.0
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+          "score": 9.4
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-94",
+          "name": "Improper Control of Generation of Code ('Code Injection')"
+        }
+      ],
+      "credits": [],
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      },
+      "epss": {
+        "percentage": 0.00626,
+        "percentile": 0.48526
+      }
+    },
+    {
+      "ghsa_id": "GHSA-xph7-9rjv-w5fr",
+      "cve_id": "CVE-2026-45831",
+      "url": "https://api.github.com/advisories/GHSA-xph7-9rjv-w5fr",
+      "html_url": "https://github.com/advisories/GHSA-xph7-9rjv-w5fr",
+      "summary": "ChromaDB's SimpleRBACAuthorizationProvider doesn't check which tenant, database, or collection a permission applies to",
+      "description": "The SimpleRBACAuthorizationProvider authorization provider in versions 0.5.0 or later of the ChromaDB Python project evaluates whether a user holds a given permission but never checks which tenant, database, or collection that permission applies to allowing users to perform cross tenant actions.",
+      "type": "reviewed",
+      "severity": "high",
+      "repository_advisory_url": null,
+      "source_code_location": "https://github.com/chroma-core/chroma",
+      "identifiers": [
+        {
+          "value": "GHSA-xph7-9rjv-w5fr",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-45831",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-45831",
+        "https://www.hiddenlayer.com/sai-security-advisory/2026-06-chromadb-3",
+        "https://github.com/chroma-core/chroma/issues/7588",
+        "https://github.com/chroma-core/chroma/pull/7602",
+        "https://github.com/advisories/GHSA-xph7-9rjv-w5fr"
+      ],
+      "published_at": "2026-06-12T18:31:56Z",
+      "updated_at": "2026-08-24T20:00:43Z",
+      "github_reviewed_at": "2026-08-24T20:00:42Z",
+      "nvd_published_at": "2026-06-12T16:16:28Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.5.0, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "score": 8.8
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:H/VI:H/VA:N/SC:H/SI:H/SA:N",
+          "score": 8.8
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-863",
+          "name": "Incorrect Authorization"
+        }
+      ],
+      "credits": [],
+      "comments": 0,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+        "score": 8.8
+      },
+      "epss": {
+        "percentage": 0.00422,
+        "percentile": 0.3451
+      }
+    },
+    {
+      "ghsa_id": "GHSA-2wm9-hf6c-p5cr",
+      "cve_id": "CVE-2026-45830",
+      "url": "https://api.github.com/advisories/GHSA-2wm9-hf6c-p5cr",
+      "html_url": "https://github.com/advisories/GHSA-2wm9-hf6c-p5cr",
+      "summary": "ChromaDB allows any authenticated users to arbitrarily read, write, update, or delete data in any tenant's collection",
+      "description": "A lack of authorization validation in version 0.4.17 or later of the ChromaDB Python project allows any authenticated users to arbitrarily read, write, update, or delete data in any tenant's collection regardless of which tenant they belong to.",
+      "type": "reviewed",
+      "severity": "high",
+      "repository_advisory_url": null,
+      "source_code_location": "https://github.com/chroma-core/chroma",
+      "identifiers": [
+        {
+          "value": "GHSA-2wm9-hf6c-p5cr",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-45830",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-45830",
+        "https://www.hiddenlayer.com/sai-security-advisory/2026-06-chromadb",
+        "https://access.redhat.com/security/cve/CVE-2026-45830",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2488408",
+        "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-45830.json",
+        "https://github.com/chroma-core/chroma/issues/7588",
+        "https://github.com/chroma-core/chroma/pull/7602",
+        "https://github.com/advisories/GHSA-2wm9-hf6c-p5cr"
+      ],
+      "published_at": "2026-06-12T18:31:56Z",
+      "updated_at": "2026-08-24T19:57:43Z",
+      "github_reviewed_at": "2026-08-24T19:57:41Z",
+      "nvd_published_at": "2026-06-12T16:16:28Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 0.4.17, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "score": 8.8
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:H/VI:H/VA:N/SC:H/SI:H/SA:N",
+          "score": 8.8
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-266",
+          "name": "Incorrect Privilege Assignment"
+        },
+        {
+          "cwe_id": "CWE-639",
+          "name": "Authorization Bypass Through User-Controlled Key"
+        }
+      ],
+      "credits": [],
+      "comments": 0,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+        "score": 8.8
+      },
+      "epss": {
+        "percentage": 0.00495,
+        "percentile": 0.40522
+      }
+    },
+    {
+      "ghsa_id": "GHSA-f4j7-r4q5-qw2c",
+      "cve_id": "CVE-2026-45829",
+      "url": "https://api.github.com/advisories/GHSA-f4j7-r4q5-qw2c",
+      "html_url": "https://github.com/advisories/GHSA-f4j7-r4q5-qw2c",
+      "summary": "ChromaDB Python project has a pre-authentication code injection vulnerability",
+      "description": "A pre-authentication, code injection vulnerability in version 1.0.0 or later of the ChromaDB Python project allows an unauthenticated attacker to run arbitrary code on the server by sending a malicious model repository and trust_remote_code set to true in the\u00a0/api/v2/tenants/{tenant}/databases/{db}/collections endpoint.",
+      "type": "reviewed",
+      "severity": "critical",
+      "repository_advisory_url": null,
+      "source_code_location": "https://github.com/chroma-core/chroma",
+      "identifiers": [
+        {
+          "value": "GHSA-f4j7-r4q5-qw2c",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-45829",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-45829",
+        "https://github.com/chroma-core/chroma/issues/6717",
+        "https://www.hiddenlayer.com/research/chromatoast-served-pre-auth",
+        "https://access.redhat.com/security/cve/CVE-2026-45829",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2479623",
+        "https://github.com/advisories/GHSA-f4j7-r4q5-qw2c",
+        "https://github.com/chroma-core/chroma",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/chromadb/PYSEC-2026-311.yaml",
+        "https://pypi.org/project/chromadb"
+      ],
+      "published_at": "2026-05-18T18:31:30Z",
+      "updated_at": "2026-10-05T21:32:32Z",
+      "github_reviewed_at": "2026-05-29T19:15:04Z",
+      "nvd_published_at": "2026-05-18T17:16:34Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "chromadb"
+          },
+          "vulnerable_version_range": ">= 1.0.0, <= 1.5.9",
+          "first_patched_version": null,
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+          "score": 10.0
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H/E:P",
+          "score": 9.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-94",
+          "name": "Improper Control of Generation of Code ('Code Injection')"
+        },
+        {
+          "cwe_id": "CWE-502",
+          "name": "Deserialization of Untrusted Data"
+        }
+      ],
+      "credits": [],
+      "comments": 0,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+        "score": 10.0
+      },
+      "epss": {
+        "percentage": 0.01023,
+        "percentile": 0.6255
+      }
+    }
+  ]
+}

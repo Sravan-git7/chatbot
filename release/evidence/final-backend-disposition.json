@@ -1,0 +1,943 @@
+{
+  "issues": [
+    {
+      "test": "tests.test_benchmark_instrumentation.StageInstrumentationTests::test_answered_query_reports_full_stage_breakdown",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_benchmark_instrumentation.StageInstrumentationTests::test_followup_turn_keeps_stage_breakdown_and_answer",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_benchmark_instrumentation.StageInstrumentationTests::test_m2c18_fail_closed_short_circuits_before_embedding",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_benchmark_instrumentation.StageInstrumentationTests::test_out_of_scope_query_has_routing_stages_but_no_generation_stages",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_focused_windows_diagnostic::test_real_113_plus_two_store_is_diagnosed_without_repair",
+      "result": "failure",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_golden_eval.GoldenEvaluationTests::test_golden_eval_suite",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_success_removes_only_approved_records_and_backup_is_exact",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_interruption_keeps_backup_original_and_no_activation[before_delete]",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_interruption_keeps_backup_original_and_no_activation[after_delete]",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_interruption_keeps_backup_original_and_no_activation[before_publish]",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_failed_backup_verification_never_reaches_delete",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_backup_copy_io_error_is_fatal",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_concurrent_source_writer_aborts[before_delete]",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_concurrent_source_writer_aborts[after_delete]",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_transient_observed_writer_is_sticky_even_after_bytes_restored",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_changed_corpus_guard_aborts_without_touching_real_corpus",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_unexpected_extra_id_in_diagnostic_aborts",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_stale_diagnostic_source_bytes_aborts",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_post_repair_metadata_tamper_detected",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_repair_refuses_source_under_production_data",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_explicit_exact_approval_required[approvals0]",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_explicit_exact_approval_required[approvals1]",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_explicit_exact_approval_required[approvals2]",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_explicit_exact_approval_required[approvals3]",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_cooperating_job_lock_is_not_reclaimed",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_preexisting_source_corpus_drift_is_rejected",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_unexpected_extra_record_in_private_stage_aborts",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_unexpected_collection_metadata_aborts_before_backup",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_target_metadata_must_match_diagnostic_exactly",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_baseline_behavior_unchanged_when_disabled",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_deterministic_reranking",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_invalid_unresolved_candidate_handling",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_query_embedding_computed_once",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_scores_identical_with_and_without_precomputed_embedding",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_top_k_candidate_retention",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase14_recall.TestPhase14RecallConfig::test_candidate_depth_configurable",
+      "result": "failure",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase14_recall.TestPhase14RecallConfig::test_default_pipeline_executes_top10",
+      "result": "failure",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_a_exact_code_match_causes_candidate_injection",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_b_candidate_pool_never_exceeds_10",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_c_no_code_token_phase13_score_unchanged",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_d_exact_code_match_produces_code_match_1",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_e_non_matching_candidate_produces_code_match_0",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_f_generic_words_do_not_trigger_injection",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_g_unresolved_card_penalty_remains_active",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_h_evidence_guard_behavior_remains_unchanged",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_01_concurrent_requests_distinct_evidence_no_overwrite",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_02_ten_concurrent_requests_match_single_thread",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_03_twenty_concurrent_mixed_requests_zero_leakage",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_04_precheck_refusal_does_not_block_on_held_generation_lock",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_05_routing_retrieval_context_run_concurrently_during_llm_generation",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_06_evidence_guard_precheck_runs_outside_generation_lock",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_07_postcheck_and_grounding_run_outside_lock_after_generation",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_08_caches_return_isolated_copies_under_concurrent_reads_and_mutations",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_09_ollama_failure_or_timeout_does_not_poison_or_deadlock_concurrent_requests",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_10_retriever_exception_does_not_poison_concurrent_or_subsequent_requests",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_11_bounded_generation_semaphore_enforces_configured_concurrency_limit",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_12_production_config_and_sequential_same_thread_isolation_invariants",
+      "result": "error",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_predeployment_hardening.HardeningTests::test_configured_model_is_used_by_the_shipped_generator_not_ignored",
+      "result": "failure",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_predeployment_hardening.HardeningTests::test_live_absent_preselected_detail_abstains",
+      "result": "failure",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_predeployment_hardening.HardeningTests::test_live_named_code_purpose_does_not_answer_from_navigation_pointer",
+      "result": "failure",
+      "disposition": "BLOCKED",
+      "root_cause": "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent"
+    },
+    {
+      "test": "tests.test_windows_portability::test_real_diagnostic_uses_child_copy_and_preserves_wrong_store",
+      "result": "failure",
+      "disposition": "BLOCKED",
+      "root_cause": "Child diagnostic exit=1; separately reproduced FileNotFoundError in resolve_model before comparison; source fixture hashes unchanged"
+    }
+  ],
+  "issue_groups": {
+    "Missing sentence-transformers/Torch/embedding runtime; actual model and stores also absent": 36,
+    "Exact tokenizer unavailable: make_token_counter reports exact=False; approximation intentionally rejected": 24,
+    "Child diagnostic exit=1; separately reproduced FileNotFoundError in resolve_model before comparison; source fixture hashes unchanged": 1
+  },
+  "skips": [
+    {
+      "test": "tests.test_card_retrieval_eval.TokenizerTests::test_overlong_text_is_reported_and_stops_the_pipeline",
+      "reason": "needs transformers + local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_card_retrieval_eval.TokenizerTests::test_recorded_statistics_match_a_fresh_measurement_and_fit_the_model",
+      "reason": "needs transformers + local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_card_retrieval_eval.CollectionTests::test_builder_refuses_existing_collection_and_rebuilds_only_its_own",
+      "reason": "needs the built sap_m2c_card_v1 store"
+    },
+    {
+      "test": "tests.test_card_retrieval_eval.CollectionTests::test_collection_is_new_separate_and_complete",
+      "reason": "needs the built sap_m2c_card_v1 store"
+    },
+    {
+      "test": "tests.test_card_retrieval_eval.CollectionTests::test_every_vector_keeps_readable_provenance_and_the_embedded_text",
+      "reason": "needs the built sap_m2c_card_v1 store"
+    },
+    {
+      "test": "tests.test_card_retrieval_eval.CollectionTests::test_hashes_recorded_in_collection_and_manifest_are_current",
+      "reason": "needs the built sap_m2c_card_v1 store"
+    },
+    {
+      "test": "tests.test_card_retrieval_eval.ResultsTests::test_rerun_is_identical",
+      "reason": "needs the store and model"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_A_elaborate_after_billing",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_B_explain_more_after_billing",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_C_tell_me_more_after_contract_account",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_D_elaborate_after_installment_plan",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_E_topic_switch_followed_by_elaborate",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_F_elaborate_with_no_previous_answer",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_G_elaborate_after_oos",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_H_elaborate_after_unable_to_verify",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_I_normal_new_query_after_answer_routes_normally",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_J_no_citation_validity_regression",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ElaborationFollowUpTests::test_K_no_stale_evidence_leakage",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_B2_second_elaborate_after_exhausted_evidence_is_safe_not_oos",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_C2_third_elaborate_must_not_become_out_of_scope",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_D2_new_query_after_exhaustion_routes_normally",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_E2_contract_account_repeated_elaboration_never_oos",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_F2_typed_explain_more_after_exhaustion_is_safe",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_L_typo_elaborat_after_an_answer_still_elaborates",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_M_elaborate_on_installment_plans_is_a_new_semantic_query",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_N_missing_pages_get_an_honest_unavailable_state",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_P_contract_account_definition_comes_first",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_Q_answers_contain_no_heading_or_bare_list_fragments",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_R_exhausted_state_never_claims_the_page_is_missing",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_elaboration_followup.ExhaustedElaborationAndHardeningTests::test_S_conversation_isolation_with_exhausted_state",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_a_standalone_question_is_never_marked_as_a_follow_up",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_an_elaboration_is_not_unreasonably_slow",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_an_elaboration_of_a_topic_with_nothing_more_is_an_honest_non_answer",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_an_example_does_not_hallucinate",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_an_unrelated_question_after_a_follow_up_stays_out_of_scope",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_billing_elaboration_uses_additional_billing_evidence",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_elaborate_explain_in_detail_and_tell_me_more_are_richer_than_the_first_answer",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_follow_up_citations_point_at_the_evidence_of_this_answer",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_multi_turn_follow_ups_keep_the_anchor_and_stay_grounded",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_simplify_is_shorter_and_self_contained",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_standalone_questions_are_byte_identical_with_and_without_the_scoped_pass",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_what_happens_next_returns_following_process_evidence_without_repeating_the_answer",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_elaboration.RealElaborationTests::test_why_is_answered_from_evidence_and_never_copies_the_citations_of_the_previous_answer",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_resolution.RealFollowUpTests::test_01_the_reported_case_contract_account_then_elaborate",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_resolution.RealFollowUpTests::test_02_explain_that_in_detail_after_a_billing_question",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_resolution.RealFollowUpTests::test_03_why_after_a_bill_creation_answer_stays_grounded_or_abstains",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_resolution.RealFollowUpTests::test_04_an_example_is_only_answered_when_the_documentation_supports_it",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_resolution.RealFollowUpTests::test_05_an_out_of_scope_question_does_not_inherit_the_conversation_topic",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_resolution.RealFollowUpTests::test_06_a_relational_follow_up_uses_the_conversation_and_the_new_topic",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_resolution.RealFollowUpTests::test_07_a_chain_of_follow_ups_stays_one_conversation",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_resolution.RealFollowUpTests::test_08_standalone_questions_are_unchanged_by_the_context_field",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_followup_resolution.RealFollowUpTests::test_09_the_resolution_is_visible_in_the_developer_view_only",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase10.RealStoreTests::test_fusion_changes_only_the_order_and_keeps_29_cards",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase10.RealStoreTests::test_lambda_zero_matches_baseline_answers",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase10.RealStoreTests::test_selected_configuration_is_deterministic_and_grounded",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_1_service.RealAnswerCorrectness::test_a_sentence_about_a_sibling_topic_is_not_returned_for_the_asked_one",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_1_service.RealAnswerCorrectness::test_absent_detail_on_a_routed_page_abstains_with_the_exact_message",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_1_service.RealAnswerCorrectness::test_answerable_detail_on_the_same_pages_is_answered",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_1_service.RealAnswerCorrectness::test_api_contract_for_each_status",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_1_service.RealAnswerCorrectness::test_deterministic",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_1_service.RealAnswerCorrectness::test_every_answer_sentence_is_a_verbatim_span_of_the_chunk_its_citation_names",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_1_service.RealAnswerCorrectness::test_evidence_block_only_in_debug",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_1_service.RealAnswerCorrectness::test_routing_failures_abstain_or_say_unavailable_but_never_invent",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_1_service.RealAnswerCorrectness::test_wrongly_routed_sibling_questions_never_return_an_ungrounded_answer",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_api.RealPipelineTests::test_health_is_ready_with_the_real_corpus",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_api.RealPipelineTests::test_real_missing_page_is_not_answered_from_the_card",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_api.RealPipelineTests::test_real_out_of_scope_and_absent_detail",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_api.RealPipelineTests::test_real_question_gets_a_real_grounded_cited_answer",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase11_api.RealPipelineTests::test_real_responses_are_deterministic",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase12_eval_audit.EvaluatorWithStores::test_pipeline_pieces_agree_with_recorded_run",
+      "reason": "stores not built in this checkout (see Phase 11 recreate order)"
+    },
+    {
+      "test": "tests.test_phase12_eval_audit.LlmPlumbing::test_extractive_exceptions_are_not_swallowed",
+      "reason": "stores not built in this checkout (see Phase 11 recreate order)"
+    },
+    {
+      "test": "tests.test_phase12_eval_audit.LlmPlumbing::test_fabricated_llm_answer_is_not_counted_correct",
+      "reason": "stores not built in this checkout (see Phase 11 recreate order)"
+    },
+    {
+      "test": "tests.test_phase12_eval_audit.LlmPlumbing::test_questions_that_never_reach_the_generator_do_not_reset_the_error_counter",
+      "reason": "stores not built in this checkout (see Phase 11 recreate order)"
+    },
+    {
+      "test": "tests.test_phase12_eval_audit.LlmPlumbing::test_raising_client_is_recorded_per_question_not_substituted",
+      "reason": "stores not built in this checkout (see Phase 11 recreate order)"
+    },
+    {
+      "test": "tests.test_phase12_eval_audit.LlmPlumbing::test_resume_makes_no_new_llm_calls",
+      "reason": "stores not built in this checkout (see Phase 11 recreate order)"
+    },
+    {
+      "test": "tests.test_phase18_reranker.TestFlagOffReproducesPhase16Routing::test_selections_pinned",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_01_single_embedding_per_answer",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_02_q_emb_propagation_to_route_to_page",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_03_reranker_receives_same_q_emb",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_04_request_local_cache_eliminates_winning_page_duplicate",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_05_correct_k_handling_in_request_cache",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_06_final_evidence_equivalence",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_07_candidate_ranking_and_score_equivalence",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_08_context_equivalence",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_09_citation_and_grounding_equivalence",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_10_concurrent_request_isolation",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_11_empty_query_and_no_global_cache",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase19a_latency.TestPhase19ALatency::test_12_unsupported_behavior_and_production_config_guard",
+      "reason": "requires built card and page vector stores"
+    },
+    {
+      "test": "tests.test_phase5.EvaluatorUnitTests::test_decision_rule_accepts_only_when_every_criterion_holds",
+      "reason": "needs sentence-transformers and chromadb to import the evaluator"
+    },
+    {
+      "test": "tests.test_phase5.EvaluatorUnitTests::test_decision_rule_rejections",
+      "reason": "needs sentence-transformers and chromadb to import the evaluator"
+    },
+    {
+      "test": "tests.test_phase5.EvaluatorUnitTests::test_length_bucket",
+      "reason": "needs sentence-transformers and chromadb to import the evaluator"
+    },
+    {
+      "test": "tests.test_phase5.EvaluatorUnitTests::test_paired",
+      "reason": "needs sentence-transformers and chromadb to import the evaluator"
+    },
+    {
+      "test": "tests.test_phase5.EvaluatorUnitTests::test_r1_gain_alone_does_not_pass",
+      "reason": "needs sentence-transformers and chromadb to import the evaluator"
+    },
+    {
+      "test": "tests.test_phase5.EvaluatorUnitTests::test_sign_test",
+      "reason": "needs sentence-transformers and chromadb to import the evaluator"
+    },
+    {
+      "test": "tests.test_phase5.EvaluatorUnitTests::test_tree_sha_detects_change",
+      "reason": "needs sentence-transformers and chromadb to import the evaluator"
+    },
+    {
+      "test": "tests.test_phase5.RecordedResultsTests::test_decision_is_reproducible_from_recorded_numbers",
+      "reason": "evaluator imports need sentence-transformers and chromadb"
+    },
+    {
+      "test": "tests.test_phase5.LiveReproductionTests::test_missing_store_fails_with_instructions",
+      "reason": "needs the store and model"
+    },
+    {
+      "test": "tests.test_phase5.LiveReproductionTests::test_rerun_reproduces_recorded_results_and_leaves_store_untouched",
+      "reason": "needs the store and model"
+    },
+    {
+      "test": "tests.test_phase7b.RealCollectionTests::test_collection_name_and_only_collection",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealCollectionTests::test_configuration_and_hashes_match_the_recorded_manifest",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealCollectionTests::test_count_dimension_metric",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealCollectionTests::test_every_source_id_once_and_metadata_complete_and_unchanged",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealCollectionTests::test_legacy_stores_not_created",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealCollectionTests::test_model_identity_matches_the_recorded_manifest",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealCollectionTests::test_stored_vectors_match_the_model_within_tolerance",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealRouterTests::test_known_source_issues_remain_visible",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealRouterTests::test_no_legacy_threshold_or_undocumented_cutoff",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealRouterTests::test_rank_ordering_and_cosine_distance_are_the_real_values",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealRouterTests::test_round_trip_normalises_metadata_and_preserves_source_url",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RegressionTests::test_phase4_top5_rankings_reproduce",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RegressionTests::test_phase5_retrieval_rankings_reproduce",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RegressionTests::test_recorded_metrics_reproduce",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealOrchestratorTests::test_fresh_process_loads_no_llm_or_legacy_module_and_uses_no_network",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.RealOrchestratorTests::test_real_collection_router_join_chain",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7b.ReproducibilityTests::test_recorded_validation_is_ok_and_a_fresh_run_reproduces_it",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7e.LiveEvaluationTests::test_fresh_process_reproduces_the_committed_document_byte_for_byte",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7e.LiveEvaluationTests::test_real_router_reproduces_recorded_rankings_on_a_sample",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7f.LiveEvaluationTests::test_fresh_process_reproduces_the_committed_results_byte_for_byte",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7f.LiveEvaluationTests::test_real_router_scores_match_the_results_on_a_sample",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7g.LiveRegressionTests::test_cli_route_only_end_to_end_on_the_real_store_in_a_fresh_process",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7g.LiveRegressionTests::test_phase4_top5_through_route_only_equals_the_recorded_rankings",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7g.LiveRegressionTests::test_phase5_top5_through_route_only_equals_the_phase7e_rankings",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase7g.LiveRegressionTests::test_store_logical_content_is_unchanged_by_routing",
+      "reason": "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files"
+    },
+    {
+      "test": "tests.test_phase8_chunking.RealCorpusChunkTests::test_model_token_limit_with_real_tokenizer_if_available",
+      "reason": "model tokenizer not available: FileNotFoundError: all-MiniLM-L6-v2 model files not found locally. Install `gt-all-minilm-l6-v2` or pass --model-path / set $M2C_MODEL_DIR. No download is attempted."
+    },
+    {
+      "test": "tests.test_phase8_e2e.RealStoreTests::test_build_is_reproducible_in_a_scratch_directory",
+      "reason": "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)"
+    },
+    {
+      "test": "tests.test_phase8_e2e.RealStoreTests::test_card_manifest_untouched_by_page_build",
+      "reason": "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)"
+    },
+    {
+      "test": "tests.test_phase8_e2e.RealStoreTests::test_manifest_records_model_dims_metric_corpus_config_count",
+      "reason": "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)"
+    },
+    {
+      "test": "tests.test_phase8_e2e.RealStoreTests::test_page_collection_is_separate_from_card_collection",
+      "reason": "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)"
+    },
+    {
+      "test": "tests.test_phase8_e2e.RealStoreTests::test_store_matches_a_fresh_chunking_of_the_corpus",
+      "reason": "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)"
+    },
+    {
+      "test": "tests.test_phase8_e2e.RealPipelineTests::test_card_first_chain_answers_with_real_page_citations",
+      "reason": "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)"
+    },
+    {
+      "test": "tests.test_phase8_e2e.RealPipelineTests::test_every_answer_in_the_eval_set_is_verifier_clean_and_never_phantom",
+      "reason": "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)"
+    },
+    {
+      "test": "tests.test_phase8_e2e.RealPipelineTests::test_oracle_mode_page_answers_cite_gold_page_only",
+      "reason": "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)"
+    },
+    {
+      "test": "tests.test_phase8_e2e.RealPipelineTests::test_unresolved_and_not_ingested_and_ood_paths",
+      "reason": "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)"
+    },
+    {
+      "test": "tests.test_phase9.RealCorpusChunkTests::test_token_limits_with_the_exact_model_tokenizer",
+      "reason": "embedding model tokenizer missing"
+    },
+    {
+      "test": "tests.test_phase9.ResultsConsistencyTests::test_router_and_page_results_reproduce_live",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_phase9.ExtrasTests::test_recorded_chains_reproduce_live",
+      "reason": "needs chromadb, the embedding model, the card store and the page store"
+    },
+    {
+      "test": "tests.test_windows_portability::test_windows_sqlite_probe_observes_real_handle_release",
+      "reason": "requires actual Windows sharing semantics"
+    }
+  ],
+  "skip_groups": {
+    "needs transformers + local all-MiniLM-L6-v2 files": 2,
+    "needs the built sap_m2c_card_v1 store": 4,
+    "needs the store and model": 3,
+    "needs chromadb, the embedding model, the card store and the page store": 65,
+    "stores not built in this checkout (see Phase 11 recreate order)": 6,
+    "requires built card and page vector stores": 12,
+    "needs sentence-transformers and chromadb to import the evaluator": 7,
+    "evaluator imports need sentence-transformers and chromadb": 1,
+    "needs data/vector_store (build_card_collection.py), chromadb, sentence-transformers and the local all-MiniLM-L6-v2 files": 25,
+    "model tokenizer not available: FileNotFoundError: all-MiniLM-L6-v2 model files not found locally. Install `gt-all-minilm-l6-v2` or pass --model-path / set $M2C_MODEL_DIR. No download is attempted.": 1,
+    "needs chromadb, the embedding model, the card store (data/vector_store) and the page store (data/vector_store/page_collection)": 9,
+    "embedding model tokenizer missing": 1,
+    "requires actual Windows sharing semantics": 1
+  },
+  "raw_xml_sha256": "86980a480625114e5ed40aef231c7d4eb387d7b686ecb8ef29e6f6cdb2ba380f",
+  "raw_log_sha256": "510f9abce4bd92a779d0c3d4ca7ff4c97a2aa0839233bffcd8f9f8ca8936c569",
+  "verification_commit": "c324ffb366511b15385524aa8ed24e956f662780"
+}

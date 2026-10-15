@@ -1,0 +1,18 @@
+{
+  "status": "PASS_DISPOSABLE_LINUX_FIXTURE_ONLY",
+  "production_backup_restore": "BLOCKED: production stores/target absent",
+  "child_processes_exited_before_copy_and_cleanup": true,
+  "backup_byte_exact_before_open": true,
+  "restored_new_path_byte_exact_before_open": true,
+  "restored_fixture_count_and_id_verified": true,
+  "corrupt_backup_hash_check_rejected": true,
+  "original_fixture_unchanged": true,
+  "files_sha256": {
+    "25f57a4a-fd17-4520-9af2-926c7b2ad241/data_level0.bin": "ca2ad22ff68c50b2c42d9b2d1eaceb7289b1f4d34b0eaf28171b3588f639a0c3",
+    "25f57a4a-fd17-4520-9af2-926c7b2ad241/header.bin": "709d1ca7614db21a38229fcf472cdec5765c319de4080000f30edeef73cf947e",
+    "25f57a4a-fd17-4520-9af2-926c7b2ad241/length.bin": "34f48cb3ebd1c37ea320cebbee9e8b668d0b808b962aadcced122b6f010b5113",
+    "25f57a4a-fd17-4520-9af2-926c7b2ad241/link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "chroma.sqlite3": "e5803c32d5c8f77d6800fdf9f21e4f6daa092ce0bc94f03f46deae226166e1e4"
+  },
+  "activated": false
+}

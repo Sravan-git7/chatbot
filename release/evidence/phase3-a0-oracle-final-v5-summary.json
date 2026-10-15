@@ -1,0 +1,105 @@
+{
+  "summary": {
+    "benchmark_schema_version": 1,
+    "adapter_id": "A0",
+    "is_test_fixture": false,
+    "oracle_mode": true,
+    "timestamp_utc": "2026-10-15T13:22:59.999254+00:00",
+    "total_cases": 70,
+    "repetitions": 1,
+    "metrics_summary": {
+      "behavior_accuracy": 0.657,
+      "behavior_matches": 46,
+      "mean_key_fact_recall": 0.507,
+      "mean_citation_coverage": 1.0,
+      "mean_citation_precision": 1.0,
+      "total_hallucinated_tokens": 0,
+      "total_prohibited_claims_detected": 10
+    },
+    "latency_summary": {
+      "generation_p50_ms": 1.69,
+      "generation_p95_ms": 3.03,
+      "generation_mean_ms": 1.62,
+      "generation_min_ms": 0.09,
+      "generation_max_ms": 6.57,
+      "retrieval_p50_ms": 100.53,
+      "retrieval_p95_ms": 153.79,
+      "retrieval_mean_ms": 109.58
+    },
+    "cost_and_tokens": {
+      "note": "Null until real hosted model usage and provider pricing are supplied. No fake cost fabricated.",
+      "total_input_tokens": null,
+      "total_output_tokens": null,
+      "cost_per_1000_queries_usd": null
+    }
+  },
+  "flagged_cases": [
+    {
+      "id": "CASE-012",
+      "flags": [
+        "Premise",
+        "Grid"
+      ],
+      "requires_human_review": true
+    },
+    {
+      "id": "CASE-020",
+      "flags": [
+        "does not document the steps to complete this procedure"
+      ],
+      "requires_human_review": true
+    },
+    {
+      "id": "CASE-023",
+      "flags": [
+        "does not document the steps to complete this procedure"
+      ],
+      "requires_human_review": true
+    },
+    {
+      "id": "CASE-024",
+      "flags": [
+        "does not document the steps to complete this procedure"
+      ],
+      "requires_human_review": true
+    },
+    {
+      "id": "CASE-025",
+      "flags": [
+        "Click Create Budget Billing Plan button"
+      ],
+      "requires_human_review": true
+    },
+    {
+      "id": "CASE-037",
+      "flags": [
+        "payments cannot be applied to installment plans"
+      ],
+      "requires_human_review": true
+    },
+    {
+      "id": "CASE-039",
+      "flags": [
+        "only one contract per account is permitted"
+      ],
+      "requires_human_review": true
+    },
+    {
+      "id": "CASE-040",
+      "flags": [
+        "Device location is a business object"
+      ],
+      "requires_human_review": true
+    },
+    {
+      "id": "CASE-052",
+      "flags": [
+        "assuming external cash desk without clarification"
+      ],
+      "requires_human_review": true
+    }
+  ],
+  "full_result_sha256": "599920f57ca19f2fcc472c49e8a971123c72e4a7a177bbe8e15f9efccab0a65d",
+  "full_result_local_path": "../phase3-a0-oracle-final-v5.json",
+  "limitations": "Real Python generator, unchanged cached evidence; NOT current retrieval/full API or independent SAP semantic certification"
+}

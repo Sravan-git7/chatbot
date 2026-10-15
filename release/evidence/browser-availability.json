@@ -1,0 +1,6 @@
+{
+  "status": "BLOCKED",
+  "checks": [],
+  "browser": "chromium",
+  "reason": "Chromium browser binaries are not installed; no browser E2E executed."
+}

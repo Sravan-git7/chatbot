@@ -1,0 +1,11 @@
+{
+  "version": "1.5.9",
+  "requires_python": ">=3.9",
+  "windows_wheels": [
+    {
+      "filename": "chromadb-1.5.9-cp39-abi3-win_amd64.whl",
+      "sha256": "4fd0b560e56761b7f3cb4d5c6205fd5f20814484b4a3e4e9af9038c2b428fc6c",
+      "size": 23542454
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "runtime_commit": "c324ffb366511b15385524aa8ed24e956f662780",
+  "checks": {
+    "backend": "7 failed, 1312 passed, 137 skipped, 54 errors, 204 subtests passed in 64.08s",
+    "release_regressions": "41 passed in 9.83s (standalone final-source run)",
+    "owned_lifecycle_windows_subset": "86 passed, 1 skipped, 1 deselected, 4 subtests passed in 12.03s",
+    "frontend": "119 passed, 1 skipped; 12 files passed; 22.00s; typecheck/build PASS (2.60s); npm audit zero",
+    "pip_check": "No broken requirements found",
+    "frontend_source_scope": "Final frontend execution at 3b95c7d; web source and dependency graph unchanged through final runtime c324ffb."
+  },
+  "blocked_commands": [
+    {
+      "command": "python benchmarks/run_quality.py --source-commit c324ffb366511b15385524aa8ed24e956f662780 --out ../full-quality-final-v7.json",
+      "exit": 1,
+      "cause": "Missing sentence_transformers; no quality JSON or inference produced"
+    },
+    {
+      "command": "python benchmarks/run_benchmark.py --mode stages --generator extractive --workload benchmarks/workload_v2.json --repeat 1 --warmup 0 --source-commit c324ffb366511b15385524aa8ed24e956f662780 --out ../performance-stages-final-v7.json",
+      "exit": 1,
+      "cause": "Missing sentence_transformers; no performance measurements produced"
+    },
+    {
+      "command": "python eval/release_v1/verify.py --out ../adversarial-preflight-final.json",
+      "exit": 2,
+      "cause": "Missing runtime/model/stores; independent gold pending"
+    },
+    {
+      "command": "python scripts/probe_q35_reproducibility.py --out ../q35-current.json",
+      "exit": 2,
+      "cause": "Safety refusal without explicitly quiesced supplied store; no Q35 inference/raw output"
+    }
+  ],
+  "verification_commit": "c324ffb366511b15385524aa8ed24e956f662780"
+}

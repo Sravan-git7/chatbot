@@ -1,0 +1,34 @@
+{
+  "verification_commit": "c324ffb366511b15385524aa8ed24e956f662780",
+  "files_sha256": {
+    "scripts/chroma_temp.py": "6253a33a1ba320b678434cd64d5248838666acee8a8090c888c1f6b1f5eda07d",
+    "scripts/owned_retrieval.py": "a8752d2ccb7b7fa5a9fcf7820d936487a965e2f0b1ea61966c8a2e87fdab6d14",
+    "scripts/rag_api.py": "5ad90fe4f08b1e0d3253cb7e128f68c0f1855871c344f449157587f2bcd867fb",
+    "scripts/rag_pipeline.py": "98c6a7bac506ef4c5b396296a29ecacf24457105231cfa8420eb97d7a2277489",
+    "scripts/rag_service.py": "88117b835d227a7000e028ca1c222522df9db1258875a2596275327364a11fbf",
+    "scripts/phase13_reranker.py": "d61e4e93cfdea1f57052fba9a861dbe4b5d140dc9042084328db7a23360226a2",
+    "tests/test_release_runtime.py": "b5123087824ce51fc3da32edc02e67cbcf71a283486ded50e0f2998947ccee05",
+    "tests/test_windows_portability.py": "42aedabf01265806bfc675be9326450aa6c48caa252df61f32624fcd18f1550e",
+    "tests/test_release_evaluation.py": "320b5db69986d5cdb55b7f083c6b4d8ed4b1e6b055e21acfd46f44d3624752a0",
+    "eval/release_v1/cases.json": "7a93120b2e102ec8757f457c66c20612fbf47047dbc351ce8fd9111683ed563c",
+    "eval/release_v1/verify.py": "8992a379fb580a8fac0dc2108c33e8e519f517e795c96bc4f1f8e898ed44348f",
+    "eval/release_v1/README.md": "f2960980e8224464aefec1b7f1e2c3277fb2892733db119e7cedf9f700722962"
+  },
+  "raw_evidence_sha256": {
+    "backend-final-v7.xml": "86980a480625114e5ed40aef231c7d4eb387d7b686ecb8ef29e6f6cdb2ba380f",
+    "backend-final-v7.log": "510f9abce4bd92a779d0c3d4ca7ff4c97a2aa0839233bffcd8f9f8ca8936c569",
+    "lifecycle-final-v7.xml": "ce431de627d7719330c5ea66eb7848c9b1c467cdbdb06c144e8163d752f302a4",
+    "lifecycle-final-v7.log": "b50497e78d934b6dd9d3095809ba1fbea4457795d1dd7604849ed20947303fb4",
+    "release-tests-final-v7.log": "7859679ead62e65ef98f8cb9e79218f5de56864bd11ef459cf89ce7cb6c1cf6a",
+    "frontend-final-v6.log": "d7e1169456b2dc4451a7fd3766465f2f52af24d2f1a73e00468e2c5f0d6af219",
+    "typecheck-final-v6.log": "566d3bb59668638721e7d8f9040a2f25be9b3c9b5b47a9a3683e5f2739e6afa0",
+    "build-final-v6.log": "db8c63103c31dd4ca0d6f211dd93062e1ed55b533478020331ce10dfee901c89",
+    "npm-audit-final-v6.json": "7a3389ffee59cce62eb9ea5c6934162f3c1b4f0612739c043c86c7353aee3012",
+    "lint-final-v7.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "format-final-v7.log": "177f260a5645724013185e4b140c7045cc39e56c0c97b120f5cb23599f85f0de",
+    "compile-final-v7.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pip-check-final.log": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+    "full-quality-final-v7.log": "db10d556f74aa4956978dc44672d9ff2345a52032b564da049e8dd47c55c625f",
+    "performance-stages-final-v7.log": "6fbbccff929ba058399e486ba164144c0074857a81ad07da8204f172643d0d41"
+  }
+}

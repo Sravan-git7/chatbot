@@ -1,152 +1,94 @@
-# SURA — pre-deployment hardening: final verification report
+# SURA — final release-engineering report
 
-**Verdict: NOT READY** for public deployment under this mission's verification gate.
-**No public deployment was performed.** Engineering changes are implemented and the Linux verification gate is green, but semantic-quality, native Windows, real-model and security dispositions remain incomplete.
+**Verdict: NOT READY.** Date: 2026-10-15. This is a reviewed hardening/verification candidate, **not an activated release**. Mandatory product, native-platform, real-model/browser, security and operations gates remain open. No public exposure, production-store migration/repair/replacement, model download, paid model call or candidate activation was performed.
 
-Date: 2026-10-13 · Repository: `Sravan-git7/chatbot` · Release branch: `arena/b450cda2-chatbot`.
-**Measured runtime commit: `05ef5e7c99aca8a03ee05b61ba16128093c2e1b9`**, descended from verified baseline `6eb9d9d`, `0c6ebdd`, `a6b1b53`, `9be6553` and `c7527ed`.
-The final report/artifact commit is supplied in the delivery message; it changes documentation/results only, not the measured runtime. This avoids assigning a self-referential hash to this report.
+## Candidate, history and preservation
 
-## 1. Engineering delivered
+- Branch: `arena/b450cda2-chatbot` throughout. Live GitHub branch tip at audit/recheck: `20cb6daa4c6cd4efd2c1d0ee117380101d843a5d` before publication. The original checkout was shallow/dirty and 11 commits behind; reconciliation there would have risked user work.
+- Work used a separate full same-branch clone at `scratch/release-mission-v3/candidate`. Original checkout remains `c7527edeb5d4a2963d8bac0072a8e7e5d0ba091f`; its working/index/untracked/stash state was preserved, not normalized/reset/cleaned.
+- Recoverable private baseline: 822 file hashes, binary working patch and user-work copies outside edited files. Baseline JSON SHA256 `a831a4fddf50766772beac663bba6ca54e3ef137782f5d8a75a7c272952b1ca5`. Final comparison: **822/822 original files unchanged; original index/stashes/status unchanged; 222/222 checkpoint pins match; 812 other original candidate baseline files unchanged**.
+- Original failing Windows test prefix: first 11,037 bytes SHA256 `fdf52dbbaa0f18ec65db58befe65fe18d202088d5784a308eb3c81b45b017d7b`, unchanged. Original assertions were not weakened. Additional tests follow that prefix.
+- Historical report previously at this filename is preserved byte-exact at `release/history/FINAL_RELEASE_REPORT.before-v3.md`, SHA256 `3f45330a10fe2ddbd1481dcf106e70c144ef6df66f7d5eb1be3b15379740d6b3`. Initial gate preregistration is separately archived unchanged. Corpus/model/checkpoint/evaluation artifacts and strict policies were not silently repaired or rebaselined.
+- Production/user data, local models, ignored backups/stores and immutable references were distinguished from newly owned disposable test stores. No live card/page store, `chroma_db`, `av`, or `local_backup2` was present here; none was deleted/created in the preserved checkout. Linux native tests used explicitly disposable stores/constant fixture vectors, never production data.
 
-Implemented targeted fixes, not a rewrite or an issue-only audit:
+### Reviewed commits
 
-- Admission-slot leakage after startup failure fixed; repeated 503s do not permanently saturate the API and recovery works.
-- Body limits enforce **received bytes**, including chunked requests; body reception expires after 10 seconds with controlled 408.
-- Ollama has a finite default network timeout (60 s); invalid/non-finite settings cannot disable it. `OLLAMA_MODEL` now actually configures the shipped client, with explicit constructor override preserved.
-- Request/generation FIFO queue waits are bounded (30 s); expiry returns 504, removes waiters, preserves permit accounting, and avoids conversation mutation.
-- Invalid configuration fails closed rather than merely warning. `/api/health` cannot contradict unavailable dependency readiness.
-- Copyable environment example keeps debug/privacy/experimental settings safe. Arbitrary request-id text is replaced by a bounded safe identifier; unexpected request logs retain exception type rather than private payload/traceback.
-- Missing **preselected/preset/default** detail now abstains rather than returning unrelated instructions. A named-code purpose question cannot be answered from a navigation-only “find more information” pointer on another page. Both fixes have positive controls and shipped-pipeline regressions.
-- Admission cap is configurable with a safe unchanged default of four; blank/invalid settings and raised/lowered caps are tested. Benchmarks distinguish completed RAG work from 429 saturation.
-- Reproducible preflight, safe byte-exact checkout refresh, dependency snapshot/ranged prerequisites, private API/UI smoke, live-HTTP frontend runner and compact Windows verification automation added.
-- Patched vulnerable Vitest/mocker tooling and removed vulnerable Tinypool dependency; preserved all UI assertions. The formerly skipped live UI test was repaired against the current **28-source** contract/current composer and actually executed.
-- Fixed versioned workloads, machine-readable latency/quality/security results, stage instrumentation and a strict wrong-source evaluator added. No answer cache, evidence truncation, invented source mapping or paid model service introduced.
+| Commit | Scope |
+|---|---|
+| `6e1528e9a82acb565e306bcad21b41f849628f2d` | Auth/privacy/owned-client lifecycle/partial-stop quarantine and regressions |
+| `c6530aa0b2e32bbac199d3656775c84854cf636d` | Cross-adapter failure quarantine and versioned adversarial evaluation package |
+| `855eb04b0712cc66931bc33d86cde8e136604388` | Reject implicit development CORS trust and wildcard production framing |
+| `72c43554e919b98d060588a0df617ac48c045f61` | Actual installed-SDK partial bindings failure, directory retention, outside-owner isolation and process-boundary recovery regression |
+| `3b95c7df081ff98d1dc9103fe3a92c22d85333cb` | Verify physical stored vector dimension and model identity against the loaded production embedding contract before readiness; actual SDK failure/recovery regressions |
+| `c324ffb366511b15385524aa8ed24e956f662780` | Refuse implicit page-database creation before SDK initialization; no-store-mutation regressions |
 
-Regression additions: **28 backend tests** (8 instrumentation/evaluator, 16 hardening/resource/checkout, 4 admission configuration) and **4 frontend tests** (2 error/recovery, 2 dependency advisory guards). Existing timeout assertions were strengthened to require finite defaults; historical source/gold assertions were not weakened.
+Final functional source and source/test verification commit: `c324ffb366511b15385524aa8ed24e956f662780`. All are descendants of the audited repository rollback point `20cb6daa...`. Normal publication is performed after final packaging/preservation checks; the completed remote receipt will be recorded separately. No force push, history rewrite, branch switch or production deployment is part of publication.
 
-Detailed root causes and test disposition: `PRE_DEPLOYMENT_AUDIT.md`.
+## Root-cause fixes and proof
 
-## 2. Full verification counts and scope
+1. **Partial native stop is not idempotent.** Real Chroma 1.5.9 deletes Rust bindings before later components can fail. The helper previously allowed a second stop attempt on an already-partially-stopped cached system. It now retains state/tree and rejects intersecting cleanup/reuse until process restart. Temporary and production-owned adapters coordinate quarantine. File-release timeout after a **successful** stop remains safely retryable without a second native stop.
+2. **Owned-client lifetime was lost.** Original retrieval factories retained collections but not their created SDK clients; both evidence/service wrappers constructed new pipelines, losing ownership metadata. New production wrappers own only their clients, transfer the resource list across both wrappers, close partial construction on failure, and release only after admission/draining. Unrelated/external owners remain usable. No global cache/refcount reset is used. Close failures stay visible and terminal.
+3. **Public errors leaked private exception messages.** Startup/readiness now return sanitized failures, while logs record exception types. Legacy tests expecting leaked text were strengthened to require sanitized text and reject private payloads, keeping status/failure behavior intact.
+4. **Shared deployment lacked a first-party boundary and trusted caller conversation IDs.** Production profile requires bearer secret/explicit hosts, rejects debug/raw logs/experiments/wildcards, has no implicit localhost CORS trust, and supported non-loopback CLI startup fails closed. Production ignores caller IDs, validates explicit client context in request-local state, and removes that state even on errors. Query fingerprints use per-app secret HMAC; request IDs are server-generated. The bearer is a backend/gateway credential, **not user identity or document-level authorization**.
+5. **Received-byte limit copied oversized chunks first; IP keys grew unbounded.** Check precedes buffer extension. Rate-limit buckets are bounded/recover after expiry; 429/errors receive privacy-safe headers. Existing queue/admission/timeout/permit recovery tests remain intact.
+6. **Readiness could accept unusable vector shapes.** Counts and declared metadata can agree while physical vectors have the wrong dimension. Both production owners now compare an actual stored embedding (public SDK read) and declared model identity against the loaded model dimension/name. A disposable store falsely declaring384 dimensions with actual2-dimensional vectors is rejected; external owners survive; a separate correct fixture recovers. Generic resource-only callers may omit a vector contract, but the production factory is regression-tested to supply it to both owners. This is an operational shape check, not full provenance/semantic certification.
+7. **Missing page database could be implicitly initialized.** Ownership wrapper now requires the existing SQLite file before calling the SDK. Empty page/card directories do not invoke the SDK or create a database. No live/default store was initialized by testing.
+8. **Undefined typing name.** The reranker omitted `typing.Set`; undefined-name/static checks and a model-independent public type-hint regression now pass. No retrieval score/rank/threshold change.
 
-| Gate | Actual result |
-| --- | --- |
-| Complete backend `pytest tests/ -q -ra`, committed source | **1366 passed, 225 subtests passed, zero failures/skips**, one Starlette deprecation warning; 163.57 s |
-| Frontend ordinary component/unit suite | **119 passed, 1 skipped** (120), 12 files |
-| Entire frontend suite with real HTTP backend | **120 passed, zero skips/failures**, 12 files (`frontend_live_verification.py`) |
-| TypeScript typecheck | passed |
-| Production frontend build | passed, 296 modules; JS 366.49 kB (gzip 113.86), CSS 41.28 kB |
-| Source/corpus, checkpoints, retrieval, evidence, citations, follow-ups, security, concurrency, readiness, logging | included in the complete green backend suite; no subsets substituted |
-| Independent current-production reference quality | 113 cases, real embeddings/stores, deterministic extractive generation; paired baseline/final outputs retained |
-| Phase 3 A0 / oracle / A2_mock | executed to **new** files; cache/mock limitations explicitly labelled |
-| Private live API/UI-serving smoke | passed nine checks, including supported/follow-up/unsupported/missing evidence/M2C-18/malformed/oversized/debug/headers |
-| Real Ollama inference | **BLOCKED** here: runtime/model unavailable. Actual outage contract tested, not a positive inference pass |
-| Chromium/Playwright | **BLOCKED**: binary absent, actual launch availability checked; no browser pass claimed |
-| Native Windows Python 3.10/full numerical and generated-byte reproduction | **NOT EXECUTED** from Arena; pending handoff gate |
+New runtime tests: 35; evaluator-honesty tests: 6. **41 passed**, with failure/recovery cases. A real Linux native subprocess fault deletes actual Rust bindings, then raises; helper/factory retry is rejected, the tree and failed cache state remain, outside collection works, and another process reopens/queries the retained fixture successfully **after the first process exits**. No real failed registry was forcibly cleared in-process. This is strong Linux/package evidence, not Windows certification.
 
-The live frontend run uses jsdom plus actual API requests, not a real browser. Ordinary unit tests use explicit HTTP fixtures. Backend tests include both injected fixtures and real-store cases; stub client success never counts as real Ollama inference.
+## Current verification, not historical substitution
 
-## 3. New latency evidence — extractive only
+Environment: Linux/Python **3.11.2**, isolated non-model venv, Chroma1.5.9/FastAPI0.142.2/Uvicorn0.54.0/Pydantic2.13.5/httpx0.28.1/numpy2.4.6/pytest9.1.1; Node22.22.3/npm10.9.8. No Torch/ST/model weights, Ollama daemon or browser binary. Existing frontend lockfile was installed with scripts disabled; original environment untouched.
 
-Same frozen workload v2, actual baseline `6eb9d9d` archive versus committed `05ef5e7`; 13 items × 100 warm measured final-turn requests = **1300 samples per mode/run**. Warmups/cold start kept separate; nearest-rank percentiles. Every measured sequential response matches status/card expectations.
+| Verification | Current result / scope |
+|---|---|
+| Full backend at final verification commit | **7 failed, 1312 passed, 137 skipped, 54 errors, 204 subtests passed; 64.08s; exit1** |
+| Initial backend baseline | 7F/1247P/136S/54E +200subtests;53.13s. Not green then or now. |
+| Release-specific regressions | **41 passed**,see final combined run; no real-model semantic certification |
+| Combined lifecycle/evaluation preparation | **86 passed,1 native-sharing skip,1 resource diagnostic deselected,4 subtests**,12.03s; diagnostic is included/failing in the full suite |
+| Immutable/source-identity subset | 190P/18S/1deselected+4subtests; current full suite also validates pins/source policy |
+| Frontend | **119P/1 live-backend skip**,12 files pass,22.00s; jsdom/fixtures, not browser E2E |
+| Typecheck/build | `tsc --noEmit` PASS; Vite6.4.3 build PASS,2.60s; no frontend source/dependency change |
+| Lint/format/review | Whole scripts/tests/new evaluator syntax/undefined-name Ruff checks PASS; four new Python files formatter check PASS; `git diff --check` PASS. No unconfigured universal Python type/style guarantee or mass protected-source reformat. |
+| Dependency compatibility/audit | Isolated environment `pip check`: no broken requirements. npm audit **0 findings**. Reviewed pip scan: Chroma **2 critical +2 high**, unresolved. |
+| Cached Phase3 A0 / oracle | **47/70**,52.1% recall,10 flags / **46/70**,50.7%,10 flags. Cache/lexical metrics, not full RAG or human SAP correctness. |
+| Full quality/stages performance | Exit1/missing `sentence_transformers`; no inference, quality JSON or latency/capacity measurements |
+| New adversarial package | Hash-protected versioned review cases/all required classes; offline preflight exit2/BLOCKED, not approved gold |
+| Native Windows/Q35 | BLOCKED; no host/historical raw reference. Q35 CLI safely refuses absent explicitly quiesced supplied store (exit2). |
+| Ollama/browser | Local Ollama tags probe ConnectError; browser smoke exit2 before any server/browser spawn (missing Chromium). No real workflows executed. |
+| Backup/restore | Disposable **Linux fixture-only** cold byte-exact copy/new-path restore, corrupt-copy hash rejection and source preservation PASS; actual production rollback BLOCKED |
 
-| Mode | Baseline p50 / p95 / p99 | Final p50 / p95 / p99 |
-| --- | --- | --- |
-| Full in-process service | **40.61 / 64.78 / 78.78 ms** | **34.82 / 53.83 / 62.59 ms** |
-| End-to-end HTTP API | **45.01 / 68.65 / 82.23 ms** | **37.59 / 54.57 / 65.51 ms** |
+### Every failure/error/skip reviewed
 
-HTTP mean/stddev: 45.84/16.24 → 38.30/13.02 ms. Expected abstentions: 400/1300; errors/timeouts: zero. Per-item distributions, individual stage windows, sample counts, document/context lengths and all raw summary metadata are preserved in JSON.
+Complete test IDs and dispositions: `release/evidence/baseline-backend-disposition.json` and `final-backend-disposition.json`. Raw full stdout/XML remain outside edited files at `../backend-final-v7.log` and `../backend-final-v7.xml`; their hashes and reviewed source identities are versioned in `review-manifest.json`.
 
-Hardware: Linux x86-64, Intel Xeon @2.60 GHz, **2 CPUs**, ~3.85 GiB RAM; Python 3.11.2, Node 22.22.3; MiniLM CPU, Chroma 1.5.9, sentence-transformers 6.1.0, Torch 2.14.1, NumPy 2.4.6. Corpus: 29 cards/28 pages/113 vectors, hash `46e7c63a…`; routing top-k 10, page cap 5, context cap 4, budget 700 tokens.
+Final 61 failed/error cases:
 
-Model/store construction: **6.881 → 5.404 s**. First service request: 85.77 → 61.30 ms; first HTTP request: 105.82 → 79.88 ms. Final peak RSS: stages 925.8 MiB, API 956.3 MiB. These are sandbox measurements, **not Windows-PC numbers** or causal/statistically established speedup claims.
+- **36** missing ST runtime cases: 31 setup errors (benchmark instrumentation4, golden1, reranker6, hybrid8, concurrency12) plus5 failures (Phase14 two; hardening configured model/absent detail/named-code purpose three). Actual weights/stores are also absent; importing ST alone would not close those gates.
+- **24** exact-tokenizer cases: 23 repair-seed setup errors +1 focused115-record diagnostic failure. `make_token_counter()` reports `exact=False`; approximation intentionally rejected. Assertions remain strict.
+- **1** original diagnostic child failure: actual separate disposable reproduction confirms FileNotFoundError at `resolve_model`, child exit1, source fixture hashes unchanged. It is **not** evidence that Windows cleanup passed or that the worker completed its full diagnostic.
 
-Baseline already met the initial latency budgets. Existing one-query-embedding/request-local retrieval reuse was preserved; no risky caching or grounding tradeoff was justified. API p95 includes generation and is below 200 ms here, conservatively bounding non-model overhead. Routing dominates extractive cost. Exact stage boundaries and unavailable pure-stage/resource counters are documented rather than invented.
+All137 skips are individually recorded, with aggregated reasons:65 full-stack card/page/model,25 card/model/ST,12 built stores,9 full-stack variant,7 evaluator imports,6 store recreation,4 card-store,3 store/model,2 transformers/local model,1 evaluator imports,1 exact tokenizer resolver,1 embedding tokenizer,1 actual Windows sharing semantics. Frontend skip is the explicit `LIVE_BACKEND=1` integration in `sura_ux.test.tsx`; never counted as real browser/model evidence.
 
-## 4. Throughput and saturation
+Warnings: provisioning script-location/PATH warnings only (explicit venv executable used); npm reports deprecated **whatwg-encoding3.1.1** (development jsdom dependency path, zero current npm advisory findings, follow-up maintenance rather than arbitrary lock churn). No warning summary was emitted by the final backend/build runs. Native/source-only/mocked limitations are recorded, not concealed.
 
-200 offered mixed requests per concurrency level; per-IP limiter lifted **only for the private benchmark process**. Production admission cap remains four. Completed RPS excludes rejections; accepted/rejection/all-response distributions are separate.
+## Product, security and operations blockers
 
-| Clients | Final accepted / 429 | Completed RPS | Accepted p95 |
-| --- | --- | --- | --- |
-| 1 | 200 / 0 | 27.15 | 51.16 ms |
-| 4 | 200 / 0 | 33.58 | 172.03 ms |
-| 5 | 53 / 147 | 27.17 | 222.81 ms |
-| 10 | 34 / 166 | 26.53 | 241.93 ms |
-| 20 | 24 / 176 | 19.99 | 480.53 ms |
+- **Highest gate — SAP semantic correctness remains inadequate/unverified.** Historical full-RAG37/65, wrong-page/negative-label drift, cached procedure/relevance/ambiguity weaknesses and ten heuristic flags remain open. M2C-18 has no verified guide/page mapping. New positive cases reuse frozen AI references; no invented SAP gold. Independent source/version/claim adjudication and actual full RAG are required; abstention is not substantive correctness.
+- Actual approved embedding runtime, exact tokenizer/model hashes, card/page stores and intended hardware are absent. No large alternative Torch/model download was used to disguise that gap.
+- Native Windows original assertions/handles/finalizer/retained aliases/same-path/partial-failure proof remains external. GitHub repository is public, but has **zero existing workflows**; Actions administration/permissions inspection is integration-denied403. No hosted runner was provisioned/dispatched, no permission/billing assumption made, and no native environment substituted for the required approved one.
+- Q35 historical Windows raw/environment provenance is missing; new rounded/arithmetic output cannot reconstruct it. Strict equality/tolerance unchanged.
+- Real Ollama, real supported browser, authenticated gateway/session, accessibility and actual failure/cancel/recovery workflows remain unexecuted. Existing browser smoke is a local workflow, not certification of authenticated production ingress.
+- Four Chroma advisories have no listed patch. Their HTTP-server endpoints are not SURA's local Rust architecture, but package/native/model-store risks and actual target reachability still need security disposition/authorized acceptance. Actual production/native/OS/Windows/model graph and hash-lock provenance are incomplete. Scope-tagged 506-component CycloneDX inventory is not a certified production dependency-edge SBOM.
+- Native synchronous work is not guaranteed immediately interruptible; no verified absolute full-pipeline deadline/cancellation/drain bound exists. Admission is retained until completion; closing resources under active workers is avoided. Real target recovery proof remains mandatory.
+- Full-API performance is **unmeasured**. Versioned p50/p95/p99/RPS/cold/memory targets/reference host are declared, all rejects/difficult/incorrect requests must be counted, and single-IP default60/min cannot be claimed as20RPS production capacity. No sandbox capacity extrapolation.
+- Actual deployed known-good release/store backup/platform/monitoring/rollback and human approval are absent. Repository rollback20cb is not proven production rollback. No automatic production store activation or repair.
 
-All accepted responses correct; zero errors/timeouts. **Four concurrent requests** is the declared default target, not twenty. Small saturation samples cannot support strong tail guarantees.
+## Deliverables and safe stopping point
 
-Separate opt-in admission-cap-20 experiment: all 200 requests at each of 1/5/10/20 complete correctly, zero 429s/errors/timeouts. Completed RPS = **25.96 / 33.27 / 29.94 / 31.92**; accepted p95 = **57.35 / 237.77 / 462.05 / 825.94 ms**. This queues through the same four service slots, not extra compute or silently discarded work. Do not extrapolate it to an unmeasured LLM host.
+Required reports are present: `RELEASE_GATES.md`, this report, `SECURITY_AUDIT.md`, `RAG_QUALITY_REPORT.md`, `WINDOWS_VERIFICATION_REPORT.md`, `DEPLOYMENT_AND_ROLLBACK.md`. Supporting source/tests, frozen-input adversarial package, complete failure/skip dispositions, inventories, advisory metadata, preservation manifests and fixture rollback proof are versioned.
 
-**Ollama latency/throughput: BLOCKED**, reported separately; no numbers fabricated or mixed with extractive.
+Remaining affected operations stop at the genuine native/model/content/security/operator resource and approval boundaries described above. This mission's acceptance is **not complete** merely because engineering changes/reporting are delivered. Resume full runtime/adjudication/native/ingress/rollback verification on the required approved resources, fix demonstrated product failures without rebaselining, and re-evaluate every mandatory gate before any deployment decision.
 
-Full methodology, before/after tables, stages and goals: `LATENCY_RAG_COMPARISON.md`.
-
-## 5. Independent quality results
-
-Same 113 frozen AI-authored reference cases (not blind expert gold); 65 answerable, 40 negative-labelled, 8 ambiguous. The final evaluator requires expected guide/page in citation **and** context plus expected evidence in the answer.
-
-| Metric | Baseline → final |
-| --- | --- |
-| Recall@1 / known-gold precision@1 | 95.38% → 95.38% |
-| Recall@5 | 100% → 100% |
-| MRR, truncated at 10 | 0.9744 → 0.9744 |
-| Gold evidence in context | 62/65 → 62/65 |
-| Strict reference-evidence answers | **37/65 → 37/65 (56.92%)** |
-| Wrong-page answered cases | **1 → 0** (withheld, not assigned an invented replacement source) |
-| Answers against frozen negative labels | **11/40 → 10/40** |
-| Appropriate abstention under those labels | 72.5% → 75% |
-| Phantom citations / citation-context identity mismatches | 0 / 0 → 0 / 0 |
-| Lexical supported-sentence rate | 100% → 100%; **not semantic truth** |
-
-The ten remaining negative-label answers correspond to eight formerly missing pages and two formerly unresolved identities now admitted. Frozen labels are not rewritten; independent semantic/source-alternative adjudication remains necessary. Strict evidence coverage/correctness is not sufficient to certify the product's broad answer quality.
-
-Fresh Phase-3 cached A0: **47/70 behavior matches**, mean key-fact recall **52.1%**, citation checks 100%, **10 prohibited-claim flags**, unchanged before/after. Oracle A0: 46/70, 50.7%, ten flags. A2_mock: fixture only (53/70, 28.2%, two flags), **not an LLM result**. Cache retrieval timings remain historical inputs, not current retrieval measurements. Those unresolved quality signals are part of the NOT READY verdict.
-
-## 6. M2C-18, historical artifacts and reproducibility
-
-**M2C-18 stays fail-closed**, no authoritative new SAP mapping available. The page is absent from its card guide's verified TOC and appears only in an unregistered alternate deliverable. Required evidence remains an exact-public-URL capture to a verified registered guide/TOC, or authoritative alternate-guide registration/TOC plus permission to repoint the card. No answer/evidence/source identity fabricated.
-
-Both prior release reports, source corpus/provenance, pinned checkpoint, identity records, historical Ollama/environment/evaluation artifacts and frozen query/gold files remain unchanged. New runs live only under `benchmarks/results/`; early invalid/exploratory attempts are explicitly adjudicated, never blended into final numbers.
-
-`.gitattributes` and the refusal-safe checkout refresh fix Windows checkout newline conversion. The sealed producer's platform-default newline output is a **separate unresolved native Windows gate**. Do not skip/weaken `test_chunk_candidates.py` or rewrite its pins to manufacture green. `test_phase7b.py` also requires exact embedding/store prerequisites; Linux passed, Windows remains pending. Legacy `chroma_db/`, personal caches and backups are not deleted.
-
-Dependency snapshot: 127 runtime/test version pins, Linux/Python-3.11 baseline; not a hash-locked cross-platform wheelhouse. Existing `av`/Python-3.10 uses ranged required prerequisites plus packaged MiniLM; a personal absolute cache path is not required. Native Windows compatibility/numerical reproduction must still be measured.
-
-## 7. Security scope and remaining blockers
-
-- npm audit: initial critical test-tooling chain fixed; **zero final findings**. Two regression guards prevent restoring the vulnerable versions.
-- pip consistency: no broken requirements. PyPI advisory audit covers **127 pins** and returns five rows representing **four unique Chroma server CVEs**, no fix versions supplied. Local PersistentClient/chat do not expose the affected collection/model-configuration HTTP endpoints, but this is scoped exposure analysis, not a clean security certification. Keep Chroma servers unexposed and obtain a patched supported version/security disposition.
-- Public exposure needs an approved authentication/TLS boundary and per-user authorization/isolation. Client-chosen conversation ids are not an authentication boundary. Tested concurrent isolation is between distinct conversations; overlapping same-id turn ordering is not independently certified.
-- Body, FIFO queue, Ollama network operations and browser requests are bounded; arbitrary hung native execution has no hard interruptible server deadline. Direct ASGI-factory operation also requires explicit operator structured-logging configuration; the CLI is the verified start mode.
-
-### Concrete next actions / release impact
-
-1. **Quality:** independently adjudicate reference failures, Phase-3 prohibited flags and corpus-drift cases; publish a new reviewed versioned gold set without overwriting frozen baselines. Improve genuine missing-fact/answerability defects against that evidence. Current 56.9% strict reference correctness is not enough for public approval.
-2. **Windows:** execute the compact handoff; retain failures. Resolve native sealed-writer/numerical reproduction with an approved versioned migration or a declared Linux/WSL verification target. Do not silently alter checkpoint pins.
-3. **Real model:** use the already installed local Ollama model for a positive round trip and the same workload; capture local hardware, tails, throughput and timeouts. No fixed LLM latency promise before measurement.
-4. **Browser:** run the supplied new smoke with existing/approved Chromium binaries. jsdom/live HTTP does not substitute for browser rendering/accessibility certification.
-5. **Security/reliability:** obtain Chroma advisory disposition and an approved public access/isolation boundary; evaluate a process-level hard execution deadline if hard cancellation is required.
-
-## 8. Compact Windows handoff
-
-From `D:\chatbot-phase12`, preserve local changes, fetch and fast-forward only, verify the exact pushed release commit from the delivery message, then run one helper:
-
-```powershell
-Set-Location D:\chatbot-phase12
-if ((git status --porcelain).Length -gt 0) { git stash push -u -m 'pre-hardening-local-backup' }
-git fetch origin
-# Must be on arena/b450cda2-chatbot; stop and inspect any divergence.
-git merge --ff-only origin/arena/b450cda2-chatbot
-git log -1 --oneline
-.\scripts\verify_windows.ps1 -Python .\av\Scripts\python.exe -InstallPrerequisites -BuildMissingStores
-```
-
-For the existing available model: set `OLLAMA_MODEL` to its actual name and run the same helper with `-Ollama` (no `ollama pull`). The helper captures new results in `%TEMP%`, runs the full suite/live UI/API/same benchmarks, preserves caches/manifests and reports failures rather than skipping them. Detailed fresh setup, safe branch switching, byte caveat, local UI start and comparison instructions: `LOCAL_PRODUCTION_VERIFICATION.md`.
-
-## 9. Release preservation and delivery
-
-Changes are confined to intentional source/tests/dependency/tooling/benchmark/docs/results files. No secrets, env files, private backups or vector/model caches are committed. Both branches remain preserved; normal fast-forward push only. Runtime source is committed as `05ef5e7`; a subsequent artifact/report commit carries this report and measurement files, with final remote synchronization verified in the delivery message.
-
-**Final verdict: NOT READY.** The measured Linux extractive configuration is materially hardened and fast, with complete regression and live component/API coverage. That is not enough to pretend the remaining quality, platform, model, browser and public-security gates are satisfied.
+**Only READY FOR APPROVED DEPLOYMENT if every mandatory gate genuinely closes. Current verdict: NOT READY.**
