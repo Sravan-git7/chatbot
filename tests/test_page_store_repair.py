@@ -178,15 +178,21 @@ def test_post_repair_metadata_tamper_detected(seed, tmp_path):
     assert not (paths[3] / "VERIFIED.json").exists()
 
 
-def test_repair_refuses_source_under_production_data(seed, tmp_path):
-    with pytest.raises(R.RepairAborted, match="production/data"):
-        R.repair(ROOT / "data/vector_store/page_collection", seed[1], tmp_path / "backup", tmp_path / "candidate", R.APPROVED, True, True)
+def test_repair_refuses_source_under_production_data(tmp_path):
+    # This must refuse before reading a diagnostic or opening any store. Requiring
+    # the model-dependent seed hid this safety assertion behind tokenizer setup.
+    with patch.object(R, "load", side_effect=AssertionError("must refuse before input reads")):
+        with pytest.raises(R.RepairAborted, match="production/data"):
+            R.repair(ROOT / "data/vector_store/page_collection", tmp_path / "diagnostic.json", tmp_path / "backup", tmp_path / "candidate", R.APPROVED, True, True)
+    assert not (tmp_path / "backup").exists() and not (tmp_path / "candidate").exists()
 
 
 @pytest.mark.parametrize("approvals", [[], list(R.APPROVED[:1]), list(R.APPROVED) + [R.APPROVED[0]], list(R.APPROVED) + ["other"]])
-def test_explicit_exact_approval_required(seed, tmp_path, approvals):
-    paths = setup_paths(seed, tmp_path)
-    with pytest.raises(R.RepairAborted, match="two explicit"): R.repair(*paths, approvals, True, True)
+def test_explicit_exact_approval_required(tmp_path, approvals):
+    paths = tuple(tmp_path / name for name in ("source", "diagnostic.json", "backup", "candidate"))
+    with patch.object(R, "load", side_effect=AssertionError("must refuse before input reads")):
+        with pytest.raises(R.RepairAborted, match="two explicit"): R.repair(*paths, approvals, True, True)
+    assert all(not path.exists() for path in paths)
 
 
 def test_cooperating_job_lock_is_not_reclaimed(seed, tmp_path):
