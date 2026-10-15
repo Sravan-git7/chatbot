@@ -3,6 +3,7 @@
 Starts a private local backend at port 8000 and stops it after the tests. Never overwrites
 historical reports. Use the current Python venv and the installed web/node_modules.
 """
+import argparse
 import os
 import subprocess
 import sys
@@ -14,6 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
+    # Parse before binding a socket or launching a backend: --help must be inert.
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.parse_args()
     base = "http://127.0.0.1:8000"
     # Never mistake another server on this port for the server under test.
     import socket

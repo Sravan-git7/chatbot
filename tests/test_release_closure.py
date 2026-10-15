@@ -92,3 +92,28 @@ def test_legacy_evaluator_retains_partial_answer_classification_without_validato
     )
     assert not RG.verify_grounding(forged, ctx).ok
     assert not EV.verify_support_chain(forged, ctx)["ok"]
+
+
+@pytest.mark.parametrize(
+    "arguments,expected_exit", [(["--help"], 0), (["--unknown"], 2)]
+)
+def test_frontend_verifier_parses_arguments_before_any_server_launch(
+    monkeypatch, arguments, expected_exit
+):
+    import importlib.util
+    from pathlib import Path
+    from unittest.mock import Mock
+
+    path = Path(__file__).resolve().parents[1] / "scripts/frontend_live_verification.py"
+    spec = importlib.util.spec_from_file_location("closure_frontend_verifier", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    launch = Mock(
+        side_effect=AssertionError("help/invalid arguments must not launch a backend")
+    )
+    monkeypatch.setattr(module.subprocess, "Popen", launch)
+    monkeypatch.setattr("sys.argv", [str(path), *arguments])
+    with pytest.raises(SystemExit) as exc:
+        module.main()
+    assert exc.value.code == expected_exit
+    launch.assert_not_called()
