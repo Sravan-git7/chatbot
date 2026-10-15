@@ -37,6 +37,8 @@ NO_ANSWER_TEXT = "I couldn't find this information in the provided SAP documenta
 MIN_SENTENCE_SUPPORT = 0.6          # pre-declared (not tuned): share of a sentence's content terms found in its cited chunks
 EXTRACTIVE_MIN_SCORE = 0.34         # pre-declared (not tuned): minimum share of question terms a sentence must contain to be extracted
 EXTRACTIVE_MAX_SENTENCES = 3
+# A fixed request-local selection limitation, never a factual claim about an entire SAP page.
+PROCEDURAL_LIMITATION_NOTICE = "The selected evidence does not establish a complete step-by-step procedure."
 _MARKER = re.compile(r"\[S(\d+)\]")
 _COMPOUND_MARKER = re.compile(r"\[(S\d+(?:[\s,/\-–]+(?:and\s+)?S?\d+)*)\]")
 _URL = re.compile(r"https?://\S+|www\.\S+|help\.sap\.com\S*", re.I)
@@ -279,14 +281,10 @@ class GroundingReport:
                 "cited_markers": self.cited_markers, "phantom_markers": self.phantom_markers}
 
 
-_PROCEDURAL_LIMITATION_RE = re.compile(
-    r"^The available SAP Help page\b.*?\bdoes not document\b",
-    re.I,
-)
-
-
 def is_procedural_limitation_sentence(text: str) -> bool:
-    return bool(_PROCEDURAL_LIMITATION_RE.match(text.strip()))
+    # Exempt only this exact, fact-free notice. Prefix matching let arbitrary
+    # unsupported claims bypass both grounding and verbatim support checks.
+    return text.strip().casefold() == PROCEDURAL_LIMITATION_NOTICE.casefold()
 
 
 def verify_grounding(
@@ -334,7 +332,7 @@ def verify_grounding(
             body = _MARKER.sub("", line).strip()
 
         if ((not T.terms(body) and not T.code_tokens(body))
-                or is_procedural_limitation_sentence(body)):
+                or (not marker_names and is_procedural_limitation_sentence(body))):
             continue                                              # marker-only / punctuation-only / limitation notice line
 
         phantom = [m for m in marker_names if m not in valid]

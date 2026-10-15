@@ -14,6 +14,8 @@ from __future__ import annotations
 import re
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 
+from rag_generate import is_procedural_limitation_sentence
+
 CITATION_MARKER_RE = re.compile(r"\[(S\d+)\]")
 
 # A purpose/definition statement in the first clause of a line ("This component enables you to create and manage
@@ -39,15 +41,9 @@ def extract_citations(text: str) -> List[str]:
     return markers
 
 
-_PROCEDURAL_LIMITATION_RE = re.compile(
-    r"^The available SAP Help page\b.*?\bdoes not document\b",
-    re.I,
-)
-
-
 def categorize_line(line: str) -> str:
     """Deterministically categorize an answer line into a section key."""
-    if _PROCEDURAL_LIMITATION_RE.match(line.strip()):
+    if is_procedural_limitation_sentence(line):
         return "overview"
     lower = line.lower()
     # Purpose/definition statements are overview content, never procedures ("enables you to create and manage ...").

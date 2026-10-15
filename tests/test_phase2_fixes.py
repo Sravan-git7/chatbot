@@ -316,7 +316,7 @@ class Phase21FormattingAndAnswerabilityTests(unittest.TestCase):
         result = self.generator.generate(question, context)
 
         self.assertFalse(result.refused)
-        expected_limitation = "The available SAP Help page explains the purpose and parameters of a budget billing plan, but it does not document the steps to create one."
+        expected_limitation = RG.PROCEDURAL_LIMITATION_NOTICE
         self.assertIn(expected_limitation, result.text)
         # Grounded context must remain present and cited
         self.assertIn("Utility companies normally bill for their services", result.text)
@@ -339,7 +339,7 @@ class Phase21FormattingAndAnswerabilityTests(unittest.TestCase):
         result = self.generator.generate(question, context)
 
         self.assertFalse(result.refused)
-        expected_limitation = "The available SAP Help page describes the features and KPIs of the Periodic Billing and Invoicing Analysis app, but it does not document the steps to perform the analysis."
+        expected_limitation = RG.PROCEDURAL_LIMITATION_NOTICE
         self.assertIn(expected_limitation, result.text)
         self.assertIn("You can use this app to analyze", result.text)
         self.assertIn("[S1]", result.text)
@@ -363,6 +363,7 @@ class Phase21FormattingAndAnswerabilityTests(unittest.TestCase):
         self.assertFalse(result.refused)
         # No limitation notice should be present
         self.assertNotIn("does not document the steps", result.text)
+        self.assertNotIn(RG.PROCEDURAL_LIMITATION_NOTICE, result.text)
         # Numbered procedural step should be present
         self.assertIn("Select the billing document to reverse. [S1]", result.text)
         self.assertTrue(RG.verify_grounding(result.text, context).ok)
@@ -382,6 +383,7 @@ class Phase21FormattingAndAnswerabilityTests(unittest.TestCase):
 
         self.assertFalse(result.refused)
         self.assertNotIn("does not document the steps", result.text)
+        self.assertNotIn(RG.PROCEDURAL_LIMITATION_NOTICE, result.text)
         self.assertIn("In Utilities, one contract account contains all contracts", result.text)
         self.assertTrue(RG.verify_grounding(result.text, context).ok)
         self.assertTrue(EV.verify_support_chain(result.text, context)["ok"])

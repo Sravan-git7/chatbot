@@ -36,7 +36,10 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_text as T  # noqa: E402
-from rag_generate import EXTRACTIVE_MAX_SENTENCES, NO_ANSWER_TEXT, GenerationResult  # noqa: E402
+from rag_generate import (  # noqa: E402
+    EXTRACTIVE_MAX_SENTENCES, NO_ANSWER_TEXT, GenerationResult,
+    PROCEDURAL_LIMITATION_NOTICE, is_procedural_limitation_sentence,
+)
 
 TAU = 0.6                           # pre-declared: share of focus terms the best answer sentence (+ its section heading) must cover
 SHIPPED_TAU = 0.5                                           # shipped value, selected on DEV2 (contract Amendment 2c); TAU above is the pre-declared grid middle
@@ -747,30 +750,9 @@ def _has_genuine_procedural_steps(units: Sequence[Unit]) -> bool:
 
 
 def _procedural_limitation_notice(question: str, chosen: Sequence[Unit]) -> str:
-    title = ""
-    for u in chosen:
-        labels = getattr(u, "heading_labels", ()) or ()
-        if labels:
-            title = labels[0]
-            break
-    q_low = question.lower()
-    t_low = title.lower()
-    if "budget billing" in q_low or "budget billing" in t_low:
-        return "The available SAP Help page explains the purpose and parameters of a budget billing plan, but it does not document the steps to create one."
-    if "periodic billing" in q_low or "f3424" in q_low or "periodic billing" in t_low or "f3424" in t_low:
-        return "The available SAP Help page describes the features and KPIs of the Periodic Billing and Invoicing Analysis app, but it does not document the steps to perform the analysis."
-    topic_name = title or "this topic"
-    return f"The available SAP Help page explains the purpose and parameters of {topic_name}, but it does not document the steps to complete this procedure."
-
-
-_PROCEDURAL_LIMITATION_RE = re.compile(
-    r"^The available SAP Help page\b.*?\bdoes not document\b",
-    re.I,
-)
-
-
-def is_procedural_limitation_sentence(text: str) -> bool:
-    return bool(_PROCEDURAL_LIMITATION_RE.match(text.strip()))
+    # Only selected snippets were inspected, not an authoritative whole page.
+    # Do not infer topic facts from a question/heading or claim page-wide absence.
+    return PROCEDURAL_LIMITATION_NOTICE
 
 
 def _workflow_sequence_has_heading_support(unit: Unit, needs: QuestionNeeds) -> bool:
@@ -1428,7 +1410,7 @@ def verify_support_chain(answer: str, context: Any) -> Dict[str, Any]:
     for line in T.split_cited_sentences(answer or ""):
         markers = re.findall(r"\[(S\d+)\]", line)
         body = _norm(re.sub(r"\[S\d+\]", "", line))
-        if not body or is_procedural_limitation_sentence(body):
+        if not body or (not markers and is_procedural_limitation_sentence(body)):
             continue
         hit = [m for m in markers if m in by and body in _norm(by[m].text)]
         records.append({"sentence": body[:160], "markers": markers, "verbatim_in": hit})
