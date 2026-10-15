@@ -1,3 +1,5 @@
+> **2026-10-15 closure follow-up — NOT READY.** The assessment below is the published `a027cd64` record, not the latest result. See [RELEASE_BLOCKER_CLOSURE.md](RELEASE_BLOCKER_CLOSURE.md) for the exhaustive current blocker classification, all61 independent failure reproductions, narrow fixes and external procedures. Tested source: `47e1e09aece4feb03aeae3abd06c5458b983ba07`; backend **7F/1330P/137S/49E +204 subtests**. All four Chroma advisories remain open. Frozen `phase12_results.json` reports38/65 and two wrong-page cases; the older37/65 narrative remains provenance-unreconciled, not a new run or baseline change. No production activation authorized.
+
 # SURA release gates — mission v3, final assessment
 
 **NOT READY.** Date: 2026-10-15. Final functional candidate: `c324ffb366511b15385524aa8ed24e956f662780`; same session branch `arena/b450cda2-chatbot`. Repository rollback/base: `20cb6daa4c6cd4efd2c1d0ee117380101d843a5d`. No public deployment/store activation authorized or performed.

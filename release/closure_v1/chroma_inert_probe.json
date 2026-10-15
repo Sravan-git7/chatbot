@@ -1,0 +1,18 @@
+{
+  "scope": "inert registered constructor, not remote-code exploit; no downloads/network/model; package 1.5.9",
+  "create_config_deserialization_calls": [
+    {
+      "trust_remote_code": true,
+      "model_name": "inert-no-network-no-model"
+    }
+  ],
+  "get_collection_provider_calls": [],
+  "get_explicit_vectors_provider_calls": [],
+  "query_explicit_vectors_provider_calls": [],
+  "configuration_property_provider_calls": [
+    {
+      "model_name": "inert-no-network-no-model",
+      "trust_remote_code": true
+    }
+  ]
+}

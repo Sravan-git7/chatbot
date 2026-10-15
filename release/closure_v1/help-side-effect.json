@@ -1,0 +1,7 @@
+{
+  "command": "python scripts/frontend_live_verification.py --help",
+  "unexpected_behavior": "Legacy script has no argument parser; --help started a loopback-only backend and readiness loop rather than displaying help.",
+  "action": "Explicitly terminated only this invocation and its child; no deployment, stores, successful readiness, model inference, browser workflow or exposure was authorized.",
+  "port_8000_listening_after_stop": true,
+  "code_defect": "Unknown/help arguments must be parsed before subprocess launch; will add parser and no-launch regression."
+}

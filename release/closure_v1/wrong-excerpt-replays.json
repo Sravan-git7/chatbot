@@ -1,0 +1,85 @@
+[
+  {
+    "id": "P12-002",
+    "scope": "Replay of historical wrong answer excerpt as isolated context; NOT original retrieved context/full RAG/authority certification",
+    "query": "What does transaction ELDM display?",
+    "excerpt": "In the SAP Easy Access screen, choose Account > Installment Plan > Display (transaction FPR3 ).",
+    "refused": false,
+    "answer": "In the SAP Easy Access screen, choose Account > Installment Plan > Display (transaction FPR3 ). [S1]",
+    "evidence": {
+      "checked": true,
+      "supported": true,
+      "reason": "SUPPORTED",
+      "detail": {
+        "best": 0.667,
+        "tau": 0.6
+      },
+      "kinds": [
+        "code"
+      ],
+      "focus_terms": [
+        "transaction",
+        "eldm",
+        "display"
+      ],
+      "asked_terms": [
+        "transaction"
+      ],
+      "limit_groups": [],
+      "code_words": [
+        "transaction",
+        "t-code",
+        "tcode"
+      ],
+      "selected": [
+        {
+          "marker": "S1",
+          "chunk_id": "historical-answer-excerpt",
+          "sentence": "In the SAP Easy Access screen, choose Account > Installment Plan > Display (transaction FPR3 ).",
+          "coverage": 0.667,
+          "kinds_ok": true
+        }
+      ],
+      "answer_selection": {
+        "intent": "definition",
+        "candidate_count": 1,
+        "deduplicated_count": 0,
+        "fallback": false
+      }
+    }
+  },
+  {
+    "id": "P12-027",
+    "scope": "Replay of historical wrong answer excerpt as isolated context; NOT original retrieved context/full RAG/authority certification",
+    "query": "What is the business function ISU_AMI_1 required for?",
+    "excerpt": "If you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1) and you are in an advanced metering infrastructure, you can find more information under Advanced Metering Infrastructure .",
+    "refused": true,
+    "answer": "I couldn't find this information in the provided SAP documentation.",
+    "evidence": {
+      "checked": true,
+      "supported": false,
+      "reason": "KIND_NOT_IN_EVIDENCE",
+      "detail": {
+        "kinds": [
+          "code"
+        ]
+      },
+      "kinds": [
+        "code"
+      ],
+      "focus_terms": [
+        "business",
+        "function",
+        "isu_ami_1"
+      ],
+      "asked_terms": [
+        "business"
+      ],
+      "limit_groups": [],
+      "code_words": [
+        "business function"
+      ],
+      "selected": []
+    }
+  }
+]

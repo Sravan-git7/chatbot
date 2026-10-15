@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/home/user/chatbot/scratch/release-mission-v3/candidate/benchmarks/run_quality.py", line 143, in <module>
+    main()
+  File "/home/user/chatbot/scratch/release-mission-v3/candidate/benchmarks/run_quality.py", line 59, in main
+    svc = S.build_service("extractive")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/rag_service.py", line 882, in build_service
+    pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/rag_pipeline.py", line 810, in build_pipeline
+    embed, minfo = BP.load_embedder()
+                   ^^^^^^^^^^^^^^^^^^
+  File "/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/build_page_collection.py", line 56, in load_embedder
+    from sentence_transformers import SentenceTransformer
+ModuleNotFoundError: No module named 'sentence_transformers'

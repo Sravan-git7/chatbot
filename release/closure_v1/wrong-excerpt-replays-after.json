@@ -1,0 +1,72 @@
+[
+  {
+    "id": "P12-002",
+    "scope": "Historical wrong answer excerpt only; NOT full retrieval context, new authoritative evidence or full-RAG reproduction",
+    "query": "What does transaction ELDM display?",
+    "excerpt": "In the SAP Easy Access screen, choose Account > Installment Plan > Display (transaction FPR3 ).",
+    "refused": true,
+    "answer": "I couldn't find this information in the provided SAP documentation.",
+    "evidence": {
+      "checked": true,
+      "supported": false,
+      "reason": "ASKED_IDENTIFIER_NOT_IN_EVIDENCE",
+      "detail": {
+        "missing": [
+          "ELDM"
+        ]
+      },
+      "kinds": [
+        "code"
+      ],
+      "focus_terms": [
+        "transaction",
+        "eldm",
+        "display"
+      ],
+      "asked_terms": [
+        "transaction"
+      ],
+      "limit_groups": [],
+      "code_words": [
+        "transaction",
+        "t-code",
+        "tcode"
+      ],
+      "selected": []
+    }
+  },
+  {
+    "id": "P12-027",
+    "scope": "Historical wrong answer excerpt only; NOT full retrieval context, new authoritative evidence or full-RAG reproduction",
+    "query": "What is the business function ISU_AMI_1 required for?",
+    "excerpt": "If you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1) and you are in an advanced metering infrastructure, you can find more information under Advanced Metering Infrastructure .",
+    "refused": true,
+    "answer": "I couldn't find this information in the provided SAP documentation.",
+    "evidence": {
+      "checked": true,
+      "supported": false,
+      "reason": "KIND_NOT_IN_EVIDENCE",
+      "detail": {
+        "kinds": [
+          "code"
+        ]
+      },
+      "kinds": [
+        "code"
+      ],
+      "focus_terms": [
+        "business",
+        "function",
+        "isu_ami_1"
+      ],
+      "asked_terms": [
+        "business"
+      ],
+      "limit_groups": [],
+      "code_words": [
+        "business function"
+      ],
+      "selected": []
+    }
+  }
+]

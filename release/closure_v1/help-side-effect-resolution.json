@@ -1,0 +1,10 @@
+{
+  "event": "Unintended legacy --help launch",
+  "termination": "Only owned helper PID16796 and backend PID16798 explicitly terminated; bounded process wait and socket check confirmed port8000 closed.",
+  "ready_or_model_workflow_completed": false,
+  "remediation_commit": "b8a52e7",
+  "current_help_exit": 0,
+  "help_unknown_argument_no_launch_regressions": "2 passed in final full/closure suite",
+  "production_deployment_or_activation": "NOT PERFORMED",
+  "no_original_store_created": "Verified original/candidate protected file hashes and absent vector store paths."
+}

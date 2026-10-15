@@ -1,0 +1,16 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_named_transaction_cannot_be_answered_by_another_code_and_correct_evidence_recovers[ELDM-FPR3] _
+tests/test_release_closure.py:129: in test_named_transaction_cannot_be_answered_by_another_code_and_correct_evidence_recovers
+    assert result.refused
+E   AssertionError: assert False
+E    +  where False = GenerationResult(text='Transaction FPR3 displays uploaded records. [S1]', refused=False, generator='extractive', raw_t...rue}], 'answer_selection': {'intent': 'definition', 'candidate_count': 1, 'deduplicated_count': 0, 'fallback': False}}).refused
+_ test_named_transaction_cannot_be_answered_by_another_code_and_correct_evidence_recovers[TXN_A-TXN_B] _
+tests/test_release_closure.py:129: in test_named_transaction_cannot_be_answered_by_another_code_and_correct_evidence_recovers
+    assert result.refused
+E   AssertionError: assert False
+E    +  where False = GenerationResult(text='Transaction TXN_B displays uploaded records. [S1]', refused=False, generator='extractive', raw_...rue}], 'answer_selection': {'intent': 'definition', 'candidate_count': 1, 'deduplicated_count': 0, 'fallback': False}}).refused
+=========================== short test summary info ============================
+FAILED tests/test_release_closure.py::test_named_transaction_cannot_be_answered_by_another_code_and_correct_evidence_recovers[ELDM-FPR3]
+FAILED tests/test_release_closure.py::test_named_transaction_cannot_be_answered_by_another_code_and_correct_evidence_recovers[TXN_A-TXN_B]
+2 failed, 11 deselected in 0.08s

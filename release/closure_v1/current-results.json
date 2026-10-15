@@ -1,0 +1,22 @@
+{
+  "published_baseline": "a027cd64b168ba1caa5eae433d70d5b5edc5f4dc",
+  "tested_source_commit": "47e1e09aece4feb03aeae3abd06c5458b983ba07",
+  "backend": "7 failed, 1330 passed, 137 skipped, 49 errors, 204 subtests passed in 62.65s",
+  "backend_exit": 1,
+  "independent_published_failure_reproductions": 61,
+  "new_closure_tests": 13,
+  "focused": "108 passed,31 subtests;9.27s",
+  "frontend": "119 passed,1 skipped;20.80s",
+  "typecheck": "PASS",
+  "build": "PASS;2.77s",
+  "lint_syntax_undefined": "PASS",
+  "new_test_format": "PASS",
+  "compile": "PASS",
+  "pip_check": "No broken requirements found",
+  "unresolved_chroma_advisories": 4,
+  "quality_full": "BLOCKED missing ST/runtime/model/stores;exit1;no inference",
+  "adversarial": "BLOCKED;exit2;not approved gold",
+  "native_windows_real_ollama_browser_production_rollback": "BLOCKED",
+  "verdict": "NOT READY",
+  "deployment": "NOT PERFORMED"
+}

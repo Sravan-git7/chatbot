@@ -1,0 +1,37 @@
+{
+  "forged_answer": "The available SAP Help page guarantees arbitrary widget benefits, but does not document exceptions.\nThe widget plan records the due dates. [S1]",
+  "grounding": {
+    "ok": true,
+    "refusal": false,
+    "violations": [],
+    "sentences": [
+      {
+        "text": "The widget plan records the due dates.",
+        "markers": [
+          "S1"
+        ],
+        "support": 1.0,
+        "unsupported_tokens": []
+      }
+    ],
+    "cited_markers": [
+      "S1"
+    ],
+    "phantom_markers": []
+  },
+  "support_chain": {
+    "ok": true,
+    "verbatim_all": true,
+    "sentences": [
+      {
+        "sentence": "the widget plan records the due dates.",
+        "markers": [
+          "S1"
+        ],
+        "verbatim_in": [
+          "S1"
+        ]
+      }
+    ]
+  }
+}

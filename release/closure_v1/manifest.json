@@ -1,0 +1,99 @@
+{
+  "tested_source_commit": "47e1e09aece4feb03aeae3abd06c5458b983ba07",
+  "raw_private_sibling_directory": "../closure-v1",
+  "raw_sha256": {
+    "published-backend.log": "65338785a9c155d52fed8beada4da2ca02a81e1d7271f35219eda76500c3d455",
+    "published-backend.xml": "bdf115b95a675dad2b47e3cc945220fea7694b38c49fe9dab24d4692cf6cd90c",
+    "final-reviewed-backend.log": "9ac1b4b7d0e2b120b357340b11214a5a1f3f396ba546b37070e98ab083d595b9",
+    "final-reviewed-backend.xml": "51999cf1f527f8646babbfcad89ec3eaebaa1bdf98432296005341145e57fd9f",
+    "frontend.log": "428607a724f81baa7c8d2b5862f2fe6a73b98e6e6c5d68d60409df29c839dd89",
+    "typecheck.log": "566d3bb59668638721e7d8f9040a2f25be9b3c9b5b47a9a3683e5f2739e6afa0",
+    "build.log": "1b453ea217c4bfc209957fd8a8998c9c0e840f9d78dd947cd47bad465c78c7b5",
+    "reviewed-lint.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "reviewed-format.log": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+    "reviewed-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pip-check.log": "0289d085541c687d9eeafa858a33dc4cf65a8ab08e9bcc23df33060814a27229",
+    "closure-final-source.log": "8c12836c6b318891ee679126094dd1eeac5dd90cd0672445010f59f187a7d53a",
+    "closure-final-source.xml": "949827b3f0e331b8451984ab8a0fd6c80c47b7329c0cc3fe96957a0a35184855",
+    "focused-reviewed.log": "56539aa677489bc451b7d934fc354d7fc2c7ac4d59092452ddbd5cf7c9111f9d",
+    "focused-reviewed.xml": "317e05a54fa42afd2f4bcca0f094e2bd1a326df957427bdc707bf92c64faa715",
+    "sap-policy.log": "637ed0c67ffdb00a9dcc703d532816fb889f121836efd1f56d424aabc02d521c",
+    "full-quality-reviewed.log": "db10d556f74aa4956978dc44672d9ff2345a52032b564da049e8dd47c55c625f",
+    "individual-run.log": "b154552212c37fe9d9e02dca54f8fef6e047f3b7a49bf2bb389560dd11feca5c",
+    "a0-before.json": "664515377e26e452dc0da3c72021ba923c99c57c56f23b4609c6b3c6014e5bd6",
+    "oracle-before.json": "a91987790f51aef6decba929f313c0c86e7fe60640a5810b22826c5da7ce24da",
+    "a0-final-source.json": "1e479bd6248fd5e965e9470138a89e466485bc65d7e7c14b0b21974e8ba55b9a",
+    "oracle-final-source.json": "a62748db0e1504597cde3f2a20e6f5abf4290d148948f2dedef8ff626e952822"
+  },
+  "tested_files_sha256": {
+    "scripts/rag_evidence.py": "58d37670447380f0a7f90b7afd1827e754110ab15601421d782af19477eb6f27",
+    "scripts/rag_generate.py": "6d7900f02f9126a4fd3650aa07c343da1d8bf8cdcf43bf498c502038553ea691",
+    "scripts/rag_response.py": "07aaeaefed59c14df0ea39cceab7b6cd8a6ddbad7cfaf04b1ff900e20e62fa11",
+    "scripts/frontend_live_verification.py": "d2b05a51367ae9862e092571772c95c169faee2875d672e05b6127ffd8d9300f",
+    "tests/test_page_store_repair.py": "37a17326916a5a6d7addd9717af0200a3b706cdcbd57e2f40e48c41ec39ec29a",
+    "tests/test_phase2_fixes.py": "5680b6204a33b455af6f962be76071e31d914c14bc90d87367315f2d2d8386f8",
+    "tests/test_release_closure.py": "dc30ad0ed7f2bee19de389ee7fea5b3c9688de71e3fd2aa89c7b068405bcce65"
+  },
+  "evidence_files_sha256": {
+    "release/closure_v1/BACKEND_FAILURES.md": "8eb7bec3fd20cd58997f04afce451a9cfb330712125f454a97eb3070f6e4d7b6",
+    "release/closure_v1/CHROMA_ADVISORIES.md": "844addf2c671392ca9958da46b33c9775bdd263b3b7461383eb89e06d96f63c1",
+    "release/closure_v1/EXTERNAL_VERIFICATION.md": "f8c514d90f6f13a692b0a69abcbe21956ff774f6087b54f18e9825ee1169c94b",
+    "release/closure_v1/GHSA-2wm9-hf6c-p5cr.json": "0d4400ddac09c1ea10c60a0466ddec65152be8313419377997a122fac5300835",
+    "release/closure_v1/GHSA-36p7-vc44-83pf.json": "4bc5d38d6a2067d5347be72bd81773ff1c90cfd0f33f1941031bfc8a02c7ee0e",
+    "release/closure_v1/GHSA-f4j7-r4q5-qw2c.json": "c1e80fadc24ce52e305ed2edb905ee1fb2e68afbf63b4a508f4d44e4e4d0cc75",
+    "release/closure_v1/GHSA-xph7-9rjv-w5fr.json": "a805da77ae66e98e0f12beae7070881b914b589e716b3445c2d4f8330e0b2a24",
+    "release/closure_v1/adversarial-preflight.json": "03009e5bc3c186fba7f96fe80e568c662ac33b7386c90086f101f1e5e78c0bbc",
+    "release/closure_v1/all-skips.json": "3ef20afae0d0fbf69c5ca6936649bfb545b291df4150d0455bad8f6c81d259ab",
+    "release/closure_v1/backend-cases.json": "97c956ef8728e1ce34eac7cd5f1e72051656dd0130053e746ab7776467975438",
+    "release/closure_v1/cached-quality.json": "5a3c6c6bdbf385b5e4fe5dae395977f926171a215194a3409066bc363cce1acc",
+    "release/closure_v1/chroma-patch-availability.json": "198e1b4b96dda2a49c31831215ecfa92351a4b9737b936a390c377702cc1c9b8",
+    "release/closure_v1/chroma_inert_probe.json": "96cab7ca70b3410a0eb53f143929a2237485a217497f83f8f3c647807bb980e2",
+    "release/closure_v1/chroma_inert_probe.py": "ebcf64263e333ac9206b432ab64f984d048a3a23ba458190f19b49be94c86bd2",
+    "release/closure_v1/current-results.json": "4643483ec008ac513586a5697735bc76194812ed17021b523bbb65bbac599f7d",
+    "release/closure_v1/diagnostic-child.json": "e87431f2d2acad07a7cc98f66b5554d001cdd8cce5a591311e90febe6a77c683",
+    "release/closure_v1/diagnostic-child.traceback.txt": "9893deb9194be0ad182ccd135fc29ca4bd45dde370b5067afbc575bbbae21a1f",
+    "release/closure_v1/focused-reviewed.log": "56539aa677489bc451b7d934fc354d7fc2c7ac4d59092452ddbd5cf7c9111f9d",
+    "release/closure_v1/full-quality-reviewed.log": "db10d556f74aa4956978dc44672d9ff2345a52032b564da049e8dd47c55c625f",
+    "release/closure_v1/help-side-effect-resolution.json": "bfd4a2c629f2b6a55693db3aae7909dc87bcf36ce6f6448d8cb176c87d169ec5",
+    "release/closure_v1/help-side-effect.json": "b64031cd6830aa882867d168c8aba17509f10ce6280c4df93a0d3511d722ec7d",
+    "release/closure_v1/helper-after-help.log": "d567483ceec0fde84074b46620e4bfe239b909ca828a23f338b59c9df38f58db",
+    "release/closure_v1/helper-before.log": "221075cbf9d5fcd5e4f563c10a97c83ed72b529c553550a4e7bc0893d2d2b139",
+    "release/closure_v1/historical-quality-review.json": "682e4215816f5528790137fa72ec1d074eb3335727fd8ed0c32d4999228adb9c",
+    "release/closure_v1/individual-reproductions.json": "78472b46e1b263c71648bc9335b4f3c8c4edbdee2123a1ffcf5bb649e674cbbf",
+    "release/closure_v1/meta-after-final.log": "621eb583bd6bdb0697e75fb54cda405775e5f07ef8c5dc5a5bfa1e3cf3a24a9d",
+    "release/closure_v1/meta-bypass-before.json": "6a395383754b7c65d10d218d2a01520e2caa2821eba274374cd83dc81fadacc3",
+    "release/closure_v1/meta-marker-before.log": "035ff06a492945b5006ee0eaca9de9fb5a3b00f2fb453b7bba67e87e25cfa53b",
+    "release/closure_v1/named-code-after.log": "67a383836d295a6e99cbbeaa925d9f06e44dc4c11980abc4d25393fd6c58b8fd",
+    "release/closure_v1/named-code-before.log": "e0a4b49e4c37e82782cfef14931de74c97b2577ac69295cc369ef9d62f423aec",
+    "release/closure_v1/preservation.json": "78bff67b9a2270a43fd9dc8b172521706d8698bc1ae46e23b631b6c34fa6d3a1",
+    "release/closure_v1/wrong-excerpt-replays-after.json": "28b30df9bcdfe3c385ecfa46aed730472585295c67612440248e2c1f9d1fe6a3",
+    "release/closure_v1/wrong-excerpt-replays.json": "ad933ea6fbbd78b02564f708603f6fab7a0062ed21bdac8f29ba610dd1f56de7",
+    "release/closure_v1/published-backend.xml.gz": "96712c71e042dff4a842e93ed2b7e6cef44dd73a88f6f8c2a6cbf4ed694caca5",
+    "release/closure_v1/final-reviewed-backend.xml.gz": "d2a19829f390b6646509204f7534941a928b73edd805b41a750d6083a1f98fd7",
+    "release/closure_v1/meta-before.log.gz": "4091a12d459e35b48e234cd7a7f6fcc5ac8ee3872cc054b453af363beb3649b7"
+  },
+  "limitations": "No actual native Windows/Ollama/browser/SAP authority/production proof; unchanged frontend graph. Raw outputs never overwrite frozen artifacts.",
+  "reports_sha256": {
+    "RELEASE_BLOCKER_CLOSURE.md": "3b7cf05b7f72b4e0adbdc666ab277a42dc96cd296ed0cc6147fff3b5bd536f97",
+    "RELEASE_GATES.md": "de4945297cd1e116c91cb2c6520a40eadbf4a78ee993c971f964a3bf7900e3af",
+    "FINAL_RELEASE_REPORT.md": "e4c05a4fc5674f3cbeab56acccd8e0de86680fc3791b7bf56fce56b8aeba98d3",
+    "SECURITY_AUDIT.md": "82139796b49b6041b468b7d9c711d8b6da5f500d12e5aba09033c46dc3d32798",
+    "RAG_QUALITY_REPORT.md": "9476baa89651bbc5a425678693dd17701a29bcd225cf7b7a99ca668119db6c20",
+    "WINDOWS_VERIFICATION_REPORT.md": "2fb9ef796e08d0a6a5a12d5484fd955a6f776fb10eca2f5d2c10dc0a1317acf8",
+    "DEPLOYMENT_AND_ROLLBACK.md": "1425ea785d3ed80a88744a107830f08b833562dfc9be1df727230024e9384c4f"
+  },
+  "compressed_raw_evidence": {
+    "release/closure_v1/published-backend.xml.gz": {
+      "uncompressed_sha256": "bdf115b95a675dad2b47e3cc945220fea7694b38c49fe9dab24d4692cf6cd90c",
+      "encoding": "gzip, byte-exact original pytest XML; not whitespace-normalized"
+    },
+    "release/closure_v1/final-reviewed-backend.xml.gz": {
+      "uncompressed_sha256": "51999cf1f527f8646babbfcad89ec3eaebaa1bdf98432296005341145e57fd9f",
+      "encoding": "gzip, byte-exact original pytest XML; not whitespace-normalized"
+    },
+    "release/closure_v1/meta-before.log.gz": {
+      "uncompressed_sha256": "3c4038538dca8eb787c8001aad3f33e7751e25459fcdc3420d4fbbfeb2cda7a0",
+      "encoding": "gzip; original pytest whitespace preserved"
+    }
+  }
+}

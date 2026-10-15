@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/diagnose_windows_verification.py", line 272, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/diagnose_windows_verification.py", line 243, in main
+    result = worker(a.store, a.worker)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/diagnose_windows_verification.py", line 132, in worker
+    model_dir, info = C.resolve_model()
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/m2c_common.py", line 64, in resolve_model
+    raise FileNotFoundError(
+FileNotFoundError: all-MiniLM-L6-v2 model files not found locally. Install `gt-all-minilm-l6-v2` or pass --model-path / set $M2C_MODEL_DIR. No download is attempted.

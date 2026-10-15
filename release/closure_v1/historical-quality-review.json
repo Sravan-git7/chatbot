@@ -1,0 +1,969 @@
+{
+  "source_file": "data/evaluation/phase12_results.json",
+  "source_sha256": "428301e8a522483b6b0cd42bb7c6f8e3e95208d27abd3fe8d3b1f0c6f6d4c61a",
+  "note": "Artifact review only, NOT current full-RAG reproduction; published narrative 37/65 and one wrong page disagrees with this frozen file. No artifact modified.",
+  "answerable": {
+    "n": 65,
+    "answered_correct": 38,
+    "answered_wrong_page": 2,
+    "answered_citation_evidence_failure": 6,
+    "incorrectly_abstained": 19,
+    "generator_errors": 0
+  },
+  "wrong_page_cases": [
+    {
+      "id": "P12-002",
+      "query": {
+        "id": "P12-002",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "direct_factual",
+        "query": "What does transaction ELDM display?",
+        "type": "answerable",
+        "facet": "direct_factual",
+        "gold_source_id": "M2C-07",
+        "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+        "acceptable_source_ids": [],
+        "evidence": [
+          "display the successfully and unsuccessfully posted meter reading documents"
+        ],
+        "expected_status": "answered",
+        "notes": "",
+        "answerability": "answerable_from_local_page"
+      },
+      "historical": {
+        "type": "answerable",
+        "category": "direct_factual",
+        "real": {
+          "status": "answered",
+          "selected": "M2C-25",
+          "reason": null,
+          "correct": false,
+          "outcome": "answerable_answered_wrong_page",
+          "grounding_ok": true,
+          "chain_ok": true,
+          "phantom": 0,
+          "url_changed": 0,
+          "evidence_in_context": false,
+          "answer": "In the SAP Easy Access screen, choose Account > Installment Plan > Display (transaction FPR3 ). [S1]",
+          "timings": {
+            "route_ms": 14.68,
+            "retrieve_ms": 0.0,
+            "context_ms": 3.23,
+            "generate_ms": 1.94,
+            "total_ms": 21.42
+          },
+          "status_match": true
+        },
+        "oracle": {
+          "status": "answered",
+          "selected": "M2C-07",
+          "reason": null,
+          "correct": true,
+          "outcome": "answerable_answered_correct",
+          "grounding_ok": true,
+          "chain_ok": true,
+          "phantom": 0,
+          "url_changed": 0,
+          "evidence_in_context": true,
+          "answer": "You can use this transaction to display the successfully and unsuccessfully posted meter reading documents after uploading discrete meter reading data (IDocs from category ISU_MR_UPLOAD). [S4]",
+          "timings": {
+            "route_ms": 0.0,
+            "retrieve_ms": 9.42,
+            "context_ms": 2.82,
+            "generate_ms": 1.98,
+            "total_ms": 15.87
+          },
+          "status_match": true
+        },
+        "chunk_rank": 1
+      }
+    },
+    {
+      "id": "P12-027",
+      "query": {
+        "id": "P12-027",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "terminology",
+        "query": "What is the business function ISU_AMI_1 required for?",
+        "type": "answerable",
+        "facet": "terminology",
+        "gold_source_id": "M2C-07",
+        "gold_doc_id": "2ac7fe29a0c94cdd88fb80c2cb9f7758/4d76765c1e012b8ae10000000a42189b",
+        "acceptable_source_ids": [],
+        "evidence": [
+          "request on-demand meter readings"
+        ],
+        "expected_status": "answered",
+        "notes": "",
+        "answerability": "answerable_from_local_page"
+      },
+      "historical": {
+        "type": "answerable",
+        "category": "terminology",
+        "real": {
+          "status": "answered",
+          "selected": "M2C-05",
+          "reason": null,
+          "correct": false,
+          "outcome": "answerable_answered_wrong_page",
+          "grounding_ok": true,
+          "chain_ok": true,
+          "phantom": 0,
+          "url_changed": 0,
+          "evidence_in_context": false,
+          "answer": "If you have activated the Advanced Metering Infrastructure business function (ISU_AMI_1) and you are in an advanced metering infrastructure, you can find more information under Advanced Metering Infrastructure . [S1]",
+          "timings": {
+            "route_ms": 16.63,
+            "retrieve_ms": 0.0,
+            "context_ms": 2.44,
+            "generate_ms": 1.92,
+            "total_ms": 22.66
+          },
+          "status_match": true
+        },
+        "oracle": {
+          "status": "answered",
+          "selected": "M2C-07",
+          "reason": null,
+          "correct": true,
+          "outcome": "answerable_answered_correct",
+          "grounding_ok": true,
+          "chain_ok": true,
+          "phantom": 0,
+          "url_changed": 0,
+          "evidence_in_context": true,
+          "answer": "If the business function Utilities, Quantity Determination ( ISU_QD_1 ) is active, you can also display meter reading results. [S2]\nNote A prerequisite is that you have activated the business function Advanced Metering Infrastructure ( ISU_AMI_1 ). [S3]\nNote A prerequisite is that you have activated the business function Advanced Metering Infrastructure 2 ( ISU_AMI_2 ). [S3]",
+          "timings": {
+            "route_ms": 0.0,
+            "retrieve_ms": 10.98,
+            "context_ms": 3.17,
+            "generate_ms": 2.03,
+            "total_ms": 18.16
+          },
+          "status_match": true
+        },
+        "chunk_rank": 1
+      }
+    }
+  ],
+  "negative_label_answers": [
+    {
+      "id": "P12-071",
+      "query": {
+        "id": "P12-071",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "absent_detail",
+        "query": "Which interval type is preselected for new installment plans?",
+        "type": "absent_detail",
+        "facet": "absent_detail",
+        "gold_source_id": "M2C-24",
+        "gold_doc_id": "9442486404b54071b4ebeab6a16628e7/790dc5536a51204be10000000a174cb4",
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "insufficient_context",
+        "notes": "the topic is on the page, the asked detail is not",
+        "answerability": "not_answerable_detail_absent_from_page",
+        "absent_terms": [
+          "preselected"
+        ]
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-24",
+        "reason": null,
+        "correct": false,
+        "outcome": "absent_detail_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "You must enter the installment interval and the interval type, as well as the installment plan category. [S2]\nIn the Remaining Amount field, specify whether this remaining amount is to be included in the first or last installment, or in a new installment. [S3]",
+        "timings": {
+          "route_ms": 20.05,
+          "retrieve_ms": 0.0,
+          "context_ms": 3.02,
+          "generate_ms": 2.4,
+          "total_ms": 27.41
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-082",
+      "query": {
+        "id": "P12-082",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "sibling_topic",
+        "query": "Where can I look at an installment plan that was already saved?",
+        "type": "not_ingested",
+        "facet": "sibling_topic",
+        "gold_source_id": "M2C-25",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "page_not_ingested",
+        "notes": "",
+        "answerability": "not_answerable_page_not_in_local_corpus"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-23",
+        "reason": null,
+        "correct": false,
+        "outcome": "not_ingested_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "The number of the installment plan is saved in the source items. [S3]",
+        "timings": {
+          "route_ms": 16.73,
+          "retrieve_ms": 0.0,
+          "context_ms": 0.92,
+          "generate_ms": 0.85,
+          "total_ms": 19.56
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-084",
+      "query": {
+        "id": "P12-084",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "sibling_topic",
+        "query": "How is a move-in carried out step by step?",
+        "type": "not_ingested",
+        "facet": "sibling_topic",
+        "gold_source_id": "M2C-03",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "page_not_ingested",
+        "notes": "",
+        "answerability": "not_answerable_page_not_in_local_corpus"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-03",
+        "reason": null,
+        "correct": false,
+        "outcome": "not_ingested_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "The available SAP Help page explains the purpose and parameters of Move-in, but it does not document the steps to complete this procedure.\n\nYou use the move-in function to carry out most of the activities required to begin providing a business partner with a utility service. [S1]\nIn these instances, you can, in Customizing under Move-In/Out -> Move-In -> Define Control Parameters at Document Level configure the system to either output a confirmation prompt or save the data automatically before the action is carried out. [S4]",
+        "timings": {
+          "route_ms": 16.69,
+          "retrieve_ms": 0.0,
+          "context_ms": 4.77,
+          "generate_ms": 1.81,
+          "total_ms": 25.0
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-085",
+      "query": {
+        "id": "P12-085",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "sibling_topic",
+        "query": "How does automatic billing run?",
+        "type": "not_ingested",
+        "facet": "sibling_topic",
+        "gold_source_id": "M2C-12",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "page_not_ingested",
+        "notes": "",
+        "answerability": "not_answerable_page_not_in_local_corpus"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-12",
+        "reason": null,
+        "correct": false,
+        "outcome": "not_ingested_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "Automatic billing enables you to bill a single contract or any selection of contracts. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\nScheduling determines how often billing runs occur. [S2]",
+        "timings": {
+          "route_ms": 14.37,
+          "retrieve_ms": 0.0,
+          "context_ms": 1.81,
+          "generate_ms": 1.87,
+          "total_ms": 19.48
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-086",
+      "query": {
+        "id": "P12-086",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "sibling_topic",
+        "query": "How are missing meter readings estimated?",
+        "type": "not_ingested",
+        "facet": "sibling_topic",
+        "gold_source_id": "M2C-08",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "page_not_ingested",
+        "notes": "",
+        "answerability": "not_answerable_page_not_in_local_corpus"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-08",
+        "reason": null,
+        "correct": false,
+        "outcome": "not_ingested_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "This component allows you to estimate meter reading results automatically in the case of missing meter readings or implausible consumption. [S1]",
+        "timings": {
+          "route_ms": 16.26,
+          "retrieve_ms": 0.0,
+          "context_ms": 0.23,
+          "generate_ms": 0.38,
+          "total_ms": 17.91
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-087",
+      "query": {
+        "id": "P12-087",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "sibling_topic",
+        "query": "Which estimation procedures are available for meter readings?",
+        "type": "not_ingested",
+        "facet": "sibling_topic",
+        "gold_source_id": "M2C-09",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "page_not_ingested",
+        "notes": "",
+        "answerability": "not_answerable_page_not_in_local_corpus"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-09",
+        "reason": null,
+        "correct": false,
+        "outcome": "not_ingested_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "In SAP Utilities, estimation procedures are used in the following processes: [S1]\n- Estimate meter reading results [S1]\n- Validate meter reading results [S1]\n- Billing simulation [S1]\n- Budget billing plan creation [S1]\n- Unbilled revenue reporting [S1]",
+        "timings": {
+          "route_ms": 17.75,
+          "retrieve_ms": 0.0,
+          "context_ms": 4.48,
+          "generate_ms": 2.22,
+          "total_ms": 26.19
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-088",
+      "query": {
+        "id": "P12-088",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "review_conflict",
+        "query": "What does the installment plan overview describe?",
+        "type": "not_ingested",
+        "facet": "review_conflict",
+        "gold_source_id": "M2C-23",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "page_not_ingested",
+        "notes": "",
+        "answerability": "not_answerable_page_not_in_local_corpus"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-23",
+        "reason": null,
+        "correct": false,
+        "outcome": "not_ingested_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "An installment plan consists of a statistical document with several installment receivables. [S3]\nThe number of the installment plan is saved in the source items. [S3]\nIf interest is payable on an installment plan, the installment plan will also have an interest supplement. [S3]",
+        "timings": {
+          "route_ms": 13.77,
+          "retrieve_ms": 0.0,
+          "context_ms": 0.88,
+          "generate_ms": 1.15,
+          "total_ms": 17.01
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-090",
+      "query": {
+        "id": "P12-090",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "direct_factual",
+        "query": "How does dunning work for overdue receivables?",
+        "type": "not_ingested",
+        "facet": "direct_factual",
+        "gold_source_id": "M2C-26",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "page_not_ingested",
+        "notes": "",
+        "answerability": "not_answerable_page_not_in_local_corpus"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-26",
+        "reason": null,
+        "correct": false,
+        "outcome": "not_ingested_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "The available SAP Help page explains the purpose and parameters of Dunning, but it does not document the steps to complete this procedure.\n\nYou can create payment reminders or dunning letters and send them to your business partners, to alert them of overdue payables and to request payment. [S1]\nIf receivables have reached a specific collection step, you can lock the contract account or the service for a business partner automatically in the dunning activities run (see Lock Services Using SAP RM-CA and SAP CRM ). [S2]",
+        "timings": {
+          "route_ms": 19.1,
+          "retrieve_ms": 0.0,
+          "context_ms": 5.02,
+          "generate_ms": 2.05,
+          "total_ms": 28.03
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-091",
+      "query": {
+        "id": "P12-091",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "direct_factual",
+        "query": "How is a utility installation disconnected and reconnected?",
+        "type": "not_ingested",
+        "facet": "direct_factual",
+        "gold_source_id": "M2C-29",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "page_not_ingested",
+        "notes": "",
+        "answerability": "not_answerable_page_not_in_local_corpus"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-29",
+        "reason": null,
+        "correct": false,
+        "outcome": "not_ingested_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "If you disconnect a business partner because he/she has reached the disconnection dunning level, the system changes the creditworthiness of the business partner for each disconnection. [S3]\nYou can configure the system to generate a contract-related proposal for the object to be disconnected/reconnected. [S4]",
+        "timings": {
+          "route_ms": 17.93,
+          "retrieve_ms": 0.0,
+          "context_ms": 2.6,
+          "generate_ms": 1.96,
+          "total_ms": 24.2
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-095",
+      "query": {
+        "id": "P12-095",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "review_conflict",
+        "query": "What is a budget billing plan used for?",
+        "type": "unresolved_identity",
+        "facet": "review_conflict",
+        "gold_source_id": "M2C-13",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "unresolved_identity",
+        "notes": "",
+        "answerability": "not_answerable_identity_unresolved"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-13",
+        "reason": null,
+        "correct": false,
+        "outcome": "unresolved_identity_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "You specify the budget billing amounts and the dates that are due in the budget billing plan. [S1]\nThe budget billing plan is the basis for charging budget billing amounts. [S1]\nWith budget billing plans, you manage the budget billing requests in a billing period in between two periodic bills. [S1]",
+        "timings": {
+          "route_ms": 17.4,
+          "retrieve_ms": 0.0,
+          "context_ms": 1.02,
+          "generate_ms": 1.27,
+          "total_ms": 21.44
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-096",
+      "query": {
+        "id": "P12-096",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "review_conflict",
+        "query": "What does the billing and invoicing analysis report?",
+        "type": "unresolved_identity",
+        "facet": "review_conflict",
+        "gold_source_id": "M2C-16",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [],
+        "evidence": [],
+        "expected_status": "unresolved_identity",
+        "notes": "",
+        "answerability": "not_answerable_identity_unresolved"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-16",
+        "reason": null,
+        "correct": false,
+        "outcome": "unresolved_identity_incorrectly_answered",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "This app is available for the role Billing Specialist (Utilities) ( SAP_BR_BILLING_SPECIALIST_ISU ). [S1]\nYou can use this app to analyze the billing and invoicing process for all billing and invoicing statuses and KPIs. [S1]\nThe app presents the most relevant KPIs for a portion-centered analysis of the billing and invoicing process. [S2]",
+        "timings": {
+          "route_ms": 19.08,
+          "retrieve_ms": 0.0,
+          "context_ms": 2.12,
+          "generate_ms": 1.76,
+          "total_ms": 24.72
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-098",
+      "query": {
+        "id": "P12-098",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "ambiguous",
+        "query": "How do I create a plan?",
+        "type": "ambiguous",
+        "facet": "ambiguous",
+        "gold_source_id": "M2C-24",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [
+          "M2C-24",
+          "M2C-13",
+          "M2C-15",
+          "M2C-23"
+        ],
+        "evidence": [],
+        "expected_status": "answered_or_abstained",
+        "notes": "",
+        "answerability": "ambiguous_any_acceptable_page_or_abstain"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-24",
+        "reason": null,
+        "correct": false,
+        "outcome": "ambiguous_answered_acceptable",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "In the SAP Easy Access screen, choose Account > Installment Plan > Create (transaction FPR1 ). [S2]\nEnter the installment plan parameters. [S2]\nYou can either copy default values to the initial screen using the Installment Plan Type or enter the installment plan parameters manually. [S2]",
+        "timings": {
+          "route_ms": 14.48,
+          "retrieve_ms": 0.0,
+          "context_ms": 5.25,
+          "generate_ms": 2.38,
+          "total_ms": 23.75
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-099",
+      "query": {
+        "id": "P12-099",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "ambiguous",
+        "query": "What does the bill contain?",
+        "type": "ambiguous",
+        "facet": "ambiguous",
+        "gold_source_id": "M2C-14",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [
+          "M2C-14",
+          "M2C-11"
+        ],
+        "evidence": [],
+        "expected_status": "answered_or_abstained",
+        "notes": "",
+        "answerability": "ambiguous_any_acceptable_page_or_abstain"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-14",
+        "reason": null,
+        "correct": false,
+        "outcome": "ambiguous_answered_acceptable",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "Billing documents from the Contract Billing (IS-U-BI) component, or budget billing plans, which are managed in the Budget Billing Plan component must exist if billing is to take place. [S1]\nAfter the bill has been created, it is sent to the bill recipient. [S4]\nThe bill requests can be followed up in contract accounts receivable and payable. [S4]",
+        "timings": {
+          "route_ms": 12.56,
+          "retrieve_ms": 0.0,
+          "context_ms": 2.16,
+          "generate_ms": 1.57,
+          "total_ms": 17.84
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-100",
+      "query": {
+        "id": "P12-100",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "ambiguous",
+        "query": "How is the account managed?",
+        "type": "ambiguous",
+        "facet": "ambiguous",
+        "gold_source_id": "M2C-17",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [
+          "M2C-17",
+          "M2C-18"
+        ],
+        "evidence": [],
+        "expected_status": "answered_or_abstained",
+        "notes": "",
+        "answerability": "ambiguous_any_acceptable_page_or_abstain"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-17",
+        "reason": null,
+        "correct": false,
+        "outcome": "ambiguous_answered_acceptable",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "The available SAP Help page explains the purpose and parameters of Contract Accounts, but it does not document the steps to complete this procedure.\n\nThis component enables you to create and manage contract account master data. [S1]\nIn Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nIn the contract account master record, you can define, for each business partner, the procedures that apply when posting and processing the line items of a given contract account. [S1]",
+        "timings": {
+          "route_ms": 13.65,
+          "retrieve_ms": 0.0,
+          "context_ms": 3.52,
+          "generate_ms": 1.45,
+          "total_ms": 20.25
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-101",
+      "query": {
+        "id": "P12-101",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "ambiguous",
+        "query": "What happens during the move?",
+        "type": "ambiguous",
+        "facet": "ambiguous",
+        "gold_source_id": "M2C-02",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [
+          "M2C-02",
+          "M2C-03",
+          "M2C-04",
+          "M2C-10"
+        ],
+        "evidence": [],
+        "expected_status": "answered_or_abstained",
+        "notes": "",
+        "answerability": "ambiguous_any_acceptable_page_or_abstain"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-04",
+        "reason": null,
+        "correct": false,
+        "outcome": "ambiguous_answered_acceptable",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "During the move-out transaction, you execute most of the activities required to cancel the customer's supply of utilities services. [S1]\nYou make changes to the business partner master data that result from a move-out. [S1]\nYou specifically end the allocation of a contract to an installation on the move-out date. [S1]",
+        "timings": {
+          "route_ms": 13.49,
+          "retrieve_ms": 0.0,
+          "context_ms": 2.1,
+          "generate_ms": 1.9,
+          "total_ms": 18.89
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-102",
+      "query": {
+        "id": "P12-102",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "ambiguous",
+        "query": "What does the monitoring show?",
+        "type": "ambiguous",
+        "facet": "ambiguous",
+        "gold_source_id": "M2C-07",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [
+          "M2C-07"
+        ],
+        "evidence": [],
+        "expected_status": "answered_or_abstained",
+        "notes": "",
+        "answerability": "ambiguous_any_acceptable_page_or_abstain"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-07",
+        "reason": null,
+        "correct": false,
+        "outcome": "ambiguous_answered_acceptable",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "The objects that you can monitor using these selection criteria are marked with x in each row. [S2]\nIf there are meter reading orders for the devices, you can use the pushbutton to navigate to the AMI monitor for one or more orders. [S3]\nIn almost all of the lists for the monitoring function, you can navigate to the detailed display of an object by choosing Edit > Select or by double clicking on the field in question. [S3]",
+        "timings": {
+          "route_ms": 13.07,
+          "retrieve_ms": 0.0,
+          "context_ms": 2.75,
+          "generate_ms": 1.98,
+          "total_ms": 19.33
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-103",
+      "query": {
+        "id": "P12-103",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "ambiguous",
+        "query": "What do I need to activate?",
+        "type": "ambiguous",
+        "facet": "ambiguous",
+        "gold_source_id": "M2C-07",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [
+          "M2C-07",
+          "M2C-05",
+          "M2C-24"
+        ],
+        "evidence": [],
+        "expected_status": "answered_or_abstained",
+        "notes": "",
+        "answerability": "ambiguous_any_acceptable_page_or_abstain"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-24",
+        "reason": null,
+        "correct": false,
+        "outcome": "ambiguous_answered_acceptable",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "- Create or delete an installment plan surcharge and/or an inflation surcharge The prerequisite in this case is that you activated the enhancement in Customizing under Business Transactions > Deferral and Installment Plans > Activate Installment Plan Enhancement for Charges/Interest . [S3]",
+        "timings": {
+          "route_ms": 14.87,
+          "retrieve_ms": 0.0,
+          "context_ms": 1.89,
+          "generate_ms": 1.55,
+          "total_ms": 19.83
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-104",
+      "query": {
+        "id": "P12-104",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "ambiguous",
+        "query": "How are devices handled?",
+        "type": "ambiguous",
+        "facet": "ambiguous",
+        "gold_source_id": "M2C-05",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [
+          "M2C-05",
+          "M2C-07"
+        ],
+        "evidence": [],
+        "expected_status": "answered_or_abstained",
+        "notes": "",
+        "answerability": "ambiguous_any_acceptable_page_or_abstain"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-05",
+        "reason": null,
+        "correct": false,
+        "outcome": "ambiguous_answered_acceptable",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "The available SAP Help page explains the purpose and parameters of Device Management, but it does not document the steps to complete this procedure.\n\nThis component manages technical data, installations, meter readings, and the inspection of devices. [S1]\nThe following table lists the standard application components that must be integrated into device management before you can manage devices. [S2]\nName in IS-U: Device; From Component: Plant Maintenance (PM); Name in Standard System: Equipment [S2]",
+        "timings": {
+          "route_ms": 13.87,
+          "retrieve_ms": 0.0,
+          "context_ms": 4.01,
+          "generate_ms": 1.82,
+          "total_ms": 21.08
+        },
+        "status_match": false
+      }
+    },
+    {
+      "id": "P12-105",
+      "query": {
+        "id": "P12-105",
+        "authorship": "AI coding assistant (not blind; not a domain expert; had read all 7 page texts and the Phase 11.1 results and failure analysis; written 2026-10-01 before any Phase 12 evaluation; NOT human-labelled)",
+        "authored_phase": "12",
+        "authored_on": "2026-10-01",
+        "category": "ambiguous",
+        "query": "Tell me about billing.",
+        "type": "ambiguous",
+        "facet": "ambiguous",
+        "gold_source_id": "M2C-11",
+        "gold_doc_id": null,
+        "acceptable_source_ids": [
+          "M2C-11",
+          "M2C-12",
+          "M2C-13",
+          "M2C-14",
+          "M2C-15",
+          "M2C-16"
+        ],
+        "evidence": [],
+        "expected_status": "answered_or_abstained",
+        "notes": "",
+        "answerability": "ambiguous_any_acceptable_page_or_abstain"
+      },
+      "historical": {
+        "status": "answered",
+        "selected": "M2C-12",
+        "reason": null,
+        "correct": false,
+        "outcome": "ambiguous_answered_acceptable",
+        "grounding_ok": true,
+        "chain_ok": true,
+        "phantom": 0,
+        "url_changed": 0,
+        "evidence_in_context": false,
+        "answer": "Automatic billing enables you to bill a single contract or any selection of contracts. [S1]\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]",
+        "timings": {
+          "route_ms": 13.25,
+          "retrieve_ms": 0.0,
+          "context_ms": 1.52,
+          "generate_ms": 1.56,
+          "total_ms": 17.57
+        },
+        "status_match": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,502 @@
+{
+  "a0": {
+    "before": {
+      "benchmark_schema_version": 1,
+      "adapter_id": "A0",
+      "is_test_fixture": false,
+      "oracle_mode": false,
+      "timestamp_utc": "2026-10-15T14:20:33.937590+00:00",
+      "total_cases": 70,
+      "repetitions": 1,
+      "metrics_summary": {
+        "behavior_accuracy": 0.671,
+        "behavior_matches": 47,
+        "mean_key_fact_recall": 0.521,
+        "mean_citation_coverage": 1.0,
+        "mean_citation_precision": 1.0,
+        "total_hallucinated_tokens": 0,
+        "total_prohibited_claims_detected": 10
+      },
+      "latency_summary": {
+        "generation_p50_ms": 2.2,
+        "generation_p95_ms": 3.5,
+        "generation_mean_ms": 1.93,
+        "generation_min_ms": 0.1,
+        "generation_max_ms": 6.35,
+        "retrieval_p50_ms": 100.53,
+        "retrieval_p95_ms": 153.79,
+        "retrieval_mean_ms": 109.58
+      },
+      "cost_and_tokens": {
+        "note": "Null until real hosted model usage and provider pricing are supplied. No fake cost fabricated.",
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "cost_per_1000_queries_usd": null
+      }
+    },
+    "after": {
+      "benchmark_schema_version": 1,
+      "adapter_id": "A0",
+      "is_test_fixture": false,
+      "oracle_mode": false,
+      "timestamp_utc": "2026-10-15T14:30:42.881787+00:00",
+      "total_cases": 70,
+      "repetitions": 1,
+      "metrics_summary": {
+        "behavior_accuracy": 0.671,
+        "behavior_matches": 47,
+        "mean_key_fact_recall": 0.495,
+        "mean_citation_coverage": 1.0,
+        "mean_citation_precision": 1.0,
+        "total_hallucinated_tokens": 0,
+        "total_prohibited_claims_detected": 9
+      },
+      "latency_summary": {
+        "generation_p50_ms": 2.11,
+        "generation_p95_ms": 4.99,
+        "generation_mean_ms": 2.19,
+        "generation_min_ms": 0.09,
+        "generation_max_ms": 6.68,
+        "retrieval_p50_ms": 100.53,
+        "retrieval_p95_ms": 153.79,
+        "retrieval_mean_ms": 109.58
+      },
+      "cost_and_tokens": {
+        "note": "Null until real hosted model usage and provider pricing are supplied. No fake cost fabricated.",
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "cost_per_1000_queries_usd": null
+      }
+    },
+    "before_raw_sha256": "664515377e26e452dc0da3c72021ba923c99c57c56f23b4609c6b3c6014e5bd6",
+    "after_raw_sha256": "1e479bd6248fd5e965e9470138a89e466485bc65d7e7c14b0b21974e8ba55b9a",
+    "cases": [
+      {
+        "id": "CASE-012",
+        "question": "What objects belong to business master data in SAP Utilities?",
+        "before_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+        "after_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+        "before_flags": [
+          "Premise",
+          "Grid"
+        ],
+        "after_flags": [
+          "Premise",
+          "Grid"
+        ],
+        "before_behavior": "answer",
+        "after_behavior": "answer"
+      },
+      {
+        "id": "CASE-020",
+        "question": "How do I process meter reading data during move-in?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Meter Reading Data (Move-In), but it does not document the steps to complete this procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+        "before_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "after_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-023",
+        "question": "How do I process incoming payments from external cash desks?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Processing Incoming Payments, but it does not document the steps to complete this procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S1]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S1]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S2]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S1]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S1]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S2]",
+        "before_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "after_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-024",
+        "question": "How do I execute automatic billing in SAP Utilities?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Automatic Billing, but it does not document the steps to complete this procedure.\n\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\n\nIn addition to general master data, the following billing master data are included in automatic billing: [S2]\n- Rate Type [S2]\n- Operand [S2]\n- Price [S2]\n- Price Adjustment Clause [S2]\n- Rate [S2]\n- Schema [S2]\n- Rate Category [S2]\n- Rate Determination [S2]\n- Variants [S2]\n- Discounts [S2]\n- Franchise Fees [S2]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\n\nIn addition to general master data, the following billing master data are included in automatic billing: [S2]\n- Rate Type [S2]\n- Operand [S2]\n- Price [S2]\n- Price Adjustment Clause [S2]\n- Rate [S2]\n- Schema [S2]\n- Rate Category [S2]\n- Rate Determination [S2]\n- Variants [S2]\n- Discounts [S2]\n- Franchise Fees [S2]",
+        "before_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "after_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-025",
+        "question": "How do I create a budget billing plan?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of a budget billing plan, but it does not document the steps to create one.\n\nUtility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. [S1]\nTherefore, they charge budget billing amounts during the supply period instead of the actual amount owed, in order to remain solvent. [S1]\nYou specify the budget billing amounts and the dates that are due in the budget billing plan. [S1]\nThe budget billing plan is the basis for charging budget billing amounts. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nUtility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. [S1]\nTherefore, they charge budget billing amounts during the supply period instead of the actual amount owed, in order to remain solvent. [S1]\nYou specify the budget billing amounts and the dates that are due in the budget billing plan. [S1]\nThe budget billing plan is the basis for charging budget billing amounts. [S1]",
+        "before_flags": [
+          "Click Create Budget Billing Plan button"
+        ],
+        "after_flags": [],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-026",
+        "question": "How do I analyse periodic billing and invoicing?",
+        "before_answer": "The available SAP Help page describes the features and KPIs of the Periodic Billing and Invoicing Analysis app, but it does not document the steps to perform the analysis.\n\nYou can use this app to analyze the billing and invoicing process for all billing and invoicing statuses and KPIs. [S1]\nAggregated information (such as the number of contracts that are ready for invoicing) is also available. [S1]\nThis app is available for the role Billing Specialist (Utilities) ( SAP_BR_BILLING_SPECIALIST_ISU ). [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nYou can use this app to analyze the billing and invoicing process for all billing and invoicing statuses and KPIs. [S1]\nAggregated information (such as the number of contracts that are ready for invoicing) is also available. [S1]\nThis app is available for the role Billing Specialist (Utilities) ( SAP_BR_BILLING_SPECIALIST_ISU ). [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-029",
+        "question": "How do I execute move-in and move-out overview?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Move-in, but it does not document the steps to complete this procedure.\n\nYou use the move-in function to carry out most of the activities required to begin providing a business partner with a utility service. [S1]\nIn move-in processing, you establish whether a contract can be billed. [S1]\nFrom the move-in, you can also trigger the charges levied at the commencement of a utility service, as well as a welcome letter to the customer. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nYou use the move-in function to carry out most of the activities required to begin providing a business partner with a utility service. [S1]\nIn move-in processing, you establish whether a contract can be billed. [S1]\nFrom the move-in, you can also trigger the charges levied at the commencement of a utility service, as well as a welcome letter to the customer. [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "abstain",
+        "after_behavior": "abstain"
+      },
+      {
+        "id": "CASE-031",
+        "question": "What happens during the move-in process and how does it relate to meter readings?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Meter Reading Data (Move-In), but it does not document the steps to complete this procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-033",
+        "question": "How are budget billing amounts processed during end-of-year billing?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of a budget billing plan, but it does not document the steps to create one.\n\n- You cannot further process the budget billing plan. [S1]\n- The budget billing amounts cannot be paid, dunned or requested. [S1]\n- Settle the budget billing payments (statistical budget billing plan procedure) or budget billing receivables against the amount invoiced for the contract (partial billing procedure). [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- You cannot further process the budget billing plan. [S1]\n- The budget billing amounts cannot be paid, dunned or requested. [S1]\n- Settle the budget billing payments (statistical budget billing plan procedure) or budget billing receivables against the amount invoiced for the contract (partial billing procedure). [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-036",
+        "question": "How do meter reading estimation and monitoring work together?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Estimation, but it does not document the steps to complete this procedure.\n\nThis component allows you to estimate meter reading results automatically in the case of missing meter readings or implausible consumption. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nThis component allows you to estimate meter reading results automatically in the case of missing meter readings or implausible consumption. [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "abstain",
+        "after_behavior": "abstain"
+      },
+      {
+        "id": "CASE-037",
+        "question": "How do incoming payments interact with installment plans?",
+        "before_answer": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. [S2]\nThe individual installment receivable is cleared upon payment. [S3]",
+        "after_answer": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. [S2]\nThe individual installment receivable is cleared upon payment. [S3]",
+        "before_flags": [
+          "payments cannot be applied to installment plans"
+        ],
+        "after_flags": [
+          "payments cannot be applied to installment plans"
+        ],
+        "before_behavior": "answer",
+        "after_behavior": "answer"
+      },
+      {
+        "id": "CASE-039",
+        "question": "Can multiple contracts belong to one contract account?",
+        "before_answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nIn Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]",
+        "after_answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nIn Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]",
+        "before_flags": [
+          "only one contract per account is permitted"
+        ],
+        "after_flags": [
+          "only one contract per account is permitted"
+        ],
+        "before_behavior": "answer",
+        "after_behavior": "answer"
+      },
+      {
+        "id": "CASE-040",
+        "question": "Can you explain the business master data objects in more detail?",
+        "before_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+        "after_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+        "before_flags": [
+          "Device location is a business object"
+        ],
+        "after_flags": [
+          "Device location is a business object"
+        ],
+        "before_behavior": "answer",
+        "after_behavior": "answer"
+      },
+      {
+        "id": "CASE-052",
+        "question": "How do I process payments?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Processing Incoming Payments, but it does not document the steps to complete this procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S2]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S2]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S3]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S2]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S2]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S3]",
+        "before_flags": [
+          "assuming external cash desk without clarification"
+        ],
+        "after_flags": [
+          "assuming external cash desk without clarification"
+        ],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      }
+    ]
+  },
+  "oracle": {
+    "before": {
+      "benchmark_schema_version": 1,
+      "adapter_id": "A0",
+      "is_test_fixture": false,
+      "oracle_mode": true,
+      "timestamp_utc": "2026-10-15T14:20:34.144918+00:00",
+      "total_cases": 70,
+      "repetitions": 1,
+      "metrics_summary": {
+        "behavior_accuracy": 0.657,
+        "behavior_matches": 46,
+        "mean_key_fact_recall": 0.507,
+        "mean_citation_coverage": 1.0,
+        "mean_citation_precision": 1.0,
+        "total_hallucinated_tokens": 0,
+        "total_prohibited_claims_detected": 10
+      },
+      "latency_summary": {
+        "generation_p50_ms": 1.8,
+        "generation_p95_ms": 3.2,
+        "generation_mean_ms": 1.65,
+        "generation_min_ms": 0.09,
+        "generation_max_ms": 6.29,
+        "retrieval_p50_ms": 100.53,
+        "retrieval_p95_ms": 153.79,
+        "retrieval_mean_ms": 109.58
+      },
+      "cost_and_tokens": {
+        "note": "Null until real hosted model usage and provider pricing are supplied. No fake cost fabricated.",
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "cost_per_1000_queries_usd": null
+      }
+    },
+    "after": {
+      "benchmark_schema_version": 1,
+      "adapter_id": "A0",
+      "is_test_fixture": false,
+      "oracle_mode": true,
+      "timestamp_utc": "2026-10-15T14:30:43.102251+00:00",
+      "total_cases": 70,
+      "repetitions": 1,
+      "metrics_summary": {
+        "behavior_accuracy": 0.657,
+        "behavior_matches": 46,
+        "mean_key_fact_recall": 0.481,
+        "mean_citation_coverage": 1.0,
+        "mean_citation_precision": 1.0,
+        "total_hallucinated_tokens": 0,
+        "total_prohibited_claims_detected": 9
+      },
+      "latency_summary": {
+        "generation_p50_ms": 1.76,
+        "generation_p95_ms": 4.03,
+        "generation_mean_ms": 1.82,
+        "generation_min_ms": 0.11,
+        "generation_max_ms": 6.64,
+        "retrieval_p50_ms": 100.53,
+        "retrieval_p95_ms": 153.79,
+        "retrieval_mean_ms": 109.58
+      },
+      "cost_and_tokens": {
+        "note": "Null until real hosted model usage and provider pricing are supplied. No fake cost fabricated.",
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "cost_per_1000_queries_usd": null
+      }
+    },
+    "before_raw_sha256": "a91987790f51aef6decba929f313c0c86e7fe60640a5810b22826c5da7ce24da",
+    "after_raw_sha256": "a62748db0e1504597cde3f2a20e6f5abf4290d148948f2dedef8ff626e952822",
+    "cases": [
+      {
+        "id": "CASE-012",
+        "question": "What objects belong to business master data in SAP Utilities?",
+        "before_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+        "after_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+        "before_flags": [
+          "Premise",
+          "Grid"
+        ],
+        "after_flags": [
+          "Premise",
+          "Grid"
+        ],
+        "before_behavior": "answer",
+        "after_behavior": "answer"
+      },
+      {
+        "id": "CASE-020",
+        "question": "How do I process meter reading data during move-in?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Meter Reading Data (Move-In), but it does not document the steps to complete this procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+        "before_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "after_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-023",
+        "question": "How do I process incoming payments from external cash desks?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Processing Incoming Payments, but it does not document the steps to complete this procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S1]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S1]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S2]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S1]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S1]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S2]",
+        "before_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "after_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-024",
+        "question": "How do I execute automatic billing in SAP Utilities?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Automatic Billing, but it does not document the steps to complete this procedure.\n\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\n\nIn addition to general master data, the following billing master data are included in automatic billing: [S2]\n- Rate Type [S2]\n- Operand [S2]\n- Price [S2]\n- Price Adjustment Clause [S2]\n- Rate [S2]\n- Schema [S2]\n- Rate Category [S2]\n- Rate Determination [S2]\n- Variants [S2]\n- Discounts [S2]\n- Franchise Fees [S2]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nBilling is executed based on intervals defined in scheduling. [S1]\nAutomatic billing provides a link between general master data and invoicing. [S2]\n\nIn addition to general master data, the following billing master data are included in automatic billing: [S2]\n- Rate Type [S2]\n- Operand [S2]\n- Price [S2]\n- Price Adjustment Clause [S2]\n- Rate [S2]\n- Schema [S2]\n- Rate Category [S2]\n- Rate Determination [S2]\n- Variants [S2]\n- Discounts [S2]\n- Franchise Fees [S2]",
+        "before_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "after_flags": [
+          "does not document the steps to complete this procedure"
+        ],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-025",
+        "question": "How do I create a budget billing plan?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of a budget billing plan, but it does not document the steps to create one.\n\nUtility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. [S1]\nTherefore, they charge budget billing amounts during the supply period instead of the actual amount owed, in order to remain solvent. [S1]\nYou specify the budget billing amounts and the dates that are due in the budget billing plan. [S1]\nThe budget billing plan is the basis for charging budget billing amounts. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nUtility companies normally bill for their services at the end of a supply period - in an annual consumption billing, for example. [S1]\nTherefore, they charge budget billing amounts during the supply period instead of the actual amount owed, in order to remain solvent. [S1]\nYou specify the budget billing amounts and the dates that are due in the budget billing plan. [S1]\nThe budget billing plan is the basis for charging budget billing amounts. [S1]",
+        "before_flags": [
+          "Click Create Budget Billing Plan button"
+        ],
+        "after_flags": [],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-026",
+        "question": "How do I analyse periodic billing and invoicing?",
+        "before_answer": "The available SAP Help page describes the features and KPIs of the Periodic Billing and Invoicing Analysis app, but it does not document the steps to perform the analysis.\n\nYou can use this app to analyze the billing and invoicing process for all billing and invoicing statuses and KPIs. [S1]\nAggregated information (such as the number of contracts that are ready for invoicing) is also available. [S1]\nThis app is available for the role Billing Specialist (Utilities) ( SAP_BR_BILLING_SPECIALIST_ISU ). [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nYou can use this app to analyze the billing and invoicing process for all billing and invoicing statuses and KPIs. [S1]\nAggregated information (such as the number of contracts that are ready for invoicing) is also available. [S1]\nThis app is available for the role Billing Specialist (Utilities) ( SAP_BR_BILLING_SPECIALIST_ISU ). [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-029",
+        "question": "How do I execute move-in and move-out overview?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Move-in, but it does not document the steps to complete this procedure.\n\nYou use the move-in function to carry out most of the activities required to begin providing a business partner with a utility service. [S1]\nIn move-in processing, you establish whether a contract can be billed. [S1]\nFrom the move-in, you can also trigger the charges levied at the commencement of a utility service, as well as a welcome letter to the customer. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nYou use the move-in function to carry out most of the activities required to begin providing a business partner with a utility service. [S1]\nIn move-in processing, you establish whether a contract can be billed. [S1]\nFrom the move-in, you can also trigger the charges levied at the commencement of a utility service, as well as a welcome letter to the customer. [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "abstain",
+        "after_behavior": "abstain"
+      },
+      {
+        "id": "CASE-031",
+        "question": "What happens during the move-in process and how does it relate to meter readings?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Meter Reading Data (Move-In), but it does not document the steps to complete this procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- If you adopt the meter reading result, the system adds the meter reading reason Move-in to the result. [S1]\n- If you change the meter reading result, a new result is created with the meter reading reason Move-in . [S1]\n- If the system does not propose a meter reading result, you can have it estimate a result or enter one manually. [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-033",
+        "question": "How are budget billing amounts processed during end-of-year billing?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of a budget billing plan, but it does not document the steps to create one.\n\n- You cannot further process the budget billing plan. [S1]\n- The budget billing amounts cannot be paid, dunned or requested. [S1]\n- Settle the budget billing payments (statistical budget billing plan procedure) or budget billing receivables against the amount invoiced for the contract (partial billing procedure). [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\n- You cannot further process the budget billing plan. [S1]\n- The budget billing amounts cannot be paid, dunned or requested. [S1]\n- Settle the budget billing payments (statistical budget billing plan procedure) or budget billing receivables against the amount invoiced for the contract (partial billing procedure). [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      },
+      {
+        "id": "CASE-036",
+        "question": "How do meter reading estimation and monitoring work together?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Estimation, but it does not document the steps to complete this procedure.\n\nThis component allows you to estimate meter reading results automatically in the case of missing meter readings or implausible consumption. [S1]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nThis component allows you to estimate meter reading results automatically in the case of missing meter readings or implausible consumption. [S1]",
+        "before_flags": [],
+        "after_flags": [],
+        "before_behavior": "abstain",
+        "after_behavior": "abstain"
+      },
+      {
+        "id": "CASE-037",
+        "question": "How do incoming payments interact with installment plans?",
+        "before_answer": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. [S2]\nThe individual installment receivable is cleared upon payment. [S3]",
+        "after_answer": "You create an installment plan for business partners wishing to make payment but who are temporarily unable to keep up their payment obligations. [S2]\nThe individual installment receivable is cleared upon payment. [S3]",
+        "before_flags": [
+          "payments cannot be applied to installment plans"
+        ],
+        "after_flags": [
+          "payments cannot be applied to installment plans"
+        ],
+        "before_behavior": "answer",
+        "after_behavior": "answer"
+      },
+      {
+        "id": "CASE-039",
+        "question": "Can multiple contracts belong to one contract account?",
+        "before_answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nIn Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]",
+        "after_answer": "In Contract Accounts Receivable and Payable, each business partner posting is assigned to one business partner and to one contract account. [S1]\nYou can assign more than one contract account to a given business partner. [S2]\nIn Utilities,one contract account contains all those contracts belonging to one business partner for which the same payment and dunning terms apply. [S3]",
+        "before_flags": [
+          "only one contract per account is permitted"
+        ],
+        "after_flags": [
+          "only one contract per account is permitted"
+        ],
+        "before_behavior": "answer",
+        "after_behavior": "answer"
+      },
+      {
+        "id": "CASE-040",
+        "question": "Can you explain the business master data objects in more detail?",
+        "before_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+        "after_answer": "Business master data includes: [S1]\n- Business partner [S1]\n- Contract account [S1]\n- Contract (billable service) [S1]\n- Service provider [S1]\n- Non-billable service [S1]\n\nTechnical master data includes: [S1]\n- Grid [S1]\n- Point of delivery [S1]\n- Connection [S1]\n- Connection object [S1]\n- Technical installation [S1]\n- Premise [S1]\n- Device location [S1]\n- Installation [S1]\n- Device [S1]",
+        "before_flags": [
+          "Device location is a business object"
+        ],
+        "after_flags": [
+          "Device location is a business object"
+        ],
+        "before_behavior": "answer",
+        "after_behavior": "answer"
+      },
+      {
+        "id": "CASE-052",
+        "question": "How do I process payments?",
+        "before_answer": "The available SAP Help page explains the purpose and parameters of Processing Incoming Payments, but it does not document the steps to complete this procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S2]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S2]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S3]",
+        "after_answer": "The selected evidence does not establish a complete step-by-step procedure.\n\nIn the document display for a payment, the External Cash Desk tab page contains detailed information about the payment. [S2]\nFor documents posted using external cash desk services, in the account balance display, you can display detailed information about the payment by choosing Environment > Payment Data > From External Cash Desk . [S2]\nUsing the enterprise service CashPointPaymentCreateNotification , you can forward payments made at cash desks of offline branches (with and without agents) to FI-CA. [S3]",
+        "before_flags": [
+          "assuming external cash desk without clarification"
+        ],
+        "after_flags": [
+          "assuming external cash desk without clarification"
+        ],
+        "before_behavior": "partial_answer",
+        "after_behavior": "partial_answer"
+      }
+    ]
+  }
+}

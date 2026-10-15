@@ -1,0 +1,1043 @@
+{
+  "source_commit": "a027cd64b168ba1caa5eae433d70d5b5edc5f4dc",
+  "source_kind": "byte-exact git archive, no source edits, fresh process per test",
+  "rows": [
+    {
+      "test": "tests.test_benchmark_instrumentation.StageInstrumentationTests::test_answered_query_reports_full_stage_breakdown",
+      "nodeid": "tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_answered_query_reports_full_stage_breakdown",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_answered_query_reports_full_stage_breakdown",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "01.log",
+      "raw_sha256": "43d97cbbb992d6be550d9f726782d02ea4cfa79032bcea7b5bfbdfb83cc75176",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of StageInstrumentationTests.test_answered_query_reports_full_stage_breakdown _\n\ncls = <class 'tests.test_benchmark_instrumentation.StageInstrumentationTests'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.svc = S.build_service(\"extractive\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_benchmark_instrumentation.py:30: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive'\n\n    def build_service(generator: str = \"extractive\") -> RagService:\n        \"\"\"Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback.\"\"\"\n        if generator not in (\"extractive\", \"ollama\"):\n            raise ValueError(\"generator must be 'extractive' or 'ollama'\")\n        import rag_evidence as EV\n        import rag_pipeline as RP\n        # Phase 11.1: the shipped configuration is \"C1\" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.\n        # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).\n>       pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nscripts/rag_service.py:882: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_answered_query_reports_full_stage_breakdown\n1 error in 0.60s\n"
+    },
+    {
+      "test": "tests.test_benchmark_instrumentation.StageInstrumentationTests::test_followup_turn_keeps_stage_breakdown_and_answer",
+      "nodeid": "tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_followup_turn_keeps_stage_breakdown_and_answer",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_followup_turn_keeps_stage_breakdown_and_answer",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "02.log",
+      "raw_sha256": "13cd3b3921297255ac1cc21eaed6335b123464f292f1e5af78237f4b46b449ce",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of StageInstrumentationTests.test_followup_turn_keeps_stage_breakdown_and_answer _\n\ncls = <class 'tests.test_benchmark_instrumentation.StageInstrumentationTests'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.svc = S.build_service(\"extractive\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_benchmark_instrumentation.py:30: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive'\n\n    def build_service(generator: str = \"extractive\") -> RagService:\n        \"\"\"Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback.\"\"\"\n        if generator not in (\"extractive\", \"ollama\"):\n            raise ValueError(\"generator must be 'extractive' or 'ollama'\")\n        import rag_evidence as EV\n        import rag_pipeline as RP\n        # Phase 11.1: the shipped configuration is \"C1\" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.\n        # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).\n>       pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nscripts/rag_service.py:882: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_followup_turn_keeps_stage_breakdown_and_answer\n1 error in 0.61s\n"
+    },
+    {
+      "test": "tests.test_benchmark_instrumentation.StageInstrumentationTests::test_m2c18_fail_closed_short_circuits_before_embedding",
+      "nodeid": "tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_m2c18_fail_closed_short_circuits_before_embedding",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_m2c18_fail_closed_short_circuits_before_embedding",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "03.log",
+      "raw_sha256": "7075b43cc44cd2fed54dea34afc86546865ad1b972f5c8883a39628e126ef84d",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of StageInstrumentationTests.test_m2c18_fail_closed_short_circuits_before_embedding _\n\ncls = <class 'tests.test_benchmark_instrumentation.StageInstrumentationTests'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.svc = S.build_service(\"extractive\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_benchmark_instrumentation.py:30: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive'\n\n    def build_service(generator: str = \"extractive\") -> RagService:\n        \"\"\"Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback.\"\"\"\n        if generator not in (\"extractive\", \"ollama\"):\n            raise ValueError(\"generator must be 'extractive' or 'ollama'\")\n        import rag_evidence as EV\n        import rag_pipeline as RP\n        # Phase 11.1: the shipped configuration is \"C1\" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.\n        # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).\n>       pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nscripts/rag_service.py:882: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_m2c18_fail_closed_short_circuits_before_embedding\n1 error in 0.65s\n"
+    },
+    {
+      "test": "tests.test_benchmark_instrumentation.StageInstrumentationTests::test_out_of_scope_query_has_routing_stages_but_no_generation_stages",
+      "nodeid": "tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_out_of_scope_query_has_routing_stages_but_no_generation_stages",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_out_of_scope_query_has_routing_stages_but_no_generation_stages",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "04.log",
+      "raw_sha256": "3df358962af50d96e327168e5c38d2968dc167226ffd11e49f1ac6b8fbbc1de5",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of StageInstrumentationTests.test_out_of_scope_query_has_routing_stages_but_no_generation_stages _\n\ncls = <class 'tests.test_benchmark_instrumentation.StageInstrumentationTests'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.svc = S.build_service(\"extractive\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_benchmark_instrumentation.py:30: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive'\n\n    def build_service(generator: str = \"extractive\") -> RagService:\n        \"\"\"Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback.\"\"\"\n        if generator not in (\"extractive\", \"ollama\"):\n            raise ValueError(\"generator must be 'extractive' or 'ollama'\")\n        import rag_evidence as EV\n        import rag_pipeline as RP\n        # Phase 11.1: the shipped configuration is \"C1\" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.\n        # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).\n>       pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nscripts/rag_service.py:882: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_benchmark_instrumentation.py::StageInstrumentationTests::test_out_of_scope_query_has_routing_stages_but_no_generation_stages\n1 error in 0.56s\n"
+    },
+    {
+      "test": "tests.test_focused_windows_diagnostic::test_real_113_plus_two_store_is_diagnosed_without_repair",
+      "nodeid": "tests/test_focused_windows_diagnostic.py::test_real_113_plus_two_store_is_diagnosed_without_repair",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_focused_windows_diagnostic.py::test_real_113_plus_two_store_is_diagnosed_without_repair",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "05.log",
+      "raw_sha256": "055c7083278a13d537c0396196ca309b0c2138df1b012b57f82a6066ab2080d1",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n___________ test_real_113_plus_two_store_is_diagnosed_without_repair ___________\n\ntmp_path = PosixPath('/tmp/pytest-of-user/pytest-32/test_real_113_plus_two_store_i0')\n\n    def test_real_113_plus_two_store_is_diagnosed_without_repair(tmp_path):\n        import build_page_collection as BP\n        import chromadb\n        import page_chunker as PK\n        import page_corpus as PC\n        from chromadb.config import Settings\n        from chroma_temp import close_systems_under\n        records = PC.load_records()\n        count, info = PK.make_token_counter()\n>       assert info[\"exact\"]\nE       assert False\n\ntests/test_focused_windows_diagnostic.py:141: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_focused_windows_diagnostic.py::test_real_113_plus_two_store_is_diagnosed_without_repair\n1 failed in 1.89s\n"
+    },
+    {
+      "test": "tests.test_golden_eval.GoldenEvaluationTests::test_golden_eval_suite",
+      "nodeid": "tests/test_golden_eval.py::GoldenEvaluationTests::test_golden_eval_suite",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_golden_eval.py::GoldenEvaluationTests::test_golden_eval_suite",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "06.log",
+      "raw_sha256": "97990a3d88f4aa62a6308fbbd65aa9f05b866c2942a09334e2b1402e2e3b0264",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n________ ERROR at setup of GoldenEvaluationTests.test_golden_eval_suite ________\n\ncls = <class 'tests.test_golden_eval.GoldenEvaluationTests'>\n\n    @classmethod\n    def setUpClass(cls):\n        fixture_path = ROOT / \"tests\" / \"fixtures\" / \"golden_evaluation_set.json\"\n        with open(fixture_path, \"r\", encoding=\"utf-8\") as f:\n            cls.test_cases = json.load(f)\n    \n        # Build service using standard factory\n>       cls.service = rag_service.build_service(\"extractive\")\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_golden_eval.py:31: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive'\n\n    def build_service(generator: str = \"extractive\") -> RagService:\n        \"\"\"Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback.\"\"\"\n        if generator not in (\"extractive\", \"ollama\"):\n            raise ValueError(\"generator must be 'extractive' or 'ollama'\")\n        import rag_evidence as EV\n        import rag_pipeline as RP\n        # Phase 11.1: the shipped configuration is \"C1\" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.\n        # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).\n>       pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nscripts/rag_service.py:882: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_golden_eval.py::GoldenEvaluationTests::test_golden_eval_suite\n1 error in 1.12s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_success_removes_only_approved_records_and_backup_is_exact",
+      "nodeid": "tests/test_page_store_repair.py::test_success_removes_only_approved_records_and_backup_is_exact",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_success_removes_only_approved_records_and_backup_is_exact",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "07.log",
+      "raw_sha256": "ab445fa77d043fb57b15e1ba5edbc3017f6178d1a8ee91e04e4afce1e18e4ac0",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of test_success_removes_only_approved_records_and_backup_is_exact _\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f1435a10cd0>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-33'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_success_removes_only_approved_records_and_backup_is_exact\n1 error in 1.85s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_interruption_keeps_backup_original_and_no_activation[before_delete]",
+      "nodeid": "tests/test_page_store_repair.py::test_interruption_keeps_backup_original_and_no_activation[before_delete]",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_interruption_keeps_backup_original_and_no_activation[before_delete]",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "08.log",
+      "raw_sha256": "7517c6c25f53ab959031ef22851f4c125ab8b4063d42481580d9d69820b0e226",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of test_interruption_keeps_backup_original_and_no_activation[before_delete] _\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f53f610cbd0>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-34'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_interruption_keeps_backup_original_and_no_activation[before_delete]\n1 error in 1.86s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_interruption_keeps_backup_original_and_no_activation[after_delete]",
+      "nodeid": "tests/test_page_store_repair.py::test_interruption_keeps_backup_original_and_no_activation[after_delete]",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_interruption_keeps_backup_original_and_no_activation[after_delete]",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "09.log",
+      "raw_sha256": "79604c2457447e7bea216a12492050d60f71ebce4267c9339096eadb2e3f0fb3",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of test_interruption_keeps_backup_original_and_no_activation[after_delete] _\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fe849610850>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-35'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_interruption_keeps_backup_original_and_no_activation[after_delete]\n1 error in 1.86s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_interruption_keeps_backup_original_and_no_activation[before_publish]",
+      "nodeid": "tests/test_page_store_repair.py::test_interruption_keeps_backup_original_and_no_activation[before_publish]",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_interruption_keeps_backup_original_and_no_activation[before_publish]",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "10.log",
+      "raw_sha256": "e0c5651620a1a35b69474da0134842a6885ad37d835e16c8d5feb3b859de0b40",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of test_interruption_keeps_backup_original_and_no_activation[before_publish] _\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f7396d20850>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-37'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_interruption_keeps_backup_original_and_no_activation[before_publish]\n1 error in 1.90s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_failed_backup_verification_never_reaches_delete",
+      "nodeid": "tests/test_page_store_repair.py::test_failed_backup_verification_never_reaches_delete",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_failed_backup_verification_never_reaches_delete",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "11.log",
+      "raw_sha256": "1d47abd459217dca7d088b79f6fcde91cc993759e1b47f3b4b257d4c55d2e0e4",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n____ ERROR at setup of test_failed_backup_verification_never_reaches_delete ____\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fb9c6028cd0>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-38'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_failed_backup_verification_never_reaches_delete\n1 error in 1.96s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_backup_copy_io_error_is_fatal",
+      "nodeid": "tests/test_page_store_repair.py::test_backup_copy_io_error_is_fatal",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_backup_copy_io_error_is_fatal",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "12.log",
+      "raw_sha256": "4ea0653506de0f3955ef150d856fed80f7a206b7c572d54e3460a947ff7cc151",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_____________ ERROR at setup of test_backup_copy_io_error_is_fatal _____________\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f3db2120dd0>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-36'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_backup_copy_io_error_is_fatal - a...\n1 error in 1.84s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_concurrent_source_writer_aborts[before_delete]",
+      "nodeid": "tests/test_page_store_repair.py::test_concurrent_source_writer_aborts[before_delete]",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_concurrent_source_writer_aborts[before_delete]",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "13.log",
+      "raw_sha256": "6c3ee1e53b4d32d8502c38bdf6ba506b09c915c6ac6003b6e83de240f2e0f774",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n____ ERROR at setup of test_concurrent_source_writer_aborts[before_delete] _____\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f6ee0410b50>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-39'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_concurrent_source_writer_aborts[before_delete]\n1 error in 1.80s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_concurrent_source_writer_aborts[after_delete]",
+      "nodeid": "tests/test_page_store_repair.py::test_concurrent_source_writer_aborts[after_delete]",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_concurrent_source_writer_aborts[after_delete]",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "14.log",
+      "raw_sha256": "052ffb00b869f6b5072d1f0dea454b09216a4c9fc0f20492a9c877c3faa91638",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_____ ERROR at setup of test_concurrent_source_writer_aborts[after_delete] _____\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fc7d33250d0>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-40'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_concurrent_source_writer_aborts[after_delete]\n1 error in 1.87s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_transient_observed_writer_is_sticky_even_after_bytes_restored",
+      "nodeid": "tests/test_page_store_repair.py::test_transient_observed_writer_is_sticky_even_after_bytes_restored",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_transient_observed_writer_is_sticky_even_after_bytes_restored",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "15.log",
+      "raw_sha256": "889f2eccbc4e65a94b92021a6ea0d942205053d593b4f19548556893e669e52c",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of test_transient_observed_writer_is_sticky_even_after_bytes_restored _\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fdd9e620890>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-41'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_transient_observed_writer_is_sticky_even_after_bytes_restored\n1 error in 1.83s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_changed_corpus_guard_aborts_without_touching_real_corpus",
+      "nodeid": "tests/test_page_store_repair.py::test_changed_corpus_guard_aborts_without_touching_real_corpus",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_changed_corpus_guard_aborts_without_touching_real_corpus",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "16.log",
+      "raw_sha256": "86b7fbbde2ae754569401267db1451cfd457fde65ebf88ce6874798dcb5a4fb2",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of test_changed_corpus_guard_aborts_without_touching_real_corpus _\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f42cb229250>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-42'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_changed_corpus_guard_aborts_without_touching_real_corpus\n1 error in 1.87s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_unexpected_extra_id_in_diagnostic_aborts",
+      "nodeid": "tests/test_page_store_repair.py::test_unexpected_extra_id_in_diagnostic_aborts",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_unexpected_extra_id_in_diagnostic_aborts",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "17.log",
+      "raw_sha256": "4e7779ff3ca0caac16ff6a7f16f80c92e018b438be26ce4c1786e78924cf8281",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_______ ERROR at setup of test_unexpected_extra_id_in_diagnostic_aborts ________\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f6999f2ce50>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-43'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_unexpected_extra_id_in_diagnostic_aborts\n1 error in 1.89s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_stale_diagnostic_source_bytes_aborts",
+      "nodeid": "tests/test_page_store_repair.py::test_stale_diagnostic_source_bytes_aborts",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_stale_diagnostic_source_bytes_aborts",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "18.log",
+      "raw_sha256": "2f5fc238ccb638ba4cc3f3c19d8446975e8277f79f9345391c9d184c9f67e025",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_________ ERROR at setup of test_stale_diagnostic_source_bytes_aborts __________\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fe566b0c750>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-45'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_stale_diagnostic_source_bytes_aborts\n1 error in 2.03s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_post_repair_metadata_tamper_detected",
+      "nodeid": "tests/test_page_store_repair.py::test_post_repair_metadata_tamper_detected",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_post_repair_metadata_tamper_detected",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "19.log",
+      "raw_sha256": "3235ef3386636550a1e64041e67571dd3e08535a05c69482710d6fb0c3cbd7d9",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_________ ERROR at setup of test_post_repair_metadata_tamper_detected __________\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7feb5930c750>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-44'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_post_repair_metadata_tamper_detected\n1 error in 1.90s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_repair_refuses_source_under_production_data",
+      "nodeid": "tests/test_page_store_repair.py::test_repair_refuses_source_under_production_data",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_repair_refuses_source_under_production_data",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "20.log",
+      "raw_sha256": "1ee1e64b1942c57375be76ef874124c0490f28594159cbfa1d0293e3a5054027",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n______ ERROR at setup of test_repair_refuses_source_under_production_data ______\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7ff5bcd20d50>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-46'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_repair_refuses_source_under_production_data\n1 error in 1.84s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_explicit_exact_approval_required[approvals0]",
+      "nodeid": "tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals0]",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals0]",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "21.log",
+      "raw_sha256": "1bb602dc45c4c4c28bf806a17458df6e349ab45b677e54e404db07b4e639c92a",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_____ ERROR at setup of test_explicit_exact_approval_required[approvals0] ______\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7ff4ca328c10>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-47'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals0]\n1 error in 1.63s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_explicit_exact_approval_required[approvals1]",
+      "nodeid": "tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals1]",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals1]",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "22.log",
+      "raw_sha256": "ada95aa63e65c9c84ce8f82dad9afd387d3e33ce180ecf827aad1cfa6912b346",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_____ ERROR at setup of test_explicit_exact_approval_required[approvals1] ______\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f40ca120c10>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-48'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals1]\n1 error in 1.78s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_explicit_exact_approval_required[approvals2]",
+      "nodeid": "tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals2]",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals2]",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "23.log",
+      "raw_sha256": "e38ada83aba1df3254e0289048b3e5ea819178a37f9bf71015fa95b89480dd6a",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_____ ERROR at setup of test_explicit_exact_approval_required[approvals2] ______\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fb8ab728cd0>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-50'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals2]\n1 error in 1.78s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_explicit_exact_approval_required[approvals3]",
+      "nodeid": "tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals3]",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals3]",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "24.log",
+      "raw_sha256": "a04a52f0fed032d442a6d27a4e4a038f00707cbe6c8995777eb01770d11ed714",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_____ ERROR at setup of test_explicit_exact_approval_required[approvals3] ______\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fc59ce29250>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-49'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_explicit_exact_approval_required[approvals3]\n1 error in 1.73s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_cooperating_job_lock_is_not_reclaimed",
+      "nodeid": "tests/test_page_store_repair.py::test_cooperating_job_lock_is_not_reclaimed",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_cooperating_job_lock_is_not_reclaimed",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "25.log",
+      "raw_sha256": "216ab0fd553b27932781e08a52ebcdfd09068b0bea33a5001269689a1eefc5eb",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_________ ERROR at setup of test_cooperating_job_lock_is_not_reclaimed _________\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f54d5629390>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-51'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_cooperating_job_lock_is_not_reclaimed\n1 error in 1.89s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_preexisting_source_corpus_drift_is_rejected",
+      "nodeid": "tests/test_page_store_repair.py::test_preexisting_source_corpus_drift_is_rejected",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_preexisting_source_corpus_drift_is_rejected",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "26.log",
+      "raw_sha256": "0622581ad07b0f0d858d5ae6485f275de676adf4a0bf7c47ffae086e3c734d70",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n______ ERROR at setup of test_preexisting_source_corpus_drift_is_rejected ______\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7f8f7f525110>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-52'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_preexisting_source_corpus_drift_is_rejected\n1 error in 1.85s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_unexpected_extra_record_in_private_stage_aborts",
+      "nodeid": "tests/test_page_store_repair.py::test_unexpected_extra_record_in_private_stage_aborts",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_unexpected_extra_record_in_private_stage_aborts",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "27.log",
+      "raw_sha256": "a1b70d46c936f51d6cdad2e0116fd9b8d50eb1a2a2ba84c80ef75da915aeeaf4",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n____ ERROR at setup of test_unexpected_extra_record_in_private_stage_aborts ____\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fd2c2a28d10>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-53'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_unexpected_extra_record_in_private_stage_aborts\n1 error in 1.75s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_unexpected_collection_metadata_aborts_before_backup",
+      "nodeid": "tests/test_page_store_repair.py::test_unexpected_collection_metadata_aborts_before_backup",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_unexpected_collection_metadata_aborts_before_backup",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "28.log",
+      "raw_sha256": "8e6e21659951d5d2026b0f10c526ba42d6e2f04b03f5967ca3a9aabbd5fbc05f",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n__ ERROR at setup of test_unexpected_collection_metadata_aborts_before_backup __\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fae83128910>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-54'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_unexpected_collection_metadata_aborts_before_backup\n1 error in 1.93s\n"
+    },
+    {
+      "test": "tests.test_page_store_repair::test_target_metadata_must_match_diagnostic_exactly",
+      "nodeid": "tests/test_page_store_repair.py::test_target_metadata_must_match_diagnostic_exactly",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_page_store_repair.py::test_target_metadata_must_match_diagnostic_exactly",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "29.log",
+      "raw_sha256": "a0355ea82118e9a712986ebe9f66cbb5ebe93b40197cc098b1eca9293c9f1123",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_____ ERROR at setup of test_target_metadata_must_match_diagnostic_exactly _____\n\ntmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fbe2910cb90>, _basetemp=PosixPath('/tmp/pytest-of-user/pytest-55'), _retention_count=3, _retention_policy='all')\n\n    @pytest.fixture(scope=\"module\")\n    def seed(tmp_path_factory):\n        import chromadb\n        from chromadb.config import Settings\n        import build_page_collection as BP\n        import page_corpus as PC\n        import page_extract as PE\n        import page_chunker as PK\n        from chroma_temp import close_systems_under\n        base = tmp_path_factory.mktemp(\"repair-seed\")\n        source = base / \"source\"\n>       count, info = PK.make_token_counter(); assert info[\"exact\"]\n                                               ^^^^^^^^^^^^^^^^^^^^\nE       assert False\n\ntests/test_page_store_repair.py:30: AssertionError\n=========================== short test summary info ============================\nERROR tests/test_page_store_repair.py::test_target_metadata_must_match_diagnostic_exactly\n1 error in 1.80s\n"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_baseline_behavior_unchanged_when_disabled",
+      "nodeid": "tests/test_phase13_reranker.py::TestPhase13Reranker::test_baseline_behavior_unchanged_when_disabled",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase13_reranker.py::TestPhase13Reranker::test_baseline_behavior_unchanged_when_disabled",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "30.log",
+      "raw_sha256": "021e1245f2d858df8df0342d594c07bc2cc2b0c4c1e469bd6f247f2f8588193f",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase13Reranker.test_baseline_behavior_unchanged_when_disabled _\n\ncls = <class 'tests.test_phase13_reranker.TestPhase13Reranker'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=RP.PipelineConfig(rerank_router=False))\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase13_reranker.py:27: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase13_reranker.py::TestPhase13Reranker::test_baseline_behavior_unchanged_when_disabled\n1 error in 0.30s\n"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_deterministic_reranking",
+      "nodeid": "tests/test_phase13_reranker.py::TestPhase13Reranker::test_deterministic_reranking",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase13_reranker.py::TestPhase13Reranker::test_deterministic_reranking",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "31.log",
+      "raw_sha256": "87cdd4f59a29029c684ab5bea1ef97b411e568a01e5a8664fd34f7760dc449fa",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n______ ERROR at setup of TestPhase13Reranker.test_deterministic_reranking ______\n\ncls = <class 'tests.test_phase13_reranker.TestPhase13Reranker'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=RP.PipelineConfig(rerank_router=False))\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase13_reranker.py:27: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase13_reranker.py::TestPhase13Reranker::test_deterministic_reranking\n1 error in 0.37s\n"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_invalid_unresolved_candidate_handling",
+      "nodeid": "tests/test_phase13_reranker.py::TestPhase13Reranker::test_invalid_unresolved_candidate_handling",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase13_reranker.py::TestPhase13Reranker::test_invalid_unresolved_candidate_handling",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "32.log",
+      "raw_sha256": "b8f361842c0304cc63c9d6f136a535abfcc1dd94bcd825396aa91e33fe4658ba",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase13Reranker.test_invalid_unresolved_candidate_handling _\n\ncls = <class 'tests.test_phase13_reranker.TestPhase13Reranker'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=RP.PipelineConfig(rerank_router=False))\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase13_reranker.py:27: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase13_reranker.py::TestPhase13Reranker::test_invalid_unresolved_candidate_handling\n1 error in 0.38s\n"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_query_embedding_computed_once",
+      "nodeid": "tests/test_phase13_reranker.py::TestPhase13Reranker::test_query_embedding_computed_once",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase13_reranker.py::TestPhase13Reranker::test_query_embedding_computed_once",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "33.log",
+      "raw_sha256": "b9d7a638dc3c523785438ca475664cc7783784a47e9e931496c3277d35055bc3",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n___ ERROR at setup of TestPhase13Reranker.test_query_embedding_computed_once ___\n\ncls = <class 'tests.test_phase13_reranker.TestPhase13Reranker'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=RP.PipelineConfig(rerank_router=False))\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase13_reranker.py:27: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase13_reranker.py::TestPhase13Reranker::test_query_embedding_computed_once\n1 error in 0.37s\n"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_scores_identical_with_and_without_precomputed_embedding",
+      "nodeid": "tests/test_phase13_reranker.py::TestPhase13Reranker::test_scores_identical_with_and_without_precomputed_embedding",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase13_reranker.py::TestPhase13Reranker::test_scores_identical_with_and_without_precomputed_embedding",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "34.log",
+      "raw_sha256": "6128946d2d5497ac471bef63018097f2c18cdc56e42e3ecd8191aa4784a7589e",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase13Reranker.test_scores_identical_with_and_without_precomputed_embedding _\n\ncls = <class 'tests.test_phase13_reranker.TestPhase13Reranker'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=RP.PipelineConfig(rerank_router=False))\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase13_reranker.py:27: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase13_reranker.py::TestPhase13Reranker::test_scores_identical_with_and_without_precomputed_embedding\n1 error in 0.27s\n"
+    },
+    {
+      "test": "tests.test_phase13_reranker.TestPhase13Reranker::test_top_k_candidate_retention",
+      "nodeid": "tests/test_phase13_reranker.py::TestPhase13Reranker::test_top_k_candidate_retention",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase13_reranker.py::TestPhase13Reranker::test_top_k_candidate_retention",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "35.log",
+      "raw_sha256": "cc2d01dd15bc1cc0733820a95a38d0c8e04a90193b5a7f2062e3c1b5f165a794",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_____ ERROR at setup of TestPhase13Reranker.test_top_k_candidate_retention _____\n\ncls = <class 'tests.test_phase13_reranker.TestPhase13Reranker'>\n\n    @classmethod\n    def setUpClass(cls):\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=RP.PipelineConfig(rerank_router=False))\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase13_reranker.py:27: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase13_reranker.py::TestPhase13Reranker::test_top_k_candidate_retention\n1 error in 0.35s\n"
+    },
+    {
+      "test": "tests.test_phase14_recall.TestPhase14RecallConfig::test_candidate_depth_configurable",
+      "nodeid": "tests/test_phase14_recall.py::TestPhase14RecallConfig::test_candidate_depth_configurable",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase14_recall.py::TestPhase14RecallConfig::test_candidate_depth_configurable",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "36.log",
+      "raw_sha256": "4fd369b22af0f5a61b626187b23961b73372423e4bcac8f26262e00950d5a55d",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________ TestPhase14RecallConfig.test_candidate_depth_configurable ___________\n\nself = <tests.test_phase14_recall.TestPhase14RecallConfig testMethod=test_candidate_depth_configurable>\n\n    def test_candidate_depth_configurable(self):\n        \"\"\"Pipeline must cleanly accept top_k_cards=5, 10, 15.\"\"\"\n>       pipe5 = RP.build_pipeline(generator=\"extractive\", config=RP.PipelineConfig(top_k_cards=5))\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase14_recall.py:56: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=5, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, cont...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_phase14_recall.py::TestPhase14RecallConfig::test_candidate_depth_configurable\n1 failed in 0.26s\n"
+    },
+    {
+      "test": "tests.test_phase14_recall.TestPhase14RecallConfig::test_default_pipeline_executes_top10",
+      "nodeid": "tests/test_phase14_recall.py::TestPhase14RecallConfig::test_default_pipeline_executes_top10",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase14_recall.py::TestPhase14RecallConfig::test_default_pipeline_executes_top10",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "37.log",
+      "raw_sha256": "a631d4535d032cd725f954cded2b9fedaf0d8c9a7a36e2b68bd95efff676b46e",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________ TestPhase14RecallConfig.test_default_pipeline_executes_top10 _________\n\nself = <tests.test_phase14_recall.TestPhase14RecallConfig testMethod=test_default_pipeline_executes_top10>\n\n    def test_default_pipeline_executes_top10(self):\n        \"\"\"Default pipeline (no explicit config passed) must route with top-10.\"\"\"\n>       default_pipe = RP.build_pipeline(generator=\"extractive\")\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase14_recall.py:45: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None, config = None\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_phase14_recall.py::TestPhase14RecallConfig::test_default_pipeline_executes_top10\n1 failed in 0.28s\n"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_a_exact_code_match_causes_candidate_injection",
+      "nodeid": "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_a_exact_code_match_causes_candidate_injection",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_a_exact_code_match_causes_candidate_injection",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "38.log",
+      "raw_sha256": "1b53b36ea380ce0c212b48e12e3d61d72660c550ae0cae0155ffe0d92bce95f7",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase15Hybrid.test_a_exact_code_match_causes_candidate_injection _\n\ncls = <class 'tests.test_phase15_hybrid.TestPhase15Hybrid'>\n\n    @classmethod\n    def setUpClass(cls):\n        # Baseline pipeline: top-10, rerank_router=True, code_aware_router=False\n>       cls.pipe_baseline = RP.build_pipeline(\n            generator=\"extractive\",\n            config=RP.PipelineConfig(top_k_cards=10, rerank_router=True, code_aware_router=False),\n        )\n\ntests/test_phase15_hybrid.py:34: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_a_exact_code_match_causes_candidate_injection\n1 error in 0.41s\n"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_b_candidate_pool_never_exceeds_10",
+      "nodeid": "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_b_candidate_pool_never_exceeds_10",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_b_candidate_pool_never_exceeds_10",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "39.log",
+      "raw_sha256": "962e67896f499a37fe653cbb2f4d9d696a843ee39a742bab67dcef6b110b266c",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n__ ERROR at setup of TestPhase15Hybrid.test_b_candidate_pool_never_exceeds_10 __\n\ncls = <class 'tests.test_phase15_hybrid.TestPhase15Hybrid'>\n\n    @classmethod\n    def setUpClass(cls):\n        # Baseline pipeline: top-10, rerank_router=True, code_aware_router=False\n>       cls.pipe_baseline = RP.build_pipeline(\n            generator=\"extractive\",\n            config=RP.PipelineConfig(top_k_cards=10, rerank_router=True, code_aware_router=False),\n        )\n\ntests/test_phase15_hybrid.py:34: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_b_candidate_pool_never_exceeds_10\n1 error in 0.22s\n"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_c_no_code_token_phase13_score_unchanged",
+      "nodeid": "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_c_no_code_token_phase13_score_unchanged",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_c_no_code_token_phase13_score_unchanged",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "40.log",
+      "raw_sha256": "0dac8b86c0ce38c5d9a47a3a4c122eddd31848aa2125477ef6c08d4078d39ba9",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase15Hybrid.test_c_no_code_token_phase13_score_unchanged _\n\ncls = <class 'tests.test_phase15_hybrid.TestPhase15Hybrid'>\n\n    @classmethod\n    def setUpClass(cls):\n        # Baseline pipeline: top-10, rerank_router=True, code_aware_router=False\n>       cls.pipe_baseline = RP.build_pipeline(\n            generator=\"extractive\",\n            config=RP.PipelineConfig(top_k_cards=10, rerank_router=True, code_aware_router=False),\n        )\n\ntests/test_phase15_hybrid.py:34: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_c_no_code_token_phase13_score_unchanged\n1 error in 0.43s\n"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_d_exact_code_match_produces_code_match_1",
+      "nodeid": "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_d_exact_code_match_produces_code_match_1",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_d_exact_code_match_produces_code_match_1",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "41.log",
+      "raw_sha256": "0b36089dd3934892ccd18b8308b35dc4f66a1048bd5f054d6c67e53eb0f8d006",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase15Hybrid.test_d_exact_code_match_produces_code_match_1 _\n\ncls = <class 'tests.test_phase15_hybrid.TestPhase15Hybrid'>\n\n    @classmethod\n    def setUpClass(cls):\n        # Baseline pipeline: top-10, rerank_router=True, code_aware_router=False\n>       cls.pipe_baseline = RP.build_pipeline(\n            generator=\"extractive\",\n            config=RP.PipelineConfig(top_k_cards=10, rerank_router=True, code_aware_router=False),\n        )\n\ntests/test_phase15_hybrid.py:34: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_d_exact_code_match_produces_code_match_1\n1 error in 0.42s\n"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_e_non_matching_candidate_produces_code_match_0",
+      "nodeid": "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_e_non_matching_candidate_produces_code_match_0",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_e_non_matching_candidate_produces_code_match_0",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "42.log",
+      "raw_sha256": "2077e660c80ab55fb6c5b9702c5c0aa91d4a24a63c5d34c2d49cdf69054c3a67",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase15Hybrid.test_e_non_matching_candidate_produces_code_match_0 _\n\ncls = <class 'tests.test_phase15_hybrid.TestPhase15Hybrid'>\n\n    @classmethod\n    def setUpClass(cls):\n        # Baseline pipeline: top-10, rerank_router=True, code_aware_router=False\n>       cls.pipe_baseline = RP.build_pipeline(\n            generator=\"extractive\",\n            config=RP.PipelineConfig(top_k_cards=10, rerank_router=True, code_aware_router=False),\n        )\n\ntests/test_phase15_hybrid.py:34: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_e_non_matching_candidate_produces_code_match_0\n1 error in 0.35s\n"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_f_generic_words_do_not_trigger_injection",
+      "nodeid": "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_f_generic_words_do_not_trigger_injection",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_f_generic_words_do_not_trigger_injection",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "43.log",
+      "raw_sha256": "cf8e8b457aff5d2b7d07e25a23090278b8815a3e273b8642f84baff0569060ae",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase15Hybrid.test_f_generic_words_do_not_trigger_injection _\n\ncls = <class 'tests.test_phase15_hybrid.TestPhase15Hybrid'>\n\n    @classmethod\n    def setUpClass(cls):\n        # Baseline pipeline: top-10, rerank_router=True, code_aware_router=False\n>       cls.pipe_baseline = RP.build_pipeline(\n            generator=\"extractive\",\n            config=RP.PipelineConfig(top_k_cards=10, rerank_router=True, code_aware_router=False),\n        )\n\ntests/test_phase15_hybrid.py:34: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_f_generic_words_do_not_trigger_injection\n1 error in 0.32s\n"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_g_unresolved_card_penalty_remains_active",
+      "nodeid": "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_g_unresolved_card_penalty_remains_active",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_g_unresolved_card_penalty_remains_active",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "44.log",
+      "raw_sha256": "454bd9b502ad480794f20def681f621762a256bdfdc8114bb9bde0862dabd6b5",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase15Hybrid.test_g_unresolved_card_penalty_remains_active _\n\ncls = <class 'tests.test_phase15_hybrid.TestPhase15Hybrid'>\n\n    @classmethod\n    def setUpClass(cls):\n        # Baseline pipeline: top-10, rerank_router=True, code_aware_router=False\n>       cls.pipe_baseline = RP.build_pipeline(\n            generator=\"extractive\",\n            config=RP.PipelineConfig(top_k_cards=10, rerank_router=True, code_aware_router=False),\n        )\n\ntests/test_phase15_hybrid.py:34: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_g_unresolved_card_penalty_remains_active\n1 error in 0.37s\n"
+    },
+    {
+      "test": "tests.test_phase15_hybrid.TestPhase15Hybrid::test_h_evidence_guard_behavior_remains_unchanged",
+      "nodeid": "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_h_evidence_guard_behavior_remains_unchanged",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_h_evidence_guard_behavior_remains_unchanged",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "45.log",
+      "raw_sha256": "36c9e33af900feb30476472540db41a4957e88666986c58b87d79629a8639fcc",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of TestPhase15Hybrid.test_h_evidence_guard_behavior_remains_unchanged _\n\ncls = <class 'tests.test_phase15_hybrid.TestPhase15Hybrid'>\n\n    @classmethod\n    def setUpClass(cls):\n        # Baseline pipeline: top-10, rerank_router=True, code_aware_router=False\n>       cls.pipe_baseline = RP.build_pipeline(\n            generator=\"extractive\",\n            config=RP.PipelineConfig(top_k_cards=10, rerank_router=True, code_aware_router=False),\n        )\n\ntests/test_phase15_hybrid.py:34: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase15_hybrid.py::TestPhase15Hybrid::test_h_evidence_guard_behavior_remains_unchanged\n1 error in 0.29s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_01_concurrent_requests_distinct_evidence_no_overwrite",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_01_concurrent_requests_distinct_evidence_no_overwrite",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_01_concurrent_requests_distinct_evidence_no_overwrite",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "46.log",
+      "raw_sha256": "ada53f22956fc8abd1c27d464977b20ac2a918f7783875d0ce06d2f55d55b646",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_01_concurrent_requests_distinct_evidence_no_overwrite _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_01_concurrent_requests_distinct_evidence_no_overwrite\n1 error in 0.40s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_02_ten_concurrent_requests_match_single_thread",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_02_ten_concurrent_requests_match_single_thread",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_02_ten_concurrent_requests_match_single_thread",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "47.log",
+      "raw_sha256": "d468c9053298705d757aa0b723d0d34baf68cdcb95e28063e2a04aa7cdd21308",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_02_ten_concurrent_requests_match_single_thread _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_02_ten_concurrent_requests_match_single_thread\n1 error in 0.37s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_03_twenty_concurrent_mixed_requests_zero_leakage",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_03_twenty_concurrent_mixed_requests_zero_leakage",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_03_twenty_concurrent_mixed_requests_zero_leakage",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "48.log",
+      "raw_sha256": "0bd0fcd9d30afa12a5527a2237471b14ec24683f132453127cac0f4251b14bad",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_03_twenty_concurrent_mixed_requests_zero_leakage _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_03_twenty_concurrent_mixed_requests_zero_leakage\n1 error in 0.47s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_04_precheck_refusal_does_not_block_on_held_generation_lock",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_04_precheck_refusal_does_not_block_on_held_generation_lock",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_04_precheck_refusal_does_not_block_on_held_generation_lock",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "49.log",
+      "raw_sha256": "1a42c7a8c8fe348b0f39057ace051a8d5581c0e4edd111a50beabdf2e6341355",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_04_precheck_refusal_does_not_block_on_held_generation_lock _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_04_precheck_refusal_does_not_block_on_held_generation_lock\n1 error in 0.35s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_05_routing_retrieval_context_run_concurrently_during_llm_generation",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_05_routing_retrieval_context_run_concurrently_during_llm_generation",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_05_routing_retrieval_context_run_concurrently_during_llm_generation",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "50.log",
+      "raw_sha256": "373d0a983bdcf99188e664d61f0b1c6d35bc6fc5e578bfaca301375057560f83",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_05_routing_retrieval_context_run_concurrently_during_llm_generation _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_05_routing_retrieval_context_run_concurrently_during_llm_generation\n1 error in 0.40s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_06_evidence_guard_precheck_runs_outside_generation_lock",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_06_evidence_guard_precheck_runs_outside_generation_lock",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_06_evidence_guard_precheck_runs_outside_generation_lock",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "51.log",
+      "raw_sha256": "3cb69e3a27560bff777a3322e1eb3c6e001717d90503d139707eb2a0be6e562c",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_06_evidence_guard_precheck_runs_outside_generation_lock _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_06_evidence_guard_precheck_runs_outside_generation_lock\n1 error in 0.42s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_07_postcheck_and_grounding_run_outside_lock_after_generation",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_07_postcheck_and_grounding_run_outside_lock_after_generation",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_07_postcheck_and_grounding_run_outside_lock_after_generation",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "52.log",
+      "raw_sha256": "4f51a89ecc2b9836978faaf1227f3d5a376805e8205e246e53c96f5a6d92ccec",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_07_postcheck_and_grounding_run_outside_lock_after_generation _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_07_postcheck_and_grounding_run_outside_lock_after_generation\n1 error in 0.39s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_08_caches_return_isolated_copies_under_concurrent_reads_and_mutations",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_08_caches_return_isolated_copies_under_concurrent_reads_and_mutations",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_08_caches_return_isolated_copies_under_concurrent_reads_and_mutations",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "53.log",
+      "raw_sha256": "bb510ca31dc346a336de0903debe83775ed5cd2e0c74da6780570caafb06ad81",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_08_caches_return_isolated_copies_under_concurrent_reads_and_mutations _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_08_caches_return_isolated_copies_under_concurrent_reads_and_mutations\n1 error in 0.41s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_09_ollama_failure_or_timeout_does_not_poison_or_deadlock_concurrent_requests",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_09_ollama_failure_or_timeout_does_not_poison_or_deadlock_concurrent_requests",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_09_ollama_failure_or_timeout_does_not_poison_or_deadlock_concurrent_requests",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "54.log",
+      "raw_sha256": "75f1f802665e94d0f119dca6d34bb6999bcc2ac7bc814d14c71fa82178fdc21b",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_09_ollama_failure_or_timeout_does_not_poison_or_deadlock_concurrent_requests _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_09_ollama_failure_or_timeout_does_not_poison_or_deadlock_concurrent_requests\n1 error in 0.41s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_10_retriever_exception_does_not_poison_concurrent_or_subsequent_requests",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_10_retriever_exception_does_not_poison_concurrent_or_subsequent_requests",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_10_retriever_exception_does_not_poison_concurrent_or_subsequent_requests",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "55.log",
+      "raw_sha256": "7c014f7cddbbdf8177adddce51510629becd89985a12ba45f4f957730aa42743",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_10_retriever_exception_does_not_poison_concurrent_or_subsequent_requests _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_10_retriever_exception_does_not_poison_concurrent_or_subsequent_requests\n1 error in 0.44s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_11_bounded_generation_semaphore_enforces_configured_concurrency_limit",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_11_bounded_generation_semaphore_enforces_configured_concurrency_limit",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_11_bounded_generation_semaphore_enforces_configured_concurrency_limit",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "56.log",
+      "raw_sha256": "5b933f99d6f177143bbc1a84dabc55e0ebf778b8c201ff6576a6f18bc9fb7ce4",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_11_bounded_generation_semaphore_enforces_configured_concurrency_limit _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_11_bounded_generation_semaphore_enforces_configured_concurrency_limit\n1 error in 0.45s\n"
+    },
+    {
+      "test": "tests.test_phase19c_concurrency.Phase19CConcurrencyTests::test_12_production_config_and_sequential_same_thread_isolation_invariants",
+      "nodeid": "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_12_production_config_and_sequential_same_thread_isolation_invariants",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_12_production_config_and_sequential_same_thread_isolation_invariants",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "57.log",
+      "raw_sha256": "39c84e9d522ebed98d2b25a9b5ea10330d3b379e631f4e4b3afa3502f897b091",
+      "output": "E                                                                        [100%]\n==================================== ERRORS ====================================\n_ ERROR at setup of Phase19CConcurrencyTests.test_12_production_config_and_sequential_same_thread_isolation_invariants _\n\ncls = <class 'tests.test_phase19c_concurrency.Phase19CConcurrencyTests'>\n\n    @classmethod\n    def setUpClass(cls) -> None:\n        cls.cfg = S.production_pipeline_config()\n>       cls.base_pipe = RP.build_pipeline(generator=\"extractive\", config=cls.cfg)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_phase19c_concurrency.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nERROR tests/test_phase19c_concurrency.py::Phase19CConcurrencyTests::test_12_production_config_and_sequential_same_thread_isolation_invariants\n1 error in 0.48s\n"
+    },
+    {
+      "test": "tests.test_predeployment_hardening.HardeningTests::test_configured_model_is_used_by_the_shipped_generator_not_ignored",
+      "nodeid": "tests/test_predeployment_hardening.py::HardeningTests::test_configured_model_is_used_by_the_shipped_generator_not_ignored",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_predeployment_hardening.py::HardeningTests::test_configured_model_is_used_by_the_shipped_generator_not_ignored",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "58.log",
+      "raw_sha256": "fa2f72bfb6b19ace845cbafb931e89d25b8c366b04475d227f1fcdc1a0d574f0",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_ HardeningTests.test_configured_model_is_used_by_the_shipped_generator_not_ignored _\n\nself = <tests.test_predeployment_hardening.HardeningTests testMethod=test_configured_model_is_used_by_the_shipped_generator_not_ignored>\n\n    def test_configured_model_is_used_by_the_shipped_generator_not_ignored(self):\n        with patch.dict(\"os.environ\", {\"OLLAMA_MODEL\": \"approved-local:test\"}):\n>           svc = S.build_service(\"ollama\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_predeployment_hardening.py:176: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'ollama'\n\n    def build_service(generator: str = \"extractive\") -> RagService:\n        \"\"\"Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback.\"\"\"\n        if generator not in (\"extractive\", \"ollama\"):\n            raise ValueError(\"generator must be 'extractive' or 'ollama'\")\n        import rag_evidence as EV\n        import rag_pipeline as RP\n        # Phase 11.1: the shipped configuration is \"C1\" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.\n        # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).\n>       pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nscripts/rag_service.py:882: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'ollama', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_predeployment_hardening.py::HardeningTests::test_configured_model_is_used_by_the_shipped_generator_not_ignored\n1 failed in 1.11s\n"
+    },
+    {
+      "test": "tests.test_predeployment_hardening.HardeningTests::test_live_absent_preselected_detail_abstains",
+      "nodeid": "tests/test_predeployment_hardening.py::HardeningTests::test_live_absent_preselected_detail_abstains",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_predeployment_hardening.py::HardeningTests::test_live_absent_preselected_detail_abstains",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "59.log",
+      "raw_sha256": "c2ef0dcfe8e392bce9c657c9dcd37dbe99ba763fb8eb2e40e515d6bfd13af0b4",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________ HardeningTests.test_live_absent_preselected_detail_abstains __________\n\nself = <tests.test_predeployment_hardening.HardeningTests testMethod=test_live_absent_preselected_detail_abstains>\n\n    def test_live_absent_preselected_detail_abstains(self):\n>       svc = S.build_service(\"extractive\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_predeployment_hardening.py:157: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive'\n\n    def build_service(generator: str = \"extractive\") -> RagService:\n        \"\"\"Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback.\"\"\"\n        if generator not in (\"extractive\", \"ollama\"):\n            raise ValueError(\"generator must be 'extractive' or 'ollama'\")\n        import rag_evidence as EV\n        import rag_pipeline as RP\n        # Phase 11.1: the shipped configuration is \"C1\" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.\n        # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).\n>       pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nscripts/rag_service.py:882: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_predeployment_hardening.py::HardeningTests::test_live_absent_preselected_detail_abstains\n1 failed in 1.19s\n"
+    },
+    {
+      "test": "tests.test_predeployment_hardening.HardeningTests::test_live_named_code_purpose_does_not_answer_from_navigation_pointer",
+      "nodeid": "tests/test_predeployment_hardening.py::HardeningTests::test_live_named_code_purpose_does_not_answer_from_navigation_pointer",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_predeployment_hardening.py::HardeningTests::test_live_named_code_purpose_does_not_answer_from_navigation_pointer",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "60.log",
+      "raw_sha256": "03fd37bd83bd3aac6d94720ce75b9488bf4b1c4588abe60fbde7aabd2d8b7326",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_ HardeningTests.test_live_named_code_purpose_does_not_answer_from_navigation_pointer _\n\nself = <tests.test_predeployment_hardening.HardeningTests testMethod=test_live_named_code_purpose_does_not_answer_from_navigation_pointer>\n\n    def test_live_named_code_purpose_does_not_answer_from_navigation_pointer(self):\n>       svc = S.build_service(\"extractive\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_predeployment_hardening.py:164: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive'\n\n    def build_service(generator: str = \"extractive\") -> RagService:\n        \"\"\"Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback.\"\"\"\n        if generator not in (\"extractive\", \"ollama\"):\n            raise ValueError(\"generator must be 'extractive' or 'ollama'\")\n        import rag_evidence as EV\n        import rag_pipeline as RP\n        # Phase 11.1: the shipped configuration is \"C1\" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.\n        # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).\n>       pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nscripts/rag_service.py:882: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ngenerator = 'extractive', llm_client = None\nconfig = PipelineConfig(top_k_cards=10, k_chunks=5, context_budget_tokens=700, max_context_chunks=4, ood_min_coverage=0.25, con...laboration_candidate_pool_size=0, elaboration_retrieval_enabled=False, ollama_num_predict=None, ollama_keep_alive=None)\nroot = PosixPath('/home/user/chatbot/scratch/release-mission-v3/closure-v1/published-source')\n\n    def build_pipeline(generator: str = \"extractive\", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:\n        \"\"\"Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded).\"\"\"\n        import build_page_collection as BP\n        import page_chunker as PK\n        from rag_generate import LLMGenerator, OllamaClient\n>       embed, minfo = BP.load_embedder()\n                       ^^^^^^^^^^^^^^^^^^\n\nscripts/rag_pipeline.py:810: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nmodel_path = None\n\n    def load_embedder(model_path: Optional[str] = None) -> \"tuple[Embedder, Dict[str, Any]]\":\n>       from sentence_transformers import SentenceTransformer\nE       ModuleNotFoundError: No module named 'sentence_transformers'\n\nscripts/build_page_collection.py:56: ModuleNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_predeployment_hardening.py::HardeningTests::test_live_named_code_purpose_does_not_answer_from_navigation_pointer\n1 failed in 0.98s\n"
+    },
+    {
+      "test": "tests.test_windows_portability::test_real_diagnostic_uses_child_copy_and_preserves_wrong_store",
+      "nodeid": "tests/test_windows_portability.py::test_real_diagnostic_uses_child_copy_and_preserves_wrong_store",
+      "command": [
+        "/home/user/chatbot/scratch/release-mission-v3/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_windows_portability.py::test_real_diagnostic_uses_child_copy_and_preserves_wrong_store",
+        "-q",
+        "--tb=long",
+        "-ra"
+      ],
+      "exit": 1,
+      "raw_log": "61.log",
+      "raw_sha256": "1a829d5749d175d864c9cb18e31774917adaf90760f8f92cc86ab32807da22f4",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n________ test_real_diagnostic_uses_child_copy_and_preserves_wrong_store ________\n\ntmp_path = PosixPath('/tmp/pytest-of-user/pytest-57/test_real_diagnostic_uses_chil0')\n\n    def test_real_diagnostic_uses_child_copy_and_preserves_wrong_store(tmp_path):\n        import chromadb\n        from chromadb.config import Settings\n        from diagnose_windows_verification import hashes, investigate\n        source = tmp_path / \"original\"\n        client = chromadb.PersistentClient(path=str(source), settings=Settings(anonymized_telemetry=False))\n        col = client.create_collection(\"sap_pages_v1\", metadata={\"embedding_model\": \"other-model\"})\n        col.add(ids=[\"wrong-extra\"], documents=[\"wrong evidence\"], embeddings=[[1., 0.]])\n        chroma_temp.close_systems_under(source)\n        before = hashes(source)\n        result = investigate(source, \"page\")\n>       assert result[\"worker_exit\"] == 0\nE       assert 1 == 0\n\ntests/test_windows_portability.py:167: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_windows_portability.py::test_real_diagnostic_uses_child_copy_and_preserves_wrong_store\n1 failed in 1.86s\n"
+    }
+  ]
+}

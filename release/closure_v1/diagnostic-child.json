@@ -1,0 +1,14 @@
+{
+  "BLOCKED": "diagnostic child failed before writing results",
+  "worker_exit": 1,
+  "stderr": "Traceback (most recent call last):\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/diagnose_windows_verification.py\", line 272, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/diagnose_windows_verification.py\", line 243, in main\n    result = worker(a.store, a.worker)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/diagnose_windows_verification.py\", line 132, in worker\n    model_dir, info = C.resolve_model()\n                      ^^^^^^^^^^^^^^^^^\n  File \"/home/user/chatbot/scratch/release-mission-v3/candidate/scripts/m2c_common.py\", line 64, in resolve_model\n    raise FileNotFoundError(\nFileNotFoundError: all-MiniLM-L6-v2 model files not found locally. Install `gt-all-minilm-l6-v2` or pass --model-path / set $M2C_MODEL_DIR. No download is attempted.\n",
+  "original_store_unchanged": true,
+  "original_file_sha256": {
+    "80612ef0-f521-4e67-b079-6a46be424220/data_level0.bin": "ca2ad22ff68c50b2c42d9b2d1eaceb7289b1f4d34b0eaf28171b3588f639a0c3",
+    "80612ef0-f521-4e67-b079-6a46be424220/header.bin": "709d1ca7614db21a38229fcf472cdec5765c319de4080000f30edeef73cf947e",
+    "80612ef0-f521-4e67-b079-6a46be424220/length.bin": "7a12e561363385e9dfeeab326368731c030ed4b374e7f5897ac819159d2884c5",
+    "80612ef0-f521-4e67-b079-6a46be424220/link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "chroma.sqlite3": "8bd59ee70233416a5ee705d96503140a15d038038b75860b6ba682152afda021"
+  },
+  "store_path": "/tmp/closure-child-fixture-hy1z3rre/source"
+}

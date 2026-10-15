@@ -1,0 +1,26 @@
+{
+  "original_822_files_unchanged": true,
+  "original_status_index_stashes_unchanged": true,
+  "published_archive_all_tracked_bytes_match": true,
+  "candidate_baseline_changed_files": [
+    "scripts/frontend_live_verification.py",
+    "scripts/rag_evidence.py",
+    "scripts/rag_generate.py",
+    "scripts/rag_response.py",
+    "tests/test_page_store_repair.py",
+    "tests/test_phase2_fixes.py"
+  ],
+  "protected_other_files_unchanged": true,
+  "windows_original_test_entire_file_unchanged": true,
+  "frozen_labels_scores_models_corpus_artifacts_unchanged": true,
+  "baseline_manifest_sha256": "52fdb4cc6eb27d10f2122e0568a57c28aeb3033f0da72e5d1f0281db384dde5b",
+  "reviewed_report_followup_headers": [
+    "RELEASE_GATES.md",
+    "FINAL_RELEASE_REPORT.md",
+    "SECURITY_AUDIT.md",
+    "RAG_QUALITY_REPORT.md",
+    "WINDOWS_VERIFICATION_REPORT.md",
+    "DEPLOYMENT_AND_ROLLBACK.md"
+  ],
+  "note": "Six report headers explicitly distinguish superseded a027 assessments from this closure; all other baseline files outside the six source/test fixes and six headers remain byte-identical."
+}

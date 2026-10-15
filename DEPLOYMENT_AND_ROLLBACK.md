@@ -1,3 +1,5 @@
+> **2026-10-15 closure follow-up — NOT READY.** The assessment below is the published `a027cd64` record, not the latest result. See [RELEASE_BLOCKER_CLOSURE.md](RELEASE_BLOCKER_CLOSURE.md) for the exhaustive current blocker classification, all61 independent failure reproductions, narrow fixes and external procedures. Tested source: `47e1e09aece4feb03aeae3abd06c5458b983ba07`; backend **7F/1330P/137S/49E +204 subtests**. All four Chroma advisories remain open. Frozen `phase12_results.json` reports38/65 and two wrong-page cases; the older37/65 narrative remains provenance-unreconciled, not a new run or baseline change. No production activation authorized.
+
 # Deployment and rollback — prepared, NOT activated
 
 **NOT READY. Human approval is required before exposure, migration, store replacement or activation.** No public server, production-store repair, deployment, model download or candidate activation occurred.

@@ -1,0 +1,12 @@
+.......F                                                                 [100%]
+=================================== FAILURES ===================================
+_ test_unsupported_meta_prose_cannot_bypass_either_verifier_and_valid_text_recovers[The selected evidence does not establish a complete step-by-step procedure. [S999]] _
+tests/test_release_closure.py:48: in test_unsupported_meta_prose_cannot_bypass_either_verifier_and_valid_text_recovers
+    assert not RG.verify_grounding(forged + "\n" + valid, ctx).ok
+E   AssertionError: assert not True
+E    +  where True = GroundingReport(ok=True, refusal=False, violations=[], sentences=[{'text': 'The widget plan records the due dates.', 'markers': ['S1'], 'support': 1.0, 'unsupported_tokens': []}], cited_markers=['S1'], phantom_markers=[]).ok
+E    +    where GroundingReport(ok=True, refusal=False, violations=[], sentences=[{'text': 'The widget plan records the due dates.', 'markers': ['S1'], 'support': 1.0, 'unsupported_tokens': []}], cited_markers=['S1'], phantom_markers=[]) = <function verify_grounding at 0x7ff12b1e8040>((('The selected evidence does not establish a complete step-by-step procedure. [S999]' + '\n') + 'The widget plan records the due dates. [S1]'), <tests.test_phase2_fixes._Context object at 0x7ff12b25c150>)
+E    +      where <function verify_grounding at 0x7ff12b1e8040> = RG.verify_grounding
+=========================== short test summary info ============================
+FAILED tests/test_release_closure.py::test_unsupported_meta_prose_cannot_bypass_either_verifier_and_valid_text_recovers[The selected evidence does not establish a complete step-by-step procedure. [S999]]
+1 failed, 7 passed in 0.07s

@@ -1,0 +1,9 @@
+usage: frontend_live_verification.py [-h]
+
+Run the entire component suite including its real-HTTP UI workflow (jsdom, NOT
+a browser). Starts a private local backend at port 8000 and stops it after the
+tests. Never overwrites historical reports. Use the current Python venv and
+the installed web/node_modules.
+
+options:
+  -h, --help  show this help message and exit

@@ -1,3 +1,5 @@
+> **2026-10-15 closure follow-up — NOT READY.** The assessment below is the published `a027cd64` record, not the latest result. See [RELEASE_BLOCKER_CLOSURE.md](RELEASE_BLOCKER_CLOSURE.md) for the exhaustive current blocker classification, all61 independent failure reproductions, narrow fixes and external procedures. Tested source: `47e1e09aece4feb03aeae3abd06c5458b983ba07`; backend **7F/1330P/137S/49E +204 subtests**. All four Chroma advisories remain open. Frozen `phase12_results.json` reports38/65 and two wrong-page cases; the older37/65 narrative remains provenance-unreconciled, not a new run or baseline change. No production activation authorized.
+
 # SURA — final release-engineering report
 
 **Verdict: NOT READY.** Date: 2026-10-15. This is a reviewed hardening/verification candidate, **not an activated release**. Mandatory product, native-platform, real-model/browser, security and operations gates remain open. No public exposure, production-store migration/repair/replacement, model download, paid model call or candidate activation was performed.
