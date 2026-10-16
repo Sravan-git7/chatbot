@@ -1,0 +1,65 @@
+{
+  "corpus_scope": "28 documented SAP Utilities topics ingested into the page corpus.",
+  "procedural_gap_analysis": [
+    {
+      "topic": "Incoming Payments & Clarification Processing",
+      "card_id": "M2C-19",
+      "coverage_type": "Analytical monitoring & KPI reporting",
+      "procedural_limitation": "The ingested documentation describes monitoring incoming payment clarification statuses and KPIs (app FPR1), but does not detail end-to-end payment posting execution screens (e.g. FP05).",
+      "disclaimer_present": true,
+      "disclaimer_text": "The selected evidence does not establish a complete end-to-end business procedure; it documents the analytical monitoring and status-tracking capabilities provided in the app."
+    },
+    {
+      "topic": "FI-CA Installment Plans",
+      "card_id": "M2C-24",
+      "coverage_type": "Installment plan calculation & creation overview",
+      "procedural_limitation": "Documentation outlines interest calculation, charges, and installment scheduling, but does not provide complete transaction-level steps.",
+      "disclaimer_present": true,
+      "disclaimer_text": "The selected evidence does not establish a complete end-to-end business procedure; it documents the calculation, charge, and scheduling rules."
+    },
+    {
+      "topic": "Budget Billing Plans",
+      "card_id": "M2C-13",
+      "coverage_type": "Budget billing statistical procedure",
+      "procedural_limitation": "Describes statistical and partial billing concepts without complete screen flows.",
+      "disclaimer_present": true,
+      "disclaimer_text": "The selected evidence does not establish a complete end-to-end business procedure."
+    },
+    {
+      "topic": "Periodic Billing and Invoicing Analysis",
+      "card_id": "M2C-16",
+      "coverage_type": "Analytical KPI app (F3424)",
+      "procedural_limitation": "Describes analytical KPI drill-down, not billing run execution.",
+      "disclaimer_present": true,
+      "disclaimer_text": "The selected evidence does not establish a complete end-to-end business procedure; it documents the analytical monitoring and status-tracking capabilities provided in the app."
+    }
+  ],
+  "transaction_code_safety": {
+    "suspect_unsupported_codes_checked": [
+      "FP05",
+      "FP25",
+      "FPCL",
+      "FPCPL",
+      "EA00",
+      "EA19",
+      "EL01",
+      "ES20"
+    ],
+    "unsupported_codes_detected_in_eval": 0,
+    "valid_corpus_codes_verified": [
+      "F5588",
+      "F3424",
+      "FPR1",
+      "XCLON",
+      "0600",
+      "0110",
+      "06",
+      "20R",
+      "20S",
+      "30G",
+      "IS-U",
+      "FI-CA"
+    ],
+    "status": "PASS (Zero ungrounded transaction codes generated; system respects corpus boundary)"
+  }
+}

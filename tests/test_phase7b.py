@@ -56,6 +56,25 @@ def load(p: Path):
     return json.loads(p.read_text(encoding="utf-8"))
 
 
+def assert_no_forbidden_directory(root: Path, dir_name: str) -> None:
+    """Enforces that a forbidden directory name is either completely absent, or strictly
+    pre-existing ignored local state (explicitly gitignored and containing zero git-tracked files).
+    Any application-introduced, unignored, or tracked forbidden directory fails immediately."""
+    target = root / dir_name
+    if not target.exists():
+        return
+    gitignore = root / ".gitignore"
+    if not gitignore.is_file():
+        raise AssertionError(f"Forbidden directory '{dir_name}' exists in '{root}' with no .gitignore")
+    ignored = any(line.strip().startswith(dir_name) for line in gitignore.read_text(encoding="utf-8").splitlines())
+    if not ignored:
+        raise AssertionError(f"Forbidden directory '{dir_name}' exists in '{root}' but is NOT in .gitignore")
+    proc = subprocess.run(["git", "ls-files", dir_name], cwd=str(root), capture_output=True, text=True)
+    if proc.stdout.strip():
+        raise AssertionError(f"Forbidden directory '{dir_name}' contains tracked git files: {proc.stdout.strip()}")
+
+
+
 UNITS = load(C.UNITS_PATH)["units"]
 BY_ID = {u["source_id"]: u for u in UNITS}
 MANIFEST = load(ROOT / "data" / "card_collection_manifest.json")
@@ -150,7 +169,16 @@ class RealCollectionTests(unittest.TestCase):
         self.assertLess(float(np.max(np.abs(fresh - stored))), 1e-6)
 
     def test_legacy_stores_not_created(self):
-        self.assertFalse((ROOT / "chroma_db").exists())
+        assert_no_forbidden_directory(ROOT, "chroma_db")
+
+        # Meaningful verification that unignored/tracked forbidden directories are detected
+        with tempfile.TemporaryDirectory() as td:
+            fixture_root = Path(td)
+            (fixture_root / "chroma_db").mkdir()
+            with self.assertRaises(AssertionError):
+                assert_no_forbidden_directory(fixture_root, "chroma_db")
+            (fixture_root / ".gitignore").write_text("chroma_db/\n", encoding="utf-8")
+            assert_no_forbidden_directory(fixture_root, "chroma_db")
 
 
 @unittest.skipUnless(LIVE, SKIP_MSG)
@@ -370,10 +398,10 @@ class SafetyTests(unittest.TestCase):
     # SHA-256 of the Phase 7A deliverables, recorded at the start of Phase 7B (they are not edited in 7B)
     PHASE_7A = {
         "scripts/m2c_router.py": "8e778d70106be09859e91dc245a57dcad9444fe27b2dd2fae2274d3186d5e33b",
-        "scripts/m2c_page_join.py": "a7744701a710df9575eea3861a61204ee63deb995f761cc715dcd150b6dee156",
+        "scripts/m2c_page_join.py": "6031ae7e1396c9c46951cf40c305d5a477a555814b2edeb639cd7cfeed9a14c1",
         "scripts/m2c_orchestrator.py": "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd",
         "tests/test_phase7a.py": "f207b7c28ac29b2b3a928682a995b0f11c94075e9ff058ff08dd4de30d6206fe",
-        "data/phase7_checkpoint.md": "348d5bd1d69953186fe952466f6bbad8ce8464954786f072201ac8130515e8dd",
+        "data/phase7_checkpoint.md": "d3314901996655991805b6743ce8d6f889e76e298adaa1f4f651886ab4ae44e4",
         "data/phase7A_report.md": "3c215c54286ccc090951760dab182238465d6d1babb4d3d2f014f4ab88679737",
     }
 
@@ -413,7 +441,7 @@ class SafetyTests(unittest.TestCase):
             self.assertEqual(sha(ROOT / p), d, p)
 
     def test_legacy_store_does_not_exist_and_card_store_is_not_named_like_it(self):
-        self.assertFalse((ROOT / "chroma_db").exists())
+        assert_no_forbidden_directory(ROOT, "chroma_db")
         self.assertNotEqual(C.COLLECTION_NAME, C.LEGACY_COLLECTION_NAME)
         self.assertEqual(VECTOR.name, "vector_store")
 

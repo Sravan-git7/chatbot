@@ -515,17 +515,17 @@ class RagPipeline:
             retrieval_query = query.strip() if query else ""
             try:
                 import rag_completeness as RC
-                if RC.is_intent_aware_enabled():
-                    retrieval_query = RC.normalize_retrieval_query(query)
-            except Exception:
-                pass
+                retrieval_query = RC.normalize_retrieval_query(retrieval_query)
+            except Exception as exc:
+                dbg["normalization_error"] = str(exc)
+            dbg["retrieval_query"] = retrieval_query
             if retrieval_query and hasattr(self.retriever, "embed"):
                 t_emb = time.perf_counter()
                 q_emb = self.retriever.embed([retrieval_query])
                 timings["embed_ms"] = timings.get("embed_ms", 0.0) + (time.perf_counter() - t_emb) * 1000
             t_cq = time.perf_counter()
             outcome = route_to_page(
-                query,
+                retrieval_query,
                 self.backend,
                 self.ctx.page_index,
                 top_k=self.cfg.top_k_cards,
@@ -534,18 +534,18 @@ class RagPipeline:
             )
             candidates = list(outcome.candidates)
             if getattr(self.cfg, "code_aware_router", False):
-                candidates = self._inject_code_aware_candidates(query, candidates, query_embedding=q_emb)
+                candidates = self._inject_code_aware_candidates(retrieval_query, candidates, query_embedding=q_emb)
             timings["card_query_ms"] = (time.perf_counter() - t_cq) * 1000
 
             if getattr(self.cfg, "rerank_router", False) and candidates:
                 import phase13_reranker as PR13
                 if q_emb is None and hasattr(self.retriever, "embed"):
                     t_emb = time.perf_counter()
-                    q_emb = self.retriever.embed([query])
+                    q_emb = self.retriever.embed([retrieval_query])
                     timings["embed_ms"] = timings.get("embed_ms", 0.0) + (time.perf_counter() - t_emb) * 1000
                 t_rr = time.perf_counter()
                 card, scored = PR13.rerank_candidates(
-                    query,
+                    retrieval_query,
                     candidates,
                     self.cards,
                     self.retriever,

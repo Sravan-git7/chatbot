@@ -48,7 +48,13 @@ def split_sentences(text: str) -> List[str]:
         line = line.strip()
         if not line:
             continue
-        out += [s.strip() for s in re.split(r"(?<=[.!?])\s+(?=[A-Z0-9(\"“‘\[])", line) if s.strip()]
+        prefix_match = _CITED_LIST_PREFIX.match(line)
+        prefix = prefix_match.group("prefix") if prefix_match else ""
+        body = line[prefix_match.end():] if prefix_match else line
+        parts = [s.strip() for s in re.split(r"(?<=[.!?])\s+(?=[A-Z0-9(\"“‘\[])", body) if s.strip()]
+        if prefix and parts:
+            parts[0] = prefix + parts[0]
+        out.extend(parts)
     return out
 
 

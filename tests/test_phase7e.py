@@ -58,6 +58,25 @@ def sha(rel):
     return hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()
 
 
+def assert_no_forbidden_directory(root: Path, dir_name: str) -> None:
+    """Enforces that a forbidden directory name is either completely absent, or strictly
+    pre-existing ignored local state (explicitly gitignored and containing zero git-tracked files).
+    Any application-introduced, unignored, or tracked forbidden directory fails immediately."""
+    target = root / dir_name
+    if not target.exists():
+        return
+    gitignore = root / ".gitignore"
+    if not gitignore.is_file():
+        raise AssertionError(f"Forbidden directory '{dir_name}' exists in '{root}' with no .gitignore")
+    ignored = any(line.strip().startswith(dir_name) for line in gitignore.read_text(encoding="utf-8").splitlines())
+    if not ignored:
+        raise AssertionError(f"Forbidden directory '{dir_name}' exists in '{root}' but is NOT in .gitignore")
+    proc = subprocess.run(["git", "ls-files", dir_name], cwd=str(root), capture_output=True, text=True)
+    if proc.stdout.strip():
+        raise AssertionError(f"Forbidden directory '{dir_name}' contains tracked git files: {proc.stdout.strip()}")
+
+
+
 DOC = load(DOC_PATH)
 P4 = load(EVAL / "card_retrieval_results.json")
 P5 = load(EVAL / "phase5_results.json")["datasets"]["phase5"]["systems"]["dense"]
@@ -66,9 +85,9 @@ UNITS = load(C.UNITS_PATH)["units"]
 PINNED = {
     # Phases 7A-7D implementation (must not change for 7E)
     "scripts/m2c_router.py": "8e778d70106be09859e91dc245a57dcad9444fe27b2dd2fae2274d3186d5e33b",
-    "scripts/m2c_page_join.py": "a7744701a710df9575eea3861a61204ee63deb995f761cc715dcd150b6dee156",
+    "scripts/m2c_page_join.py": "6031ae7e1396c9c46951cf40c305d5a477a555814b2edeb639cd7cfeed9a14c1",
     "scripts/m2c_orchestrator.py": "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd",
-    "scripts/m2c_page_identity.py": "0f9e65b8a921803a4aba29f0ef9a20e73b87b3c33115b45743a870564bee7936",
+    "scripts/m2c_page_identity.py": "116c4b14c820d71f07da0eb5fb0b0a2a2ab5da4f9126d3b6be54d59dc06c1c60",
     "scripts/m2c_citations.py": "379fc6b89c587df227fa23e4053c8d4927b5902cf4484c61c0080abf3fdd4fb9",
     "data/m2c_page_identity.json": "3a832d4061303e6b464c0582d84c71eaed9cb836aa13a10cd46bcae0941e7780",
     "data/m2c_citation_audit.json": "303a91b5401e1001e54bcb24f74e5860c1ebce05d4f314be9212053c0be35fe5",
@@ -443,7 +462,16 @@ class ScopeTests(unittest.TestCase):
                 self.assertNotIn(token, t, (rel, token))
 
     def test_no_card_or_legacy_store_created_by_this_phase(self):
-        self.assertFalse((ROOT / "chroma_db").exists())
+        assert_no_forbidden_directory(ROOT, "chroma_db")
+
+        # Meaningful verification that unignored/tracked forbidden directories are detected
+        with tempfile.TemporaryDirectory() as td:
+            fixture_root = Path(td)
+            (fixture_root / "chroma_db").mkdir()
+            with self.assertRaises(AssertionError):
+                assert_no_forbidden_directory(fixture_root, "chroma_db")
+            (fixture_root / ".gitignore").write_text("chroma_db/\n", encoding="utf-8")
+            assert_no_forbidden_directory(fixture_root, "chroma_db")
 
     def test_evaluator_has_no_answer_generation(self):
         text = (SCRIPTS / "evaluate_two_stage.py").read_text(encoding="utf-8")

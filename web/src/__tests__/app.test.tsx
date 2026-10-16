@@ -481,8 +481,8 @@ describe('answers', () => {
     const sourcesRegion = within(message).getByRole('region', { name: 'Sources' })
     expect(sourcesRegion).toHaveTextContent('Sources · 1 document · 2 citations')
     const sourceCard = within(sourcesRegion).getByTestId('source-item')
-    expect(within(sourceCard).getByText('1')).toBeInTheDocument()
-    expect(within(sourceCard).getByText('2')).toBeInTheDocument()
+    expect(within(sourceCard).getByText('[1]')).toBeInTheDocument()
+    expect(within(sourceCard).getByText('[2]')).toBeInTheDocument()
     expect(within(sourcesRegion).queryByText('Budget Billing Plan')).not.toBeInTheDocument()
 
     await userEvent.click(within(actions).getByRole('button', { name: 'Copy answer' }))

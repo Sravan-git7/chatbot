@@ -579,7 +579,7 @@ def write_report(path: Path, *, corpus: Dict[str, Any], corpus_sha: str, docs: S
           "* Keep B only if per-section retrieval is wanted, with boilerplate and label sections excluded or down-weighted in retrieval.",
           "", "These would be separate, documented decisions for the next phase; none of them changes the normalised source text.", ""]
     L += ["## Test results", "", test_summary or "_Not recorded in this run. Pass `--test-summary \"<pytest result>\"` to record the final test outcome._", ""]
-    path.write_text("\n".join(L), encoding="utf-8")
+    path.write_bytes(("\n".join(L)).encode("utf-8"))
 
 
 def sensitivity_table(docs: Sequence[Dict[str, Any]], small_chars: int) -> List[Dict[str, Any]]:
@@ -606,7 +606,7 @@ def run(corpus_path: Path, pdf_dir: Optional[Path], out_dir: Path, max_chars: in
     metrics = {s: analyse(chunks[s], docs, pdf_dir=pdf_dir, small_chars=small_chars, large_chars=large_chars,
                           max_chars=max_chars if s == "bounded_sections" else None) for s in STRATEGIES}
     for s in STRATEGIES:
-        (out_dir / f"{s}.json").write_text(_dump(strategy_payload(s, chunks[s], corpus, sha, max_chars)), encoding="utf-8")
+        (out_dir / f"{s}.json").write_bytes(_dump(strategy_payload(s, chunks[s], corpus, sha, max_chars)).encode("utf-8"))
     write_report(out_dir / "chunk_candidate_report.md", corpus=corpus, corpus_sha=sha, docs=docs, chunks=chunks, metrics=metrics,
                  structure=corpus_structure(docs), sensitivity=sensitivity_table(docs, small_chars), max_chars=max_chars,
                  small_chars=small_chars, large_chars=large_chars, test_summary=test_summary)

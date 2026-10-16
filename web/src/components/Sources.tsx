@@ -79,16 +79,20 @@ export function Sources({
                             : m
                       return (
                         <span key={m} className="cite-chip cite-chip-static">
-                          {displayNum}
+                          [{displayNum}]
                         </span>
                       )
                     })}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="break-words font-semibold leading-snug text-stone-900 [overflow-wrap:anywhere]">{displayTitle}</div>
-                    {breadcrumb && (
+                    {breadcrumb ? (
                       <div className="mt-0.5 break-words text-[11px] leading-relaxed text-stone-500 [overflow-wrap:anywhere]">
                         {breadcrumb}
+                      </div>
+                    ) : (
+                      <div className="mt-0.5 break-words text-[11px] leading-relaxed text-stone-400 [overflow-wrap:anywhere]">
+                        SAP Help Portal · SAP S/4HANA Utilities
                       </div>
                     )}
                     {hasValidUrl ? (

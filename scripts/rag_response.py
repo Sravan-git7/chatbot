@@ -12,7 +12,7 @@ Strict architectural constraints:
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, List, Mapping, Optional, Sequence
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Set
 
 from rag_generate import is_procedural_limitation_sentence
 
@@ -85,6 +85,16 @@ def compose_structured_answer(
     raw_lines = [line.strip() for line in answer.split("\n") if line.strip()]
     if not raw_lines:
         return None
+
+    # Deduplicate lines by body to guarantee structured sections never have duplicate headings or sentences
+    deduped_raw_lines: List[str] = []
+    seen_bodies: Set[str] = set()
+    for line in raw_lines:
+        body = re.sub(r"\s*\[S\d+\]", "", line).strip()
+        if body not in seen_bodies:
+            seen_bodies.add(body)
+            deduped_raw_lines.append(line)
+    raw_lines = deduped_raw_lines
 
     all_citations = extract_citations(answer)
 

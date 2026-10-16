@@ -347,19 +347,20 @@ export default function MessageView({
                   SURA answers questions about topics covered by the available SAP Utilities documentation, such as billing, invoicing, contract accounts, and incoming payments.
                 </p>
                 {onAskFollowUp && (
-                  <div className="mt-2.5 flex flex-wrap gap-2">
+                  <ul className="mt-2.5 flex flex-wrap gap-2 list-none p-0 m-0" role="list" aria-label="Suggested questions">
                     {['How does billing work?', 'What is a contract account?'].map((ex) => (
-                      <button
-                        key={ex}
-                        type="button"
-                        disabled={disabled}
-                        onClick={() => onAskFollowUp(ex)}
-                        className="inline-flex items-center rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-medium text-stone-700 shadow-2xs hover:border-accent hover:text-stone-900 cursor-pointer transition"
-                      >
-                        {ex}
-                      </button>
+                      <li key={ex} className="inline-flex">
+                        <button
+                          type="button"
+                          disabled={disabled}
+                          onClick={() => onAskFollowUp(ex)}
+                          className="inline-flex items-center rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-medium text-stone-700 shadow-2xs hover:border-accent hover:text-stone-900 cursor-pointer transition"
+                        >
+                          {ex}
+                        </button>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 )}
               </div>
             )}

@@ -98,7 +98,7 @@ def _rel(path: Path, root: Path) -> str:
     try:
         return path.resolve().relative_to(root.resolve()).as_posix()
     except ValueError:
-        return str(path)
+        return path.as_posix()
 
 
 def _query_of(url: str) -> Optional[str]:
@@ -750,7 +750,7 @@ def build_audit(ctx: IdentityContext, cards: Optional[Sequence[Any]] = None) -> 
 
 
 def write_identity_json(audit: Mapping[str, Any], path: Path) -> None:
-    Path(path).write_text(json.dumps(audit, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
+    Path(path).write_bytes((json.dumps(audit, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode("utf-8"))
 
 
 def render_json(audit: Mapping[str, Any]) -> str:
@@ -902,7 +902,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = ap.parse_args(argv)
     audit = build_audit(IdentityContext.from_root(ROOT))
     write_identity_json(audit, Path(args.out))
-    Path(args.report).write_text(render_report(audit), encoding="utf-8")
+    Path(args.report).write_bytes(render_report(audit).encode("utf-8"))
     print(f"{audit['card_count']} cards: {audit['status_counts']}")
     return 0
 

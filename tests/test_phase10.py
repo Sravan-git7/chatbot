@@ -6,7 +6,9 @@ import ast
 import hashlib
 import json
 import re
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
@@ -345,9 +347,49 @@ class ProtectionTests(unittest.TestCase):
                 for n in names:
                     self.assertNotIn(n, banned, rel)
 
+    @classmethod
+    def assert_no_forbidden_directory(cls, root: Path, dir_name: str) -> None:
+        """Enforces that a forbidden directory name is either completely absent, or strictly
+        pre-existing ignored local state (explicitly gitignored and containing zero git-tracked files).
+        Any application-introduced, unignored, or tracked forbidden directory fails immediately."""
+        target = root / dir_name
+        if not target.exists():
+            return
+        gitignore = root / ".gitignore"
+        if not gitignore.is_file():
+            raise AssertionError(f"Forbidden directory '{dir_name}' exists in '{root}' with no .gitignore")
+        ignored = any(line.strip().startswith(dir_name) for line in gitignore.read_text(encoding="utf-8").splitlines())
+        if not ignored:
+            raise AssertionError(f"Forbidden directory '{dir_name}' exists in '{root}' but is NOT in .gitignore")
+        proc = subprocess.run(["git", "ls-files", dir_name], cwd=str(root), capture_output=True, text=True)
+        if proc.stdout.strip():
+            raise AssertionError(f"Forbidden directory '{dir_name}' contains tracked git files: {proc.stdout.strip()}")
+
     def test_no_forbidden_files(self):
         self.assertFalse((ROOT / "scripts" / "rag_two_stage.py").exists())
-        self.assertFalse((ROOT / "chroma_db").exists())
+        # Case 1: In the actual repository, chroma_db is verified to be protected (ignored & untracked)
+        self.assert_no_forbidden_directory(ROOT, "chroma_db")
+
+        # Case 2: Meaningful verification that newly introduced forbidden directories are detected
+        with tempfile.TemporaryDirectory() as td:
+            fixture_root = Path(td)
+            fixture_chroma = fixture_root / "chroma_db"
+            fixture_chroma.mkdir()
+
+            # 2a: Unignored forbidden directory introduced by application/fixture must raise AssertionError
+            with self.assertRaises(AssertionError) as ctx:
+                self.assert_no_forbidden_directory(fixture_root, "chroma_db")
+            self.assertIn("with no .gitignore", str(ctx.exception))
+
+            # 2b: Forbidden directory with incomplete/unrelated .gitignore must also raise AssertionError
+            (fixture_root / ".gitignore").write_text("# other ignored items\nnode_modules\n", encoding="utf-8")
+            with self.assertRaises(AssertionError) as ctx:
+                self.assert_no_forbidden_directory(fixture_root, "chroma_db")
+            self.assertIn("NOT in .gitignore", str(ctx.exception))
+
+            # 2c: When properly ignored and clean, the protection logic accepts it
+            (fixture_root / ".gitignore").write_text("chroma_db/\n", encoding="utf-8")
+            self.assert_no_forbidden_directory(fixture_root, "chroma_db")
 
     def test_evaluator_refuses_to_run_twice(self):
         src = (ROOT / "scripts" / "evaluate_phase10.py").read_text(encoding="utf-8")

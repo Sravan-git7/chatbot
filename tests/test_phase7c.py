@@ -38,7 +38,7 @@ PINNED = {
     "data/source_manifest.json": "08ad208c0187e935377c828faef36ec9fe077704cd580bb38004356f51b740b1",
     "data/retrieval_units.json": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
     "data/final_corpus_manifest.json": "77ad52cce25deb7aa5b4e44169d2efd087bb864fd1ffa9185bfd92138e979dbc",
-    "scripts/m2c_page_join.py": "a7744701a710df9575eea3861a61204ee63deb995f761cc715dcd150b6dee156",
+    "scripts/m2c_page_join.py": "6031ae7e1396c9c46951cf40c305d5a477a555814b2edeb639cd7cfeed9a14c1",
     "scripts/m2c_orchestrator.py": "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd",
     "scripts/m2c_router.py": "8e778d70106be09859e91dc245a57dcad9444fe27b2dd2fae2274d3186d5e33b",
     "data/toc/2ac7fe29a0c94cdd88fb80c2cb9f7758.json": "ff0f6c77cf09496a51cb566776633aa1c5f9aa17baf06edfbde6aaec1b6d755d",

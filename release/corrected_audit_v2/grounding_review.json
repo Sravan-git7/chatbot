@@ -1,0 +1,1302 @@
+{
+  "audit_methodology": {
+    "heuristic_nature": "Lexical token overlap and verbatim substring extraction.",
+    "limitation_disclosure": "Lexical extraction verifies text source presence and absence of hallucinated tokens, but does NOT constitute proof of semantic correctness, business process completeness, or logical validity without human SME sign-off.",
+    "semantic_review_status": "OUTSTANDING (Automated audit verifies lexical grounding; formal domain semantic review remains pending SME sign-off)."
+  },
+  "summary_metrics": {
+    "total_claims_inspected": 107,
+    "verbatim_matches": 0,
+    "high_lexical_overlap": 0,
+    "partial_matches": 0,
+    "unsupported_claims": 107,
+    "claims_requiring_human_semantic_review": 107
+  },
+  "per_case_grounding": [
+    {
+      "case_id": "C1",
+      "card_id": "M2C-01",
+      "claims_count": 7,
+      "claims": [
+        {
+          "claim_text": "This component contains data for the Utilities Industry (IS-U) component that remains unchanged over a long period of time.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "IS-U"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Business master data includes:",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Business partner",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Contract account",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Contract (billable service)",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Service provider",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Non-billable service",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P1.1",
+      "card_id": "M2C-01",
+      "claims_count": 6,
+      "claims": [
+        {
+          "claim_text": "Business master data includes:",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Business partner",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Contract account",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Contract (billable service)",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Service provider",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Non-billable service",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P1.2",
+      "card_id": "M2C-01",
+      "claims_count": 7,
+      "claims": [
+        {
+          "claim_text": "This component contains data for the Utilities Industry (IS-U) component that remains unchanged over a long period of time.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "IS-U"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Business master data includes:",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Business partner",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Contract account",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Contract (billable service)",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Service provider",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Non-billable service",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "C2",
+      "card_id": "M2C-01",
+      "claims_count": 11,
+      "claims": [
+        {
+          "claim_text": "This component contains data for the Utilities Industry (IS-U) component that remains unchanged over a long period of time.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "IS-U"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Technical master data includes:",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Grid",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Point of delivery",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Connection",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Connection object",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Technical installation",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Premise",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Device location",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Installation",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Device",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P2.1",
+      "card_id": "M2C-01",
+      "claims_count": 10,
+      "claims": [
+        {
+          "claim_text": "Technical master data includes:",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Grid",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Point of delivery",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Connection",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Connection object",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Technical installation",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Premise",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Device location",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Installation",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Device",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P2.2",
+      "card_id": "M2C-01",
+      "claims_count": 10,
+      "claims": [
+        {
+          "claim_text": "Technical master data includes:",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Grid",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Point of delivery",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Connection",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Connection object",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Technical installation",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Premise",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Device location",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Installation",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Device",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "C3",
+      "card_id": "M2C-19",
+      "claims_count": 3,
+      "claims": [
+        {
+          "claim_text": "With the Analyze Incoming Payments (F5588) app, you can monitor and analyze incoming payments to optimize clarification processes and team workload.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "F5588",
+            "55"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "The app analyzes payment lots, credit lots, and check lots, and displays an overview of which amount and number of payments in a payment lot has been cleared automatically or manually.",
+          "cited_markers": [
+            "2"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Note: If you are using SAP Cash Application, add-on for contract accounting , the app analyzes payment lots, credit lots, and check lots, and displays an overview of which amount and number of payments in a payment lot has been cleared using machine learning.",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P3.1",
+      "card_id": "M2C-19",
+      "claims_count": 3,
+      "claims": [
+        {
+          "claim_text": "With the Analyze Incoming Payments (F5588) app, you can monitor and analyze incoming payments to optimize clarification processes and team workload.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "F5588",
+            "55"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Analyze how many payments have been clarified manually within a given period.",
+          "cited_markers": [
+            "2"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Analyze the effectiveness of the automated clarification process provided by the standard.",
+          "cited_markers": [
+            "2"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P3.2",
+      "card_id": "M2C-20",
+      "claims_count": 3,
+      "claims": [
+        {
+          "claim_text": "During the processing of externally initiated payments, the system attempts in event 0110 to assign the payment amount to the open items.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "0110",
+            "01"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "By default, the system posts unassigned amounts and partial amounts of a payment on account.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Additional postings, such as payments on account and expense and revenue postings, can also be set up.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "C4",
+      "card_id": "M2C-24",
+      "claims_count": 3,
+      "claims": [
+        {
+          "claim_text": "The installment amount is calculated from the total sum of the original receivables, the rounding amount, and the number of installments.",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Regardless of whether you have the system create an installment plan proposal by entering the installment amount or by entering the rounding amount and number of installments, there may be a remaining amount when the individual installments are calculated.",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Select the open items that you want to include in the installment plan.",
+          "cited_markers": [
+            "4"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P4.1",
+      "card_id": "M2C-24",
+      "claims_count": 3,
+      "claims": [
+        {
+          "claim_text": "You do so in Customizing for Contract Accounts Payable and Receivable, under: Business Transactions > Deferral and Installment Plan > Activate Additional Installment Plan Enhancement",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "In the SAP Easy Access screen, choose Account > Installment Plan > Create (transaction FPR1 ).",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "FPR1"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Create or delete an installment plan surcharge and/or an inflation surcharge The prerequisite in this case is that you activated the enhancement in Customizing under Business Transactions > Deferral and Installment Plans > Activate Installment Plan Enhancement for Charges/Interest .",
+          "cited_markers": [
+            "4"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P4.2",
+      "card_id": "M2C-24",
+      "claims_count": 3,
+      "claims": [
+        {
+          "claim_text": "In the SAP Easy Access screen, choose Account > Installment Plan > Create (transaction FPR1 ).",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "FPR1"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Enter the installment plan parameters.",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "You can either copy default values to the initial screen using the Installment Plan Type or enter the installment plan parameters manually.",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "C5",
+      "card_id": "M2C-21",
+      "claims_count": 6,
+      "claims": [
+        {
+          "claim_text": "In Customizing for Contract Accounts Receivable and Payable, under Open Item Management > Clearing Control > Define Clearing Types , define the clearing rules, depending on the clearing type.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "These rules are processed in the clearing process in the following sequence:",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Filter the selected open items according to the specifications for restricting the selection",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Creation of a clearing proposal based on the rules of the clearing variant",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Handling of unassigned payments (on account or clarification)",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Clearing statistical items without follow-on posting (indicator XCLON )",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "XCLON"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P5.1",
+      "card_id": "M2C-21",
+      "claims_count": 6,
+      "claims": [
+        {
+          "claim_text": "In Customizing for Contract Accounts Receivable and Payable, under Open Item Management > Clearing Control > Define Clearing Types , define the clearing rules, depending on the clearing type.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "These rules are processed in the clearing process in the following sequence:",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Filter the selected open items according to the specifications for restricting the selection",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Creation of a clearing proposal based on the rules of the clearing variant",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Handling of unassigned payments (on account or clarification)",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Clearing statistical items without follow-on posting (indicator XCLON )",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "XCLON"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "P5.2",
+      "card_id": "M2C-21",
+      "claims_count": 6,
+      "claims": [
+        {
+          "claim_text": "In Customizing for Contract Accounts Receivable and Payable, under Open Item Management > Clearing Control > Define Clearing Types , define the clearing rules, depending on the clearing type.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "These rules are processed in the clearing process in the following sequence:",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Filter the selected open items according to the specifications for restricting the selection",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Creation of a clearing proposal based on the rules of the clearing variant",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Handling of unassigned payments (on account or clarification)",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Clearing statistical items without follow-on posting (indicator XCLON )",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "XCLON"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "C6",
+      "status": "out_of_scope",
+      "claims_count": 0,
+      "claims": [],
+      "grounding_status": "NOT_APPLICABLE_ABSTENTION"
+    },
+    {
+      "case_id": "P6.1",
+      "status": "out_of_scope",
+      "claims_count": 0,
+      "claims": [],
+      "grounding_status": "NOT_APPLICABLE_ABSTENTION"
+    },
+    {
+      "case_id": "P6.2",
+      "status": "out_of_scope",
+      "claims_count": 0,
+      "claims": [],
+      "grounding_status": "NOT_APPLICABLE_ABSTENTION"
+    },
+    {
+      "case_id": "H1",
+      "card_id": "M2C-13",
+      "claims_count": 3,
+      "claims": [
+        {
+          "claim_text": "You specify the budget billing amounts and the dates that are due in the budget billing plan.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "The budget billing plan is the basis for charging budget billing amounts.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "With budget billing plans, you manage the budget billing requests in a billing period in between two periodic bills.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "H2",
+      "card_id": "M2C-16",
+      "claims_count": 3,
+      "claims": [
+        {
+          "claim_text": "You can use this app to analyze the billing and invoicing process for all billing and invoicing statuses and KPIs.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Aggregated information (such as the number of contracts that are ready for invoicing) is also available.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "This app is available for the role Billing Specialist (Utilities) ( SAP_BR_BILLING_SPECIALIST_ISU ).",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "FT1.1",
+      "card_id": "M2C-21",
+      "claims_count": 6,
+      "claims": [
+        {
+          "claim_text": "In Customizing for Contract Accounts Receivable and Payable, under Open Item Management > Clearing Control > Define Clearing Types , define the clearing rules, depending on the clearing type.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "These rules are processed in the clearing process in the following sequence:",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Filter the selected open items according to the specifications for restricting the selection",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Creation of a clearing proposal based on the rules of the clearing variant",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Handling of unassigned payments (on account or clarification)",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Clearing statistical items without follow-on posting (indicator XCLON )",
+          "cited_markers": [],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "XCLON"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "FT1.2",
+      "card_id": "M2C-21",
+      "claims_count": 6,
+      "claims": [
+        {
+          "claim_text": "Clearing type 06 is used in the configuration of the extended grouping in event 0600.",
+          "cited_markers": [
+            "2"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "0600",
+            "06"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Clearing Type: 20R; Description: Distribute a payment to the original items of an installment plan; Use: Distribute the clearing amount to the dependent items",
+          "cited_markers": [
+            "2"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "20R"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Clearing Type: 20S; Description: Distribute a payment to the original items of a collective bill; Use: Distribute the clearing amount to the dependent items",
+          "cited_markers": [
+            "2"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "20S"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Clearing Type: 30G; Description: Distribute a payment to the line items of a summarization group; Use: Distribute the clearing amount to the dependent items",
+          "cited_markers": [
+            "2"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [
+            "30G"
+          ],
+          "sap_identifiers_verified": false,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Note: A clearing type is also flagged if it controls the assignment of an available amount (such as a payment) to the open items.",
+          "cited_markers": [
+            "2"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "Depending on the area of use, the rules to be defined for a clearing type vary.",
+          "cited_markers": [
+            "3"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "FT2.1",
+      "card_id": "M2C-02",
+      "claims_count": 2,
+      "claims": [
+        {
+          "claim_text": "The contracts are then created and allocated to a utility installation.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        },
+        {
+          "claim_text": "In the case of a move-in, you can create a business partner and contract account for the customer, or select existing ones.",
+          "cited_markers": [
+            "1"
+          ],
+          "match_category": "UNSUPPORTED",
+          "lexical_overlap_ratio": 0.0,
+          "sap_identifiers_found": [],
+          "sap_identifiers_verified": true,
+          "semantic_review_status": "OUTSTANDING_DOMAIN_EXPERT_REVIEW"
+        }
+      ],
+      "grounding_status": "NEEDS_REVIEW"
+    },
+    {
+      "case_id": "FT2.2",
+      "status": "no_additional_verified_evidence",
+      "claims_count": 0,
+      "claims": [],
+      "grounding_status": "NOT_APPLICABLE_ABSTENTION"
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "manifest_source": "release/evidence_closure_v3/delivery-inputs.sha256 (Frozen at inherited commit 582f993)",
+  "audit_scope": "D:/scratch/audit_workspace (Isolated workspace only; primary repository D:/chatbot-phase12 untouched)",
+  "protected_databases_status": "PROTECTED_UNTOUCHED (data/vector_store/chroma.sqlite3 and page_collection/chroma.sqlite3 not present in manifest and not accessed)",
+  "total_manifest_entries": 979,
+  "matching_files_count": 957,
+  "missing_entries_count": 0,
+  "missing_entries": [],
+  "mismatch_count": 22,
+  "mismatch_breakdown": {
+    "pre_remediation_fixes": 20,
+    "phase_e_retrieval_remediation": 2,
+    "total": 22
+  },
+  "owner_sign_off_status": "PENDING (Changes have clear technical rationale but require formal repository-owner manifest re-signing)",
+  "mismatches": [
+    {
+      "rel_path": "data/phase7_checkpoint.md",
+      "manifest_expected_sha256": "348d5bd1d69953186fe952466f6bbad8ce8464954786f072201ac8130515e8dd",
+      "isolated_workspace_actual_sha256": "d3314901996655991805b6743ce8d6f889e76e298adaa1f4f651886ab4ae44e4",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Documentation checkpoint updated during Phase 7 identity verification pass.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "scripts/build_chunk_candidates.py",
+      "manifest_expected_sha256": "225ba3781ba4d18a2f80bf1e9d87ada9440cd900cc51f15a7a330ea07df571d1",
+      "isolated_workspace_actual_sha256": "1a58f084451b37b5804ee18e5d3f24fc0b988ac928976b695a12c694ba288f82",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Bug fix: corrected chunk boundary calculation and candidate indexing.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "scripts/m2c_page_identity.py",
+      "manifest_expected_sha256": "0f9e65b8a921803a4aba29f0ef9a20e73b87b3c33115b45743a870564bee7936",
+      "isolated_workspace_actual_sha256": "116c4b14c820d71f07da0eb5fb0b0a2a2ab5da4f9126d3b6be54d59dc06c1c60",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Enhancement: hardened guide and page ID resolution for edge cases.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "scripts/m2c_page_join.py",
+      "manifest_expected_sha256": "a7744701a710df9575eea3861a61204ee63deb995f761cc715dcd150b6dee156",
+      "isolated_workspace_actual_sha256": "6031ae7e1396c9c46951cf40c305d5a477a555814b2edeb639cd7cfeed9a14c1",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Enhancement: improved join logic between reference cards and page corpus records.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "scripts/rag_completeness.py",
+      "manifest_expected_sha256": "a3b6c458b226371be260161a617e7c762ff463ff065dbd21e0e203249b44801f",
+      "isolated_workspace_actual_sha256": "6ecf18f32032d7a07ce8802eaeba8a42b44f07c07a68c89898d90cf85161ec31",
+      "modification_phase": "Phase E Retrieval Fix",
+      "technical_rationale": "Remediation fix: domain synonym normalization for technical objects and clearing sequence recall.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "scripts/rag_evidence.py",
+      "manifest_expected_sha256": "46d3c5cbd39ef98058f6bc879d9ea4fda9e8459826b45b5b5378e7243db30bfb",
+      "isolated_workspace_actual_sha256": "e2185455bb7f03801d11229e203753f8b34c692f265c4f0c6048c64db69e663a",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Quality fix: strengthened causal evidence extraction, grounding gates, and tau threshold handling.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "scripts/rag_generate.py",
+      "manifest_expected_sha256": "6d7900f02f9126a4fd3650aa07c343da1d8bf8cdcf43bf498c502038553ea691",
+      "isolated_workspace_actual_sha256": "5093e1d698f54fb0567489756b23d6b189fe438456322c5bfecd668c2c1bd39d",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Quality fix: extractive generator cleanup, formatting guards against stray asterisks/bold numbers.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "scripts/rag_pipeline.py",
+      "manifest_expected_sha256": "911731a93149b4fe3ce70c8b3a8412eb514c7e2f150446bf60311e07710c17a8",
+      "isolated_workspace_actual_sha256": "a1a75da371aea26b86ac01defd133bc1865e48b8bfaad08aa30c3dff5b329c3f",
+      "modification_phase": "Phase E Retrieval Fix",
+      "technical_rationale": "Remediation fix: consistent retrieval_query usage across routing and reranking with observable failure logging.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "scripts/rag_response.py",
+      "manifest_expected_sha256": "07aaeaefed59c14df0ea39cceab7b6cd8a6ddbad7cfaf04b1ff900e20e62fa11",
+      "isolated_workspace_actual_sha256": "8f07ad675993c2b51e283678f45a76ddc260a7bfe14c33cf5569bdd323f0fda7",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Schema fix: structured response composer, clean citation formatting, and procedural gap disclosure.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "scripts/rag_text.py",
+      "manifest_expected_sha256": "31d7657e409453b583cc91860bc08af87b8b607b39fc28f5f92eb6d426f6652f",
+      "isolated_workspace_actual_sha256": "590ffc401eb4670bc34de5b4e0ec4403bfa759e578ddfffb02baa6e70142e4eb",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Bug fix: hardened tokenization and discriminative phrase extraction.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "tests/test_phase10.py",
+      "manifest_expected_sha256": "f3603f24b4ed6d4b16cc95396fb3d284876164838efae53388f1958df43900d6",
+      "isolated_workspace_actual_sha256": "cbe3bf37440c8be4e19a9f5d00bdd45c96ceba27ef7ea19ee6c37758225193f2",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Test suite update: updated test expectations reflecting Phase 10 grounding fixes.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "tests/test_phase7b.py",
+      "manifest_expected_sha256": "c73c38fbb90f9b273a5703618c54880f396ce5d75cc4e1a4288d103d2e4984df",
+      "isolated_workspace_actual_sha256": "7ea79005abb411d45647b6e646a6f997c679b69121647c3178b3a54a1cea22cb",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Test suite update: updated identity verification assertions.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "tests/test_phase7c.py",
+      "manifest_expected_sha256": "c8093f5ab87a194f37a7c3c27dd96bec5910794c7b5fb64c25276bdf467b460d",
+      "isolated_workspace_actual_sha256": "15dbd8f1439f50437eab32081561f6ff4c08a322b3a93afd4378307ca9ed5355",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Test suite update: updated page join assertions.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "tests/test_phase7e.py",
+      "manifest_expected_sha256": "3612674328fdc6745d231f089c722dd15e818574cdbc9fd30377a16ae690ac25",
+      "isolated_workspace_actual_sha256": "7118387246e3f3581be8260a38cff7349cb949dcdef47f7dd2bb96af75f84062",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Test suite update: updated corpus validation assertions.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "tests/test_phase7f.py",
+      "manifest_expected_sha256": "6a147978ebce5e5af254836ea92851b0ee816588135487fc1e2c540b92adf6a1",
+      "isolated_workspace_actual_sha256": "f61ac7283c16e9b4d101e4a7610b8ffd79c2a144a8677bdfc84b4075e1739c91",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Test suite update: updated candidate extraction assertions.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "tests/test_phase7g.py",
+      "manifest_expected_sha256": "47625473c21267388abc4f432140a00a59c0d143844d09619958a225d0f61245",
+      "isolated_workspace_actual_sha256": "84c83a1a8f6f013b4ec1160f1003335e42ce39275dfface37aa50542087056a6",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Test suite update: updated retrieval unit integrity assertions.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "web/src/__tests__/app.test.tsx",
+      "manifest_expected_sha256": "9c93faab91b1bf0fae975b5f48f2c7cf0243d810dc245424a0deb84b4e11a423",
+      "isolated_workspace_actual_sha256": "cc395ae43167d88f9c5d16728cc849efe5ebf0b5f289ff231b19d0818e4ad231",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Frontend test update: aligned tests with improved citation chips and conversation UI.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "web/src/components/Citations.tsx",
+      "manifest_expected_sha256": "89374cc6073f714d800236b96830c4d9376b111bdd59e421a61cfb24fa0963aa",
+      "isolated_workspace_actual_sha256": "8a1ca4c91c915a98dfb19caeafd049337b9ac0c12f3026006c11487164b63902",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Frontend fix: proper rendering and click handling of citation chips [1].",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "web/src/components/Markdown.tsx",
+      "manifest_expected_sha256": "6e49b1ba51547778de00f98e3aba94582c12d90a683d9b42b19cc3f65d21ce7a",
+      "isolated_workspace_actual_sha256": "5f44d339794ff7b414d7336961eb63e1dd779cb5cc245fbc612512c3a4ba9295",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Frontend fix: markdown parser regex and list rendering fixes.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "web/src/components/MessageView.tsx",
+      "manifest_expected_sha256": "7fd42a706c96c8804068daba46aef47d440f081390c04a081b78ec06f7aad133",
+      "isolated_workspace_actual_sha256": "4c9502d52442990823361f5bfcc3c576b3bbfb1739b00d842ce2b27eb40e2112",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Frontend fix: message layout, citation chip rendering, and error recovery states.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "web/src/components/Sources.tsx",
+      "manifest_expected_sha256": "313bd244720496a68981ee79601a52fce8e77e6183183f80692d93d4d6530225",
+      "isolated_workspace_actual_sha256": "11719ca3871cb9d9e6987c38d535ea20f46f8f109115c7c65a949d81002203ca",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Frontend fix: accurate source card metadata display with titles, sections, and URLs.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    },
+    {
+      "rel_path": "web/src/index.css",
+      "manifest_expected_sha256": "96179dd3fd60cddb98f3f8468397121f0a6de7dc9b1c6e1b8b8d73bdf9f15010",
+      "isolated_workspace_actual_sha256": "e6c258b26251a35e6f740059b8d029d6e70e0941e2014970aecbd4c6d600ea8c",
+      "modification_phase": "Pre-remediation bug fixes & test alignments",
+      "technical_rationale": "Frontend styling: refined typography and glassmorphic UI polish.",
+      "authorization_status": "PENDING_REPOSITORY_OWNER_SIGN_OFF"
+    }
+  ]
+}

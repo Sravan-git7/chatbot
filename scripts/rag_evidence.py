@@ -51,7 +51,7 @@ _WORD = re.compile(r"[a-z0-9][a-z0-9_]*")
 # question-frame words: they carry no topic information (stems are computed below)
 FRAME_WORDS = frozenset("possible available required needed need happen happens work works exist exists mean means called allowed applicable relevant important typical typically "
                         "usually normally generally come comes get gets many much relationship difference differences purpose reason reasons meaning kind kinds type types way ways example examples overview "
-                        "main primary key".split())
+                        "main primary key procedure procedures process processes step steps workflow method methods".split())
 _ASK_SKIP = frozenset("is are does do did the a an of in for to can could will would should be it its this that these those one must may might shall have has had been being".split())
 HEAD_WEIGHT = 0.5                   # a term found only in the section heading counts half (context, weaker than the sentence itself)
 
@@ -804,7 +804,8 @@ def _source_sequence_info(unit: Unit) -> Optional[Tuple[str, int]]:
                 continue
             body = line[prefix.end():]
             sentence_parts = {quality_norm(part) for part in T.split_sentences(body)}
-            if sentence not in sentence_parts:
+            clean_sentence = re.sub(r"^\d+\s+", "", sentence)
+            if sentence not in sentence_parts and clean_sentence not in sentence_parts:
                 continue
             return "numbered", int(numbered.group("number"))
         if bullet:
@@ -827,17 +828,25 @@ def _has_workflow_heading(unit: Unit) -> bool:
 
 
 def _has_genuine_procedural_steps(units: Sequence[Unit]) -> bool:
-    """True when units contain actual numbered sequence steps, workflow headings, or structural steps."""
+    """True when units contain actual numbered sequence steps starting from initial step or multiple ordered steps."""
+    has_step_one = False
+    distinct_steps = set()
     for u in units:
         seq = _source_sequence_info(u)
         if seq and seq[0] == "numbered":
-            return True
-        if _has_workflow_heading(u):
-            return True
-        full = u.full_text()
-        if _NUM_STEP_PAT.search(full) or re.search(r"^\s*\d+[\.\)]\s+", full):
-            return True
-    return False
+            if seq[1] == 1:
+                has_step_one = True
+            distinct_steps.add(seq[1])
+        texts_to_check = [u.full_text(), *(getattr(u, "list_items", None) or ())]
+        for t in texts_to_check:
+            if re.search(r"^\s*1[\.\)]\s+", t) or re.search(r"\bstep\s+1\b", t, re.I):
+                has_step_one = True
+            for m in re.finditer(r"(?:^|\n)\s*(\d+)[\.\)]\s+", t):
+                num = int(m.group(1))
+                if num == 1:
+                    has_step_one = True
+                distinct_steps.add(num)
+    return has_step_one or (len(distinct_steps) >= 3 and min(distinct_steps) <= 2)
 
 
 def _procedural_limitation_notice(question: str, chosen: Sequence[Unit]) -> str:
@@ -859,7 +868,9 @@ def is_procedural_limitation_sentence(text: str) -> bool:
 
 def _workflow_sequence_has_heading_support(unit: Unit, needs: QuestionNeeds) -> bool:
     """A numbered sentence may be relevant through its explicit workflow section, not repeated query wording."""
-    if not _source_sequence_info(unit) or not _has_workflow_heading(unit):
+    seq = _source_sequence_info(unit)
+    has_numbered_items = bool(getattr(unit, "list_items", None) and any(re.match(r"^\s*\d+[\.\)]", item) for item in unit.list_items))
+    if not (seq or has_numbered_items):
         return False
     intent_terms = {stem2(term) for term in ("process", "workflow", "procedure", "step", "sequence", "flow")}
     subject_terms = set(needs.focus) - intent_terms
@@ -867,7 +878,12 @@ def _workflow_sequence_has_heading_support(unit: Unit, needs: QuestionNeeds) -> 
     if isinstance(labels, str):
         labels = (labels,)
     heading_terms = set(unit.head) | set(terms2(" ".join(str(label) for label in labels)))
-    return bool(subject_terms & heading_terms)
+    if not bool(subject_terms & heading_terms):
+        return False
+    if _has_workflow_heading(unit):
+        return True
+    chunk_text = getattr(unit, "chunk_text", "") or ""
+    return bool(_WORKFLOW_HEADING.search(chunk_text))
 
 
 def workflow_context_selection_key(question: str, hits: Sequence[Any]) -> Optional[Callable[[Any], Tuple[int, int]]]:
@@ -1025,7 +1041,8 @@ def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Uni
     else:
         eligible = [(score, unit) for score, unit in scored if score >= cutoff]
     numbered_present = any(
-        (info := _source_sequence_info(unit)) is not None and info[0] == "numbered"
+        ((info := _source_sequence_info(unit)) is not None and info[0] == "numbered")
+        or bool(getattr(unit, "list_items", None) and any(re.match(r"^\s*\d+[\.\)]", item) for item in unit.list_items))
         for _, unit in eligible
     )
     candidates: List[Tuple[int, float, Unit]] = []
@@ -1034,22 +1051,23 @@ def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Uni
             continue
         if intent == "workflow":
             sequence = _source_sequence_info(unit)
-            if sequence and sequence[0] == "numbered":
+            has_numbered_items = bool(getattr(unit, "list_items", None) and any(re.match(r"^\s*\d+[\.\)]", item) for item in unit.list_items))
+            if (sequence and sequence[0] == "numbered") or has_numbered_items:
                 tier = 0
-            elif sequence and sequence[0] == "bullet":
-                tier = 3 if numbered_present else 0
-            elif _has_workflow_heading(unit) and _has_explanatory_predicate(unit.text):
-                tier = 2
+            elif _has_workflow_heading(unit):
+                tier = 1
+            elif sequence and sequence[0] == "bullet" and numbered_present:
+                tier = 3
             else:
-                tier = 4
-            if not (_has_explanatory_predicate(unit.text) or sequence):
+                tier = 2
+            if not (_has_explanatory_predicate(unit.text) or (tier == 0)):
                 continue
             candidates.append((tier, score, unit))
         else:
             candidates.append((0, score, unit))
 
     if intent == "workflow":
-        candidates.sort(key=lambda entry: (entry[0], entry[2].order))
+        candidates.sort(key=lambda entry: (entry[0], -entry[1], entry[2].order))
     else:
         candidates.sort(key=lambda entry: (-entry[1], entry[2].order))
 
@@ -1185,6 +1203,9 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
         missing = [term for term in missing if term not in {stem2(word) for word in ("object", "item", "element")}]
     if missing and frame_normalization:
         missing = [a for a in missing if not structural_evidence_present(a, units)]
+    if missing and is_process_question(needs.question):
+        proc_words = {stem2(word) for word in ("procedure", "procedures", "process", "processes", "step", "steps", "workflow", "method", "methods")}
+        missing = [a for a in missing if a not in proc_words]
     if missing:
         return Decision(False, "ASKED_TERM_NOT_IN_EVIDENCE", {"missing": missing}), []
     pool = [u for u in units if unit_kinds_ok(u, needs)]
@@ -1306,7 +1327,11 @@ class EvidenceExtractiveGenerator:
             lines.append(procedural_limitation)
             lines.append("")
 
+        covered_list_items = set()
         for i, u in enumerate(chosen):
+            u_clean = re.sub(r"^\s*[-*•]\s*", "", u.text).strip().lower()
+            if u_clean in covered_list_items:
+                continue
             if i > 0 and (getattr(chosen[i - 1], "list_items", None) or getattr(u, "list_items", None)):
                 lines.append("")
             if u.prev_line and needs.kinds and not kind_satisfied(needs.kinds[0], u.text, needs):
@@ -1315,9 +1340,15 @@ class EvidenceExtractiveGenerator:
             if getattr(u, "list_items", None):
                 for item in u.list_items:
                     for s in T.split_sentences(item):
-                        lines.append(f"{s} [{u.marker}]")
+                        s_clean = re.sub(r"^\s*[-*•]\s*", "", s).strip().lower()
+                        if s_clean:
+                            covered_list_items.add(s_clean)
+                        lines.append(s)
             if u.follow:
-                lines.append(f"{u.follow} [{u.marker}]")
+                follow_body = re.sub(r"\s*\[S\d+\]", "", u.follow).strip()
+                list_bodies = [re.sub(r"\s*\[S\d+\]", "", item).strip() for item in (getattr(u, "list_items", None) or ())]
+                if follow_body not in list_bodies:
+                    lines.append(f"{u.follow} [{u.marker}]")
             record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text,
                                         "coverage": round(unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3),
                                         "kinds_ok": unit_kinds_ok(u, needs)})
@@ -1330,11 +1361,24 @@ class EvidenceExtractiveGenerator:
             if add_ev:
                 record["additional_evidence"] = add_ev
         dedup: List[str] = []
+        seen_bodies: Dict[str, int] = {}
         for ln in lines:                                                    # a header line attached to two neighbouring sentences is shown once
             if not ln:
                 if dedup and dedup[-1] != "":
                     dedup.append("")
-            elif ln not in dedup:
+                continue
+            body = re.sub(r"\s*\[S\d+\]", "", ln).strip()
+            marker_match = re.findall(r"\[S\d+\]", ln)
+            is_bullet = bool(re.match(r"^\s*[-*•]\s*", body))
+            if body in seen_bodies:
+                idx = seen_bodies[body]
+                existing = dedup[idx]
+                if not is_bullet:
+                    for m in marker_match:
+                        if m not in existing:
+                            dedup[idx] = f"{existing} {m}"
+            else:
+                seen_bodies[body] = len(dedup)
                 dedup.append(ln)
         while dedup and not dedup[0]:
             dedup.pop(0)
@@ -1545,13 +1589,21 @@ def verify_support_chain(answer: str, context: Any) -> Dict[str, Any]:
     """Independent traceability check: every answer sentence must be a verbatim span of the original text of the chunk its marker names."""
     by = {i.marker: i for i in context.items}
     records, ok = [], True
+    active_markers: List[str] = []
     for line in T.split_cited_sentences(answer or ""):
         markers = re.findall(r"\[(S\d+)\]", line)
+        if markers:
+            active_markers = markers
+        effective_markers = markers or active_markers
         body = _norm(re.sub(r"\[S\d+\]", "", line))
         if not body or (not markers and _is_exact_procedural_limitation_sentence(body)):
             continue
-        hit = [m for m in markers if m in by and body in _norm(by[m].text)]
-        records.append({"sentence": body[:160], "markers": markers, "verbatim_in": hit})
+        clean_body = re.sub(r"^[-*•]\s*", "", body).strip()
+        hit = [
+            m for m in effective_markers
+            if m in by and (body in _norm(by[m].text) or (clean_body and clean_body in _norm(by[m].text)))
+        ]
+        records.append({"sentence": body[:160], "markers": effective_markers, "verbatim_in": hit})
         ok = ok and bool(hit)
     return {"ok": ok and bool(records), "verbatim_all": ok and bool(records), "sentences": records}
 

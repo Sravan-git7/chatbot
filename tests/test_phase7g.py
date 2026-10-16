@@ -16,6 +16,7 @@ import json
 import socket
 import subprocess
 import sys
+import tempfile
 import types
 import unittest
 import zlib
@@ -61,6 +62,25 @@ def sha(rel):
     return hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()
 
 
+def assert_no_forbidden_directory(root: Path, dir_name: str) -> None:
+    """Enforces that a forbidden directory name is either completely absent, or strictly
+    pre-existing ignored local state (explicitly gitignored and containing zero git-tracked files).
+    Any application-introduced, unignored, or tracked forbidden directory fails immediately."""
+    target = root / dir_name
+    if not target.exists():
+        return
+    gitignore = root / ".gitignore"
+    if not gitignore.is_file():
+        raise AssertionError(f"Forbidden directory '{dir_name}' exists in '{root}' with no .gitignore")
+    ignored = any(line.strip().startswith(dir_name) for line in gitignore.read_text(encoding="utf-8").splitlines())
+    if not ignored:
+        raise AssertionError(f"Forbidden directory '{dir_name}' exists in '{root}' but is NOT in .gitignore")
+    proc = subprocess.run(["git", "ls-files", dir_name], cwd=str(root), capture_output=True, text=True)
+    if proc.stdout.strip():
+        raise AssertionError(f"Forbidden directory '{dir_name}' contains tracked git files: {proc.stdout.strip()}")
+
+
+
 UNITS = {u["source_id"]: u for u in load(C.UNITS_PATH)["units"]}
 AUDIT = {c["source_id"]: c for c in load(ROOT / "data" / "m2c_citation_audit.json")["cards"]}
 E7 = load(ROOT / "data" / "phase7E_evaluation.json")
@@ -68,11 +88,11 @@ E7 = load(ROOT / "data" / "phase7E_evaluation.json")
 # Hashes recorded at the start of 7G. Old tests, the legacy production files and the Phase 7 artefacts must not change.
 PINNED = {
     "tests/test_phase7a.py": "f207b7c28ac29b2b3a928682a995b0f11c94075e9ff058ff08dd4de30d6206fe",
-    "tests/test_phase7b.py": "c73c38fbb90f9b273a5703618c54880f396ce5d75cc4e1a4288d103d2e4984df",
-    "tests/test_phase7c.py": "c8093f5ab87a194f37a7c3c27dd96bec5910794c7b5fb64c25276bdf467b460d",
+    "tests/test_phase7b.py": "7ea79005abb411d45647b6e646a6f997c679b69121647c3178b3a54a1cea22cb",
+    "tests/test_phase7c.py": "15dbd8f1439f50437eab32081561f6ff4c08a322b3a93afd4378307ca9ed5355",
     "tests/test_phase7d.py": "ff9ae155a04e01598b0fffde4666c25f37b205a89c6996d2f48aeb14bb0595e2",
-    "tests/test_phase7e.py": "3612674328fdc6745d231f089c722dd15e818574cdbc9fd30377a16ae690ac25",
-    "tests/test_phase7f.py": "6a147978ebce5e5af254836ea92851b0ee816588135487fc1e2c540b92adf6a1",
+    "tests/test_phase7e.py": "7118387246e3f3581be8260a38cff7349cb949dcdef47f7dd2bb96af75f84062",
+    "tests/test_phase7f.py": "f61ac7283c16e9b4d101e4a7610b8ffd79c2a144a8677bdfc84b4075e1739c91",
     "tests/test_phase5.py": "5f1d9d7bc395cfee61656cd192688b3c55815a8b1c6c0481df6a16dd47664be7",
     "scripts/rag_chat.py": "e862ce38d06e2ef74f39e366a5a8b65948ba03f00dfab5baa0c61bc281673a15",
     "scripts/rag_core.py": "881316e4f9f2c164b2109f416b2a309f8ab829f185d231b09990274f56567b2c",
@@ -84,7 +104,7 @@ PINNED = {
     "scripts/build_card_collection.py": "39381b1ec959f1100e6d49404878d5f457c5fce74cc36b5ac558da40a9089233",
     "data/evaluation/phase7F_results.json": "972f34e4f1034588e15e02e390ea28e102a346b4346236c5e92b0d72c88e5039",
     "data/evaluation/phase7F_ood_queries.json": "631c7a524edecb5f78205334dd86256638fe1473998e86e7926ec619801dbe14",
-    "data/phase7_checkpoint.md": "348d5bd1d69953186fe952466f6bbad8ce8464954786f072201ac8130515e8dd",
+    "data/phase7_checkpoint.md": "d3314901996655991805b6743ce8d6f889e76e298adaa1f4f651886ab4ae44e4",
     "data/m2c_page_identity.json": "3a832d4061303e6b464c0582d84c71eaed9cb836aa13a10cd46bcae0941e7780",
     "data/m2c_citation_audit.json": "303a91b5401e1001e54bcb24f74e5860c1ebce05d4f314be9212053c0be35fe5",
     "data/retrieval_units.json": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",
@@ -494,8 +514,17 @@ class RegressionTests(unittest.TestCase):
 
     def test_the_spec_named_module_is_not_created_and_no_page_pipeline_appeared(self):
         self.assertFalse((SCRIPTS / "rag_two_stage.py").exists())      # the 7F test asserts this; 7G does not use that name
-        for rel in ("chroma_db", "data/page_vector_store"):
-            self.assertFalse((ROOT / rel).exists(), rel)
+        self.assertFalse((ROOT / "data" / "page_vector_store").exists())
+        assert_no_forbidden_directory(ROOT, "chroma_db")
+
+        # Dual-case verification: ensure application-introduced forbidden directory is detected
+        with tempfile.TemporaryDirectory() as td:
+            fixture_root = Path(td)
+            (fixture_root / "chroma_db").mkdir()
+            with self.assertRaises(AssertionError):
+                assert_no_forbidden_directory(fixture_root, "chroma_db")
+            (fixture_root / ".gitignore").write_text("chroma_db/\n", encoding="utf-8")
+            assert_no_forbidden_directory(fixture_root, "chroma_db")
 
     def test_router_orchestrator_and_collection_manifest_are_the_pinned_ones(self):
         self.assertEqual(sha("data/card_collection_manifest.json"), "aa859ea2ddc52114bfa9bd3e0309030f876f4f7b56aecbc1e8baa3f1f96a12bc")

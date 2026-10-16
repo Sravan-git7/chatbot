@@ -86,18 +86,32 @@ def classify_intent(query: str) -> Dict[str, Any]:
     }
 
 
+def normalize_domain_synonyms(query: str) -> str:
+    """Normalize domain synonyms for retrieval/routing token matching without altering user-visible text."""
+    q = (query or "").strip()
+    # 1. Technical objects in SAP Utilities -> Technical master data objects (handles singular/plural)
+    if re.search(r"\btechnical\s+objects?\b", q, re.I) and not re.search(r"\btechnical\s+master\s+data\b", q, re.I):
+        q = re.sub(r"\btechnical\s+objects?\b", "technical master data objects", q, flags=re.I)
+    # 2. Clearing rules -> Clearing rules clearing types (handles singular/plural, preserves casing)
+    if re.search(r"\bclearing\s+rules?\b", q, re.I) and not re.search(r"\bclearing\s+types?\b", q, re.I):
+        q = re.sub(r"\b(clearing\s+rules?)\b", r"\1 clearing types", q, flags=re.I)
+    # 3. Contract Accounts Receivable and Payable -> Contract Accounts Receivable and Payable FI-CA (preserves casing)
+    if re.search(r"\bContract\s+Accounts\s+Receivable\s+and\s+Payable\b", q, re.I) and not re.search(r"\bFI-CA\b", q, re.I):
+        q = re.sub(r"\b(Contract\s+Accounts\s+Receivable\s+and\s+Payable)\b", r"\1 FI-CA", q, flags=re.I)
+    return q
+
 def normalize_retrieval_query(query: str) -> str:
     """Normalize query strictly for retrieval/routing token matching.
 
-    Removes conversational fluff prefixes while leaving domain tokens intact.
-    Does NOT modify the user-visible question.
+    Applies deterministic domain synonyms and removes conversational fluff prefixes
+    for token matching. Does NOT modify the user-visible question.
     """
-    if not is_intent_aware_enabled():
-        return query
-
     q = (query or "").strip()
-    cleaned = _CONVERSATIONAL_PREFIXES.sub("", q).strip()
-    return cleaned if cleaned else q
+    if is_intent_aware_enabled():
+        cleaned = _CONVERSATIONAL_PREFIXES.sub("", q).strip()
+        q = cleaned if cleaned else q
+
+    return normalize_domain_synonyms(q)
 
 
 # ---------------------------------------------------------------------------

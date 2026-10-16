@@ -1,0 +1,59 @@
+{
+  "execution_timestamp": "2026-10-16T17:07:23+05:30",
+  "environment": "Windows 11 / PowerShell / Isolated Workspace (D:/scratch/audit_workspace)",
+  "test_suites": [
+    {
+      "suite": "pytest tests/test_ephemeral_rag_pipeline.py",
+      "command": "python -m pytest tests/test_ephemeral_rag_pipeline.py -q",
+      "exit_code": 0,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 9.37,
+      "status": "PASS"
+    },
+    {
+      "suite": "pytest tests/test_response_quality_fixes.py",
+      "command": "python -m pytest tests/test_response_quality_fixes.py -q",
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 5.27,
+      "status": "PASS"
+    },
+    {
+      "suite": "pytest tests/test_delivery_inputs_verifier.py",
+      "command": "python -m pytest tests/test_delivery_inputs_verifier.py -q",
+      "exit_code": 1,
+      "passed": 4,
+      "failed": 1,
+      "skipped": 0,
+      "duration_seconds": 0.52,
+      "status": "EXPECTED_FAILURE_ON_MANIFEST_MISMATCHES",
+      "failure_reason": "Verifies that the frozen historical delivery-inputs.sha256 fails on the 22 legitimate bug fixes until repo-owner sign-off."
+    },
+    {
+      "suite": "web vitest (frontend unit & integration)",
+      "command": "npm test -- --run",
+      "working_directory": "D:/scratch/audit_workspace/web",
+      "exit_code": 0,
+      "test_files_passed": 12,
+      "passed": 119,
+      "failed": 0,
+      "skipped": 1,
+      "duration_seconds": 37.17,
+      "status": "PASS"
+    },
+    {
+      "suite": "web production build",
+      "command": "npm run build",
+      "working_directory": "D:/scratch/audit_workspace/web",
+      "exit_code": 0,
+      "output": "tsc --noEmit && vite build clean",
+      "duration_seconds": 1.82,
+      "status": "PASS"
+    }
+  ],
+  "overall_test_status": "CONDITIONAL_PASS (All unit, functional, UI, and build tests PASS; manifest verification gate pending owner sign-off)"
+}

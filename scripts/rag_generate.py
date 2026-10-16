@@ -246,8 +246,19 @@ class ExtractiveGenerator:
             for i, s in enumerate(sents):
                 order += 1
                 score = len(qt & T.term_set(s)) / len(qt) if qt else 0.0
-                follow = sents[i + 1] if s.rstrip().endswith(":") and i + 1 < len(sents) else None
-                cands.append((score, order, item.marker, s, follow))
+                follows: List[str] = []
+                if s.rstrip().endswith(":"):
+                    k = i + 1
+                    while k < len(sents):
+                        cand = sents[k]
+                        if cand.startswith(("-", "*", "•")) or re.match(r"^\d+[.)]", cand):
+                            follows.append(cand)
+                            k += 1
+                        else:
+                            break
+                    if not follows and i + 1 < len(sents) and not sents[i + 1].rstrip().endswith(":"):
+                        follows.append(sents[i + 1])
+                cands.append((score, order, item.marker, s, follows))
         if not cands or not qt:
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "")
         best = max(c[0] for c in cands)
@@ -255,11 +266,28 @@ class ExtractiveGenerator:
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "")
         keep = [c for c in cands if c[0] >= max(self.min_score, 0.6 * best)]
         keep = sorted(sorted(keep, key=lambda c: (-c[0], c[1]))[: self.max_sentences], key=lambda c: c[1])
-        lines = []
-        for _score, _o, marker, s, follow in keep:
-            lines.append(f"{s} [{marker}]")
-            if follow:
-                lines.append(f"{follow} [{marker}]")
+        lines: List[str] = []
+        seen_bodies: Dict[str, int] = {}
+        for _score, _o, marker, s, follows in keep:
+            s_clean = s.strip()
+            if not s_clean:
+                continue
+            body = re.sub(r"\s*\[S\d+\]", "", s_clean).strip()
+            if body in seen_bodies:
+                idx = seen_bodies[body]
+                if f"[{marker}]" not in lines[idx]:
+                    lines[idx] = f"{lines[idx]} [{marker}]"
+            else:
+                seen_bodies[body] = len(lines)
+                lines.append(f"{s_clean} [{marker}]")
+            for f in (follows or []):
+                f_clean = f.strip()
+                if not f_clean:
+                    continue
+                f_body = re.sub(r"\s*\[S\d+\]", "", f_clean).strip()
+                if f_body not in seen_bodies:
+                    seen_bodies[f_body] = len(lines)
+                    lines.append(f_clean)
         text = "\n".join(lines)
         return GenerationResult(text, False, self.name, text)
 
@@ -362,10 +390,15 @@ def verify_grounding(
         # Citation inheritance for bullet lists or multi-sentence answers
         if not good and citation_normalization and all_explicit_good_markers:
             candidate_markers = []
-            for next_p in parsed_lines[idx + 1:]:
-                if next_p["good"]:
-                    candidate_markers = next_p["good"]
+            for prev_p in reversed(parsed_lines[:idx]):
+                if prev_p["good"]:
+                    candidate_markers = prev_p["good"]
                     break
+            if not candidate_markers:
+                for next_p in parsed_lines[idx + 1:]:
+                    if next_p["good"]:
+                        candidate_markers = next_p["good"]
+                        break
             if not candidate_markers:
                 candidate_markers = all_explicit_good_markers
 

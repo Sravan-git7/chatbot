@@ -29,7 +29,7 @@ export default function Citations({ citations, sources, markerMap, onCite }: Cit
             data-testid={`citation-${marker}`}
             aria-label={`Source ${label}`}
           >
-            {label}
+            [{label}]
           </button>
         )
       })}

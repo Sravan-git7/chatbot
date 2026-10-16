@@ -87,7 +87,7 @@ function MarkdownView({ text, markers, markerMap, onCite }: Props) {
                   aria-label={`Source ${displayNum}`}
                   onClick={() => onCite?.(m)}
                 >
-                  {displayNum}
+                  [{displayNum}]
                 </button>
               )
             }

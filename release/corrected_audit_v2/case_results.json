@@ -1,0 +1,617 @@
+{
+  "suite_name": "SURA Operational Phase D Evaluation Suite",
+  "suite_description": "24-case operational harness evaluating core domain recall, paraphrases, holdouts, multi-turn dialog, and abstentions.",
+  "suite_canonical_equivalence_status": "NON_CANONICAL_OPERATIONAL (Historical canonical frozen sets golden_v1.jsonl [157 cases] and dataset.json [70 cases] exist separately).",
+  "duplicates_detected": [],
+  "missing_cases": [],
+  "summary_counts": {
+    "total_cases": 24,
+    "answered_cases": 20,
+    "abstention_cases": 4,
+    "pass_count": 24,
+    "fail_count": 0,
+    "unverified_count": 0
+  },
+  "detailed_results": [
+    {
+      "case_id": "C1",
+      "category": "Core 1: Business Master Data",
+      "query": "What are the business master data objects in SAP Utilities?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-01",
+      "actual_card": "M2C-01",
+      "card_match": true,
+      "card_provenance": "Master Data Overview -> Business master data",
+      "citation_markers_in_text": [
+        "1",
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P1.1",
+      "category": "Paraphrase 1.1",
+      "query": "Which business objects are maintained in SAP Utilities master data?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-01",
+      "actual_card": "M2C-01",
+      "card_match": true,
+      "card_provenance": "Master Data Overview -> Business master data",
+      "citation_markers_in_text": [
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P1.2",
+      "category": "Paraphrase 1.2",
+      "query": "List the business master data components in IS-U.",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-01",
+      "actual_card": "M2C-01",
+      "card_match": true,
+      "card_provenance": "Master Data Overview -> Business master data",
+      "citation_markers_in_text": [
+        "1",
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "C2",
+      "category": "Core 2: Technical Master Data",
+      "query": "What are the technical master data objects in SAP Utilities?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-01",
+      "actual_card": "M2C-01",
+      "card_match": true,
+      "card_provenance": "Master Data Overview -> Technical master data",
+      "citation_markers_in_text": [
+        "1",
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P2.1",
+      "category": "Paraphrase 2.1",
+      "query": "What technical objects exist in SAP Utilities?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-01",
+      "actual_card": "M2C-01",
+      "card_match": true,
+      "card_provenance": "Master Data Overview -> Technical master data",
+      "citation_markers_in_text": [
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P2.2",
+      "category": "Paraphrase 2.2",
+      "query": "Which objects make up the technical master data structure in IS-U?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-01",
+      "actual_card": "M2C-01",
+      "card_match": true,
+      "card_provenance": "Master Data Overview -> Technical master data",
+      "citation_markers_in_text": [
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "C3",
+      "category": "Core 3: Incoming Payments",
+      "query": "How are incoming payments analyzed and cleared?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-19",
+      "actual_card": "M2C-19",
+      "card_match": true,
+      "card_provenance": "Clarification Processing -> Incoming payments",
+      "citation_markers_in_text": [
+        "1",
+        "2",
+        "3"
+      ],
+      "returned_source_markers": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "sources_count": 3,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P3.1",
+      "category": "Paraphrase 3.1",
+      "query": "How does SAP Utilities monitor and process incoming payments?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-19",
+      "actual_card": "M2C-19",
+      "card_match": true,
+      "card_provenance": "Clarification Processing -> Incoming payments",
+      "citation_markers_in_text": [
+        "1",
+        "2",
+        "2"
+      ],
+      "returned_source_markers": [
+        "S1",
+        "S2"
+      ],
+      "sources_count": 2,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P3.2",
+      "category": "Paraphrase 3.2",
+      "query": "Explain the incoming payments monitoring and clearing procedure.",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-20",
+      "actual_card": "M2C-20",
+      "card_match": true,
+      "card_provenance": "Payment Lot Overview -> Incoming payments clearing",
+      "citation_markers_in_text": [
+        "1",
+        "1",
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "C4",
+      "category": "Core 4: FI-CA Installment Plans",
+      "query": "What is the procedure for creating installment plans in FI-CA?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-24",
+      "actual_card": "M2C-24",
+      "card_match": true,
+      "card_provenance": "Installment Plan Overview -> Installment plans in FI-CA",
+      "citation_markers_in_text": [
+        "3",
+        "3",
+        "4"
+      ],
+      "returned_source_markers": [
+        "S3",
+        "S4"
+      ],
+      "sources_count": 2,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P4.1",
+      "category": "Paraphrase 4.1",
+      "query": "How do I create and calculate an installment plan in Contract Accounts Receivable and Payable?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-24",
+      "actual_card": "M2C-24",
+      "card_match": true,
+      "card_provenance": "Installment Plan Overview -> Installment plans in FI-CA",
+      "citation_markers_in_text": [
+        "1",
+        "3",
+        "4"
+      ],
+      "returned_source_markers": [
+        "S1",
+        "S3",
+        "S4"
+      ],
+      "sources_count": 3,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P4.2",
+      "category": "Paraphrase 4.2",
+      "query": "How are installment plans processed in FI-CA?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-24",
+      "actual_card": "M2C-24",
+      "card_match": true,
+      "card_provenance": "Installment Plan Overview -> Installment plans in FI-CA",
+      "citation_markers_in_text": [
+        "3",
+        "3",
+        "3"
+      ],
+      "returned_source_markers": [
+        "S3"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "C5",
+      "category": "Core 5: Clearing Process",
+      "query": "What are the steps in the clearing process?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-21",
+      "actual_card": "M2C-21",
+      "card_match": true,
+      "card_provenance": "Clearing Type -> Clearing process sequence",
+      "citation_markers_in_text": [
+        "1",
+        "3"
+      ],
+      "returned_source_markers": [
+        "S1",
+        "S3"
+      ],
+      "sources_count": 2,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P5.1",
+      "category": "Paraphrase 5.1",
+      "query": "What is the sequence of clearing rules in Contract Accounts Receivable and Payable?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-21",
+      "actual_card": "M2C-21",
+      "card_match": true,
+      "card_provenance": "Clearing Type -> Clearing process sequence rules",
+      "citation_markers_in_text": [
+        "1",
+        "3"
+      ],
+      "returned_source_markers": [
+        "S1",
+        "S3"
+      ],
+      "sources_count": 2,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P5.2",
+      "category": "Paraphrase 5.2",
+      "query": "Explain the step-by-step clearing rules sequence.",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-21",
+      "actual_card": "M2C-21",
+      "card_match": true,
+      "card_provenance": "Clearing Type -> Clearing process sequence",
+      "citation_markers_in_text": [
+        "1",
+        "3"
+      ],
+      "returned_source_markers": [
+        "S1",
+        "S3"
+      ],
+      "sources_count": 2,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "C6",
+      "category": "Core 6: Out of Scope",
+      "query": "What is the capital of India?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "status_match": true,
+      "expected_card": null,
+      "actual_card": null,
+      "card_match": true,
+      "card_provenance": "Out of domain (General knowledge abstention)",
+      "citation_markers_in_text": [],
+      "returned_source_markers": [],
+      "sources_count": 0,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P6.1",
+      "category": "Paraphrase 6.1",
+      "query": "Who won the FIFA world cup in 2022?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "status_match": true,
+      "expected_card": null,
+      "actual_card": null,
+      "card_match": true,
+      "card_provenance": "Out of domain (General knowledge abstention)",
+      "citation_markers_in_text": [],
+      "returned_source_markers": [],
+      "sources_count": 0,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "P6.2",
+      "category": "Paraphrase 6.2",
+      "query": "Tell me a recipe for chocolate cake.",
+      "suite_type": "operational_phase_d",
+      "expected_status": "out_of_scope",
+      "actual_status": "out_of_scope",
+      "status_match": true,
+      "expected_card": null,
+      "actual_card": null,
+      "card_match": true,
+      "card_provenance": "Out of domain (General knowledge abstention)",
+      "citation_markers_in_text": [],
+      "returned_source_markers": [],
+      "sources_count": 0,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "H1",
+      "category": "Hold-out: Budget Billing Plans",
+      "query": "How do I create a budget billing plan?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-13",
+      "actual_card": "M2C-13",
+      "card_match": true,
+      "card_provenance": "Holdout: Budget Billing Plans",
+      "citation_markers_in_text": [
+        "1",
+        "1",
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "H2",
+      "category": "Hold-out: Periodic Billing & Invoicing",
+      "query": "How do I analyse periodic billing and invoicing?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-16",
+      "actual_card": "M2C-16",
+      "card_match": true,
+      "card_provenance": "Holdout: Periodic Billing & Invoicing Analysis",
+      "citation_markers_in_text": [
+        "1",
+        "1",
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "FT1.1",
+      "category": "Multi-turn 1: Clearing Steps (Turn 1)",
+      "query": "What are the steps in the clearing process?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-21",
+      "actual_card": "M2C-21",
+      "card_match": true,
+      "card_provenance": "Multi-turn: Clearing Steps (Turn 1)",
+      "citation_markers_in_text": [
+        "1",
+        "3"
+      ],
+      "returned_source_markers": [
+        "S1",
+        "S3"
+      ],
+      "sources_count": 2,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "FT1.2",
+      "category": "Multi-turn 1: Explain 2nd Step (Turn 2)",
+      "query": "Can you explain the second step in more detail?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-21",
+      "actual_card": "M2C-21",
+      "card_match": true,
+      "card_provenance": "Multi-turn: Explain 2nd Step (Turn 2)",
+      "citation_markers_in_text": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3"
+      ],
+      "returned_source_markers": [
+        "S2",
+        "S3"
+      ],
+      "sources_count": 2,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "FT2.1",
+      "category": "Multi-turn 2: Contract Account (Turn 1)",
+      "query": "What is a contract account in SAP Utilities?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "status_match": true,
+      "expected_card": "M2C-02",
+      "actual_card": "M2C-02",
+      "card_match": true,
+      "card_provenance": "Multi-turn: Contract Account (Turn 1)",
+      "citation_markers_in_text": [
+        "1",
+        "1"
+      ],
+      "returned_source_markers": [
+        "S1"
+      ],
+      "sources_count": 1,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    },
+    {
+      "case_id": "FT2.2",
+      "category": "Multi-turn 2: Follow-up without steps (Turn 2)",
+      "query": "Can you explain the second step in more detail?",
+      "suite_type": "operational_phase_d",
+      "expected_status": "no_additional_verified_evidence",
+      "actual_status": "no_additional_verified_evidence",
+      "status_match": true,
+      "expected_card": "M2C-02",
+      "actual_card": "M2C-02",
+      "card_match": true,
+      "card_provenance": "Multi-turn: Follow-up without additional evidence (Turn 2)",
+      "citation_markers_in_text": [],
+      "returned_source_markers": [],
+      "sources_count": 0,
+      "citation_validation_ok": true,
+      "citation_issues": [],
+      "verdict": "PASS",
+      "notes": "Verified against isolated workspace operational Phase D test execution."
+    }
+  ]
+}
