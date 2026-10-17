@@ -10,6 +10,7 @@ from tests.phase8_support import ROOT, SCRIPTS, regex_count
 
 import m2c_citations as MC  # noqa: E402
 import m2c_page_identity as pid  # noqa: E402
+import page_corpus as PC  # noqa: E402
 import page_citations as PCIT  # noqa: E402
 import rag_context as RC  # noqa: E402
 import rag_generate as RG  # noqa: E402
@@ -18,11 +19,11 @@ import rag_text as T  # noqa: E402
 G, P = "g" * 32, "p" * 32
 
 
-def hit(i, text, rank=None, path=("Page", "Use"), guide=G, page=P, ch=None, h=None, url="https://help.sap.com/docs/P/x/y.html"):
+def hit(i, text, rank=None, path=("Page", "Use"), guide=G, page=P, ch=None, h=None, url="https://help.sap.com/docs/P/x/y.html", metadata=None):
     import hashlib
     return SimpleNamespace(rank=rank or i + 1, chunk_id=f"{guide}/{page}/{i:03d}", guide_id=guide, page_id=page, source_url=url, title="Page",
                            heading_path=tuple(path), section_title=path[-1], chunk_index=i, chunk_count=9, content_hash=h or hashlib.sha256(text.encode()).hexdigest(),
-                           text=text, distance=0.3, similarity=0.7)
+                           text=text, distance=0.3, similarity=0.7, metadata=metadata or {})
 
 
 class ContextTests(unittest.TestCase):
@@ -100,6 +101,16 @@ class GroundingTests(unittest.TestCase):
         r = RG.verify_grounding("You create an installment plan when open items exist.", self.ctx)
         self.assertIn("NO_CITATION", {v["kind"] for v in r.violations})
 
+    def test_citation_never_inherits_to_a_later_claim(self):
+        answer = "You create an installment plan when open items exist. [S1]\nUse transaction FPR1 to start it."
+        report = RG.verify_grounding(answer, self.ctx)
+        self.assertFalse(report.ok)
+        self.assertIn("NO_CITATION", {violation["kind"] for violation in report.violations})
+        import rag_evidence as EV
+        support = EV.verify_support_chain(answer, self.ctx)
+        self.assertFalse(support["ok"])
+        self.assertIn("NO_EXPLICIT_CITATION", support["sentences"][-1]["errors"])
+
     def test_invented_url_fails_but_url_in_context_is_allowed(self):
         r = RG.verify_grounding("You create an installment plan when open items exist. [S1] See https://help.sap.com/docs/x/y.html.", self.ctx)
         self.assertIn("URL_NOT_IN_CONTEXT", {v["kind"] for v in r.violations})
@@ -132,6 +143,46 @@ class GroundingTests(unittest.TestCase):
     def test_empty_or_marker_only_answer_fails(self):
         self.assertTrue(RG.verify_grounding("", self.ctx).refusal)
         self.assertFalse(RG.verify_grounding("[S1]", self.ctx).ok)
+
+    def test_malformed_marker_only_line_fails_all_upstream_evidence_gates(self):
+        answer = "[S0]\nYou create an installment plan when open items exist. [S1]"
+        grounding = RG.verify_grounding(answer, self.ctx)
+        self.assertFalse(grounding.ok)
+        self.assertIn("MALFORMED_MARKER", {row["kind"] for row in grounding.violations})
+
+        import rag_evidence as EV
+        support = EV.verify_support_chain(answer, self.ctx)
+        self.assertFalse(support["ok"])
+        self.assertTrue(any("MALFORMED_MARKER" in row["errors"] for row in support["sentences"]))
+        self.assertTrue(any("NO_CLAIM_BODY" in row["errors"] for row in support["sentences"]))
+
+        from rag_claim_review import review_answer_claims
+        provenance = {"ok": True, "items": [
+            {"marker": item.marker, "source_object_valid": True} for item in self.ctx.items
+        ]}
+        review = review_answer_claims(answer, self.ctx, grounding.to_dict(), provenance)
+        self.assertNotEqual(review["status"], "LEXICALLY_SCREENED")
+        self.assertTrue(any(row["kind"] == "MALFORMED_MARKER" for row in review["errors"]))
+
+    def test_standalone_valid_marker_line_fails_grounding_claim_review_and_support_chain(self):
+        answer = "[S1]\nYou create an installment plan when open items exist. [S1]"
+        grounding = RG.verify_grounding(answer, self.ctx)
+        self.assertFalse(grounding.ok)
+        self.assertIn("NO_CLAIM_BODY", {row["kind"] for row in grounding.violations})
+
+        import rag_evidence as EV
+        support = EV.verify_support_chain(answer, self.ctx)
+        self.assertFalse(support["ok"])
+        self.assertTrue(any("NO_CLAIM_BODY" in row["errors"] for row in support["sentences"]))
+
+        from rag_claim_review import review_answer_claims
+        provenance = {"ok": True, "items": [
+            {"marker": item.marker, "source_object_valid": True} for item in self.ctx.items
+        ]}
+        review = review_answer_claims(answer, self.ctx, grounding.to_dict(), provenance)
+        self.assertNotEqual(review["status"], "LEXICALLY_SCREENED")
+        self.assertEqual(review["claim_count"], 1)
+        self.assertTrue(any(row["kind"] == "NO_CLAIM_BODY" for row in review["errors"]))
 
     def test_one_bad_sentence_fails_the_whole_answer(self):
         r = RG.verify_grounding("You create an installment plan when open items exist. [S1]\nUse transaction ZQ99 now. [S1]", self.ctx)
@@ -199,14 +250,18 @@ class CitationTests(unittest.TestCase):
         cls.ctx_id = pid.IdentityContext.from_root(ROOT)
         cls.cards = {c["source_id"]: c for c in pid.load_cards(ROOT)}
 
-    def _build(self, sid, texts, answer):
+    def _build(self, sid, texts, answer, source_url_override=None):
         card = self.cards[sid]
         ident = pid.resolve_identity(card, self.ctx_id)
+        record = next(row for row in PC.load_records() if sid in row.get("source_ids", []))
         g, p = ident.effective_guide_id or G, ident.effective_page_id or P
-        hits = [hit(i, t, guide=g, page=p, url=card["source_url"]) for i, t in enumerate(texts)]
+        metadata = {"doc_id": record["doc_id"], "source_ids": [sid], "page_text_sha256": record["text_sha256"]}
+        source_url = source_url_override or record["source_url"]
+        hits = [hit(i, t, guide=g, page=p, url=source_url, metadata=metadata) for i, t in enumerate(texts)]
         ctx = RC.build_context(hits, regex_count, max_chunks=9)
         rep = RG.verify_grounding(answer, ctx)
-        return PCIT.build_citations(card, ident, self.ctx_id, ctx, rep), ctx, rep
+        corpus_entry = {"corpus_status": "ingested", "doc_id": record["doc_id"], "text_sha256": record["text_sha256"]}
+        return PCIT.build_citations(card, ident, self.ctx_id, ctx, rep, corpus_entry), ctx, rep
 
     def test_only_cited_verified_chunks_are_answer_sources(self):
         cit, ctx, rep = self._build("M2C-24", ["You create an installment plan when open items exist.", "Unrelated second chunk about weather."], "You create an installment plan when open items exist. [S1]")
@@ -243,6 +298,17 @@ class CitationTests(unittest.TestCase):
             self.assertEqual(s["url"], self.cards["M2C-14"]["source_url"])
         self.assertTrue(cit["topic_pointer"]["review_flag"])
         self.assertTrue(any("needs_review" in n for n in cit["notes"]))
+
+    def test_unverified_page_url_is_audited_but_not_exposed_as_a_link(self):
+        record = next(row for row in PC.load_records() if "M2C-24" in row.get("source_ids", []))
+        wrong_url = record["source_url"].replace(record["guide_id"], "c" * 32)
+        cit, _, rep = self._build("M2C-24", ["You create an installment plan when open items exist."],
+                                  "You create an installment plan when open items exist. [S1]", wrong_url)
+        self.assertTrue(rep.ok)
+        source = cit["answer_sources"][0]
+        self.assertIsNone(source["url"])
+        self.assertEqual(source["provenance"]["recorded_url"], wrong_url)
+        self.assertEqual(source["url_flag"], "URL_GUIDE_RELATION_NOT_ESTABLISHED")
 
     def test_m2c05_correction_note_and_join(self):
         cit, _, _ = self._build("M2C-05", ["This component manages technical data, installations, meter readings, and the inspection of devices."],

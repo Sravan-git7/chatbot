@@ -8,6 +8,12 @@
 - `run_quality.py`: independent frozen 113-case reference-evidence evaluator of the production pipeline. Expected guide/page, cited context identity and evidence in the answer must agree; a plausible wrong-source answer cannot score as correct.
 - `results/`: machine-readable runs. `results/README.md` identifies authoritative and exploratory/invalid runs. Sealed historical results under `data/` and `eval/` are never overwritten.
 
+## Evaluation families are not interchangeable
+
+- **Operational Phase D** is the 24-scenario operational harness recorded in `release/corrected_audit_v2/case_results.json`. Its historical result is not a canonical frozen gold set and was **not re-executed** by the store-free tests in this patch. The new isolated operational regression module covers only the two targeted P2.1/P5.1 source-grounding cases; it is not a 24-case Phase D run.
+- **Frozen quality labels** are evaluated separately by `run_quality.py` against `data/evaluation/phase12_queries.json` (113 AI-authored reference-evidence cases). The runner validates its case-ID and expectation contract before service construction, and its metrics are lexical/provenance—not SAP semantic correctness.
+- **Historical frozen datasets** such as `eval/golden/golden_v1.jsonl` (157 cases) and `eval/phase3/dataset.json` (70 cases) keep their own versioned labels and protocols. Never merge their counts or treat an Operational Phase D result, a latency workload, or a case-ID reconciliation as semantic gold.
+
 ## Commands (repository root, chosen Python venv)
 
 ```bash

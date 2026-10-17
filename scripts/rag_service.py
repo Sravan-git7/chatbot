@@ -34,21 +34,21 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_elaborate as EL  # noqa: E402
 import rag_followup as FU  # noqa: E402
 import rag_response as RR  # noqa: E402  deterministic response composer
+from rag_status import (ANSWERED, API_STATUSES, DOCUMENTATION_UNAVAILABLE, NO_ADDITIONAL_VERIFIED_EVIDENCE,
+                        OUT_OF_SCOPE, UNABLE_TO_VERIFY)  # noqa: E402
 
 SCHEMA_VERSION = "11.1"
 MAX_MESSAGE_CHARS = 500
 CONVERSATION_ID_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
-ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE = "answered", "documentation_unavailable", "unable_to_verify", "out_of_scope"
+DOC_UNAVAILABLE = DOCUMENTATION_UNAVAILABLE
 # A scoped elaboration that cannot add any further verified evidence is its own deterministic state: the topic WAS
 # answered and grounded, the source page exists in the corpus, and only the unused verified evidence is exhausted.
 # It is deliberately NOT unable_to_verify (nothing failed to verify) and NOT documentation_unavailable (the page is
 # not missing), so the response never claims that a used page is absent from the knowledge base.
-NO_ADDITIONAL_VERIFIED_EVIDENCE = "no_additional_verified_evidence"
 ELABORATION_EXHAUSTED_MODE = "elaboration_exhausted"       # routing.mode for an exhausted scoped elaboration
 ELABORATION_CONTEXT_MISSING = "ELABORATION_CONTEXT_MISSING"
 ELABORATION_CONTEXT_MISSING_TEXT = "Please share the SAP Utilities topic or original question you'd like me to elaborate on."
-API_STATUSES = (ANSWERED, DOC_UNAVAILABLE, UNABLE_TO_VERIFY, OUT_OF_SCOPE, NO_ADDITIONAL_VERIFIED_EVIDENCE)
 # pipeline status (rag_pipeline.STATUSES) -> API status
 STATUS_MAP = {"answered": ANSWERED, "page_not_ingested": DOC_UNAVAILABLE, "unresolved_identity": UNABLE_TO_VERIFY, "insufficient_context": UNABLE_TO_VERIFY,
               "out_of_domain": OUT_OF_SCOPE, "no_relevant_page": OUT_OF_SCOPE}
@@ -234,8 +234,16 @@ def _exhausted_routing(routing: Any) -> Dict[str, Any]:
 
 
 def _source(s: Mapping[str, Any]) -> Dict[str, Any]:
-    return {"type": "page", "marker": s.get("marker"), "title": s.get("title"), "section": " > ".join(s.get("heading_path") or []) or None, "url": _safe_url(s.get("url")),
-            "source_id": (s.get("join") or {}).get("card_source_id"), "chunk_id": s.get("chunk_id")}
+    provenance = s.get("provenance") if isinstance(s.get("provenance"), Mapping) else {}
+    url_verified = provenance.get("url_verified") is True and s.get("url_flag") is None
+    return {"type": "page", "marker": s.get("marker"), "title": s.get("title"),
+            "section": " > ".join(s.get("heading_path") or []) or None,
+            "url": _safe_url(s.get("url")) if url_verified else None,
+            "url_status": provenance.get("url_status") or s.get("url_flag"),
+            "source_id": (s.get("join") or {}).get("card_source_id"), "chunk_id": s.get("chunk_id"),
+            "doc_id": s.get("doc_id"), "guide_id": s.get("guide_id"), "page_id": s.get("page_id"),
+            "source_ids": list(s.get("source_ids") or []), "content_hash": s.get("content_hash"),
+            "page_text_sha256": s.get("page_text_sha256")}
 
 
 def _grounding(dbg: Mapping[str, Any], status: str) -> Dict[str, Any]:
@@ -334,7 +342,15 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
         reference = {"type": "topic_reference", "title": topic["title"], "url": _safe_url(topic["card_url"]), "note": REFERENCE_NOTE}
     routed = status != OUT_OF_SCOPE and raw.get("reason_code") != "AMBIGUOUS_PAYMENT_PROCESS"
     grounding_view = _grounding(dbg, pstatus)
-    grounded_ok = status == ANSWERED and grounding_view["ok"] is True
+    claim_review = dbg.get("claim_review") if isinstance(dbg.get("claim_review"), Mapping) else {}
+    claim_grounding = {
+        "checked": bool(claim_review.get("checked")),
+        "status": claim_review.get("status") or "NOT_CHECKED",
+        "claim_count": len(claim_review.get("claims") or []),
+        "references_valid": bool(claim_review.get("references_valid")),
+        "semantic_entailment": "NOT_ASSESSED",
+    }
+    grounded_ok = status == ANSWERED and grounding_view["ok"] is True and claim_grounding["status"] == "LEXICALLY_SCREENED"
     if raw.get("reason_code") == ELABORATION_CONTEXT_MISSING:
         page_available = None  # no topic was resolved, so do not imply a page is missing
     elif pstatus == "page_not_ingested":
@@ -343,7 +359,8 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
         page_available = (topic.get("corpus_status") == "ingested") if routed else None
     meta = {"card_id": topic.get("source_id") if routed else None, "card_title": topic.get("title") if routed else None,
             "identity_status": topic.get("identity_status") if routed else None, "page_available": page_available, "generator": generator, "grounded": grounded_ok,
-            "can_elaborate": grounded_ok, "grounding": grounding_view, "pipeline_status": pstatus, "reason_code": raw.get("reason_code"), "latency_ms": round(latency_ms, 1)}
+            "can_elaborate": grounded_ok, "grounding": grounding_view, "claim_grounding": claim_grounding,
+            "pipeline_status": pstatus, "reason_code": raw.get("reason_code"), "latency_ms": round(latency_ms, 1)}
     if raw.get("reason_code") == "AMBIGUOUS_PAYMENT_PROCESS":
         meta["clarification_required"] = True
     if (status == ANSWERED and topic.get("source_id") and topic.get("effective_guide_id") and topic.get("effective_page_id")):

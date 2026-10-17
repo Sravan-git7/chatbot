@@ -36,6 +36,7 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_text as T  # noqa: E402
+from citation_markers import has_claim_body, parse_citation_line, valid_marker  # noqa: E402
 from rag_generate import (  # noqa: E402
     EXTRACTIVE_MAX_SENTENCES, NO_ANSWER_TEXT, GenerationResult,
     PROCEDURAL_LIMITATION_NOTICE,
@@ -1343,7 +1344,9 @@ class EvidenceExtractiveGenerator:
                         s_clean = re.sub(r"^\s*[-*•]\s*", "", s).strip().lower()
                         if s_clean:
                             covered_list_items.add(s_clean)
-                        lines.append(s)
+                        item_body = re.sub(r"\s*\[S\d+\]", "", s).strip()
+                        if item_body:
+                            lines.append(f"{item_body} [{u.marker}]")
             if u.follow:
                 follow_body = re.sub(r"\s*\[S\d+\]", "", u.follow).strip()
                 list_bodies = [re.sub(r"\s*\[S\d+\]", "", item).strip() for item in (getattr(u, "list_items", None) or ())]
@@ -1586,26 +1589,78 @@ class EvidenceRetriever:
 
 # ------------------------------------------------------------------------------------------------------------ support chain
 def verify_support_chain(answer: str, context: Any) -> Dict[str, Any]:
-    """Independent traceability check: every answer sentence must be a verbatim span of the original text of the chunk its marker names."""
-    by = {i.marker: i for i in context.items}
-    records, ok = [], True
-    active_markers: List[str] = []
+    """Check each claim against the exact chunk named on that same line.
+
+    Citation inheritance is deliberately forbidden here: every substantive line must carry
+    its own explicit marker. The only unmarked exception is the exact, fact-free procedural
+    limitation notice used by the extractive generator.
+    """
+    items = list(getattr(context, "items", ()) or ())
+    counts: Dict[str, int] = {}
+    for item in items:
+        marker = str(getattr(item, "marker", "") or "")
+        counts[marker] = counts.get(marker, 0) + 1
+    by = {
+        str(item.marker): item for item in items
+        if valid_marker(getattr(item, "marker", None))
+        and counts.get(item.marker) == 1
+    }
+    records: List[Dict[str, Any]] = []
+    errors: List[Dict[str, str]] = []
+    ok = True
+    for marker, count in sorted(counts.items()):
+        if not valid_marker(marker):
+            ok = False
+            errors.append({"kind": "INVALID_CONTEXT_MARKER", "marker": marker})
+        if count > 1:
+            ok = False
+            errors.append({"kind": "DUPLICATE_CONTEXT_MARKER", "marker": marker})
+
     for line in T.split_cited_sentences(answer or ""):
-        markers = re.findall(r"\[(S\d+)\]", line)
-        if markers:
-            active_markers = markers
-        effective_markers = markers or active_markers
-        body = _norm(re.sub(r"\[S\d+\]", "", line))
-        if not body or (not markers and _is_exact_procedural_limitation_sentence(body)):
+        markers, malformed, raw_body = parse_citation_line(line, allow_compound=True)
+        body = _norm(raw_body)
+        if not has_claim_body(raw_body):
+            if markers or malformed or raw_body:
+                line_errors: List[str] = []
+                if malformed:
+                    line_errors.append("MALFORMED_MARKER")
+                if not markers:
+                    line_errors.append("NO_EXPLICIT_CITATION")
+                line_errors.append("NO_CLAIM_BODY")
+                records.append({"sentence": _norm(line)[:160], "markers": markers,
+                                "verbatim_in": [], "errors": line_errors})
+                ok = False
             continue
+        if not markers and not malformed and _is_exact_procedural_limitation_sentence(body):
+            continue
+
+        duplicate_refs = sorted({marker for marker in markers if markers.count(marker) > 1})
+        unknown = sorted({marker for marker in markers if marker not in counts})
         clean_body = re.sub(r"^[-*•]\s*", "", body).strip()
         hit = [
-            m for m in effective_markers
-            if m in by and (body in _norm(by[m].text) or (clean_body and clean_body in _norm(by[m].text)))
+            marker for marker in dict.fromkeys(markers)
+            if marker in by
+            and (body in _norm(getattr(by[marker], "text", ""))
+                 or (clean_body and clean_body in _norm(getattr(by[marker], "text", ""))))
         ]
-        records.append({"sentence": body[:160], "markers": effective_markers, "verbatim_in": hit})
-        ok = ok and bool(hit)
-    return {"ok": ok and bool(records), "verbatim_all": ok and bool(records), "sentences": records}
+        line_errors: List[str] = []
+        if malformed:
+            line_errors.append("MALFORMED_MARKER")
+        if duplicate_refs:
+            line_errors.append("DUPLICATE_MARKER")
+        if unknown:
+            line_errors.append("PHANTOM_MARKER")
+        if not markers:
+            line_errors.append("NO_EXPLICIT_CITATION")
+        if not hit:
+            line_errors.append("NO_VERBATIM_SOURCE_MATCH")
+        records.append({"sentence": body[:160], "markers": markers, "verbatim_in": hit,
+                        "errors": line_errors})
+        if line_errors:
+            ok = False
+
+    return {"ok": ok and bool(records), "verbatim_all": ok and bool(records),
+            "sentences": records, "errors": errors}
 
 
 def build_evidence_pipeline(base: Any, tau: float = TAU, widen: bool = True, generator: str = "extractive", llm_client: Any = None,

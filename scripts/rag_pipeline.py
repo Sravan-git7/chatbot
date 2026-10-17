@@ -467,6 +467,7 @@ class RagPipeline:
         out: Dict[str, Any] = {"schema_version": SCHEMA_VERSION, "query": query, "status": None, "answer": None, "reason_code": None, "message": None,
                                "topic": None, "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": PCIT.LABEL_NONE, "notes": []},
                                "routing": {"selected_source_id": None, "candidates": [], "mode": "oracle" if oracle_source_id else "router_rank1"}}
+        retrieval_query = query.strip() if query else ""
 
         # A uniquely focused registered topic with no local searchable content must win before the router can
         # select a semantic neighbor or the reranker can fetch page evidence from one. Exception: a follow-up that
@@ -636,7 +637,7 @@ class RagPipeline:
                 anchor_hits = list(rerank_hits_cache[anchor_cache_key][:elaboration_pool_size])
             else:
                 anchor_hits = self.retriever.retrieve_in_page(
-                    query,
+                    retrieval_query,
                     identity.effective_guide_id,
                     identity.effective_page_id,
                     top_k=elaboration_pool_size,
@@ -672,7 +673,7 @@ class RagPipeline:
                 hits = list(rerank_hits_cache[win_page_key_k][: self.cfg.k_chunks])
             else:
                 hits = self.retriever.retrieve_in_page(
-                    query,
+                    retrieval_query,
                     identity.effective_guide_id,
                     identity.effective_page_id,
                     top_k=self.cfg.k_chunks,
@@ -702,6 +703,13 @@ class RagPipeline:
             )
         timings["context_ms"] = (time.perf_counter() - t) * 1000
         dbg["context"] = context.to_dict(with_text=True)
+        provenance = PCIT.validate_context_provenance(context, identity, self.ctx, entry)
+        dbg["source_provenance"] = provenance
+        if not provenance["ok"]:
+            out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, None, entry)
+            return self._finish(out, INSUFFICIENT, "SOURCE_PROVENANCE_INVALID",
+                                "The retrieved page chunks could not be tied to one verified source object, so no answer is shown.",
+                                dbg, debug, timings, t0)
         ctx_text = "\n".join(f"{' '.join(i.heading_path)} {i.rendered_text}" for i in context.items)
         ccov = T.coverage(qterms, ctx_text)
         relaxed_gate = getattr(self.cfg, "relaxed_context_gate", False) or getattr(self.cfg, "phase16_context_experiment", False)
@@ -741,7 +749,6 @@ class RagPipeline:
             dbg["answer_withheld"] = gen.text
             return self._finish(out, INSUFFICIENT, "GROUNDING_VERIFICATION_FAILED", MESSAGES[INSUFFICIENT] + " (a generated answer was withheld because it failed the grounding check)",
                                 dbg, debug, timings, t0)
-
         # ---- 7b. Phase 18 (E2): deterministic in-page citation repair (flag OFF => no-op) --------------------
         # Only markers change, never content. The repaired text must pass the SAME verifier; otherwise the
         # original (already verified) answer is kept. Worst case is the status quo.
@@ -759,6 +766,20 @@ class RagPipeline:
                     repair_log["revert"] = "REPAIR_FAILED_VERIFICATION"
                     repaired_text = gen.text
             dbg["citation_repair"] = repair_log
+
+        # Review the final text/marker mapping after any configured citation repair.
+        # This is a lexical/provenance screen only; semantic entailment remains unassessed.
+        dbg["grounding"] = report.to_dict()
+        import rag_claim_review as CRV
+        t_cr = time.perf_counter()
+        dbg["claim_review"] = CRV.review_answer_claims(repaired_text, citation_context, report.to_dict(), provenance)
+        timings["claim_review_ms"] = (time.perf_counter() - t_cr) * 1000
+        if dbg["claim_review"].get("status") != "LEXICALLY_SCREENED":
+            out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry)
+            dbg["answer_withheld"] = repaired_text
+            return self._finish(out, INSUFFICIENT, "CLAIM_REVIEW_FAILED",
+                                MESSAGES[INSUFFICIENT] + " (a generated answer was withheld because its claim-to-source mapping failed)",
+                                dbg, debug, timings, t0)
 
         out["answer"] = repaired_text
         out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, report, entry)

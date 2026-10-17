@@ -12,8 +12,15 @@ export interface Source {
   title: string | null
   section: string | null
   url: string | null
+  url_status?: string | null
   source_id: string | null
   chunk_id: string | null
+  doc_id?: string | null
+  guide_id?: string | null
+  page_id?: string | null
+  source_ids?: string[]
+  content_hash?: string | null
+  page_text_sha256?: string | null
 }
 
 export interface TopicReference {
@@ -82,6 +89,14 @@ export interface ElaborationSection {
   line_orders?: number[]
 }
 
+export interface ClaimGrounding {
+  checked: boolean
+  status: string
+  claim_count: number
+  references_valid: boolean
+  semantic_entailment: 'NOT_ASSESSED'
+}
+
 export interface Metadata {
   card_id: string | null
   card_title: string | null
@@ -92,6 +107,7 @@ export interface Metadata {
   /** Backend-authoritative: false once the verified evidence of the active topic is exhausted. */
   can_elaborate?: boolean | null
   grounding: Grounding
+  claim_grounding?: ClaimGrounding | null
   pipeline_status: string
   reason_code: string | null
   latency_ms: number

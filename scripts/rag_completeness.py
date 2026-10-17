@@ -86,19 +86,31 @@ def classify_intent(query: str) -> Dict[str, Any]:
     }
 
 
+_RETRIEVAL_EQUIVALENCES = (
+    # Lexical aliases observed in the admitted SAP Utilities corpus. These expand retrieval terms only;
+    # they do not select a card, alter the prompt, or claim semantic equivalence beyond retrieval.
+    (re.compile(r"\btechnical\s+objects?\b", re.I), "technical master data objects"),
+    (re.compile(r"\bclearing\s+rules?\b", re.I), "clearing types"),
+    (re.compile(r"\bcontract\s+accounts?\s+receivable\s+and\s+payable\b", re.I), "FI-CA"),
+    (re.compile(r"\bFI\s*[-–]?\s*CA\b", re.I), "Contract Accounts Receivable and Payable"),
+)
+
+
 def normalize_domain_synonyms(query: str) -> str:
-    """Normalize domain synonyms for retrieval/routing token matching without altering user-visible text."""
+    """Append corpus-observed retrieval aliases while preserving the original query verbatim.
+
+    This is a lexical query expansion, not a one-off route or ranking bias. The user-visible
+    question remains unchanged and is still passed to the answer generator.
+    """
     q = (query or "").strip()
-    # 1. Technical objects in SAP Utilities -> Technical master data objects (handles singular/plural)
-    if re.search(r"\btechnical\s+objects?\b", q, re.I) and not re.search(r"\btechnical\s+master\s+data\b", q, re.I):
-        q = re.sub(r"\btechnical\s+objects?\b", "technical master data objects", q, flags=re.I)
-    # 2. Clearing rules -> Clearing rules clearing types (handles singular/plural, preserves casing)
-    if re.search(r"\bclearing\s+rules?\b", q, re.I) and not re.search(r"\bclearing\s+types?\b", q, re.I):
-        q = re.sub(r"\b(clearing\s+rules?)\b", r"\1 clearing types", q, flags=re.I)
-    # 3. Contract Accounts Receivable and Payable -> Contract Accounts Receivable and Payable FI-CA (preserves casing)
-    if re.search(r"\bContract\s+Accounts\s+Receivable\s+and\s+Payable\b", q, re.I) and not re.search(r"\bFI-CA\b", q, re.I):
-        q = re.sub(r"\b(Contract\s+Accounts\s+Receivable\s+and\s+Payable)\b", r"\1 FI-CA", q, flags=re.I)
-    return q
+    if not q:
+        return q
+    additions: List[str] = []
+    for pattern, expansion in _RETRIEVAL_EQUIVALENCES:
+        if pattern.search(q) and not re.search(rf"\b{re.escape(expansion)}\b", q, re.I):
+            if not any(re.search(rf"\b{re.escape(expansion)}\b", existing, re.I) for existing in additions):
+                additions.append(expansion)
+    return f"{q} {' '.join(additions)}" if additions else q
 
 def normalize_retrieval_query(query: str) -> str:
     """Normalize query strictly for retrieval/routing token matching.

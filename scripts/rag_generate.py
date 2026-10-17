@@ -32,6 +32,7 @@ from typing import Any, Dict, List, Mapping, Optional, Protocol, Sequence, Tuple
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_text as T  # noqa: E402
 from rag_context import ContextBlock  # noqa: E402
+from citation_markers import has_claim_body, parse_citation_line, valid_marker  # noqa: E402
 
 NO_ANSWER_TEXT = "I couldn't find this information in the provided SAP documentation."     # same sentence as the legacy prompt (rag_core)
 MIN_SENTENCE_SUPPORT = 0.6          # pre-declared (not tuned): share of a sentence's content terms found in its cited chunks
@@ -39,8 +40,6 @@ EXTRACTIVE_MIN_SCORE = 0.34         # pre-declared (not tuned): minimum share of
 EXTRACTIVE_MAX_SENTENCES = 3
 # A fixed request-local selection limitation, never a factual claim about an entire SAP page.
 PROCEDURAL_LIMITATION_NOTICE = "The selected evidence does not establish a complete step-by-step procedure."
-_MARKER = re.compile(r"\[S(\d+)\]")
-_COMPOUND_MARKER = re.compile(r"\[(S\d+(?:[\s,/\-–]+(?:and\s+)?S?\d+)*)\]")
 _URL = re.compile(r"https?://\S+|www\.\S+|help\.sap\.com\S*", re.I)
 _HEX_ID = re.compile(r"\b[0-9a-f]{32}\b", re.I)
 
@@ -285,9 +284,13 @@ class ExtractiveGenerator:
                 if not f_clean:
                     continue
                 f_body = re.sub(r"\s*\[S\d+\]", "", f_clean).strip()
-                if f_body not in seen_bodies:
+                if f_body in seen_bodies:
+                    idx = seen_bodies[f_body]
+                    if f"[{marker}]" not in lines[idx]:
+                        lines[idx] = f"{lines[idx]} [{marker}]"
+                else:
                     seen_bodies[f_body] = len(lines)
-                    lines.append(f_clean)
+                    lines.append(f"{f_body} [{marker}]")
         text = "\n".join(lines)
         return GenerationResult(text, False, self.name, text)
 
@@ -327,12 +330,28 @@ def verify_grounding(
     if not text or NO_ANSWER_TEXT.lower() in text.lower():
         return GroundingReport(ok=True, refusal=True)
     rep = GroundingReport(ok=True, refusal=False)
-    valid = {i.marker: i for i in context.items}
-    all_context = "\n".join(i.text for i in context.items)
+    context_items = list(context.items)
+    marker_counts: Dict[str, int] = {}
+    for item in context_items:
+        marker = str(getattr(item, "marker", "") or "")
+        marker_counts[marker] = marker_counts.get(marker, 0) + 1
+    valid = {
+        str(item.marker): item for item in context_items
+        if isinstance(getattr(item, "marker", None), str)
+        and valid_marker(item.marker)
+        and marker_counts.get(item.marker) == 1
+    }
+    all_context = "\n".join(str(getattr(item, "text", "") or "") for item in context_items)
 
     def violate(kind: str, detail: str, sentence: Optional[str] = None) -> None:
         rep.ok = False
         rep.violations.append({"kind": kind, "detail": detail, "sentence": sentence})
+
+    for marker, count in sorted(marker_counts.items()):
+        if not valid_marker(marker):
+            violate("INVALID_CONTEXT_MARKER", marker)
+        if count > 1:
+            violate("DUPLICATE_CONTEXT_MARKER", marker)
 
     for u in _URL.findall(text):
         if u.rstrip(".,;)") not in all_context:
@@ -343,75 +362,41 @@ def verify_grounding(
 
     raw_lines = T.split_cited_sentences(text)
     parsed_lines: List[Dict[str, Any]] = []
-    all_explicit_good_markers: List[str] = []
 
     for line in raw_lines:
-        if citation_normalization:
-            marker_names = []
-            for g in _COMPOUND_MARKER.findall(line):
-                for num in re.findall(r"\d+", g):
-                    mname = f"S{num}"
-                    if mname not in marker_names:
-                        marker_names.append(mname)
-            body = _COMPOUND_MARKER.sub("", line).strip()
-        else:
-            markers = _MARKER.findall(line)
-            marker_names = [f"S{m}" for m in markers]
-            body = _MARKER.sub("", line).strip()
+        marker_names, malformed, body = parse_citation_line(
+            line, allow_compound=citation_normalization)
 
-        if ((not T.terms(body) and not T.code_tokens(body))
-                or (not marker_names and is_procedural_limitation_sentence(body))):
-            continue                                              # marker-only / punctuation-only / limitation notice line
+        for marker_ref in malformed:
+            violate("MALFORMED_MARKER", marker_ref, line)
+        for marker in marker_names:
+            if not valid_marker(marker):
+                violate("MALFORMED_MARKER", f"[{marker}]", line)
+        duplicate_refs = sorted({marker for marker in marker_names if marker_names.count(marker) > 1})
+        for marker in duplicate_refs:
+            violate("DUPLICATE_MARKER", marker, line)
 
-        phantom = [m for m in marker_names if m not in valid]
-        for m in phantom:
-            rep.phantom_markers.append(m)
-            violate("PHANTOM_MARKER", m, line)
+        phantom = [marker for marker in marker_names if marker not in marker_counts]
+        for marker in phantom:
+            rep.phantom_markers.append(marker)
+            violate("PHANTOM_MARKER", marker, line)
 
-        good = [m for m in marker_names if m in valid]
-        for m in good:
-            if m not in all_explicit_good_markers:
-                all_explicit_good_markers.append(m)
+        good = [marker for marker in marker_names if marker in valid]
+        if not has_claim_body(body):
+            if marker_names or malformed:
+                violate("NO_CLAIM_BODY", "citation marker has no claim body", line)
+            continue                                              # punctuation-only line
+        if not marker_names and is_procedural_limitation_sentence(body):
+            continue                                              # the exact, fact-free procedural limitation notice only
 
-        parsed_lines.append({
-            "line": line,
-            "body": body,
-            "markers": marker_names,
-            "good": good,
-        })
+        parsed_lines.append({"line": line, "body": body, "markers": marker_names, "good": good})
 
     cited_ok: List[str] = []
-    for idx, p in enumerate(parsed_lines):
+    for p in parsed_lines:
         line = p["line"]
         body = p["body"]
         marker_names = p["markers"]
         good = list(p["good"])
-
-        # Citation inheritance for bullet lists or multi-sentence answers
-        if not good and citation_normalization and all_explicit_good_markers:
-            candidate_markers = []
-            for prev_p in reversed(parsed_lines[:idx]):
-                if prev_p["good"]:
-                    candidate_markers = prev_p["good"]
-                    break
-            if not candidate_markers:
-                for next_p in parsed_lines[idx + 1:]:
-                    if next_p["good"]:
-                        candidate_markers = next_p["good"]
-                        break
-            if not candidate_markers:
-                candidate_markers = all_explicit_good_markers
-
-            cand_text = "\n".join(valid[m].text for m in candidate_markers)
-            bt = set(T.terms(body))
-            cand_sup = (len(bt & T.term_set(cand_text)) / len(bt)) if bt else 1.0
-            cand_unsupported = sorted(t for t in T.code_tokens(body) if t not in cand_text and t not in all_context)
-            cand_in_other = sorted(t for t in T.code_tokens(body) if t not in cand_text and t in all_context)
-            cand_tokens_ok = (not cand_unsupported) and (not cand_in_other or in_page_grounding)
-
-            # Accept inheritance only if verified supported and no unsupported tokens
-            if cand_sup >= min_support and cand_tokens_ok:
-                good = candidate_markers
 
         entry: Dict[str, Any] = {"text": body, "markers": marker_names, "support": None, "unsupported_tokens": []}
         if not good:

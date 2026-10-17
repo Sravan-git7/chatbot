@@ -168,11 +168,17 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(markers)
         self.assertEqual(markers, {s["marker"] for s in r["sources"]})
 
-    def test_sources_are_page_chunks_never_cards(self):
+    def test_sources_are_page_chunks_with_explicit_identity_and_provenance_never_cards(self):
         r = self.svc.ask(Q_BILLING)
         for s in r["sources"]:
             self.assertEqual(s["type"], "page")
             self.assertTrue(s["chunk_id"] and s["url"].startswith("https://"))
+            self.assertRegex(s["doc_id"], r"^[0-9a-f]{32}/[0-9a-f]{32}$")
+            self.assertEqual(s["doc_id"], f"{s['guide_id']}/{s['page_id']}")
+            self.assertEqual(s["url_status"], "VERIFIED")
+            self.assertIn(s["source_id"], s["source_ids"])
+            self.assertRegex(s["content_hash"], r"^[0-9a-f]{64}$")
+            self.assertRegex(s["page_text_sha256"], r"^[0-9a-f]{64}$")
         self.assertIsNone(r["topic_reference"])
 
     def test_documentation_unavailable_has_no_sources_and_a_labelled_reference(self):

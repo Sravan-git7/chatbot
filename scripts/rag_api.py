@@ -223,8 +223,15 @@ class Source(BaseModel):
     title: Optional[str] = None
     section: Optional[str] = None
     url: Optional[str] = None
+    url_status: Optional[str] = None
     source_id: Optional[str] = None
     chunk_id: Optional[str] = None
+    doc_id: Optional[str] = None
+    guide_id: Optional[str] = None
+    page_id: Optional[str] = None
+    source_ids: List[str] = Field(default_factory=list)
+    content_hash: Optional[str] = None
+    page_text_sha256: Optional[str] = None
 
 
 class TopicReference(BaseModel):
@@ -276,6 +283,7 @@ class Metadata(BaseModel):
     # verified evidence of the active topic is exhausted (status no_additional_verified_evidence).
     can_elaborate: bool = True
     grounding: Grounding
+    claim_grounding: Optional[Dict[str, Any]] = None
     pipeline_status: str
     reason_code: Optional[str] = None
     latency_ms: float

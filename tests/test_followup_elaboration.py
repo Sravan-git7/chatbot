@@ -137,11 +137,13 @@ def _utilities_source_context(insurance_text=None, insurance_section=None):
                 heading_path[-1] = section
             if insurance_text is not None:
                 body = insurance_text
+        import hashlib
         items.append(SimpleNamespace(
-            marker=f"S{number}", chunk_id=f"contract-accounts-block-{block_index}", rank=number - 1,
+            marker=f"S{number}", chunk_id=f"{page['guide_id']}/{page['page_id']}/{block_index:03d}", rank=number - 1,
             chunk_index=block_index, title=card["card_title"], section_title=section, heading_path=heading_path,
             text=body, rendered_text=body, source_url=card["card_url"], guide_id=page["guide_id"],
-            page_id=page["page_id"], content_hash=f"contract-accounts-block-{block_index}",
+            page_id=page["page_id"], doc_id=page["doc_id"], source_ids=["M2C-17"],
+            content_hash=hashlib.sha256(body.encode("utf-8")).hexdigest(), page_text_sha256=page["text_sha256"],
         ))
     return _Ctx(items)
 
@@ -230,7 +232,8 @@ class Selection(unittest.TestCase):
                 "source_status": "verified", "source_url_status": "ok", "citation": "SAP Help"}
         citations = PCIT.build_citations(
             card, identity, identity_context, citation_context, report,
-            {"corpus_status": "ingested", "doc_id": f"{guide_id}/{page_id}", "reason": None},
+            {"corpus_status": "ingested", "doc_id": f"{guide_id}/{page_id}",
+             "text_sha256": context.items[0].page_text_sha256, "reason": None},
         )
         citation_json = json.dumps(citations, sort_keys=True)
         self.assertNotIn("S5", citation_json)

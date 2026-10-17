@@ -29,8 +29,8 @@ if HAVE_API:
 
 INTERNAL_ID = re.compile(r"\bM2C-\d+\b")
 RESPONSE_KEYS = {"schema_version", "conversation_id", "status", "answer", "sources", "topic_reference", "metadata", "structured_answer", "documentation_coverage"}
-META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "can_elaborate", "grounding", "pipeline_status", "reason_code", "latency_ms", "topic_identity", "documentation_coverage"}
-SOURCE_KEYS = {"type", "marker", "title", "section", "url", "source_id", "chunk_id"}
+META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "can_elaborate", "grounding", "claim_grounding", "pipeline_status", "reason_code", "latency_ms", "topic_identity", "documentation_coverage"}
+SOURCE_KEYS = {"type", "marker", "title", "section", "url", "url_status", "source_id", "chunk_id", "doc_id", "guide_id", "page_id", "source_ids", "content_hash", "page_text_sha256"}
 
 
 def client(generator=None, name="extractive", **kw):

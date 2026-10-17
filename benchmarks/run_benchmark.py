@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """SURA latency & performance benchmark harness.
 
-Measures the shipped system against the fixed, versioned workload in ``benchmarks/workload_v1.json``.
+Measures the shipped system against the fixed, versioned workload (CLI default: ``benchmarks/workload_v2.json``; v1 remains preserved).
 
 Two measurement modes (never mixed into one number):
 
@@ -13,9 +13,10 @@ Two measurement modes (never mixed into one number):
 * ``e2e``     - HTTP against a running API (``--url``) or one spawned by the harness (``--spawn PORT``). Reports
   wall-clock request latency, throughput, cold-start samples, and a concurrency sweep (default 1/5/10/20 workers).
 
-Every measured response is checked against the workload's ``expected_status``; mismatches are recorded in the
-results (``correctness``) and, with ``--strict``, fail the run. Abstention statuses (out_of_scope,
-unable_to_verify, documentation_unavailable) are legitimate outcomes and are counted separately from errors.
+Every measured response is checked against the workload's explicit status, routed-card, citation-marker, source-identity,
+provenance, and claim-review contract. These mechanical checks are NOT SAP semantic certification; semantic correctness
+remains unassessed. Mismatches are recorded in ``correctness`` and, with ``--strict``, fail the run. Safe abstentions
+are checked against fixed non-substantive responses, not counted as substantive correctness.
 
 Honesty rules baked in:
 * No fabricated numbers: everything is measured with ``time.perf_counter`` around the real code path.
@@ -40,6 +41,7 @@ import hashlib
 import json
 import os
 import platform
+import re
 import statistics
 import subprocess
 import sys
@@ -47,13 +49,17 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Mapping, Optional, Sequence
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 BENCH_DIR = ROOT / "benchmarks"
 RESULTS_DIR = BENCH_DIR / "results"
 RUNTIME_ROOT = ROOT
 sys.path.insert(0, str(ROOT / "scripts"))
+from rag_status import API_STATUSES, WORKLOAD_STATUS_VOCABULARY  # noqa: E402
+from citation_markers import is_marker_only_line, parse_citation_line, valid_marker  # noqa: E402
+from claim_review_contract import validate_claim_review_metadata  # noqa: E402
 
 GENERATION_TIMEOUT_S = 90.0
 ADMISSION_CAP = None
@@ -176,10 +182,233 @@ def summarize(samples: Sequence[float]) -> Dict[str, Any]:
 
 # -------------------------------------------------------------------------------------------- workload
 
+def _strict_json_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate workload JSON key: {key}")
+        result[key] = value
+    return result
+
+
 def load_workload(path=None) -> (Dict[str, Any], str):
     path = Path(path) if path else BENCH_DIR / "workload_v1.json"
     raw = path.read_bytes()
-    return json.loads(raw.decode("utf-8")), hashlib.sha256(raw).hexdigest()
+    return json.loads(raw.decode("utf-8"), object_pairs_hook=_strict_json_object), hashlib.sha256(raw).hexdigest()
+
+
+_WORKLOAD_CATEGORIES = frozenset({
+    "simple_supported", "complex_supported", "followup", "doc_length_variation",
+    "insufficient_evidence", "out_of_scope", "unresolved_identity",
+})
+
+
+def validate_workload(workload: Any) -> Dict[str, Any]:
+    """Validate a versioned workload against fixed API/status and case contracts before service construction."""
+    errors: List[str] = []
+    if not isinstance(workload, Mapping):
+        return {"ok": False, "errors": ["workload must be an object"], "expected_ids": []}
+    items = workload.get("items")
+    if not isinstance(items, list) or not items:
+        return {"ok": False, "errors": ["workload must contain a non-empty items list"], "expected_ids": []}
+    workload_version = workload.get("workload_version")
+    if not isinstance(workload_version, str) or workload_version not in {"v1", "v2"}:
+        errors.append("workload_version must be a supported version (v1 or v2)")
+
+    raw_statuses = workload.get("status_vocabulary")
+    if (not isinstance(raw_statuses, list) or not raw_statuses
+            or not all(isinstance(status, str) and status.strip() for status in raw_statuses)
+            or len(raw_statuses) != len(set(raw_statuses))):
+        errors.append("status_vocabulary must be a non-empty list of unique status strings")
+    elif set(raw_statuses) != WORKLOAD_STATUS_VOCABULARY:
+        errors.append("status_vocabulary differs from the authoritative workload vocabulary")
+
+    ids: List[str] = []
+    has_single_turn_case = False
+    authoritative_statuses = set(API_STATUSES)
+    for index, item in enumerate(items):
+        if not isinstance(item, Mapping):
+            errors.append(f"items[{index}] must be an object")
+            continue
+        item_id = item.get("id")
+        if not isinstance(item_id, str) or not item_id.strip() or item_id != item_id.strip():
+            errors.append(f"items[{index}] has no canonical non-empty id")
+        else:
+            ids.append(item_id)
+        category = item.get("category")
+        if not isinstance(category, str) or category not in _WORKLOAD_CATEGORIES:
+            errors.append(f"item {item_id!r} has missing or unknown category {category!r}")
+        expected = item.get("expected_status")
+        if not isinstance(expected, str) or expected not in authoritative_statuses:
+            errors.append(f"item {item_id!r} has missing or unknown API expected_status {expected!r}")
+        turns = item.get("turns")
+        if not isinstance(turns, list) or not turns or any(
+                not isinstance(turn, Mapping) or not isinstance(turn.get("message"), str) or not turn["message"].strip()
+                for turn in turns):
+            errors.append(f"item {item_id!r} has invalid turns")
+            continue
+        has_single_turn_case = has_single_turn_case or len(turns) == 1
+        measured_turn = item.get("measured_turn", len(turns))
+        if type(measured_turn) is not int or not 1 <= measured_turn <= len(turns):
+            errors.append(f"item {item_id!r} has invalid measured_turn")
+        if "expected_card_id" in item and item["expected_card_id"] is not None:
+            card_id = item["expected_card_id"]
+            if not isinstance(card_id, str) or not re.fullmatch(r"M2C-\d{2}", card_id):
+                errors.append(f"item {item_id!r} has invalid expected_card_id")
+    duplicates = sorted({item_id for item_id in ids if ids.count(item_id) > 1})
+    if duplicates:
+        errors.append("duplicate item ids: " + ", ".join(duplicates))
+    if len(ids) != len(items):
+        errors.append("every workload item must have a unique non-empty case ID")
+    if not has_single_turn_case:
+        errors.append("workload must contain at least one single-turn case for the concurrency sweep")
+    return {"ok": not errors, "errors": errors, "expected_ids": ids, "duplicate_expected_ids": duplicates}
+
+
+def validate_observation_ids(items: Sequence[Dict[str, Any]], observations: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
+    """Reconcile exact workload IDs and one summary observation per case; malformed inputs fail closed."""
+    items_valid = isinstance(items, Sequence) and not isinstance(items, (str, bytes))
+    observations_valid = isinstance(observations, Sequence) and not isinstance(observations, (str, bytes))
+    item_rows = list(items) if items_valid else []
+    observation_rows = list(observations) if observations_valid else []
+    expected = [item.get("id") if isinstance(item, Mapping) and isinstance(item.get("id"), str) else ""
+                for item in item_rows]
+    observed = [row.get("id") if isinstance(row, Mapping) and isinstance(row.get("id"), str) else ""
+                for row in observation_rows]
+    expected_set, observed_set = set(expected), set(observed)
+    duplicates_expected = sorted({key for key in expected if expected.count(key) > 1})
+    duplicates_observed = sorted({key for key in observed if observed.count(key) > 1})
+    missing = sorted(expected_set - observed_set)
+    unexpected = sorted(observed_set - expected_set)
+    empty_expected = [index for index, key in enumerate(expected) if not key]
+    empty = [index for index, key in enumerate(observed) if not key]
+    malformed_input = not items_valid or not observations_valid
+    return {"ok": not (malformed_input or duplicates_expected or duplicates_observed or missing or unexpected
+                        or empty_expected or empty),
+            "expected_count": len(expected), "observed_count": len(observed), "missing_ids": missing,
+            "duplicate_expected_ids": duplicates_expected, "duplicate_observed_ids": duplicates_observed,
+            "unexpected_ids": unexpected, "empty_expected_id_rows": empty_expected, "empty_id_rows": empty,
+            "malformed_input": malformed_input}
+
+
+_SAFE_NONANSWER_TEXTS = {
+    "I found the relevant topic, but the underlying SAP Help page is not currently available in the local knowledge base.",
+    "I couldn't find enough verified information in the available SAP Utilities documentation to answer that specific detail.",
+    "This question doesn't appear to match the SAP Utilities documentation available to me.",
+    "I couldn't verify the relevant documentation.",
+    "That's all the additional detail I could verify from the available documentation.",
+}
+_HASH64 = re.compile(r"^[0-9a-f]{64}$", re.I)
+_ID32 = re.compile(r"^[0-9a-f]{32}$", re.I)
+_PROCEDURE_LIMITATION = "The selected evidence does not establish a complete step-by-step procedure."
+
+
+def evaluate_response_contract(item: Dict[str, Any], body: Any, http_status: int = 200) -> Dict[str, Any]:
+    """Mechanical response contract, not a semantic correctness judgment."""
+    failures: List[str] = []
+    if not isinstance(body, dict):
+        return {"ok": False, "failures": ["RESPONSE_BODY_NOT_OBJECT"], "semantic_correctness": None}
+    metadata = body.get("metadata") if isinstance(body.get("metadata"), dict) else {}
+    status = body.get("status")
+    expected_status = item.get("expected_status")
+    answer = body.get("answer") if isinstance(body.get("answer"), str) else ""
+    sources = body.get("sources") if isinstance(body.get("sources"), list) else None
+    if http_status != 200:
+        failures.append("HTTP_STATUS_NOT_200")
+    if status != expected_status:
+        failures.append("STATUS_MISMATCH")
+    if "expected_card_id" in item and metadata.get("card_id") != item.get("expected_card_id"):
+        failures.append("ROUTED_CARD_MISMATCH")
+    if sources is None:
+        failures.append("SOURCES_NOT_LIST")
+        sources = []
+    if expected_status == "answered":
+        if metadata.get("grounded") is not True:
+            failures.append("NOT_GROUNDED")
+        claim_review = metadata.get("claim_grounding")
+        claim_review_ok, _claim_review_errors = validate_claim_review_metadata(
+            claim_review, answer)
+        if not claim_review_ok:
+            failures.append("CLAIM_REVIEW_CONTRACT_INVALID")
+        marker_refs: List[str] = []
+        malformed: List[str] = []
+        duplicates: List[str] = []
+        for line in answer.splitlines():
+            line_markers, line_malformed, body_text = parse_citation_line(line, allow_compound=False)
+            marker_refs.extend(line_markers)
+            malformed.extend(line_malformed)
+            duplicates.extend(sorted({marker for marker in line_markers if line_markers.count(marker) > 1}))
+            if is_marker_only_line(line, allow_compound=False):
+                failures.append("MARKER_ONLY_CITATION_LINE")
+            elif body_text and body_text.casefold() != _PROCEDURE_LIMITATION.casefold() and not line_markers:
+                failures.append("UNCITED_ANSWER_LINE")
+        if not marker_refs:
+            failures.append("NO_CITATION_MARKERS")
+        if malformed:
+            failures.append("MALFORMED_CITATION_MARKER")
+        if duplicates:
+            failures.append("DUPLICATE_CITATION_MARKER")
+        by_marker: Dict[str, List[Dict[str, Any]]] = {}
+        for source in sources:
+            if not isinstance(source, dict):
+                failures.append("SOURCE_OBJECT_NOT_OBJECT")
+                continue
+            marker = source.get("marker")
+            if not valid_marker(marker):
+                failures.append("SOURCE_MARKER_INVALID")
+                continue
+            by_marker.setdefault(marker, []).append(source)
+            guide_id, page_id = source.get("guide_id"), source.get("page_id")
+            doc_id, chunk_id = source.get("doc_id"), source.get("chunk_id")
+            source_id, source_ids = source.get("source_id"), source.get("source_ids")
+            if source.get("type") != "page":
+                failures.append("SOURCE_TYPE_INVALID")
+            if not isinstance(guide_id, str) or not _ID32.fullmatch(guide_id) or not isinstance(page_id, str) or not _ID32.fullmatch(page_id):
+                failures.append("SOURCE_PAGE_ID_INVALID")
+            expected_doc_id = f"{guide_id}/{page_id}"
+            if doc_id != expected_doc_id or not isinstance(chunk_id, str) or not re.fullmatch(re.escape(expected_doc_id) + r"/\d{3}", chunk_id):
+                failures.append("SOURCE_CHUNK_IDENTITY_INVALID")
+            expected_card = item.get("expected_card_id")
+            if (not isinstance(source_id, str) or not source_id or not isinstance(source_ids, list)
+                    or not all(isinstance(value, str) for value in source_ids)
+                    or source_id not in source_ids or len(source_ids) != len(set(source_ids))
+                    or (expected_card is not None and source_id != expected_card)):
+                failures.append("SOURCE_CARD_PROVENANCE_INVALID")
+            if not isinstance(source.get("content_hash"), str) or not _HASH64.fullmatch(source.get("content_hash", "")):
+                failures.append("SOURCE_CONTENT_HASH_INVALID")
+            if not isinstance(source.get("page_text_sha256"), str) or not _HASH64.fullmatch(source.get("page_text_sha256", "")):
+                failures.append("SOURCE_PAGE_HASH_INVALID")
+            source_url = source.get("url")
+            if source_url is not None and (not isinstance(source_url, str)
+                                           or not source_url.startswith(("https://", "http://"))
+                                           or source.get("url_status") != "VERIFIED"):
+                failures.append("UNVERIFIED_SOURCE_URL_EXPOSED")
+        duplicate_sources = sorted(marker for marker, rows in by_marker.items() if len(rows) != 1)
+        if duplicate_sources:
+            failures.append("SOURCE_MARKER_NOT_UNIQUE")
+        if set(marker_refs) != set(by_marker):
+            failures.append("ANSWER_SOURCE_MARKER_SET_MISMATCH")
+        for line in answer.splitlines():
+            line_markers, _line_malformed, clean = parse_citation_line(line, allow_compound=False)
+            if clean and clean.casefold() != _PROCEDURE_LIMITATION.casefold() and not line_markers:
+                failures.append("UNCITED_ANSWER_LINE")
+                break
+    else:
+        if status == "answered":
+            failures.append("UNEXPECTED_ANSWERED_STATUS")
+        if metadata.get("grounded") is not False:
+            failures.append("NONANSWER_MARKED_GROUNDED")
+        if sources:
+            failures.append("NONANSWER_HAS_SOURCES")
+        if answer not in _SAFE_NONANSWER_TEXTS:
+            failures.append("NONANSWER_TEXT_NOT_IN_FIXED_SAFE_SET")
+        nonanswer_markers, nonanswer_malformed, _nonanswer_body = parse_citation_line(
+            answer, allow_compound=True)
+        if nonanswer_markers or nonanswer_malformed:
+            failures.append("NONANSWER_HAS_CITATION_MARKER")
+    return {"ok": not failures, "failures": sorted(set(failures)), "observed_status": status,
+            "http_status": http_status, "source_count": len(sources), "semantic_correctness": None,
+            "note": "Mechanical identity/citation/status checks only; no SAP semantic adjudication."}
 
 
 # -------------------------------------------------------------------------------------------- stages mode
@@ -227,25 +456,35 @@ def run_stages(generator: str, workload: Dict[str, Any], repeat: int, warmup: in
         pipe_totals: List[float] = []
         by_stage: Dict[str, List[float]] = {k: [] for k in stage_names}
         statuses: Dict[str, int] = {}
+        contract_passes = 0
+        contract_failure_counts: Dict[str, int] = {}
         conv = 0
         for _ in range(repeat):
             conv += 1
             cid = f"bench-{item['id']}-{conv}"
             measured_turn = item.get("measured_turn", len(item["turns"]))
             result = None
+            measured_result = None
             for ti, turn in enumerate(item["turns"], start=1):
                 t_wall = time.perf_counter()
                 result = svc.ask(turn["message"], conversation_id=cid, debug=True)
                 if ti == measured_turn:
+                    measured_result = result
                     wall = (time.perf_counter() - t_wall) * 1000
                     walls.append(wall)
                     all_walls.append(wall)
+            result = measured_result if measured_result is not None else result
+            contract = evaluate_response_contract(item, result, 200)
+            if contract["ok"]:
+                contract_passes += 1
+            for failure in contract["failures"]:
+                contract_failure_counts[failure] = contract_failure_counts.get(failure, 0) + 1
             st = result.get("status") if result else None
             statuses[st] = statuses.get(st, 0) + 1
             all_statuses[st] = all_statuses.get(st, 0) + 1
-            if st != item["expected_status"] or ("expected_card_id" in item and
-               (result.get("metadata") or {}).get("card_id") != item["expected_card_id"]):
-                mismatches.append({"item": item["id"], "expected": item["expected_status"], "observed": st})
+            if not contract["ok"] or st != item["expected_status"]:
+                mismatches.append({"item": item["id"], "expected": item["expected_status"], "observed": st,
+                                   "contract_failures": contract["failures"]})
             tm = ((result or {}).get("debug") or {}).get("timings_ms") or {}
             for k in stage_names:
                 if isinstance(tm.get(k), (int, float)):
@@ -256,6 +495,9 @@ def run_stages(generator: str, workload: Dict[str, Any], repeat: int, warmup: in
         per_item.append({
             "id": item["id"], "category": item["category"], "expected_status": item["expected_status"],
             "observed_statuses": statuses,
+            "response_contract": {"checked": repeat, "passed": contract_passes,
+                                  "failure_counts": contract_failure_counts,
+                                  "semantic_correctness": None},
             "wall": summarize(walls),
             "pipeline_total": summarize(pipe_totals),
             "stages": {k: summarize(v) for k, v in by_stage.items() if v},
@@ -264,15 +506,18 @@ def run_stages(generator: str, workload: Dict[str, Any], repeat: int, warmup: in
             "page_char_count": len(svc.pipeline.corpus.page_text((result.get("metadata") or {}).get("card_id")) or "") if (result.get("metadata") or {}).get("card_id") else 0,
         })
 
+    case_id_validation = validate_observation_ids(workload["items"], per_item)
     return {
-        "status": "OK",
+        "status": "OK" if case_id_validation["ok"] else "INVALID",
+        "case_id_validation": case_id_validation,
         "service_build_s": round(build_s, 3),
         "cold_start": cold_samples,
         "per_item": per_item,
         "aggregate_wall": summarize(all_walls),
         "aggregate_stages": {k: summarize(v) for k, v in all_stages.items()},
         "observed_statuses": all_statuses,
-        "correctness": {"expected_status_mismatches": mismatches, "mismatch_count": len(mismatches)},
+        "correctness": {"expected_status_mismatches": mismatches, "mismatch_count": len(mismatches),
+                        "substantive_semantic_correctness": None},
         "peak_rss_mb": _peak_rss_mb(),
     }
 
@@ -292,21 +537,27 @@ def _wait_health(base: str, timeout_s: float = 90.0) -> bool:
     return False
 
 
-def _chat(base: str, client, message: str, cid: str) -> Dict[str, Any]:
+def _chat(base: str, client, message: str, cid: str, expected_item: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     t0 = time.perf_counter()
     try:
         r = client.post(f"{base}/api/chat", json={"message": message, "conversation_id": cid}, timeout=GENERATION_TIMEOUT_S)
     except Exception as exc:
-        return {"wall_ms": (time.perf_counter() - t0) * 1000, "http_status": 0, "body_status": None,
-                "error_code": type(exc).__name__, "timeout": isinstance(exc, __import__("httpx").TimeoutException)}
+        failed = {"wall_ms": (time.perf_counter() - t0) * 1000, "http_status": 0, "body_status": None,
+                  "error_code": type(exc).__name__, "timeout": isinstance(exc, __import__("httpx").TimeoutException)}
+        if expected_item is not None:
+            failed["response_contract"] = {"ok": False, "failures": ["REQUEST_FAILED"], "semantic_correctness": None}
+        return failed
     wall = (time.perf_counter() - t0) * 1000
     try:
         body = r.json()
     except Exception:
         body = {"_non_json": r.text[:200]}
-    return {"wall_ms": wall, "http_status": r.status_code, "body_status": body.get("status"), "generator": (body.get("metadata") or {}).get("generator"),
-            "grounded": (body.get("metadata") or {}).get("grounded"), "source_count": len(body.get("sources") or []), "card_id": (body.get("metadata") or {}).get("card_id"),
-            "error_code": (body.get("error") or {}).get("code") if isinstance(body.get("error"), dict) else None}
+    result = {"wall_ms": wall, "http_status": r.status_code, "body_status": body.get("status"), "generator": (body.get("metadata") or {}).get("generator"),
+              "grounded": (body.get("metadata") or {}).get("grounded"), "source_count": len(body.get("sources") or []), "card_id": (body.get("metadata") or {}).get("card_id"),
+              "error_code": (body.get("error") or {}).get("code") if isinstance(body.get("error"), dict) else None}
+    if expected_item is not None:
+        result["response_contract"] = evaluate_response_contract(expected_item, body, r.status_code)
+    return result
 
 
 def run_e2e(generator: str, workload: Dict[str, Any], repeat: int, warmup: int,
@@ -365,6 +616,8 @@ def run_e2e(generator: str, workload: Dict[str, Any], repeat: int, warmup: int,
             for item in workload["items"]:
                 samples = []
                 http_codes: Dict[int, int] = {}
+                contract_passes = 0
+                contract_failure_counts: Dict[str, int] = {}
                 conv = 0
                 for _ in range(repeat):
                     conv += 1
@@ -372,7 +625,8 @@ def run_e2e(generator: str, workload: Dict[str, Any], repeat: int, warmup: int,
                     measured_turn = item.get("measured_turn", len(item["turns"]))
                     last = None
                     for ti, turn in enumerate(item["turns"], start=1):
-                        last = _chat(base, client, turn["message"], cid)
+                        last = _chat(base, client, turn["message"], cid,
+                                     expected_item=item if ti == measured_turn else None)
                         if ti == measured_turn:
                             samples.append(last["wall_ms"])
                             all_walls.append(last["wall_ms"])
@@ -380,14 +634,22 @@ def run_e2e(generator: str, workload: Dict[str, Any], repeat: int, warmup: int,
                     all_statuses[last["body_status"]] = all_statuses.get(last["body_status"], 0) + 1
                     if last["http_status"] >= 500 or last["http_status"] == 0:
                         errors += 1
-                    if (last["body_status"] != item["expected_status"] or
-                        ("expected_card_id" in item and last.get("card_id") != item["expected_card_id"]) or
+                    response_contract = last.get("response_contract") or {"ok": False, "failures": ["CONTRACT_NOT_CHECKED"]}
+                    if response_contract.get("ok"):
+                        contract_passes += 1
+                    for failure in response_contract.get("failures", []):
+                        contract_failure_counts[failure] = contract_failure_counts.get(failure, 0) + 1
+                    if (not response_contract.get("ok") or
                         (last.get("generator") != generator and len(item["turns"]) == 1)):
                         mismatches.append({"item": item["id"], "expected": item["expected_status"],
                                            "observed": last["body_status"], "http": last["http_status"],
+                                           "contract_failures": response_contract.get("failures"),
                                            "error_code": last["error_code"]})
                 per_item.append({"id": item["id"], "category": item["category"],
                                  "expected_status": item["expected_status"], "http_codes": http_codes,
+                                 "response_contract": {"checked": repeat, "passed": contract_passes,
+                                                       "failure_counts": contract_failure_counts,
+                                                       "semantic_correctness": None},
                                  "latency": summarize(samples)})
 
             # Concurrency sweep on a mixed workload (round-robin over items, single-turn requests)
@@ -396,12 +658,10 @@ def run_e2e(generator: str, workload: Dict[str, Any], repeat: int, warmup: int,
             for level in levels:
                 def one(i: int) -> Dict[str, Any]:
                     it = single_turn_items[i % len(single_turn_items)]
-                    response = _chat(base, client, it["turns"][0]["message"], f"bench-conc-{level}-{i}")
+                    response = _chat(base, client, it["turns"][0]["message"], f"bench-conc-{level}-{i}", expected_item=it)
                     response["expected_status"] = it["expected_status"]
-                    response["correct"] = (response["body_status"] == it["expected_status"]
-                                           and ("expected_card_id" not in it or response.get("card_id") == it["expected_card_id"])
-                                           and (it["expected_status"] != "answered" or
-                                                (response.get("grounded") and response.get("source_count", 0) > 0)))
+                    contract = response.get("response_contract") or {"ok": False, "failures": ["CONTRACT_NOT_CHECKED"]}
+                    response["correct"] = bool(contract.get("ok")) and (response.get("generator") == generator)
                     return response
                 t0 = time.perf_counter()
                 with ThreadPoolExecutor(max_workers=level) as ex:
@@ -429,10 +689,14 @@ def run_e2e(generator: str, workload: Dict[str, Any], repeat: int, warmup: int,
                               "answered": answered, "abstentions": abst})
             out["concurrency_sweep"] = sweep
             out["per_item"] = per_item
+            out["case_id_validation"] = validate_observation_ids(workload["items"], per_item)
             out["aggregate_wall"] = summarize(all_walls)
             out["observed_statuses"] = all_statuses
             out["correctness"] = {"expected_status_mismatches": mismatches[:50], "mismatch_count": len(mismatches),
-                                  "http_5xx_sequential": errors}
+                                  "http_5xx_sequential": errors, "substantive_semantic_correctness": None}
+            if not out["case_id_validation"]["ok"]:
+                out["status"] = "INVALID"
+                out["blocked_reason"] = "Per-item observations do not reconcile exactly to workload case IDs."
             # Contamination guard: if the rate limiter (or anything else) turned a meaningful share of responses
             # into 429s, the latency/throughput numbers measure rejection handling, not the pipeline. Refuse to
             # present them as a valid benchmark.
@@ -470,6 +734,21 @@ def _proc_rss_mb(pid: int) -> Optional[float]:
 
 # -------------------------------------------------------------------------------------------- main
 
+def _parse_concurrency_levels(value: str) -> List[int]:
+    """Parse a non-empty comma-separated list of positive worker counts for the E2E sweep."""
+    parts = value.split(",")
+    if not parts or any(not part.strip() for part in parts):
+        raise argparse.ArgumentTypeError("concurrency levels must be comma-separated positive integers")
+    try:
+        levels = [int(part.strip()) for part in parts]
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(
+            "concurrency levels must be comma-separated positive integers") from exc
+    if any(level <= 0 for level in levels):
+        raise argparse.ArgumentTypeError("concurrency levels must all be positive")
+    return levels
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--workload", type=Path, default=BENCH_DIR / "workload_v2.json")
@@ -479,7 +758,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--warmup", type=int, default=None, help="warmup requests excluded from stats (default: stages=10, e2e=5)")
     ap.add_argument("--url", default=None, help="e2e: base URL of an already-running API")
     ap.add_argument("--spawn", type=int, default=None, metavar="PORT", help="e2e: spawn the API on this port (default when --url absent: 8300)")
-    ap.add_argument("--concurrency-levels", default="1,5,10,20")
+    ap.add_argument("--concurrency-levels", type=_parse_concurrency_levels, default="1,5,10,20")
     ap.add_argument("--concurrency-requests", type=int, default=100, help="requests per concurrency level")
     ap.add_argument("--strict", action="store_true", help="exit non-zero on expected_status mismatches")
     ap.add_argument("--out", default=None)
@@ -487,35 +766,81 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--source-commit", help="commit used to export --source-root, recorded separately from harness commit")
     ap.add_argument("--admission-cap", type=int, default=None, help="e2e spawned API admission override; default uses production 4")
     a = ap.parse_args(argv)
-    global RUNTIME_ROOT, ADMISSION_CAP
-    ADMISSION_CAP = a.admission_cap
-    if a.source_root:
-        RUNTIME_ROOT = a.source_root.resolve()
-        sys.path.insert(0, str(RUNTIME_ROOT / "scripts"))
     if (a.repeat is not None and a.repeat < 1) or (a.warmup is not None and a.warmup < 0):
         ap.error("repeat must be >=1 and warmup >=0")
+    if a.concurrency_requests < 1:
+        ap.error("concurrency-requests must be >=1")
+    if a.admission_cap is not None and a.admission_cap < 1:
+        ap.error("admission-cap must be >=1")
+    if a.spawn is not None and not 1 <= a.spawn <= 65535:
+        ap.error("spawn port must be between 1 and 65535")
+    if a.mode != "e2e" and (a.url is not None or a.spawn is not None):
+        ap.error("--url and --spawn are only valid with --mode e2e")
+    if a.url is not None:
+        if not a.url or a.url != a.url.strip() or any(character.isspace() for character in a.url):
+            ap.error("url must be a non-empty absolute HTTP(S) URL without whitespace")
+        if a.spawn is not None:
+            ap.error("choose either --url or --spawn, not both")
+        try:
+            parsed_url = urlsplit(a.url)
+            _url_port = parsed_url.port
+        except ValueError:
+            ap.error("url has an invalid host or port")
+        if parsed_url.scheme not in {"http", "https"} or not parsed_url.hostname:
+            ap.error("url must be an absolute HTTP(S) URL with a hostname")
+    if a.out and Path(a.out).exists():
+        ap.error("Output already exists; choose a new versioned path")
 
-    if a.mode == "e2e" and a.generator == "ollama" and not a.url and a.spawn is None:
+    if a.mode == "e2e" and a.generator == "ollama" and a.url is None and a.spawn is None:
         a.spawn = 8301
 
     repeat = a.repeat if a.repeat is not None else (100 if a.mode == "stages" else 30)
     warmup = a.warmup if a.warmup is not None else (10 if a.mode == "stages" else 5)
-    levels = [int(x) for x in a.concurrency_levels.split(",") if x.strip()]
+    levels = a.concurrency_levels
 
-    workload, wsha = load_workload(a.workload)
+    workload_error = None
+    try:
+        workload, wsha = load_workload(a.workload)
+    except (OSError, UnicodeDecodeError, ValueError, TypeError, RecursionError) as exc:
+        workload, wsha = None, None
+        workload_error = f"{type(exc).__name__}: {exc}"
+    if workload_error:
+        workload_validation = {"ok": False, "errors": ["workload JSON could not be loaded", workload_error],
+                               "expected_ids": []}
+    else:
+        workload_validation = validate_workload(workload)
+    if workload_validation["ok"]:
+        global RUNTIME_ROOT, ADMISSION_CAP
+        runtime_root = ROOT
+        if a.source_root is not None:
+            try:
+                runtime_root = a.source_root.resolve(strict=True)
+            except (OSError, RuntimeError) as exc:
+                ap.error(f"source-root must be an existing source tree ({type(exc).__name__})")
+            if not runtime_root.is_dir() or not (runtime_root / "scripts" / "rag_service.py").is_file():
+                ap.error("source-root must contain scripts/rag_service.py")
+        RUNTIME_ROOT = runtime_root
+        ADMISSION_CAP = a.admission_cap
+        if a.source_root is not None:
+            sys.path.insert(0, str(RUNTIME_ROOT / "scripts"))
     started = datetime.now(timezone.utc).isoformat(timespec="seconds")
     t0 = time.perf_counter()
 
-    if a.mode == "stages":
+    if not workload_validation["ok"]:
+        core = {"status": "INVALID", "blocked_reason": "Workload contract is invalid; no service or store was constructed.",
+                "workload_validation": workload_validation}
+    elif a.mode == "stages":
         core = run_stages(a.generator, workload, repeat, warmup)
     else:
         core = run_e2e(a.generator, workload, repeat, warmup, a.url, a.spawn, levels, a.concurrency_requests)
+    core["workload_validation"] = workload_validation
 
+    valid_workload = workload_validation["ok"] is True
     result = {
-        "benchmark_version": "1.1",
-        "source_commit": a.source_commit or _git_state()["commit"],
+        "benchmark_version": "1.2",
+        "source_commit": a.source_commit or (_git_state()["commit"] if valid_workload else None),
         "source_tree": "immutable git archive" if a.source_root else "working tree (see git dirty flag)",
-        "workload_version": workload.get("workload_version"),
+        "workload_version": workload.get("workload_version") if isinstance(workload, Mapping) else None,
         "workload_sha256": wsha,
         "mode": a.mode,
         "generator": a.generator,
@@ -525,15 +850,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                    "concurrency_requests_per_level": a.concurrency_requests if a.mode == "e2e" else None,
                    "percentile_method": "nearest-rank (ceil(q/100*n), 1-based)",
                    "generation_timeout_s": GENERATION_TIMEOUT_S},
-        "environment": capture_environment(a.generator, wsha),
+        "environment": (capture_environment(a.generator, wsha) if valid_workload else
+                        {"workload_sha256": wsha, "capture_skipped": True}),
         "results": core,
     }
 
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     commit = (result["environment"].get("git") or {}).get("commit", "nogit")[:7]
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out_path = Path(a.out) if a.out else RESULTS_DIR / f"{stamp}_{commit}_{a.generator}_{a.mode}.json"
-    out_path.write_text(json.dumps(result, indent=2, sort_keys=False), encoding="utf-8")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with out_path.open("x", encoding="utf-8") as target:
+        json.dump(result, target, indent=2, sort_keys=False)
+        target.write("\n")
 
     try:
         shown_path = str(out_path.relative_to(ROOT))

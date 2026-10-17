@@ -46,9 +46,13 @@ class ContextItem:
     content_hash: str
     source_url: str
     overlap_removed_chars: int = 0
+    doc_id: Optional[str] = None
+    source_ids: List[str] = field(default_factory=list)
+    page_text_sha256: Optional[str] = None
 
     def to_dict(self, with_text: bool = False) -> Dict[str, Any]:
-        d = {"marker": self.marker, "chunk_id": self.chunk_id, "guide_id": self.guide_id, "page_id": self.page_id, "title": self.title,
+        d = {"marker": self.marker, "chunk_id": self.chunk_id, "guide_id": self.guide_id, "page_id": self.page_id, "doc_id": self.doc_id,
+             "source_ids": list(self.source_ids), "page_text_sha256": self.page_text_sha256, "title": self.title,
              "heading_path": self.heading_path, "section_title": self.section_title, "chunk_index": self.chunk_index, "rank": self.rank,
              "similarity": round(self.similarity, 4), "tokens": self.tokens, "content_hash": self.content_hash, "source_url": self.source_url,
              "overlap_removed_chars": self.overlap_removed_chars}
@@ -131,10 +135,21 @@ def build_context(hits: Sequence[Any], count_tokens: Callable[[str], int], budge
     for n, h in enumerate(selected, start=1):
         adjacent = prev is not None and prev.page_id == h.page_id and h.chunk_index == prev.chunk_index + 1
         rendered = _strip_overlap(h.text, prev.text if adjacent else None)
+        metadata = getattr(h, "metadata", None) or {}
+        raw_source_ids = metadata.get("source_ids") if isinstance(metadata, dict) else None
+        if isinstance(raw_source_ids, str):
+            source_ids = [value.strip() for value in raw_source_ids.split(",") if value.strip()]
+        elif isinstance(raw_source_ids, (list, tuple, set)):
+            source_ids = [str(value).strip() for value in raw_source_ids if str(value).strip()]
+        else:
+            source_ids = []
         block.items.append(ContextItem(marker=f"S{n}", chunk_id=h.chunk_id, guide_id=h.guide_id, page_id=h.page_id, title=h.title, heading_path=list(h.heading_path),
                                        section_title=h.section_title, chunk_index=h.chunk_index, rank=h.rank, similarity=h.similarity, text=h.text,
                                        rendered_text=rendered, tokens=count_tokens(rendered), content_hash=h.content_hash, source_url=h.source_url,
-                                       overlap_removed_chars=len(h.text) - len(rendered) if rendered != h.text else 0))
+                                       overlap_removed_chars=len(h.text) - len(rendered) if rendered != h.text else 0,
+                                       doc_id=metadata.get("doc_id") if isinstance(metadata, dict) else None,
+                                       source_ids=source_ids,
+                                       page_text_sha256=metadata.get("page_text_sha256") if isinstance(metadata, dict) else None))
         prev = h
     block.total_tokens = sum(i.tokens for i in block.items)
     return block
