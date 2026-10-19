@@ -225,7 +225,9 @@ class ContractTests(unittest.TestCase):
         a, b = self.svc.ask(Q_PLAN, conversation_id="c1"), self.svc.ask(Q_PLAN, conversation_id="c1")
         json.dumps(a, allow_nan=False)
         for r in (a, b):
-            r["metadata"].pop("latency_ms")
+            r["metadata"].pop("latency_ms", None)
+            r["metadata"].pop("cached", None)
+            r.pop("id", None)
         self.assertEqual(a, b)
 
     def test_public_function_uses_the_given_service(self):

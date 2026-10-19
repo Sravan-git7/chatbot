@@ -12,6 +12,7 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 from tests.phase8_support import make_pipeline
+from tests.test_phase9 import NEED_STORES
 from tests.test_phase11_service import Q_PLAN, RANKING
 import rag_api
 import rag_generate as RG
@@ -153,6 +154,7 @@ class HardeningTests(unittest.TestCase):
             self.assertFalse(E.kind_satisfied("default", "Enter the interval type.", needs))
             self.assertTrue(E.kind_satisfied("default", "The default interval type is monthly.", needs))
 
+    @NEED_STORES
     def test_live_absent_preselected_detail_abstains(self):
         svc = S.build_service("extractive")
         result = svc.ask("Which interval type is preselected for new installment plans?", debug=True)
@@ -160,6 +162,7 @@ class HardeningTests(unittest.TestCase):
         self.assertFalse(result["metadata"]["grounded"])
         self.assertEqual(result["sources"], [])
 
+    @NEED_STORES
     def test_live_named_code_purpose_does_not_answer_from_navigation_pointer(self):
         svc = S.build_service("extractive")
         result = svc.ask("What is the business function ISU_AMI_1 required for?", debug=True)
@@ -171,6 +174,7 @@ class HardeningTests(unittest.TestCase):
         self.assertEqual(positive["status"], "answered")
         self.assertEqual(positive["metadata"]["card_id"], "M2C-07")
 
+    @NEED_STORES
     def test_configured_model_is_used_by_the_shipped_generator_not_ignored(self):
         with patch.dict("os.environ", {"OLLAMA_MODEL": "approved-local:test"}):
             svc = S.build_service("ollama")

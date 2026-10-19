@@ -86,7 +86,13 @@ class StubBackend:
 
     def query(self, query: str, n_results: int):
         self.calls.append(query)
-        ids = list(self.ranking.get(query, self.default))[:n_results]
+        ids = self.ranking.get(query)
+        if ids is None:
+            for k, v in self.ranking.items():
+                if query.lower().strip(". ") in k.lower() or k.lower().strip(". ") in query.lower():
+                    ids = v
+                    break
+        ids = list(self.default if ids is None else ids)[:n_results]
         metas = []
         for sid in ids:
             u = self.cards[sid]

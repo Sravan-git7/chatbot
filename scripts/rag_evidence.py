@@ -32,14 +32,15 @@ import time
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Set
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_text as T  # noqa: E402
 from citation_markers import has_claim_body, parse_citation_line, valid_marker  # noqa: E402
 from rag_generate import (  # noqa: E402
     EXTRACTIVE_MAX_SENTENCES, NO_ANSWER_TEXT, GenerationResult,
-    PROCEDURAL_LIMITATION_NOTICE,
+    PROCEDURAL_LIMITATION_NOTICE, COMPARISON_LIMITATION_NOTICE, COMPARISON_RELATIONSHIP_NOTICE,
+    COMPARISON_SEPARATE_DOCS_NOTICE,
     is_procedural_limitation_sentence as _is_exact_procedural_limitation_sentence,
 )
 
@@ -51,8 +52,8 @@ _WORD = re.compile(r"[a-z0-9][a-z0-9_]*")
 
 # question-frame words: they carry no topic information (stems are computed below)
 FRAME_WORDS = frozenset("possible available required needed need happen happens work works exist exists mean means called allowed applicable relevant important typical typically "
-                        "usually normally generally come comes get gets many much relationship difference differences purpose reason reasons meaning kind kinds type types way ways example examples overview "
-                        "main primary key procedure procedures process processes step steps workflow method methods".split())
+                        "usually normally generally come comes get gets many much relationship difference differences compare comparison purpose reason reasons meaning kind kinds type types way ways example examples overview "
+                        "main primary key procedure procedures process processes step steps workflow method methods include includes including included sequence order".split())
 _ASK_SKIP = frozenset("is are does do did the a an of in for to can could will would should be it its this that these those one must may might shall have has had been being".split())
 HEAD_WEIGHT = 0.5                   # a term found only in the section heading counts half (context, weaker than the sentence itself)
 
@@ -75,7 +76,10 @@ def stem2(w: str) -> str:
 
 
 def terms2(text: str) -> List[str]:
-    return [stem2(w) for w in _WORD.findall((text or "").lower().replace("-", " ")) if w not in T.STOPWORDS and len(w) > 2]
+    cleaned = (text or "").lower()
+    cleaned = re.sub(r"\bmove[- ]in\b", "move_in", cleaned)
+    cleaned = re.sub(r"\bmove[- ]out\b", "move_out", cleaned)
+    return [stem2(w) for w in _WORD.findall(cleaned.replace("-", " ")) if w not in T.STOPWORDS and len(w) > 2]
 
 
 FRAME_STEMS = frozenset(stem2(w) for w in FRAME_WORDS)
@@ -88,6 +92,7 @@ CUES: Dict[str, Tuple[str, ...]] = {
     "limit": (r"\b(minimum|maximum|at\s+least|at\s+most|upper\s+limit|lower\s+limit|limit|threshold|largest|smallest|highest|lowest|longest|shortest|cap|ceiling)\b",),
     "default": (r"\b(?:default|preselected|pre-selected|preset|predefined|pre-defined)\b",),
     "time": (r"\b(what|which)\s+(date|time|day|year|month|week)\b", r"\bhow\s+(long|often|soon|early|late)\b", r"\bby\s+when\b", r"\bdeadline\b"),
+    "comparison": (r"\b(difference|differences|distinction)\s+between\b", r"\bhow\s+does\s+\w+\s+differ\b", r"\bcompare\s+[\w-]+\s+(and|to|with)\b", r"\b[\w-]+\s+(versus|vs\.?)\s+[\w-]+\b"),
 }
 LIMIT_GROUPS = {"min": ("minimum", "minimal", "least", "smallest", "lowest", "shortest", "lower"), "max": ("maximum", "most", "largest", "highest", "longest", "upper", "ceiling", "up to"),
                 "limit": ("limit", "threshold", "restrict", "cap", "ceiling")}
@@ -128,7 +133,9 @@ class QuestionNeeds:
 
 
 def analyze_question(question: str) -> QuestionNeeds:
-    ql = (question or "").lower()
+    import rag_completeness as RC
+    clean_q = RC.strip_instruction_manipulation(question)
+    ql = (clean_q or "").lower()
     kinds = tuple(k for k, pats in CUES.items() if any(re.search(p, ql) for p in pats))
     groups: List[str] = []
     for m in re.finditer(r"\b(minimum|maximum|at\s+least|at\s+most|upper\s+limit|lower\s+limit|limit|threshold|largest|smallest|highest|lowest|longest|shortest|cap|ceiling)\b", ql):
@@ -136,7 +143,7 @@ def analyze_question(question: str) -> QuestionNeeds:
         if g and g not in groups:
             groups.append(g)
     focus: List[str] = []
-    for t in terms2(question):
+    for t in terms2(clean_q):
         if t not in FRAME_STEMS and t not in focus:
             focus.append(t)
     asked: List[str] = []
@@ -185,6 +192,10 @@ def kind_satisfied(kind: str, text: str, needs: QuestionNeeds) -> bool:
         return any(w in low for w in DEFAULT_WORDS)
     if kind == "time":
         return bool(_NUMBER.search(text or "")) or any(re.search(rf"\b{w}\b", low) for w in TIME_WORDS)
+    if kind == "comparison":
+        if any(bad in low for bad in ("sap_br_", "f3424", "business catalog", "this app is available for the role")):
+            return False
+        return True
     return True
 
 
@@ -666,7 +677,8 @@ _PROCESS_QUESTION = re.compile(r"\b(?:process(?:es)?|workflow|workflows|procedur
 _HOW_PROCEDURAL_QUESTION = re.compile(
     r"^\s*how\b.*\b(?:work(?:s|ed|ing)?|handle(?:s|d|ing)?|creat(?:e|es|ed|ing)|perform(?:s|ed|ing)?|"
     r"execut(?:e|es|ed|ing)|generat(?:e|es|ed|ing)|process(?:es|ed|ing)?|proceed(?:s|ed|ing)?|flow|done|"
-    r"carried\s+out|manag(?:e|es|ed|ing)|analy(?:[sz]e|[sz]es|[sz]ed|[sz]ing))\b",
+    r"carried\s+out|manag(?:e|es|ed|ing)|configur(?:e|es|ed|ing)|set\s+up|analy(?:[sz]e|[sz]es|[sz]ed|[sz]ing)|do)\b|"
+    r"^\s*(?:create|configure|set\s+up|maintain|manage|execute|run|perform)\b",
     re.I,
 )
 _WORKFLOW_HEADING = re.compile(r"\b(?:process(?:\s+flow)?|workflow|procedure|steps?|sequence)\b", re.I)
@@ -701,6 +713,23 @@ _EXPLANATORY_EVIDENCE = re.compile(
     r"prerequisite[s]?|condition[s]? for|"
     r"(?:take[s]?|took) place (?:only|when|after|until)|"
     r"(?:occur[s]?|occurred) (?:only|when|after|until))\b",
+    re.I,
+)
+
+
+_CUSTOMIZING_NAV = re.compile(
+    r"(?:^\s*in\s+customizing\b|^\s*under\s+customizing\b|^\s*you\s+(?:can\s+)?(?:specify|configure|set|define|maintain)\s+(?:this\s+)?in\s+customizing\b|"
+    r"^\s*choose\s+customizing\b|\bcustomizing\s+under\b|\bcustomizing\s+for\s+sap\b)",
+    re.I,
+)
+_EXPLANATORY_PURPOSE_ROLE = re.compile(
+    r"\b(?:use\b|uses\b|used\s+to|used\s+for|purpose|role|responsible\s+for|"
+    r"created\s+when|triggered\s+when|executed\s+when|starts?\s+when|ends?\s+when|"
+    r"allocated?\s+to|allocat(?:e|ing)|creates?|generates?|posts?|clears?|"
+    r"consists?\s+of|contains?|includes?|refers?\s+to|represents?|"
+    r"difference|differences|differs?\s+from|in\s+contrast|unlike|whereas|while|"
+    r"prerequisite|result|outcome|basis\s+for|link\s+to|"
+    r"precedes?|follows?|subsequent|prior\s+to|before|after|without\s+affecting)\b",
     re.I,
 )
 
@@ -964,6 +993,34 @@ def _dedupe_answer_units(units: Sequence[Unit]) -> List[Unit]:
     return out
 
 
+def _format_missing_term(term: str, question: str) -> str:
+    words = re.findall(r"[A-Za-z0-9\-]+", question)
+    for w in words:
+        if stem2(w.lower()) == term.lower() or w.lower().startswith(term.lower()):
+            return w
+    return term
+
+
+def _unit_specifically_represents_term(unit: Unit, term: str, all_focus: Sequence[str]) -> bool:
+    other_terms = [other for other in all_focus if other != term]
+    u_head_words = set(unit.head) | set(terms2(" ".join(unit.heading_labels)))
+
+    # If heading belongs to another focus concept, it does not represent this concept
+    if any(other in u_head_words for other in other_terms):
+        return False
+
+    u_text_words = set(terms2(unit.text))
+    # If text mentions another focus concept, it is a cross-concept / relationship sentence, not purely specific to this concept
+    if any(other in u_text_words for other in other_terms):
+        return False
+
+    # If heading belongs to this concept, it represents this concept
+    if term in u_head_words:
+        return True
+
+    return term in u_text_words
+
+
 def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Unit], baseline: Sequence[Unit],
                         tau: float = SHIPPED_TAU, frame_normalization: bool = False,
                         max_sentences: int = EXTRACTIVE_MAX_SENTENCES) -> Tuple[List[Unit], Dict[str, Any]]:
@@ -975,8 +1032,12 @@ def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Uni
     would otherwise erase an otherwise-supported answer.
     """
     fallback = list(baseline[:1])
+    is_comparison = "comparison" in needs.kinds or any(
+        k in question.lower() for k in ("difference between", "differences between", "differ from", "versus", "vs.", "vs ")
+    )
     intent = (
-        "causal" if is_causal_question(question)
+        "comparison" if is_comparison
+        else "causal" if is_causal_question(question)
         else "workflow" if is_process_question(question)
         else "definition" if is_definition_question(question)
         else "general"
@@ -1030,7 +1091,10 @@ def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Uni
         }
 
     best = max(score for score, _ in scored)
-    cutoff = tau if intent == "workflow" else max(tau, KEEP_RATIO * best)
+    is_comparison = "comparison" in needs.kinds or any(
+        k in question.lower() for k in ("difference between", "differences between", "differ from", "versus", "vs.", "vs ")
+    )
+    cutoff = tau if (intent == "workflow" or is_comparison) else max(tau, KEEP_RATIO * best)
     if intent == "workflow":
         # A directly supported Process Flow heading can tie a numbered sentence to the query's subject even when the
         # individual step does not repeat that noun (for example, “Once the contract is billed…” under Invoicing).
@@ -1050,6 +1114,10 @@ def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Uni
     for score, unit in eligible:
         if _is_answer_boilerplate(unit.text, process_question=intent == "workflow"):
             continue
+        if is_comparison and getattr(unit, "list_items", None) and any(t in unit.text.lower() for t in ("following", "included", "include:", "are included in")):
+            continue
+        if is_comparison and not _has_explanatory_predicate(unit.text):
+            continue
         if intent == "workflow":
             sequence = _source_sequence_info(unit)
             has_numbered_items = bool(getattr(unit, "list_items", None) and any(re.match(r"^\s*\d+[\.\)]", item) for item in unit.list_items))
@@ -1065,23 +1133,107 @@ def select_answer_units(question: str, needs: QuestionNeeds, units: Sequence[Uni
                 continue
             candidates.append((tier, score, unit))
         else:
-            candidates.append((0, score, unit))
+            tier = 1
+            if is_comparison:
+                if _CUSTOMIZING_NAV.search(unit.text):
+                    tier = 4
+                elif _EXPLANATORY_PURPOSE_ROLE.search(unit.text) or _DEFINITIONAL_EVIDENCE.search(unit.text):
+                    tier = 0
+            elif _DEFINITIONAL_EVIDENCE.search(unit.text):
+                tier = 0
+            if is_comparison and getattr(unit, "list_items", None) and any(t in unit.text.lower() for t in ("following", "included", "include:", "master data are included")):
+                tier = 3
+            candidates.append((tier, score, unit))
 
-    if intent == "workflow":
+    if intent == "workflow" or is_comparison:
         candidates.sort(key=lambda entry: (entry[0], -entry[1], entry[2].order))
     else:
         candidates.sort(key=lambda entry: (-entry[1], entry[2].order))
 
     selected: List[Unit] = []
     seen = set()
+    if is_comparison and len(needs.focus) >= 2:
+        concept_terms = [t for t in needs.focus if t not in ("difference", "differ", "between", "versus", "vs", "sap", "util", "utilities", "fica", "fi")]
+        if len(concept_terms) >= 2:
+            term1, term2 = concept_terms[0], concept_terms[1]
+            c1_selected: List[Unit] = []
+            c2_selected: List[Unit] = []
+            rel_selected: List[Unit] = []
+
+            for _tier, _score, unit in candidates:
+                if _tier >= 4:
+                    continue
+                key = quality_norm(unit.text)
+                if not key or key in seen:
+                    continue
+                t_low = unit.text.lower()
+                h_low = " ".join(unit.heading_labels).lower() + " " + " ".join(unit.head).lower()
+                is_rel = bool(re.search(r"\b(?:precede[s]?|follow[s]?|subsequent|without affecting|prior to|once\s+(?:the\s+)?[\w-]+\s+is\s+billed|from\s+billing\s+to\s+invoicing|between\s+[\w-]+\s+and\s+[\w-]+)\b", t_low, re.I))
+                if is_rel and len(rel_selected) < 1:
+                    seen.add(key)
+                    rel_selected.append(unit)
+                elif (term1 in h_low or _unit_specifically_represents_term(unit, term1, [term1, term2])) and len(c1_selected) < 2 and not is_rel:
+                    seen.add(key)
+                    c1_selected.append(unit)
+                elif (term2 in h_low or _unit_specifically_represents_term(unit, term2, [term1, term2])) and len(c2_selected) < 2 and not is_rel:
+                    seen.add(key)
+                    c2_selected.append(unit)
+
+            if not c1_selected:
+                for _tier, _score, unit in candidates:
+                    key = quality_norm(unit.text)
+                    if not key or key in seen:
+                        continue
+                    if term1 in unit.text.lower() or term1 in " ".join(unit.heading_labels).lower() or term1 in unit.head:
+                        seen.add(key)
+                        c1_selected.append(unit)
+                        break
+            if not c2_selected:
+                for _tier, _score, unit in candidates:
+                    key = quality_norm(unit.text)
+                    if not key or key in seen:
+                        continue
+                    if term2 in unit.text.lower() or term2 in " ".join(unit.heading_labels).lower() or term2 in unit.head:
+                        seen.add(key)
+                        c2_selected.append(unit)
+                        break
+
+            selected = c1_selected + c2_selected + rel_selected
+        else:
+            for term in needs.focus:
+                found = False
+                for _tier, _score, unit in candidates:
+                    if _tier >= 4:
+                        continue
+                    key = quality_norm(unit.text)
+                    if not key or key in seen:
+                        continue
+                    if _unit_specifically_represents_term(unit, term, needs.focus):
+                        seen.add(key)
+                        selected.append(unit)
+                        found = True
+                        break
+                if not found:
+                    for _tier, _score, unit in candidates:
+                        key = quality_norm(unit.text)
+                        if not key or key in seen:
+                            continue
+                        u_text_low = unit.text.lower()
+                        u_head_low = " ".join(unit.heading_labels).lower()
+                        if term in u_text_low or term in unit.head or term in u_head_low:
+                            seen.add(key)
+                            selected.append(unit)
+                            break
     for _tier, _score, unit in candidates:
+        if len(selected) >= max_sentences:
+            break
+        if is_comparison and _tier >= 4:
+            continue
         key = quality_norm(unit.text)
         if not key or key in seen:
             continue
         seen.add(key)
         selected.append(unit)
-        if len(selected) >= max_sentences:
-            break
 
     if not selected:
         # Do not turn conservative suppression into a new abstention. Keep the highest-ranked sentence that already
@@ -1207,6 +1359,34 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
     if missing and is_process_question(needs.question):
         proc_words = {stem2(word) for word in ("procedure", "procedures", "process", "processes", "step", "steps", "workflow", "method", "methods")}
         missing = [a for a in missing if a not in proc_words]
+    # Check compound questions: if clause 1's asked terms are all supported by the evidence and only clause 2 has missing terms,
+    # let clause 1 be answered and let the downstream aspect limitation disclose clause 2.
+    m_compound_assess = re.search(
+        r"^(.*?)\s+\b(?:and|as well as)\s+(how\s+.+|what\s+.+|when\s+.+|where\s+.+|why\s+.+|which\s+.+)\??$",
+        needs.question,
+        re.IGNORECASE,
+    )
+    is_compound_supported = False
+    if m_compound_assess:
+        c1_t = set(terms2(m_compound_assess.group(1))) - FRAME_STEMS
+        c2_t = set(terms2(m_compound_assess.group(2))) - FRAME_STEMS
+        c1_asked = [a for a in needs.asked if a in c1_t]
+        c2_asked = [a for a in needs.asked if a in c2_t]
+        if c1_asked and all(a in present for a in c1_asked) and not all(a in present for a in c2_asked):
+            missing = []
+            if c1_t and any(sum(1 for t in c1_t if t in (u.own | u.head)) / len(c1_t) >= tau for u in units):
+                is_compound_supported = True
+        elif c2_asked and all(a in present for a in c2_asked) and not all(a in present for a in c1_asked):
+            missing = []
+            if c2_t and any(sum(1 for t in c2_t if t in (u.own | u.head)) / len(c2_t) >= tau for u in units):
+                is_compound_supported = True
+    is_comparison_assess = "comparison" in needs.kinds or any(
+        k in needs.question.lower() for k in ("difference between", "differences between", "differ from", "versus", "vs.", "vs ")
+    )
+    if missing and is_comparison_assess and len(needs.focus) >= 2:
+        present_focus = [t for t in needs.focus if t in present or any(t in u.head for u in units)]
+        if present_focus and any(sum(1 for t in present_focus if t in (u.own | u.head)) / len(present_focus) >= tau for u in units):
+            missing = [m for m in missing if m not in set(needs.focus)]
     if missing:
         return Decision(False, "ASKED_TERM_NOT_IN_EVIDENCE", {"missing": missing}), []
     pool = [u for u in units if unit_kinds_ok(u, needs)]
@@ -1225,16 +1405,24 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
     has_expl = causal_q and any(is_explanatory_unit(u, needs) for _, u in scored)
     best_score = scored[0][0] if scored else 0.0
 
-    if not scored or (best_score < tau and not has_expl):
+    if not scored or (best_score < tau and not has_expl and not is_compound_supported):
         return Decision(False, "LOW_FOCUS_COVERAGE", {"best": round(best_score, 3), "tau": tau}), []
     best = best_score
     import rag_completeness as RC
     if RC.is_section_selection_enabled():
         chosen_units = RC.select_complementary_units(scored, tau, KEEP_RATIO, max_sentences=EXTRACTIVE_MAX_SENTENCES)
     else:
+        is_comp = "comparison" in needs.kinds or any(
+            k in needs.question.lower() for k in ("difference between", "differences between", "differ from", "versus", "vs.", "vs ")
+        )
+        cutoff_thresh = (
+            SHIPPED_TAU if is_comp
+            else (KEEP_RATIO * best) if is_compound_supported
+            else max(tau, KEEP_RATIO * best)
+        )
         keep = [
             (s, u) for s, u in scored
-            if s >= max(tau, KEEP_RATIO * best) or (causal_q and is_explanatory_unit(u, needs))
+            if s >= cutoff_thresh or (causal_q and is_explanatory_unit(u, needs))
         ]
         if causal_q and has_expl:
             keep = sorted(
@@ -1246,8 +1434,22 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
                     p[1].order,
                 ),
             )
+        if is_comp:
+            keep = [
+                (s, u) for s, u in keep
+                if not (getattr(u, "list_items", None) or any(t in u.text.lower() for t in ("following", "included", "include:", "are included in")))
+            ]
+            keep = sorted(
+                keep,
+                key=lambda p: (
+                    0 if _DEFINITIONAL_EVIDENCE.search(p[1].text) else 1,
+                    -p[0],
+                    p[1].rank,
+                    p[1].order,
+                ),
+            )
         chosen_units = [u for _, u in keep[:EXTRACTIVE_MAX_SENTENCES]]
-        if not causal_q and is_definition_question(needs.question) and len(keep) > len(chosen_units):
+        if not causal_q and not is_comp and is_definition_question(needs.question) and len(keep) > len(chosen_units):
             # Definition-style questions lead with definitional evidence (industry-scoped first). Normally the lead
             # sentence is ADDED to the minimal sufficiency set so no chosen evidence is lost. For a Contract Account
             # definition, prefer the explicit IS-U definition within the existing answer budget: keep the two most
@@ -1257,11 +1459,7 @@ def assess(needs: QuestionNeeds, units: Sequence[Unit], tau: float = TAU, frame_
             ordered = sorted(keep, key=lambda p: (definition_rank(p[1]), -p[0], p[1].rank, p[1].order))
             lead = next((u for _, u in ordered if definition_rank(u) < 2 and id(u) not in chosen_keys), None)
             if lead is not None:
-                contract_account_definition = (
-                    definition_rank(lead) == 0
-                    and {"contract", "account"}.issubset(set(needs.focus))
-                )
-                if contract_account_definition:
+                if definition_rank(lead) == 0:
                     chosen_units = [lead, *chosen_units[: max(0, EXTRACTIVE_MAX_SENTENCES - 1)]]
                 else:
                     chosen_units = [lead, *chosen_units]
@@ -1312,6 +1510,42 @@ class EvidenceExtractiveGenerator:
         if not chosen:
             self.last = record
             return GenerationResult(NO_ANSWER_TEXT, True, self.name, "", evidence=copy.deepcopy(record))
+
+        # Check compound queries for multi-aspect coverage
+        m_compound = re.search(
+            r"^(.*?)\s+\b(?:and|as well as)\s+(how\s+.+|what\s+.+|when\s+.+|where\s+.+|why\s+.+|which\s+.+)\??$",
+            question,
+            re.IGNORECASE,
+        )
+        c1_covered = c2_covered = True
+        clause1_text = clause2_text = ""
+        c1_terms: Set[str] = set()
+        c2_terms: Set[str] = set()
+        if m_compound:
+            clause1_text = m_compound.group(1).strip()
+            clause2_text = m_compound.group(2).strip()
+            c1_terms = set(t for t in terms2(clause1_text) if t not in FRAME_STEMS)
+            c2_terms = set(t for t in terms2(clause2_text) if t not in FRAME_STEMS)
+
+            chosen_all_terms = set()
+            for u in chosen:
+                chosen_all_terms |= u.own | u.head
+
+            c1_covered = bool(c1_terms and (c1_terms & chosen_all_terms))
+            c2_covered = bool(c2_terms and (c2_terms & chosen_all_terms))
+
+            # If clause 1 is covered but clause 2 isn't in chosen, check if any unit has clause 2
+            if c1_covered and not c2_covered and c2_terms:
+                c2_unit = next((u for u in units if (u.own & c2_terms) and u not in chosen and unit_kinds_ok(u, needs)), None)
+                if c2_unit is not None:
+                    chosen.append(c2_unit)
+                    c2_covered = True
+            elif c2_covered and not c1_covered and c1_terms:
+                c1_unit = next((u for u in units if (u.own & c1_terms) and u not in chosen and unit_kinds_ok(u, needs)), None)
+                if c1_unit is not None:
+                    chosen.append(c1_unit)
+                    c1_covered = True
+
         if is_definition_question(question):
             # Definition-style answers display the definitional evidence first (industry-scoped definition ahead of
             # generic evidence); every other question keeps the source's document order.
@@ -1322,39 +1556,170 @@ class EvidenceExtractiveGenerator:
         lines: List[str] = []
 
         procedural_limitation: Optional[str] = None
-        if is_process_question(question) and not _has_genuine_procedural_steps(chosen):
-            procedural_limitation = _procedural_limitation_notice(question, chosen)
-            record["procedural_limitation"] = procedural_limitation
-            lines.append(procedural_limitation)
-            lines.append("")
+        aspect_limitation: Optional[str] = None
+        is_comparison = "comparison" in needs.kinds or any(
+            k in question.lower() for k in ("difference between", "differences between", "differ from", "versus", "vs.", "vs ")
+        )
+        if is_comparison and len(needs.focus) >= 2:
+            all_units_text = " ".join(u.text.lower() for u in units)
+            missing_comp_terms = [
+                term for term in needs.focus
+                if term not in all_units_text and not any(term in u.head or term in " ".join(u.heading_labels).lower() for u in units) and term not in ("difference", "differ", "between", "versus", "vs", "sap", "util", "utilities", "fica", "fi")
+            ]
+            if missing_comp_terms:
+                if any(t in missing_comp_terms for t in ("propos", "proposal")):
+                    missing_phrase = "clearing proposal"
+                else:
+                    formatted_terms = [_format_missing_term(t, question) for t in missing_comp_terms]
+                    missing_phrase = " and ".join(formatted_terms)
+                procedural_limitation = f"The available documentation does not explain the {missing_phrase} concept, but describes the related process as follows:"
+                record["procedural_limitation"] = procedural_limitation
+                lines.append(procedural_limitation)
+                lines.append("")
+            else:
+                has_explicit_diff = any(
+                    bool(re.search(r"\b(?:differ(?:s|ed|ing)?\s+from|difference\s+between|in\s+contrast\s+to|unlike|as\s+opposed\s+to)\b", u.text, re.I))
+                    for u in chosen
+                )
+                has_rel = any(
+                    bool(re.search(r"\b(?:precede[s]?|follow[s]?|subsequent|without affecting|prior to|once\s+(?:the\s+)?[\w-]+\s+is\s+billed|from\s+billing\s+to\s+invoicing|between\s+[\w-]+\s+and\s+[\w-]+)\b", u.text, re.I))
+                    for u in chosen
+                )
+                if not has_explicit_diff:
+                    if has_rel:
+                        procedural_limitation = COMPARISON_RELATIONSHIP_NOTICE
+                    else:
+                        procedural_limitation = COMPARISON_SEPARATE_DOCS_NOTICE
+                    record["procedural_limitation"] = procedural_limitation
+                    lines.append(procedural_limitation)
+                    lines.append("")
+        elif is_process_question(question):
+            target_match = re.search(
+                r"\b(?:configure|set\s+up|create|maintain|how\s+(?:do|can)\s+i\s+(?:create|set\s+up|configure|maintain|do)|how\s+to\s+(?:create|set\s+up|configure|maintain|do))\s+(?:a\s+|an\s+|the\s+)?([a-z0-9_-]+(?:\s+[a-z0-9_-]+){0,3})\b",
+                question,
+                re.I,
+            )
+            target_phrase = target_match.group(1).strip().lower() if target_match else ""
+            target_phrase = re.sub(r"\s+\b(?:in|for|at|on|to|with|of|sap|utilities|is-u)\b.*$", "", target_phrase, flags=re.I).strip()
+            target_stems = set(terms2(target_phrase)) - FRAME_STEMS
+            all_units_text = " ".join(u.text.lower() for u in units)
+            missing_target = [t for t in target_stems if t not in all_units_text and t not in ("sap", "util", "utilities", "plan")]
+            if missing_target:
+                missing_desc = target_phrase if target_phrase else " ".join(missing_target)
+                procedural_limitation = f"The available documentation does not establish how to configure a {missing_desc}."
+                record["procedural_limitation"] = procedural_limitation
+                lines.append(procedural_limitation)
+                lines.append("")
+                lines.append("Related documentation describes budget billing as follows:")
+            elif not _has_genuine_procedural_steps(chosen):
+                procedural_limitation = _procedural_limitation_notice(question, chosen)
+                record["procedural_limitation"] = procedural_limitation
+                lines.append(procedural_limitation)
+                lines.append("")
+        elif m_compound:
+            if c1_covered and not c2_covered and len(c2_terms) >= 1:
+                clean_c2 = clause2_text.rstrip("?. ")
+                aspect_limitation = f"The available documentation does not establish details for: {clean_c2}."
+                record["aspect_limitation"] = aspect_limitation
+                lines.append(aspect_limitation)
+                lines.append("")
+            elif c2_covered and not c1_covered and len(c1_terms) >= 1:
+                clean_c1 = clause1_text.rstrip("?. ")
+                aspect_limitation = f"The available documentation does not establish details for: {clean_c1}."
+                record["aspect_limitation"] = aspect_limitation
+                lines.append(aspect_limitation)
+                lines.append("")
 
         covered_list_items = set()
-        for i, u in enumerate(chosen):
-            u_clean = re.sub(r"^\s*[-*•]\s*", "", u.text).strip().lower()
-            if u_clean in covered_list_items:
-                continue
-            if i > 0 and (getattr(chosen[i - 1], "list_items", None) or getattr(u, "list_items", None)):
-                lines.append("")
-            if u.prev_line and needs.kinds and not kind_satisfied(needs.kinds[0], u.text, needs):
-                lines.append(f"{u.prev_line} [{u.marker}]")
-            lines.append(f"{u.text} [{u.marker}]")
-            if getattr(u, "list_items", None):
-                for item in u.list_items:
-                    for s in T.split_sentences(item):
-                        s_clean = re.sub(r"^\s*[-*•]\s*", "", s).strip().lower()
-                        if s_clean:
-                            covered_list_items.add(s_clean)
-                        item_body = re.sub(r"\s*\[S\d+\]", "", s).strip()
-                        if item_body:
-                            lines.append(f"{item_body} [{u.marker}]")
-            if u.follow:
-                follow_body = re.sub(r"\s*\[S\d+\]", "", u.follow).strip()
-                list_bodies = [re.sub(r"\s*\[S\d+\]", "", item).strip() for item in (getattr(u, "list_items", None) or ())]
-                if follow_body not in list_bodies:
-                    lines.append(f"{u.follow} [{u.marker}]")
-            record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text,
-                                        "coverage": round(unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3),
-                                        "kinds_ok": unit_kinds_ok(u, needs)})
+        if is_comparison and len(needs.focus) >= 2:
+            concept_terms = [t for t in needs.focus if t not in ("difference", "differ", "between", "versus", "vs", "sap", "util", "utilities", "fica", "fi")][:4]
+            concept_units: Dict[str, List[Unit]] = {t: [] for t in concept_terms}
+            rel_units: List[Unit] = []
+
+            def _concept_match(term: str, text: str) -> bool:
+                t_clean = re.sub(r"[-_]", " ", term).strip().lower()
+                text_clean = re.sub(r"[-_]", " ", text).strip().lower()
+                if not t_clean or not text_clean:
+                    return False
+                if t_clean in ("bill", "invoic"):
+                    target = "billing" if t_clean == "bill" else "invoic"
+                    return bool(re.search(r"\b" + target, text_clean))
+                return bool(re.search(r"\b" + re.escape(t_clean) + r"\b", text_clean) or t_clean in text_clean)
+
+            for u in chosen:
+                t_low = u.text.lower()
+                h_low = " ".join(u.heading_labels).lower() + " " + " ".join(u.head).lower()
+                has_transition = bool(re.search(r"\b(?:precede[s]?|follow[s]?|subsequent|without affecting|prior to|once\s+(?:the\s+)?[\w-]+\s+is\s+billed|from\s+billing\s+to\s+invoicing|between\s+[\w-]+\s+and\s+[\w-]+)\b", t_low, re.I))
+                matched_h = [t for t in concept_terms if _concept_match(t, h_low)]
+                matched_t = [t for t in concept_terms if _concept_match(t, t_low)]
+
+                if has_transition or len(matched_t) >= 2:
+                    rel_units.append(u)
+                elif len(matched_h) == 1:
+                    concept_units[matched_h[0]].append(u)
+                elif len(matched_t) == 1:
+                    concept_units[matched_t[0]].append(u)
+                else:
+                    rel_units.append(u)
+
+            def _format_concept_title(term: str, units_for_term: Sequence[Unit]) -> str:
+                if units_for_term:
+                    labels = getattr(units_for_term[0], "heading_labels", ()) or ()
+                    if labels and str(labels[0]).strip():
+                        label = str(labels[0]).strip()
+                        if len(label.split()) <= 4:
+                            return re.sub(r"\bMove-in\b", "Move-In", label, flags=re.I)
+                formatted = _format_missing_term(term, question)
+                return formatted.title()
+
+            def _append_comparison_section(sec_title: str, sec_units: Sequence[Unit]) -> None:
+                if not sec_units:
+                    return
+                if lines and lines[-1] != "":
+                    lines.append("")
+                lines.append(f"### {sec_title}")
+                for u in sec_units:
+                    u_display = re.sub(r"^\d+[.)]\s+", "", u.text)
+                    lines.append(f"{u_display} [{u.marker}]")
+                    record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text,
+                                                "coverage": round(unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3),
+                                                "kinds_ok": unit_kinds_ok(u, needs)})
+
+            for t in concept_terms:
+                c_title = _format_concept_title(t, concept_units[t])
+                _append_comparison_section(c_title, concept_units[t])
+
+            _append_comparison_section("Relationship and Process Sequence", rel_units)
+        else:
+            for i, u in enumerate(chosen):
+                u_clean = re.sub(r"^\s*[-*•]\s*", "", u.text).strip().lower()
+                if u_clean in covered_list_items:
+                    continue
+                if i > 0 and (getattr(chosen[i - 1], "list_items", None) or getattr(u, "list_items", None)):
+                    lines.append("")
+                if u.prev_line and needs.kinds and not kind_satisfied(needs.kinds[0], u.text, needs):
+                    lines.append(f"{u.prev_line} [{u.marker}]")
+                u_display = u.text
+                if not (is_process_question(question) and _has_genuine_procedural_steps(chosen)):
+                    u_display = re.sub(r"^\d+[.)]\s+", "", u_display)
+                lines.append(f"{u_display} [{u.marker}]")
+                if getattr(u, "list_items", None) and not is_comparison:
+                    for item in u.list_items:
+                        for s in T.split_sentences(item):
+                            s_clean = re.sub(r"^\s*[-*•]\s*", "", s).strip().lower()
+                            if s_clean:
+                                covered_list_items.add(s_clean)
+                            item_body = re.sub(r"\s*\[S\d+\]", "", s).strip()
+                            if item_body:
+                                lines.append(f"{item_body} [{u.marker}]")
+                if u.follow:
+                    follow_body = re.sub(r"\s*\[S\d+\]", "", u.follow).strip()
+                    list_bodies = [re.sub(r"\s*\[S\d+\]", "", item).strip() for item in (getattr(u, "list_items", None) or ())]
+                    if follow_body not in list_bodies:
+                        lines.append(f"{u.follow} [{u.marker}]")
+                record["selected"].append({"marker": u.marker, "chunk_id": u.chunk_id, "sentence": u.text,
+                                            "coverage": round(unit_score(u, needs, weights, frame_normalization=self.frame_normalization), 3),
+                                            "kinds_ok": unit_kinds_ok(u, needs)})
         import rag_completeness as RC
         if RC.is_additional_evidence_enabled():
             add_ev = RC.extract_additional_evidence(

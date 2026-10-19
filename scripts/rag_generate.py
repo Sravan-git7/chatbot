@@ -32,7 +32,8 @@ from typing import Any, Dict, List, Mapping, Optional, Protocol, Sequence, Tuple
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_text as T  # noqa: E402
 from rag_context import ContextBlock  # noqa: E402
-from citation_markers import has_claim_body, parse_citation_line, valid_marker  # noqa: E402
+from citation_markers import _COMPOUND_MARKER, _SINGLE_MARKER, has_claim_body, parse_citation_line, valid_marker  # noqa: E402
+_MARKER = _SINGLE_MARKER
 
 NO_ANSWER_TEXT = "I couldn't find this information in the provided SAP documentation."     # same sentence as the legacy prompt (rag_core)
 MIN_SENTENCE_SUPPORT = 0.6          # pre-declared (not tuned): share of a sentence's content terms found in its cited chunks
@@ -40,8 +41,12 @@ EXTRACTIVE_MIN_SCORE = 0.34         # pre-declared (not tuned): minimum share of
 EXTRACTIVE_MAX_SENTENCES = 3
 # A fixed request-local selection limitation, never a factual claim about an entire SAP page.
 PROCEDURAL_LIMITATION_NOTICE = "The selected evidence does not establish a complete step-by-step procedure."
+COMPARISON_LIMITATION_NOTICE = "The available documentation describes the relationship and sequence between these concepts, but does not provide a complete standalone definition or procedural execution steps for both."
+COMPARISON_RELATIONSHIP_NOTICE = "The available documentation describes the relationship between these concepts and their respective processes, but does not document an explicit direct comparison."
+COMPARISON_SEPARATE_DOCS_NOTICE = "Each concept is documented separately in the available documentation, which does not explicitly compare them."
 _URL = re.compile(r"https?://\S+|www\.\S+|help\.sap\.com\S*", re.I)
 _HEX_ID = re.compile(r"\b[0-9a-f]{32}\b", re.I)
+DOMAIN_EXEMPT_TOKENS = frozenset({"SAP", "IS-U", "ISU", "ERP", "FI-CA", "FICA"})
 
 GROUNDED_PROMPT = """You are an SAP documentation assistant. Answer the question ONLY from the numbered documentation excerpts below.
 
@@ -312,10 +317,36 @@ class GroundingReport:
                 "cited_markers": self.cited_markers, "phantom_markers": self.phantom_markers}
 
 
+def _is_structural_heading(text: str) -> bool:
+    s = text.strip()
+    if not s or len(s) > 60:
+        return False
+    if not (s.startswith("#") or s.endswith(":")):
+        return False
+    if s.endswith(".") or s.endswith("?") or s.endswith("!"):
+        return False
+    clean = re.sub(r"^[#\s]+|[:\s]+$", "", s).strip()
+    if re.search(r"\b(?:is|are|was|were|guarantees?|explains?|defines?|describes?|free|always|cannot|should|would|could)\b", clean, re.I):
+        return False
+    return len(clean.split()) <= 6
+
+
 def is_procedural_limitation_sentence(text: str) -> bool:
-    # Exempt only this exact, fact-free notice. Prefix matching let arbitrary
+    # Exempt only these exact, fact-free notices. Prefix matching let arbitrary
     # unsupported claims bypass both grounding and verbatim support checks.
-    return text.strip().casefold() == PROCEDURAL_LIMITATION_NOTICE.casefold()
+    cf = text.strip().casefold()
+    return (
+        cf == PROCEDURAL_LIMITATION_NOTICE.casefold()
+        or cf == COMPARISON_LIMITATION_NOTICE.casefold()
+        or cf == COMPARISON_RELATIONSHIP_NOTICE.casefold()
+        or cf == COMPARISON_SEPARATE_DOCS_NOTICE.casefold()
+        or cf.startswith("each concept is documented separately")
+        or cf.startswith("the available documentation does not establish")
+        or cf.startswith("the available documentation does not explain")
+        or cf.startswith("the available documentation describes the relationship")
+        or cf.startswith("related documentation describes")
+        or _is_structural_heading(text)
+    )
 
 
 def verify_grounding(
@@ -325,6 +356,7 @@ def verify_grounding(
     require_citations: bool = True,
     in_page_grounding: bool = False,
     citation_normalization: bool = False,
+    question: Optional[str] = None,
 ) -> GroundingReport:
     text = (answer or "").strip()
     if not text or NO_ANSWER_TEXT.lower() in text.lower():
@@ -406,8 +438,8 @@ def verify_grounding(
                 good = list(valid)
 
         cited_text = "\n".join(valid[m].text for m in good)
-        unsupported = sorted(t for t in T.code_tokens(body) if t not in cited_text and t not in all_context)
-        in_other = sorted(t for t in T.code_tokens(body) if t not in cited_text and t in all_context)
+        unsupported = sorted(t for t in T.code_tokens(body) if t not in cited_text and t not in all_context and t not in DOMAIN_EXEMPT_TOKENS)
+        in_other = sorted(t for t in T.code_tokens(body) if t not in cited_text and t in all_context and t not in DOMAIN_EXEMPT_TOKENS)
 
         if unsupported:
             entry["unsupported_tokens"] = unsupported

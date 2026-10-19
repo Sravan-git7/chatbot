@@ -104,15 +104,22 @@ _PATTERNS: Tuple[Tuple[str, str], ...] = (
     (r"explain\s+like\s+i(?:\s+am|'m|m)?\s+(?:completely\s+|totally\s+|very\s+|quite\s+)?(?:new|a\s+beginner|a\s+novice)(?:\s+to\s+(?:this|that|it))?(?:\s+please)?", "simplify"),
     (r"explain\s+(?:(?:that|this|it)\s+)?in\s+(?:a\s+)?(?:simpler|simple|plain)\s+(?:way|language|words)(?:\s+please)?", "simplify"),
     (r"(?:please\s+)?(?:say|put)\s+(?:that|this|it)\s+in\s+(?:a\s+)?(?:simpler|simple|plain)\s+(?:way|language|words)(?:\s+please)?", "simplify"),
+    (r"(?:please\s+)?make\s+(?:that|this|it)\s+(?:simpler|simple|plain|clearer|more\s+plain|concise|shorter)(?:\s+please)?", "simplify"),
     # REFERENCE (pronouns; some of these carry their own topic words, see _carries_own_topic)
     (r"(?:and\s+)?what\s+about\s+(?:that|this|it|those|these)(?:\s+then)?", "reference"),
+    (r"(?:and\s+)?what\s+about\s+(?:the\s+|its\s+|their\s+)?(prerequisites?|requirements?|dependencies|rules?|steps?|process|transaction\s+codes?|tcodes?|definition|purpose|terms|details?)(?:\s+then)?(?:\s+please)?", "reference"),
     (r"what\s+does\s+(?:that|this|it)\s+mean(?:\s+by\s+that)?", "reference"),
     (r"what\s+do\s+you\s+mean(?:\s+by\s+(?:that|this))?", "reference"),
     (r"how\s+does\s+(?:that|this|it)\s+work(?:\s+exactly)?", "reference"),
+    (r"(?:please\s+)?(?:explain|describe|show|what\s+are)\s+(?:the\s+)?steps?\s+(?:to\s+\w+\s+)?(?:that|this|it)(?:\s+please)?", "reference"),
+    (r"how\s+(?:do|can)\s+(?:i|we)\s+\w+\s+(?:that|this|it)(?:\s+please)?", "reference"),
     (r"how\s+does\s+(?:that|this|it)\s+(?:relate|connect|link)\s+to\s+.+", "reference"),
     (r"what\s+is\s+the\s+(?:relationship|connection|link)\s+(?:between|with|to)\s+.+", "reference"),
     (r"how\s+is\s+(?:that|this|it)\s+(?:related|connected|linked)\s+to\s+.+", "reference"),
     (r"what\s+is\s+(?:that|this)(?:\s+then)?", "reference"),
+    (r"(?:and\s+)?what\s+(?:is|are)\s+(?:its|their)\s+.+", "reference"),
+    (r"(?:which|what)\s+transaction(?:\s+code)?\s+(?:runs?|creates?|is\s+used\s+for|executes?)\s+(?:it|this|that)", "reference"),
+    (r"what\s+transaction(?:\s+code)?\s+does\s+it\s+use", "reference"),
     (r"tell\s+me\s+(?:about\s+)?(?:that|this|it)(?:\s+again)?", "reference"),
     (r"explain\s+(?:that|this|it)\s+again", "reference"),
     (r"how(?:\s+exactly)?", "reference"),
@@ -128,6 +135,8 @@ _FOLLOWUP_VOCAB = (
     "stage", "item", "option", "else", "then", "more", "other", "deep", "deeper",
     "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth",
     "1st", "2nd", "3rd", "4th", "5th", "6th", "one", "two", "three", "four", "five", "six",
+    "transaction", "tcode", "code", "prerequisite", "prerequisites", "requirement", "requirements",
+    "dependency", "dependencies",
 )
 _FOLLOWUP_TERMS = frozenset(T.stem(w) for w in _FOLLOWUP_VOCAB)
 
@@ -285,32 +294,40 @@ def _extract_ordinal_target(message: str) -> Optional[int]:
 
 
 def _extract_numbered_units(answer: str) -> Dict[int, str]:
-    """Extract numbered steps or resolvable units from the prior answer."""
+    """Extract numbered steps, bullet points, or ordered units from the prior answer."""
     units: Dict[int, str] = {}
     if not answer or not isinstance(answer, str):
         return units
-    lines = answer.splitlines()
+    lines = [line.strip() for line in answer.splitlines() if line.strip()]
+
+    # 1. Check for explicit numbers (1., 2), step 1, etc.)
     for line in lines:
-        line = line.strip()
-        m = re.match(r"^(?:step\s+)?(\d{1,2})[.):]\s+(.*)", line, flags=re.IGNORECASE)
+        m = re.match(r"^(?:step\s+|point\s+)?(?:\(?(\d{1,2})[.):]|\((\d{1,2})\))\s*(.*)", line, flags=re.IGNORECASE)
         if m:
-            num = int(m.group(1))
-            content = re.sub(r"\[S\d+\]", "", m.group(2)).strip()
+            num = int(m.group(1) or m.group(2))
+            content = re.sub(r"\[S\d+\]", "", m.group(3)).strip()
             if content and num not in units:
                 units[num] = content
     if units:
         return units
+
     matches = re.finditer(
-        r"(?:^|\s)(?:step\s+)?(\d{1,2})[.):]\s+([^0-9]+?)(?=(?:\s+(?:step\s+)?\d{1,2}[.):])|$)",
+        r"(?:^|\s)(?:step\s+|point\s+)?(?:\(?(\d{1,2})[.):]|\((\d{1,2})\))\s+([^0-9]+?)(?=(?:\s+(?:step\s+|point\s+)?\d{1,2}[.):])|$)",
         answer,
         flags=re.IGNORECASE,
     )
     for m in matches:
-        num = int(m.group(1))
-        content = re.sub(r"\[S\d+\]", "", m.group(2)).strip()
+        num = int(m.group(1) or m.group(2))
+        content = re.sub(r"\[S\d+\]", "", m.group(3)).strip()
         if content and num not in units:
             units[num] = content
     return units
+
+
+def _anchor_subject(anchor: str) -> str:
+    cleaned = re.sub(r"^(?:what\s+(?:is|are)(?:\s+(?:a|an|the))?|how\s+does|how\s+to|tell\s+me\s+about)\s+", "", anchor, flags=re.I).strip(" ?.")
+    cleaned = re.sub(r"\s+work\??$", "", cleaned, flags=re.I).strip(" ?.")
+    return cleaned if cleaned else anchor.strip(" ?.")
 
 
 def resolve(message: Any, context: Optional[Mapping[str, Any]] = None) -> Optional[Dict[str, Any]]:
@@ -366,6 +383,50 @@ def resolve(message: Any, context: Optional[Mapping[str, Any]] = None) -> Option
                 "unresolved_ordinal": ordinal_target,
                 "query": re.sub(r"\s+", " ", query).strip(),
             }
+
+    m_aspect = re.match(
+        r"^(?:and\s+)?what\s+about\s+(?:the\s+|its\s+|their\s+)?(prerequisites?|requirements?|dependencies?|rules?|steps?|process|transaction\s+codes?|tcodes?|definition|purpose|terms|details?)(?:\s+then)?(?:\s+please)?\??$",
+        text,
+        re.I,
+    )
+    if m_aspect:
+        aspect = m_aspect.group(1).rstrip("?. ")
+        subject = _anchor_subject(anchor)
+        query = f"What are the {aspect} for {subject}?"
+        return {
+            "category": category,
+            "anchor": anchor,
+            "anchor_source": source,
+            "anchor_index": index,
+            "form": "aspect_resolution",
+            "query": re.sub(r"\s+", " ", query).strip(),
+        }
+
+    if category == "reference" and (
+        re.search(r"\b(?:its|their)\b", text, re.I)
+        or (re.search(r"\b(?:steps?|how\s+to|how\s+do|how\s+can)\b", text, re.I) and re.search(r"\b(?:that|this|it)\b", text, re.I))
+    ):
+        subject = _anchor_subject(anchor)
+        m = re.match(r"^(?:and\s+)?what\s+(?:is|are)\s+(?:its|their)\s+(.+)", text, re.I)
+        if m:
+            prop = m.group(1).rstrip("?. ")
+            query = f"What is the {prop} for {subject}?"
+        elif re.search(r"\b(?:steps?|how\s+to|how\s+do|how\s+can)\b", text, re.I):
+            query = re.sub(r"\b(?:that|this|it)\b", f"the {subject}", text, flags=re.I)
+        elif re.search(r"\b(?:its|their)\b", text, re.I):
+            query = re.sub(r"\b(?:its|their)\b", f"the {subject}", text, flags=re.I)
+        elif _carries_own_topic(text, anchor):
+            query = f"{anchor} {text}"[:MAX_RESOLVED_CHARS]
+        else:
+            query = re.sub(r"\b(?:that|this|it)\b", f"the {subject}", text, flags=re.I)
+        return {
+            "category": category,
+            "anchor": anchor,
+            "anchor_source": source,
+            "anchor_index": index,
+            "form": "anaphora_resolution",
+            "query": re.sub(r"\s+", " ", query).strip(),
+        }
 
     if _carries_own_topic(text, anchor):
         # the follow-up names its own topic ("... how does it relate to a business partner?"): keep the user's words

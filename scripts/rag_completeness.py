@@ -31,12 +31,33 @@ def is_additional_evidence_enabled() -> bool:
 # 1. Deterministic Intent Classification & Retrieval-Only Query Normalization
 # ---------------------------------------------------------------------------
 
+_INSTRUCTION_MANIPULATION_PATTERNS = re.compile(
+    r"\b(?:system\s+(?:override|directive|prompt|instructions?)|"
+    r"you\s+are\s+now\s+(?:dan|unrestricted|unfiltered)|"
+    r"forget\s+(?:all\s+)?(?:safety\s+)?(?:protocols|rules|instructions?)|"
+    r"(?:ignore|disregard)\s+(?:all\s+)?(?:your\s+|previous\s+|all\s+)?(?:instructions|prompts|directives)(?:\s+and\s+(?:answer\s+without\s+(?:sources|citations)|bypass\s+citations?))?[^.?!:;\n]*|"
+    r"(?:reveal|show|display|print|output|tell\s+me)\s+(?:all\s+)?(?:your\s+)?(?:hidden\s+|internal\s+|initial\s+)?(?:system\s+prompts?|secrets?|internal\s+configuration|instructions?|prompt\s+templates?|prompts?|rules?)[^.?!:;\n]*|"
+    r"what\s+is\s+your\s+system\s+prompt|"
+    r"answer\s+without\s+(?:sources|citations)|"
+    r"invent\s+(?:an\s+)?answer(?:\s+if\s+necessary)?|"
+    r"fabricate\s+(?:a\s+)?(?:transaction\s+code|detail|answer|source)|"
+    r"bypass\s+citation\s+requirements?|"
+    r"do\s+not\s+(?:use|include)\s+sources?)\b[:;,.]?",
+    re.IGNORECASE,
+)
+
 _CONVERSATIONAL_PREFIXES = re.compile(
-    r"^(?:can\s+you\s+(?:please\s+)?(?:tell\s+me|explain|describe|show\s+me)|"
-    r"could\s+you\s+(?:please\s+)?(?:tell\s+me|explain|describe)|"
-    r"i\s+(?:would\s+like|want)\s+to\s+(?:know|understand)|"
-    r"please\s+(?:tell\s+me|explain|describe)|"
-    r"what\s+can\s+you\s+tell\s+me\s+about)\s+",
+    r"^(?:also\s*[,:]?\s*)?(?:and\s+)?(?:now\s*[,:]?\s*)?"
+    r"(?:can\s+you\s+(?:please\s+)?|could\s+you\s+(?:please\s+)?|"
+    r"i\s+(?:would\s+like|want)\s+to\s+(?:know|understand)|please\s+)?"
+    r"(?:tell\s+me(?:\s+about)?|explain(?:\s+about)?|describe|show\s+me|what\s+can\s+you\s+tell\s+me\s+about)\s+",
+    re.IGNORECASE,
+)
+
+_TRAILING_META_PROMPT_PATTERNS = re.compile(
+    r"(?:\s*(?:using|from|in|based\s+on|according\s+to)\s+(?:the\s+)?"
+    r"(?:verified\s+|authoritative\s+|official\s+|available\s+)?"
+    r"(?:sap\s+(?:utilities\s+)?)?documentation[.]?)+$",
     re.IGNORECASE,
 )
 
@@ -48,6 +69,12 @@ _PROCEDURAL_PATTERNS = re.compile(
 
 _DEFINITION_PATTERNS = re.compile(
     r"\b(?:what\s+is\s+a|what\s+is\s+an|what\s+is\s+the|what\s+is|what\s+are|define|definition\s+of|meaning\s+of|overview\s+of)\b",
+    re.IGNORECASE,
+)
+
+_COMPARISON_PATTERNS = re.compile(
+    r"\b(?:difference\s+between|differences\s+between|how\s+does\s+.+?\s+differ\s+from|distinction\s+between|"
+    r"compare\s+.+?\s+(?:to|with|and)|vs\.?|versus)\b",
     re.IGNORECASE,
 )
 
@@ -67,6 +94,8 @@ def classify_intent(query: str) -> Dict[str, Any]:
     q = (query or "").strip()
     intents: List[str] = []
 
+    if _COMPARISON_PATTERNS.search(q):
+        intents.append("comparison")
     if _DEFINITION_PATTERNS.search(q):
         intents.append("definition")
     if _PROCEDURAL_PATTERNS.search(q):
@@ -80,10 +109,24 @@ def classify_intent(query: str) -> Dict[str, Any]:
     return {
         "primary_intent": primary_intent,
         "intents": intents or ["general"],
+        "is_comparison": "comparison" in intents,
         "is_procedural": "procedural" in intents,
         "is_definition": "definition" in intents,
         "is_relationship": "relationship" in intents,
     }
+
+
+def strip_instruction_manipulation(query: str) -> str:
+    """Strip prompt injection and instruction bypass phrases for retrieval and intent analysis."""
+    q = (query or "").strip()
+    cleaned = _INSTRUCTION_MANIPULATION_PATTERNS.sub("", q).strip()
+    cleaned = re.sub(r"^[:;,.\s]+", "", cleaned)
+    cleaned = _CONVERSATIONAL_PREFIXES.sub("", cleaned).strip()
+    cleaned = _TRAILING_META_PROMPT_PATTERNS.sub("", cleaned).strip()
+    cleaned = re.sub(r"^(?:(?:and\s+)?(?:tell\s+me|explain|describe|show\s+me|in\s+detail|briefly)[:;,.\s]+)+", "", cleaned, flags=re.I).strip()
+    cleaned = re.sub(r"^(?:please\s+)?(?:answer|reply)\s+(?:concisely|in\s+detail|briefly|shortly|quickly)[:;,.\s]+", "", cleaned, flags=re.I).strip()
+    cleaned = re.sub(r"^[:;,.\s]+", "", cleaned)
+    return cleaned if cleaned else q
 
 
 _RETRIEVAL_EQUIVALENCES = (
@@ -108,6 +151,8 @@ def normalize_domain_synonyms(query: str) -> str:
     additions: List[str] = []
     for pattern, expansion in _RETRIEVAL_EQUIVALENCES:
         if pattern.search(q) and not re.search(rf"\b{re.escape(expansion)}\b", q, re.I):
+            if expansion == "Contract Accounts Receivable and Payable" and re.search(r"\b(clearing|clear|installment|dunning)\b", q, re.I):
+                continue
             if not any(re.search(rf"\b{re.escape(expansion)}\b", existing, re.I) for existing in additions):
                 additions.append(expansion)
     return f"{q} {' '.join(additions)}" if additions else q
@@ -115,13 +160,14 @@ def normalize_domain_synonyms(query: str) -> str:
 def normalize_retrieval_query(query: str) -> str:
     """Normalize query strictly for retrieval/routing token matching.
 
-    Applies deterministic domain synonyms and removes conversational fluff prefixes
-    for token matching. Does NOT modify the user-visible question.
+    Applies deterministic domain synonyms, strips adversarial prompt manipulations,
+    and removes conversational fluff prefixes for token matching.
+    Does NOT modify the user-visible question.
     """
-    q = (query or "").strip()
-    if is_intent_aware_enabled():
-        cleaned = _CONVERSATIONAL_PREFIXES.sub("", q).strip()
-        q = cleaned if cleaned else q
+    q = strip_instruction_manipulation(query)
+    cleaned = _CONVERSATIONAL_PREFIXES.sub("", q).strip()
+    cleaned = _TRAILING_META_PROMPT_PATTERNS.sub("", cleaned).strip()
+    q = cleaned if cleaned else q
 
     return normalize_domain_synonyms(q)
 

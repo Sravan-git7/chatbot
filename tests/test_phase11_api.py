@@ -29,7 +29,7 @@ if HAVE_API:
 
 INTERNAL_ID = re.compile(r"\bM2C-\d+\b")
 RESPONSE_KEYS = {"schema_version", "conversation_id", "status", "answer", "sources", "topic_reference", "metadata", "structured_answer", "documentation_coverage"}
-META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "can_elaborate", "grounding", "claim_grounding", "pipeline_status", "reason_code", "latency_ms", "topic_identity", "documentation_coverage"}
+META_KEYS = {"card_id", "card_title", "identity_status", "page_available", "generator", "grounded", "can_elaborate", "grounding", "claim_grounding", "pipeline_status", "reason_code", "latency_ms", "topic_identity", "documentation_coverage", "verification_status", "verification_label"}
 SOURCE_KEYS = {"type", "marker", "title", "section", "url", "url_status", "source_id", "chunk_id", "doc_id", "guide_id", "page_id", "source_ids", "content_hash", "page_text_sha256"}
 
 
@@ -232,7 +232,9 @@ class ResponseContractTests(unittest.TestCase):
     def test_deterministic_extractive_response(self):
         a, b = post(self.c, conversation_id="same").json(), post(self.c, conversation_id="same").json()
         for r in (a, b):
-            r["metadata"].pop("latency_ms")
+            r["metadata"].pop("latency_ms", None)
+            r["metadata"].pop("cached", None)
+            r.pop("id", None)
         self.assertEqual(a, b)
 
     def test_json_serialisation_is_strict_and_utf8(self):

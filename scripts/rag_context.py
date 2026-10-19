@@ -130,7 +130,7 @@ def build_context(hits: Sequence[Any], count_tokens: Callable[[str], int], budge
         selected.append(h)
         seen_hash.add(h.content_hash)
         used += t
-    selected.sort(key=lambda x: x.chunk_index)
+    selected.sort(key=lambda x: (getattr(x, "page_id", ""), getattr(x, "chunk_index", 0)))
     prev: Optional[Any] = None
     for n, h in enumerate(selected, start=1):
         adjacent = prev is not None and prev.page_id == h.page_id and h.chunk_index == prev.chunk_index + 1

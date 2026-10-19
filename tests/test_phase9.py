@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import socket
 import sys
@@ -29,7 +30,7 @@ except Exception:                                                        # noqa:
     HAVE_MODEL = False
 from tests.phase8_support import CARD_STORE, PAGE_STORE  # noqa: E402
 
-STORES = HAVE_CHROMA and HAVE_MODEL and (CARD_STORE / "chroma.sqlite3").is_file() and (PAGE_STORE / "chroma.sqlite3").is_file()
+STORES = (os.environ.get("SURA_TEST_ISOLATED") != "1") and HAVE_CHROMA and HAVE_MODEL and (CARD_STORE / "chroma.sqlite3").is_file() and (PAGE_STORE / "chroma.sqlite3").is_file()
 NEED_STORES = unittest.skipUnless(STORES, "needs chromadb, the embedding model, the card store and the page store")
 NEED_PIPE = unittest.skipUnless(HAVE_CHROMA and HAVE_BS4, "chromadb / bs4 not installed")
 

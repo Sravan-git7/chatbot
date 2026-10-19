@@ -13,6 +13,7 @@ Contract rules (Phase 13-A):
 """
 from __future__ import annotations
 
+import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -47,7 +48,6 @@ def discriminative_phrases(query: str, max_phrases: int = PHRASE_MAX) -> List[st
     because "the" is kept). Uniqueness is enforced at scoring time (a phrase that occurs in exactly
     ONE ingested page page is discriminative; phrases in 0 or >= 2 pages carry no signal).
     """
-    import re
     tokens = [t for t in re.findall(r"[a-z0-9_-]+", (query or "").lower()) if len(t) >= PHRASE_TOKEN_MIN_LEN]
     out: List[str] = []
     seen = set()
@@ -180,7 +180,6 @@ def score_candidate(
     if code_aware and query_code_tokens and ingested:
         if not page_txt and hits:
             page_txt = " ".join(f"{h.title} {h.text}" for h in hits)
-        import re
         if any(re.search(r'\b' + re.escape(ct.lower()) + r'\b', page_txt.lower()) for ct in query_code_tokens):
             code_match = 1.0
 
@@ -205,6 +204,49 @@ def score_candidate(
 
     if ingested:
         score = w_card * card_sim + w_page * page_sim + w_cov * coverage + w_tech * tech
+        cand_title_low = (cand.title or "").lower()
+        cand_title_terms = set(T.terms(cand.title or ""))
+
+        # 1. Title / topical alignment: boost candidates whose title concepts directly match query terms
+        if cand_title_terms and qterms:
+            overlap = len(set(qterms) & cand_title_terms) / len(cand_title_terms)
+            if overlap > 0.0:
+                score += 0.10 * overlap
+
+        # Domain-specific topical alignment: focus on core operational terms rather than generic category words
+        generic_cat_words = {"overview", "detail", "details", "procedur", "procedure", "process", "sap", "util", "utilities"}
+        cand_domain = cand_title_terms - generic_cat_words
+        q_domain = set(qterms) - generic_cat_words - {"differ", "difference", "how", "what", "work", "step"}
+        if cand_domain and q_domain:
+            domain_overlap = len(cand_domain & q_domain) / max(len(q_domain), 1)
+            if domain_overlap > 0.0:
+                score += 0.16 * domain_overlap
+
+        # Discourage unrequested sub-specializations when query does not request them
+        if "budget" in cand_title_low and "budget" not in query.lower():
+            score -= 0.08
+        if "automatic" in cand_title_low and "automatic" not in query.lower():
+            score -= 0.05
+        # Discourage generic overview cards when query asks about a specific functional domain operation
+        if "overview" in cand_title_low and not (cand_domain & q_domain):
+            score -= 0.08
+
+        # Multi-concept coverage for comparison queries: candidates whose title covers multiple compared entities
+        if re.search(r"\b(difference|differ|compare|distinction|versus|vs)\b", query, re.I):
+            cand_words = set(re.findall(r"[a-z0-9]+", (cand.title or "").lower())) - {"overview", "process", "details", "procedure", "sap", "utilities"}
+            q_comp_words = set(re.findall(r"[a-z0-9]+", query.lower())) - {"what", "is", "the", "difference", "differences", "between", "and", "or", "versus", "vs", "from", "differ", "how", "does"}
+            matched_words = cand_words & q_comp_words
+            is_reporting_card = any(term in cand_title_low for term in ("analysis", "monitoring", "kpi", "catalog", "fiori", "analytics"))
+            if not is_reporting_card:
+                if len(matched_words) >= 3 or (len(q_comp_words) >= 2 and matched_words == q_comp_words):
+                    score += 0.12
+                elif len(matched_words) >= 1 and any(w in cand_words for w in ("invoicing", "billing", "clearing")):
+                    score += 0.08
+
+        # 2. Discourage peripheral catalogs/reporting when query seeks conceptual or procedural information
+        query_wants_reporting = bool(re.search(r"\b(analy|report|monitor|dashboard|kpi|catalog|fiori)\b", query, re.I))
+        if not query_wants_reporting and any(term in cand_title_low for term in ("analysis", "monitoring", "kpi", "catalog", "fiori", "analytics")):
+            score -= 0.20
     elif status_7c in (pid.CONFLICTING_IDENTITY, pid.CARD_IDENTITY_ONLY, pid.UNRESOLVED):
         score = w_card * card_sim - UNRESOLVED_PENALTY
     else:

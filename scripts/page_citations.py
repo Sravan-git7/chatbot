@@ -42,24 +42,26 @@ _ID32 = re.compile(r"^[0-9a-f]{32}$", re.I)
 
 
 def validate_context_provenance(context: Any, identity: "pid.PageIdentity", ctx: "pid.IdentityContext",
-                                corpus_entry: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
+                                corpus_entry: Optional[Mapping[str, Any]] = None,
+                                additional_topics: Optional[Sequence[Tuple[Any, "pid.PageIdentity", Optional[Mapping[str, Any]]]]] = None) -> Dict[str, Any]:
     """Validate each citation marker against one immutable page-chunk object and its page manifest.
 
     A malformed, duplicated, cross-page, wrong-source, or content-hash-mismatched object is fatal.
     A recorded SAP URL that does not identify the admitted guide/page is retained for audit but is
     explicitly unverified and must not be exposed as a clickable citation. We never repair/build URLs.
+    When additional_topics is provided, each chunk is checked against its own authorized topic identity.
     """
     items = list(getattr(context, "items", ()) or ())
     counts: Dict[str, int] = {}
     for item in items:
         marker = str(getattr(item, "marker", "") or "")
         counts[marker] = counts.get(marker, 0) + 1
-    expected_guide = str(getattr(identity, "effective_guide_id", None) or "").lower()
-    expected_page = str(getattr(identity, "effective_page_id", None) or "").lower()
-    expected_source_id = str(getattr(identity, "source_id", None) or "")
-    corpus = corpus_entry if isinstance(corpus_entry, Mapping) else {}
-    expected_page_hash = str(corpus.get("text_sha256") or "").lower()
-    expected_corpus_doc_id = str(corpus.get("doc_id") or "")
+
+    all_targets = [(identity, corpus_entry if isinstance(corpus_entry, Mapping) else {})]
+    if additional_topics:
+        for _acard, _aident, _acorp in additional_topics:
+            all_targets.append((_aident, _acorp if isinstance(_acorp, Mapping) else {}))
+
     numeric_pairs = MC.recorded_numeric_pairs(ctx)
     checked_items: List[Dict[str, Any]] = []
     errors: List[Dict[str, Any]] = []
@@ -83,12 +85,31 @@ def validate_context_provenance(context: Any, identity: "pid.PageIdentity", ctx:
             item_errors.append("DUPLICATE_MARKER")
         if not _ID32.fullmatch(guide_id) or not _ID32.fullmatch(page_id):
             item_errors.append("INVALID_GUIDE_OR_PAGE_ID")
-        if corpus.get("corpus_status") != "ingested":
+
+        target_match = None
+        for cand_ident, cand_corp in all_targets:
+            c_guide = str(getattr(cand_ident, "effective_guide_id", None) or "").lower()
+            c_page = str(getattr(cand_ident, "effective_page_id", None) or "").lower()
+            if (guide_id, page_id) == (c_guide, c_page):
+                target_match = (cand_ident, cand_corp)
+                break
+
+        if target_match is None:
+            item_errors.append("CONTEXT_IDENTITY_MISMATCH")
+            cur_ident, cur_corp = identity, corpus_entry if isinstance(corpus_entry, Mapping) else {}
+        else:
+            cur_ident, cur_corp = target_match
+
+        expected_guide = str(getattr(cur_ident, "effective_guide_id", None) or "").lower()
+        expected_page = str(getattr(cur_ident, "effective_page_id", None) or "").lower()
+        expected_source_id = str(getattr(cur_ident, "source_id", None) or "")
+        expected_page_hash = str(cur_corp.get("text_sha256") or "").lower()
+        expected_corpus_doc_id = str(cur_corp.get("doc_id") or "")
+
+        if cur_corp.get("corpus_status") != "ingested":
             item_errors.append("CORPUS_ENTRY_NOT_INGESTED")
         if not _HASH64.fullmatch(expected_page_hash):
             item_errors.append("PAGE_MANIFEST_HASH_MISSING_OR_INVALID")
-        if (guide_id, page_id) != (expected_guide, expected_page):
-            item_errors.append("CONTEXT_IDENTITY_MISMATCH")
         if not expected_source_id or expected_source_id not in source_ids:
             item_errors.append("SOURCE_ID_MISSING_OR_MISMATCHED")
         if len(source_ids) != len(set(source_ids)):
@@ -120,9 +141,9 @@ def validate_context_provenance(context: Any, identity: "pid.PageIdentity", ctx:
             url_status = MC.URL_FLAG_NOT_PARSEABLE
         elif url_parts["page_id"] != page_id:
             url_status = "URL_PAGE_ID_MISMATCH"
-        elif url_parts["segment_kind"] == "loio" and url_parts["segment"] == guide_id:
+        elif url_parts["segment_kind"] == "loio" and (url_parts["segment"] == guide_id or (getattr(cur_ident, "card_guide_id", None) and url_parts["segment"] == str(cur_ident.card_guide_id).lower())):
             url_status = "VERIFIED"
-        elif url_parts["segment_kind"] == "numeric_deliverable" and numeric_pairs.get(url_parts["segment"]) == guide_id:
+        elif url_parts["segment_kind"] == "numeric_deliverable" and (numeric_pairs.get(url_parts["segment"]) == guide_id or (getattr(cur_ident, "card_guide_id", None) and numeric_pairs.get(url_parts["segment"]) == str(cur_ident.card_guide_id).lower())):
             url_status = "VERIFIED"
         else:
             url_status = "URL_GUIDE_RELATION_NOT_ESTABLISHED"
@@ -143,12 +164,11 @@ def validate_context_provenance(context: Any, identity: "pid.PageIdentity", ctx:
 
 
 def build_citations(card: Any, identity: "pid.PageIdentity", ctx: "pid.IdentityContext", context: Optional[Any] = None,
-                    verification: Optional[Any] = None, corpus_entry: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+                    verification: Optional[Any] = None, corpus_entry: Optional[Dict[str, Any]] = None,
+                    additional_topics: Optional[Sequence[Tuple[Any, "pid.PageIdentity", Optional[Mapping[str, Any]]]]] = None) -> Dict[str, Any]:
     pairs = MC.recorded_numeric_pairs(ctx)
     pointer = MC.card_route_entry(card, identity, ctx)
     if corpus_entry:
-        # The 7C/7D identity status is computed against data/sap_help only. Phase 8 holds page text in data/page_corpus; say so on the pointer
-        # (the 7D entry itself is not modified: this is a copy).
         pointer["page_corpus"] = {"status": corpus_entry.get("corpus_status"), "doc_id": corpus_entry.get("doc_id"), "reason": corpus_entry.get("reason")}
         if corpus_entry.get("corpus_status") == "ingested":
             pointer["statement"] = ("Topic identified by the M2C card; this entry is a pointer to the SAP page, not page text. Page text for this topic is held in the "
@@ -164,22 +184,30 @@ def build_citations(card: Any, identity: "pid.PageIdentity", ctx: "pid.IdentityC
     answer_sources: List[Dict[str, Any]] = []
     not_cited: List[Dict[str, Any]] = []
     if context is not None:
-        provenance = validate_context_provenance(context, identity, ctx, corpus_entry)
+        provenance = validate_context_provenance(context, identity, ctx, corpus_entry, additional_topics=additional_topics)
         provenance_by_marker = {row["marker"]: row for row in provenance["items"]}
         if not provenance["ok"]:
             notes.append("source provenance validation failed; answer sources are withheld")
         cited = (set(verification.cited_markers)
                  if provenance["ok"] and verification is not None and verification.ok and not verification.refusal else set())
+        all_identities = [(identity, card)] + [(ti, tc) for tc, ti, _ in (additional_topics or [])]
         for item in context.items:
             if item.marker in cited:
-                e = MC.page_chunk_entry(_chunk_for(item), identity, pairs)
+                item_id = identity
+                for cand_id, cand_card in all_identities:
+                    c_guide = str(getattr(cand_id, "effective_guide_id", None) or "").lower()
+                    c_page = str(getattr(cand_id, "effective_page_id", None) or "").lower()
+                    if (str(item.guide_id or "").lower(), str(item.page_id or "").lower()) == (c_guide, c_page):
+                        item_id = cand_id
+                        break
+                e = MC.page_chunk_entry(_chunk_for(item), item_id, pairs)
                 source_provenance = provenance_by_marker[item.marker]
-                e.update({"marker": item.marker, "provided_as_context": True, "used_as_answer_text": True, "verified_used": True,
+                e.update({"marker": item.marker, "source_id": getattr(item_id, "source_id", None) or e.get("join", {}).get("card_source_id"),
+                          "provided_as_context": True, "used_as_answer_text": True, "verified_used": True,
                           "heading_path": list(item.heading_path), "section_title": item.section_title, "chunk_index": item.chunk_index,
                           "content_hash": item.content_hash, "page_text_sha256": item.page_text_sha256,
                           "guide_id": item.guide_id, "page_id": item.page_id, "doc_id": item.doc_id,
                           "source_ids": list(item.source_ids), "provenance": source_provenance,
-                          # Keep the raw recorded URL in the provenance audit, but never expose an unverified URL as a link.
                           "url": e.get("url") if source_provenance["url_verified"] else None,
                           "url_flag": None if source_provenance["url_verified"] else source_provenance["url_status"]})
                 if not e["join"]["joined_to_card"]:
@@ -188,8 +216,11 @@ def build_citations(card: Any, identity: "pid.PageIdentity", ctx: "pid.IdentityC
             else:
                 not_cited.append({"marker": item.marker, "chunk_id": item.chunk_id, "heading_path": list(item.heading_path), "provided_as_context": True,
                                   "used_as_answer_text": False, "verified_used": False})
-    return {"topic_pointer": pointer, "answer_sources": answer_sources, "context_not_cited": not_cited,
-            "label": LABEL_ANSWER if answer_sources else LABEL_NONE, "notes": notes}
+    res = {"topic_pointer": pointer, "answer_sources": answer_sources, "context_not_cited": not_cited,
+           "label": LABEL_ANSWER if answer_sources else LABEL_NONE, "notes": notes}
+    if additional_topics:
+        res["additional_topic_pointers"] = [MC.card_route_entry(c, i, ctx) for c, i, _ in additional_topics]
+    return res
 
 
 def format_answer_sources(cit: Dict[str, Any]) -> str:

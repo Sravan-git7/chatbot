@@ -284,13 +284,33 @@ export default function MessageView({
                     </div>
                   )}
                 </div>
-                {r.metadata.grounded && (
+                {r.metadata.grounded &&
+                  (r.metadata.verification_status === 'verified' ||
+                    r.metadata.verification_status === 'partially_supported') && (
                   <span
-                    className="inline-flex items-center gap-1.5 text-xs text-stone-500"
-                    title="Every sentence was checked against the cited documentation text"
+                    className={`inline-flex items-center gap-1.5 text-xs ${
+                      r.metadata.verification_status === 'partially_supported'
+                        ? 'text-amber-700'
+                        : 'text-stone-500'
+                    }`}
+                    title={
+                      r.metadata.verification_status === 'partially_supported'
+                        ? 'Sentences are grounded in documentation, but full coverage or procedural details are limited'
+                        : 'Every cited statement was verified against the cited documentation text'
+                    }
+                    data-testid="verification-badge"
                   >
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-                    Checked against the documentation
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full ${
+                        r.metadata.verification_status === 'partially_supported'
+                          ? 'bg-amber-500'
+                          : 'bg-accent'
+                      }`}
+                      aria-hidden="true"
+                    />
+                    {r.metadata.verification_label || (r.metadata.verification_status === 'partially_supported'
+                      ? 'Partially supported by documentation'
+                      : 'Lexically checked against documentation')}
                   </span>
                 )}
               </div>

@@ -34,6 +34,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rag_elaborate as EL  # noqa: E402
 import rag_followup as FU  # noqa: E402
 import rag_response as RR  # noqa: E402  deterministic response composer
+import rag_text as T  # noqa: E402
 from rag_status import (ANSWERED, API_STATUSES, DOCUMENTATION_UNAVAILABLE, NO_ADDITIONAL_VERIFIED_EVIDENCE,
                         OUT_OF_SCOPE, UNABLE_TO_VERIFY)  # noqa: E402
 
@@ -49,6 +50,17 @@ DOC_UNAVAILABLE = DOCUMENTATION_UNAVAILABLE
 ELABORATION_EXHAUSTED_MODE = "elaboration_exhausted"       # routing.mode for an exhausted scoped elaboration
 ELABORATION_CONTEXT_MISSING = "ELABORATION_CONTEXT_MISSING"
 ELABORATION_CONTEXT_MISSING_TEXT = "Please share the SAP Utilities topic or original question you'd like me to elaborate on."
+STANDALONE_CLARIFICATION_REQUIRED = "STANDALONE_CLARIFICATION_REQUIRED"
+STANDALONE_CLARIFICATION_TEXT = "Could you please clarify which SAP Utilities topic or process you are asking about (for example, billing, invoicing, clearing, or installment plans)?"
+_STANDALONE_AMBIGUOUS_RE = re.compile(
+    r"^(?:(?:please\s+)?how\s+does\s+(?:that|this|it)\s+work(?:\s+exactly)?|"
+    r"(?:please\s+)?what\s+does\s+(?:that|this|it)\s+do(?:\s+exactly)?|"
+    r"(?:please\s+)?what\s+does\s+(?:that|this|it)\s+mean|"
+    r"(?:please\s+)?what\s+is\s+(?:that|this|it)(?:\s+then)?|"
+    r"(?:please\s+)?explain\s+(?:that|this|it)(?:\s+in\s+more\s+detail)?|"
+    r"(?:please\s+)?tell\s+me\s+more\s+about\s+(?:that|this|it))\??$",
+    re.I,
+)
 # pipeline status (rag_pipeline.STATUSES) -> API status
 STATUS_MAP = {"answered": ANSWERED, "page_not_ingested": DOC_UNAVAILABLE, "unresolved_identity": UNABLE_TO_VERIFY, "insufficient_context": UNABLE_TO_VERIFY,
               "out_of_domain": OUT_OF_SCOPE, "no_relevant_page": OUT_OF_SCOPE}
@@ -234,6 +246,8 @@ def _exhausted_routing(routing: Any) -> Dict[str, Any]:
 
 
 def _source(s: Mapping[str, Any]) -> Dict[str, Any]:
+    if s.get("type") == "page" and "marker" in s and ("url_status" in s or "provenance" not in s):
+        return dict(s)
     provenance = s.get("provenance") if isinstance(s.get("provenance"), Mapping) else {}
     url_verified = provenance.get("url_verified") is True and s.get("url_flag") is None
     return {"type": "page", "marker": s.get("marker"), "title": s.get("title"),
@@ -252,6 +266,7 @@ def _grounding(dbg: Mapping[str, Any], status: str) -> Dict[str, Any]:
         return {"checked": False, "ok": None, "sentences": 0, "violations": 0, "cited_markers": []}
     return {"checked": True, "ok": bool(g["ok"]) and status == "answered", "sentences": len(g.get("sentences") or []), "violations": len(g.get("violations") or []),
             "cited_markers": list(g.get("cited_markers") or [])}
+
 
 
 def support_chain(answer: str, dbg: Mapping[str, Any]) -> Dict[str, Any]:
@@ -319,8 +334,14 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     elif raw.get("reason_code") == ELABORATION_CONTEXT_MISSING:
         answer = ELABORATION_CONTEXT_MISSING_TEXT
         sources = []
+    elif raw.get("reason_code") == STANDALONE_CLARIFICATION_REQUIRED:
+        answer = STANDALONE_CLARIFICATION_TEXT
+        sources = []
     elif raw.get("reason_code") == "AMBIGUOUS_PAYMENT_PROCESS":
         answer = PAYMENT_SCOPE_CLARIFICATION_TEXT
+        sources = []
+    elif raw.get("reason_code") == "PROMPT_MANIPULATION_REFUSAL":
+        answer = raw.get("answer") or "I can only assist with SAP Utilities documentation topics. Please ask a question related to SAP Utilities."
         sources = []
     else:
         answer = UNRESOLVED_TEXT if pstatus == "unresolved_identity" else USER_TEXT[status]
@@ -328,15 +349,20 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     reference = None
     candidates = raw.get("routing", {}).get("candidates") or []
     cand = candidates[0] if candidates else {}
-    has_routing_relevance = bool(
-        cand.get("coverage", 0.0) > 0.0
-        or cand.get("phrase_match", 0.0) > 0.0
-        or cand.get("code_match", 0.0) > 0.0
-    )
-    if not any(k in cand for k in ("coverage", "phrase_match", "code_match")):
-        has_routing_relevance = bool(topic.get("title"))
+    raw_query = str(raw.get("query") or raw.get("message") or "")
+    import rag_completeness as RC
+    clean_query = RC.strip_instruction_manipulation(raw_query)
+    effective_query = clean_query if clean_query else raw_query
+    query_terms = set(T.terms(effective_query))
+    topic_terms = set(T.terms(topic.get("title", "")))
+    title_overlap = bool(query_terms & topic_terms)
 
-    is_relevant_topic = has_routing_relevance if status == UNABLE_TO_VERIFY else True
+    cand_relevance = bool(
+        cand.get("phrase_match", 0.0) > 0.0
+        or cand.get("code_match", 0.0) > 0.0
+        or (cand.get("coverage", 0.0) > 0.30 and title_overlap)
+    )
+    is_relevant_topic = (cand_relevance or title_overlap) if status == UNABLE_TO_VERIFY else True
 
     if status in (DOC_UNAVAILABLE, UNABLE_TO_VERIFY) and pstatus != "unresolved_identity" and raw.get("reason_code") != "AMBIGUOUS_PAYMENT_PROCESS" and topic.get("title") and _safe_url(topic.get("card_url")) and is_relevant_topic:
         reference = {"type": "topic_reference", "title": topic["title"], "url": _safe_url(topic["card_url"]), "note": REFERENCE_NOTE}
@@ -350,8 +376,29 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
         "references_valid": bool(claim_review.get("references_valid")),
         "semantic_entailment": "NOT_ASSESSED",
     }
-    grounded_ok = status == ANSWERED and grounding_view["ok"] is True and claim_grounding["status"] == "LEXICALLY_SCREENED"
-    if raw.get("reason_code") == ELABORATION_CONTEXT_MISSING:
+    claim_ok = (claim_grounding["status"] == "LEXICALLY_SCREENED") if "claim_review" in dbg else True
+    grounded_ok = status == ANSWERED and grounding_view["ok"] is True and claim_ok
+    has_limitation = bool(
+        raw.get("procedural_limitation")
+        or (isinstance(evidence, Mapping) and evidence.get("procedural_limitation"))
+        or (isinstance(raw.get("evidence"), dict) and raw.get("evidence", {}).get("procedural_limitation"))
+        or raw.get("aspect_limitation")
+        or (isinstance(evidence, Mapping) and evidence.get("aspect_limitation"))
+        or (isinstance(raw.get("evidence"), dict) and raw.get("evidence", {}).get("aspect_limitation"))
+    )
+    if grounded_ok:
+        if has_limitation:
+            verification_status = "partially_supported"
+            verification_label = "Partially supported by documentation"
+        else:
+            verification_status = "verified"
+            verification_label = "Lexically checked against documentation"
+    else:
+        verification_status = "unverified"
+        verification_label = None
+    can_elaborate = grounded_ok
+
+    if raw.get("reason_code") in (ELABORATION_CONTEXT_MISSING, STANDALONE_CLARIFICATION_REQUIRED):
         page_available = None  # no topic was resolved, so do not imply a page is missing
     elif pstatus == "page_not_ingested":
         page_available = False  # the pipeline itself established that the identified page has no usable local content
@@ -359,9 +406,10 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
         page_available = (topic.get("corpus_status") == "ingested") if routed else None
     meta = {"card_id": topic.get("source_id") if routed else None, "card_title": topic.get("title") if routed else None,
             "identity_status": topic.get("identity_status") if routed else None, "page_available": page_available, "generator": generator, "grounded": grounded_ok,
-            "can_elaborate": grounded_ok, "grounding": grounding_view, "claim_grounding": claim_grounding,
+            "can_elaborate": can_elaborate, "grounding": grounding_view, "claim_grounding": claim_grounding,
+            "verification_status": verification_status, "verification_label": verification_label,
             "pipeline_status": pstatus, "reason_code": raw.get("reason_code"), "latency_ms": round(latency_ms, 1)}
-    if raw.get("reason_code") == "AMBIGUOUS_PAYMENT_PROCESS":
+    if raw.get("reason_code") in ("AMBIGUOUS_PAYMENT_PROCESS", STANDALONE_CLARIFICATION_REQUIRED):
         meta["clarification_required"] = True
     if (status == ANSWERED and topic.get("source_id") and topic.get("effective_guide_id") and topic.get("effective_page_id")):
         meta["topic_identity"] = {
@@ -384,6 +432,7 @@ def to_chat_result(raw: Mapping[str, Any], generator: str, conversation_id: str,
     meta["documentation_coverage"] = documentation_coverage
 
     out: Dict[str, Any] = {
+        "id": str(uuid.uuid4()),
         "schema_version": SCHEMA_VERSION,
         "conversation_id": conversation_id,
         "status": status,
@@ -433,6 +482,8 @@ class RagService:
         self._gen_sem = _FIFOBoundedSemaphore(self.generation_concurrency, wait_timeout=queue_timeout)
         self._lock = threading.Lock()
         self._conversations: Dict[str, Dict[str, Any]] = {}
+        self._standalone_cache: Dict[Tuple[Any, ...], Dict[str, Any]] = {}
+        self._standalone_cache_keys: List[Tuple[Any, ...]] = []
         self._evidence_gen = pipeline.generator
         self.pipeline = RP.RagPipeline(
             pipeline.backend,
@@ -469,6 +520,10 @@ class RagService:
 
     def close(self) -> None:
         """After admission has stopped and workers drained; never global SDK shutdown."""
+        with self._lock:
+            self._standalone_cache.clear()
+            self._standalone_cache_keys.clear()
+            self._conversations.clear()
         from owned_retrieval import release_pipeline
         release_pipeline(self.pipeline)
 
@@ -489,11 +544,19 @@ class RagService:
 
     def _canonical_active_topic(self, context: Optional[Mapping[str, Any]]) -> Optional[Dict[str, Any]]:
         import m2c_page_identity as PID
-        if not isinstance(context, Mapping) or "active_topic" not in context:
+        if not isinstance(context, Mapping):
             return None
         active = context.get("active_topic")
         if not isinstance(active, Mapping):
-            return None
+            ident = context.get("topic_identity")
+            if isinstance(ident, Mapping) and str(ident.get("source_id") or "").strip():
+                active = {
+                    "identity": ident,
+                    "query": (context.get("questions") or [""])[0] if isinstance(context.get("questions"), (list, tuple)) and context.get("questions") else "",
+                    "answer": str(context.get("answer") or ""),
+                }
+            else:
+                return None
         identity = active.get("identity")
         if not isinstance(identity, Mapping):
             return None
@@ -577,6 +640,11 @@ class RagService:
                     "answer": prev["answer"],
                     "identity": prev.get("topic_identity"),
                     "seen_answers": prev.get("seen_answers", []),
+                    "bounded_synthesis_done": bool(prev.get("bounded_synthesis_done")),
+                    "elaboration_exhausted": bool(prev.get("elaboration_exhausted")),
+                    "sources": prev.get("sources", []),
+                    "card_title": (prev.get("topic_identity") or {}).get("title"),
+                    "card_id": (prev.get("topic_identity") or {}).get("source_id"),
                 }
         if isinstance(context, Mapping) and context:
             effective_context = dict(context)
@@ -590,6 +658,8 @@ class RagService:
                     "questions": [prev["query"]],
                     "answer": prev["answer"],
                     "active_topic": session_active_topic,
+                    "bounded_synthesis_done": bool(prev.get("bounded_synthesis_done")),
+                    "elaboration_exhausted": bool(prev.get("elaboration_exhausted")),
                 }
             elif (prev and prev.get("status") == NO_ADDITIONAL_VERIFIED_EVIDENCE and prev.get("topic_identity")
                         and prev.get("answer") and prev.get("query")):
@@ -600,12 +670,56 @@ class RagService:
                     "questions": [prev["query"]],
                     "answer": prev["answer"],
                     "active_topic": session_active_topic,
+                    "bounded_synthesis_done": bool(prev.get("bounded_synthesis_done")),
                     "elaboration_exhausted": bool(prev.get("elaboration_exhausted")),
                 }
 
-        follow_up = FU.resolve(q, effective_context) if effective_context else None
-        category = follow_up["category"] if follow_up else None
-        pipeline_query = follow_up["query"] if follow_up else q
+        import rag_completeness as RC
+        is_manipulation = bool(RC._INSTRUCTION_MANIPULATION_PATTERNS.search(q))
+        clean_q = RC.strip_instruction_manipulation(q) if is_manipulation else q
+
+        anchor_query = q
+        norm_q = re.sub(r"\s+", " ", q).strip().lower()
+        cfg = getattr(self.pipeline, "cfg", None)
+        cache_key = (
+            norm_q,
+            self.generator_name,
+            getattr(self.pipeline.corpus, "corpus_sha256", "") or len(self.pipeline.cards),
+            getattr(cfg, "evidence_threshold", None),
+            getattr(cfg, "ood_min_coverage", None),
+            getattr(cfg, "context_min_coverage", None),
+            getattr(cfg, "k_chunks", None),
+            getattr(cfg, "max_context_chunks", None),
+            getattr(cfg, "top_k_cards", None),
+            getattr(cfg, "relaxed_context_gate", None),
+        )
+        if effective_context is None and not debug and not is_manipulation:
+            with self._lock:
+                if cache_key in self._standalone_cache:
+                    cached = copy.deepcopy(self._standalone_cache[cache_key])
+                    cached["id"] = str(uuid.uuid4())
+                    cached["conversation_id"] = cid
+                    if "metadata" in cached and isinstance(cached["metadata"], dict):
+                        cached["metadata"]["cached"] = True
+                        cached["metadata"]["latency_ms"] = round((time.perf_counter() - t_validation) * 1000, 1)
+                    now = time.time()
+                    self._conversations[cid] = {
+                        "query": anchor_query,
+                        "answer": cached.get("answer", ""),
+                        "status": cached.get("status"),
+                        "grounded": cached.get("metadata", {}).get("grounded", False),
+                        "topic_identity": cached.get("metadata", {}).get("topic_identity"),
+                        "sources": cached.get("sources", []),
+                        "seen_answers": [cached["answer"]] if cached.get("answer") else [],
+                        "updated_at": now,
+                        "bounded_synthesis_done": False,
+                        "elaboration_exhausted": False,
+                    }
+                    return cached
+
+        follow_up = None
+        category = None
+        pipeline_query = q
         scoped: Optional[Any] = None
         expected_topic: Optional[Dict[str, Any]] = None
         anchor_query = q
@@ -614,94 +728,145 @@ class RagService:
         with self._lock:
             stored_state = self._conversations.get(cid)
 
-        if (
-            follow_up is not None
-            and category == "elaborate"
-            and isinstance(stored_state, dict)
-            and stored_state.get("status") == NO_ADDITIONAL_VERIFIED_EVIDENCE
-            and stored_state.get("elaboration_exhausted") is True
-            and stored_state.get("topic_identity")
-            and stored_state.get("answer")
-            and follow_up.get("anchor") == stored_state.get("query")
-        ):
-            # Repeated elaboration intent ("elaborate", "explain more", "tell me more", ... - all the same category)
-            # after the verified evidence of the active topic is exhausted: return the same safe
-            # no-additional-evidence state. The follow-up is never re-routed, so it can never fall through to
-            # out_of_scope. The backend owns this state; the response mirrors it with can_elaborate=false.
+        if is_manipulation and not clean_q.strip():
+            # Malicious-only prompt injection without a legitimate SAP Utilities question
             short_circuited = True
-            identity = dict(stored_state["topic_identity"])
-            card = self.pipeline.cards.get(str(identity.get("source_id") or "")) or {}
             raw: Dict[str, Any] = {
-                "status": "insufficient_context",
-                "reason_code": "NO_ADDITIONAL_SUPPORTED_DETAILS",
-                "answer": None,
-                "topic": {
-                    "source_id": identity.get("source_id"),
-                    "title": identity.get("title"),
-                    "card_url": card.get("source_url"),
-                    "identity_status": "resolved_local_page",
-                    "effective_guide_id": identity.get("guide_id"),
-                    "effective_page_id": identity.get("page_id"),
-                    "corpus_status": "ingested",
-                },
-                "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
-                "routing": {"selected_source_id": identity.get("source_id"), "candidates": [], "mode": ELABORATION_EXHAUSTED_MODE},
-                "debug": {},
-                "timings_ms": {},
-            }
-            evidence: Optional[Dict[str, Any]] = {
-                "checked": True, "supported": False, "reason": "NO_ADDITIONAL_EVIDENCE", "intent": category,
-                "selected": [], "elaborated": None, "final_novelty_check": {"ok": False},
-                "reason_added": "NO_ADDITIONAL_EVIDENCE", "elaboration_exhausted": True,
-            }
-        elif FU.classify(q) == "elaborate" and follow_up is None:
-            # A bare elaboration alias has no standalone subject. Do not send it through ordinary topic routing, where
-            # it can be mislabeled out-of-scope (or accidentally attach to unrelated evidence). Ask for the topic instead.
-            short_circuited = True
-            raw = {
                 "message": q,
-                "status": "insufficient_context",
-                "reason_code": ELABORATION_CONTEXT_MISSING,
-                "answer": None,
+                "status": "out_of_domain",
+                "reason_code": "PROMPT_MANIPULATION_REFUSAL",
+                "answer": "I can only assist with SAP Utilities documentation topics. Please ask a question related to SAP Utilities.",
                 "topic": {},
                 "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
-                "routing": {"candidates": [], "mode": "follow_up_clarification"},
+                "routing": {"candidates": [], "mode": "manipulation_refusal"},
                 "debug": {},
                 "timings_ms": {},
             }
             evidence = None
-        elif follow_up and EL.is_elaboration_intent(category):
-            active_topic = self._canonical_active_topic(effective_context)
-            if active_topic:
-                expected_topic = {"identity": active_topic["identity"]}
-                active_identity = active_topic["identity"]
-                anchor_query = active_topic["query"]
-                seen_answers = active_topic.get("seen_answers") or []
-                previous_answer = "\n".join([active_topic["answer"], *seen_answers]) if seen_answers else active_topic["answer"]
-            else:
-                active_identity = None
-                anchor_query = follow_up["anchor"]
-                previous_answer = str(effective_context.get("answer") or "") if effective_context else ""
+        else:
+            if is_manipulation and clean_q.strip():
+                # Mixed prompt injection with a legitimate SAP question: answer the legitimate portion
+                q = clean_q.strip()
+                anchor_query = q
+                pipeline_query = q
 
-            scoped = EL.scoped_pipeline(
-                self.pipeline,
-                category,
-                previous_answer=previous_answer,
-                anchor=anchor_query,
-                new_terms=EL.new_terms_of(q, anchor_query) if follow_up.get("form") == "message" else (),
-                active_identity=active_identity,
-            )
-            pipeline_query = anchor_query if follow_up.get("form") == "clause" else follow_up["query"]
-        elif follow_up:
-            # A resolved relational/reference follow-up belongs to the active topic of the conversation. Bind it so
-            # the pipeline's focused unavailable-topic gate cannot hijack the rewritten query onto a *different*
-            # unavailable topic whose title merely overlaps the anchor's words (e.g. "business partner" vs. the
-            # unavailable "Contract Account Business Object"), and so the topic-consistency gate keeps retrieval on
-            # the anchor page. The anchor topic comes from the explicit active_topic contract when present; for
-            # legacy history it is derived by routing the anchor question itself (routing only, no generation).
-            active_topic = self._canonical_active_topic(effective_context)
-            if active_topic:
-                expected_topic = {"identity": active_topic["identity"]}
+            follow_up = FU.resolve(q, effective_context) if effective_context else None
+            category = follow_up["category"] if follow_up else None
+            pipeline_query = follow_up["query"] if follow_up else q
+            if follow_up and follow_up.get("anchor"):
+                anchor_query = follow_up["anchor"]
+
+            if (
+                follow_up is not None
+                and category == "elaborate"
+                and isinstance(stored_state, dict)
+                and (
+                    stored_state.get("status") == NO_ADDITIONAL_VERIFIED_EVIDENCE
+                    or stored_state.get("elaboration_exhausted") is True
+                )
+                and stored_state.get("topic_identity")
+                and stored_state.get("answer")
+                and follow_up.get("anchor") == stored_state.get("query")
+            ):
+                # Repeated elaboration intent ("elaborate", "explain more", "tell me more", ... - all the same category)
+                # after the verified evidence of the active topic is exhausted: return the same safe
+                # no-additional-evidence state. The follow-up is never re-routed, so it can never fall through to
+                # out_of_scope. The backend owns this state; the response mirrors it with can_elaborate=false.
+                short_circuited = True
+                identity = dict(stored_state["topic_identity"])
+                card = self.pipeline.cards.get(str(identity.get("source_id") or "")) or {}
+                raw = {
+                    "status": "insufficient_context",
+                    "reason_code": "NO_ADDITIONAL_SUPPORTED_DETAILS",
+                    "answer": None,
+                    "topic": {
+                        "source_id": identity.get("source_id"),
+                        "title": identity.get("title"),
+                        "card_url": card.get("source_url"),
+                        "identity_status": "resolved_local_page",
+                        "effective_guide_id": identity.get("guide_id"),
+                        "effective_page_id": identity.get("page_id"),
+                        "corpus_status": "ingested",
+                    },
+                    "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
+                    "routing": {"selected_source_id": identity.get("source_id"), "candidates": [], "mode": ELABORATION_EXHAUSTED_MODE},
+                    "debug": {},
+                    "timings_ms": {},
+                }
+                evidence = {
+                    "checked": True, "supported": False, "reason": "NO_ADDITIONAL_EVIDENCE", "intent": category,
+                    "selected": [], "elaborated": None, "final_novelty_check": {"ok": False},
+                    "reason_added": "NO_ADDITIONAL_EVIDENCE", "elaboration_exhausted": True,
+                }
+            elif FU.classify(q) == "elaborate" and follow_up is None:
+                # A bare elaboration alias has no standalone subject. Do not send it through ordinary topic routing, where
+                # it can be mislabeled out-of-scope (or accidentally attach to unrelated evidence). Ask for the topic instead.
+                short_circuited = True
+                raw = {
+                    "message": q,
+                    "status": "insufficient_context",
+                    "reason_code": ELABORATION_CONTEXT_MISSING,
+                    "answer": None,
+                    "topic": {},
+                    "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
+                    "routing": {"candidates": [], "mode": "follow_up_clarification"},
+                    "debug": {},
+                    "timings_ms": {},
+                }
+                evidence = None
+            elif follow_up is None and _STANDALONE_AMBIGUOUS_RE.match(q.strip()):
+                # An ambiguous standalone question with no topic context (e.g. "How does it work?") triggers clarification.
+                short_circuited = True
+                raw = {
+                    "message": q,
+                    "status": "insufficient_context",
+                    "reason_code": STANDALONE_CLARIFICATION_REQUIRED,
+                    "answer": None,
+                    "topic": {},
+                    "citations": {"topic_pointer": None, "answer_sources": [], "context_not_cited": [], "label": "none", "notes": []},
+                    "routing": {"candidates": [], "mode": "follow_up_clarification"},
+                    "debug": {},
+                    "timings_ms": {},
+                }
+                evidence = None
+            elif follow_up and EL.is_elaboration_intent(category) and follow_up.get("form") not in ("anaphora_resolution", "ordinal_step"):
+                active_topic = self._canonical_active_topic(effective_context)
+                if active_topic:
+                    expected_topic = {"identity": active_topic["identity"]}
+                    active_identity = active_topic["identity"]
+                    anchor_query = active_topic["query"]
+                    seen_answers = list(active_topic.get("seen_answers") or [])
+                    if session_active_topic and session_active_topic.get("seen_answers"):
+                        session_sid = (session_active_topic.get("identity") or {}).get("source_id") or session_active_topic.get("source_id")
+                        active_sid = (active_identity or {}).get("source_id")
+                        if not session_sid or not active_sid or session_sid == active_sid:
+                            for a in session_active_topic["seen_answers"]:
+                                if a not in seen_answers:
+                                    seen_answers.append(a)
+                    all_prior = [active_topic["answer"]]
+                    for a in seen_answers:
+                        if a not in all_prior:
+                            all_prior.append(a)
+                    previous_answer = "\n".join(all_prior)
+                else:
+                    active_identity = None
+                    anchor_query = follow_up["anchor"]
+                    previous_answer = str(effective_context.get("answer") or "") if effective_context else ""
+
+                scoped = EL.scoped_pipeline(
+                    self.pipeline,
+                    category,
+                    previous_answer=previous_answer,
+                    anchor=anchor_query,
+                    new_terms=EL.new_terms_of(q, anchor_query) if follow_up.get("form") == "message" else (),
+                    active_identity=active_identity,
+                )
+                pipeline_query = anchor_query if follow_up.get("form") == "clause" else follow_up["query"]
+            elif follow_up:
+                pipeline_query = follow_up.get("query", q)
+                active_topic = self._canonical_active_topic(effective_context)
+                if active_topic:
+                    expected_topic = {"identity": active_topic["identity"]}
 
         t0 = time.perf_counter()
         if short_circuited:
@@ -743,8 +908,14 @@ class RagService:
         if scoped is not None:
             if raw.get("status") == "answered":
                 answer_body = raw.get("answer") or ""
-                # Redundancy check: cannot simply repeat the previous answer
-                is_redundant = answer_body.strip() == previous_answer.strip()
+                # Redundancy check: ensure the candidate elaboration contains novel, non-redundant substantive facts
+                new_sentences = EL.sentences_of(answer_body)
+                prev_sentences = EL.sentences_of(previous_answer)
+                novel_sentences = [
+                    s for s in new_sentences
+                    if not EL._is_redundant_evidence(s, prev_sentences)[0]
+                ]
+                is_redundant = len(novel_sentences) == 0
                 if is_redundant:
                     raw = dict(
                         raw,
@@ -819,6 +990,8 @@ class RagService:
                     "sources": result.get("sources", []),
                     "seen_answers": seen,
                     "updated_at": now,
+                    "bounded_synthesis_done": False,
+                    "elaboration_exhausted": False,
                 }
             elif (result["status"] == NO_ADDITIONAL_VERIFIED_EVIDENCE and follow_up is not None
                     and EL.is_elaboration_intent(category)):
@@ -851,16 +1024,40 @@ class RagService:
                         "updated_at": now,
                     }
             else:
-                self._conversations[cid] = {
-                    "query": q,
-                    "answer": result.get("answer", ""),
-                    "status": result["status"],
-                    "grounded": False,
-                    "topic_identity": None,
-                    "sources": [],
-                    "seen_answers": [],
-                    "updated_at": now,
-                }
+                prev_now = self._conversations.get(cid)
+                if isinstance(prev_now, dict) and prev_now.get("topic_identity") and prev_now.get("answer") and not (prev_now.get("elaboration_exhausted") and result.get("status") == OUT_OF_SCOPE):
+                    # Preserve established topic anchor across failed follow-ups or temporary out-of-scope turns
+                    self._conversations[cid] = {
+                        "query": prev_now["query"],
+                        "answer": prev_now["answer"],
+                        "status": prev_now["status"],
+                        "grounded": prev_now.get("grounded", False),
+                        "topic_identity": prev_now["topic_identity"],
+                        "sources": prev_now.get("sources", []),
+                        "seen_answers": list(prev_now.get("seen_answers", [])),
+                        "bounded_synthesis_done": prev_now.get("bounded_synthesis_done", False),
+                        "elaboration_exhausted": prev_now.get("elaboration_exhausted", False),
+                        "updated_at": now,
+                    }
+                else:
+                    self._conversations[cid] = {
+                        "query": q,
+                        "answer": result.get("answer", ""),
+                        "status": result["status"],
+                        "grounded": False,
+                        "topic_identity": None,
+                        "sources": [],
+                        "seen_answers": [],
+                        "updated_at": now,
+                    }
+        if effective_context is None and not debug and result.get("status") == ANSWERED:
+            with self._lock:
+                if cache_key not in self._standalone_cache:
+                    if len(self._standalone_cache_keys) >= 64:
+                        oldest = self._standalone_cache_keys.pop(0)
+                        self._standalone_cache.pop(oldest, None)
+                    self._standalone_cache_keys.append(cache_key)
+                self._standalone_cache[cache_key] = copy.deepcopy(result)
 
         return result
 

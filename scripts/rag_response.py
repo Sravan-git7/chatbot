@@ -118,6 +118,17 @@ def compose_structured_answer(
         cat = categorize_line(line)
         sections_by_key.setdefault(cat, []).append(line)
 
+    # Collapse isolated single-line non-overview sections into Overview unless they carry explicit steps/navigation
+    for cat in list(sections_by_key.keys()):
+        if cat != "overview" and len(sections_by_key[cat]) < 2:
+            single_line = sections_by_key[cat][0]
+            has_explicit_step = bool(
+                re.match(r"^\s*(?:\d+[\.\)]|step\s+\d+|[-*•])\s+", single_line, re.I)
+                or (">" in single_line and any(k in single_line.lower() for k in ("choose", "menu", "path", "navigate")))
+            )
+            if not has_explicit_step:
+                sections_by_key.setdefault("overview", []).extend(sections_by_key.pop(cat))
+
     # If only a single category exists, title it "Overview"
     if len(sections_by_key) <= 1:
         return {

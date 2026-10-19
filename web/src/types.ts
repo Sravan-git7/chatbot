@@ -115,6 +115,8 @@ export interface Metadata {
   documentation_coverage?: DocumentationCoverage | null
   follow_up_category?: string | null
   elaboration_sections?: ElaborationSection[]
+  verification_status?: 'verified' | 'partially_supported' | 'unverified' | null
+  verification_label?: string | null
 }
 
 export interface ChatResult {

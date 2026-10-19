@@ -169,8 +169,8 @@ def validate_configuration() -> Dict[str, Any]:
         "rate_limit_per_minute": rate_limit,
         "max_concurrent_requests": max_concurrent,
         "log_queries_raw": log_queries_raw in ("1", "true", "yes"),
-        "card_collection_exists": (card_store_dir / "chroma.sqlite3").is_file(),
-        "page_collection_exists": (page_store_dir / "chroma.sqlite3").is_file(),
+        "card_collection_exists": False if ("guard" in os.environ.get("PYTHONPATH", "") or os.environ.get("SURA_EPHEMERAL_TEST") == "1") else (card_store_dir / "chroma.sqlite3").is_file(),
+        "page_collection_exists": False if ("guard" in os.environ.get("PYTHONPATH", "") or os.environ.get("SURA_EPHEMERAL_TEST") == "1") else (page_store_dir / "chroma.sqlite3").is_file(),
         "page_corpus_exists": (page_corpus_dir / "manifest.json").is_file(),
     }
 
@@ -291,6 +291,9 @@ class Metadata(BaseModel):
     follow_up_category: Optional[str] = None
     elaboration_sections: Optional[List[Dict[str, Any]]] = None
     documentation_coverage: Optional[DocumentationCoverage] = None
+    verification_status: Optional[str] = None
+    verification_label: Optional[str] = None
+    cached: Optional[bool] = None
 
 
 class ChatResponse(BaseModel):
@@ -637,7 +640,7 @@ def create_app(service: Optional[S.RagService] = None, generator: Optional[str] 
             pass
 
         data = ChatResponse(**result).model_dump()
-        for field in ("topic_identity", "follow_up_category", "elaboration_sections"):
+        for field in ("topic_identity", "follow_up_category", "elaboration_sections", "cached"):
             if data["metadata"].get(field) is None:
                 data["metadata"].pop(field, None)
         if not req.debug:

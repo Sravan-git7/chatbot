@@ -132,4 +132,102 @@ describe('MessageView presentation', () => {
     expect(reference).toHaveTextContent('Reference only')
     expect(within(reference).getByRole('link')).toHaveAttribute('href', 'https://help.sap.com/docs/contract-accounts-overview')
   })
+
+  it('renders honest verification label and badge when verified against documentation', () => {
+    const verifiedResult = result({
+      status: 'answered',
+      answer: 'Contract accounts group contracts. [S1]',
+      sources: [SOURCE],
+      metadata: {
+        ...result().metadata,
+        grounded: true,
+        verification_status: 'verified',
+        verification_label: 'Lexically checked against documentation',
+      },
+    })
+    render(<MessageView message={assistantMessage({ result: verifiedResult })} developerMode={false} />)
+
+    const badge = screen.getByTestId('verification-badge')
+    expect(badge).toHaveTextContent('Lexically checked against documentation')
+    expect(badge).toHaveClass('text-stone-500')
+  })
+
+  it('renders amber warning badge when verification status is partially supported', () => {
+    const partialResult = result({
+      status: 'answered',
+      answer: 'Partial procedural steps. [S1]',
+      sources: [SOURCE],
+      metadata: {
+        ...result().metadata,
+        grounded: true,
+        verification_status: 'partially_supported',
+        verification_label: 'Partially supported by documentation',
+      },
+    })
+    render(<MessageView message={assistantMessage({ result: partialResult })} developerMode={false} />)
+
+    const badge = screen.getByTestId('verification-badge')
+    expect(badge).toHaveTextContent('Partially supported by documentation')
+    expect(badge).toHaveClass('text-amber-700')
+  })
+
+  it('does not display verified badge or phantom sources on insufficient evidence', () => {
+    const unableResult = result({
+      status: 'unable_to_verify',
+      answer: "I couldn't find enough verified information.",
+      sources: [],
+      metadata: {
+        ...result().metadata,
+        grounded: false,
+        verification_status: 'unverified',
+      },
+    })
+    render(<MessageView message={assistantMessage({ result: unableResult })} developerMode={false} />)
+
+    expect(screen.queryByTestId('verification-badge')).not.toBeInTheDocument()
+    expect(screen.queryByRole('region', { name: 'Sources' })).not.toBeInTheDocument()
+  })
+
+  it('does not display verification badge when verification_status is unverified even if answered', () => {
+    const unverifiedResult = result({
+      status: 'answered',
+      answer: 'Unverified answer text.',
+      sources: [],
+      metadata: {
+        ...result().metadata,
+        grounded: false,
+        verification_status: 'unverified',
+      },
+    })
+    render(<MessageView message={assistantMessage({ result: unverifiedResult })} developerMode={false} />)
+
+    expect(screen.queryByTestId('verification-badge')).not.toBeInTheDocument()
+  })
+
+  it('renders reference-only card without verification badge or sources on abstention with topic reference', () => {
+    const abstentionWithRef = result({
+      status: 'unable_to_verify',
+      answer: "I couldn't find enough verified information.",
+      sources: [],
+      topic_reference: {
+        type: 'topic_reference',
+        title: 'Master Data in SAP Utilities',
+        url: 'https://help.sap.com/docs/master-data',
+        note: 'Topic reference only - not used as evidence for any answer.',
+      },
+      metadata: {
+        ...result().metadata,
+        grounded: false,
+        verification_status: 'unverified',
+      },
+    })
+    render(<MessageView message={assistantMessage({ result: abstentionWithRef })} developerMode={false} />)
+
+    expect(screen.queryByTestId('verification-badge')).not.toBeInTheDocument()
+    expect(screen.queryByRole('region', { name: 'Sources' })).not.toBeInTheDocument()
+    const ref = screen.getByLabelText('Related SAP Help topic')
+    expect(ref).toBeInTheDocument()
+    expect(ref).toHaveTextContent('Reference only: this page was not used as evidence for the answer.')
+    expect(within(ref).getByRole('link')).toHaveAttribute('href', 'https://help.sap.com/docs/master-data')
+  })
 })

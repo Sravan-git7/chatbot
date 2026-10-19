@@ -645,19 +645,13 @@ class IntentExtractiveGenerator:
         units, industry_scope, excluded_industry_units, excluded_industry_markers = _industry_scope_units(
             units, context, self.anchor or question, self.previous_answer, self.new_terms, expected_industry=expected_industry
         )
+        units, excluded_list_units, list_filter = EV.filter_list_subject_units(self.anchor or question, units)
         units, excluded_quality_units, quality_filter_details = EV.filter_quality_units(units, context)
         excluded_adjacent_fragments = quality_filter_details["excluded_adjacent_fragments"]
         if self.intent == "elaborate":
             units, topic_scope_filter = _invoicing_scope_filter(units, self.anchor or question, self.new_terms)
         else:
             topic_scope_filter = None
-        novelty_filter: Optional[Dict[str, Any]] = None
-        if self.intent == "elaborate":
-            units, novelty_filter = _novelty_filter_units(units, self.previous_answer)
-        quality_fragment_markers = sorted({str(getattr(unit, "marker", "")) for unit in excluded_quality_units
-                                           if getattr(unit, "marker", None)})
-        usable_quality_markers = {str(getattr(unit, "marker", "")) for unit in units if getattr(unit, "marker", None)}
-        fully_excluded_quality_markers = [marker for marker in quality_fragment_markers if marker not in usable_quality_markers]
         if self.new_terms:                                           # a relationship follow-up: the terms the *message* added
             present: set = set()                                     # count only when the routed evidence actually covers them
             for u in units:
@@ -665,7 +659,15 @@ class IntentExtractiveGenerator:
             extra = tuple(t for t in self.new_terms if t in present and t not in needs.focus)
             if extra:
                 needs = dataclasses.replace(needs, focus=needs.focus + extra)
+        # Assess topic support across all valid units on the verified topic page before filtering for novelty
         decision, baseline = EV.assess(needs, units, self.tau, frame_normalization=self.frame_normalization)
+        novelty_filter: Optional[Dict[str, Any]] = None
+        if self.intent == "elaborate":
+            units, novelty_filter = _novelty_filter_units(units, self.previous_answer)
+        quality_fragment_markers = sorted({str(getattr(unit, "marker", "")) for unit in excluded_quality_units
+                                           if getattr(unit, "marker", None)})
+        usable_quality_markers = {str(getattr(unit, "marker", "")) for unit in units if getattr(unit, "marker", None)}
+        fully_excluded_quality_markers = [marker for marker in quality_fragment_markers if marker not in usable_quality_markers]
         record: Dict[str, Any] = {"checked": True, "supported": decision.supported, "reason": decision.reason,
                                   "detail": decision.detail, **needs.to_dict(), "intent": self.intent, "selected": []}
         if topic_consistency is not None:
@@ -841,6 +843,9 @@ class IntentExtractiveGenerator:
             if not EV.unit_kinds_ok(u, needs):
                 continue
             score = EV.unit_score(u, needs, weights, frame_normalization=self.frame_normalization)
+            if score == 0.0 and self.intent in ELABORATION_INTENTS and (u.head & set(needs.focus)):
+                f = set(needs.focus)
+                score = (EV.HEAD_WEIGHT * sum(weights.get(t, 1.0) for t in u.head & f)) / max(sum(weights.get(t, 1.0) for t in f), 1.0)
             if score > 0:
                 scored.append((score, u))
         if self.intent == "elaborate":
@@ -868,11 +873,12 @@ class IntentExtractiveGenerator:
                     break
             if self.previous and len(novel) < REQUIRED_NEW_ELABORATE:
                 # One novel, supported sentence from a chunk the user has already been shown is new information about
-                # that same source, provided it reads on its own. A single sentence from an unseen chunk, or a dangling
-                # sentence such as "This does not apply ...", still needs the usual minimum and is not offered.
+                # that same source, provided it reads on its own.
                 shown = {str(chunk_id) for chunk_id in getattr(self._tls, "shown_chunk_ids", ())}
-                if not (len(novel) == 1 and str(novel[0].chunk_id) in shown and _stands_alone(novel[0].text)):
+                standalone_novel = [u for u in novel if _stands_alone(u.text) or str(u.chunk_id) in shown]
+                if not standalone_novel:
                     return []
+                novel = standalone_novel
             return sorted(novel, key=lambda unit: unit.order)
 
         if self.intent == "continuation":

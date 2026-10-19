@@ -243,6 +243,11 @@ _TOPIC_FOCUS_FRAMES = (
     re.compile(r"^\s*what\s+does\s+(.+?)\s+(?:contain|show|cover|include|represent|mean|enable|do)\b.*$", re.I),
     re.compile(r"^\s*what\s+(?:is|are)\s+(.+?)\s*[?.!]*\s*$", re.I),
 )
+_COMPARISON_FRAMES = (
+    re.compile(r"^\s*(?:compare|comparison\s+of)\s+(.+?)\s+(?:and|to|with)\s+(.+?)\s*[?.!]*$", re.I),
+    re.compile(r"^\s*(?:what\s+(?:is|are)\s+(?:the\s+)?)?(?:explain\s+)?(?:the\s+)?(?:difference|differences|distinction)\s+between\s+(.+?)\s+and\s+(.+?)\s*[?.!]*$", re.I),
+    re.compile(r"^\s*(?:how\s+does\s+)?(.+?)\s+(?:differ\s+from|versus|vs\.?)\s+(.+?)\s*[?.!]*$", re.I),
+)
 _CARD_TOPIC_ID = re.compile(r"^M2C-(\d+)$", re.I)
 
 
@@ -255,7 +260,14 @@ def _focused_topic_terms(query: str) -> List[str]:
     for frame in _TOPIC_FOCUS_FRAMES:
         match = frame.match(query or "")
         if match:
-            return T.terms(match.group(1))
+            candidate = match.group(1).strip()
+            # If compound/multi-clause, extract only the primary focus noun phrase before clause conjunctions/secondary interrogatives
+            primary = re.split(
+                r"(?:,\s*(?:and\s+)?|\s+and\s+)(?:their|its|how|what|why|when|where|which|can|do|is|are|the|relat|connect|purpose)\b|\b(?:as\s+well\s+as|how\s+does|how\s+do|how\s+is|how\s+to|relat(?:e|ion|ionship)|connect(?:ion)?)\b",
+                candidate,
+                flags=re.I,
+            )[0].strip()
+            return T.terms(primary)
     return []
 
 
@@ -391,6 +403,9 @@ class RagPipeline:
         """Phase 15: If query contains technical codes or discriminative phrases matching page text,
         inject matching cards into the candidate pool (replacing lowest-ranked dense candidates to keep pool <= top_k_cards).
         """
+        if not dense_candidates:
+            return []
+
         import re
         import m2c_router as rt
 
@@ -453,6 +468,228 @@ class RagPipeline:
 
         return pool
 
+    @staticmethod
+    def _is_multi_topic_query(query: str) -> bool:
+        if not query:
+            return False
+        q_low = query.lower()
+        comparison_patterns = (
+            r"\b(?:difference|differences)\s+between\b",
+            r"\bhow\s+does\s+.+?\s+differ\s+from\b",
+            r"\bdistinction\s+between\b",
+            r"\bcompare\s+.+?\s+(?:to|with|and)\b",
+            r"^\s*compare\b",
+            r"\bversus\b",
+            r"\bvs\.?\b",
+            r"\bboth\s+.+?\s+and\b",
+            r"\bas\s+well\s+as\b",
+        )
+        return any(re.search(pat, q_low) for pat in comparison_patterns)
+
+    def _select_secondary_topics(
+        self,
+        query: str,
+        primary_card: Any,
+        candidates: Sequence[Any],
+    ) -> List[Tuple[Any, "pid.PageIdentity", Dict[str, Any]]]:
+        if not self._is_multi_topic_query(query):
+            return []
+        primary_sid = primary_card.get("source_id") if isinstance(primary_card, Mapping) else primary_card.source_id
+        primary_title = primary_card.get("title", "") if isinstance(primary_card, Mapping) else getattr(primary_card, "title", "")
+        primary_title_lower = primary_title.lower()
+        q_lower = query.lower()
+
+        STOP_FOCUS = {"difference", "differences", "differ", "between", "versus", "vs", "compare", "comparison", "sap", "utilities", "overview", "process", "procedure", "explain"}
+        q_terms = set(T.terms(query)) - STOP_FOCUS
+        primary_title_terms = set(T.terms(primary_title))
+
+        ordered_candidates = list(candidates[1:]) if candidates else []
+        seen_sids = {primary_sid, *(c.get("source_id") if isinstance(c, Mapping) else getattr(c, "source_id", "") for c in ordered_candidates)}
+        search_pool = ordered_candidates + [c for sid, c in self.cards.items() if sid not in seen_sids]
+
+        STOP_TITLE = {T.stem(w) for w in 'sap utility utilities procedure process overview'.split()} | {'sap', 'util', 'utilities', 'procedure', 'procedur', 'process', 'proces', 'overview'}
+        eligible_secondary: List[Tuple[Tuple[int, int], Tuple[Any, "pid.PageIdentity", Dict[str, Any]]]] = []
+        for cand in search_pool:
+            c_sid = cand.get("source_id") if isinstance(cand, Mapping) else cand.source_id
+            if c_sid == primary_sid or c_sid == "M2C-18":
+                continue
+            cand_card = self.cards.get(c_sid, cand if isinstance(cand, Mapping) else {"source_id": c_sid, "title": getattr(cand, "title", "")})
+            cand_title = cand_card.get("title", "") if isinstance(cand_card, Mapping) else getattr(cand_card, "title", "")
+            cand_title_lower = cand_title.lower()
+
+            cand_title_terms = set(T.terms(cand_title))
+            distinct_terms = (cand_title_terms & q_terms) - primary_title_terms
+
+            distinct_phrase = False
+            for phrase in ("move-out", "move out", "move-in", "move in"):
+                if phrase in cand_title_lower and phrase in q_lower and phrase not in primary_title_lower:
+                    distinct_phrase = True
+                    break
+
+            if distinct_terms or distinct_phrase:
+                cand_ident = pid.resolve_identity(cand_card, self.ctx)
+                if cand_ident.resolution_status in (pid.CONFLICTING_IDENTITY, pid.CARD_IDENTITY_ONLY, pid.UNRESOLVED) or not cand_ident.effective_page_id:
+                    continue
+                cand_entry = self.corpus.entry(c_sid) or {}
+                if cand_entry.get("corpus_status") != PC.S_INGESTED:
+                    continue
+                extra_terms = cand_title_terms - q_terms - STOP_TITLE
+                match_weight = len(distinct_terms) + (2 if distinct_phrase else 0)
+                score = (match_weight, -len(extra_terms))
+                eligible_secondary.append((score, (cand_card, cand_ident, cand_entry)))
+
+        if not eligible_secondary:
+            return []
+        eligible_secondary.sort(key=lambda x: x[0], reverse=True)
+        return [eligible_secondary[0][1]]
+
+    PROTECTED_MULTIWORD_PHRASES = (
+        "business and technical master data",
+        "periodic billing and invoicing",
+        "contract accounts receivable and payable",
+    )
+
+    def _extract_comparison_concepts(self, query: str) -> Optional[List[str]]:
+        q = (query or "").strip()
+        q_norm = " ".join(re.sub(r"[^a-z0-9\s/-]", " ", q.lower()).split())
+        for p in self.PROTECTED_MULTIWORD_PHRASES:
+            if q_norm == p or q_norm in (f"what is {p}", f"what are {p}", f"explain {p}", f"describe {p}"):
+                return None
+
+        placeholders: Dict[str, str] = {}
+        for idx, p in enumerate(self.PROTECTED_MULTIWORD_PHRASES):
+            if p in q.lower():
+                ph = f"__PROTECTED_{idx}__"
+                placeholders[ph] = p
+                q = re.sub(re.escape(p), ph, q, flags=re.I)
+
+        # 1. Compare X, Y, and Z / Compare X and Y
+        m = re.match(r"^\s*(?:compare|comparison\s+of)\s+(.+?)[.?!]*$", q, re.I)
+        if m:
+            body = m.group(1).strip()
+            parts = re.split(r",\s*(?:and\s+)?|\s+(?:and|with|to)\s+", body, flags=re.I)
+            parts = [placeholders.get(p.strip(), p.strip()) for p in parts if p.strip()]
+            if len(parts) >= 2:
+                return parts[:4]
+
+        # 2. Difference between X and Y [and Z]
+        m = re.match(r"^\s*(?:what\s+(?:is|are)\s+(?:the\s+)?)?(?:explain\s+)?(?:the\s+)?(?:difference|differences|distinction)\s+between\s+(.+?)[.?!]*$", q, re.I)
+        if m:
+            body = m.group(1).strip()
+            parts = re.split(r",\s*(?:and\s+)?|\s+and\s+", body, flags=re.I)
+            parts = [placeholders.get(p.strip(), p.strip()) for p in parts if p.strip()]
+            if len(parts) >= 2:
+                return parts[:4]
+
+        # 3. How does X differ from/relate to Y / X vs Y / X versus Y
+        m = re.match(r"^\s*(?:how\s+does\s+)?(.+?)\s+(?:differ\s+from|relate\s+to|versus|vs\.?)\s+(.+?)[.?!]*$", q, re.I)
+        if m:
+            parts = [m.group(1).strip(), m.group(2).strip()]
+            parts = [placeholders.get(p, p) for p in parts if p]
+            if len(parts) >= 2:
+                return parts[:4]
+
+        # 4. X or Y
+        m = re.match(r"^\s*([a-z0-9_-]+(?:\s+[a-z0-9_-]+){0,2})\s+or\s+([a-z0-9_-]+(?:\s+[a-z0-9_-]+){0,2})[.?!]*$", q, re.I)
+        if m:
+            parts = [m.group(1).strip(), m.group(2).strip()]
+            parts = [placeholders.get(p, p) for p in parts if p]
+            if len(parts) >= 2:
+                return parts[:4]
+
+        return None
+
+    def _find_best_topic_for_concept(
+        self,
+        concept_phrase: str,
+        other_phrases: Sequence[str],
+    ) -> Optional[Tuple[Any, "pid.PageIdentity", Dict[str, Any]]]:
+        COMMON_STOP_WORDS = {
+            'a', 'an', 'the', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from',
+            'itself', 'fi', 'ca', 'fica', 'is', 'it', 'its', 'and', 'or', 'as', 'well',
+            'sap', 'util', 'utilities'
+        }
+        c_clean = re.sub(r"\b(?:a|an|the|on|at|to|for|of|with|by|from|sap|utilities|is-u|fi-ca)\b", " ", concept_phrase or "", flags=re.I).strip().lower()
+        c_words = {w for w in c_clean.replace("/", " ").split() if w and w not in COMMON_STOP_WORDS}
+        other_clean = " ".join(re.sub(r"\b(?:a|an|the|on|at|to|for|of|with|by|from|sap|utilities|is-u|fi-ca)\b", " ", o or "", flags=re.I).strip().lower() for o in other_phrases)
+        other_words = {w for w in other_clean.replace("/", " ").split() if w and w not in COMMON_STOP_WORDS}
+
+        own_words = c_words - other_words
+        foreign_words = other_words - c_words
+        c_terms = {t for t in T.terms(concept_phrase or "") if t not in COMMON_STOP_WORDS}
+        if not c_terms and not own_words:
+            return None
+
+        STOP_TITLE = {T.stem(w) for w in 'sap utility utilities procedure process plan analysis overview'.split()} | {
+            'sap', 'util', 'utilities', 'procedure', 'procedur', 'process', 'proces', 'plan', 'analysis', 'overview'
+        }
+
+        scored = []
+        for sid, card in self.cards.items():
+            if sid == "M2C-18":
+                continue
+            ident = pid.resolve_identity(card, self.ctx)
+            if ident.resolution_status in (pid.CONFLICTING_IDENTITY, pid.CARD_IDENTITY_ONLY, pid.UNRESOLVED) or not ident.effective_page_id:
+                continue
+            entry = self.corpus.entry(sid) or {}
+            if entry.get("corpus_status") != PC.S_INGESTED:
+                continue
+
+            title = card.get("title", "") if isinstance(card, Mapping) else getattr(card, "title", "")
+            title_lower = title.lower()
+            title_words = {w for w in title_lower.replace("/", " ").split() if w and w not in COMMON_STOP_WORDS}
+            t_terms = {t for t in T.terms(title) if t not in COMMON_STOP_WORDS}
+
+            matched_own = own_words & title_words
+            matched_terms = (c_terms - STOP_TITLE) & (t_terms - STOP_TITLE)
+            if not matched_own and not matched_terms:
+                continue
+
+            is_aggregate = bool(foreign_words & title_words)
+            is_overview = "overview" in title_lower
+
+            score = 0
+            if matched_own:
+                score += len(matched_own) * 10
+            if c_clean and (c_clean in title_lower or c_clean.replace("-", " ") in title_lower):
+                score += 8
+            score += len(matched_terms) * 3
+            if is_aggregate:
+                score -= 15
+            if is_overview:
+                score -= 10
+            extra_terms = t_terms - c_terms - STOP_TITLE
+            score -= len(extra_terms)
+            scored.append((score, (card, ident, entry)))
+
+        if not scored:
+            return None
+        scored.sort(key=lambda x: x[0], reverse=True)
+        return scored[0][1]
+
+    def _match_comparison_topics(
+        self,
+        query: str,
+    ) -> Optional[Tuple[Tuple[Any, "pid.PageIdentity", Dict[str, Any]], List[Tuple[Any, "pid.PageIdentity", Dict[str, Any]]]]]:
+        concepts = self._extract_comparison_concepts(query)
+        if not concepts or len(concepts) < 2:
+            return None
+
+        matches: List[Tuple[Any, "pid.PageIdentity", Dict[str, Any]]] = []
+        seen_sids: Set[str] = set()
+        for idx, concept in enumerate(concepts):
+            others = [c for j, c in enumerate(concepts) if j != idx]
+            matched = self._find_best_topic_for_concept(concept, others)
+            if matched is not None:
+                sid = matched[1].source_id
+                if sid not in seen_sids:
+                    seen_sids.add(sid)
+                    matches.append(matched)
+
+        if len(matches) >= 2:
+            return matches[0], matches[1:]
+        return None
+
     # ------------------------------------------------------------------------------------------------------------
     def answer(self, query: str, debug: bool = False, oracle_source_id: Optional[str] = None,
                expected_topic: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
@@ -508,70 +745,106 @@ class RagPipeline:
         card: Any = None
         q_emb: Any = None
         rerank_hits_cache: Dict[Any, Any] = {}
+        secondary_topics: List[Any] = []
         if oracle_source_id:
             card = self.cards.get(oracle_source_id)
             if card is None:
                 raise KeyError(f"unknown card {oracle_source_id}")
+        elif expected_sid and expected_sid in self.cards:
+            card = self.cards.get(expected_sid)
+            out["routing"]["selected_source_id"] = expected_sid
+            out["routing"]["mode"] = "active_topic_bound"
+            out["routing"]["candidates"] = [{"rank": 1, "source_id": expected_sid, "title": card.get("title", ""), "similarity": 1.0, "distance": 0.0}]
         else:
-            retrieval_query = query.strip() if query else ""
-            try:
-                import rag_completeness as RC
-                retrieval_query = RC.normalize_retrieval_query(retrieval_query)
-            except Exception as exc:
-                dbg["normalization_error"] = str(exc)
-            dbg["retrieval_query"] = retrieval_query
-            if retrieval_query and hasattr(self.retriever, "embed"):
-                t_emb = time.perf_counter()
-                q_emb = self.retriever.embed([retrieval_query])
-                timings["embed_ms"] = timings.get("embed_ms", 0.0) + (time.perf_counter() - t_emb) * 1000
-            t_cq = time.perf_counter()
-            outcome = route_to_page(
-                retrieval_query,
-                self.backend,
-                self.ctx.page_index,
-                top_k=self.cfg.top_k_cards,
-                selector=select_top_ranked,
-                query_embedding=q_emb,
-            )
-            candidates = list(outcome.candidates)
-            if getattr(self.cfg, "code_aware_router", False):
-                candidates = self._inject_code_aware_candidates(retrieval_query, candidates, query_embedding=q_emb)
-            timings["card_query_ms"] = (time.perf_counter() - t_cq) * 1000
+            comparison_match = None
+            if expected_sid is None and oracle_source_id is None:
+                comparison_match = self._match_comparison_topics(query)
 
-            if getattr(self.cfg, "rerank_router", False) and candidates:
-                import phase13_reranker as PR13
-                if q_emb is None and hasattr(self.retriever, "embed"):
+            if comparison_match is not None:
+                primary_match, secondary_matches = comparison_match
+                card = primary_match[0]
+                secondary_topics = secondary_matches
+                candidates = [primary_match[0]] + [s[0] for s in secondary_topics]
+                out["routing"]["mode"] = "concept_paired_comparison"
+                c_list = []
+                for idx, item in enumerate([primary_match] + secondary_matches):
+                    c_card, c_ident, _ = item
+                    c_sid = c_card.get("source_id") if isinstance(c_card, Mapping) else c_card.source_id
+                    c_title = c_card.get("title", "") if isinstance(c_card, Mapping) else getattr(c_card, "title", "")
+                    c_list.append({"rank": idx + 1, "source_id": c_sid, "title": c_title, "similarity": 1.0, "distance": 0.0})
+                out["routing"]["candidates"] = c_list
+                dbg["comparison_concepts"] = {"primary": primary_match[1].source_id, "secondary": [s[1].source_id for s in secondary_topics]}
+                if secondary_topics:
+                    dbg["secondary_topics"] = [s[1].source_id for s in secondary_topics]
+                    out["routing"]["secondary_source_ids"] = [s[1].source_id for s in secondary_topics]
+            else:
+                retrieval_query = query.strip() if query else ""
+                try:
+                    import rag_completeness as RC
+                    retrieval_query = RC.normalize_retrieval_query(retrieval_query)
+                except Exception as exc:
+                    dbg["normalization_error"] = str(exc)
+                dbg["retrieval_query"] = retrieval_query
+                if retrieval_query and hasattr(self.retriever, "embed"):
                     t_emb = time.perf_counter()
                     q_emb = self.retriever.embed([retrieval_query])
                     timings["embed_ms"] = timings.get("embed_ms", 0.0) + (time.perf_counter() - t_emb) * 1000
-                t_rr = time.perf_counter()
-                card, scored = PR13.rerank_candidates(
+                t_cq = time.perf_counter()
+                outcome = route_to_page(
                     retrieval_query,
-                    candidates,
-                    self.cards,
-                    self.retriever,
-                    self.ctx,
-                    self.corpus,
-                    top_k_evaluate=self.cfg.top_k_cards,
+                    self.backend,
+                    self.ctx.page_index,
+                    top_k=self.cfg.top_k_cards,
+                    selector=select_top_ranked,
                     query_embedding=q_emb,
-                    code_aware=getattr(self.cfg, "code_aware_router", False),
-                    phrase_reranker=getattr(self.cfg, "phrase_reranker", False),
-                    phrase_min_corroboration=getattr(self.cfg, "phrase_min_corroboration", 1),
-                    full_page_coverage=getattr(self.cfg, "full_page_coverage", False),
-                    k_chunks=self.cfg.k_chunks,
-                    hits_out=rerank_hits_cache,
                 )
-                timings["rerank_ms"] = (time.perf_counter() - t_rr) * 1000
-                mode_str = f"router_reranked_top{self.cfg.top_k_cards}"
+                candidates = list(outcome.candidates)
                 if getattr(self.cfg, "code_aware_router", False):
-                    mode_str += "_code_aware"
-                out["routing"]["mode"] = mode_str
-                out["routing"]["candidates"] = [s.to_dict() for s in scored]
-            else:
-                out["routing"]["candidates"] = [{"rank": c.rank, "source_id": c.source_id, "title": c.title, "similarity": round(1.0 - c.distance, 4),
-                                                 "distance": round(c.distance, 6)} for c in candidates]
-                card = candidates[0] if candidates else None
-            dbg["routing_outcome_state_7a"] = outcome.state
+                    candidates = self._inject_code_aware_candidates(retrieval_query, candidates, query_embedding=q_emb)
+                timings["card_query_ms"] = (time.perf_counter() - t_cq) * 1000
+
+                if getattr(self.cfg, "rerank_router", False) and candidates:
+                    import phase13_reranker as PR13
+                    if q_emb is None and hasattr(self.retriever, "embed"):
+                        t_emb = time.perf_counter()
+                        q_emb = self.retriever.embed([retrieval_query])
+                        timings["embed_ms"] = timings.get("embed_ms", 0.0) + (time.perf_counter() - t_emb) * 1000
+                    t_rr = time.perf_counter()
+                    card, scored = PR13.rerank_candidates(
+                        retrieval_query,
+                        candidates,
+                        self.cards,
+                        self.retriever,
+                        self.ctx,
+                        self.corpus,
+                        top_k_evaluate=self.cfg.top_k_cards,
+                        query_embedding=q_emb,
+                        code_aware=getattr(self.cfg, "code_aware_router", False),
+                        phrase_reranker=getattr(self.cfg, "phrase_reranker", False),
+                        phrase_min_corroboration=getattr(self.cfg, "phrase_min_corroboration", 1),
+                        full_page_coverage=getattr(self.cfg, "full_page_coverage", False),
+                        k_chunks=self.cfg.k_chunks,
+                        hits_out=rerank_hits_cache,
+                    )
+                    timings["rerank_ms"] = (time.perf_counter() - t_rr) * 1000
+                    mode_str = f"router_reranked_top{self.cfg.top_k_cards}"
+                    if getattr(self.cfg, "code_aware_router", False):
+                        mode_str += "_code_aware"
+                    out["routing"]["mode"] = mode_str
+                    out["routing"]["candidates"] = [s.to_dict() for s in scored]
+                else:
+                    out["routing"]["candidates"] = [{"rank": c.rank, "source_id": c.source_id, "title": c.title, "similarity": round(1.0 - c.distance, 4),
+                                                     "distance": round(c.distance, 6)} for c in candidates]
+                    card = candidates[0] if candidates else None
+                dbg["routing_outcome_state_7a"] = outcome.state
+
+                secondary_topics = []
+                if expected_topic is None and oracle_source_id is None:
+                    secondary_topics = self._select_secondary_topics(query, card, candidates)
+                if secondary_topics:
+                    dbg["secondary_topics"] = [s[1].source_id for s in secondary_topics]
+                    out["routing"]["secondary_source_ids"] = [s[1].source_id for s in secondary_topics]
+
         timings["route_ms"] = (time.perf_counter() - t) * 1000
         if card is None:
             return self._finish(out, NO_PAGE, "EMPTY_OR_UNROUTABLE_QUERY", MESSAGES[NO_PAGE], dbg, debug, timings, t0)
@@ -596,16 +869,26 @@ class RagPipeline:
                                     "label": PCIT.LABEL_NONE, "notes": []}
                 return self._finish(out, INSUFFICIENT, "ACTIVE_TOPIC_MISMATCH", MESSAGES[INSUFFICIENT], dbg, debug, timings, t0)
 
-        out["citations"] = PCIT.build_citations(card, identity, self.ctx, corpus_entry=entry)
+        out["citations"] = PCIT.build_citations(card, identity, self.ctx, corpus_entry=entry, additional_topics=secondary_topics)
 
         # ---- 3. lexical topic gate (heuristic; see module docstring) -------------------------------------------------
-        qterms = T.terms(query)
+        import rag_completeness as RC
+        clean_query = RC.strip_instruction_manipulation(query)
+        qterms = T.terms(clean_query) if clean_query else T.terms(query)
         card_text = str(self.cards.get(sid, {}).get("embedding_text") or "")
         page_chunks: List[Any] = []
         ingested = entry.get("corpus_status") == PC.S_INGESTED and identity.effective_guide_id and identity.effective_page_id
         if ingested:
             page_chunks = self.retriever.page_chunks(identity.effective_guide_id, identity.effective_page_id)
         topic_text = card_text + "\n" + "\n".join(f"{h.title} {' '.join(h.heading_path)} {h.text}" for h in page_chunks)
+        if secondary_topics:
+            for s_card, s_ident, s_entry in secondary_topics:
+                s_sid = s_ident.source_id
+                s_card_text = str(self.cards.get(s_sid, {}).get("embedding_text") or "")
+                s_chunks: List[Any] = []
+                if s_entry.get("corpus_status") == PC.S_INGESTED and s_ident.effective_guide_id and s_ident.effective_page_id:
+                    s_chunks = self.retriever.page_chunks(s_ident.effective_guide_id, s_ident.effective_page_id)
+                topic_text += "\n" + s_card_text + "\n" + "\n".join(f"{h.title} {' '.join(h.heading_path)} {h.text}" for h in s_chunks)
         cov = T.coverage(qterms, topic_text)
         dbg["gate_topic"] = {"query_terms": qterms, "coverage": round(cov, 3), "min": self.cfg.ood_min_coverage}
         if not qterms or cov < self.cfg.ood_min_coverage:
@@ -680,6 +963,25 @@ class RagPipeline:
                     query_embedding=q_emb,
                 )
         timings["retrieve_ms"] = (time.perf_counter() - t) * 1000
+        if secondary_topics:
+            per_topic_k = max(3, self.cfg.k_chunks)
+            primary_hits = hits[:per_topic_k]
+            combined_hits = list(primary_hits)
+            for s_card, s_ident, s_entry in secondary_topics:
+                sec_hits = self.retriever.retrieve_in_page(
+                    retrieval_query,
+                    s_ident.effective_guide_id,
+                    s_ident.effective_page_id,
+                    top_k=per_topic_k,
+                    query_embedding=q_emb,
+                )
+                combined_hits.extend(sec_hits[:per_topic_k])
+            hits = combined_hits
+            dbg["multi_topic_retrieval"] = {
+                "primary": identity.source_id,
+                "secondary": [s[1].source_id for s in secondary_topics],
+                "candidates_returned": len(hits),
+            }
         dbg["retrieved"] = [h.to_dict(with_text=False) for h in hits]
         if not hits:
             return self._finish(out, NOT_INGESTED, "PAGE_MISSING_FROM_VECTOR_STORE", "The page is registered but has no chunks in the page index.", dbg, debug, timings, t0)
@@ -694,19 +996,22 @@ class RagPipeline:
             selection_key = EV.workflow_context_selection_key(query, hits)
             if selection_key is not None:
                 dbg["context_selection"] = {"strategy": "ordered_workflow_evidence", "max_chunks": self.cfg.max_context_chunks}
+        max_ctx_chunks = self.cfg.max_context_chunks
+        if secondary_topics:
+            max_ctx_chunks = max(max_ctx_chunks, 3 * (1 + len(secondary_topics)))
         if selection_key is None:
-            context = build_context(hits, self.count_tokens, self.cfg.context_budget_tokens, self.cfg.max_context_chunks)
+            context = build_context(hits, self.count_tokens, self.cfg.context_budget_tokens, max_ctx_chunks)
         else:
             context = build_context(
-                hits, self.count_tokens, self.cfg.context_budget_tokens, self.cfg.max_context_chunks,
+                hits, self.count_tokens, self.cfg.context_budget_tokens, max_ctx_chunks,
                 selection_key=selection_key,
             )
         timings["context_ms"] = (time.perf_counter() - t) * 1000
         dbg["context"] = context.to_dict(with_text=True)
-        provenance = PCIT.validate_context_provenance(context, identity, self.ctx, entry)
+        provenance = PCIT.validate_context_provenance(context, identity, self.ctx, entry, additional_topics=secondary_topics)
         dbg["source_provenance"] = provenance
         if not provenance["ok"]:
-            out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, None, entry)
+            out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, None, entry, additional_topics=secondary_topics)
             return self._finish(out, INSUFFICIENT, "SOURCE_PROVENANCE_INVALID",
                                 "The retrieved page chunks could not be tied to one verified source object, so no answer is shown.",
                                 dbg, debug, timings, t0)
@@ -716,19 +1021,20 @@ class RagPipeline:
         ccov_min = 0.25 if relaxed_gate else self.cfg.context_min_coverage
         dbg["gate_context"] = {"coverage": round(ccov, 3), "min": ccov_min}
         if ccov < ccov_min:
-            out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, None, entry)
+            out["citations"] = PCIT.build_citations(card, identity, self.ctx, context, None, entry, additional_topics=secondary_topics)
             return self._finish(out, INSUFFICIENT, "LOW_QUERY_TERM_COVERAGE_IN_CONTEXT", MESSAGES[INSUFFICIENT], dbg, debug, timings, t0)
 
         # ---- 7. generation + verification ------------------------------------------------------------------------------
+        gen_query = clean_query if clean_query else query
         t = time.perf_counter()
-        gen = self.generator.generate(query, context)
+        gen = self.generator.generate(gen_query, context)
         timings["generate_ms"] = (time.perf_counter() - t) * 1000
         in_page = getattr(self.cfg, "in_page_grounding", False) or getattr(self.cfg, "phase16_context_experiment", False)
         cit_norm = getattr(self.cfg, "citation_normalization", False) or getattr(self.cfg, "phase16_context_experiment", False)
         generation_evidence = getattr(gen, "evidence", None)
         citation_context = _citation_context_after_scope(context, generation_evidence)
         t_v = time.perf_counter()
-        report = verify_grounding(gen.text, citation_context, in_page_grounding=in_page, citation_normalization=cit_norm)
+        report = verify_grounding(gen.text, citation_context, in_page_grounding=in_page, citation_normalization=cit_norm, question=query)
         timings["verify_ms"] = timings.get("verify_ms", 0.0) + (time.perf_counter() - t_v) * 1000
         dbg["generation"] = {"generator": gen.generator, "refused": gen.refused, "raw_text": gen.raw_text, "prompt": gen.prompt}
         if getattr(gen, "telemetry", None):
@@ -739,13 +1045,13 @@ class RagPipeline:
             dbg["evidence"] = gen.evidence
         dbg["grounding"] = report.to_dict()
         if gen.refused or report.refusal:
-            out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry)
+            out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry, additional_topics=secondary_topics)
             reason = "GENERATOR_REFUSED"
             if gen.refused and isinstance(generation_evidence, dict) and generation_evidence.get("reason") == "AMBIGUOUS_PAYMENT_PROCESS":
                 reason = "AMBIGUOUS_PAYMENT_PROCESS"
             return self._finish(out, INSUFFICIENT, reason, MESSAGES[INSUFFICIENT], dbg, debug, timings, t0)
         if not report.ok:
-            out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry)
+            out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry, additional_topics=secondary_topics)
             dbg["answer_withheld"] = gen.text
             return self._finish(out, INSUFFICIENT, "GROUNDING_VERIFICATION_FAILED", MESSAGES[INSUFFICIENT] + " (a generated answer was withheld because it failed the grounding check)",
                                 dbg, debug, timings, t0)
@@ -758,7 +1064,7 @@ class RagPipeline:
             repaired_text, repair_log = CRC.repair_citations(gen.text, citation_context, citation_normalization=bool(cit_norm))
             if repair_log.get("changed"):
                 t_v = time.perf_counter()
-                repaired_report = verify_grounding(repaired_text, citation_context, in_page_grounding=in_page, citation_normalization=cit_norm)
+                repaired_report = verify_grounding(repaired_text, citation_context, in_page_grounding=in_page, citation_normalization=cit_norm, question=query)
                 timings["verify_ms"] = timings.get("verify_ms", 0.0) + (time.perf_counter() - t_v) * 1000
                 if repaired_report.ok and not repaired_report.refusal:
                     report = repaired_report
@@ -775,14 +1081,14 @@ class RagPipeline:
         dbg["claim_review"] = CRV.review_answer_claims(repaired_text, citation_context, report.to_dict(), provenance)
         timings["claim_review_ms"] = (time.perf_counter() - t_cr) * 1000
         if dbg["claim_review"].get("status") != "LEXICALLY_SCREENED":
-            out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry)
+            out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, None, entry, additional_topics=secondary_topics)
             dbg["answer_withheld"] = repaired_text
             return self._finish(out, INSUFFICIENT, "CLAIM_REVIEW_FAILED",
                                 MESSAGES[INSUFFICIENT] + " (a generated answer was withheld because its claim-to-source mapping failed)",
                                 dbg, debug, timings, t0)
 
         out["answer"] = repaired_text
-        out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, report, entry)
+        out["citations"] = PCIT.build_citations(card, identity, self.ctx, citation_context, report, entry, additional_topics=secondary_topics)
         return self._finish(out, ANSWERED, None, None, dbg, debug, timings, t0)
 
     # ------------------------------------------------------------------------------------------------------------
