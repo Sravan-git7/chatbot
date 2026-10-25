@@ -417,8 +417,11 @@ class SourceSequenceMapping(unittest.TestCase):
             self.assertIsNone(EV._source_sequence_info(unit))
             self.assertIsNone(EL._source_sequence_group(unit))
 
-        step_one = next(unit for unit in units if unit.text.startswith("Once the contract is billed"))
-        step_two = next(unit for unit in units if unit.text.startswith("Invoicing with Bill Creation"))
+        def _strip_list_prefix(t: str) -> str:
+            import re as _re
+            return _re.sub(r"^\s*\d+[.)]\s*", "", t)
+        step_one = next(unit for unit in units if _strip_list_prefix(unit.text).startswith("Once the contract is billed"))
+        step_two = next(unit for unit in units if _strip_list_prefix(unit.text).startswith("Invoicing with Bill Creation"))
         self.assertEqual(EV._source_sequence_info(step_one), ("numbered", 1))
         self.assertEqual(EV._source_sequence_info(step_two), ("numbered", 2))
         self.assertEqual(EL._source_sequence_group(step_one), ("invoicing", "numbered", step_one.source_line_index))
@@ -435,7 +438,7 @@ class SourceSequenceMapping(unittest.TestCase):
         )
         separate_list_item.title = "Invoicing Procedure"
         separate_list_item.heading_path = ("Invoicing Procedure", "Process Flow")
-        separate_unit = next(unit for unit in EV.build_units([separate_list_item]) if unit.text.startswith("A separate invoicing"))
+        separate_unit = next(unit for unit in EV.build_units([separate_list_item]) if _strip_list_prefix(unit.text).startswith("A separate invoicing"))
         self.assertEqual(EV._source_sequence_info(separate_unit), ("numbered", 1))
         self.assertNotEqual(EL._source_sequence_group(step_one), EL._source_sequence_group(separate_unit))
 
@@ -465,7 +468,7 @@ class SourceSequenceMapping(unittest.TestCase):
         overview_item.section_title = "Use"
         context = _Context([step_item, overview_item])
         first_sentence = next(
-            unit for unit in EV.build_units([step_item]) if unit.text.startswith("Once the contract is billed")
+            unit for unit in EV.build_units([step_item]) if unit.text.lstrip("0123456789. ").startswith("Once the contract is billed")
         )
         previous_answer = f"1. {first_sentence.text} [S1]"
 

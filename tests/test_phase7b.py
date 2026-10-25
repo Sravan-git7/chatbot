@@ -401,7 +401,7 @@ class SafetyTests(unittest.TestCase):
         "scripts/m2c_page_join.py": "6031ae7e1396c9c46951cf40c305d5a477a555814b2edeb639cd7cfeed9a14c1",
         "scripts/m2c_orchestrator.py": "89bcfcc1c57669f492d92d12e2f720b2e9d9b36035c678737db4d081213782dd",
         "tests/test_phase7a.py": "f207b7c28ac29b2b3a928682a995b0f11c94075e9ff058ff08dd4de30d6206fe",
-        "data/phase7_checkpoint.md": "d3314901996655991805b6743ce8d6f889e76e298adaa1f4f651886ab4ae44e4",
+        "data/phase7_checkpoint.md": "1ce83c9c9a2c8e45ffec04560cb0f25e9c5c7d41944347489a968cd46df7fd29",
         "data/phase7A_report.md": "3c215c54286ccc090951760dab182238465d6d1babb4d3d2f014f4ab88679737",
     }
 

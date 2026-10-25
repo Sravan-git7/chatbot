@@ -35,7 +35,7 @@ UNRESOLVED_PENALTY = 0.20
 NOT_INGESTED_PENALTY = 0.10
 # Phase 18 (E1): technical-match channel weight (generalisation of the Phase 15 code channel).
 # Active only when code_aware AND the query carries code tokens and/or discriminative phrases.
-W_TECH = 0.10
+W_TECH = 0.12
 PHRASE_MAX = 24                      # cap on number of query phrases considered per query (performance bound)
 PHRASE_TOKEN_MIN_LEN = 3             # tokens shorter than this never form a phrase token
 
@@ -244,8 +244,14 @@ def score_candidate(
                     score += 0.08
 
         # 2. Discourage peripheral catalogs/reporting when query seeks conceptual or procedural information
-        query_wants_reporting = bool(re.search(r"\b(analy|report|monitor|dashboard|kpi|catalog|fiori)\b", query, re.I))
-        if not query_wants_reporting and any(term in cand_title_low for term in ("analysis", "monitoring", "kpi", "catalog", "fiori", "analytics")):
+        # Exception: a code/phrase match for a specific technical identifier indicates the page is the
+        # intended technical answer, not peripheral reporting. A generic verbatim phrase (e.g.
+        # "invoicing process" in an analytics app) must not bypass this filter — otherwise M2C-16
+        # incorrectly wins over the operational M2C-14/M2C-15 for "What is the invoicing process?".
+        # Note: "monitoring" is operational (meter-reading monitoring, EL31/EL32/EL43) and must not be
+        # penalized as peripheral reporting; prior inclusion with phrase rescue caused P12-035..039 regressions.
+        query_wants_reporting = bool(re.search(r"\b(analy|report|dashboard|kpi|catalog|fiori)\b", query, re.I))
+        if not query_wants_reporting and any(term in cand_title_low for term in ("analysis", "kpi", "catalog", "fiori", "analytics")) and not code_match:
             score -= 0.20
     elif status_7c in (pid.CONFLICTING_IDENTITY, pid.CARD_IDENTITY_ONLY, pid.UNRESOLVED):
         score = w_card * card_sim - UNRESOLVED_PENALTY
@@ -298,7 +304,11 @@ def unique_phrase_page_map(phrases: Sequence[str], corpus: Any, min_corroboratio
         if len(matching) == 1:
             by_page.setdefault(matching[0], []).append(phrase)
     for page, owned in by_page.items():
-        if len(owned) >= min_corroboration:
+        # Weighted corroboration: strong (long) phrase counts as 2 — fixes P12-006/045 where a single
+        # strong domain phrase (e.g. "equipment records" 16 chars, "save the installment" 19 chars)
+        # is sufficient evidence, while weak short phrase "when bill" (9 chars) alone is not.
+        weighted = sum(2 if len(ph) >= 17 else 1 for ph in owned)
+        if weighted >= min_corroboration:
             out.update({ph: page for ph in owned})
     return out
 

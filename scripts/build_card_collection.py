@@ -130,7 +130,17 @@ def build(units_path: Path, vector_dir: Path, collection_name: str, rebuild: boo
         "legacy_collection_untouched": {"name": LEGACY_COLLECTION_NAME, "present_in_this_store": LEGACY_COLLECTION_NAME in existing},
         "reproduce_with": "python scripts/build_retrieval_units.py && python scripts/validate_token_lengths.py && python scripts/build_card_collection.py --rebuild",
     }
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Preserve tracked manifest: when building to a staging/temporary directory, do not overwrite
+    # the production manifest. Write the manifest alongside the temporary store instead.
+    _default_manifest = MANIFEST_PATH.resolve()
+    _requested_manifest = Path(manifest_path).resolve() if manifest_path else _default_manifest
+    _default_vector = VECTOR_DIR.resolve()
+    _requested_vector = Path(vector_dir).resolve() if vector_dir else _default_vector
+    if _requested_manifest == _default_manifest and _requested_vector != _default_vector:
+        alt = Path(vector_dir) / "card_collection_manifest.json"
+        alt.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    else:
+        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return manifest
 
 

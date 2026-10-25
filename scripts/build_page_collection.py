@@ -150,7 +150,17 @@ def build(vector_dir: Path, collection_name: str, strategy_name: str, rebuild: b
         "chromadb": chromadb.__version__,
         "reproduce_with": "python scripts/page_corpus.py && python scripts/build_page_collection.py --rebuild",
     }
-    Path(manifest_path).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Preserve tracked manifest: when building to a staging/temporary directory, do not overwrite
+    # the production manifest. Write the manifest alongside the temporary store instead.
+    _default_manifest2 = MANIFEST_PATH.resolve()
+    _requested_manifest2 = Path(manifest_path).resolve() if manifest_path else _default_manifest2
+    _default_vector2 = PAGE_VECTOR_DIR.resolve()
+    _requested_vector2 = Path(vector_dir).resolve() if vector_dir else _default_vector2
+    if _requested_manifest2 == _default_manifest2 and _requested_vector2 != _default_vector2:
+        alt2 = Path(vector_dir) / "page_collection_manifest.json"
+        alt2.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    else:
+        Path(manifest_path).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return manifest
 
 

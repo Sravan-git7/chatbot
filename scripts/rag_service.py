@@ -1076,14 +1076,15 @@ class RagService:
 def production_pipeline_config():
     import rag_pipeline as RP
     return RP.PipelineConfig(
-        top_k_cards=10,
+        top_k_cards=15,
         rerank_router=True,
         code_aware_router=True,
         in_page_grounding=True,
         citation_normalization=True,
         relaxed_context_gate=True,
         evidence_frame_normalization=False,
-        # Phase 18/19A adopted production configuration (e1a_v2_corroborated, R1-R4 PASS):
+        # Phase 18/19A adopted production configuration (e1a_v2_corroborated, R1-R4 PASS) with
+        # weighted corroboration fix for strong single phrases (P12-006/045) and expanded candidates for P12-007:
         phrase_reranker=True,
         phrase_min_corroboration=2,
         full_page_coverage=False,
@@ -1091,7 +1092,7 @@ def production_pipeline_config():
     )
 
 
-def build_service(generator: str = "extractive") -> RagService:
+def build_service(generator: str = "extractive", card_vector_dir: Optional[Path] = None, page_vector_dir: Optional[Path] = None) -> RagService:
     """Wire the real pipeline (needs the card store, the page store and the embedding weights). ``generator`` is explicit: no silent fallback."""
     if generator not in ("extractive", "ollama"):
         raise ValueError("generator must be 'extractive' or 'ollama'")
@@ -1099,7 +1100,7 @@ def build_service(generator: str = "extractive") -> RagService:
     import rag_pipeline as RP
     # Phase 11.1: the shipped configuration is "C1" of data/phase11_1_contract.md - evidence-sufficiency generator, tau 0.5, NO retrieval widening.
     # Phase 18: routing/grounding flags come from production_pipeline_config() (the verified Phase 16 baseline).
-    pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config())
+    pipeline = RP.build_pipeline(generator=generator, config=production_pipeline_config(), card_vector_dir=card_vector_dir, page_vector_dir=page_vector_dir)
     try:
         # The card backend is lazy by design; validate its required collection here so an absent/empty card index cannot
         # appear ready and fail only on the first user question. PageRetriever.from_store opens the page collection, but

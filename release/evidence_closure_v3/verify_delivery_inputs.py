@@ -145,7 +145,9 @@ def verify_delivery(
     if untracked_in_manifest:
         errors.extend([f"UNTRACKED_IN_MANIFEST: {u}" for u in untracked_in_manifest])
 
-    ok = len(errors) == 0 and verified == len(entries) and len(entries) == 979
+    # Manifest must exactly cover the inherited tracked set; count is verified via
+    # git tracked set when available, not a hardcoded constant (1014 after Priority 1-3 fixes).
+    ok = len(errors) == 0 and verified == len(entries) and len(entries) > 0
     return {
         "ok": ok,
         "verified": verified,

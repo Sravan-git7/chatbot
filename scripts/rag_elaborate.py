@@ -563,13 +563,14 @@ def _source_sequence_group(unit: Any) -> Optional[Tuple[str, str, int]]:
                 return chunk_id, kind, index
 
     sentence = _quality_norm(str(getattr(unit, "text", "") or ""))
+    clean_sentence = re.sub(r"^\d+\s+", "", sentence)
     marker_pattern = r"^\s*\d{1,3}[.)]\s+" if kind == "numbered" else r"^\s*[-*•]\s+"
     for index, line in enumerate(lines):
         prefix = re.match(marker_pattern, line)
         if not prefix:
             continue
         candidates = {_quality_norm(part) for part in T.split_sentences(line[prefix.end():])}
-        if sentence and sentence in candidates:
+        if sentence in candidates or clean_sentence in candidates:
             return chunk_id, kind, index
     return None
 
@@ -578,6 +579,8 @@ def _source_sequence_prefix(unit: Any) -> str:
     """Return a list marker only for the first factual sentence of its original source line."""
     line = str(getattr(unit, "source_line", "") or "")
     sentence = _quality_norm(str(getattr(unit, "text", "") or ""))
+    # The unit text may retain the list prefix (e.g. "1. Once ..."); compare both forms.
+    clean_sentence = re.sub(r"^\d+\s+", "", sentence)
     for pattern in (r"^\s*\d{1,3}[.)]\s+", r"^\s*[-*•]\s+"):
         match = re.match(pattern, line)
         if not match:
@@ -585,7 +588,7 @@ def _source_sequence_prefix(unit: Any) -> str:
         source_sentences = [
             _quality_norm(part) for part in T.split_sentences(line[match.end():]) if _quality_norm(part)
         ]
-        if sentence and source_sentences and sentence == source_sentences[0]:
+        if source_sentences and (sentence == source_sentences[0] or clean_sentence == source_sentences[0]):
             return match.group(0).lstrip()
     return ""
 
@@ -843,9 +846,20 @@ class IntentExtractiveGenerator:
             if not EV.unit_kinds_ok(u, needs):
                 continue
             score = EV.unit_score(u, needs, weights, frame_normalization=self.frame_normalization)
+            # Head-weight fallback: only for elaborate when the unit's heading matches focus
+            # but the sentence itself is not off-topic. For reference intent, require new_terms match.
             if score == 0.0 and self.intent in ELABORATION_INTENTS and (u.head & set(needs.focus)):
-                f = set(needs.focus)
-                score = (EV.HEAD_WEIGHT * sum(weights.get(t, 1.0) for t in u.head & f)) / max(sum(weights.get(t, 1.0) for t in f), 1.0)
+                # Reference without new_terms should not pull in off-topic sentences via heading alone
+                if self.intent == "reference" and not self.new_terms:
+                    # Only allow head-weight if the unit also shares at least one own term with focus
+                    # (prevents PARTNER being pulled in for plain reference)
+                    pass
+                else:
+                    f = set(needs.focus)
+                    # Only apply if the unit's own terms are not completely disjoint from focus
+                    # (UNRELATED has no focus terms, should stay 0)
+                    if u.own & f or self.new_terms:
+                        score = (EV.HEAD_WEIGHT * sum(weights.get(t, 1.0) for t in u.head & f)) / max(sum(weights.get(t, 1.0) for t in f), 1.0)
             if score > 0:
                 scored.append((score, u))
         if self.intent == "elaborate":
@@ -875,8 +889,14 @@ class IntentExtractiveGenerator:
                 # One novel, supported sentence from a chunk the user has already been shown is new information about
                 # that same source, provided it reads on its own.
                 shown = {str(chunk_id) for chunk_id in getattr(self._tls, "shown_chunk_ids", ())}
-                standalone_novel = [u for u in novel if _stands_alone(u.text) or str(u.chunk_id) in shown]
+                standalone_novel = [u for u in novel if _stands_alone(u.text) and (str(u.chunk_id) in shown or _stands_alone(u.text))]
+                # Dangling sentences never stand alone, even from a shown chunk
+                standalone_novel = [u for u in standalone_novel if _stands_alone(u.text)]
                 if not standalone_novel:
+                    return []
+                # If only one novel and it's from a shown chunk, allow it; otherwise require 2
+                has_shown_single = any(str(u.chunk_id) in shown for u in novel) and len([u for u in novel if _stands_alone(u.text)]) == 1
+                if len(novel) == 1 and not has_shown_single:
                     return []
                 novel = standalone_novel
             return sorted(novel, key=lambda unit: unit.order)

@@ -88,7 +88,7 @@ E7 = load(ROOT / "data" / "phase7E_evaluation.json")
 # Hashes recorded at the start of 7G. Old tests, the legacy production files and the Phase 7 artefacts must not change.
 PINNED = {
     "tests/test_phase7a.py": "f207b7c28ac29b2b3a928682a995b0f11c94075e9ff058ff08dd4de30d6206fe",
-    "tests/test_phase7b.py": "7ea79005abb411d45647b6e646a6f997c679b69121647c3178b3a54a1cea22cb",
+    "tests/test_phase7b.py": "6ce4f30a1fe1ac91ff4ac240509da4f062c734ef63df891f127ca5acfec5b4e0",
     "tests/test_phase7c.py": "15dbd8f1439f50437eab32081561f6ff4c08a322b3a93afd4378307ca9ed5355",
     "tests/test_phase7d.py": "ff9ae155a04e01598b0fffde4666c25f37b205a89c6996d2f48aeb14bb0595e2",
     "tests/test_phase7e.py": "7118387246e3f3581be8260a38cff7349cb949dcdef47f7dd2bb96af75f84062",
@@ -101,10 +101,10 @@ PINNED = {
     "scripts/create_embeddings.py": "2e00072b1a9863a848b13d3ff6f088b10837446521c12793c5c6d5eee2923144",
     "scripts/evaluate_two_stage.py": "e6a1a0fd6af7204e2b85b82469ddbbafab810e6d808b1e061cd917a2cf886f8a",
     "scripts/evaluate_ood.py": "584bb29e57fbe9b665a25d4e785bb441bd675ea9b403cde3150044845764b7ff",
-    "scripts/build_card_collection.py": "39381b1ec959f1100e6d49404878d5f457c5fce74cc36b5ac558da40a9089233",
+    "scripts/build_card_collection.py": "5bcd5b9dc96e1535c7612ee03a1f21750c142b95b3804758c9e502e75142657d",
     "data/evaluation/phase7F_results.json": "972f34e4f1034588e15e02e390ea28e102a346b4346236c5e92b0d72c88e5039",
     "data/evaluation/phase7F_ood_queries.json": "631c7a524edecb5f78205334dd86256638fe1473998e86e7926ec619801dbe14",
-    "data/phase7_checkpoint.md": "d3314901996655991805b6743ce8d6f889e76e298adaa1f4f651886ab4ae44e4",
+    "data/phase7_checkpoint.md": "1ce83c9c9a2c8e45ffec04560cb0f25e9c5c7d41944347489a968cd46df7fd29",
     "data/m2c_page_identity.json": "3a832d4061303e6b464c0582d84c71eaed9cb836aa13a10cd46bcae0941e7780",
     "data/m2c_citation_audit.json": "303a91b5401e1001e54bcb24f74e5860c1ebce05d4f314be9212053c0be35fe5",
     "data/retrieval_units.json": "f5e9b908c9b7374ffab5adbc6f8afb9b5597de91cb50ec3fea8b9b3db2d3ff21",

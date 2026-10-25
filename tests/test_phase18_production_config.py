@@ -24,7 +24,7 @@ import rag_service as S  # noqa: E402
 class TestProductionPipelineConfig(unittest.TestCase):
     def test_verified_phase16_baseline_flags(self):
         cfg = S.production_pipeline_config()
-        self.assertEqual(cfg.top_k_cards, 10)
+        self.assertEqual(cfg.top_k_cards, 15)
         self.assertTrue(cfg.rerank_router)
         self.assertTrue(cfg.code_aware_router)          # Phase 15
         self.assertTrue(cfg.in_page_grounding)          # Phase 16 A
@@ -74,7 +74,7 @@ class TestServiceWiring(unittest.TestCase):
                 self.cards = {"M2C-01": {"source_id": "M2C-01", "title": "t", "embedding_text": "t"}}
 
         svc = S.RagService(StubPipeline(), "extractive")
-        self.assertEqual(svc.pipeline.cfg.top_k_cards, 10)
+        self.assertEqual(svc.pipeline.cfg.top_k_cards, 15)
         self.assertTrue(svc.pipeline.cfg.code_aware_router)
         self.assertTrue(svc.pipeline.cfg.in_page_grounding)
         self.assertTrue(svc.pipeline.cfg.citation_normalization)

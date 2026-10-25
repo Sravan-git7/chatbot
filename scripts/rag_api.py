@@ -157,8 +157,16 @@ def validate_configuration() -> Dict[str, Any]:
         if "*" in os.environ.get(FRAME_ANCESTORS_ENV, ""):
             raise ValueError("Production forbids wildcard frame ancestors")
 
-    card_store_dir = ROOT / "data" / "vector_store"
-    page_store_dir = card_store_dir / "page_collection"
+    # Staging/temporary vector-store configuration (backwards-compatible, no silent fallback).
+    # When SURA_CARD_VECTOR_DIR/SURA_PAGE_VECTOR_DIR are set, validate those paths instead of production defaults.
+    _card_env = __import__("os").environ.get("SURA_CARD_VECTOR_DIR")
+    _page_env = __import__("os").environ.get("SURA_PAGE_VECTOR_DIR")
+    card_store_dir = Path(_card_env) if _card_env and _card_env.strip() else (ROOT / "data" / "vector_store")
+    page_store_dir = Path(_page_env) if _page_env and _page_env.strip() else (ROOT / "data" / "vector_store" / "page_collection")
+    if _card_env and _card_env.strip() and not _page_env:
+        # If only card dir is staged, page dir defaults to production unless explicitly staged
+        # (explicit staging requires both env vars for clarity)
+        pass
     page_corpus_dir = ROOT / "data" / "page_corpus"
     return {
         "generator": gen,

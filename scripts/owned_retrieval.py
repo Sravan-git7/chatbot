@@ -113,6 +113,12 @@ class _Owner:
 
 class OwnedCardBackend(_Owner, RT.ChromaCardBackend):
     def __init__(self, *args, expected_dimension=None, expected_model=None, **kwargs):
+        # Support SURA_CARD_VECTOR_DIR staging override without silent fallback
+        if not args and "vector_dir" not in kwargs:
+            import os as _os
+            _v = _os.environ.get("SURA_CARD_VECTOR_DIR")
+            if _v and _v.strip():
+                kwargs["vector_dir"] = Path(_v.strip())
         super().__init__(*args, **kwargs)
         self.expected_dimension = expected_dimension
         self.expected_model = expected_model
@@ -167,12 +173,19 @@ class OwnedPageRetriever(_Owner, PR.PageRetriever):
     @classmethod
     def from_store(
         cls,
-        vector_dir=BP.PAGE_VECTOR_DIR,
+        vector_dir=None,
         collection=BP.PAGE_COLLECTION,
         embed=None,
         expected_dimension=None,
         expected_model=None,
     ):
+        if vector_dir is None:
+            import os as _os
+            _v = _os.environ.get("SURA_PAGE_VECTOR_DIR")
+            if _v and _v.strip():
+                vector_dir = Path(_v.strip())
+            else:
+                vector_dir = BP.PAGE_VECTOR_DIR
         BP.guard_names(collection, Path(vector_dir))
         if not (
             Path(vector_dir).is_dir()

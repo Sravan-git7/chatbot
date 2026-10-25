@@ -1,0 +1,54 @@
+# SURA — Docker build context hygiene
+# Never include secrets, protected stores, or unrelated large artifacts in images.
+
+# Secrets and local env
+.env
+.env.local
+.env.production
+*.pem
+*.key
+*.crt
+*.p12
+secrets/
+release_intake/received/
+release_intake/trusted_anchors/
+
+# Protected vector stores (provisioned at runtime via volume, never baked)
+data/vector_store/
+chroma_db/
+local_backup2/
+av/
+scratch/
+routing-diff.txt
+slim_for_replay.py
+
+# Git and CI
+.git
+.gitignore
+.github/
+
+# Python caches and venvs
+__pycache__/
+*.pyc
+.venv/
+venv/
+av/
+*.egg-info/
+.pytest_cache/
+
+# Node
+web/node_modules/
+web/dist/
+
+# Generated benchmarks and temporary reports (not needed in image)
+benchmarks/results/sura-quality-real-*.json
+benchmarks/results/v1_*.json
+*.log
+*.jsonl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Deployment working dirs
+/tmp/sura-build-test/

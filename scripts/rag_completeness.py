@@ -134,6 +134,8 @@ _RETRIEVAL_EQUIVALENCES = (
     # they do not select a card, alter the prompt, or claim semantic equivalence beyond retrieval.
     (re.compile(r"\btechnical\s+objects?\b", re.I), "technical master data objects"),
     (re.compile(r"\bclearing\s+rules?\b", re.I), "clearing types"),
+    # SAP abbreviation: Customizing shows "Clrg Priority indicator" while queries use "clearing priority".
+    (re.compile(r"\bclearing\s+priority\b", re.I), "Clrg Priority"),
     (re.compile(r"\bcontract\s+accounts?\s+receivable\s+and\s+payable\b", re.I), "FI-CA"),
     (re.compile(r"\bFI\s*[-–]?\s*CA\b", re.I), "Contract Accounts Receivable and Payable"),
 )
@@ -163,7 +165,15 @@ def normalize_retrieval_query(query: str) -> str:
     Applies deterministic domain synonyms, strips adversarial prompt manipulations,
     and removes conversational fluff prefixes for token matching.
     Does NOT modify the user-visible question.
+
+    Retrieval aliases (e.g. "technical objects" -> "technical master data objects",
+    "clearing rules" -> "clearing types") are always applied — they are
+    corpus-observed lexical expansions needed for correct routing even when the
+    broader intent-aware pipeline is disabled (isolated tests, fallback mode).
     """
+    if not is_intent_aware_enabled():
+        # Minimal deterministic expansion: preserve original query verbatim, append aliases
+        return normalize_domain_synonyms(query)
     q = strip_instruction_manipulation(query)
     cleaned = _CONVERSATIONAL_PREFIXES.sub("", q).strip()
     cleaned = _TRAILING_META_PROMPT_PATTERNS.sub("", cleaned).strip()

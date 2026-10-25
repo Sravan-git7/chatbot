@@ -149,8 +149,8 @@ class TestScoringMechanics(unittest.TestCase):
             "GOLD": "You can assign numerical key figures in the Prio column. This enables you to influence the clearing priority of the selected original items when payments are received.",
         }
         self.corpus = FakeCorpus(self.entries, self.texts)
-        # SIB: dense rank 1 (card 0.70); GOLD: dense rank 2 (card 0.55). Off-flag gap 0.075; the 0.10
-        # phrase channel (minus the 0.035 card-weight shift for both) flips the order only with the flag.
+        # SIB: dense rank 1 (card 0.70); GOLD: dense rank 2 (card 0.55). Off-flag gap 0.075; the tech
+        # phrase channel (minus the card-weight shift for both) flips the order only with the flag.
         self.cands = [make_candidate("SIB", 1, 0.30), make_candidate("GOLD", 2, 0.45)]
         self.cards = {"SIB": {}, "GOLD": {}}
 
@@ -184,7 +184,7 @@ class TestScoringMechanics(unittest.TestCase):
         self.assertEqual(by["SIB"].phrase_match, 0.0)
         # GOLD wins once the unique phrase fires
         self.assertEqual(scored_on[0].candidate.source_id, "GOLD")
-        # the gain is exactly the 0.10 tech channel (weights shift card 0.50 -> 0.40 for BOTH candidates)
+        # the gain is exactly the tech channel (weights shift card 0.50 -> 0.40 for BOTH candidates, W_TECH=0.12)
         sib_off = next(s for s in scored_off if s.candidate.source_id == "SIB")
         sib_on = by["SIB"]
         expected_sib_on = 0.40 * sib_off.card_similarity + 0.40 * sib_off.page_similarity + 0.10 * sib_off.coverage
@@ -198,7 +198,7 @@ class TestScoringMechanics(unittest.TestCase):
                                            top_k_evaluate=2, code_aware=True, phrase_reranker=True)
         by = {s.candidate.source_id: s for s in scored}
         self.assertEqual(by["GOLD"].code_match, 1.0)
-        expected = 0.40 * by["GOLD"].card_similarity + 0.40 * by["GOLD"].page_similarity + 0.10 * by["GOLD"].coverage + 0.10 * 1.0
+        expected = 0.40 * by["GOLD"].card_similarity + 0.40 * by["GOLD"].page_similarity + 0.10 * by["GOLD"].coverage + 0.12 * 1.0
         self.assertAlmostEqual(by["GOLD"].final_score, round(expected, 4), places=4)
         self.assertEqual(by["SIB"].code_match, 0.0)
 

@@ -1132,7 +1132,7 @@ def format_answer(a: Mapping[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def build_pipeline(generator: str = "extractive", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT) -> RagPipeline:
+def build_pipeline(generator: str = "extractive", llm_client: Any = None, config: Optional[PipelineConfig] = None, root: Path = PC.ROOT, card_vector_dir: Optional[Path] = None, page_vector_dir: Optional[Path] = None) -> RagPipeline:
     """Wire the real components (needs the card store, the page store and the embedding weights; nothing is downloaded)."""
     import build_page_collection as BP
     import page_chunker as PK
@@ -1140,8 +1140,22 @@ def build_pipeline(generator: str = "extractive", llm_client: Any = None, config
     embed, minfo = BP.load_embedder()
     count, _ = PK.make_token_counter(minfo["model_dir"])
     from owned_retrieval import OwnedCardBackend, OwnedPageRetriever
-    backend = OwnedCardBackend(embedder=embed, expected_dimension=minfo["dimensions"], expected_model=BP.C.MODEL_NAME)
-    retriever = OwnedPageRetriever.from_store(embed=embed, expected_dimension=minfo["dimensions"], expected_model=BP.C.MODEL_NAME)
+    import os as _os
+    # Explicit args win, then env vars, then production defaults — never silently fall back to production if explicit/configured path is missing.
+    def _resolve_card_dir():
+        if card_vector_dir is not None:
+            return Path(card_vector_dir)
+        _v = _os.environ.get("SURA_CARD_VECTOR_DIR")
+        return Path(_v.strip()) if _v and _v.strip() else (Path(__file__).resolve().parent.parent / "data" / "vector_store")
+    def _resolve_page_dir():
+        if page_vector_dir is not None:
+            return Path(page_vector_dir)
+        _v = _os.environ.get("SURA_PAGE_VECTOR_DIR")
+        return Path(_v.strip()) if _v and _v.strip() else (Path(__file__).resolve().parent.parent / "data" / "vector_store" / "page_collection")
+    _card_dir = _resolve_card_dir()
+    _page_dir = _resolve_page_dir()
+    backend = OwnedCardBackend(vector_dir=_card_dir, embedder=embed, expected_dimension=minfo["dimensions"], expected_model=BP.C.MODEL_NAME)
+    retriever = OwnedPageRetriever.from_store(vector_dir=_page_dir, embed=embed, expected_dimension=minfo["dimensions"], expected_model=BP.C.MODEL_NAME)
     try:
         ctx = pid.IdentityContext.from_root(root)
         client = llm_client
